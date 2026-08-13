@@ -779,6 +779,346 @@
         border-radius: 10px;
         width: fit-content;
       }
+      .lecture-tracker-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #065f46;
+      }
+      .lecture-stat-box {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 2px solid #6ee7b7;
+        border-radius: 12px;
+        padding: 4px 10px;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      .lecture-stat-box:focus-within {
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+      }
+      .lecture-count-input {
+        width: 26px;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 800;
+        color: #059669;
+        line-height: 1;
+        text-align: center;
+        padding: 0;
+        -moz-appearance: textfield;
+      }
+      .lecture-count-input::-webkit-inner-spin-button,
+      .lecture-count-input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      .lecture-count-input:focus {
+        outline: none;
+      }
+      .lecture-stat-sep,
+      .lecture-stat-target {
+        font-size: 12px;
+        font-weight: 700;
+        color: #059669;
+      }
+      .lecture-done-btn {
+        display: block;
+        width: auto;
+        margin: 12px auto 0;
+        border: none;
+        border-radius: 8px;
+        padding: 5px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        background: linear-gradient(135deg, #34d399, #059669);
+        color: white;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        margin-bottom: 10px;
+      }
+      .lecture-done-btn:active {
+        transform: scale(0.98);
+      }
+      .chore-card {
+        padding: 12px;
+        margin-bottom: 8px;
+      }
+      .chore-question {
+        font-size: 12px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin-bottom: 6px;
+      }
+      .chore-log-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .chore-log-row .date-stat-box {
+        flex: 1;
+      }
+      .chore-log-btn {
+        display: inline-block;
+        width: auto;
+        margin: 0;
+        flex-shrink: 0;
+      }
+      .water-litre-preview {
+        font-size: 10px;
+        font-weight: 700;
+        color: #0ea5e9;
+        text-align: right;
+        margin-top: 2px;
+      }
+      .typing-range-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .typing-range-row .date-stat-box {
+        flex: 1;
+      }
+      .typing-range-sep {
+        font-size: 11px;
+        font-weight: 600;
+        color: #9ca3af;
+        flex-shrink: 0;
+      }
+      .medicine-slot {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        background: #f9fafb;
+        margin-bottom: 5px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .medicine-slot:last-of-type {
+        margin-bottom: 0;
+      }
+      .medicine-slot.completed {
+        background: #f0fdf4;
+      }
+      .medicine-slot.completed .checkbox {
+        background: #22c55e;
+        border-color: #22c55e;
+      }
+      .medicine-slot.completed .checkbox svg {
+        display: block;
+      }
+      .medicine-slot-label {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a1a2e;
+      }
+      .medicine-slot-status {
+        font-size: 11px;
+        font-weight: 700;
+        color: #ef4444;
+      }
+      .medicine-slot.completed .medicine-slot-status {
+        color: #22c55e;
+      }
+      .medicine-reminder-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px dashed #e5e7eb;
+      }
+      .medicine-reminder-text {
+        font-size: 12px;
+        font-weight: 700;
+        color: #1a1a2e;
+      }
+      .medicine-reminder-sub {
+        font-size: 10px;
+        color: #6b7280;
+        margin-top: 2px;
+      }
+      .medicine-reminder-btn {
+        flex-shrink: 0;
+        border: none;
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        background: linear-gradient(135deg, #6366f1, #4338ca);
+        color: white;
+      }
+      .medicine-reminder-btn.active {
+        background: linear-gradient(135deg, #10b981, #059669);
+      }
+      .hair-wash-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .hair-wash-count {
+        font-size: 12px;
+        font-weight: 700;
+        color: #4338ca;
+      }
+      .hair-wash-buttons {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .hair-wash-btn {
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 700;
+      }
+      .hair-wash-minus {
+        width: 26px;
+        height: 26px;
+        background: #f3f4f6;
+        color: #6b7280;
+        font-size: 15px;
+      }
+      .hair-wash-minus:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .hair-wash-plus {
+        padding: 6px 12px;
+        font-size: 11px;
+        background: linear-gradient(135deg, #6366f1, #4338ca);
+        color: white;
+      }
+      .hair-wash-plus:active,
+      .hair-wash-minus:active {
+        transform: scale(0.95);
+      }
+      .hair-wash-progress-track {
+        height: 5px;
+        background: rgba(99, 102, 241, 0.15);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-top: 6px;
+      }
+      .hair-wash-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #818cf8, #4338ca);
+        border-radius: 6px;
+        transition: width 0.4s ease, background 0.3s ease;
+      }
+      .hair-wash-progress-fill.complete {
+        background: linear-gradient(90deg, #34d399, #059669);
+      }
+      .lecture-date-inline {
+        border: none;
+        border-radius: 6px;
+        padding: 0;
+        font-size: 11px;
+        font-weight: 600;
+        font-family: inherit;
+        color: #1a1a2e;
+        background: transparent;
+      }
+      .lecture-date-inline:focus {
+        outline: none;
+      }
+      .lecture-date-icon {
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .zad-log-dropdown-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .zad-log-select {
+        flex: 1;
+        min-width: 0;
+        border: 1.5px solid #a7f3d0;
+        border-radius: 8px;
+        padding: 4px 6px;
+        font-size: 10px;
+        background: white;
+      }
+      .zad-log-select:focus {
+        outline: none;
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+      }
+      .zad-log-delete-btn {
+        flex-shrink: 0;
+        background: none;
+        border: 1.5px solid #a7f3d0;
+        border-radius: 8px;
+        color: #9ca3af;
+        font-size: 11px;
+        cursor: pointer;
+        padding: 4px 6px;
+      }
+      .zad-log-delete-btn:hover {
+        color: #ef4444;
+        border-color: #ef4444;
+      }
+      .lecture-progress-track {
+        height: 6px;
+        background: rgba(16, 185, 129, 0.15);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 8px;
+      }
+      .lecture-progress-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #34d399, #059669);
+        border-radius: 6px;
+        transition: width 0.5s ease, background 0.3s ease;
+      }
+      .lecture-progress-fill.complete {
+        background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      }
+      .zad-card {
+        position: relative;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .zad-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(16, 185, 129, 0.22);
+      }
+      .zad-icon {
+        display: inline-block;
+        animation: zadIconPulse 2.4s ease-in-out infinite;
+      }
+      @keyframes zadIconPulse {
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg);
+        }
+        50% {
+          transform: scale(1.15) rotate(-4deg);
+        }
+      }
 
       .action-buttons {
         display: flex;
@@ -1191,37 +1531,96 @@
         font-weight: 700;
         color: #1a1a2e;
       }
-      .steps-input-row {
+      .tracker-summary-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .tracker-summary-row .steps-summary {
+        flex: 1;
+        margin-bottom: 0;
+        padding: 10px 10px;
+      }
+      .tracker-summary-row .steps-summary-text {
+        font-size: 12px;
+      }
+      .steps-summary-colored {
+        background: rgba(99, 102, 241, 0.1);
+      }
+      .steps-summary-colored .steps-summary-text,
+      .steps-summary-colored .steps-summary-icon {
+        color: #4338ca;
+      }
+      .water-summary-colored {
+        background: rgba(14, 165, 233, 0.1);
+      }
+      .water-summary-colored .steps-summary-text,
+      .water-summary-colored .steps-summary-icon {
+        color: #0369a1;
+      }
+      .tracker-row {
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin-top: 8px;
+        gap: 6px;
+        margin-top: 6px;
+        flex-wrap: wrap;
       }
-      .steps-input {
-        width: 70px;
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        padding: 6px 10px;
+      .tracker-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex: 1;
+        min-width: 100px;
+        padding: 4px 8px;
+        border-radius: 8px;
+      }
+      .tracker-group-icon {
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .tracker-input {
+        width: 40px;
+        border: none;
+        background: white;
+        border-radius: 6px;
+        padding: 3px 4px;
         font-size: 13px;
         font-weight: 700;
         font-family: inherit;
-        color: #1a1a2e;
+        text-align: center;
         -moz-appearance: textfield;
         appearance: textfield;
       }
-      .steps-input::-webkit-inner-spin-button,
-      .steps-input::-webkit-outer-spin-button {
+      .tracker-input::-webkit-inner-spin-button,
+      .tracker-input::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
       }
-      .steps-input:focus {
+      .tracker-input:focus {
         outline: none;
-        border-color: #667eea;
       }
-      .steps-input-label {
-        font-size: 12px;
+      .tracker-group-label {
+        font-size: 11px;
         font-weight: 600;
-        color: #9ca3af;
+        flex-shrink: 0;
+      }
+      .steps-group {
+        background: rgba(99, 102, 241, 0.1);
+      }
+      .steps-group .tracker-input {
+        color: #4338ca;
+      }
+      .steps-group .tracker-group-label {
+        color: #6366f1;
+      }
+      .water-group {
+        background: rgba(14, 165, 233, 0.1);
+      }
+      .water-group .tracker-input {
+        color: #0369a1;
+      }
+      .water-group .tracker-group-label {
+        color: #0ea5e9;
       }
       .schedule-tab-btn {
         --accent: #8b5cf6;
@@ -1337,6 +1736,10 @@
         color: #6b7280;
         font-weight: 500;
       }
+
+      .water-title {
+        color: #38bdf8;
+      }
     </style>
     <base target="_blank" />
   </head>
@@ -1358,12 +1761,20 @@
           <span class="tab-label">Period</span>
         </button>
         <button class="tab-btn" onclick="switchTab('schedule', this)">
-          <span class="tab-icon">📅</span>
+          <span class="tab-icon">⏰</span>
           <span class="tab-label">Schedule</span>
         </button>
         <button class="tab-btn" onclick="switchTab('recipe', this)">
           <span class="tab-icon">🍳</span>
           <span class="tab-label">Recipe</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('history', this)">
+          <span class="tab-icon">📜</span>
+          <span class="tab-label">History</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('water', this)">
+          <span class="tab-icon">✅</span>
+          <span class="tab-label">Tracker</span>
         </button>
       </div>
 
@@ -1374,66 +1785,51 @@
             <span>📅</span> 3 DAYS A WEEK
           </div>
 
-          <div class="week-section" style="margin-bottom: 14px">
+          <div class="week-section zad-card" style="padding: 14px; margin-bottom: 14px">
             <div class="week-header">
-              <span>🎓</span>
+              <span class="zad-icon">🎓</span>
               <span class="week-header-title">@academyzaden</span>
             </div>
-            <div class="week-sub">📌 Do 3x per week</div>
-
             <div class="subtopic-label">📖 aqeedah</div>
-            <div class="week-days">
-              <div class="week-day" id="wd1" onclick="toggleWeekDay(1)">
-                <div class="day-check">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <div class="day-label">Day 1</div>
+
+            <div class="zad-log-dropdown-row" onclick="event.stopPropagation()">
+              <select class="lecture-date-inline zad-log-select" id="zadLectureLogSelect">
+                <option value="">📜 No history yet</option>
+              </select>
+              <button
+                class="zad-log-delete-btn"
+                onclick="deleteSelectedZadLectureLogEntry()"
+                title="Remove selected entry"
+              >
+                🗑️
+              </button>
+            </div>
+
+            <div class="lecture-tracker-row">
+              <span class="lecture-tracker-label">🎬 Lecture</span>
+              <div class="lecture-stat-box">
+                <input
+                  type="number"
+                  class="lecture-count-input"
+                  id="zadLectureInput"
+                  min="1"
+                  max="25"
+                  onchange="setZadLecture(this.value)"
+                />
+                <span class="lecture-stat-sep">/</span>
+                <span class="lecture-stat-target">25</span>
               </div>
-              <div class="week-day" id="wd2" onclick="toggleWeekDay(2)">
-                <div class="day-check">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <div class="day-label">Day 2</div>
+              <div class="lecture-stat-box date-stat-box">
+                <span class="lecture-date-icon">📅</span>
+                <input
+                  type="date"
+                  class="lecture-date-inline"
+                  id="zadLogDateInput"
+                />
               </div>
-              <div class="week-day" id="wd3" onclick="toggleWeekDay(3)">
-                <div class="day-check">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <div class="day-label">Day 3</div>
-              </div>
+            </div>
+            <div class="lecture-progress-track">
+              <div class="lecture-progress-fill" id="zadLectureProgressFill"></div>
             </div>
             <a
               class="yt-link"
@@ -1443,66 +1839,59 @@
             >
               <span>▶️</span> Open Aqeedah Playlist
             </a>
+
+            <button
+              class="lecture-done-btn"
+              onclick="addZadLectureLogEntry()"
+            >
+              ➕ Add to Log
+            </button>
           </div>
 
-          <div class="week-section">
+          <div class="week-section zad-card" style="padding: 14px">
             <div class="week-header">
-              <span>📖</span>
+              <span class="zad-icon">📖</span>
               <span class="week-header-title">@understandquran</span>
             </div>
-            <div class="week-sub">📌 Do 3x per week</div>
-            <div class="week-days">
-              <div class="week-day" id="wd4" onclick="toggleWeekDay(4)">
-                <div class="day-check">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <div class="day-label">Day 1</div>
+
+            <div class="zad-log-dropdown-row" onclick="event.stopPropagation()">
+              <select class="lecture-date-inline zad-log-select" id="uqLectureLogSelect">
+                <option value="">📜 No history yet</option>
+              </select>
+              <button
+                class="zad-log-delete-btn"
+                onclick="deleteSelectedUqLectureLogEntry()"
+                title="Remove selected entry"
+              >
+                🗑️
+              </button>
+            </div>
+
+            <div class="lecture-tracker-row">
+              <span class="lecture-tracker-label">🎬 Lecture</span>
+              <div class="lecture-stat-box">
+                <input
+                  type="number"
+                  class="lecture-count-input"
+                  id="uqLectureInput"
+                  min="1"
+                  max="20"
+                  onchange="setUqLecture(this.value)"
+                />
+                <span class="lecture-stat-sep">/</span>
+                <span class="lecture-stat-target">20</span>
               </div>
-              <div class="week-day" id="wd5" onclick="toggleWeekDay(5)">
-                <div class="day-check">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <div class="day-label">Day 2</div>
+              <div class="lecture-stat-box date-stat-box">
+                <span class="lecture-date-icon">📅</span>
+                <input
+                  type="date"
+                  class="lecture-date-inline"
+                  id="uqLogDateInput"
+                />
               </div>
-              <div class="week-day" id="wd6" onclick="toggleWeekDay(6)">
-                <div class="day-check">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <div class="day-label">Day 3</div>
-              </div>
+            </div>
+            <div class="lecture-progress-track">
+              <div class="lecture-progress-fill" id="uqLectureProgressFill"></div>
             </div>
             <a
               class="yt-link"
@@ -1512,6 +1901,13 @@
             >
               <span>▶️</span> Open Understand Quran Playlist
             </a>
+
+            <button
+              class="lecture-done-btn"
+              onclick="addUqLectureLogEntry()"
+            >
+              ➕ Add to Log
+            </button>
           </div>
         </div>
 
@@ -1590,28 +1986,9 @@
             </button>
           </div>
 
-          <div class="steps-summary">
-            <span class="steps-summary-icon">🚶</span>
-            <span class="steps-summary-text"><span id="stepsCount">0</span> / <span id="stepsTarget">4000</span> steps</span>
-          </div>
-
           <div id="morning-section" class="schedule-section active">
           <div class="section-title morning-title">
             <span>🌅</span> MORNING ROUTINES
-          </div>
-          <div class="task-card" id="task-m1-s" onclick="toggleTask('m1')">
-            <div class="checkbox">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <div style="flex: 1">
-              <div class="task-text">Morning walk <span>🌅</span></div>
-              <div class="steps-input-row" onclick="event.stopPropagation()">
-                <input type="number" class="steps-input" id="steps-m1" min="0" inputmode="numeric" placeholder="0" oninput="updateStepsTotal()" />
-                <span class="steps-input-label">steps walked</span>
-              </div>
-            </div>
           </div>
           <div class="task-card" id="task-m2-s" onclick="toggleTask('m2')">
             <div class="checkbox">
@@ -1684,20 +2061,6 @@
           <div class="section-title afternoon-title">
             <span>☀️</span> AFTERNOON ROUTINES
           </div>
-          <div class="task-card" id="task-a1-s" onclick="toggleTask('a1')">
-            <div class="checkbox">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <div style="flex: 1">
-              <div class="task-text">Afternoon walk <span>☀️</span></div>
-              <div class="steps-input-row" onclick="event.stopPropagation()">
-                <input type="number" class="steps-input" id="steps-a1" min="0" inputmode="numeric" placeholder="0" oninput="updateStepsTotal()" />
-                <span class="steps-input-label">steps walked</span>
-              </div>
-            </div>
-          </div>
           <div class="task-card" id="task-a2-s" onclick="toggleTask('a2')">
             <div class="checkbox">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -1722,20 +2085,6 @@
           <div id="evening-section" class="schedule-section">
           <div class="section-title evening-title">
             <span>🌇</span> EVENING ROUTINES
-          </div>
-          <div class="task-card" id="task-e1-s" onclick="toggleTask('e1')">
-            <div class="checkbox">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <div style="flex: 1">
-              <div class="task-text">Garden walk <span>🌳</span></div>
-              <div class="steps-input-row" onclick="event.stopPropagation()">
-                <input type="number" class="steps-input" id="steps-e1" min="0" inputmode="numeric" placeholder="0" oninput="updateStepsTotal()" />
-                <span class="steps-input-label">steps walked</span>
-              </div>
-            </div>
           </div>
           <div class="task-card" id="task-e3-s" onclick="toggleTask('e3')">
             <div class="checkbox">
@@ -1784,48 +2133,6 @@
           <div id="night-section" class="schedule-section">
           <div class="section-title night-title">
             <span>🌙</span> NIGHT ROUTINES
-          </div>
-          <div class="task-card" id="task-n4-s" onclick="toggleTask('n4')">
-            <div class="checkbox">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <div style="flex: 1">
-              <div class="task-text">Night walk <span>🌙</span></div>
-              <div class="steps-input-row" onclick="event.stopPropagation()">
-                <input type="number" class="steps-input" id="steps-n4" min="0" inputmode="numeric" placeholder="0" oninput="updateStepsTotal()" />
-                <span class="steps-input-label">steps walked</span>
-              </div>
-            </div>
-          </div>
-          <div class="task-card" id="task-n1-s" onclick="toggleTask('n1')">
-            <div class="checkbox">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <div style="flex: 1">
-              <div class="task-text">Listen English <span>📚</span></div>
-              <a class="yt-link" href="https://youtube.com/@englishspeeches?si=LbZFw8e3OxlDKTTI" target="_blank" onclick="event.stopPropagation()">
-                <span>▶️</span> Open @Englishspeeches
-              </a>
-              <div class="timer-wrap" onclick="event.stopPropagation()">
-                <div class="timer-display" id="timer-display-english">10:00</div>
-                <div class="timer-info">
-                  <div class="adhkar-label" style="margin-bottom: 2px">⏱️ Listening Timer</div>
-                  <div class="timer-controls">
-                    <button class="timer-btn" id="timer-toggle-english">Start</button>
-                    <button class="timer-reset-btn" id="timer-reset-english" title="Reset">↺</button>
-                    <div class="timer-adjust">
-                      <button class="timer-adjust-btn" id="timer-minus-english">−</button>
-                      <span class="timer-minutes" id="timer-minutes-english">10m</span>
-                      <button class="timer-adjust-btn" id="timer-plus-english">+</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="task-card" id="task-n2-s" onclick="toggleTask('n2')">
             <div class="checkbox">
@@ -1956,6 +2263,221 @@
               </div>
             </div>
           </details>
+        </div>
+
+        <!-- HISTORY TAB -->
+        <div class="tab-content" id="tab-history">
+          <div class="section-title water-title">
+            <span>📜</span> HISTORY
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">🛏️ When did you last turn the mattress?</div>
+            <div class="chore-log-row">
+              <div class="lecture-stat-box date-stat-box">
+                <span class="lecture-date-icon">📅</span>
+                <input type="date" class="lecture-date-inline" id="choreMattressDateInput" />
+              </div>
+              <button class="lecture-done-btn chore-log-btn" onclick="addChoreLogEntry('mattress')">➕ Log</button>
+            </div>
+            <div class="zad-log-dropdown-row">
+              <select class="lecture-date-inline zad-log-select" id="choreMattressLogSelect">
+                <option value="">📜 No history yet</option>
+              </select>
+              <button class="zad-log-delete-btn" onclick="deleteSelectedChoreLogEntry('mattress')" title="Remove selected entry">🗑️</button>
+            </div>
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">🧹 Last room clean?</div>
+            <div class="chore-log-row">
+              <div class="lecture-stat-box date-stat-box">
+                <span class="lecture-date-icon">📅</span>
+                <input type="date" class="lecture-date-inline" id="choreRoomDateInput" />
+              </div>
+              <button class="lecture-done-btn chore-log-btn" onclick="addChoreLogEntry('room')">➕ Log</button>
+            </div>
+            <div class="zad-log-dropdown-row">
+              <select class="lecture-date-inline zad-log-select" id="choreRoomLogSelect">
+                <option value="">📜 No history yet</option>
+              </select>
+              <button class="zad-log-delete-btn" onclick="deleteSelectedChoreLogEntry('room')" title="Remove selected entry">🗑️</button>
+            </div>
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">💻 Last computer clean?</div>
+            <div class="chore-log-row">
+              <div class="lecture-stat-box date-stat-box">
+                <span class="lecture-date-icon">📅</span>
+                <input type="date" class="lecture-date-inline" id="choreComputerDateInput" />
+              </div>
+              <button class="lecture-done-btn chore-log-btn" onclick="addChoreLogEntry('computer')">➕ Log</button>
+            </div>
+            <div class="zad-log-dropdown-row">
+              <select class="lecture-date-inline zad-log-select" id="choreComputerLogSelect">
+                <option value="">📜 No history yet</option>
+              </select>
+              <button class="zad-log-delete-btn" onclick="deleteSelectedChoreLogEntry('computer')" title="Remove selected entry">🗑️</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRACKER TAB -->
+        <div class="tab-content" id="tab-water">
+          <div class="section-title water-title">
+            <span>✅</span> TRACKER
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">🧴 Washed hair this week?</div>
+            <div class="hair-wash-row">
+              <div class="hair-wash-count" id="hairWashCount">0 / 2 this week</div>
+              <div class="hair-wash-buttons">
+                <button class="hair-wash-btn hair-wash-minus" onclick="adjustHairWash(-1)" id="hairWashMinusBtn">−</button>
+                <button class="hair-wash-btn hair-wash-plus" onclick="adjustHairWash(1)">+1 Log a wash</button>
+              </div>
+            </div>
+            <div class="hair-wash-progress-track">
+              <div class="hair-wash-progress-fill" id="hairWashProgressFill"></div>
+            </div>
+            <div class="medicine-reminder-row">
+              <div>
+                <div class="medicine-reminder-text">🔔 Hair wash reminders</div>
+                <div class="medicine-reminder-sub" id="hairWashReminderSub">Get a nudge if you're behind on 2x this week.</div>
+              </div>
+              <button class="medicine-reminder-btn" id="hairWashReminderBtn" onclick="toggleHairWashReminders()">Enable</button>
+            </div>
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">🏋️ Exercise done today?</div>
+            <div class="tracker-row" style="margin-top: 0">
+              <div class="tracker-group steps-group">
+                <span class="tracker-group-icon">🏋️</span>
+                <input type="number" class="tracker-input" id="trackerExerciseInput" min="0" inputmode="numeric" placeholder="0" />
+                <span class="tracker-group-label">minutes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tracker-summary-row">
+            <div class="steps-summary steps-summary-colored">
+              <span class="steps-summary-icon">🚶</span>
+              <span class="steps-summary-text"><span id="trackerWalkCount">0</span> / 6000-10000 steps</span>
+            </div>
+            <div class="steps-summary water-summary-colored">
+              <span class="steps-summary-icon">💧</span>
+              <span class="steps-summary-text"><span id="trackerWaterCount">0</span> / 8 glasses</span>
+            </div>
+          </div>
+
+          <div class="task-card" id="task-trackerWalk-s" onclick="toggleTask('trackerWalk')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Walk <span>🚶</span></div>
+              <div class="tracker-row" onclick="event.stopPropagation()">
+                <div class="tracker-group steps-group">
+                  <span class="tracker-group-icon">🚶</span>
+                  <input type="number" class="tracker-input" id="trackerWalkInput" min="0" inputmode="numeric" placeholder="0" oninput="updateTrackerWalkWaterSummary()" />
+                  <span class="tracker-group-label">steps</span>
+                </div>
+                <div class="tracker-group water-group">
+                  <span class="tracker-group-icon">💧</span>
+                  <input type="number" class="tracker-input" id="trackerWaterInput" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview(); updateTrackerWalkWaterSummary()" />
+                  <span class="tracker-group-label">glasses</span>
+                </div>
+              </div>
+              <div class="water-litre-preview" id="waterLitrePreview">0 glasses = 0.00 L</div>
+            </div>
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">🧠 Lumosity game played?</div>
+            <div class="tracker-row" style="margin-top: 0">
+              <div class="tracker-group steps-group">
+                <span class="tracker-group-icon">🧠</span>
+                <input type="number" class="tracker-input" id="trackerLumosityInput" min="0" inputmode="numeric" placeholder="0" />
+                <span class="tracker-group-label">sessions</span>
+              </div>
+            </div>
+            <div class="medicine-reminder-row">
+              <div>
+                <div class="medicine-reminder-text">🔔 Daily reminder</div>
+                <div class="medicine-reminder-sub" id="lumosityReminderSub">Get a daily nudge to play Lumosity.</div>
+              </div>
+              <button class="medicine-reminder-btn" id="lumosityReminderBtn" onclick="toggleLumosityReminders()">Enable</button>
+            </div>
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">⌨️ Typing practice done?</div>
+            <a
+              class="yt-link"
+              href="https://www.typing.com/student/lessons"
+              target="_blank"
+              onclick="event.stopPropagation()"
+            >
+              <span>⌨️</span> Open Typing.com Lessons
+            </a>
+            <div class="typing-range-row">
+              <div class="lecture-stat-box date-stat-box">
+                <span class="lecture-date-icon">📅</span>
+                <input type="date" class="lecture-date-inline" id="typingStartDateInput" onchange="saveTypingRange()" />
+              </div>
+              <span class="typing-range-sep">to</span>
+              <div class="lecture-stat-box date-stat-box">
+                <span class="lecture-date-icon">🏁</span>
+                <input type="date" class="lecture-date-inline" id="typingEndDateInput" onchange="saveTypingRange()" />
+              </div>
+            </div>
+          </div>
+
+          <div class="history-card chore-card">
+            <div class="chore-question">💊 Medicine taken today?</div>
+
+            <div class="medicine-slot" id="medSlot-morning" onclick="toggleMedicineSlot('morning')">
+              <div class="checkbox">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span class="medicine-slot-label">🌅 Morning</span>
+              <span class="medicine-slot-status" id="medSlotStatus-morning">❓ Not taken</span>
+            </div>
+
+            <div class="medicine-slot" id="medSlot-afternoon" onclick="toggleMedicineSlot('afternoon')">
+              <div class="checkbox">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span class="medicine-slot-label">☀️ Afternoon</span>
+              <span class="medicine-slot-status" id="medSlotStatus-afternoon">❓ Not taken</span>
+            </div>
+
+            <div class="medicine-slot" id="medSlot-night" onclick="toggleMedicineSlot('night')">
+              <div class="checkbox">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <span class="medicine-slot-label">🌙 Night</span>
+              <span class="medicine-slot-status" id="medSlotStatus-night">❓ Not taken</span>
+            </div>
+
+            <div class="medicine-reminder-row">
+              <div>
+                <div class="medicine-reminder-text">🔔 Medicine reminders</div>
+                <div class="medicine-reminder-sub" id="medicineReminderSub">Get a nudge if you forget to mark a dose.</div>
+              </div>
+              <button class="medicine-reminder-btn" id="medicineReminderBtn" onclick="toggleMedicineReminders()">Enable</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2088,7 +2610,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      const TOTAL_TASKS = 14;
+      const TOTAL_TASKS = 9;
       let completedTasks = new Set();
       let weekDaysCompleted = new Set();
       let weekDaysCompleted2 = new Set();
@@ -2098,6 +2620,53 @@
         periods: [],
         defaultCycleLength: 28,
       };
+
+      // Zad Academy lecture tracker
+      const ZAD_TOTAL_LECTURES = 25;
+      let zadLecture = 1;
+      let zadLectureLog = [];
+
+      // Understand Quran lecture tracker
+      const UQ_TOTAL_LECTURES = 20;
+      let uqLecture = 1;
+      let uqLectureLog = [];
+
+      // Weekly chore check-ins (History tab)
+      let choreLogs = {
+        mattress: [],
+        room: [],
+        computer: [],
+      };
+      const GLASS_ML = 250;
+
+      const MEDICINE_SLOTS = ["morning", "afternoon", "night"];
+      let medicineStatus = {
+        date: "",
+        morning: false,
+        afternoon: false,
+        night: false,
+        notified: { morning: false, afternoon: false, night: false },
+        remindersEnabled: false,
+      };
+      let medicineReminderIntervalId = null;
+      const MEDICINE_REMINDER_INTERVAL_MS = 15 * 60 * 1000;
+
+      const HAIR_WASH_TARGET = 2;
+      let hairWashStatus = {
+        weekStart: "",
+        count: 0,
+        remindersEnabled: false,
+        lastReminded: "",
+      };
+      let hairWashReminderIntervalId = null;
+      const HAIR_WASH_REMINDER_INTERVAL_MS = 6 * 60 * 60 * 1000;
+
+      let lumosityReminderStatus = {
+        remindersEnabled: false,
+        lastReminded: "",
+      };
+      let lumosityReminderIntervalId = null;
+      const LUMOSITY_REMINDER_INTERVAL_MS = 6 * 60 * 60 * 1000;
 
       function scrollToScheduleSection(sectionId) {
         document.querySelectorAll(".schedule-section").forEach((section) => {
@@ -2971,16 +3540,6 @@
         }
       }
 
-      function updateStepsTotal() {
-        const stepsEl = document.getElementById("stepsCount");
-        if (!stepsEl) return;
-        const total = ["steps-m1", "steps-a1", "steps-e1", "steps-n4"].reduce((sum, id) => {
-          const el = document.getElementById(id);
-          return sum + (parseInt(el.value, 10) || 0);
-        }, 0);
-        stepsEl.textContent = total;
-      }
-
       function toggleWeekDay(dayNum) {
         const dayEl = document.getElementById("wd" + dayNum);
         const set = dayNum <= 3 ? weekDaysCompleted : weekDaysCompleted2;
@@ -2991,6 +3550,827 @@
           set.add(dayNum);
           dayEl.classList.add("checked");
         }
+      }
+
+      // Zad Academy lecture tracker
+      function loadZadLecture() {
+        try {
+          const stored = parseInt(
+            localStorage.getItem("zad_lecture_v1"),
+            10,
+          );
+          if (Number.isFinite(stored)) {
+            zadLecture = Math.min(ZAD_TOTAL_LECTURES, Math.max(1, stored));
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+        renderZadLecture();
+      }
+
+      function setZadLecture(value) {
+        const n = parseInt(value, 10);
+        zadLecture = Number.isFinite(n)
+          ? Math.min(ZAD_TOTAL_LECTURES, Math.max(1, n))
+          : 1;
+        try {
+          localStorage.setItem("zad_lecture_v1", zadLecture);
+        } catch (e) {
+          // ignore storage errors
+        }
+        renderZadLecture();
+      }
+
+      function renderZadLecture() {
+        document.getElementById("zadLectureInput").value = zadLecture;
+
+        const pct = Math.min(
+          100,
+          Math.round((zadLecture / ZAD_TOTAL_LECTURES) * 100),
+        );
+        const fillEl = document.getElementById("zadLectureProgressFill");
+        fillEl.style.width = pct + "%";
+
+        const complete = zadLecture >= ZAD_TOTAL_LECTURES;
+        fillEl.classList.toggle("complete", complete);
+      }
+
+      function isoToDDMMYY(isoDateStr) {
+        const parts = isoDateStr.split("-");
+        return parts[2] + "-" + parts[1] + "-" + parts[0].slice(-2);
+      }
+
+      function choreInputId(key) {
+        return "chore" + key.charAt(0).toUpperCase() + key.slice(1) + "DateInput";
+      }
+
+      function choreSelectId(key) {
+        return "chore" + key.charAt(0).toUpperCase() + key.slice(1) + "LogSelect";
+      }
+
+      function loadChoreLog(key) {
+        try {
+          const stored = localStorage.getItem("chore_log_" + key + "_v1");
+          choreLogs[key] = stored ? JSON.parse(stored) : [];
+          if (!Array.isArray(choreLogs[key])) choreLogs[key] = [];
+        } catch (e) {
+          choreLogs[key] = [];
+        }
+        renderChoreLog(key);
+      }
+
+      function saveChoreLog(key) {
+        try {
+          localStorage.setItem(
+            "chore_log_" + key + "_v1",
+            JSON.stringify(choreLogs[key]),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function addChoreLogEntry(key) {
+        const dateEl = document.getElementById(choreInputId(key));
+        const dateVal = dateEl.value;
+
+        if (!dateVal) {
+          showToast("Please select the date");
+          return;
+        }
+
+        choreLogs[key].unshift({ date: isoToDDMMYY(dateVal) });
+        choreLogs[key] = choreLogs[key].slice(0, 50);
+        saveChoreLog(key);
+        renderChoreLog(key);
+        dateEl.value = "";
+        showToast("✅ Logged");
+      }
+
+      function deleteSelectedChoreLogEntry(key) {
+        const selectEl = document.getElementById(choreSelectId(key));
+        const index = parseInt(selectEl.value, 10);
+        if (!Number.isFinite(index)) return;
+        choreLogs[key].splice(index, 1);
+        saveChoreLog(key);
+        renderChoreLog(key);
+      }
+
+      function renderChoreLog(key) {
+        const selectEl = document.getElementById(choreSelectId(key));
+        if (!selectEl) return;
+
+        if (choreLogs[key].length === 0) {
+          selectEl.innerHTML = '<option value="">📜 No history yet</option>';
+          return;
+        }
+
+        let html = "";
+        choreLogs[key].forEach((entry, index) => {
+          html += `<option value="${index}">📅 ${entry.date}</option>`;
+        });
+        selectEl.innerHTML = html;
+      }
+
+      function loadAllChoreLogs() {
+        ["mattress", "room", "computer"].forEach(loadChoreLog);
+      }
+
+      function loadTypingRange() {
+        try {
+          const stored = localStorage.getItem("typing_range_v1");
+          const data = stored ? JSON.parse(stored) : {};
+          if (data.start) {
+            document.getElementById("typingStartDateInput").value = data.start;
+          }
+          if (data.end) {
+            document.getElementById("typingEndDateInput").value = data.end;
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+      }
+
+      function saveTypingRange() {
+        const start = document.getElementById("typingStartDateInput").value;
+        const end = document.getElementById("typingEndDateInput").value;
+        try {
+          localStorage.setItem(
+            "typing_range_v1",
+            JSON.stringify({ start, end }),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function medicineTodayStr() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, "0");
+        const d = String(now.getDate()).padStart(2, "0");
+        return y + "-" + m + "-" + d;
+      }
+
+      function loadMedicineStatus() {
+        try {
+          const stored = localStorage.getItem("medicine_status_v1");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            medicineStatus.remindersEnabled = !!parsed.remindersEnabled;
+            if (parsed.date === medicineTodayStr()) {
+              MEDICINE_SLOTS.forEach((slot) => {
+                medicineStatus[slot] = !!parsed[slot];
+              });
+              medicineStatus.notified = parsed.notified || {
+                morning: false,
+                afternoon: false,
+                night: false,
+              };
+            } else {
+              MEDICINE_SLOTS.forEach((slot) => {
+                medicineStatus[slot] = false;
+              });
+              medicineStatus.notified = {
+                morning: false,
+                afternoon: false,
+                night: false,
+              };
+            }
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+        medicineStatus.date = medicineTodayStr();
+        saveMedicineStatus();
+        renderMedicineStatus();
+        if (
+          medicineStatus.remindersEnabled &&
+          typeof Notification !== "undefined" &&
+          Notification.permission === "granted"
+        ) {
+          startMedicineReminderInterval();
+        }
+      }
+
+      function saveMedicineStatus() {
+        try {
+          localStorage.setItem(
+            "medicine_status_v1",
+            JSON.stringify(medicineStatus),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function toggleMedicineSlot(slot) {
+        medicineStatus[slot] = !medicineStatus[slot];
+        if (medicineStatus[slot]) {
+          medicineStatus.notified[slot] = true;
+        }
+        saveMedicineStatus();
+        renderMedicineStatus();
+        showToast(
+          medicineStatus[slot]
+            ? "💊 Marked " + slot + " dose as taken"
+            : "Unmarked " + slot + " dose",
+        );
+      }
+
+      function renderMedicineStatus() {
+        MEDICINE_SLOTS.forEach((slot) => {
+          const slotEl = document.getElementById("medSlot-" + slot);
+          const statusEl = document.getElementById("medSlotStatus-" + slot);
+          if (!slotEl || !statusEl) return;
+          if (medicineStatus[slot]) {
+            slotEl.classList.add("completed");
+            statusEl.textContent = "✅ Taken";
+          } else {
+            slotEl.classList.remove("completed");
+            statusEl.textContent = "❓ Not taken";
+          }
+        });
+
+        const btn = document.getElementById("medicineReminderBtn");
+        const sub = document.getElementById("medicineReminderSub");
+        if (medicineStatus.remindersEnabled) {
+          btn.textContent = "🔕 Disable";
+          btn.classList.add("active");
+          sub.textContent =
+            "Reminders are on — we'll check in about once an hour while this tab is open.";
+        } else {
+          btn.textContent = "Enable";
+          btn.classList.remove("active");
+          sub.textContent = "Get a nudge if you forget to mark a dose.";
+        }
+      }
+
+      const MEDICINE_ALARM_TIMES = {
+        morning: 11 * 60,
+        afternoon: 15 * 60,
+        night: 22 * 60,
+      };
+
+      function checkMedicineReminder() {
+        if (medicineStatus.date !== medicineTodayStr()) {
+          loadMedicineStatus();
+        }
+        if (!medicineStatus.remindersEnabled) return;
+        if (
+          typeof Notification === "undefined" ||
+          Notification.permission !== "granted"
+        ) {
+          return;
+        }
+        const now = new Date();
+        const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+        MEDICINE_SLOTS.forEach((slot) => {
+          if (medicineStatus[slot]) return;
+          if (medicineStatus.notified[slot]) return;
+          if (nowMinutes < MEDICINE_ALARM_TIMES[slot]) return;
+
+          medicineStatus.notified[slot] = true;
+          saveMedicineStatus();
+          new Notification("💊 Medicine reminder", {
+            body:
+              "Have you taken your " + slot + " medicine today? Tap to mark it in the app.",
+          });
+        });
+      }
+
+      function startMedicineReminderInterval() {
+        if (medicineReminderIntervalId) clearInterval(medicineReminderIntervalId);
+        medicineReminderIntervalId = setInterval(
+          checkMedicineReminder,
+          MEDICINE_REMINDER_INTERVAL_MS,
+        );
+      }
+
+      function toggleMedicineReminders() {
+        if (medicineStatus.remindersEnabled) {
+          medicineStatus.remindersEnabled = false;
+          if (medicineReminderIntervalId) {
+            clearInterval(medicineReminderIntervalId);
+            medicineReminderIntervalId = null;
+          }
+          saveMedicineStatus();
+          renderMedicineStatus();
+          showToast("Medicine reminders turned off");
+          return;
+        }
+
+        if (typeof Notification === "undefined") {
+          showToast("Notifications aren't supported in this browser");
+          return;
+        }
+
+        if (Notification.permission === "granted") {
+          medicineStatus.remindersEnabled = true;
+          saveMedicineStatus();
+          renderMedicineStatus();
+          startMedicineReminderInterval();
+          showToast("🔔 Medicine reminders enabled");
+          checkMedicineReminder();
+        } else if (Notification.permission === "denied") {
+          showToast("Notifications are blocked — enable them in browser settings");
+        } else {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              medicineStatus.remindersEnabled = true;
+              saveMedicineStatus();
+              renderMedicineStatus();
+              startMedicineReminderInterval();
+              showToast("🔔 Medicine reminders enabled");
+              checkMedicineReminder();
+            } else {
+              showToast("Notification permission not granted");
+            }
+          });
+        }
+      }
+
+      function getMondayStr(date) {
+        const d = new Date(date);
+        const day = d.getDay();
+        const diff = day === 0 ? -6 : 1 - day;
+        d.setDate(d.getDate() + diff);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const dd = String(d.getDate()).padStart(2, "0");
+        return y + "-" + m + "-" + dd;
+      }
+
+      function loadHairWashStatus() {
+        const currentWeek = getMondayStr(new Date());
+        try {
+          const stored = localStorage.getItem("hair_wash_status_v1");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            hairWashStatus.remindersEnabled = !!parsed.remindersEnabled;
+            if (parsed.weekStart === currentWeek) {
+              hairWashStatus.count = parsed.count || 0;
+              hairWashStatus.lastReminded = parsed.lastReminded || "";
+            } else {
+              hairWashStatus.count = 0;
+              hairWashStatus.lastReminded = "";
+            }
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+        hairWashStatus.weekStart = currentWeek;
+        saveHairWashStatus();
+        renderHairWashStatus();
+        if (
+          hairWashStatus.remindersEnabled &&
+          typeof Notification !== "undefined" &&
+          Notification.permission === "granted"
+        ) {
+          startHairWashReminderInterval();
+        }
+      }
+
+      function saveHairWashStatus() {
+        try {
+          localStorage.setItem(
+            "hair_wash_status_v1",
+            JSON.stringify(hairWashStatus),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function adjustHairWash(delta) {
+        if (hairWashStatus.weekStart !== getMondayStr(new Date())) {
+          loadHairWashStatus();
+        }
+        hairWashStatus.count = Math.max(0, hairWashStatus.count + delta);
+        saveHairWashStatus();
+        renderHairWashStatus();
+        if (delta > 0) {
+          if (hairWashStatus.count >= HAIR_WASH_TARGET) {
+            showToast("🧴 Goal reached — " + hairWashStatus.count + " washes this week! 🎉");
+          } else {
+            showToast("🧴 Logged a hair wash");
+          }
+        }
+      }
+
+      function renderHairWashStatus() {
+        const countEl = document.getElementById("hairWashCount");
+        const fillEl = document.getElementById("hairWashProgressFill");
+        const minusBtn = document.getElementById("hairWashMinusBtn");
+        if (!countEl) return;
+
+        countEl.textContent =
+          hairWashStatus.count + " / " + HAIR_WASH_TARGET + " this week";
+        minusBtn.disabled = hairWashStatus.count <= 0;
+
+        const pct = Math.min(
+          100,
+          Math.round((hairWashStatus.count / HAIR_WASH_TARGET) * 100),
+        );
+        fillEl.style.width = pct + "%";
+        fillEl.classList.toggle("complete", hairWashStatus.count >= HAIR_WASH_TARGET);
+
+        const btn = document.getElementById("hairWashReminderBtn");
+        const sub = document.getElementById("hairWashReminderSub");
+        if (hairWashStatus.remindersEnabled) {
+          btn.textContent = "🔕 Disable";
+          btn.classList.add("active");
+          sub.textContent = "Reminders are on — checked a few times a day.";
+        } else {
+          btn.textContent = "Enable";
+          btn.classList.remove("active");
+          sub.textContent = "Get a nudge if you're behind on 2x this week.";
+        }
+      }
+
+      function checkHairWashReminder() {
+        if (hairWashStatus.weekStart !== getMondayStr(new Date())) {
+          loadHairWashStatus();
+        }
+        if (!hairWashStatus.remindersEnabled) return;
+        if (
+          typeof Notification === "undefined" ||
+          Notification.permission !== "granted"
+        ) {
+          return;
+        }
+        if (hairWashStatus.count >= HAIR_WASH_TARGET) return;
+
+        const today = medicineTodayStr();
+        if (hairWashStatus.lastReminded === today) return;
+
+        hairWashStatus.lastReminded = today;
+        saveHairWashStatus();
+        const remaining = HAIR_WASH_TARGET - hairWashStatus.count;
+        new Notification("🧴 Hair wash reminder", {
+          body:
+            "You've washed your hair " + hairWashStatus.count + "/" + HAIR_WASH_TARGET +
+            " times this week. " + remaining + " more to go!",
+        });
+      }
+
+      function startHairWashReminderInterval() {
+        if (hairWashReminderIntervalId) clearInterval(hairWashReminderIntervalId);
+        hairWashReminderIntervalId = setInterval(
+          checkHairWashReminder,
+          HAIR_WASH_REMINDER_INTERVAL_MS,
+        );
+      }
+
+      function toggleHairWashReminders() {
+        if (hairWashStatus.remindersEnabled) {
+          hairWashStatus.remindersEnabled = false;
+          if (hairWashReminderIntervalId) {
+            clearInterval(hairWashReminderIntervalId);
+            hairWashReminderIntervalId = null;
+          }
+          saveHairWashStatus();
+          renderHairWashStatus();
+          showToast("Hair wash reminders turned off");
+          return;
+        }
+
+        if (typeof Notification === "undefined") {
+          showToast("Notifications aren't supported in this browser");
+          return;
+        }
+
+        if (Notification.permission === "granted") {
+          hairWashStatus.remindersEnabled = true;
+          saveHairWashStatus();
+          renderHairWashStatus();
+          startHairWashReminderInterval();
+          showToast("🔔 Hair wash reminders enabled");
+          checkHairWashReminder();
+        } else if (Notification.permission === "denied") {
+          showToast("Notifications are blocked — enable them in browser settings");
+        } else {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              hairWashStatus.remindersEnabled = true;
+              saveHairWashStatus();
+              renderHairWashStatus();
+              startHairWashReminderInterval();
+              showToast("🔔 Hair wash reminders enabled");
+              checkHairWashReminder();
+            } else {
+              showToast("Notification permission not granted");
+            }
+          });
+        }
+      }
+
+      function loadLumosityReminderStatus() {
+        try {
+          const stored = localStorage.getItem("lumosity_reminder_v1");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            lumosityReminderStatus.remindersEnabled = !!parsed.remindersEnabled;
+            lumosityReminderStatus.lastReminded = parsed.lastReminded || "";
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+        renderLumosityReminderStatus();
+        if (
+          lumosityReminderStatus.remindersEnabled &&
+          typeof Notification !== "undefined" &&
+          Notification.permission === "granted"
+        ) {
+          startLumosityReminderInterval();
+        }
+      }
+
+      function saveLumosityReminderStatus() {
+        try {
+          localStorage.setItem(
+            "lumosity_reminder_v1",
+            JSON.stringify(lumosityReminderStatus),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function renderLumosityReminderStatus() {
+        const btn = document.getElementById("lumosityReminderBtn");
+        const sub = document.getElementById("lumosityReminderSub");
+        if (!btn) return;
+        if (lumosityReminderStatus.remindersEnabled) {
+          btn.textContent = "🔕 Disable";
+          btn.classList.add("active");
+          sub.textContent = "Reminders are on — checked a few times a day.";
+        } else {
+          btn.textContent = "Enable";
+          btn.classList.remove("active");
+          sub.textContent = "Get a daily nudge to play Lumosity.";
+        }
+      }
+
+      function checkLumosityReminder() {
+        if (!lumosityReminderStatus.remindersEnabled) return;
+        if (
+          typeof Notification === "undefined" ||
+          Notification.permission !== "granted"
+        ) {
+          return;
+        }
+        const today = medicineTodayStr();
+        if (lumosityReminderStatus.lastReminded === today) return;
+
+        lumosityReminderStatus.lastReminded = today;
+        saveLumosityReminderStatus();
+        new Notification("🧠 Lumosity reminder", {
+          body: "Don't forget to play Lumosity today!",
+        });
+      }
+
+      function startLumosityReminderInterval() {
+        if (lumosityReminderIntervalId) clearInterval(lumosityReminderIntervalId);
+        lumosityReminderIntervalId = setInterval(
+          checkLumosityReminder,
+          LUMOSITY_REMINDER_INTERVAL_MS,
+        );
+      }
+
+      function toggleLumosityReminders() {
+        if (lumosityReminderStatus.remindersEnabled) {
+          lumosityReminderStatus.remindersEnabled = false;
+          if (lumosityReminderIntervalId) {
+            clearInterval(lumosityReminderIntervalId);
+            lumosityReminderIntervalId = null;
+          }
+          saveLumosityReminderStatus();
+          renderLumosityReminderStatus();
+          showToast("Lumosity reminders turned off");
+          return;
+        }
+
+        if (typeof Notification === "undefined") {
+          showToast("Notifications aren't supported in this browser");
+          return;
+        }
+
+        if (Notification.permission === "granted") {
+          lumosityReminderStatus.remindersEnabled = true;
+          saveLumosityReminderStatus();
+          renderLumosityReminderStatus();
+          startLumosityReminderInterval();
+          showToast("🔔 Lumosity reminders enabled");
+          checkLumosityReminder();
+        } else if (Notification.permission === "denied") {
+          showToast("Notifications are blocked — enable them in browser settings");
+        } else {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              lumosityReminderStatus.remindersEnabled = true;
+              saveLumosityReminderStatus();
+              renderLumosityReminderStatus();
+              startLumosityReminderInterval();
+              showToast("🔔 Lumosity reminders enabled");
+              checkLumosityReminder();
+            } else {
+              showToast("Notification permission not granted");
+            }
+          });
+        }
+      }
+
+      function updateWaterLitrePreview() {
+        const glasses =
+          parseInt(document.getElementById("trackerWaterInput").value, 10) || 0;
+        const litres = ((glasses * GLASS_ML) / 1000).toFixed(2);
+        document.getElementById("waterLitrePreview").textContent =
+          glasses + " glasses = " + litres + " L";
+      }
+
+      function updateTrackerWalkWaterSummary() {
+        document.getElementById("trackerWalkCount").textContent =
+          parseInt(document.getElementById("trackerWalkInput").value, 10) || 0;
+        document.getElementById("trackerWaterCount").textContent =
+          parseInt(document.getElementById("trackerWaterInput").value, 10) || 0;
+      }
+
+      function loadZadLectureLog() {
+        try {
+          const stored = localStorage.getItem("zad_lecture_log_v1");
+          zadLectureLog = stored ? JSON.parse(stored) : [];
+          if (!Array.isArray(zadLectureLog)) zadLectureLog = [];
+        } catch (e) {
+          zadLectureLog = [];
+        }
+        renderZadLectureLog();
+      }
+
+      function saveZadLectureLog() {
+        try {
+          localStorage.setItem(
+            "zad_lecture_log_v1",
+            JSON.stringify(zadLectureLog),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function addZadLectureLogEntry() {
+        const dateEl = document.getElementById("zadLogDateInput");
+        const dateVal = dateEl.value;
+
+        if (!dateVal) {
+          showToast("Please select the date");
+          return;
+        }
+
+        zadLectureLog.unshift({
+          date: isoToDDMMYY(dateVal),
+          lecture: zadLecture,
+        });
+        zadLectureLog = zadLectureLog.slice(0, 50);
+        saveZadLectureLog();
+        renderZadLectureLog();
+        dateEl.value = "";
+        showToast("✅ Added to log");
+      }
+
+      function deleteSelectedZadLectureLogEntry() {
+        const selectEl = document.getElementById("zadLectureLogSelect");
+        const index = parseInt(selectEl.value, 10);
+        if (!Number.isFinite(index)) return;
+        zadLectureLog.splice(index, 1);
+        saveZadLectureLog();
+        renderZadLectureLog();
+      }
+
+      function renderZadLectureLog() {
+        const selectEl = document.getElementById("zadLectureLogSelect");
+        if (!selectEl) return;
+
+        if (zadLectureLog.length === 0) {
+          selectEl.innerHTML = '<option value="">📜 No history yet</option>';
+          return;
+        }
+
+        let html = "";
+        zadLectureLog.forEach((entry, index) => {
+          html += `<option value="${index}">📅 ${entry.date} · 🎬 Lecture ${entry.lecture}</option>`;
+        });
+        selectEl.innerHTML = html;
+      }
+
+      function loadUqLecture() {
+        try {
+          const stored = parseInt(
+            localStorage.getItem("uq_lecture_v1"),
+            10,
+          );
+          if (Number.isFinite(stored)) {
+            uqLecture = Math.min(UQ_TOTAL_LECTURES, Math.max(1, stored));
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+        renderUqLecture();
+      }
+
+      function setUqLecture(value) {
+        const n = parseInt(value, 10);
+        uqLecture = Number.isFinite(n)
+          ? Math.min(UQ_TOTAL_LECTURES, Math.max(1, n))
+          : 1;
+        try {
+          localStorage.setItem("uq_lecture_v1", uqLecture);
+        } catch (e) {
+          // ignore storage errors
+        }
+        renderUqLecture();
+      }
+
+      function renderUqLecture() {
+        document.getElementById("uqLectureInput").value = uqLecture;
+
+        const pct = Math.min(
+          100,
+          Math.round((uqLecture / UQ_TOTAL_LECTURES) * 100),
+        );
+        const fillEl = document.getElementById("uqLectureProgressFill");
+        fillEl.style.width = pct + "%";
+
+        const complete = uqLecture >= UQ_TOTAL_LECTURES;
+        fillEl.classList.toggle("complete", complete);
+      }
+
+      function loadUqLectureLog() {
+        try {
+          const stored = localStorage.getItem("uq_lecture_log_v1");
+          uqLectureLog = stored ? JSON.parse(stored) : [];
+          if (!Array.isArray(uqLectureLog)) uqLectureLog = [];
+        } catch (e) {
+          uqLectureLog = [];
+        }
+        renderUqLectureLog();
+      }
+
+      function saveUqLectureLog() {
+        try {
+          localStorage.setItem(
+            "uq_lecture_log_v1",
+            JSON.stringify(uqLectureLog),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function addUqLectureLogEntry() {
+        const dateEl = document.getElementById("uqLogDateInput");
+        const dateVal = dateEl.value;
+
+        if (!dateVal) {
+          showToast("Please select the date");
+          return;
+        }
+
+        uqLectureLog.unshift({
+          date: isoToDDMMYY(dateVal),
+          lecture: uqLecture,
+        });
+        uqLectureLog = uqLectureLog.slice(0, 50);
+        saveUqLectureLog();
+        renderUqLectureLog();
+        dateEl.value = "";
+        showToast("✅ Added to log");
+      }
+
+      function deleteSelectedUqLectureLogEntry() {
+        const selectEl = document.getElementById("uqLectureLogSelect");
+        const index = parseInt(selectEl.value, 10);
+        if (!Number.isFinite(index)) return;
+        uqLectureLog.splice(index, 1);
+        saveUqLectureLog();
+        renderUqLectureLog();
+      }
+
+      function renderUqLectureLog() {
+        const selectEl = document.getElementById("uqLectureLogSelect");
+        if (!selectEl) return;
+
+        if (uqLectureLog.length === 0) {
+          selectEl.innerHTML = '<option value="">📜 No history yet</option>';
+          return;
+        }
+
+        let html = "";
+        uqLectureLog.forEach((entry, index) => {
+          html += `<option value="${index}">📅 ${entry.date} · 🎬 Lecture ${entry.lecture}</option>`;
+        });
+        selectEl.innerHTML = html;
       }
 
       function showToast(msg) {
@@ -3014,10 +4394,6 @@
         document.getElementById("sub-m3").className = "task-sub sub-not-taken";
         document.getElementById("sub-a2").textContent = "❓ Not taken";
         document.getElementById("sub-a2").className = "task-sub sub-not-taken";
-        ["steps-m1", "steps-a1", "steps-e1", "steps-n4"].forEach((id) => {
-          document.getElementById(id).value = "";
-        });
-        updateStepsTotal();
         showToast("Day reset! Start fresh 🌟");
       }
 
@@ -3196,7 +4572,6 @@
         plusEl.addEventListener("click", (e) => adjust(1, e));
       }
 
-      initCountdownTimer("english", 10, "English listening timer done! 🎉");
       initCountdownTimer("grammar", 10, "Grammar session timer done! 🎉");
       initCountdownTimer("phonics", 10, "Phonics timer done! 🎉");
       initCountdownTimer("exercise", 30, "Exercise timer done! 🎉");
@@ -3204,6 +4579,15 @@
       // Initialize on load
       loadPeriodData();
       loadRecipeData();
+      loadZadLecture();
+      loadZadLectureLog();
+      loadUqLecture();
+      loadUqLectureLog();
+      loadAllChoreLogs();
+      loadTypingRange();
+      loadMedicineStatus();
+      loadHairWashStatus();
+      loadLumosityReminderStatus();
     </script>
   </body>
 </html>
