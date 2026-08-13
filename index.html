@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
     <title>Daily Routine Tracker</title>
     <style>
@@ -22,6 +22,7 @@
         display: flex;
         justify-content: center;
         padding: 16px;
+        padding-bottom: calc(88px + env(safe-area-inset-bottom));
       }
       .app-container {
         width: 100%;
@@ -347,20 +348,40 @@
 
       .tabs {
         display: flex;
-        justify-content: center;
-        gap: 4px;
-        padding: 0 0 14px;
+        justify-content: stretch;
+        gap: 0;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 6px 2px calc(6px + env(safe-area-inset-bottom));
+        background: rgba(30, 23, 66, 0.96);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-radius: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .tabs::-webkit-scrollbar {
+        display: none;
       }
       .tab-btn {
-        flex: 1;
+        flex: 1 1 0;
+        min-width: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 10px 4px;
-        border-radius: 14px;
+        padding: 7px 1px;
+        border-radius: 12px;
         border: none;
         background: transparent;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(255, 255, 255, 0.6);
         cursor: pointer;
         font-family: inherit;
         transition: all 0.2s;
@@ -371,12 +392,16 @@
         box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
       }
       .tab-icon {
-        font-size: 22px;
+        font-size: 18px;
         margin-bottom: 2px;
       }
       .tab-label {
-        font-size: 10px;
+        font-size: 8.5px;
         font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
       }
 
       .tab-content {
@@ -797,6 +822,7 @@
         border: 2px solid #6ee7b7;
         border-radius: 12px;
         padding: 4px 10px;
+        min-width: 0;
         transition: box-shadow 0.2s ease, border-color 0.2s ease;
       }
       .lecture-stat-box:focus-within {
@@ -895,6 +921,77 @@
         font-weight: 600;
         color: #9ca3af;
         flex-shrink: 0;
+      }
+      .summary-card {
+        background: white;
+        border-radius: 16px;
+        padding: 14px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .summary-card-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .summary-card-count {
+        margin-left: auto;
+        font-weight: 700;
+        color: #6366f1;
+        font-size: 12px;
+      }
+      .summary-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 6px 0;
+        font-size: 12.5px;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .summary-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .summary-row-label {
+        color: #475569;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .summary-row-value {
+        font-weight: 700;
+        color: #1a1a2e;
+        text-align: right;
+      }
+      .summary-row-value.done {
+        color: #059669;
+      }
+      .summary-row-value.pending {
+        color: #d97706;
+      }
+      .summary-progress-track {
+        height: 6px;
+        border-radius: 3px;
+        background: #e2e8f0;
+        overflow: hidden;
+        margin: 6px 0 2px;
+      }
+      .summary-progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        transition: width 0.3s ease;
+      }
+      .summary-empty {
+        font-size: 12px;
+        color: #94a3b8;
+        text-align: center;
+        padding: 6px 0;
       }
       .medicine-slot {
         display: flex;
@@ -1039,6 +1136,9 @@
         font-family: inherit;
         color: #1a1a2e;
         background: transparent;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
       }
       .lecture-date-inline:focus {
         outline: none;
@@ -1121,7 +1221,7 @@
       }
 
       .action-buttons {
-        display: flex;
+        display: none;
         gap: 12px;
         padding: 16px 0;
       }
@@ -1776,6 +1876,10 @@
           <span class="tab-icon">✅</span>
           <span class="tab-label">Tracker</span>
         </button>
+        <button class="tab-btn" onclick="switchTab('summary', this)">
+          <span class="tab-icon">📊</span>
+          <span class="tab-label">Summary</span>
+        </button>
       </div>
 
       <div id="content-area">
@@ -2355,7 +2459,7 @@
             <div class="tracker-row" style="margin-top: 0">
               <div class="tracker-group steps-group">
                 <span class="tracker-group-icon">🏋️</span>
-                <input type="number" class="tracker-input" id="trackerExerciseInput" min="0" inputmode="numeric" placeholder="0" />
+                <input type="number" class="tracker-input" id="trackerExerciseInput" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
                 <span class="tracker-group-label">minutes</span>
               </div>
             </div>
@@ -2383,12 +2487,12 @@
               <div class="tracker-row" onclick="event.stopPropagation()">
                 <div class="tracker-group steps-group">
                   <span class="tracker-group-icon">🚶</span>
-                  <input type="number" class="tracker-input" id="trackerWalkInput" min="0" inputmode="numeric" placeholder="0" oninput="updateTrackerWalkWaterSummary()" />
+                  <input type="number" class="tracker-input" id="trackerWalkInput" min="0" inputmode="numeric" placeholder="0" oninput="updateTrackerWalkWaterSummary(); saveTrackerDaily()" />
                   <span class="tracker-group-label">steps</span>
                 </div>
                 <div class="tracker-group water-group">
                   <span class="tracker-group-icon">💧</span>
-                  <input type="number" class="tracker-input" id="trackerWaterInput" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview(); updateTrackerWalkWaterSummary()" />
+                  <input type="number" class="tracker-input" id="trackerWaterInput" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview(); updateTrackerWalkWaterSummary(); saveTrackerDaily()" />
                   <span class="tracker-group-label">glasses</span>
                 </div>
               </div>
@@ -2401,7 +2505,7 @@
             <div class="tracker-row" style="margin-top: 0">
               <div class="tracker-group steps-group">
                 <span class="tracker-group-icon">🧠</span>
-                <input type="number" class="tracker-input" id="trackerLumosityInput" min="0" inputmode="numeric" placeholder="0" />
+                <input type="number" class="tracker-input" id="trackerLumosityInput" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
                 <span class="tracker-group-label">sessions</span>
               </div>
             </div>
@@ -2476,6 +2580,131 @@
                 <div class="medicine-reminder-sub" id="medicineReminderSub">Get a nudge if you forget to mark a dose.</div>
               </div>
               <button class="medicine-reminder-btn" id="medicineReminderBtn" onclick="toggleMedicineReminders()">Enable</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUMMARY TAB -->
+        <div class="tab-content" id="tab-summary">
+          <div class="section-title water-title">
+            <span>📊</span> TODAY'S SUMMARY
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">✅ Schedule <span class="summary-card-count" id="summaryScheduleCount">--</span></div>
+            <div id="summaryScheduleList"></div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">💧 Water &amp; Activity</div>
+            <div class="summary-row">
+              <span class="summary-row-label">💧 Water</span>
+              <span class="summary-row-value" id="summaryWater">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">🚶 Walk</span>
+              <span class="summary-row-value" id="summaryWalk">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">🏋️ Exercise</span>
+              <span class="summary-row-value" id="summaryExercise">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">🧠 Lumosity</span>
+              <span class="summary-row-value" id="summaryLumosity">--</span>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">💊 Medicine</div>
+            <div class="summary-row">
+              <span class="summary-row-label">🌅 Morning</span>
+              <span class="summary-row-value" id="summaryMedMorning">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">☀️ Afternoon</span>
+              <span class="summary-row-value" id="summaryMedAfternoon">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">🌙 Night</span>
+              <span class="summary-row-value" id="summaryMedNight">--</span>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">🧴 Hair Wash (this week)</div>
+            <div class="summary-row">
+              <span class="summary-row-label">Washes logged</span>
+              <span class="summary-row-value" id="summaryHairWash">--</span>
+            </div>
+            <div class="summary-progress-track">
+              <div class="summary-progress-fill" id="summaryHairWashFill"></div>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">🎓 @academyzaden</div>
+            <div class="summary-row">
+              <span class="summary-row-label">Current lecture</span>
+              <span class="summary-row-value" id="summaryZadLecture">--</span>
+            </div>
+            <div class="summary-progress-track">
+              <div class="summary-progress-fill" id="summaryZadFill"></div>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">Last logged</span>
+              <span class="summary-row-value" id="summaryZadLast">--</span>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">📖 @understandquran</div>
+            <div class="summary-row">
+              <span class="summary-row-label">Current lecture</span>
+              <span class="summary-row-value" id="summaryUqLecture">--</span>
+            </div>
+            <div class="summary-progress-track">
+              <div class="summary-progress-fill" id="summaryUqFill"></div>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">Last logged</span>
+              <span class="summary-row-value" id="summaryUqLast">--</span>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">📜 History (last logged)</div>
+            <div class="summary-row">
+              <span class="summary-row-label">🛏️ Mattress</span>
+              <span class="summary-row-value" id="summaryChoreMattress">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">🧹 Room</span>
+              <span class="summary-row-value" id="summaryChoreRoom">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">🖥️ Computer</span>
+              <span class="summary-row-value" id="summaryChoreComputer">--</span>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">⌨️ Typing Practice</div>
+            <div class="summary-row">
+              <span class="summary-row-label">Practice period</span>
+              <span class="summary-row-value" id="summaryTyping">--</span>
+            </div>
+          </div>
+
+          <div class="summary-card">
+            <div class="summary-card-title">📿 Adhkar Counters</div>
+            <div class="summary-row">
+              <span class="summary-row-label">Morning Dhikr</span>
+              <span class="summary-row-value" id="summaryAdhkarMorning">--</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-row-label">Evening Dhikr</span>
+              <span class="summary-row-value" id="summaryAdhkarEvening">--</span>
             </div>
           </div>
         </div>
@@ -2638,6 +2867,17 @@
         computer: [],
       };
       const GLASS_ML = 250;
+      const SCHEDULE_TASKS = [
+        { id: "m2", label: "Morning Adhkar", icon: "🤲" },
+        { id: "m3", label: "Folic Acid medicine", icon: "💊" },
+        { id: "m4", label: "Exercise", icon: "🏋️" },
+        { id: "a2", label: "Vitamin medicine", icon: "💊" },
+        { id: "a3", label: "Activity on Kimi", icon: "🤖" },
+        { id: "e3", label: "Read and Listen Quran", icon: "📖" },
+        { id: "e2", label: "Evening Adhkar", icon: "🤲" },
+        { id: "n2", label: "Grammar Session", icon: "📝" },
+        { id: "n3", label: "Phonics", icon: "🔤" },
+      ];
 
       const MEDICINE_SLOTS = ["morning", "afternoon", "night"];
       let medicineStatus = {
@@ -3505,6 +3745,9 @@
             .querySelector('.tab-btn[onclick*="' + tabName + '"]')
             .classList.add("active");
         document.getElementById("tab-" + tabName).classList.add("active");
+        if (tabName === "summary") renderSummary();
+        document.querySelector(".action-buttons").style.display =
+          tabName === "schedule" || tabName === "water" ? "flex" : "none";
       }
 
       function toggleTask(taskId) {
@@ -3538,6 +3781,7 @@
             sub.className = "task-sub sub-taken";
           }
         }
+        saveScheduleStatus();
       }
 
       function toggleWeekDay(dayNum) {
@@ -3550,6 +3794,86 @@
           set.add(dayNum);
           dayEl.classList.add("checked");
         }
+      }
+
+      function saveScheduleStatus() {
+        try {
+          localStorage.setItem(
+            "schedule_status_v1",
+            JSON.stringify({
+              date: medicineTodayStr(),
+              completed: Array.from(completedTasks),
+            }),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function loadScheduleStatus() {
+        try {
+          const stored = localStorage.getItem("schedule_status_v1");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed.date === medicineTodayStr()) {
+              (parsed.completed || []).forEach((id) => {
+                completedTasks.add(id);
+                const card = document.getElementById("task-" + id + "-s");
+                if (card) card.classList.add("completed");
+                if (id === "m3") {
+                  const sub = document.getElementById("sub-m3");
+                  sub.textContent = "✅ Taken";
+                  sub.className = "task-sub sub-taken";
+                }
+                if (id === "a2") {
+                  const sub = document.getElementById("sub-a2");
+                  sub.textContent = "✅ Taken";
+                  sub.className = "task-sub sub-taken";
+                }
+              });
+            }
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+        saveScheduleStatus();
+      }
+
+      function saveTrackerDaily() {
+        try {
+          localStorage.setItem(
+            "tracker_daily_v1",
+            JSON.stringify({
+              date: medicineTodayStr(),
+              walk: document.getElementById("trackerWalkInput").value,
+              water: document.getElementById("trackerWaterInput").value,
+              exercise: document.getElementById("trackerExerciseInput").value,
+              lumosity: document.getElementById("trackerLumosityInput").value,
+            }),
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function loadTrackerDaily() {
+        try {
+          const stored = localStorage.getItem("tracker_daily_v1");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (parsed.date === medicineTodayStr()) {
+              if (parsed.walk) document.getElementById("trackerWalkInput").value = parsed.walk;
+              if (parsed.water) document.getElementById("trackerWaterInput").value = parsed.water;
+              if (parsed.exercise) document.getElementById("trackerExerciseInput").value = parsed.exercise;
+              if (parsed.lumosity) document.getElementById("trackerLumosityInput").value = parsed.lumosity;
+            }
+          }
+        } catch (e) {
+          // ignore corrupted storage
+        }
+        updateWaterLitrePreview();
+        updateTrackerWalkWaterSummary();
+        saveTrackerDaily();
       }
 
       // Zad Academy lecture tracker
@@ -4394,6 +4718,14 @@
         document.getElementById("sub-m3").className = "task-sub sub-not-taken";
         document.getElementById("sub-a2").textContent = "❓ Not taken";
         document.getElementById("sub-a2").className = "task-sub sub-not-taken";
+        ["trackerWalkInput", "trackerWaterInput", "trackerExerciseInput", "trackerLumosityInput"].forEach((id) => {
+          document.getElementById(id).value = "";
+        });
+        updateWaterLitrePreview();
+        updateTrackerWalkWaterSummary();
+        saveScheduleStatus();
+        saveTrackerDaily();
+        renderSummary();
         showToast("Day reset! Start fresh 🌟");
       }
 
@@ -4402,6 +4734,9 @@
           completedTasks.size +
           weekDaysCompleted.size +
           weekDaysCompleted2.size;
+        saveScheduleStatus();
+        saveTrackerDaily();
+        renderSummary();
         showToast("Saved! " + count + "/" + TOTAL_TASKS + " completed 💾");
       }
 
@@ -4576,6 +4911,126 @@
       initCountdownTimer("phonics", 10, "Phonics timer done! 🎉");
       initCountdownTimer("exercise", 30, "Exercise timer done! 🎉");
 
+      function renderSummary() {
+        const doneCount = SCHEDULE_TASKS.filter((t) =>
+          completedTasks.has(t.id),
+        ).length;
+        document.getElementById("summaryScheduleCount").textContent =
+          doneCount + "/" + SCHEDULE_TASKS.length;
+        document.getElementById("summaryScheduleList").innerHTML =
+          SCHEDULE_TASKS.map((t) => {
+            const done = completedTasks.has(t.id);
+            return (
+              '<div class="summary-row"><span class="summary-row-label">' +
+              t.icon +
+              " " +
+              t.label +
+              '</span><span class="summary-row-value ' +
+              (done ? "done" : "pending") +
+              '">' +
+              (done ? "✅ Done" : "⬜ Pending") +
+              "</span></div>"
+            );
+          }).join("");
+
+        const walk =
+          parseInt(document.getElementById("trackerWalkInput").value, 10) ||
+          0;
+        const water =
+          parseInt(document.getElementById("trackerWaterInput").value, 10) ||
+          0;
+        const exercise =
+          parseInt(
+            document.getElementById("trackerExerciseInput").value,
+            10,
+          ) || 0;
+        const lumosity =
+          parseInt(
+            document.getElementById("trackerLumosityInput").value,
+            10,
+          ) || 0;
+        document.getElementById("summaryWater").textContent =
+          water + " glasses (" + ((water * GLASS_ML) / 1000).toFixed(2) + " L)";
+        document.getElementById("summaryWalk").textContent = walk + " steps";
+        document.getElementById("summaryExercise").textContent =
+          exercise + " min";
+        document.getElementById("summaryLumosity").textContent =
+          lumosity + " sessions";
+
+        ["morning", "afternoon", "night"].forEach((slot) => {
+          const el = document.getElementById(
+            "summaryMed" + slot.charAt(0).toUpperCase() + slot.slice(1),
+          );
+          const taken = !!medicineStatus[slot];
+          el.textContent = taken ? "✅ Taken" : "❓ Not taken";
+          el.className = "summary-row-value " + (taken ? "done" : "pending");
+        });
+
+        document.getElementById("summaryHairWash").textContent =
+          hairWashStatus.count + " / " + HAIR_WASH_TARGET;
+        document.getElementById("summaryHairWashFill").style.width =
+          Math.min(
+            100,
+            Math.round((hairWashStatus.count / HAIR_WASH_TARGET) * 100),
+          ) + "%";
+
+        document.getElementById("summaryZadLecture").textContent =
+          zadLecture + " / " + ZAD_TOTAL_LECTURES;
+        document.getElementById("summaryZadFill").style.width =
+          Math.min(100, Math.round((zadLecture / ZAD_TOTAL_LECTURES) * 100)) +
+          "%";
+        document.getElementById("summaryZadLast").textContent =
+          zadLectureLog.length
+            ? zadLectureLog[0].date + " · Lecture " + zadLectureLog[0].lecture
+            : "No logs yet";
+
+        document.getElementById("summaryUqLecture").textContent =
+          uqLecture + " / " + UQ_TOTAL_LECTURES;
+        document.getElementById("summaryUqFill").style.width =
+          Math.min(100, Math.round((uqLecture / UQ_TOTAL_LECTURES) * 100)) +
+          "%";
+        document.getElementById("summaryUqLast").textContent =
+          uqLectureLog.length
+            ? uqLectureLog[0].date + " · Lecture " + uqLectureLog[0].lecture
+            : "No logs yet";
+
+        document.getElementById("summaryChoreMattress").textContent =
+          choreLogs.mattress.length ? choreLogs.mattress[0].date : "No logs yet";
+        document.getElementById("summaryChoreRoom").textContent =
+          choreLogs.room.length ? choreLogs.room[0].date : "No logs yet";
+        document.getElementById("summaryChoreComputer").textContent =
+          choreLogs.computer.length
+            ? choreLogs.computer[0].date
+            : "No logs yet";
+
+        const typingStart = document.getElementById(
+          "typingStartDateInput",
+        ).value;
+        const typingEnd = document.getElementById("typingEndDateInput").value;
+        if (typingStart && typingEnd) {
+          document.getElementById("summaryTyping").textContent =
+            isoToDDMMYY(typingStart) + " to " + isoToDDMMYY(typingEnd);
+        } else if (typingStart) {
+          document.getElementById("summaryTyping").textContent =
+            "Started " + isoToDDMMYY(typingStart);
+        } else {
+          document.getElementById("summaryTyping").textContent = "Not set";
+        }
+
+        let acMorning = 0;
+        let acEvening = 0;
+        try {
+          acMorning = parseInt(localStorage.getItem("ac_morning"), 10) || 0;
+          acEvening = parseInt(localStorage.getItem("ac_evening"), 10) || 0;
+        } catch (e) {
+          // ignore storage errors
+        }
+        document.getElementById("summaryAdhkarMorning").textContent =
+          acMorning + " / 1000";
+        document.getElementById("summaryAdhkarEvening").textContent =
+          acEvening + " / 1000";
+      }
+
       // Initialize on load
       loadPeriodData();
       loadRecipeData();
@@ -4588,6 +5043,9 @@
       loadMedicineStatus();
       loadHairWashStatus();
       loadLumosityReminderStatus();
+      loadScheduleStatus();
+      loadTrackerDaily();
+      renderSummary();
     </script>
   </body>
 </html>
