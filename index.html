@@ -1225,6 +1225,16 @@
         gap: 12px;
         padding: 16px 0;
       }
+      .schedule-quick-actions {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .schedule-quick-actions .btn {
+        padding: 11px;
+        font-size: 13px;
+        border-radius: 12px;
+      }
       .btn {
         flex: 1;
         padding: 14px;
@@ -1612,52 +1622,6 @@
         backdrop-filter: blur(6px);
         -webkit-backdrop-filter: blur(6px);
       }
-      .steps-summary {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        background: white;
-        border-radius: 14px;
-        padding: 10px 16px;
-        margin-bottom: 14px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      }
-      .steps-summary-icon {
-        font-size: 18px;
-      }
-      .steps-summary-text {
-        font-size: 14px;
-        font-weight: 700;
-        color: #1a1a2e;
-      }
-      .tracker-summary-row {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-      .tracker-summary-row .steps-summary {
-        flex: 1;
-        margin-bottom: 0;
-        padding: 10px 10px;
-      }
-      .tracker-summary-row .steps-summary-text {
-        font-size: 12px;
-      }
-      .steps-summary-colored {
-        background: rgba(99, 102, 241, 0.1);
-      }
-      .steps-summary-colored .steps-summary-text,
-      .steps-summary-colored .steps-summary-icon {
-        color: #4338ca;
-      }
-      .water-summary-colored {
-        background: rgba(14, 165, 233, 0.1);
-      }
-      .water-summary-colored .steps-summary-text,
-      .water-summary-colored .steps-summary-icon {
-        color: #0369a1;
-      }
       .tracker-row {
         display: flex;
         align-items: center;
@@ -1795,6 +1759,107 @@
       }
       .schedule-section.active {
         display: block;
+      }
+
+      .schedule-history-item {
+        --level-1: #34d399;
+        --level-2: #059669;
+        --level-shadow: rgba(5, 150, 105, 0.35);
+        --level-tint: #ecfdf5;
+        --level-tint-2: #d1fae5;
+        background: linear-gradient(135deg, var(--level-tint), var(--level-tint-2));
+        border-radius: 14px;
+        padding: 4px 14px;
+        margin-bottom: 8px;
+        border-left: 4px solid var(--level-1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .schedule-history-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      }
+      .schedule-history-item[open] {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+      .schedule-history-item.level-mid {
+        --level-1: #fbbf24;
+        --level-2: #d97706;
+        --level-shadow: rgba(217, 119, 6, 0.35);
+        --level-tint: #fffbeb;
+        --level-tint-2: #fef3c7;
+      }
+      .schedule-history-item.level-low {
+        --level-1: #fb7185;
+        --level-2: #e11d48;
+        --level-shadow: rgba(225, 29, 72, 0.35);
+        --level-tint: #fff1f2;
+        --level-tint-2: #ffe4e6;
+      }
+      .schedule-history-summary {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--level-2);
+        cursor: pointer;
+        list-style: none;
+      }
+      .schedule-history-item[open] .schedule-history-summary {
+        padding-bottom: 8px;
+      }
+      .schedule-history-summary::-webkit-details-marker {
+        display: none;
+      }
+      .schedule-history-date {
+        flex: 1;
+      }
+      .schedule-history-arrow {
+        font-size: 11px;
+        color: #9ca3af;
+        transition: transform 0.2s ease;
+      }
+      .schedule-history-item[open] .schedule-history-arrow {
+        transform: rotate(90deg);
+      }
+      .schedule-history-badge {
+        font-size: 11px;
+        font-weight: 800;
+        padding: 4px 11px;
+        border-radius: 20px;
+        color: white;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, var(--level-1), var(--level-2));
+        box-shadow: 0 2px 6px var(--level-shadow);
+      }
+      .schedule-history-body {
+        padding-bottom: 12px;
+        border-top: 1px dashed #e5e7eb;
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .schedule-history-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .schedule-history-clear-btn {
+        background: none;
+        border: none;
+        color: #9ca3af;
+        font-size: 14px;
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 8px;
+        transition: color 0.2s, background 0.2s;
+      }
+      .schedule-history-clear-btn:hover {
+        color: #ef4444;
+        background: rgba(239, 68, 68, 0.1);
       }
 
       .schedule-nav-container {
@@ -2090,9 +2155,41 @@
             </button>
           </div>
 
+          <div class="schedule-quick-actions">
+            <button class="btn btn-reset" onclick="resetDay()">
+              <span>🔄</span> Reset Day
+            </button>
+            <button class="btn btn-save" onclick="saveDay()">
+              <span>💾</span> Save Day
+            </button>
+          </div>
+
           <div id="morning-section" class="schedule-section active">
           <div class="section-title morning-title">
             <span>🌅</span> MORNING ROUTINES
+          </div>
+          <div class="task-card" id="task-trackerWalk-morning-s" onclick="toggleTask('trackerWalk-morning')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Walk &amp; Water <span>🚶💧</span></div>
+              <div class="tracker-row" onclick="event.stopPropagation()">
+                <div class="tracker-group steps-group">
+                  <span class="tracker-group-icon">🚶</span>
+                  <input type="number" class="tracker-input" id="trackerWalkInput-morning" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
+                  <span class="tracker-group-label">steps</span>
+                </div>
+                <div class="tracker-group water-group">
+                  <span class="tracker-group-icon">💧</span>
+                  <input type="number" class="tracker-input" id="trackerWaterInput-morning" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview('morning'); saveTrackerDaily()" />
+                  <span class="tracker-group-label">glasses</span>
+                </div>
+              </div>
+              <div class="water-litre-preview" id="waterLitrePreview-morning">0 glasses = 0.00 L</div>
+            </div>
           </div>
           <div class="task-card" id="task-m2-s" onclick="toggleTask('m2')">
             <div class="checkbox">
@@ -2165,6 +2262,29 @@
           <div class="section-title afternoon-title">
             <span>☀️</span> AFTERNOON ROUTINES
           </div>
+          <div class="task-card" id="task-trackerWalk-afternoon-s" onclick="toggleTask('trackerWalk-afternoon')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Walk &amp; Water <span>🚶💧</span></div>
+              <div class="tracker-row" onclick="event.stopPropagation()">
+                <div class="tracker-group steps-group">
+                  <span class="tracker-group-icon">🚶</span>
+                  <input type="number" class="tracker-input" id="trackerWalkInput-afternoon" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
+                  <span class="tracker-group-label">steps</span>
+                </div>
+                <div class="tracker-group water-group">
+                  <span class="tracker-group-icon">💧</span>
+                  <input type="number" class="tracker-input" id="trackerWaterInput-afternoon" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview('afternoon'); saveTrackerDaily()" />
+                  <span class="tracker-group-label">glasses</span>
+                </div>
+              </div>
+              <div class="water-litre-preview" id="waterLitrePreview-afternoon">0 glasses = 0.00 L</div>
+            </div>
+          </div>
           <div class="task-card" id="task-a2-s" onclick="toggleTask('a2')">
             <div class="checkbox">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -2189,6 +2309,29 @@
           <div id="evening-section" class="schedule-section">
           <div class="section-title evening-title">
             <span>🌇</span> EVENING ROUTINES
+          </div>
+          <div class="task-card" id="task-trackerWalk-evening-s" onclick="toggleTask('trackerWalk-evening')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Walk &amp; Water <span>🚶💧</span></div>
+              <div class="tracker-row" onclick="event.stopPropagation()">
+                <div class="tracker-group steps-group">
+                  <span class="tracker-group-icon">🚶</span>
+                  <input type="number" class="tracker-input" id="trackerWalkInput-evening" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
+                  <span class="tracker-group-label">steps</span>
+                </div>
+                <div class="tracker-group water-group">
+                  <span class="tracker-group-icon">💧</span>
+                  <input type="number" class="tracker-input" id="trackerWaterInput-evening" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview('evening'); saveTrackerDaily()" />
+                  <span class="tracker-group-label">glasses</span>
+                </div>
+              </div>
+              <div class="water-litre-preview" id="waterLitrePreview-evening">0 glasses = 0.00 L</div>
+            </div>
           </div>
           <div class="task-card" id="task-e3-s" onclick="toggleTask('e3')">
             <div class="checkbox">
@@ -2237,6 +2380,29 @@
           <div id="night-section" class="schedule-section">
           <div class="section-title night-title">
             <span>🌙</span> NIGHT ROUTINES
+          </div>
+          <div class="task-card" id="task-trackerWalk-night-s" onclick="toggleTask('trackerWalk-night')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Walk &amp; Water <span>🚶💧</span></div>
+              <div class="tracker-row" onclick="event.stopPropagation()">
+                <div class="tracker-group steps-group">
+                  <span class="tracker-group-icon">🚶</span>
+                  <input type="number" class="tracker-input" id="trackerWalkInput-night" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
+                  <span class="tracker-group-label">steps</span>
+                </div>
+                <div class="tracker-group water-group">
+                  <span class="tracker-group-icon">💧</span>
+                  <input type="number" class="tracker-input" id="trackerWaterInput-night" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview('night'); saveTrackerDaily()" />
+                  <span class="tracker-group-label">glasses</span>
+                </div>
+              </div>
+              <div class="water-litre-preview" id="waterLitrePreview-night">0 glasses = 0.00 L</div>
+            </div>
           </div>
           <div class="task-card" id="task-n2-s" onclick="toggleTask('n2')">
             <div class="checkbox">
@@ -2294,6 +2460,19 @@
               </div>
             </div>
           </div>
+          </div>
+
+          <div class="history-card">
+            <div class="history-header">
+              <span class="history-title">📜 Schedule History</span>
+              <div class="schedule-history-header-actions">
+                <span class="history-count" id="scheduleHistoryCount">0</span>
+                <button class="schedule-history-clear-btn" onclick="clearScheduleHistory()" title="Clear all history">🗑️</button>
+              </div>
+            </div>
+            <div class="history-list" id="scheduleHistoryList">
+              <div class="history-empty">No schedule history yet.</div>
+            </div>
           </div>
         </div>
 
@@ -2462,41 +2641,6 @@
                 <input type="number" class="tracker-input" id="trackerExerciseInput" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
                 <span class="tracker-group-label">minutes</span>
               </div>
-            </div>
-          </div>
-
-          <div class="tracker-summary-row">
-            <div class="steps-summary steps-summary-colored">
-              <span class="steps-summary-icon">🚶</span>
-              <span class="steps-summary-text"><span id="trackerWalkCount">0</span> / 6000-10000 steps</span>
-            </div>
-            <div class="steps-summary water-summary-colored">
-              <span class="steps-summary-icon">💧</span>
-              <span class="steps-summary-text"><span id="trackerWaterCount">0</span> / 8 glasses</span>
-            </div>
-          </div>
-
-          <div class="task-card" id="task-trackerWalk-s" onclick="toggleTask('trackerWalk')">
-            <div class="checkbox">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <div style="flex: 1">
-              <div class="task-text">Walk <span>🚶</span></div>
-              <div class="tracker-row" onclick="event.stopPropagation()">
-                <div class="tracker-group steps-group">
-                  <span class="tracker-group-icon">🚶</span>
-                  <input type="number" class="tracker-input" id="trackerWalkInput" min="0" inputmode="numeric" placeholder="0" oninput="updateTrackerWalkWaterSummary(); saveTrackerDaily()" />
-                  <span class="tracker-group-label">steps</span>
-                </div>
-                <div class="tracker-group water-group">
-                  <span class="tracker-group-icon">💧</span>
-                  <input type="number" class="tracker-input" id="trackerWaterInput" min="0" inputmode="numeric" placeholder="0" oninput="updateWaterLitrePreview(); updateTrackerWalkWaterSummary(); saveTrackerDaily()" />
-                  <span class="tracker-group-label">glasses</span>
-                </div>
-              </div>
-              <div class="water-litre-preview" id="waterLitrePreview">0 glasses = 0.00 L</div>
             </div>
           </div>
 
@@ -2867,6 +3011,7 @@
         computer: [],
       };
       const GLASS_ML = 250;
+      const WALK_WATER_PERIODS = ["morning", "afternoon", "evening", "night"];
       const SCHEDULE_TASKS = [
         { id: "m2", label: "Morning Adhkar", icon: "🤲" },
         { id: "m3", label: "Folic Acid medicine", icon: "💊" },
@@ -2878,6 +3023,13 @@
         { id: "n2", label: "Grammar Session", icon: "📝" },
         { id: "n3", label: "Phonics", icon: "🔤" },
       ];
+      const WALK_WATER_TASKS = WALK_WATER_PERIODS.map((p) => ({
+        id: "trackerWalk-" + p,
+        label: p.charAt(0).toUpperCase() + p.slice(1) + " Walk & Water",
+        icon: "🚶💧",
+      }));
+      const ALL_SCHEDULE_TASKS = SCHEDULE_TASKS.concat(WALK_WATER_TASKS);
+      const SCHEDULE_HISTORY_MAX_DAYS = 30;
 
       const MEDICINE_SLOTS = ["morning", "afternoon", "night"];
       let medicineStatus = {
@@ -3747,7 +3899,7 @@
         document.getElementById("tab-" + tabName).classList.add("active");
         if (tabName === "summary") renderSummary();
         document.querySelector(".action-buttons").style.display =
-          tabName === "schedule" || tabName === "water" ? "flex" : "none";
+          tabName === "water" ? "flex" : "none";
       }
 
       function toggleTask(taskId) {
@@ -3798,16 +3950,115 @@
 
       function saveScheduleStatus() {
         try {
+          const today = medicineTodayStr();
           localStorage.setItem(
             "schedule_status_v1",
             JSON.stringify({
-              date: medicineTodayStr(),
+              date: today,
               completed: Array.from(completedTasks),
             }),
           );
+          saveScheduleHistoryEntry(today, Array.from(completedTasks));
         } catch (e) {
           // ignore storage errors
         }
+        renderScheduleHistory();
+      }
+
+      function loadScheduleHistory() {
+        try {
+          const stored = localStorage.getItem("schedule_history_v1");
+          return stored ? JSON.parse(stored) : {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function saveScheduleHistoryEntry(date, completedIds) {
+        try {
+          const history = loadScheduleHistory();
+          history[date] = completedIds;
+          const dates = Object.keys(history).sort();
+          while (dates.length > SCHEDULE_HISTORY_MAX_DAYS) {
+            delete history[dates.shift()];
+          }
+          localStorage.setItem("schedule_history_v1", JSON.stringify(history));
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+
+      function clearScheduleHistory() {
+        if (!confirm("Clear all schedule history? This cannot be undone.")) return;
+        try {
+          localStorage.removeItem("schedule_history_v1");
+        } catch (e) {
+          // ignore storage errors
+        }
+        renderScheduleHistory();
+        showToast("Schedule history cleared 🗑️");
+      }
+
+      function renderScheduleHistory() {
+        const history = loadScheduleHistory();
+        const dates = Object.keys(history).sort().reverse();
+        const listEl = document.getElementById("scheduleHistoryList");
+        const countEl = document.getElementById("scheduleHistoryCount");
+        if (!listEl) return;
+        countEl.textContent = dates.length;
+        if (!dates.length) {
+          listEl.innerHTML = '<div class="history-empty">No schedule history yet.</div>';
+          return;
+        }
+        listEl.innerHTML = dates
+          .map((date) => {
+            const completed = new Set(history[date] || []);
+            const doneCount = ALL_SCHEDULE_TASKS.filter((t) =>
+              completed.has(t.id),
+            ).length;
+            const ratio = doneCount / ALL_SCHEDULE_TASKS.length;
+            const level = ratio >= 0.7 ? "level-high" : ratio >= 0.4 ? "level-mid" : "level-low";
+            const badge = ratio === 1 ? "🎉" : ratio >= 0.7 ? "👍" : ratio >= 0.4 ? "🙂" : "💤";
+            const rows = ALL_SCHEDULE_TASKS.map((t) => {
+              const done = completed.has(t.id);
+              return (
+                '<div class="summary-row"><span class="summary-row-label">' +
+                t.icon +
+                " " +
+                t.label +
+                '</span><span class="summary-row-value ' +
+                (done ? "done" : "pending") +
+                '">' +
+                (done ? "✅ Done" : "❌ Not done") +
+                "</span></div>"
+              );
+            }).join("");
+            const isToday = date === medicineTodayStr();
+            return (
+              '<details class="schedule-history-item ' +
+              (level === "level-high" ? "" : level) +
+              '">' +
+              '<summary class="schedule-history-summary">' +
+              '<span class="schedule-history-date">' +
+              badge +
+              " " +
+              isoToDDMMYY(date) +
+              (isToday ? " (Today)" : "") +
+              "</span>" +
+              '<span class="schedule-history-badge">' +
+              doneCount +
+              "/" +
+              ALL_SCHEDULE_TASKS.length +
+              "</span>" +
+              '<span class="schedule-history-arrow">▸</span>' +
+              "</summary>" +
+              '<div class="schedule-history-body">' +
+              rows +
+              "</div>" +
+              "</details>"
+            );
+          })
+          .join("");
       }
 
       function loadScheduleStatus() {
@@ -3841,12 +4092,18 @@
 
       function saveTrackerDaily() {
         try {
+          const walk = {};
+          const water = {};
+          WALK_WATER_PERIODS.forEach((p) => {
+            walk[p] = document.getElementById("trackerWalkInput-" + p).value;
+            water[p] = document.getElementById("trackerWaterInput-" + p).value;
+          });
           localStorage.setItem(
             "tracker_daily_v1",
             JSON.stringify({
               date: medicineTodayStr(),
-              walk: document.getElementById("trackerWalkInput").value,
-              water: document.getElementById("trackerWaterInput").value,
+              walk,
+              water,
               exercise: document.getElementById("trackerExerciseInput").value,
               lumosity: document.getElementById("trackerLumosityInput").value,
             }),
@@ -3862,8 +4119,12 @@
           if (stored) {
             const parsed = JSON.parse(stored);
             if (parsed.date === medicineTodayStr()) {
-              if (parsed.walk) document.getElementById("trackerWalkInput").value = parsed.walk;
-              if (parsed.water) document.getElementById("trackerWaterInput").value = parsed.water;
+              WALK_WATER_PERIODS.forEach((p) => {
+                if (parsed.walk && parsed.walk[p])
+                  document.getElementById("trackerWalkInput-" + p).value = parsed.walk[p];
+                if (parsed.water && parsed.water[p])
+                  document.getElementById("trackerWaterInput-" + p).value = parsed.water[p];
+              });
               if (parsed.exercise) document.getElementById("trackerExerciseInput").value = parsed.exercise;
               if (parsed.lumosity) document.getElementById("trackerLumosityInput").value = parsed.lumosity;
             }
@@ -3871,8 +4132,7 @@
         } catch (e) {
           // ignore corrupted storage
         }
-        updateWaterLitrePreview();
-        updateTrackerWalkWaterSummary();
+        WALK_WATER_PERIODS.forEach((p) => updateWaterLitrePreview(p));
         saveTrackerDaily();
       }
 
@@ -4506,19 +4766,28 @@
         }
       }
 
-      function updateWaterLitrePreview() {
+      function updateWaterLitrePreview(period) {
         const glasses =
-          parseInt(document.getElementById("trackerWaterInput").value, 10) || 0;
+          parseInt(document.getElementById("trackerWaterInput-" + period).value, 10) || 0;
         const litres = ((glasses * GLASS_ML) / 1000).toFixed(2);
-        document.getElementById("waterLitrePreview").textContent =
+        document.getElementById("waterLitrePreview-" + period).textContent =
           glasses + " glasses = " + litres + " L";
       }
 
-      function updateTrackerWalkWaterSummary() {
-        document.getElementById("trackerWalkCount").textContent =
-          parseInt(document.getElementById("trackerWalkInput").value, 10) || 0;
-        document.getElementById("trackerWaterCount").textContent =
-          parseInt(document.getElementById("trackerWaterInput").value, 10) || 0;
+      function getTrackerWalkTotal() {
+        return WALK_WATER_PERIODS.reduce(
+          (sum, p) =>
+            sum + (parseInt(document.getElementById("trackerWalkInput-" + p).value, 10) || 0),
+          0,
+        );
+      }
+
+      function getTrackerWaterTotal() {
+        return WALK_WATER_PERIODS.reduce(
+          (sum, p) =>
+            sum + (parseInt(document.getElementById("trackerWaterInput-" + p).value, 10) || 0),
+          0,
+        );
       }
 
       function loadZadLectureLog() {
@@ -4718,11 +4987,14 @@
         document.getElementById("sub-m3").className = "task-sub sub-not-taken";
         document.getElementById("sub-a2").textContent = "❓ Not taken";
         document.getElementById("sub-a2").className = "task-sub sub-not-taken";
-        ["trackerWalkInput", "trackerWaterInput", "trackerExerciseInput", "trackerLumosityInput"].forEach((id) => {
+        WALK_WATER_PERIODS.forEach((p) => {
+          document.getElementById("trackerWalkInput-" + p).value = "";
+          document.getElementById("trackerWaterInput-" + p).value = "";
+        });
+        ["trackerExerciseInput", "trackerLumosityInput"].forEach((id) => {
           document.getElementById(id).value = "";
         });
-        updateWaterLitrePreview();
-        updateTrackerWalkWaterSummary();
+        WALK_WATER_PERIODS.forEach((p) => updateWaterLitrePreview(p));
         saveScheduleStatus();
         saveTrackerDaily();
         renderSummary();
@@ -4933,12 +5205,8 @@
             );
           }).join("");
 
-        const walk =
-          parseInt(document.getElementById("trackerWalkInput").value, 10) ||
-          0;
-        const water =
-          parseInt(document.getElementById("trackerWaterInput").value, 10) ||
-          0;
+        const walk = getTrackerWalkTotal();
+        const water = getTrackerWaterTotal();
         const exercise =
           parseInt(
             document.getElementById("trackerExerciseInput").value,
