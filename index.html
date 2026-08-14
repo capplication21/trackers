@@ -442,6 +442,31 @@
         border: 2px solid var(--ink);
         transform: translateY(-2px);
       }
+      .tab-btn.active[onclick*="schedule"] .tab-icon {
+        background: #f5b729;
+      }
+      .tab-btn.active[onclick*="water"] .tab-icon {
+        background: #159895;
+        color: #ffffff;
+      }
+      .tab-btn.active[onclick*="week"] .tab-icon {
+        background: #e8772e;
+        color: #ffffff;
+      }
+      .tab-btn.active[onclick*="history"] .tab-icon {
+        background: #e8a317;
+      }
+      .tab-btn.active[onclick*="period"] .tab-icon {
+        background: #e0578f;
+        color: #ffffff;
+      }
+      .tab-btn.active[onclick*="recipe"] .tab-icon {
+        background: #f5b729;
+      }
+      .tab-btn.active[onclick*="summary"] .tab-icon {
+        background: #6366f1;
+        color: #ffffff;
+      }
       .tab-icon {
         font-size: 16px;
         margin-bottom: 0;
@@ -508,12 +533,48 @@
         box-shadow: 0 1px 0 var(--ink);
       }
       .task-card.completed {
-        background: #eaf7ec;
-        border-color: var(--green);
-        box-shadow: 0 3px 0 var(--green);
+        background: #f0faf4;
+        border-color: #1f9d55;
+        box-shadow: 0 3px 0 #1f9d55;
       }
       .task-card.completed:active {
-        box-shadow: 0 1px 0 var(--green);
+        box-shadow: 0 1px 0 #1f9d55;
+      }
+      #morning-section .task-card.completed {
+        background: #fffdf5;
+        border-color: #e8a317;
+        box-shadow: 0 3px 0 #e8a317;
+      }
+      #morning-section .task-card.completed .checkbox {
+        background: #f5b729;
+        border-color: #e8a317;
+      }
+      #afternoon-section .task-card.completed {
+        background: #f4f9fd;
+        border-color: #2f8fd1;
+        box-shadow: 0 3px 0 #2f8fd1;
+      }
+      #afternoon-section .task-card.completed .checkbox {
+        background: #2f8fd1;
+        border-color: #1f72ae;
+      }
+      #evening-section .task-card.completed {
+        background: #fff7f5;
+        border-color: #e8772e;
+        box-shadow: 0 3px 0 #e8772e;
+      }
+      #evening-section .task-card.completed .checkbox {
+        background: #e8772e;
+        border-color: #c85f1e;
+      }
+      #night-section .task-card.completed {
+        background: #f8f7ff;
+        border-color: #6366f1;
+        box-shadow: 0 3px 0 #6366f1;
+      }
+      #night-section .task-card.completed .checkbox {
+        background: #6366f1;
+        border-color: #4f46e5;
       }
       .checkbox {
         width: 28px;
@@ -525,6 +586,7 @@
         justify-content: center;
         flex-shrink: 0;
         transition: all 0.2s;
+        background: #ffffff;
       }
       .task-card.completed .checkbox {
         background: #1F9D55;
@@ -611,14 +673,11 @@
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background: var(--teal);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: white;
         cursor: pointer;
-        box-shadow: 0 3px 0 var(--teal-deep);
         transition: transform 0.1s ease;
         position: absolute;
         top: 8px;
@@ -631,9 +690,23 @@
         transform: scale(0.92) translateY(2px);
         box-shadow: none;
       }
+      #morning-section .adhkar-btn {
+        background: #f5b729;
+        box-shadow: 0 3px 0 #e8a317;
+        color: var(--ink);
+      }
+      #evening-section .adhkar-btn {
+        background: #e8772e;
+        box-shadow: 0 3px 0 #c85f1e;
+        color: white;
+      }
+      #evening-section .adhkar-ring-svg .fill {
+        stroke: #e8772e;
+      }
       .adhkar-btn.done {
-        background: var(--green);
-        box-shadow: 0 3px 0 var(--green-deep);
+        background: #1f9d55 !important;
+        box-shadow: 0 3px 0 #16803f !important;
+        color: white !important;
       }
       .adhkar-btn .num {
         font-size: 14px;
@@ -677,22 +750,33 @@
         width: 64px;
         height: 48px;
         border-radius: 14px;
-        background: var(--teal);
+        background: #f5b729;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: var(--ink);
         font-weight: 700;
         font-size: 14px;
         font-family: inherit;
         flex-shrink: 0;
         border: 2.5px solid var(--ink);
-        box-shadow: 0 3px 0 var(--teal-deep);
+        box-shadow: 0 3px 0 #e8a317;
         transition: background 0.2s ease;
       }
+      #night-section #timer-display-grammar {
+        background: #2f8fd1;
+        box-shadow: 0 3px 0 #1f72ae;
+        color: white;
+      }
+      #night-section #timer-display-phonics {
+        background: #6366f1;
+        box-shadow: 0 3px 0 #4f46e5;
+        color: white;
+      }
       .timer-display.done {
-        background: var(--green);
-        box-shadow: 0 3px 0 var(--green-deep);
+        background: #1f9d55 !important;
+        box-shadow: 0 3px 0 #16803f !important;
+        color: white !important;
       }
       .timer-info {
         flex: 1;
@@ -774,8 +858,9 @@
         border: 2.5px solid var(--ink);
         border-radius: var(--radius);
         padding: 18px;
-        background: #e8f5ea;
+        background: #ffffff;
         box-shadow: var(--shadow-flat);
+        margin-bottom: 14px;
       }
       .week-header {
         display: flex;
@@ -785,84 +870,19 @@
       }
       .week-header-title {
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 700;
         color: #1A1A1A;
       }
-      .week-sub {
-        font-size: 13px;
-        color: #16803F;
-        font-weight: 600;
-        margin-bottom: 14px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-      .week-days {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 12px;
-      }
-      .week-day {
-        flex: 1;
-        background: white;
-        border: 2.5px solid var(--ink);
-        border-radius: var(--radius-sm);
-        padding: 14px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.15s;
-        box-shadow: 0 2px 0 var(--ink);
-      }
-      .week-day:active {
-        transform: translateY(2px);
-        box-shadow: none;
-      }
-      .week-day.checked {
-        background: #dcf2e1;
-        border-color: var(--green);
-        box-shadow: 0 2px 0 var(--green);
-      }
-      .day-check {
-        width: 22px;
-        height: 22px;
-        border: 2px solid #1A1A1A;
-        border-radius: 6px;
-        margin: 0 auto 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
-      }
-      .week-day.checked .day-check {
-        background: #1F9D55;
-        border-color: #1F9D55;
-      }
-      .day-check svg {
-        display: none;
-      }
-      .week-day.checked .day-check svg {
-        display: block;
-      }
-      .day-label {
-        font-size: 12px;
-        font-weight: 500;
-        color: #7A7460;
-      }
-      .week-day.checked .day-label {
-        color: #16803F;
-        font-weight: 600;
-      }
-
       .subtopic-label {
-        font-size: 14px;
-        font-weight: 600;
-        color: #145C34;
+        font-size: 13px;
+        font-weight: 700;
+        color: #c85f1e;
         margin-bottom: 10px;
         display: flex;
         align-items: center;
         gap: 6px;
-        padding: 6px 10px;
-        background: rgba(31, 157, 85, 0.1);
+        padding: 5px 10px;
+        background: #fdf4ed;
         border-radius: 10px;
         width: fit-content;
       }
@@ -873,23 +893,22 @@
         gap: 8px;
         margin-bottom: 10px;
         font-size: 12px;
-        font-weight: 600;
-        color: #145C34;
+        font-weight: 700;
+        color: #1A1A1A;
       }
       .lecture-stat-box {
         display: inline-flex;
         align-items: center;
         gap: 5px;
-        background: rgba(31, 157, 85, 0.08);
-        border: 2px solid #8FD4A8;
+        background: #ffffff;
+        border: 2px solid var(--ink);
         border-radius: 12px;
         padding: 4px 10px;
         min-width: 0;
-        transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        box-shadow: 0 1.5px 0 var(--ink);
       }
       .lecture-stat-box:focus-within {
-        border-color: #16803F;
-        box-shadow: 0 0 0 3px rgba(31, 157, 85, 0.18);
+        border-color: var(--yellow-deep);
       }
       .lecture-count-input {
         width: 34px;
@@ -898,7 +917,7 @@
         font-family: inherit;
         font-size: 16px;
         font-weight: 800;
-        color: #16803F;
+        color: #c85f1e;
         line-height: 1;
         text-align: center;
         padding: 0;
@@ -916,7 +935,7 @@
       .lecture-stat-target {
         font-size: 12px;
         font-weight: 700;
-        color: #16803F;
+        color: #7a7460;
       }
       .lecture-done-btn {
         display: block;
@@ -924,35 +943,46 @@
         margin: 12px auto 0;
         border: 2.5px solid var(--ink);
         border-radius: 999px;
-        padding: 9px 16px;
+        padding: 9px 18px;
         font-size: 12px;
         font-weight: 800;
         cursor: pointer;
         font-family: inherit;
-        background: var(--green);
+        background: #e8772e;
         color: white;
-        box-shadow: 0 3px 0 var(--green-deep);
+        box-shadow: 0 3px 0 #c85f1e;
         margin-bottom: 10px;
       }
       .lecture-done-btn:active {
         transform: translateY(3px);
         box-shadow: none;
       }
+      .week-section:nth-of-type(2) .subtopic-label {
+        color: #0e7a78;
+        background: #e6f7f6;
+      }
+      .week-section:nth-of-type(2) .lecture-count-input {
+        color: #0e7a78;
+      }
+      .week-section:nth-of-type(2) .lecture-done-btn {
+        background: #159895;
+        box-shadow: 0 3px 0 #0e7a78;
+      }
       .chore-card {
-        padding: 12px;
-        margin-bottom: 8px;
+        padding: 18px 16px;
+        margin-bottom: 14px;
       }
       .chore-question {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 700;
         color: #1A1A1A;
-        margin-bottom: 6px;
+        margin-bottom: 12px;
       }
       .chore-log-row {
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin-bottom: 6px;
+        gap: 10px;
+        margin-bottom: 10px;
       }
       .chore-log-row .date-stat-box {
         flex: 1;
@@ -970,19 +1000,39 @@
         text-align: right;
         margin-top: 2px;
       }
+      #tab-water .chore-card {
+        padding: 20px 18px;
+        margin-bottom: 18px;
+      }
+      #tab-water .chore-question {
+        font-size: 15px;
+        margin-bottom: 14px;
+      }
+      #tab-water .yt-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        background: rgba(47, 143, 209, 0.08);
+        border: 1.5px solid rgba(47, 143, 209, 0.25);
+        border-radius: 10px;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
       .typing-range-row {
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin-top: 10px;
+        gap: 12px;
+        margin-top: 14px;
       }
       .typing-range-row .date-stat-box {
         flex: 1;
+        padding: 6px 10px;
       }
       .typing-range-sep {
-        font-size: 11px;
-        font-weight: 600;
-        color: #9B9480;
+        font-size: 12px;
+        font-weight: 700;
+        color: #7A7460;
         flex-shrink: 0;
       }
       .summary-card {
@@ -1099,9 +1149,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 8px;
-        margin-top: 8px;
-        padding-top: 8px;
+        gap: 12px;
+        margin-top: 14px;
+        padding-top: 14px;
         border-top: 1px dashed #E7E0C9;
       }
       .medicine-reminder-text {
@@ -1112,7 +1162,7 @@
       .medicine-reminder-sub {
         font-size: 11px;
         color: #7A7460;
-        margin-top: 2px;
+        margin-top: 3px;
       }
       .medicine-reminder-btn {
         flex-shrink: 0;
@@ -1139,18 +1189,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 8px;
+        gap: 10px;
         flex-wrap: wrap;
+        margin-bottom: 12px;
       }
       .hair-wash-count {
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 700;
         color: #0E7A78;
       }
       .hair-wash-buttons {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
       }
       .hair-wash-btn {
         border: 2.5px solid var(--ink);
@@ -1184,21 +1235,22 @@
         box-shadow: none;
       }
       .hair-wash-progress-track {
-        height: 5px;
+        height: 8px;
         background: rgba(21, 152, 149, 0.15);
         border-radius: 6px;
         overflow: hidden;
-        margin-top: 6px;
+        margin-top: 10px;
+        margin-bottom: 6px;
       }
       .hair-wash-progress-fill {
         height: 100%;
         width: 0%;
-        background: #5FB8E0;
+        background: linear-gradient(90deg, #2f8fd1, #159895);
         border-radius: 6px;
         transition: width 0.4s ease, background 0.3s ease;
       }
       .hair-wash-progress-fill.complete {
-        background: #3DBD70;
+        background: #1f9d55;
       }
       .lecture-date-inline {
         border: none;
@@ -1229,26 +1281,29 @@
       .zad-log-select {
         flex: 1;
         min-width: 0;
-        border: 1.5px solid #B7E4C7;
-        border-radius: 8px;
-        padding: 8px 8px;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        padding: 6px 10px;
         font-size: 13px;
-        background: white;
+        font-weight: 600;
+        color: #1A1A1A;
+        background: #ffffff;
+        box-shadow: 0 1.5px 0 var(--ink);
       }
       .zad-log-select:focus {
         outline: none;
-        border-color: #16803F;
-        box-shadow: 0 0 0 3px rgba(31, 157, 85, 0.18);
+        border-color: var(--yellow-deep);
       }
       .zad-log-delete-btn {
         flex-shrink: 0;
-        background: none;
-        border: 1.5px solid #B7E4C7;
-        border-radius: 8px;
-        color: #9B9480;
-        font-size: 13px;
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        color: #1A1A1A;
+        font-size: 12px;
         cursor: pointer;
-        padding: 8px 10px;
+        padding: 4px 8px;
+        box-shadow: 0 1.5px 0 var(--ink);
       }
       .zad-log-delete-btn:hover {
         color: #E8562E;
@@ -1256,7 +1311,7 @@
       }
       .lecture-progress-track {
         height: 6px;
-        background: rgba(31, 157, 85, 0.15);
+        background: #EDE7D2;
         border-radius: 6px;
         overflow: hidden;
         margin-bottom: 8px;
@@ -1264,12 +1319,12 @@
       .lecture-progress-fill {
         height: 100%;
         width: 0%;
-        background: #3DBD70;
+        background: #E8772E;
         border-radius: 6px;
         transition: width 0.5s ease, background 0.3s ease;
       }
-      .lecture-progress-fill.complete {
-        background: #E8772E;
+      .week-section:nth-of-type(2) .lecture-progress-fill {
+        background: #159895;
       }
       .zad-card {
         position: relative;
@@ -1473,25 +1528,82 @@
         max-height: 360px;
         overflow-y: auto;
       }
-      .ingredients-toggle summary {
+      .ingredients-toggle {
+        margin-top: 20px;
+        background: linear-gradient(135deg, #fffbf2 0%, #ffffff 100%);
+        border: 2.5px solid var(--ink);
+        border-radius: var(--radius);
+        box-shadow: 0 4px 0 var(--ink);
+        overflow: hidden;
+        transition: all 0.2s ease;
+      }
+      .ingredients-toggle[open] {
+        background: #ffffff;
+        box-shadow: 0 5px 0 var(--ink);
+      }
+      .ingredients-toggle-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        background: linear-gradient(135deg, #ffecc4 0%, #fff4da 100%);
+        border-bottom: 2px solid transparent;
         cursor: pointer;
         list-style: none;
+        user-select: none;
+        transition: all 0.2s ease;
       }
-      .ingredients-toggle summary::-webkit-details-marker {
+      .ingredients-toggle[open] .ingredients-toggle-summary {
+        border-bottom: 2.5px solid var(--ink);
+        background: linear-gradient(135deg, #ffd98a 0%, #ffe4a0 100%);
+      }
+      .ingredients-toggle-summary::-webkit-details-marker {
         display: none;
       }
-      .ingredients-toggle summary::after {
-        content: "▸";
-        margin-left: auto;
-        font-size: 11px;
-        color: #9B9480;
-        transition: transform 0.2s ease;
+      .ingredients-summary-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
-      .ingredients-toggle[open] summary::after {
-        transform: rotate(90deg);
+      .ingredients-icon-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        box-shadow: 0 2px 0 var(--ink);
+      }
+      .ingredients-summary-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--ink);
+        letter-spacing: 0.01em;
+      }
+      .ingredients-arrow-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        box-shadow: 0 2px 0 var(--ink);
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--ink);
+        transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease;
+      }
+      .ingredients-toggle[open] .ingredients-arrow-badge {
+        transform: rotate(180deg);
+        background: var(--yellow);
       }
       .ingredients-toggle-body {
-        margin-top: 12px;
+        padding: 16px;
       }
       .form-ingredient-list {
         display: flex;
@@ -1609,88 +1721,137 @@
       .ingredient-chip-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
         margin-top: 4px;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
       .ingredient-chip {
-        background: rgba(21, 152, 149, 0.12);
-        color: #1F72AE;
-        font-size: 12px;
+        background: linear-gradient(135deg, rgba(21, 152, 149, 0.16), rgba(47, 143, 209, 0.16));
+        color: #0c6a68;
+        font-size: 13px;
         font-weight: 700;
-        padding: 6px 12px;
-        border-radius: 20px;
+        padding: 8px 14px;
+        border-radius: 14px;
+        border: 1.5px solid rgba(21, 152, 149, 0.35);
+        box-shadow: 0 2px 0 rgba(21, 152, 149, 0.2);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .ingredient-chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 0 rgba(21, 152, 149, 0.3);
       }
       #uncommonIngredientsCard {
-        padding: 12px;
+        padding: 14px;
       }
       #uncommonIngredientsList.history-list {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-        gap: 5px;
+        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+        gap: 10px;
         align-items: start;
       }
       .uncommon-ingredient-item {
-        padding: 5px 7px;
-        background: #F7F3E6;
-        border-radius: 8px;
+        padding: 9px 12px;
+        background: linear-gradient(135deg, #fff7ea 0%, #fffdf8 100%);
+        border: 2px solid #e8a317;
+        border-radius: 14px;
         min-width: 0;
+        box-shadow: 0 2.5px 0 #e8a317;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: pointer;
+      }
+      .uncommon-ingredient-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4.5px 0 #e8a317;
       }
       details.uncommon-ingredient-item[open] {
         grid-column: 1 / -1;
-        background: #FFF6DC;
-      }
-      #uncommonIngredientsList.history-list > .history-empty {
-        grid-column: 1 / -1;
+        background: linear-gradient(135deg, #fff4d9 0%, #ffffff 100%);
+        border: 2.5px solid var(--ink);
+        box-shadow: 0 4px 0 var(--ink);
+        padding: 14px 16px;
       }
       .uncommon-ingredient-name {
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 700;
-        color: #1A1A1A;
+        color: #6b3e04;
         cursor: pointer;
         list-style: none;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
         line-height: 1.4;
       }
       details.uncommon-ingredient-item[open] .uncommon-ingredient-name {
         white-space: normal;
+        font-size: 15px;
+        color: var(--ink);
       }
       .uncommon-ingredient-name::-webkit-details-marker {
         display: none;
       }
-      .uncommon-ingredient-name::before {
-        content: "▸";
-        display: inline-block;
-        margin-right: 4px;
-        color: #9B9480;
-        transition: transform 0.15s;
+      .uncommon-ingredient-name-text {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      details[open] > .uncommon-ingredient-name::before {
-        transform: rotate(90deg);
+      .uncommon-arrow-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 800;
+        color: #e8a317;
+        transition: transform 0.25s ease, color 0.2s ease;
+      }
+      details[open] > .uncommon-ingredient-name .uncommon-arrow-icon {
+        transform: rotate(180deg);
+        color: var(--ink);
       }
       .uncommon-recipe-count {
-        font-weight: 500;
-        color: #9B9480;
+        font-size: 11px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #f5b729, #e8772e);
+        color: #ffffff;
+        padding: 2px 7px;
+        border-radius: 10px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
       }
       .uncommon-recipe-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 5px;
-        margin-top: 6px;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1.5px dashed #e7e0c9;
       }
       .uncommon-recipe-link-tag {
-        background: rgba(245, 183, 41, 0.18);
-        color: var(--yellow-ink);
-        font-size: 11px;
-        font-weight: 600;
-        padding: 3px 9px;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #f5b729 0%, #e8a317 100%);
+        color: #1a1a1a;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 7px 13px;
+        border-radius: 10px;
+        border: 2px solid var(--ink);
+        box-shadow: 0 2px 0 var(--ink);
         text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
       }
       .uncommon-recipe-link-tag:hover {
-        text-decoration: underline;
+        transform: translateY(-2px);
+        box-shadow: 0 3.5px 0 var(--ink);
+        text-decoration: none;
       }
 
       .schedule-tabs {
@@ -2001,29 +2162,29 @@
       </div>
 
       <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('week', this)">
-          <span class="tab-icon">📅</span>
-          <span class="tab-label">3x/Week</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('period', this)">
-          <span class="tab-icon">🩸</span>
-          <span class="tab-label">Period</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('schedule', this)">
+        <button class="tab-btn active" onclick="switchTab('schedule', this)">
           <span class="tab-icon">⏰</span>
           <span class="tab-label">Schedule</span>
         </button>
-        <button class="tab-btn" onclick="switchTab('recipe', this)">
-          <span class="tab-icon">🍳</span>
-          <span class="tab-label">Recipe</span>
+        <button class="tab-btn" onclick="switchTab('water', this)">
+          <span class="tab-icon">✅</span>
+          <span class="tab-label">Tracker</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('week', this)">
+          <span class="tab-icon">📅</span>
+          <span class="tab-label">3x/Week</span>
         </button>
         <button class="tab-btn" onclick="switchTab('history', this)">
           <span class="tab-icon">📜</span>
           <span class="tab-label">History</span>
         </button>
-        <button class="tab-btn" onclick="switchTab('water', this)">
-          <span class="tab-icon">✅</span>
-          <span class="tab-label">Tracker</span>
+        <button class="tab-btn" onclick="switchTab('period', this)">
+          <span class="tab-icon">🩸</span>
+          <span class="tab-label">Period</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('recipe', this)">
+          <span class="tab-icon">🍳</span>
+          <span class="tab-label">Recipe</span>
         </button>
         <button class="tab-btn" onclick="switchTab('summary', this)">
           <span class="tab-icon">📊</span>
@@ -2239,15 +2400,6 @@
             </button>
           </div>
 
-          <div class="schedule-quick-actions">
-            <button class="btn btn-reset" onclick="resetDay()">
-              <span>🔄</span> Reset Day
-            </button>
-            <button class="btn btn-save" onclick="saveDay()">
-              <span>💾</span> Save Day
-            </button>
-          </div>
-
           <div id="morning-section" class="schedule-section active">
           <div class="section-title morning-title">
             <span>🌅</span> MORNING ROUTINES
@@ -2376,7 +2528,7 @@
               </svg>
             </div>
             <div style="flex: 1">
-              <div class="task-text">Vitamin medicine? <span>💊</span></div>
+              <div class="task-text">Vitamin B Complex medicine? <span>💊</span></div>
               <div class="task-sub sub-not-taken" id="sub-a2">❓ Not taken</div>
             </div>
           </div>
@@ -2457,6 +2609,19 @@
                   <button class="adhkar-reset" id="reset-evening">↺ Reset counter</button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="task-card" id="task-e4-s" onclick="toggleTask('e4')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Lumosity <span>🧠</span></div>
+              <a class="yt-link" href="https://www.lumosity.com" target="_blank" onclick="event.stopPropagation()">
+                <span>🧠</span> Open Lumosity
+              </a>
             </div>
           </div>
           </div>
@@ -2544,6 +2709,17 @@
               </div>
             </div>
           </div>
+          <div class="task-card" id="task-n4-s" onclick="toggleTask('n4')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Freedase 30 medicine? <span>💊</span></div>
+              <div class="task-sub sub-not-taken" id="sub-n4">❓ Not taken</div>
+            </div>
+          </div>
           </div>
 
           <div class="history-card">
@@ -2597,22 +2773,26 @@
           </div>
 
           <!-- Ingredients -->
-          <details class="ingredients-toggle" style="margin-top: 18px">
-            <summary class="section-title" style="margin-bottom: 0">
-              <span>🧾</span> Ingredients
+          <details class="ingredients-toggle">
+            <summary class="ingredients-toggle-summary">
+              <div class="ingredients-summary-left">
+                <span class="ingredients-icon-badge">🧾</span>
+                <span class="ingredients-summary-title">Ingredients Explorer</span>
+              </div>
+              <div class="ingredients-arrow-badge">▾</div>
             </summary>
             <div class="ingredients-toggle-body">
               <div class="section-title" style="margin-top: 0">
-                <span>🧂</span> Common
+                <span>🧂</span> Common Ingredients
               </div>
-              <div class="history-card">
+              <div class="history-card" style="margin-bottom: 16px">
                 <div class="ingredient-chip-list" id="commonIngredientsList">
                   <div class="history-empty">No recipes added yet.</div>
                 </div>
               </div>
 
-              <div class="section-title" style="margin-top: 18px">
-                <span>🛒</span> Uncommon
+              <div class="section-title">
+                <span>🛒</span> Uncommon Ingredients
               </div>
               <div class="recipe-search-row">
                 <input
@@ -2717,34 +2897,8 @@
             </div>
           </div>
 
-          <div class="history-card chore-card">
-            <div class="chore-question">🏋️ Exercise done today?</div>
-            <div class="tracker-row" style="margin-top: 0">
-              <div class="tracker-group steps-group">
-                <span class="tracker-group-icon">🏋️</span>
-                <input type="number" class="tracker-input" id="trackerExerciseInput" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
-                <span class="tracker-group-label">minutes</span>
-              </div>
-            </div>
-          </div>
 
-          <div class="history-card chore-card">
-            <div class="chore-question">🧠 Lumosity game played?</div>
-            <div class="tracker-row" style="margin-top: 0">
-              <div class="tracker-group steps-group">
-                <span class="tracker-group-icon">🧠</span>
-                <input type="number" class="tracker-input" id="trackerLumosityInput" min="0" inputmode="numeric" placeholder="0" oninput="saveTrackerDaily()" />
-                <span class="tracker-group-label">sessions</span>
-              </div>
-            </div>
-            <div class="medicine-reminder-row">
-              <div>
-                <div class="medicine-reminder-text">🔔 Daily reminder</div>
-                <div class="medicine-reminder-sub" id="lumosityReminderSub">Get a daily nudge to play Lumosity.</div>
-              </div>
-              <button class="medicine-reminder-btn" id="lumosityReminderBtn" onclick="toggleLumosityReminders()">Enable</button>
-            </div>
-          </div>
+
 
           <div class="history-card chore-card">
             <div class="chore-question">⌨️ Typing practice done?</div>
@@ -2769,47 +2923,7 @@
             </div>
           </div>
 
-          <div class="history-card chore-card">
-            <div class="chore-question">💊 Medicine taken today?</div>
 
-            <div class="medicine-slot" id="medSlot-morning" onclick="toggleMedicineSlot('morning')">
-              <div class="checkbox">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <span class="medicine-slot-label">🌅 Morning</span>
-              <span class="medicine-slot-status" id="medSlotStatus-morning">❓ Not taken</span>
-            </div>
-
-            <div class="medicine-slot" id="medSlot-afternoon" onclick="toggleMedicineSlot('afternoon')">
-              <div class="checkbox">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <span class="medicine-slot-label">☀️ Afternoon</span>
-              <span class="medicine-slot-status" id="medSlotStatus-afternoon">❓ Not taken</span>
-            </div>
-
-            <div class="medicine-slot" id="medSlot-night" onclick="toggleMedicineSlot('night')">
-              <div class="checkbox">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <span class="medicine-slot-label">🌙 Night</span>
-              <span class="medicine-slot-status" id="medSlotStatus-night">❓ Not taken</span>
-            </div>
-
-            <div class="medicine-reminder-row">
-              <div>
-                <div class="medicine-reminder-text">🔔 Medicine reminders</div>
-                <div class="medicine-reminder-sub" id="medicineReminderSub">Get a nudge if you forget to mark a dose.</div>
-              </div>
-              <button class="medicine-reminder-btn" id="medicineReminderBtn" onclick="toggleMedicineReminders()">Enable</button>
-            </div>
-          </div>
         </div>
 
         <!-- SUMMARY TAB -->
@@ -2833,31 +2947,10 @@
               <span class="summary-row-label">🚶 Walk</span>
               <span class="summary-row-value" id="summaryWalk">--</span>
             </div>
-            <div class="summary-row">
-              <span class="summary-row-label">🏋️ Exercise</span>
-              <span class="summary-row-value" id="summaryExercise">--</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-row-label">🧠 Lumosity</span>
-              <span class="summary-row-value" id="summaryLumosity">--</span>
-            </div>
+
           </div>
 
-          <div class="summary-card">
-            <div class="summary-card-title">💊 Medicine</div>
-            <div class="summary-row">
-              <span class="summary-row-label">🌅 Morning</span>
-              <span class="summary-row-value" id="summaryMedMorning">--</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-row-label">☀️ Afternoon</span>
-              <span class="summary-row-value" id="summaryMedAfternoon">--</span>
-            </div>
-            <div class="summary-row">
-              <span class="summary-row-label">🌙 Night</span>
-              <span class="summary-row-value" id="summaryMedNight">--</span>
-            </div>
-          </div>
+
 
           <div class="summary-card">
             <div class="summary-card-title">🧴 Hair Wash (this week)</div>
@@ -2936,15 +3029,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="action-buttons">
-        <button class="btn btn-reset" onclick="resetDay()">
-          <span>🔄</span> Reset
-        </button>
-        <button class="btn btn-save" onclick="saveDay()">
-          <span>💾</span> Save
-        </button>
       </div>
     </div>
 
@@ -3067,7 +3151,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      const TOTAL_TASKS = 9;
+      const TOTAL_TASKS = 11;
       let completedTasks = new Set();
       let weekDaysCompleted = new Set();
       let weekDaysCompleted2 = new Set();
@@ -3100,12 +3184,14 @@
         { id: "m2", label: "Morning Adhkar", icon: "🤲" },
         { id: "m3", label: "Folic Acid medicine", icon: "💊" },
         { id: "m4", label: "Exercise", icon: "🏋️" },
-        { id: "a2", label: "Vitamin medicine", icon: "💊" },
+        { id: "a2", label: "Vitamin B Complex medicine", icon: "💊" },
         { id: "a3", label: "Activity on Kimi", icon: "🤖" },
         { id: "e3", label: "Read and Listen Quran", icon: "📖" },
         { id: "e2", label: "Evening Adhkar", icon: "🤲" },
+        { id: "e4", label: "Lumosity", icon: "🧠" },
         { id: "n2", label: "Grammar Session", icon: "📝" },
         { id: "n3", label: "Phonics", icon: "🔤" },
+        { id: "n4", label: "Freedase 30 medicine", icon: "💊" },
       ];
       const WALK_WATER_TASKS = WALK_WATER_PERIODS.map((p) => ({
         id: "trackerWalk-" + p,
@@ -3115,17 +3201,7 @@
       const ALL_SCHEDULE_TASKS = SCHEDULE_TASKS.concat(WALK_WATER_TASKS);
       const SCHEDULE_HISTORY_MAX_DAYS = 30;
 
-      const MEDICINE_SLOTS = ["morning", "afternoon", "night"];
-      let medicineStatus = {
-        date: "",
-        morning: false,
-        afternoon: false,
-        night: false,
-        notified: { morning: false, afternoon: false, night: false },
-        remindersEnabled: false,
-      };
-      let medicineReminderIntervalId = null;
-      const MEDICINE_REMINDER_INTERVAL_MS = 15 * 60 * 1000;
+
 
       const HAIR_WASH_TARGET = 2;
       let hairWashStatus = {
@@ -3136,13 +3212,6 @@
       };
       let hairWashReminderIntervalId = null;
       const HAIR_WASH_REMINDER_INTERVAL_MS = 6 * 60 * 60 * 1000;
-
-      let lumosityReminderStatus = {
-        remindersEnabled: false,
-        lastReminded: "",
-      };
-      let lumosityReminderIntervalId = null;
-      const LUMOSITY_REMINDER_INTERVAL_MS = 6 * 60 * 60 * 1000;
 
       function scrollToScheduleSection(sectionId) {
         document.querySelectorAll(".schedule-section").forEach((section) => {
@@ -3789,7 +3858,7 @@
           ? commonNames
               .map(
                 (name) =>
-                  `<div class="ingredient-chip">${escapeHtml(name)}</div>`,
+                  `<div class="ingredient-chip"><span>🌿</span> ${escapeHtml(name)}</div>`,
               )
               .join("")
           : '<div class="history-empty">No common ingredients found.</div>';
@@ -3811,12 +3880,18 @@
               .map(
                 (entry) => `
           <details class="uncommon-ingredient-item">
-            <summary class="uncommon-ingredient-name">${escapeHtml(entry.name)} <span class="uncommon-recipe-count">(${entry.recipes.length})</span></summary>
+            <summary class="uncommon-ingredient-name">
+              <span class="uncommon-ingredient-name-text">🥘 ${escapeHtml(entry.name)}</span>
+              <span style="display:inline-flex; align-items:center; gap:6px; flex-shrink:0;">
+                <span class="uncommon-recipe-count">${entry.recipes.length}</span>
+                <span class="uncommon-arrow-icon">▾</span>
+              </span>
+            </summary>
             <div class="uncommon-recipe-links">
               ${entry.recipes
                 .map(
                   (r) =>
-                    `<a class="uncommon-recipe-link-tag" href="${escapeHtml(r.url)}" target="_blank" rel="noopener">${escapeHtml(r.title)}</a>`,
+                    `<a class="uncommon-recipe-link-tag" href="${escapeHtml(r.url)}" target="_blank" rel="noopener"><span>📖</span> ${escapeHtml(r.title)}</a>`,
                 )
                 .join("")}
             </div>
@@ -4003,6 +4078,11 @@
             sub.textContent = "❓ Not taken";
             sub.className = "task-sub sub-not-taken";
           }
+          if (taskId === "n4") {
+            const sub = document.getElementById("sub-n4");
+            sub.textContent = "❓ Not taken";
+            sub.className = "task-sub sub-not-taken";
+          }
         } else {
           card.classList.add("completed");
           completedTasks.add(taskId);
@@ -4013,6 +4093,11 @@
           }
           if (taskId === "a2") {
             const sub = document.getElementById("sub-a2");
+            sub.textContent = "✅ Taken";
+            sub.className = "task-sub sub-taken";
+          }
+          if (taskId === "n4") {
+            const sub = document.getElementById("sub-n4");
             sub.textContent = "✅ Taken";
             sub.className = "task-sub sub-taken";
           }
@@ -4165,6 +4250,11 @@
                   sub.textContent = "✅ Taken";
                   sub.className = "task-sub sub-taken";
                 }
+                if (id === "n4") {
+                  const sub = document.getElementById("sub-n4");
+                  sub.textContent = "✅ Taken";
+                  sub.className = "task-sub sub-taken";
+                }
               });
             }
           }
@@ -4188,8 +4278,6 @@
               date: medicineTodayStr(),
               walk,
               water,
-              exercise: document.getElementById("trackerExerciseInput").value,
-              lumosity: document.getElementById("trackerLumosityInput").value,
             }),
           );
         } catch (e) {
@@ -4209,8 +4297,6 @@
                 if (parsed.water && parsed.water[p])
                   document.getElementById("trackerWaterInput-" + p).value = parsed.water[p];
               });
-              if (parsed.exercise) document.getElementById("trackerExerciseInput").value = parsed.exercise;
-              if (parsed.lumosity) document.getElementById("trackerLumosityInput").value = parsed.lumosity;
             }
           }
         } catch (e) {
@@ -4380,184 +4466,7 @@
         return y + "-" + m + "-" + d;
       }
 
-      function loadMedicineStatus() {
-        try {
-          const stored = localStorage.getItem("medicine_status_v1");
-          if (stored) {
-            const parsed = JSON.parse(stored);
-            medicineStatus.remindersEnabled = !!parsed.remindersEnabled;
-            if (parsed.date === medicineTodayStr()) {
-              MEDICINE_SLOTS.forEach((slot) => {
-                medicineStatus[slot] = !!parsed[slot];
-              });
-              medicineStatus.notified = parsed.notified || {
-                morning: false,
-                afternoon: false,
-                night: false,
-              };
-            } else {
-              MEDICINE_SLOTS.forEach((slot) => {
-                medicineStatus[slot] = false;
-              });
-              medicineStatus.notified = {
-                morning: false,
-                afternoon: false,
-                night: false,
-              };
-            }
-          }
-        } catch (e) {
-          // ignore corrupted storage
-        }
-        medicineStatus.date = medicineTodayStr();
-        saveMedicineStatus();
-        renderMedicineStatus();
-        if (
-          medicineStatus.remindersEnabled &&
-          typeof Notification !== "undefined" &&
-          Notification.permission === "granted"
-        ) {
-          startMedicineReminderInterval();
-        }
-      }
 
-      function saveMedicineStatus() {
-        try {
-          localStorage.setItem(
-            "medicine_status_v1",
-            JSON.stringify(medicineStatus),
-          );
-        } catch (e) {
-          // ignore storage errors
-        }
-      }
-
-      function toggleMedicineSlot(slot) {
-        medicineStatus[slot] = !medicineStatus[slot];
-        if (medicineStatus[slot]) {
-          medicineStatus.notified[slot] = true;
-        }
-        saveMedicineStatus();
-        renderMedicineStatus();
-        showToast(
-          medicineStatus[slot]
-            ? "💊 Marked " + slot + " dose as taken"
-            : "Unmarked " + slot + " dose",
-        );
-      }
-
-      function renderMedicineStatus() {
-        MEDICINE_SLOTS.forEach((slot) => {
-          const slotEl = document.getElementById("medSlot-" + slot);
-          const statusEl = document.getElementById("medSlotStatus-" + slot);
-          if (!slotEl || !statusEl) return;
-          if (medicineStatus[slot]) {
-            slotEl.classList.add("completed");
-            statusEl.textContent = "✅ Taken";
-          } else {
-            slotEl.classList.remove("completed");
-            statusEl.textContent = "❓ Not taken";
-          }
-        });
-
-        const btn = document.getElementById("medicineReminderBtn");
-        const sub = document.getElementById("medicineReminderSub");
-        if (medicineStatus.remindersEnabled) {
-          btn.textContent = "🔕 Disable";
-          btn.classList.add("active");
-          sub.textContent =
-            "Reminders are on — we'll check in about once an hour while this tab is open.";
-        } else {
-          btn.textContent = "Enable";
-          btn.classList.remove("active");
-          sub.textContent = "Get a nudge if you forget to mark a dose.";
-        }
-      }
-
-      const MEDICINE_ALARM_TIMES = {
-        morning: 11 * 60,
-        afternoon: 15 * 60,
-        night: 22 * 60,
-      };
-
-      function checkMedicineReminder() {
-        if (medicineStatus.date !== medicineTodayStr()) {
-          loadMedicineStatus();
-        }
-        if (!medicineStatus.remindersEnabled) return;
-        if (
-          typeof Notification === "undefined" ||
-          Notification.permission !== "granted"
-        ) {
-          return;
-        }
-        const now = new Date();
-        const nowMinutes = now.getHours() * 60 + now.getMinutes();
-
-        MEDICINE_SLOTS.forEach((slot) => {
-          if (medicineStatus[slot]) return;
-          if (medicineStatus.notified[slot]) return;
-          if (nowMinutes < MEDICINE_ALARM_TIMES[slot]) return;
-
-          medicineStatus.notified[slot] = true;
-          saveMedicineStatus();
-          new Notification("💊 Medicine reminder", {
-            body:
-              "Have you taken your " + slot + " medicine today? Tap to mark it in the app.",
-          });
-        });
-      }
-
-      function startMedicineReminderInterval() {
-        if (medicineReminderIntervalId) clearInterval(medicineReminderIntervalId);
-        medicineReminderIntervalId = setInterval(
-          checkMedicineReminder,
-          MEDICINE_REMINDER_INTERVAL_MS,
-        );
-      }
-
-      function toggleMedicineReminders() {
-        if (medicineStatus.remindersEnabled) {
-          medicineStatus.remindersEnabled = false;
-          if (medicineReminderIntervalId) {
-            clearInterval(medicineReminderIntervalId);
-            medicineReminderIntervalId = null;
-          }
-          saveMedicineStatus();
-          renderMedicineStatus();
-          showToast("Medicine reminders turned off");
-          return;
-        }
-
-        if (typeof Notification === "undefined") {
-          showToast("Notifications aren't supported in this browser");
-          return;
-        }
-
-        if (Notification.permission === "granted") {
-          medicineStatus.remindersEnabled = true;
-          saveMedicineStatus();
-          renderMedicineStatus();
-          startMedicineReminderInterval();
-          showToast("🔔 Medicine reminders enabled");
-          checkMedicineReminder();
-        } else if (Notification.permission === "denied") {
-          showToast("Notifications are blocked — enable them in browser settings");
-        } else {
-          Notification.requestPermission().then((permission) => {
-            if (permission === "granted") {
-              medicineStatus.remindersEnabled = true;
-              saveMedicineStatus();
-              renderMedicineStatus();
-              startMedicineReminderInterval();
-              showToast("🔔 Medicine reminders enabled");
-              checkMedicineReminder();
-            } else {
-              showToast("Notification permission not granted");
-            }
-          });
-        }
-      }
 
       function getMondayStr(date) {
         const d = new Date(date);
@@ -4734,121 +4643,7 @@
         }
       }
 
-      function loadLumosityReminderStatus() {
-        try {
-          const stored = localStorage.getItem("lumosity_reminder_v1");
-          if (stored) {
-            const parsed = JSON.parse(stored);
-            lumosityReminderStatus.remindersEnabled = !!parsed.remindersEnabled;
-            lumosityReminderStatus.lastReminded = parsed.lastReminded || "";
-          }
-        } catch (e) {
-          // ignore corrupted storage
-        }
-        renderLumosityReminderStatus();
-        if (
-          lumosityReminderStatus.remindersEnabled &&
-          typeof Notification !== "undefined" &&
-          Notification.permission === "granted"
-        ) {
-          startLumosityReminderInterval();
-        }
-      }
 
-      function saveLumosityReminderStatus() {
-        try {
-          localStorage.setItem(
-            "lumosity_reminder_v1",
-            JSON.stringify(lumosityReminderStatus),
-          );
-        } catch (e) {
-          // ignore storage errors
-        }
-      }
-
-      function renderLumosityReminderStatus() {
-        const btn = document.getElementById("lumosityReminderBtn");
-        const sub = document.getElementById("lumosityReminderSub");
-        if (!btn) return;
-        if (lumosityReminderStatus.remindersEnabled) {
-          btn.textContent = "🔕 Disable";
-          btn.classList.add("active");
-          sub.textContent = "Reminders are on — checked a few times a day.";
-        } else {
-          btn.textContent = "Enable";
-          btn.classList.remove("active");
-          sub.textContent = "Get a daily nudge to play Lumosity.";
-        }
-      }
-
-      function checkLumosityReminder() {
-        if (!lumosityReminderStatus.remindersEnabled) return;
-        if (
-          typeof Notification === "undefined" ||
-          Notification.permission !== "granted"
-        ) {
-          return;
-        }
-        const today = medicineTodayStr();
-        if (lumosityReminderStatus.lastReminded === today) return;
-
-        lumosityReminderStatus.lastReminded = today;
-        saveLumosityReminderStatus();
-        new Notification("🧠 Lumosity reminder", {
-          body: "Don't forget to play Lumosity today!",
-        });
-      }
-
-      function startLumosityReminderInterval() {
-        if (lumosityReminderIntervalId) clearInterval(lumosityReminderIntervalId);
-        lumosityReminderIntervalId = setInterval(
-          checkLumosityReminder,
-          LUMOSITY_REMINDER_INTERVAL_MS,
-        );
-      }
-
-      function toggleLumosityReminders() {
-        if (lumosityReminderStatus.remindersEnabled) {
-          lumosityReminderStatus.remindersEnabled = false;
-          if (lumosityReminderIntervalId) {
-            clearInterval(lumosityReminderIntervalId);
-            lumosityReminderIntervalId = null;
-          }
-          saveLumosityReminderStatus();
-          renderLumosityReminderStatus();
-          showToast("Lumosity reminders turned off");
-          return;
-        }
-
-        if (typeof Notification === "undefined") {
-          showToast("Notifications aren't supported in this browser");
-          return;
-        }
-
-        if (Notification.permission === "granted") {
-          lumosityReminderStatus.remindersEnabled = true;
-          saveLumosityReminderStatus();
-          renderLumosityReminderStatus();
-          startLumosityReminderInterval();
-          showToast("🔔 Lumosity reminders enabled");
-          checkLumosityReminder();
-        } else if (Notification.permission === "denied") {
-          showToast("Notifications are blocked — enable them in browser settings");
-        } else {
-          Notification.requestPermission().then((permission) => {
-            if (permission === "granted") {
-              lumosityReminderStatus.remindersEnabled = true;
-              saveLumosityReminderStatus();
-              renderLumosityReminderStatus();
-              startLumosityReminderInterval();
-              showToast("🔔 Lumosity reminders enabled");
-              checkLumosityReminder();
-            } else {
-              showToast("Notification permission not granted");
-            }
-          });
-        }
-      }
 
       function updateWaterLitrePreview(period) {
         const glasses =
@@ -5071,13 +4866,13 @@
         document.getElementById("sub-m3").className = "task-sub sub-not-taken";
         document.getElementById("sub-a2").textContent = "❓ Not taken";
         document.getElementById("sub-a2").className = "task-sub sub-not-taken";
+        document.getElementById("sub-n4").textContent = "❓ Not taken";
+        document.getElementById("sub-n4").className = "task-sub sub-not-taken";
         WALK_WATER_PERIODS.forEach((p) => {
           document.getElementById("trackerWalkInput-" + p).value = "";
           document.getElementById("trackerWaterInput-" + p).value = "";
         });
-        ["trackerExerciseInput", "trackerLumosityInput"].forEach((id) => {
-          document.getElementById(id).value = "";
-        });
+
         WALK_WATER_PERIODS.forEach((p) => updateWaterLitrePreview(p));
         saveScheduleStatus();
         saveTrackerDaily();
@@ -5291,32 +5086,11 @@
 
         const walk = getTrackerWalkTotal();
         const water = getTrackerWaterTotal();
-        const exercise =
-          parseInt(
-            document.getElementById("trackerExerciseInput").value,
-            10,
-          ) || 0;
-        const lumosity =
-          parseInt(
-            document.getElementById("trackerLumosityInput").value,
-            10,
-          ) || 0;
         document.getElementById("summaryWater").textContent =
           water + " glasses (" + ((water * GLASS_ML) / 1000).toFixed(2) + " L)";
         document.getElementById("summaryWalk").textContent = walk + " steps";
-        document.getElementById("summaryExercise").textContent =
-          exercise + " min";
-        document.getElementById("summaryLumosity").textContent =
-          lumosity + " sessions";
 
-        ["morning", "afternoon", "night"].forEach((slot) => {
-          const el = document.getElementById(
-            "summaryMed" + slot.charAt(0).toUpperCase() + slot.slice(1),
-          );
-          const taken = !!medicineStatus[slot];
-          el.textContent = taken ? "✅ Taken" : "❓ Not taken";
-          el.className = "summary-row-value " + (taken ? "done" : "pending");
-        });
+
 
         document.getElementById("summaryHairWash").textContent =
           hairWashStatus.count + " / " + HAIR_WASH_TARGET;
@@ -5392,13 +5166,11 @@
       loadUqLectureLog();
       loadAllChoreLogs();
       loadTypingRange();
-      loadMedicineStatus();
       loadHairWashStatus();
-      loadLumosityReminderStatus();
       loadScheduleStatus();
       loadTrackerDaily();
       renderSummary();
-      switchTab("week");
+      switchTab("schedule");
     </script>
   </body>
 </html>
