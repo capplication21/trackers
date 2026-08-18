@@ -44,16 +44,85 @@
         --radius: 20px;
         --radius-sm: 14px;
         --shadow-flat: 0 3px 0 var(--ink);
+      *,
+      *::before,
+      *::after,
+      body,
+      button,
+      input,
+      select,
+      textarea,
+      span,
+      div,
+      p,
+      a,
+      strong,
+      b,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .tab-icon,
+      .tab-label,
+      .task-text,
+      .chore-card-icon-badge,
+      .recipe-fav-star-badge,
+      .recipe-must-try-badge {
+        font-weight: 400 !important;
       }
       body {
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         background: var(--bg);
         min-height: 100vh;
         display: flex;
         justify-content: center;
         padding: 16px;
         padding-bottom: calc(88px + env(safe-area-inset-bottom));
+      }
+      button,
+      input[type="button"],
+      input[type="submit"],
+      .btn,
+      .tab-btn,
+      .nav-edit-btn,
+      .timer-btn,
+      .timer-adjust-btn,
+      .lecture-done-btn,
+      .chore-log-btn,
+      .chore-quick-today-btn,
+      .chore-log-custom-btn,
+      .add-period-btn,
+      .modal-save-btn,
+      .modal-cancel-btn,
+      .recipe-action-btn,
+      .recipe-search-btn,
+      .recipe-add-btn,
+      .recipe-edit-inline-btn,
+      .recipe-add-changes-btn,
+      .btn-reset,
+      .btn-backup,
+      .btn-restore,
+      .zad-log-delete-btn,
+      .chore-history-del-btn,
+      .history-delete,
+      .adhkar-btn,
+      .adhkar-reset,
+      .note-action-btn,
+      .note-filter-pill,
+      .schedule-tab-btn,
+      .schedule-history-clear-btn,
+      .image-viewer-close-btn,
+      .note-remove-preview-btn {
+        font-weight: 400 !important;
+      }
+      strong, b {
+        font-weight: 500;
       }
       .app-container {
         width: 100%;
@@ -84,11 +153,11 @@
         opacity: 0.7;
         text-transform: uppercase;
         letter-spacing: 1.5px;
-        font-weight: 700;
+        font-weight: 500;
       }
       .nav-title-value {
         font-size: 20px;
-        font-weight: 800;
+        font-weight: 500;
       }
       .nav-countdown-box {
         background: rgba(26, 26, 26, 0.1);
@@ -100,7 +169,7 @@
       }
       .nav-countdown-box .days {
         font-size: 28px;
-        font-weight: 800;
+        font-weight: 500;
         line-height: 1;
       }
       .nav-countdown-box .label {
@@ -108,7 +177,7 @@
         opacity: 0.7;
         text-transform: uppercase;
         letter-spacing: 1px;
-        font-weight: 700;
+        font-weight: 500;
       }
       .nav-edit-btn {
         background: var(--ink);
@@ -117,7 +186,7 @@
         padding: 8px 12px;
         border-radius: 10px;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         cursor: pointer;
         font-family: inherit;
         transition: all 0.2s;
@@ -146,7 +215,7 @@
       }
       .history-title {
         font-size: 15px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
         display: flex;
         align-items: center;
@@ -159,7 +228,7 @@
         padding: 3px 10px;
         border-radius: 10px;
         font-size: 12px;
-        font-weight: 800;
+        font-weight: 500;
       }
       .history-list {
         display: flex;
@@ -181,7 +250,7 @@
       }
       .history-date {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         color: #1A1A1A;
       }
       .history-days {
@@ -220,7 +289,7 @@
       }
       .stat-value {
         font-size: 18px;
-        font-weight: 700;
+        font-weight: 500;
         color: var(--yellow-ink);
       }
       .stat-label {
@@ -253,11 +322,11 @@
       .period-summary-label {
         font-size: 12px;
         color: #9B9480;
-        font-weight: 600;
+        font-weight: 500;
       }
       .period-summary-value {
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
       }
 
@@ -291,7 +360,7 @@
       }
       .modal-title {
         font-size: 18px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
         margin-bottom: 4px;
         display: flex;
@@ -308,7 +377,7 @@
       }
       .input-label {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         color: #3A3627;
         margin-bottom: 6px;
         display: block;
@@ -337,7 +406,7 @@
       }
       .cycle-length-display span {
         color: var(--yellow-ink);
-        font-weight: 700;
+        font-weight: 500;
       }
       .modal-buttons {
         display: flex;
@@ -349,7 +418,7 @@
         border-radius: 999px;
         border: 2.5px solid var(--ink);
         font-size: 14px;
-        font-weight: 800;
+        font-weight: 500;
         cursor: pointer;
         font-family: inherit;
         transition: all 0.15s;
@@ -380,7 +449,7 @@
       .live-clock {
         color: var(--ink-soft);
         font-size: 15px;
-        font-weight: 600;
+        font-weight: 500;
         font-variant-numeric: tabular-nums;
         letter-spacing: 0.5px;
         margin-bottom: 12px;
@@ -473,7 +542,7 @@
       }
       .tab-label {
         font-size: 8.5px;
-        font-weight: 700;
+        font-weight: 500;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -487,32 +556,53 @@
         display: block;
       }
       .section-title {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 8px;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
+        margin-top: 4px;
         margin-bottom: 12px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: #fde8c7;
+        border: 2px solid var(--ink);
+        box-shadow: 0 2.5px 0 var(--ink);
+        color: var(--ink);
       }
       .morning-title {
-        color: var(--yellow-ink);
+        background: #fef0cd;
+        color: #78350f;
       }
       .afternoon-title {
-        color: var(--orange-ink);
+        background: #ffe3cb;
+        color: #7c2d12;
       }
       .evening-title {
-        color: var(--red-ink);
+        background: #fed7cd;
+        color: #7f1d1d;
       }
       .night-title {
-        color: var(--blue-deep);
+        background: #dbeafe;
+        color: #1e3a8a;
       }
       .week-title {
-        color: var(--green-deep);
+        background: #dcfce7;
+        color: #14532d;
       }
       .period-title {
-        color: var(--rose-deep);
+        background: #fce7f3;
+        color: #831843;
+      }
+      .notes-title {
+        background: #fef3c7;
+        color: #78350f;
+      }
+      .water-title {
+        background: #e0f2fe;
+        color: #075985;
       }
 
       .task-card {
@@ -613,7 +703,7 @@
       .task-sub {
         font-size: 13px;
         margin-top: 4px;
-        font-weight: 600;
+        font-weight: 500;
       }
       .sub-not-taken {
         color: #E8562E;
@@ -622,26 +712,60 @@
         color: #1F9D55;
       }
 
-      .yt-link {
+      /* UNIFIED CLICKABLE LINK STYLES */
+      .yt-link,
+      .recipe-link,
+      a.app-link {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        color: var(--blue-deep);
-        font-size: 13px;
-        text-decoration: none;
-        margin-top: 6px;
-      }
-      .yt-link:hover {
+        color: #1a73e8;
+        background: rgba(26, 115, 232, 0.07);
+        border: 1px solid rgba(26, 115, 232, 0.25);
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-size: 12.5px;
+        font-weight: 500;
         text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        margin-top: 6px;
+        margin-bottom: 4px;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      .yt-link:hover,
+      .recipe-link:hover,
+      a.app-link:hover {
+        background: rgba(26, 115, 232, 0.14);
+        border-color: #1a73e8;
+        color: #1558b0;
+        transform: translateY(-1px);
+        text-decoration: underline;
+      }
+      .yt-link:active,
+      .recipe-link:active,
+      a.app-link:active {
+        transform: translateY(1px);
+      }
+      .recipe-link {
+        word-break: break-all;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .adhkar-wrap {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-top: 12px;
-        padding-top: 12px;
-        border-top: 1px dashed #E7E0C9;
+        justify-content: space-between;
+        gap: 32px;
+        margin-top: 14px;
+        padding: 12px 18px;
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: 16px;
+        border: 1px dashed #E7E0C9;
       }
       .adhkar-ring-wrap {
         position: relative;
@@ -696,12 +820,12 @@
         color: var(--ink);
       }
       #evening-section .adhkar-btn {
-        background: #e8772e;
-        box-shadow: 0 3px 0 #c85f1e;
-        color: white;
+        background: #fcd49e;
+        box-shadow: 0 3px 0 #e5a354;
+        color: var(--ink);
       }
       #evening-section .adhkar-ring-svg .fill {
-        stroke: #e8772e;
+        stroke: #f8a856;
       }
       .adhkar-btn.done {
         background: #1f9d55 !important;
@@ -710,7 +834,7 @@
       }
       .adhkar-btn .num {
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 500;
       }
       .adhkar-btn .sub {
         font-size: 8px;
@@ -718,33 +842,54 @@
       }
       .adhkar-info {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        gap: 10px;
+        padding-left: 16px;
       }
       .adhkar-label {
-        font-size: 12px;
-        font-weight: 600;
-        color: #7A7460;
-        margin-bottom: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 0;
       }
       .adhkar-reset {
-        color: #9B9480;
+        color: #7a7460;
         font-size: 11px;
-        background: none;
-        border: none;
+        font-weight: 500;
+        background: #ffffff;
+        border: 1.5px solid #dcd5be;
+        border-radius: 8px;
         cursor: pointer;
-        padding: 2px 0;
+        padding: 5px 12px;
         font-family: inherit;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .adhkar-reset:hover {
+        border-color: var(--ink);
+        color: var(--ink);
+        background: #fdfbf7;
       }
       .adhkar-reset:active {
-        color: #7A7460;
+        transform: translateY(1px);
+        background: #ede7d2;
       }
 
       .timer-wrap {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px dashed #E7E0C9;
+        justify-content: space-between;
+        gap: 28px;
+        margin-top: 14px;
+        padding: 12px 16px;
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: 16px;
+        border: 1px dashed #E7E0C9;
       }
       .timer-display {
         width: 64px;
@@ -755,7 +900,7 @@
         align-items: center;
         justify-content: center;
         color: var(--ink);
-        font-weight: 700;
+        font-weight: 500;
         font-size: 14px;
         font-family: inherit;
         flex-shrink: 0;
@@ -780,22 +925,27 @@
       }
       .timer-info {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+        gap: 8px;
       }
       .timer-controls {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 4px;
+        gap: 10px;
       }
       .timer-btn {
         background: #E4F2F1;
         color: #0E7A78;
         border: none;
         border-radius: 10px;
-        padding: 5px 10px;
+        padding: 5px 12px;
         font-size: 11px;
-        font-weight: 600;
+        font-weight: 500;
         cursor: pointer;
         font-family: inherit;
         flex-shrink: 0;
@@ -804,17 +954,27 @@
         transform: scale(0.95);
       }
       .timer-reset-btn {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        border: none;
-        background: #EDE7D2;
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        border: 1.5px solid #dcd5be;
+        background: #ffffff;
         color: #7A7460;
         font-size: 13px;
         line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
         font-family: inherit;
         flex-shrink: 0;
+        margin-left: 4px;
+        transition: all 0.15s ease;
+      }
+      .timer-reset-btn:hover {
+        border-color: var(--ink);
+        color: var(--ink);
+        background: #fdfbf7;
       }
       .timer-reset-btn:active {
         transform: scale(0.9);
@@ -832,7 +992,7 @@
         border: none;
         background: #E4F2F1;
         color: #0E7A78;
-        font-weight: 700;
+        font-weight: 500;
         font-size: 13px;
         line-height: 1;
         cursor: pointer;
@@ -848,7 +1008,7 @@
       }
       .timer-minutes {
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 500;
         color: #7A7460;
         min-width: 24px;
         text-align: center;
@@ -870,12 +1030,12 @@
       }
       .week-header-title {
         font-size: 16px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
       }
       .subtopic-label {
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
         color: #c85f1e;
         margin-bottom: 10px;
         display: flex;
@@ -893,7 +1053,7 @@
         gap: 8px;
         margin-bottom: 10px;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
       }
       .lecture-stat-box {
@@ -907,6 +1067,19 @@
         min-width: 0;
         box-shadow: 0 1.5px 0 var(--ink);
       }
+      .lecture-stat-box.date-stat-box {
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.15s ease;
+      }
+      .lecture-stat-box.date-stat-box:hover {
+        background: #fdfaf0;
+        transform: translateY(-1px);
+      }
+      .lecture-stat-box.date-stat-box:active {
+        transform: translateY(1px);
+      }
       .lecture-stat-box:focus-within {
         border-color: var(--yellow-deep);
       }
@@ -916,7 +1089,7 @@
         background: transparent;
         font-family: inherit;
         font-size: 16px;
-        font-weight: 800;
+        font-weight: 500;
         color: #c85f1e;
         line-height: 1;
         text-align: center;
@@ -934,7 +1107,7 @@
       .lecture-stat-sep,
       .lecture-stat-target {
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         color: #7a7460;
       }
       .lecture-done-btn {
@@ -945,7 +1118,7 @@
         border-radius: 999px;
         padding: 9px 18px;
         font-size: 12px;
-        font-weight: 800;
+        font-weight: 500;
         cursor: pointer;
         font-family: inherit;
         background: #e8772e;
@@ -968,14 +1141,309 @@
         background: #159895;
         box-shadow: 0 3px 0 #0e7a78;
       }
+      /* Enhanced History Tab Styles */
+      .history-hero-banner {
+        background: linear-gradient(135deg, #fbf7ee 0%, #f4ebd2 100%);
+        border: 2px solid var(--ink);
+        border-radius: var(--radius-sm);
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        box-shadow: var(--shadow-flat);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .history-hero-text h3 {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 2px;
+      }
+      .history-hero-text p {
+        font-size: 11.5px;
+        color: #7a7460;
+        font-weight: 500;
+        margin: 0;
+      }
+      .history-hero-icon {
+        font-size: 26px;
+        flex-shrink: 0;
+      }
+
+      .chore-hero-card {
+        background: var(--surface);
+        border: 2.5px solid var(--ink);
+        border-radius: 16px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 0 var(--ink);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .chore-hero-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 var(--ink);
+      }
+      .chore-hero-card.theme-mattress {
+        border-top: 6px solid #6366f1;
+      }
+      .chore-hero-card.theme-room {
+        border-top: 6px solid #10b981;
+      }
+      .chore-hero-card.theme-computer {
+        border-top: 6px solid #f59e0b;
+      }
+
+      .chore-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .chore-card-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .chore-card-icon-badge {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        border: 2px solid var(--ink);
+        flex-shrink: 0;
+        box-shadow: 0 2px 0 var(--ink);
+      }
+      .theme-mattress .chore-card-icon-badge {
+        background: #ede9fe;
+      }
+      .theme-room .chore-card-icon-badge {
+        background: #d1fae5;
+      }
+      .theme-computer .chore-card-icon-badge {
+        background: #fef3c7;
+      }
+
+      .chore-card-title {
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink);
+        line-height: 1.2;
+      }
+      .chore-card-subtitle {
+        font-size: 11px;
+        color: #7a7460;
+        font-weight: 500;
+        margin-top: 2px;
+      }
+
+      .chore-last-done-badge {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 9px;
+        border-radius: 8px;
+        border: 1.5px solid var(--ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .chore-last-done-badge.is-recent {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .chore-last-done-badge.is-moderate {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .chore-last-done-badge.is-old {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .chore-last-done-badge.is-empty {
+        background: #f3f4f6;
+        color: #6b7280;
+      }
+
+      .chore-action-panel {
+        background: #f9f7f0;
+        border: 1.5px solid #e2dac2;
+        border-radius: 12px;
+        padding: 10px;
+        margin-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .chore-action-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .chore-action-row .lecture-stat-box.date-stat-box {
+        flex: 1;
+        min-width: 120px;
+      }
+      .chore-quick-today-btn {
+        background: #2f8fd1;
+        color: white;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-size: 11.5px;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: inherit;
+        box-shadow: 0 2px 0 var(--ink);
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+      .chore-quick-today-btn:hover {
+        background: #2579b3;
+        transform: translateY(-1px);
+      }
+      .chore-quick-today-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .chore-log-custom-btn {
+        background: var(--yellow);
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-size: 11.5px;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: inherit;
+        box-shadow: 0 2px 0 var(--ink);
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+      }
+      .chore-log-custom-btn:hover {
+        background: #f8c857;
+        transform: translateY(-1px);
+      }
+      .chore-log-custom-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+
+      .chore-history-container {
+        border-top: 1px dashed #e2dac2;
+        padding-top: 10px;
+      }
+      .chore-history-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11px;
+        font-weight: 500;
+        color: #7a7460;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+      .chore-history-count-tag {
+        background: #ede7d2;
+        padding: 1px 6px;
+        border-radius: 6px;
+        font-size: 10px;
+        color: var(--ink);
+      }
+      .chore-history-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        max-height: 180px;
+        overflow-y: auto;
+        padding-right: 2px;
+      }
+      .chore-history-item {
+        background: #ffffff;
+        border: 1.5px solid #e7e0c9;
+        border-radius: 10px;
+        padding: 6px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        transition: background 0.15s;
+      }
+      .chore-history-item:hover {
+        background: #fcfbfa;
+        border-color: #dcd5be;
+      }
+      .chore-history-item.is-first {
+        border-color: #d49520;
+        background: #fffdf5;
+      }
+      .chore-history-date-info {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .chore-history-date {
+        font-weight: 500;
+        color: var(--ink);
+      }
+      .chore-history-ago {
+        font-size: 10.5px;
+        color: #8c8570;
+        font-weight: 500;
+        background: rgba(0, 0, 0, 0.04);
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      .chore-history-del-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 3px;
+        font-size: 12px;
+        opacity: 0.6;
+        transition: opacity 0.15s, transform 0.15s;
+        border-radius: 4px;
+      }
+      .chore-history-del-btn:hover {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+      .chore-history-empty {
+        font-size: 11.5px;
+        color: #9c9480;
+        font-style: italic;
+        padding: 4px 0;
+      }
+
       .chore-card {
         padding: 18px 16px;
         margin-bottom: 14px;
       }
       .chore-question {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         font-size: 14px;
-        font-weight: 700;
-        color: #1A1A1A;
+        font-weight: 500;
+        color: #1a1a1a;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: #fde8c7;
+        border: 2px solid var(--ink);
+        box-shadow: 0 2.5px 0 var(--ink);
         margin-bottom: 12px;
       }
       .chore-log-row {
@@ -995,7 +1463,7 @@
       }
       .water-litre-preview {
         font-size: 10px;
-        font-weight: 700;
+        font-weight: 500;
         color: var(--blue-deep);
         text-align: right;
         margin-top: 2px;
@@ -1005,8 +1473,9 @@
         margin-bottom: 18px;
       }
       #tab-water .chore-question {
-        font-size: 15px;
+        font-size: 14px;
         margin-bottom: 14px;
+        background: #fde8c7;
       }
       #tab-water .yt-link {
         display: inline-flex;
@@ -1017,21 +1486,67 @@
         border: 1.5px solid rgba(47, 143, 209, 0.25);
         border-radius: 10px;
         margin-bottom: 6px;
-        font-weight: 600;
+        font-weight: 500;
       }
       .typing-range-row {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-top: 14px;
+        gap: 10px;
+        margin-top: 12px;
       }
-      .typing-range-row .date-stat-box {
+      .typing-date-picker-box {
         flex: 1;
-        padding: 6px 10px;
+        position: relative;
+        background: #F7F3E6;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.15s ease;
+        box-shadow: 0 2px 0 var(--ink);
+        min-height: 42px;
+        overflow: hidden;
+      }
+      .typing-date-picker-box:hover {
+        background: #fdfaf0;
+        transform: translateY(-1px);
+      }
+      .typing-date-picker-box:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .typing-date-display {
+        font-size: 13px;
+        font-weight: 500;
+        color: #7A7460;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .typing-date-display.has-value {
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .typing-hidden-date-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+        margin: 0;
       }
       .typing-range-sep {
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         color: #7A7460;
         flex-shrink: 0;
       }
@@ -1045,7 +1560,7 @@
       }
       .summary-card-title {
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
         margin-bottom: 8px;
         display: flex;
@@ -1054,7 +1569,7 @@
       }
       .summary-card-count {
         margin-left: auto;
-        font-weight: 700;
+        font-weight: 500;
         color: var(--teal-deep);
         font-size: 12px;
       }
@@ -1078,7 +1593,7 @@
         gap: 6px;
       }
       .summary-row-value {
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
         text-align: right;
       }
@@ -1134,12 +1649,12 @@
       .medicine-slot-label {
         flex: 1;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 500;
         color: #1A1A1A;
       }
       .medicine-slot-status {
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         color: #E8562E;
       }
       .medicine-slot.completed .medicine-slot-status {
@@ -1156,7 +1671,7 @@
       }
       .medicine-reminder-text {
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
       }
       .medicine-reminder-sub {
@@ -1170,7 +1685,7 @@
         border-radius: 999px;
         padding: 9px 14px;
         font-size: 12px;
-        font-weight: 800;
+        font-weight: 500;
         cursor: pointer;
         font-family: inherit;
         background: var(--teal);
@@ -1195,7 +1710,7 @@
       }
       .hair-wash-count {
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 500;
         color: #0E7A78;
       }
       .hair-wash-buttons {
@@ -1208,7 +1723,7 @@
         border-radius: 999px;
         cursor: pointer;
         font-family: inherit;
-        font-weight: 800;
+        font-weight: 500;
       }
       .hair-wash-minus {
         width: 34px;
@@ -1257,7 +1772,7 @@
         border-radius: 6px;
         padding: 0;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         font-family: inherit;
         color: #1A1A1A;
         background: transparent;
@@ -1285,7 +1800,7 @@
         border-radius: 12px;
         padding: 6px 10px;
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 500;
         color: #1A1A1A;
         background: #ffffff;
         box-shadow: 0 1.5px 0 var(--ink);
@@ -1368,7 +1883,7 @@
         border-radius: 999px;
         border: 2.5px solid var(--ink);
         font-size: 15px;
-        font-weight: 800;
+        font-weight: 500;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -1434,7 +1949,7 @@
         background: var(--yellow);
         color: var(--ink);
         font-size: 15px;
-        font-weight: 800;
+        font-weight: 500;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -1507,16 +2022,210 @@
         border: 2px solid var(--ink);
         border-radius: var(--radius-sm);
         padding: 10px 12px;
+        transition: all 0.15s ease;
       }
       .recipe-index-item[open] {
         background: var(--surface);
         box-shadow: var(--shadow-flat);
       }
+      .recipe-index-item.is-favorite {
+        border-color: #d48806;
+        background: #fffdf5;
+      }
+      .recipe-index-item.is-favorite[open] {
+        background: #ffffff;
+      }
+      .recipe-index-item.is-must-try {
+        border-color: #e8772e;
+        background: #fffaf5;
+      }
+      .recipe-index-item.is-must-try[open] {
+        background: #ffffff;
+      }
       .recipe-index-summary {
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .recipe-summary-title {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .recipe-fav-star-badge {
+        font-size: 14px;
+        color: #f5b729;
+        flex-shrink: 0;
+      }
+      .recipe-must-try-badge {
+        font-size: 14px;
+        color: #e8772e;
+        flex-shrink: 0;
+      }
+      .recipe-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+      .recipe-action-btn {
+        background: #f7f3e6;
+        border: 1.5px solid var(--ink);
+        border-radius: 8px;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+        font-family: inherit;
+        color: var(--ink);
+        flex-shrink: 0;
+      }
+      .recipe-action-btn:hover {
+        background: var(--surface-muted);
+        transform: translateY(-1px);
+      }
+      .recipe-action-btn:active {
+        transform: translateY(1px);
+      }
+      .recipe-action-btn.fav-btn {
+        background: #fff9e6;
+        border-color: #c99316;
+        color: #8a5c10;
+      }
+      .recipe-action-btn.fav-btn.active {
+        background: var(--yellow);
+        border-color: var(--ink);
+        color: var(--ink);
+        box-shadow: 0 1.5px 0 var(--ink);
+      }
+      .recipe-action-btn.must-try-btn {
+        background: #fff3eb;
+        border-color: #e8772e;
+        color: #c85f1e;
+      }
+      .recipe-action-btn.must-try-btn.active {
+        background: #e8772e;
+        border-color: var(--ink);
+        color: #ffffff;
+        box-shadow: 0 1.5px 0 var(--ink);
+      }
+      .recipe-action-btn.quick-btn {
+        background: #eff6ff;
+        border-color: #3b82f6;
+        color: #1d4ed8;
+      }
+      .recipe-action-btn.quick-btn.active {
+        background: #3b82f6;
+        border-color: var(--ink);
+        color: #ffffff;
+        box-shadow: 0 1.5px 0 var(--ink);
+      }
+      .recipe-quick-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .recipe-action-btn.edit-btn:hover {
+        background: #eef6ff;
+        border-color: var(--blue-deep);
+        color: var(--blue-deep);
+      }
+      .recipe-user-changes {
+        margin: 10px 0;
+        background: linear-gradient(135deg, #fff9e6 0%, #fff2d1 100%);
+        border: 2px dashed #d49520;
+        border-radius: 12px;
+        padding: 10px 12px;
+      }
+      .recipe-user-changes-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11px;
+        font-weight: 500;
+        color: #8a5c10;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 7px;
+      }
+      .recipe-edit-inline-btn {
+        background: transparent;
+        border: 1px solid #c99316;
+        color: #8a5c10;
+        border-radius: 6px;
+        padding: 2px 6px;
+        font-size: 10px;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .recipe-edit-inline-btn:hover {
+        background: #f5b729;
+        color: #1a1a1a;
+      }
+      .recipe-notes-row {
+        font-size: 12.5px;
+        line-height: 1.45;
+        color: #2b2314;
+        margin-bottom: 6px;
+        word-break: break-word;
+        white-space: pre-wrap;
+      }
+      .recipe-notes-row:last-child {
+        margin-bottom: 0;
+      }
+      .recipe-notes-row strong {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        margin-right: 4px;
+        color: #8a5c10;
+        font-weight: 500;
+      }
+      .recipe-add-changes-prompt {
+        margin: 8px 0;
+      }
+      .recipe-add-changes-btn {
+        background: transparent;
+        border: 1.5px dashed #b5ab92;
+        color: #7a7460;
+        border-radius: 10px;
+        padding: 6px 10px;
+        font-size: 11px;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .recipe-add-changes-btn:hover {
+        border-color: var(--ink);
+        color: var(--ink);
+        background: #fdfbf7;
       }
       .recipe-index-item[open] .recipe-index-summary {
         margin-bottom: 10px;
@@ -1524,7 +2233,9 @@
       .recipe-index-body .recipe-item-header {
         margin-bottom: 0;
       }
-      #recipeTitleList.history-list {
+      #recipeTitleList.history-list,
+      #recipeFavoriteList.history-list,
+      #recipeMustTryList.history-list {
         max-height: 360px;
         overflow-y: auto;
       }
@@ -1579,7 +2290,7 @@
       }
       .ingredients-summary-title {
         font-size: 16px;
-        font-weight: 800;
+        font-weight: 500;
         color: var(--ink);
         letter-spacing: 0.01em;
       }
@@ -1594,7 +2305,7 @@
         border: 2px solid var(--ink);
         box-shadow: 0 2px 0 var(--ink);
         font-size: 15px;
-        font-weight: 800;
+        font-weight: 500;
         color: var(--ink);
         transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease;
       }
@@ -1634,7 +2345,7 @@
       .form-ingredient-item span {
         flex: 1;
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         color: #1A1A1A;
       }
       .form-ingredient-remove {
@@ -1665,20 +2376,8 @@
       }
       .recipe-title {
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
-      }
-      .recipe-link {
-        display: block;
-        font-size: 12px;
-        font-weight: 600;
-        color: #1F72AE;
-        text-decoration: none;
-        word-break: break-all;
-        margin-bottom: 8px;
-      }
-      .recipe-link:hover {
-        text-decoration: underline;
       }
       .recipe-ingredient-list {
         display: flex;
@@ -1700,7 +2399,7 @@
       }
       .recipe-ingredient-item span {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         color: #1A1A1A;
       }
       .recipe-ingredient-item span.checked {
@@ -1709,7 +2408,7 @@
       }
       .recipe-ingredient-subheading {
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 500;
         letter-spacing: 0.03em;
         text-transform: uppercase;
         color: #9B9480;
@@ -1729,7 +2428,7 @@
         background: linear-gradient(135deg, rgba(21, 152, 149, 0.16), rgba(47, 143, 209, 0.16));
         color: #0c6a68;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
         padding: 8px 14px;
         border-radius: 14px;
         border: 1.5px solid rgba(21, 152, 149, 0.35);
@@ -1775,7 +2474,7 @@
       }
       .uncommon-ingredient-name {
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
         color: #6b3e04;
         cursor: pointer;
         list-style: none;
@@ -1808,7 +2507,7 @@
         align-items: center;
         justify-content: center;
         font-size: 13px;
-        font-weight: 800;
+        font-weight: 500;
         color: #e8a317;
         transition: transform 0.25s ease, color 0.2s ease;
       }
@@ -1818,7 +2517,7 @@
       }
       .uncommon-recipe-count {
         font-size: 11px;
-        font-weight: 800;
+        font-weight: 500;
         background: linear-gradient(135deg, #f5b729, #e8772e);
         color: #ffffff;
         padding: 2px 7px;
@@ -1837,7 +2536,7 @@
         background: linear-gradient(135deg, #f5b729 0%, #e8a317 100%);
         color: #1a1a1a;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         padding: 7px 13px;
         border-radius: 10px;
         border: 2px solid var(--ink);
@@ -1864,6 +2563,189 @@
         border: 2.5px solid var(--ink);
         border-radius: 20px;
         box-shadow: var(--shadow-flat);
+      }
+
+      /* RECIPE SUB NAVIGATION TABS */
+      .recipe-sub-tabs {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+        padding: 8px 6px;
+        margin-bottom: 16px;
+        background: var(--surface);
+        border: 2.5px solid var(--ink);
+        border-radius: 20px;
+        box-shadow: var(--shadow-flat);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .recipe-sub-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .recipe-sub-tab-btn {
+        flex: 1;
+        min-width: 54px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 2px;
+        border-radius: 14px;
+        border: none;
+        background: transparent;
+        color: var(--muted-light);
+        cursor: pointer;
+        font-family: inherit;
+        transition: color 0.2s ease;
+      }
+      .recipe-sub-tab-btn[data-recipe-tab="favorites"] {
+        --rec-accent: #F5B729;
+        --rec-accent-2: #E8A317;
+      }
+      .recipe-sub-tab-btn[data-recipe-tab="all"] {
+        --rec-accent: #159895;
+        --rec-accent-2: #0E7A78;
+      }
+      .recipe-sub-tab-btn[data-recipe-tab="musttry"] {
+        --rec-accent: #E8772E;
+        --rec-accent-2: #C85F1E;
+      }
+      .recipe-sub-tab-btn[data-recipe-tab="quick"] {
+        --rec-accent: #3B82F6;
+        --rec-accent-2: #1D4ED8;
+      }
+      .recipe-sub-tab-btn[data-recipe-tab="ingredients"] {
+        --rec-accent: #E0578F;
+        --rec-accent-2: #A83E5C;
+      }
+      .recipe-sub-tab-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        background: var(--surface-muted);
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+      }
+      .recipe-sub-tab-label {
+        font-size: 10px;
+        font-weight: 400;
+        letter-spacing: 0.1px;
+        white-space: nowrap;
+      }
+      .recipe-sub-tab-btn.active {
+        color: var(--ink);
+      }
+      .recipe-sub-tab-btn.active .recipe-sub-tab-icon {
+        background: var(--rec-accent);
+        border-color: var(--ink);
+        box-shadow: 0 2px 0 var(--rec-accent-2);
+        transform: translateY(-2px);
+        color: #ffffff;
+      }
+      .recipe-sub-tab-btn[data-recipe-tab="favorites"].active .recipe-sub-tab-icon {
+        color: var(--ink);
+      }
+      .recipe-sub-tab-btn:hover:not(.active) .recipe-sub-tab-icon {
+        background: var(--line-soft);
+      }
+      .recipe-sub-tab-btn:active .recipe-sub-tab-icon {
+        transform: scale(0.95);
+      }
+      .recipe-section {
+        display: none;
+      }
+      .recipe-section.active {
+        display: block;
+      }
+      /* Ingredient Dropdown / Accordion Card */
+      .ingredient-dropdown-card {
+        margin-bottom: 14px;
+        border-radius: 22px;
+        background: #ffffff;
+        border: 2px solid #1a1a1a;
+        box-shadow: 0 3.5px 0 #1a1a1a;
+        overflow: hidden;
+        transition: all 0.2s ease;
+      }
+      .ingredient-dropdown-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9px 12px;
+        background: #fde8c7;
+        cursor: pointer;
+        user-select: none;
+        border-bottom: 2px solid transparent;
+        transition: background 0.2s ease, border-color 0.2s ease;
+      }
+      .ingredient-dropdown-card.open .ingredient-dropdown-header {
+        border-bottom-color: #1a1a1a;
+        background: #fde8c7;
+      }
+      .ingredient-dropdown-icon-box {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: #ffffff;
+        border: 1.5px solid #1a1a1a;
+        box-shadow: 0 1.5px 0 #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+      .ingredient-dropdown-title-wrap {
+        flex: 1;
+        margin-left: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .ingredient-dropdown-title {
+        font-size: 16px;
+        font-weight: 400;
+        color: #1a1a1a;
+        letter-spacing: -0.2px;
+      }
+      .ingredient-dropdown-count {
+        font-size: 11px;
+        font-weight: 400;
+        padding: 1px 7px;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 1.2px solid #1a1a1a;
+        color: #1a1a1a;
+      }
+      .ingredient-dropdown-chevron-box {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1.5px solid #1a1a1a;
+        box-shadow: 0 1.5px 0 #1a1a1a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: #1a1a1a;
+        flex-shrink: 0;
+        transition: transform 0.25s ease;
+      }
+      .ingredient-dropdown-card.open .ingredient-dropdown-chevron-box {
+        transform: rotate(180deg);
+      }
+      .ingredient-dropdown-body {
+        padding: 12px;
+        display: none;
+        background: #ffffff;
+      }
+      .ingredient-dropdown-card.open .ingredient-dropdown-body {
+        display: block;
       }
       .tracker-row {
         display: flex;
@@ -1892,7 +2774,7 @@
         border-radius: 6px;
         padding: 6px 4px;
         font-size: 16px;
-        font-weight: 700;
+        font-weight: 500;
         font-family: inherit;
         text-align: center;
         -moz-appearance: textfield;
@@ -1908,7 +2790,7 @@
       }
       .tracker-group-label {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         flex-shrink: 0;
       }
       .steps-group {
@@ -1958,9 +2840,9 @@
         --accent-shadow: rgba(200, 95, 30, 0.45);
       }
       .schedule-tab-btn[data-period="evening"] {
-        --accent: #E8562E;
-        --accent-2: #C2431F;
-        --accent-shadow: rgba(194, 67, 31, 0.45);
+        --accent: #fcd49e;
+        --accent-2: #e5a354;
+        --accent-shadow: rgba(229, 163, 84, 0.45);
       }
       .schedule-tab-btn[data-period="night"] {
         --accent: #5FB8E0;
@@ -1981,7 +2863,7 @@
       }
       .schedule-tab-label {
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 500;
         letter-spacing: 0.2px;
       }
       .schedule-tab-btn.active {
@@ -2047,7 +2929,7 @@
         gap: 8px;
         padding: 12px 0;
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 500;
         color: var(--level-2);
         cursor: pointer;
         list-style: none;
@@ -2071,7 +2953,7 @@
       }
       .schedule-history-badge {
         font-size: 11px;
-        font-weight: 800;
+        font-weight: 500;
         padding: 4px 11px;
         border-radius: 20px;
         color: white;
@@ -2137,7 +3019,7 @@
       }
       .schedule-nav-name {
         font-size: 16px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1A1A1A;
         flex: 1;
       }
@@ -2177,7 +3059,7 @@
         border-radius: 999px;
         padding: 6px 14px;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         cursor: pointer;
         white-space: nowrap;
         font-family: inherit;
@@ -2217,7 +3099,7 @@
       }
       .note-card-title {
         font-size: 15px;
-        font-weight: 800;
+        font-weight: 500;
         color: #1a1a1a;
         line-height: 1.3;
         flex: 1;
@@ -2231,7 +3113,7 @@
       }
       .note-tag-badge {
         font-size: 10.5px;
-        font-weight: 700;
+        font-weight: 500;
         padding: 2px 8px;
         border-radius: 6px;
         border: 1.5px solid var(--ink);
@@ -2258,7 +3140,7 @@
       .note-card-date {
         font-size: 11px;
         color: #7a7460;
-        font-weight: 600;
+        font-weight: 500;
         margin-bottom: 8px;
       }
       .note-card-text {
@@ -2303,7 +3185,7 @@
         backdrop-filter: blur(4px);
         color: white;
         font-size: 10.5px;
-        font-weight: 700;
+        font-weight: 500;
         padding: 3px 8px;
         border-radius: 6px;
         pointer-events: none;
@@ -2323,7 +3205,7 @@
         border-radius: 8px;
         padding: 4px 10px;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1a1a1a;
         cursor: pointer;
         font-family: inherit;
@@ -2366,7 +3248,7 @@
       }
       .note-drop-text {
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 500;
         color: #1a1a1a;
         margin-bottom: 2px;
       }
@@ -2406,7 +3288,7 @@
         justify-content: center;
         font-size: 14px;
         cursor: pointer;
-        font-weight: 800;
+        font-weight: 500;
       }
 
       /* Image Viewer Full-Screen Modal */
@@ -2454,7 +3336,7 @@
         border-radius: 999px;
         padding: 6px 14px;
         font-size: 13px;
-        font-weight: 800;
+        font-weight: 500;
         cursor: pointer;
         box-shadow: 0 2px 0 #1a1a1a;
       }
@@ -2545,12 +3427,14 @@
                 <span class="lecture-stat-sep">/</span>
                 <span class="lecture-stat-target">25</span>
               </div>
-              <div class="lecture-stat-box date-stat-box">
+              <div class="lecture-stat-box date-stat-box" onclick="openWeekCalendar('zad')">
                 <span class="lecture-date-icon">📅</span>
+                <span class="typing-date-display" id="zadLogDateDisplay">Select date</span>
                 <input
                   type="date"
-                  class="lecture-date-inline"
+                  class="typing-hidden-date-input"
                   id="zadLogDateInput"
+                  onchange="onWeekDateChanged('zad')"
                 />
               </div>
             </div>
@@ -2607,12 +3491,14 @@
                 <span class="lecture-stat-sep">/</span>
                 <span class="lecture-stat-target">20</span>
               </div>
-              <div class="lecture-stat-box date-stat-box">
+              <div class="lecture-stat-box date-stat-box" onclick="openWeekCalendar('uq')">
                 <span class="lecture-date-icon">📅</span>
+                <span class="typing-date-display" id="uqLogDateDisplay">Select date</span>
                 <input
                   type="date"
-                  class="lecture-date-inline"
+                  class="typing-hidden-date-input"
                   id="uqLogDateInput"
+                  onchange="onWeekDateChanged('uq')"
                 />
               </div>
             </div>
@@ -3073,111 +3959,375 @@
             <span>➕</span> Add New Recipe
           </button>
 
-          <!-- Recipe Index -->
-          <div class="history-card">
-            <div class="history-header">
-              <span class="history-title">📋 All Recipes</span>
-              <span class="history-count" id="recipeTotalCount">0</span>
-            </div>
-            <div class="history-list" id="recipeTitleList">
-              <div class="history-empty">No recipes added yet.</div>
+          <!-- Recipe Sub-Navigation Bar -->
+          <div class="recipe-sub-tabs">
+            <button class="recipe-sub-tab-btn active" data-recipe-tab="all" onclick="switchRecipeSubTab('all', event)">
+              <span class="recipe-sub-tab-icon">📋</span>
+              <span class="recipe-sub-tab-label">All Recipes</span>
+            </button>
+            <button class="recipe-sub-tab-btn" data-recipe-tab="favorites" onclick="switchRecipeSubTab('favorites', event)">
+              <span class="recipe-sub-tab-icon">⭐</span>
+              <span class="recipe-sub-tab-label">Favorites</span>
+            </button>
+            <button class="recipe-sub-tab-btn" data-recipe-tab="musttry" onclick="switchRecipeSubTab('musttry', event)">
+              <span class="recipe-sub-tab-icon">🔥</span>
+              <span class="recipe-sub-tab-label">Must Try</span>
+            </button>
+            <button class="recipe-sub-tab-btn" data-recipe-tab="quick" onclick="switchRecipeSubTab('quick', event)">
+              <span class="recipe-sub-tab-icon">⚡</span>
+              <span class="recipe-sub-tab-label">Quick</span>
+            </button>
+            <button class="recipe-sub-tab-btn" data-recipe-tab="ingredients" onclick="switchRecipeSubTab('ingredients', event)">
+              <span class="recipe-sub-tab-icon">🧾</span>
+              <span class="recipe-sub-tab-label">Ingredients</span>
+            </button>
+          </div>
+
+          <!-- SECTION 1: ALL RECIPES -->
+          <div id="recipe-section-all" class="recipe-section active">
+            <div class="ingredient-dropdown-card open" id="ingDrop-allRecipes">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-allRecipes')">
+                <div class="ingredient-dropdown-icon-box">📋</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">All Recipes</span>
+                  <span class="ingredient-dropdown-count" id="recipeTotalCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
+              </div>
+              <div class="ingredient-dropdown-body">
+                <div class="history-list" id="recipeTitleList">
+                  <div class="history-empty">No recipes added yet.</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Ingredients -->
-          <details class="ingredients-toggle">
-            <summary class="ingredients-toggle-summary">
-              <div class="ingredients-summary-left">
-                <span class="ingredients-icon-badge">🧾</span>
-                <span class="ingredients-summary-title">Ingredients Explorer</span>
+          <!-- SECTION 2: FAVORITES (TRIED DISHES) -->
+          <div id="recipe-section-favorites" class="recipe-section">
+            <div class="ingredient-dropdown-card open" id="ingDrop-favorites">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-favorites')">
+                <div class="ingredient-dropdown-icon-box">⭐</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">Favorite List (Tried Dishes)</span>
+                  <span class="ingredient-dropdown-count" id="recipeFavoriteCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
               </div>
-              <div class="ingredients-arrow-badge">▾</div>
-            </summary>
-            <div class="ingredients-toggle-body">
-              <div class="section-title" style="margin-top: 0">
-                <span>🧂</span> Common Ingredients
+              <div class="ingredient-dropdown-body">
+                <div class="history-list" id="recipeFavoriteList">
+                  <div class="history-empty">No favorite or tried recipes yet.</div>
+                </div>
               </div>
-              <div class="history-card" style="margin-bottom: 16px">
+            </div>
+          </div>
+
+          <!-- SECTION 3: MUST TRY (HAVE TO TRY) -->
+          <div id="recipe-section-musttry" class="recipe-section">
+            <div class="ingredient-dropdown-card open" id="ingDrop-musttry">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-musttry')">
+                <div class="ingredient-dropdown-icon-box">🔥</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">Have To Try List (Must Try)</span>
+                  <span class="ingredient-dropdown-count" id="recipeMustTryCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
+              </div>
+              <div class="ingredient-dropdown-body">
+                <div class="history-list" id="recipeMustTryList">
+                  <div class="history-empty">No recipes in your Have-To-Try list yet.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: QUICK RECIPES (LESS TIME) -->
+          <div id="recipe-section-quick" class="recipe-section">
+            <div class="ingredient-dropdown-card open" id="ingDrop-quick">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-quick')">
+                <div class="ingredient-dropdown-icon-box">⚡</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">Quick Recipes (Less Time)</span>
+                  <span class="ingredient-dropdown-count" id="recipeQuickCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
+              </div>
+              <div class="ingredient-dropdown-body">
+                <div class="history-list" id="recipeQuickList">
+                  <div class="history-empty">No quick recipes added yet.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 5: INGREDIENT EXPLORER & SHOPPING NOTE -->
+          <div id="recipe-section-ingredients" class="recipe-section">
+
+            <!-- 1. HAVE TO BUY DROPDOWN -->
+            <div class="ingredient-dropdown-card open" id="ingDrop-haveToBuy">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-haveToBuy')">
+                <div class="ingredient-dropdown-icon-box">🛒</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">Have to Buy</span>
+                  <span class="ingredient-dropdown-count" id="missingIngCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
+              </div>
+              <div class="ingredient-dropdown-body">
+                <!-- Toolbar with WhatsApp, Copy, Trash -->
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                  <span style="font-size: 12px; color: #6b7280;">Shopping Checklist</span>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <button
+                      type="button"
+                      class="whatsapp-share-btn"
+                      onclick="shareMissingIngredientsToWhatsApp()"
+                      style="background: #25D366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 28px; height: 28px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); transition: all 0.15s ease;"
+                      title="Share to WhatsApp"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff" style="display: block;">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      class="missing-copy-btn"
+                      onclick="copyMissingIngredients()"
+                      style="background: var(--surface); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 8px; width: 28px; height: 28px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); transition: all 0.15s ease;"
+                      title="Copy list to clipboard"
+                    >
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      class="missing-clear-btn"
+                      onclick="clearMissingIngredients()"
+                      style="display: inline-flex; align-items: center; justify-content: center; background: #fee2e2; color: #b91c1c; border: 1.5px solid var(--ink); border-radius: 8px; width: 28px; height: 28px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); transition: all 0.15s ease;"
+                      title="Clear all items"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Input Row -->
+                <div class="recipe-search-row" style="margin-bottom: 8px;">
+                  <input
+                    type="text"
+                    class="input-field"
+                    id="missingIngInput"
+                    placeholder="Add ingredient to buy..."
+                    onkeydown="if(event.key === 'Enter'){ event.preventDefault(); addMissingIngredient(); }"
+                  />
+                  <button type="button" class="recipe-search-btn" onclick="addMissingIngredient()" title="Add to list">
+                    ➕
+                  </button>
+                </div>
+
+                <!-- List of Missing Items -->
+                <div id="missingIngList" style="display: flex; flex-direction: column; gap: 4px;">
+                  <div class="history-empty" style="padding: 6px 0;">No items added yet.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. COMMON INGREDIENTS DROPDOWN -->
+            <div class="ingredient-dropdown-card open" id="ingDrop-common">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-common')">
+                <div class="ingredient-dropdown-icon-box">🧂</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">Common Ingredients</span>
+                  <span class="ingredient-dropdown-count" id="commonIngredientsCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
+              </div>
+              <div class="ingredient-dropdown-body">
                 <div class="ingredient-chip-list" id="commonIngredientsList">
                   <div class="history-empty">No recipes added yet.</div>
                 </div>
               </div>
+            </div>
 
-              <div class="section-title">
-                <span>🛒</span> Uncommon Ingredients
+            <!-- 3. UNCOMMON INGREDIENTS DROPDOWN -->
+            <div class="ingredient-dropdown-card open" id="ingDrop-uncommon">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-uncommon')">
+                <div class="ingredient-dropdown-icon-box">🧾</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">Uncommon Ingredients</span>
+                  <span class="ingredient-dropdown-count" id="uncommonIngredientsCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
               </div>
-              <div class="recipe-search-row">
-                <input
-                  type="text"
-                  class="input-field"
-                  id="uncommonSearchInput"
-                  placeholder="Search uncommon ingredient..."
-                  oninput="filterUncommonIngredients()"
-                />
-              </div>
-              <div class="history-card" id="uncommonIngredientsCard">
+              <div class="ingredient-dropdown-body">
+                <div class="recipe-search-row" style="margin-bottom: 10px;">
+                  <input
+                    type="text"
+                    class="input-field"
+                    id="uncommonSearchInput"
+                    placeholder="Search uncommon ingredient..."
+                    oninput="filterUncommonIngredients()"
+                  />
+                </div>
                 <div class="history-list" id="uncommonIngredientsList">
                   <div class="history-empty">No recipes added yet.</div>
                 </div>
               </div>
             </div>
-          </details>
+
+          </div>
         </div>
 
         <!-- HISTORY TAB -->
         <div class="tab-content" id="tab-history">
           <div class="section-title water-title">
-            <span>📜</span> HISTORY
+            <span>📜</span> ROUTINE HISTORY &amp; CHORES
           </div>
 
-          <div class="history-card chore-card">
-            <div class="chore-question">🛏️ When did you last turn the mattress?</div>
-            <div class="chore-log-row">
-              <div class="lecture-stat-box date-stat-box">
-                <span class="lecture-date-icon">📅</span>
-                <input type="date" class="lecture-date-inline" id="choreMattressDateInput" />
-              </div>
-              <button class="lecture-done-btn chore-log-btn" onclick="addChoreLogEntry('mattress')">➕ Log</button>
+          <div class="history-hero-banner">
+            <div class="history-hero-text">
+              <h3>🏡 Home &amp; Hygiene Tracker</h3>
+              <p>Keep track of when you last performed your regular routines.</p>
             </div>
-            <div class="zad-log-dropdown-row">
-              <select class="lecture-date-inline zad-log-select" id="choreMattressLogSelect">
-                <option value="">📜 No history yet</option>
-              </select>
-              <button class="zad-log-delete-btn" onclick="deleteSelectedChoreLogEntry('mattress')" title="Remove selected entry">🗑️</button>
+            <div class="history-hero-icon">🧹</div>
+          </div>
+
+          <!-- 1. MATTRESS -->
+          <div class="chore-hero-card theme-mattress" id="choreCard-mattress">
+            <div class="chore-card-header">
+              <div class="chore-card-title-wrap">
+                <div class="chore-card-icon-badge">🛏️</div>
+                <div>
+                  <div class="chore-card-title">Turn &amp; Flip Mattress</div>
+                  <div class="chore-card-subtitle">Recommended every 3-6 months</div>
+                </div>
+              </div>
+              <div class="chore-last-done-badge is-empty" id="choreBadge-mattress">🌱 No logs yet</div>
+            </div>
+
+            <div class="chore-action-panel">
+              <div class="chore-action-row">
+                <button type="button" class="chore-quick-today-btn" onclick="logChoreToday('mattress')">
+                  <span>✨</span> Log Today
+                </button>
+                <div class="lecture-stat-box date-stat-box" onclick="openChoreCalendar('mattress')">
+                  <span class="lecture-date-icon">📅</span>
+                  <span class="typing-date-display" id="choreMattressDateDisplay">Select date</span>
+                  <input
+                    type="date"
+                    class="typing-hidden-date-input"
+                    id="choreMattressDateInput"
+                    onchange="onChoreDateChanged('mattress')"
+                  />
+                </div>
+                <button type="button" class="chore-log-custom-btn" onclick="addChoreLogEntry('mattress')">
+                  <span>➕</span> Log
+                </button>
+              </div>
+            </div>
+
+            <div class="chore-history-container">
+              <div class="chore-history-header">
+                <span>📜 Log History</span>
+                <span class="chore-history-count-tag" id="choreCount-mattress">0 logs</span>
+              </div>
+              <div class="chore-history-list" id="choreList-mattress">
+                <div class="chore-history-empty">No history recorded yet.</div>
+              </div>
             </div>
           </div>
 
-          <div class="history-card chore-card">
-            <div class="chore-question">🧹 Last room clean?</div>
-            <div class="chore-log-row">
-              <div class="lecture-stat-box date-stat-box">
-                <span class="lecture-date-icon">📅</span>
-                <input type="date" class="lecture-date-inline" id="choreRoomDateInput" />
+          <!-- 2. ROOM CLEAN -->
+          <div class="chore-hero-card theme-room" id="choreCard-room">
+            <div class="chore-card-header">
+              <div class="chore-card-title-wrap">
+                <div class="chore-card-icon-badge">🧹</div>
+                <div>
+                  <div class="chore-card-title">Deep Room Cleaning</div>
+                  <div class="chore-card-subtitle">Dusting, vacuuming &amp; tidying</div>
+                </div>
               </div>
-              <button class="lecture-done-btn chore-log-btn" onclick="addChoreLogEntry('room')">➕ Log</button>
+              <div class="chore-last-done-badge is-empty" id="choreBadge-room">🌱 No logs yet</div>
             </div>
-            <div class="zad-log-dropdown-row">
-              <select class="lecture-date-inline zad-log-select" id="choreRoomLogSelect">
-                <option value="">📜 No history yet</option>
-              </select>
-              <button class="zad-log-delete-btn" onclick="deleteSelectedChoreLogEntry('room')" title="Remove selected entry">🗑️</button>
+
+            <div class="chore-action-panel">
+              <div class="chore-action-row">
+                <button type="button" class="chore-quick-today-btn" onclick="logChoreToday('room')">
+                  <span>✨</span> Log Today
+                </button>
+                <div class="lecture-stat-box date-stat-box" onclick="openChoreCalendar('room')">
+                  <span class="lecture-date-icon">📅</span>
+                  <span class="typing-date-display" id="choreRoomDateDisplay">Select date</span>
+                  <input
+                    type="date"
+                    class="typing-hidden-date-input"
+                    id="choreRoomDateInput"
+                    onchange="onChoreDateChanged('room')"
+                  />
+                </div>
+                <button type="button" class="chore-log-custom-btn" onclick="addChoreLogEntry('room')">
+                  <span>➕</span> Log
+                </button>
+              </div>
+            </div>
+
+            <div class="chore-history-container">
+              <div class="chore-history-header">
+                <span>📜 Log History</span>
+                <span class="chore-history-count-tag" id="choreCount-room">0 logs</span>
+              </div>
+              <div class="chore-history-list" id="choreList-room">
+                <div class="chore-history-empty">No history recorded yet.</div>
+              </div>
             </div>
           </div>
 
-          <div class="history-card chore-card">
-            <div class="chore-question">💻 Last computer clean?</div>
-            <div class="chore-log-row">
-              <div class="lecture-stat-box date-stat-box">
-                <span class="lecture-date-icon">📅</span>
-                <input type="date" class="lecture-date-inline" id="choreComputerDateInput" />
+          <!-- 3. COMPUTER CLEAN -->
+          <div class="chore-hero-card theme-computer" id="choreCard-computer">
+            <div class="chore-card-header">
+              <div class="chore-card-title-wrap">
+                <div class="chore-card-icon-badge">💻</div>
+                <div>
+                  <div class="chore-card-title">Clean Computer &amp; Desk</div>
+                  <div class="chore-card-subtitle">Screen wipe, keyboard &amp; cables</div>
+                </div>
               </div>
-              <button class="lecture-done-btn chore-log-btn" onclick="addChoreLogEntry('computer')">➕ Log</button>
+              <div class="chore-last-done-badge is-empty" id="choreBadge-computer">🌱 No logs yet</div>
             </div>
-            <div class="zad-log-dropdown-row">
-              <select class="lecture-date-inline zad-log-select" id="choreComputerLogSelect">
-                <option value="">📜 No history yet</option>
-              </select>
-              <button class="zad-log-delete-btn" onclick="deleteSelectedChoreLogEntry('computer')" title="Remove selected entry">🗑️</button>
+
+            <div class="chore-action-panel">
+              <div class="chore-action-row">
+                <button type="button" class="chore-quick-today-btn" onclick="logChoreToday('computer')">
+                  <span>✨</span> Log Today
+                </button>
+                <div class="lecture-stat-box date-stat-box" onclick="openChoreCalendar('computer')">
+                  <span class="lecture-date-icon">📅</span>
+                  <span class="typing-date-display" id="choreComputerDateDisplay">Select date</span>
+                  <input
+                    type="date"
+                    class="typing-hidden-date-input"
+                    id="choreComputerDateInput"
+                    onchange="onChoreDateChanged('computer')"
+                  />
+                </div>
+                <button type="button" class="chore-log-custom-btn" onclick="addChoreLogEntry('computer')">
+                  <span>➕</span> Log
+                </button>
+              </div>
+            </div>
+
+            <div class="chore-history-container">
+              <div class="chore-history-header">
+                <span>📜 Log History</span>
+                <span class="chore-history-count-tag" id="choreCount-computer">0 logs</span>
+              </div>
+              <div class="chore-history-list" id="choreList-computer">
+                <div class="chore-history-empty">No history recorded yet.</div>
+              </div>
             </div>
           </div>
         </div>
@@ -3223,14 +4373,26 @@
               <span>⌨️</span> Open Typing.com Lessons
             </a>
             <div class="typing-range-row">
-              <div class="lecture-stat-box date-stat-box">
+              <div class="typing-date-picker-box" onclick="openTypingCalendar('start')">
                 <span class="lecture-date-icon">📅</span>
-                <input type="date" class="lecture-date-inline" id="typingStartDateInput" onchange="saveTypingRange()" />
+                <span class="typing-date-display" id="typingStartDateDisplay">Start date</span>
+                <input
+                  type="date"
+                  class="typing-hidden-date-input"
+                  id="typingStartDateInput"
+                  onchange="onTypingDateChanged('start')"
+                />
               </div>
               <span class="typing-range-sep">to</span>
-              <div class="lecture-stat-box date-stat-box">
+              <div class="typing-date-picker-box" onclick="openTypingCalendar('end')">
                 <span class="lecture-date-icon">🏁</span>
-                <input type="date" class="lecture-date-inline" id="typingEndDateInput" onchange="saveTypingRange()" />
+                <span class="typing-date-display" id="typingEndDateDisplay">End date</span>
+                <input
+                  type="date"
+                  class="typing-hidden-date-input"
+                  id="typingEndDateInput"
+                  onchange="onTypingDateChanged('end')"
+                />
               </div>
             </div>
           </div>
@@ -3439,8 +4601,9 @@
     <!-- Recipe Input Modal -->
     <div class="modal-overlay" id="recipeModal">
       <div class="modal-card">
-        <div class="modal-title">🍳 Add Recipe</div>
-        <div class="modal-subtitle">
+        <input type="hidden" id="recipeEditIndex" value="" />
+        <div class="modal-title" id="recipeModalTitle">🍳 Add Recipe</div>
+        <div class="modal-subtitle" id="recipeModalSubtitle">
           Save a recipe link with its ingredients
         </div>
 
@@ -3485,6 +4648,43 @@
           <div class="form-ingredient-list" id="formIngredientList"></div>
         </div>
 
+        <div class="input-group" style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+          <label class="recipe-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 13px; cursor: pointer; user-select: none;">
+            <input type="checkbox" id="recipeFavoriteInput" style="width: 18px; height: 18px; accent-color: var(--yellow); cursor: pointer;" />
+            <span>⭐ Already tried dish (Add to Favorite List)</span>
+          </label>
+          <label class="recipe-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 13px; cursor: pointer; user-select: none;">
+            <input type="checkbox" id="recipeMustTryInput" style="width: 18px; height: 18px; accent-color: var(--orange); cursor: pointer;" />
+            <span>🔥 Have to try (Add to Must Try List)</span>
+          </label>
+          <label class="recipe-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 13px; cursor: pointer; user-select: none;">
+            <input type="checkbox" id="recipeQuickInput" style="width: 18px; height: 18px; accent-color: #3b82f6; cursor: pointer;" />
+            <span>⚡ Quick Recipe (Less Time / Under 20 min)</span>
+          </label>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">What I Added (Extra Ingredients / Custom Items)</label>
+          <textarea
+            class="input-field"
+            id="recipeAddedItemsInput"
+            rows="2"
+            placeholder="e.g. Added sweet corn, lemon juice, extra chili flakes, garlic butter..."
+            style="resize: vertical; font-family: inherit; font-size: 13px;"
+          ></textarea>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Changes / Tweaks Made in Recipe</label>
+          <textarea
+            class="input-field"
+            id="recipeChangesInput"
+            rows="2"
+            placeholder="e.g. Air fried at 190°C for 12 mins, reduced sugar by half, marinated for 30m..."
+            style="resize: vertical; font-family: inherit; font-size: 13px;"
+          ></textarea>
+        </div>
+
         <div class="modal-buttons">
           <button
             class="modal-btn modal-btn-cancel"
@@ -3492,7 +4692,7 @@
           >
             Cancel
           </button>
-          <button class="modal-btn modal-btn-save" onclick="saveRecipeData()">
+          <button class="modal-btn modal-btn-save" id="recipeSaveBtn" onclick="saveRecipeData()">
             Add Recipe
           </button>
         </div>
@@ -3969,86 +5169,255 @@
       let recipeData = { recipes: [] };
       let pendingIngredients = [];
 
+      const INGREDIENT_CANONICAL_MAP = {
+        // Cornstarch & Flours
+        "coern starch": "Cornstarch",
+        "corn starch": "Cornstarch",
+        "corn-starch": "Cornstarch",
+        "corn flour": "Cornstarch",
+        "cornflour": "Cornstarch",
+        "cornstarch": "Cornstarch",
+        "purpose flour": "All-purpose flour",
+        "all purpose flour": "All-purpose flour",
+        "all-purpose flour": "All-purpose flour",
+        "plain flour": "All-purpose flour",
+        "flour": "All-purpose flour",
+        "maida": "All-purpose flour",
+        "rice flour": "Rice flour",
+        "riceflour": "Rice flour",
+
+        // Soy Sauces
+        "dark soya sauce": "Dark soy sauce",
+        "dark soy sauce": "Dark soy sauce",
+        "dark soya": "Dark soy sauce",
+        "dark soy": "Dark soy sauce",
+        "light soya sauce": "Light soy sauce",
+        "light soy sauce": "Light soy sauce",
+        "light soya": "Light soy sauce",
+        "light soy": "Light soy sauce",
+        "soya sauce": "Soy sauce",
+        "soy sauce": "Soy sauce",
+
+        // Sauces & Condiments
+        "sweet chilli sauce": "Sweet chilli sauce",
+        "sweet chili sauce": "Sweet chilli sauce",
+        "chilli crisp": "Chilli crisp",
+        "chili crisp": "Chilli crisp",
+        "chilli oil": "Chilli oil",
+        "chili oil": "Chilli oil",
+        "sriracha": "Sriracha",
+        "sriracha sauce": "Sriracha",
+        "gochujang": "Gochujang",
+        "oyster sauce": "Oyster sauce",
+        "fish sauce": "Fish sauce",
+        "hoisin sauce": "Hoisin sauce",
+        "ketchup": "Ketchup",
+        "tomato ketchup": "Ketchup",
+
+        // Seasonings & Spices
+        "salt": "Salt",
+        "table salt": "Salt",
+        "sugar": "Sugar",
+        "white sugar": "Sugar",
+        "brown sugar": "Brown sugar",
+        "chilli flakes": "Chilli flakes",
+        "chili flakes": "Chilli flakes",
+        "red chilli flakes": "Chilli flakes",
+        "red chili flakes": "Chilli flakes",
+        "black pepper": "Black pepper",
+        "pepper": "Black pepper",
+        "garlic powder": "Garlic powder",
+        "ginger powder": "Ginger powder",
+        "sesame seeds": "Sesame seeds",
+        "white sesame seeds": "Sesame seeds",
+        "toasted sesame seeds": "Sesame seeds",
+
+        // Liquids & Oils
+        "water": "Water",
+        "some water": "Water",
+        "add some water": "Water",
+        "vinegar": "Vinegar",
+        "white vinegar": "Vinegar",
+        "rice vinegar": "Rice vinegar",
+        "rice wine vinegar": "Rice vinegar",
+        "sesame oil": "Sesame oil",
+        "toasted sesame oil": "Sesame oil",
+        "oil": "Oil",
+        "cooking oil": "Oil",
+        "vegetable oil": "Oil",
+        "olive oil": "Olive oil",
+        "butter": "Butter",
+        "unsalted butter": "Butter",
+        "honey": "Honey",
+
+        // Aromatics & Herbs
+        "garlic(chopped)": "Garlic (chopped)",
+        "garlic (chopped)": "Garlic (chopped)",
+        "chopped garlic": "Garlic (chopped)",
+        "minced garlic": "Garlic (chopped)",
+        "garlic minced": "Garlic (chopped)",
+        "garlic(grated)": "Garlic (grated)",
+        "garlic (grated)": "Garlic (grated)",
+        "grated garlic": "Garlic (grated)",
+        "garlic(thin)": "Garlic (sliced)",
+        "garlic (thin)": "Garlic (sliced)",
+        "garlic (sliced)": "Garlic (sliced)",
+        "sliced garlic": "Garlic (sliced)",
+        "garlic": "Garlic",
+        "garlic cloves": "Garlic",
+        "ginger(chopped)": "Ginger (chopped)",
+        "ginger (chopped)": "Ginger (chopped)",
+        "chopped ginger": "Ginger (chopped)",
+        "minced ginger": "Ginger (chopped)",
+        "ginger(grated)": "Ginger (grated)",
+        "ginger (grated)": "Ginger (grated)",
+        "grated ginger": "Ginger (grated)",
+        "ginger": "Ginger",
+        "garlic&ginger(grated)": "Garlic & ginger (grated)",
+        "garlic & ginger(grated)": "Garlic & ginger (grated)",
+        "garlic & ginger (grated)": "Garlic & ginger (grated)",
+        "ginger garlic paste": "Garlic & ginger (grated)",
+        "ginger & garlic paste": "Garlic & ginger (grated)",
+        "lemongrass(chopped)": "Lemongrass (chopped)",
+        "lemongrass (chopped)": "Lemongrass (chopped)",
+        "lemongrass": "Lemongrass",
+        "onion(cube)": "Onion (cubed)",
+        "onion (cube)": "Onion (cubed)",
+        "onion (cubed)": "Onion (cubed)",
+        "cubed onion": "Onion (cubed)",
+        "diced onion": "Onion (cubed)",
+        "onion": "Onion",
+        "red onion": "Red onion",
+        "spring onion(half inch cut)": "Spring onion",
+        "spring onion (half inch cut)": "Spring onion",
+        "spring onion": "Spring onion",
+        "spring onions": "Spring onion",
+        "green onion": "Spring onion",
+        "green onions": "Spring onion",
+        "scallion": "Spring onion",
+        "scallions": "Spring onion",
+        "thai chilli/red hari moti mirchi(chopped)": "Thai chilli (chopped)",
+        "thai chilli (chopped)": "Thai chilli (chopped)",
+        "thai chili (chopped)": "Thai chilli (chopped)",
+        "thai chilli": "Thai chilli (chopped)",
+        "thai chili": "Thai chilli (chopped)",
+        "green chilli": "Green chilli",
+        "green chili": "Green chilli",
+        "red chilli": "Red chilli",
+        "red chili": "Red chilli",
+        "thai basil leaf": "Thai basil leaves",
+        "thai basil leaves": "Thai basil leaves",
+        "basil leaves": "Thai basil leaves",
+        "basil leaf": "Thai basil leaves",
+
+        // Proteins
+        "3 egg": "Eggs",
+        "egg": "Eggs",
+        "eggs": "Eggs",
+        "chicken": "Chicken",
+        "cubes of chicken": "Chicken",
+        "chicken breast": "Chicken",
+        "chicken thighs": "Chicken",
+        "boneless chicken": "Chicken",
+        "chicken keema": "Chicken keema",
+        "keema": "Chicken keema",
+        "minced chicken": "Chicken keema",
+        "ground chicken": "Chicken keema",
+        "beef": "Beef",
+        "thin slice beef": "Beef",
+        "minced beef": "Beef keema",
+        "ground beef": "Beef keema",
+        "beef keema": "Beef keema",
+      };
+
+      function normalizeIngredientName(name) {
+        if (!name) return "";
+        const clean = name.trim();
+        const lower = clean.toLowerCase();
+        if (INGREDIENT_CANONICAL_MAP[lower]) return INGREDIENT_CANONICAL_MAP[lower];
+        return clean.charAt(0).toUpperCase() + clean.slice(1);
+      }
+
       const SEED_RECIPES = [
         {
           title: "Crispy chilli beef",
           url: "https://youtube.com/shorts/9q0_UO9s8w4?si=xWRo9eK9GHp9dRfm",
-          ingredients: ["Cornstarch", "Flour", "Salt", "Beef", "400 degree 12 mint", "Sauce", "Soy sauce", "Rice vinegar", "Sweet chilli sauce", "Water", "Garlic(chopped)"],
+          ingredients: ["Cornstarch", "All-purpose flour", "Salt", "Beef", "Soy sauce", "Rice vinegar", "Sweet chilli sauce", "Water", "Garlic (chopped)"],
         },
         {
           title: "Sweet honey chicken",
           url: "https://youtube.com/shorts/Syy1FeNc1tw?si=PljSaNO78Pgla6kf",
-          ingredients: ["Chicken", "Honey", "Soy sauce", "Vinegar", "Ketchup", "Garlic", "(15mint marinate)"],
+          ingredients: ["Chicken", "Honey", "Soy sauce", "Vinegar", "Ketchup", "Garlic"],
         },
         {
           title: "Sticky sweet ground beef",
           url: "https://youtube.com/shorts/fzp3VFh-ORE?si=mvLiwWqhRW39vwAS",
-          ingredients: ["Oil", "Keema", "Dark soya sauce", "Light soya sauce", "Oyster sauce", "Sesame oil", "Brown sugar"],
+          ingredients: ["Oil", "Chicken keema", "Dark soy sauce", "Light soy sauce", "Oyster sauce", "Sesame oil", "Brown sugar"],
         },
         {
           title: "Crispy chilli oil chicken",
           url: "https://youtube.com/shorts/9zBqB6cmQJs?si=8ptuNoY4dxzq1e50",
-          ingredients: ["Cornstarch", "Purpose flour", "Salt", "Chicken", "Sauce:", "Soy sauce", "Honey", "Chilli crisp", "Rice vinegar", "Garlic"],
+          ingredients: ["Cornstarch", "All-purpose flour", "Salt", "Chicken", "Soy sauce", "Honey", "Chilli crisp", "Rice vinegar", "Garlic"],
         },
         {
           title: "Tree cup chicken",
           url: "https://youtube.com/shorts/Z4alSEQeees?si=6FlcUkRNZWqiYeur",
-          ingredients: ["Ginger(chopped)", "Thai chilli/Red Hari Moti mirchi(chopped)", "Garlic", "Oil", "Dark soy sauce", "Light soy sauce", "Sesame oil", "Sugar", "Thai basil leaf", "Chicken"],
+          ingredients: ["Ginger (chopped)", "Thai chilli (chopped)", "Garlic", "Oil", "Dark soy sauce", "Light soy sauce", "Sesame oil", "Sugar", "Thai basil leaves", "Chicken"],
         },
         {
           title: "Honey Garlic chicken stir fry",
           url: "https://youtube.com/shorts/qtltYrd-oUM?si=Pzr3GRMse3iLzzON",
-          ingredients: ["Cubes of chicken", "Salt", "Cornstarch", "(Marinate for 15mint)", "Spring onion(half inch cut)", "Onion(cube)", "Garlic(thin)", "Sauce:", "Dark Soy sauce", "Light soy sauce", "Oyster sauce", "Garlic&ginger(grated)", "Honey", "Sriracha"],
+          ingredients: ["Chicken", "Salt", "Cornstarch", "Spring onion", "Onion (cubed)", "Garlic (sliced)", "Dark soy sauce", "Light soy sauce", "Oyster sauce", "Garlic & ginger (grated)", "Honey", "Sriracha"],
         },
         {
           title: "Crispy honey garlic beef",
           url: "https://youtube.com/shorts/SpkG2YvbGMY?si=_ArptvhsVl_onUB7",
-          ingredients: ["Cornstarch", "Flour", "Salt", "Beef", "Sauce:", "Soy sauce", "Honey", "Rice vinegar", "Garlic", "Some water"],
+          ingredients: ["Cornstarch", "All-purpose flour", "Salt", "Beef", "Soy sauce", "Honey", "Rice vinegar", "Garlic", "Water"],
         },
         {
           title: "Crispy GOCHUJANG chicken",
           url: "https://youtube.com/shorts/gZUnkbVZ8PY?si=kPAzjgAR0Ej5GPvX",
-          ingredients: ["Cornstarch", "Flour", "Salt", "Chicken", "Sauce:", "GOCHUJANG", "Garlic(chopped)", "Soy sauce", "Rice vinegar", "Honey", "Sesame oil", "Some water"],
+          ingredients: ["Cornstarch", "All-purpose flour", "Salt", "Chicken", "Gochujang", "Garlic (chopped)", "Soy sauce", "Rice vinegar", "Honey", "Sesame oil", "Water"],
         },
         {
           title: "Crispy hot honey chicken",
           url: "https://youtube.com/shorts/gzFtQ1n2_8o?si=RtqSXVv0waHC2b8G",
-          ingredients: ["Cornstarch", "Flour", "Salt", "Chicken", "375 degree for 13 mint", "Honey", "Soy sauce", "Rice vinegar", "Sriracha", "Garlic powder", "Chilli flakes"],
+          ingredients: ["Cornstarch", "All-purpose flour", "Salt", "Chicken", "Honey", "Soy sauce", "Rice vinegar", "Sriracha", "Garlic powder", "Chilli flakes"],
         },
         {
           title: "Sticky sweet chicken",
           url: "https://youtube.com/shorts/wlFMS79ycm8?si=dAcNLQ324PW7eg0W",
-          ingredients: ["Chicken", "Dark soy sauce", "Light soy sauce", "Oyster sauce", "Garlic(grated)", "Brown sugar", "Honey", "Rice vinegar", "Sesame oil"],
+          ingredients: ["Chicken", "Dark soy sauce", "Light soy sauce", "Oyster sauce", "Garlic (grated)", "Brown sugar", "Honey", "Rice vinegar", "Sesame oil"],
         },
         {
           title: "Honey butter fried chicken",
           url: "https://youtube.com/shorts/b46s1FI-hEI?si=ltbazSrTivLRPUeh",
-          ingredients: ["Rice flour", "Corn flour", "Salt", "Add some water", "Mix with chicken", "Fry chicken till it golden", "Butter", "Soy sauce", "Rice vinegar", "Honey", "Garlic(chopped)"],
+          ingredients: ["Rice flour", "Cornstarch", "Salt", "Water", "Butter", "Soy sauce", "Rice vinegar", "Honey", "Garlic (chopped)"],
         },
         {
           title: "Sticky ground beef",
           url: "https://youtube.com/shorts/NzS_73MSILE?si=A-9_Bhfclbwo_MW9",
-          ingredients: ["Oil", "Garlic(chopped)", "Ginger(chopped)", "Chicken keema", "Dark soy sauce", "Light soy sauce", "Brown sugar", "Hoisin sauce", "Vinegar", "Sriracha"],
+          ingredients: ["Oil", "Garlic (chopped)", "Ginger (chopped)", "Chicken keema", "Dark soy sauce", "Light soy sauce", "Brown sugar", "Hoisin sauce", "Vinegar", "Sriracha"],
         },
         {
           title: "Ground beef egg bowl",
           url: "https://youtube.com/shorts/M_SyOXXqGJ4?si=jL9K2PWQ2aN_nloO",
-          ingredients: ["3 egg", "Salt", "Sugar", "Garlic(chopped)", "Chicken keema", "Dark soya sauce", "Light soya sauce"],
+          ingredients: ["Eggs", "Salt", "Sugar", "Garlic (chopped)", "Chicken keema", "Dark soy sauce", "Light soy sauce"],
         },
         {
           title: "Lemongrass beef",
           url: "https://youtube.com/shorts/Dwgq-nwcHLU?si=-kAt3Ajna9u_8_aZ",
-          ingredients: ["Thin slice beef", "Dark soy sauce", "Light soy sauce", "Fish sauce", "Oyster sauce", "Sugar", "Lemongrass(chopped)", "Garlic(grated)"],
+          ingredients: ["Beef", "Dark soy sauce", "Light soy sauce", "Fish sauce", "Oyster sauce", "Sugar", "Lemongrass (chopped)", "Garlic (grated)"],
         },
         {
           title: "Honey Chilli Chicken",
           url: "https://youtube.com/shorts/lukfDQwjE-g?si=nVToTdmlW8S3Wca3",
-          ingredients: ["Corn starch", "Salt", "Chicken", "Oil", "Garlic(chopped)", "Soy sauce", "Honey", "Chilli flakes", "Water"],
+          ingredients: ["Cornstarch", "Salt", "Chicken", "Oil", "Garlic (chopped)", "Soy sauce", "Honey", "Chilli flakes", "Water"],
         },
         {
           title: "Honey butter chicken tenders",
           url: "https://youtube.com/shorts/zqxTIBr6MbA?si=42vEYp6pW43lDBzS",
-          ingredients: ["Rice flour", "Corn starch", "Salt", "Some water", "Butter", "Soy sauce", "Vinegar", "Honey", "Ginger(chopped)"],
+          ingredients: ["Rice flour", "Cornstarch", "Salt", "Water", "Butter", "Soy sauce", "Vinegar", "Honey", "Ginger (chopped)"],
         },
       ];
 
@@ -4061,7 +5430,34 @@
       function loadRecipeData() {
         try {
           const stored = localStorage.getItem("recipe_book_data_v1");
-          if (stored) recipeData = JSON.parse(stored);
+          if (stored) {
+            recipeData = JSON.parse(stored);
+            if (recipeData && Array.isArray(recipeData.recipes)) {
+              recipeData.recipes.forEach((r) => {
+                if (r.favorite === undefined) r.favorite = false;
+                if (r.mustTry === undefined) r.mustTry = false;
+                if (r.quick === undefined) r.quick = false;
+                if (r.addedItems === undefined) r.addedItems = "";
+                if (r.changes === undefined) r.changes = "";
+                if (Array.isArray(r.ingredients)) {
+                  r.ingredients = r.ingredients
+                    .filter(
+                      (ing) =>
+                        !isInstructionText(
+                          typeof ing === "string" ? ing : ing.name,
+                        ),
+                    )
+                    .map((ing) => {
+                      const rawName = typeof ing === "string" ? ing : ing.name;
+                      const norm = normalizeIngredientName(rawName);
+                      if (typeof ing === "string")
+                        return { name: norm, checked: false };
+                      return { ...ing, name: norm };
+                    });
+                }
+              });
+            }
+          }
         } catch (e) {
           console.error("Error loading recipe data:", e);
         }
@@ -4073,8 +5469,13 @@
             recipeData.recipes.push({
               title: seed.title,
               url: seed.url,
+              favorite: false,
+              mustTry: false,
+              quick: false,
+              addedItems: "",
+              changes: "",
               ingredients: seed.ingredients.map((name) => ({
-                name,
+                name: normalizeIngredientName(name),
                 checked: false,
               })),
             });
@@ -4082,7 +5483,7 @@
             added = true;
           }
         });
-        if (added) saveRecipeDataToStorage();
+        saveRecipeDataToStorage();
 
         renderRecipeList();
       }
@@ -4091,28 +5492,85 @@
         localStorage.setItem("recipe_book_data_v1", JSON.stringify(recipeData));
       }
 
-      function openRecipeModal() {
-        document.getElementById("recipeTitleInput").value = "";
-        document.getElementById("recipeUrlInput").value = "";
-        document.getElementById("recipeIngredientInput").value = "";
-        pendingIngredients = [];
+      function openRecipeModal(editIndex) {
+        const titleEl = document.getElementById("recipeTitleInput");
+        const urlEl = document.getElementById("recipeUrlInput");
+        const ingEl = document.getElementById("recipeIngredientInput");
+        const favEl = document.getElementById("recipeFavoriteInput");
+        const mustTryEl = document.getElementById("recipeMustTryInput");
+        const quickEl = document.getElementById("recipeQuickInput");
+        const addedItemsEl = document.getElementById("recipeAddedItemsInput");
+        const changesEl = document.getElementById("recipeChangesInput");
+        const editIdxEl = document.getElementById("recipeEditIndex");
+        const modalTitleEl = document.getElementById("recipeModalTitle");
+        const modalSubEl = document.getElementById("recipeModalSubtitle");
+        const saveBtnEl = document.getElementById("recipeSaveBtn");
+
+        if (ingEl) ingEl.value = "";
+
+        if (
+          editIndex !== undefined &&
+          editIndex !== null &&
+          editIndex !== "" &&
+          recipeData.recipes[editIndex]
+        ) {
+          const recipe = recipeData.recipes[editIndex];
+          if (editIdxEl) editIdxEl.value = editIndex;
+          if (modalTitleEl) modalTitleEl.textContent = "✏️ Edit Recipe";
+          if (modalSubEl)
+            modalSubEl.textContent = "Update recipe details, what you added, and your custom changes";
+          if (saveBtnEl) saveBtnEl.textContent = "Save Changes";
+
+          if (titleEl) titleEl.value = recipe.title || "";
+          if (urlEl) urlEl.value = recipe.url || "";
+          if (favEl) favEl.checked = !!recipe.favorite;
+          if (mustTryEl) mustTryEl.checked = !!recipe.mustTry;
+          if (quickEl) quickEl.checked = !!recipe.quick;
+          if (addedItemsEl) addedItemsEl.value = recipe.addedItems || "";
+          if (changesEl) changesEl.value = recipe.changes || "";
+
+          pendingIngredients = (recipe.ingredients || []).map((ing) =>
+            typeof ing === "string"
+              ? { name: ing, checked: false }
+              : { ...ing },
+          );
+        } else {
+          if (editIdxEl) editIdxEl.value = "";
+          if (modalTitleEl) modalTitleEl.textContent = "🍳 Add Recipe";
+          if (modalSubEl)
+            modalSubEl.textContent = "Save a recipe link with its ingredients and notes";
+          if (saveBtnEl) saveBtnEl.textContent = "Add Recipe";
+
+          if (titleEl) titleEl.value = "";
+          if (urlEl) urlEl.value = "";
+          if (favEl) favEl.checked = false;
+          if (mustTryEl) mustTryEl.checked = false;
+          if (quickEl) quickEl.checked = false;
+          if (addedItemsEl) addedItemsEl.value = "";
+          if (changesEl) changesEl.value = "";
+          pendingIngredients = [];
+        }
+
         renderFormIngredientList();
         document.getElementById("recipeModal").classList.add("show");
       }
 
       function closeRecipeModal() {
         document.getElementById("recipeModal").classList.remove("show");
+        const editIdxEl = document.getElementById("recipeEditIndex");
+        if (editIdxEl) editIdxEl.value = "";
       }
 
       function addIngredientToForm() {
         const input = document.getElementById("recipeIngredientInput");
-        const name = input.value.trim();
-        if (!name) return;
-        if (isInstructionText(name)) {
+        const rawName = input.value.trim();
+        if (!rawName) return;
+        if (isInstructionText(rawName)) {
           showToast("That looks like a temperature/timing step, not an ingredient 🚫");
           input.value = "";
           return;
         }
+        const name = normalizeIngredientName(rawName);
         pendingIngredients.push({ name, checked: false });
         input.value = "";
         renderFormIngredientList();
@@ -4150,8 +5608,20 @@
       }
 
       function saveRecipeData() {
+        const editIdxEl = document.getElementById("recipeEditIndex");
+        const editIdxVal = editIdxEl ? editIdxEl.value : "";
         const title = document.getElementById("recipeTitleInput").value.trim();
         const url = document.getElementById("recipeUrlInput").value.trim();
+        const favEl = document.getElementById("recipeFavoriteInput");
+        const favorite = favEl ? favEl.checked : false;
+        const mustTryEl = document.getElementById("recipeMustTryInput");
+        const mustTry = mustTryEl ? mustTryEl.checked : false;
+        const quickEl = document.getElementById("recipeQuickInput");
+        const quick = quickEl ? quickEl.checked : false;
+        const addedItemsEl = document.getElementById("recipeAddedItemsInput");
+        const addedItems = addedItemsEl ? addedItemsEl.value.trim() : "";
+        const changesEl = document.getElementById("recipeChangesInput");
+        const changes = changesEl ? changesEl.value.trim() : "";
 
         if (!title) {
           showToast("Please enter a recipe title 📝");
@@ -4168,19 +5638,99 @@
 
         const ingredients = pendingIngredients.map((ing) => ({ ...ing }));
 
-        recipeData.recipes.unshift({ title, url, ingredients });
+        if (editIdxVal !== "") {
+          const editIndex = parseInt(editIdxVal, 10);
+          if (recipeData.recipes[editIndex]) {
+            recipeData.recipes[editIndex] = {
+              ...recipeData.recipes[editIndex],
+              title,
+              url,
+              favorite,
+              mustTry,
+              quick,
+              addedItems,
+              changes,
+              ingredients,
+            };
+            showToast("Recipe updated ✏️");
+          }
+        } else {
+          recipeData.recipes.unshift({
+            title,
+            url,
+            favorite,
+            mustTry,
+            quick,
+            addedItems,
+            changes,
+            ingredients,
+          });
+          showToast(
+            quick
+              ? "Added to Quick Recipes ⚡"
+              : favorite
+                ? "Recipe added to Favorites ⭐"
+                : mustTry
+                  ? "Recipe added to Have-To-Try list 🔥"
+                  : "Recipe added 🍳",
+          );
+        }
+
         saveRecipeDataToStorage();
         closeRecipeModal();
-        renderRecipeList(document.getElementById("recipeSearchInput").value);
-        showToast("Recipe added 🍳");
+        renderRecipeList(document.getElementById("recipeSearchInput")?.value || "");
+      }
+
+      function toggleRecipeFavorite(index, event) {
+        if (event) event.stopPropagation();
+        const recipe = recipeData.recipes[index];
+        if (!recipe) return;
+        recipe.favorite = !recipe.favorite;
+        saveRecipeDataToStorage();
+        renderRecipeList(document.getElementById("recipeSearchInput")?.value || "");
+        showToast(
+          recipe.favorite
+            ? "Added to Favorite List ⭐"
+            : "Removed from Favorite List",
+        );
+      }
+
+      function toggleRecipeMustTry(index, event) {
+        if (event) event.stopPropagation();
+        const recipe = recipeData.recipes[index];
+        if (!recipe) return;
+        recipe.mustTry = !recipe.mustTry;
+        saveRecipeDataToStorage();
+        renderRecipeList(document.getElementById("recipeSearchInput")?.value || "");
+        showToast(
+          recipe.mustTry
+            ? "Added to Have-To-Try List 🔥"
+            : "Removed from Have-To-Try List",
+        );
+      }
+
+      function toggleRecipeQuick(index, event) {
+        if (event) event.stopPropagation();
+        const recipe = recipeData.recipes[index];
+        if (!recipe) return;
+        recipe.quick = !recipe.quick;
+        saveRecipeDataToStorage();
+        renderRecipeList(document.getElementById("recipeSearchInput")?.value || "");
+        showToast(
+          recipe.quick
+            ? "Added to Quick Recipes ⚡"
+            : "Removed from Quick Recipes",
+        );
       }
 
       function deleteRecipe(index, event) {
         if (event) event.stopPropagation();
-        if (!confirm("Delete this recipe?")) return;
+        const recipe = recipeData.recipes[index];
+        const recipeTitle = recipe ? `"${recipe.title}"` : "this recipe";
+        if (!confirm(`Delete ${recipeTitle}?`)) return;
         recipeData.recipes.splice(index, 1);
         saveRecipeDataToStorage();
-        renderRecipeList(document.getElementById("recipeSearchInput").value);
+        renderRecipeList(document.getElementById("recipeSearchInput")?.value || "");
         showToast("Recipe deleted 🗑️");
       }
 
@@ -4311,6 +5861,9 @@
         const commonNames = [...commonMap.values()].sort((a, b) =>
           a.localeCompare(b),
         );
+        const commonCountEl = document.getElementById("commonIngredientsCount");
+        if (commonCountEl) commonCountEl.textContent = commonNames.length;
+
         commonListEl.innerHTML = commonNames.length
           ? commonNames
               .map(
@@ -4323,7 +5876,18 @@
         uncommonIngredientEntries = [...uncommonMap.values()].sort((a, b) =>
           a.name.localeCompare(b.name),
         );
+        const uncommonCountEl = document.getElementById(
+          "uncommonIngredientsCount",
+        );
+        if (uncommonCountEl)
+          uncommonCountEl.textContent = uncommonIngredientEntries.length;
+
         renderUncommonList(uncommonIngredientEntries);
+      }
+
+      function toggleIngredientDropdown(id) {
+        const card = document.getElementById(id);
+        if (card) card.classList.toggle("open");
       }
 
       function renderUncommonList(entries) {
@@ -4348,7 +5912,7 @@
               ${entry.recipes
                 .map(
                   (r) =>
-                    `<a class="uncommon-recipe-link-tag" href="${escapeHtml(r.url)}" target="_blank" rel="noopener"><span>📖</span> ${escapeHtml(r.title)}</a>`,
+                    `<a class="uncommon-recipe-link-tag" href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer"><span>📖</span> <span>${escapeHtml(r.title)}</span> <span style="font-size: 10px; opacity: 0.75;">↗</span></a>`,
                 )
                 .join("")}
             </div>
@@ -4368,6 +5932,150 @@
             )
           : uncommonIngredientEntries;
         renderUncommonList(filtered);
+      }
+
+      // ==================== MISSING INGREDIENTS & WHATSAPP NOTE ====================
+      let missingIngredients = [];
+
+      function loadMissingIngredients() {
+        try {
+          const stored = localStorage.getItem("missing_ingredients_list_v1");
+          missingIngredients = stored ? JSON.parse(stored) : [];
+          if (!Array.isArray(missingIngredients)) missingIngredients = [];
+        } catch (e) {
+          missingIngredients = [];
+        }
+        renderMissingIngredients();
+      }
+
+      function saveMissingIngredients() {
+        try {
+          localStorage.setItem(
+            "missing_ingredients_list_v1",
+            JSON.stringify(missingIngredients),
+          );
+        } catch (e) {}
+      }
+
+      function addMissingIngredient() {
+        const input = document.getElementById("missingIngInput");
+        const rawVal = input ? input.value.trim() : "";
+        if (!rawVal) return;
+        const name = normalizeIngredientName(rawVal);
+        missingIngredients.push({ name, checked: false });
+        saveMissingIngredients();
+        renderMissingIngredients();
+        if (input) {
+          input.value = "";
+          input.focus();
+        }
+        showToast("Added to shopping note 🛒");
+      }
+
+      function addSpecificMissingIngredient(rawName, event) {
+        if (event) event.stopPropagation();
+        if (!rawName) return;
+        const name = normalizeIngredientName(rawName);
+        missingIngredients.push({ name, checked: false });
+        saveMissingIngredients();
+        renderMissingIngredients();
+        showToast(`Added "${name}" to shopping note 🛒`);
+      }
+
+      function toggleMissingIngredient(index) {
+        if (!missingIngredients[index]) return;
+        missingIngredients[index].checked = !missingIngredients[index].checked;
+        saveMissingIngredients();
+        renderMissingIngredients();
+      }
+
+      function deleteMissingIngredient(index) {
+        missingIngredients.splice(index, 1);
+        saveMissingIngredients();
+        renderMissingIngredients();
+        showToast("Removed from note 🗑️");
+      }
+
+      function clearMissingIngredients() {
+        if (missingIngredients.length === 0) return;
+        if (!confirm("Clear all missing ingredients from note?")) return;
+        missingIngredients = [];
+        saveMissingIngredients();
+        renderMissingIngredients();
+        showToast("Note cleared 🗑️");
+      }
+
+      function renderMissingIngredients() {
+        const countEl = document.getElementById("missingIngCount");
+        const listEl = document.getElementById("missingIngList");
+        if (!listEl) return;
+        if (countEl) countEl.textContent = missingIngredients.length;
+
+        if (missingIngredients.length === 0) {
+          listEl.innerHTML =
+            '<div class="history-empty" style="padding: 10px 0;">No missing ingredients noted yet. Type above to add!</div>';
+          return;
+        }
+
+        listEl.innerHTML = missingIngredients
+          .map(
+            (item, index) => `
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #ffffff; border: 1px solid #e7e0c9; border-radius: 8px; padding: 4px 8px;">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; flex: 1; min-width: 0; user-select: none;">
+              <input type="checkbox" ${item.checked ? "checked" : ""} onchange="toggleMissingIngredient(${index})" style="width: 15px; height: 15px; accent-color: var(--ink); cursor: pointer;" />
+              <span style="font-size: 12.5px; color: ${item.checked ? "#9ca3af" : "#1f2937"}; text-decoration: ${item.checked ? "line-through" : "none"}; word-break: break-word;">${escapeHtml(item.name)}</span>
+            </label>
+            <button type="button" onclick="deleteMissingIngredient(${index})" style="background: none; border: none; font-size: 12px; cursor: pointer; opacity: 0.5; padding: 2px 4px;" title="Remove">✕</button>
+          </div>
+        `,
+          )
+          .join("");
+      }
+
+      function getMissingIngredientsText() {
+        if (missingIngredients.length === 0) return "";
+        const pending = missingIngredients.filter((i) => !i.checked);
+        const bought = missingIngredients.filter((i) => i.checked);
+        let text = "🛒 *Missing Ingredients to Buy:*\n";
+        if (pending.length > 0) {
+          text += "\n" + pending.map((item) => `• ${item.name}`).join("\n");
+        }
+        if (bought.length > 0) {
+          text += "\n\n*Already Bought / Checked:*\n" + bought.map((item) => `✓ ~${item.name}~`).join("\n");
+        }
+        text += "\n\n_Sent from Recipe Book Tracker_";
+        return text;
+      }
+
+      function shareMissingIngredientsToWhatsApp() {
+        if (missingIngredients.length === 0) {
+          showToast("Please add missing ingredients to your note first 🛒");
+          return;
+        }
+        const text = getMissingIngredientsText();
+        const url =
+          "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
+        window.open(url, "_blank");
+      }
+
+      function copyMissingIngredients() {
+        if (missingIngredients.length === 0) {
+          showToast("No ingredients to copy 📋");
+          return;
+        }
+        const text = getMissingIngredientsText();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(text)
+            .then(() => {
+              showToast("List copied to clipboard! 📋");
+            })
+            .catch(() => {
+              showToast("List copied! 📋");
+            });
+        } else {
+          showToast("List copied! 📋");
+        }
       }
 
       function ingredientChecked(ing) {
@@ -4401,15 +6109,22 @@
           .filter(Boolean);
         return recipeData.recipes
           .map((recipe, index) => ({ recipe, index }))
-          .filter(
-            ({ recipe }) =>
-              terms.length === 0 ||
-              terms.every((term) =>
-                recipe.ingredients.some((ing) =>
-                  ingredientName(ing).toLowerCase().includes(term),
-                ),
-              ),
-          );
+          .filter(({ recipe }) => {
+            if (terms.length === 0) return true;
+            const title = (recipe.title || "").toLowerCase();
+            const changes = (recipe.changes || "").toLowerCase();
+            const addedItems = (recipe.addedItems || "").toLowerCase();
+            return terms.every(
+              (term) =>
+                title.includes(term) ||
+                changes.includes(term) ||
+                addedItems.includes(term) ||
+                (recipe.ingredients &&
+                  recipe.ingredients.some((ing) =>
+                    ingredientName(ing).toLowerCase().includes(term),
+                  )),
+            );
+          });
       }
 
       function renderRecipeIngredientsHTML(recipe, index) {
@@ -4444,16 +6159,162 @@
         `;
       }
 
-      function renderRecipeList(filterText) {
-        const searchInput = document.getElementById("recipeSearchInput");
-        const query =
-          filterText !== undefined
-            ? filterText
-            : searchInput
-              ? searchInput.value
-              : "";
-        renderRecipeIndex(query);
-        renderIngredientsPage();
+      function renderRecipeItemHTML(recipe, index) {
+        const hasAdded =
+          recipe.addedItems && recipe.addedItems.trim().length > 0;
+        const hasChanges =
+          recipe.changes && recipe.changes.trim().length > 0;
+        const hasNotes = hasAdded || hasChanges;
+        const isFav = !!recipe.favorite;
+        const isMustTry = !!recipe.mustTry;
+        const isQuick = !!recipe.quick;
+        return `
+          <details class="recipe-index-item ${isFav ? "is-favorite" : ""} ${isMustTry ? "is-must-try" : ""} ${isQuick ? "is-quick" : ""}">
+            <summary class="recipe-index-summary">
+              <div class="recipe-summary-title">
+                ${isFav ? '<span class="recipe-fav-star-badge" title="Tried / Favorite">⭐</span>' : ""}
+                ${isMustTry ? '<span class="recipe-must-try-badge" title="Must Try / Have To Try">🔥</span>' : ""}
+                ${isQuick ? '<span class="recipe-quick-badge" title="Quick Recipe (Less Time)">⚡</span>' : ""}
+                <span>${escapeHtml(recipe.title || "Untitled Recipe")}</span>
+              </div>
+              <div class="recipe-item-actions" onclick="event.stopPropagation()">
+                <button type="button" class="recipe-action-btn fav-btn ${isFav ? "active" : ""}" onclick="toggleRecipeFavorite(${index}, event)" title="${isFav ? "Favorited (Click to remove)" : "Add to favorites"}">
+                  ${isFav ? "⭐" : "☆"}
+                </button>
+                <button type="button" class="recipe-action-btn must-try-btn ${isMustTry ? "active" : ""}" onclick="toggleRecipeMustTry(${index}, event)" title="${isMustTry ? "Must Try (Click to remove)" : "Add to Have-To-Try"}">
+                  🔥
+                </button>
+                <button type="button" class="recipe-action-btn quick-btn ${isQuick ? "active" : ""}" onclick="toggleRecipeQuick(${index}, event)" title="${isQuick ? "Quick Recipe (Click to remove)" : "Mark as Quick Recipe (Less Time)"}">
+                  ⚡
+                </button>
+                <button type="button" class="recipe-action-btn edit-btn" onclick="openRecipeModal(${index})" title="Edit recipe and notes">
+                  ✏️
+                </button>
+                <button type="button" class="history-delete" onclick="deleteRecipe(${index}, event)" title="Delete recipe">
+                  🗑️
+                </button>
+              </div>
+            </summary>
+            <div class="recipe-index-body">
+              <div class="recipe-item-header">
+                <a class="recipe-link" href="${escapeHtml(recipe.url)}" target="_blank" rel="noopener noreferrer" title="Open ${escapeHtml(recipe.url)}">
+                  <span>🔗</span>
+                  <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(recipe.url)}</span>
+                  <span style="font-size: 11px; opacity: 0.75; margin-left: 2px;">↗</span>
+                </a>
+              </div>
+
+              ${
+                hasNotes
+                  ? `
+                <div class="recipe-user-changes">
+                  <div class="recipe-user-changes-header">
+                    <span>✏️ My Notes & Changes</span>
+                    <button type="button" class="recipe-edit-inline-btn" onclick="openRecipeModal(${index})" title="Edit notes">✏️</button>
+                  </div>
+                  ${
+                    hasAdded
+                      ? `<div class="recipe-notes-row"><strong>➕ What I Added:</strong> <span>${escapeHtml(recipe.addedItems)}</span></div>`
+                      : ""
+                  }
+                  ${
+                    hasChanges
+                      ? `<div class="recipe-notes-row"><strong>✏️ Changes Made:</strong> <span>${escapeHtml(recipe.changes)}</span></div>`
+                      : ""
+                  }
+                </div>
+              `
+                  : `
+                <div class="recipe-add-changes-prompt">
+                  <button type="button" class="recipe-add-changes-btn" onclick="openRecipeModal(${index})">
+                    ➕ Add what you added or changes made
+                  </button>
+                </div>
+              `
+              }
+
+              <div class="recipe-ingredient-list">
+                ${renderRecipeIngredientsHTML(recipe, index)}
+              </div>
+            </div>
+          </details>
+        `;
+      }
+
+      function renderRecipeFavoriteList(filterText) {
+        const countEl = document.getElementById("recipeFavoriteCount");
+        const listEl = document.getElementById("recipeFavoriteList");
+        if (!countEl || !listEl) return;
+
+        const totalFavorites = recipeData.recipes.filter(
+          (r) => r.favorite,
+        ).length;
+        countEl.textContent = totalFavorites;
+
+        const favoriteEntries = getFilteredRecipeEntries(filterText).filter(
+          ({ recipe }) => recipe.favorite,
+        );
+
+        if (favoriteEntries.length === 0) {
+          listEl.innerHTML = filterText
+            ? `<div class="history-empty">No favorite recipes found for "${escapeHtml(filterText)}".</div>`
+            : '<div class="history-empty">No dishes tried yet. Tap "☆" on any recipe or add a new recipe with your tweaks!</div>';
+          return;
+        }
+
+        listEl.innerHTML = favoriteEntries
+          .map(({ recipe, index }) => renderRecipeItemHTML(recipe, index))
+          .join("");
+      }
+
+      function renderRecipeMustTryList(filterText) {
+        const countEl = document.getElementById("recipeMustTryCount");
+        const listEl = document.getElementById("recipeMustTryList");
+        if (!countEl || !listEl) return;
+
+        const totalMustTry = recipeData.recipes.filter(
+          (r) => r.mustTry,
+        ).length;
+        countEl.textContent = totalMustTry;
+
+        const mustTryEntries = getFilteredRecipeEntries(filterText).filter(
+          ({ recipe }) => recipe.mustTry,
+        );
+
+        if (mustTryEntries.length === 0) {
+          listEl.innerHTML = filterText
+            ? `<div class="history-empty">No must-try recipes found for "${escapeHtml(filterText)}".</div>`
+            : '<div class="history-empty">No recipes in your Have-To-Try list yet. Tap "🔥" on any recipe or add a new one to try!</div>';
+          return;
+        }
+
+        listEl.innerHTML = mustTryEntries
+          .map(({ recipe, index }) => renderRecipeItemHTML(recipe, index))
+          .join("");
+      }
+
+      function renderRecipeQuickList(filterText) {
+        const countEl = document.getElementById("recipeQuickCount");
+        const listEl = document.getElementById("recipeQuickList");
+        if (!countEl || !listEl) return;
+
+        const totalQuick = recipeData.recipes.filter((r) => r.quick).length;
+        countEl.textContent = totalQuick;
+
+        const quickEntries = getFilteredRecipeEntries(filterText).filter(
+          ({ recipe }) => recipe.quick,
+        );
+
+        if (quickEntries.length === 0) {
+          listEl.innerHTML = filterText
+            ? `<div class="history-empty">No quick recipes found for "${escapeHtml(filterText)}".</div>`
+            : '<div class="history-empty">No quick recipes yet. Tap "⚡" on any recipe or add a fast 15-min meal when short on time!</div>';
+          return;
+        }
+
+        listEl.innerHTML = quickEntries
+          .map(({ recipe, index }) => renderRecipeItemHTML(recipe, index))
+          .join("");
       }
 
       function renderRecipeIndex(filterText) {
@@ -4473,23 +6334,39 @@
         }
 
         listEl.innerHTML = entries
-          .map(
-            ({ recipe, index }) => `
-          <details class="recipe-index-item">
-            <summary class="recipe-index-summary">${escapeHtml(recipe.title || "Untitled Recipe")}</summary>
-            <div class="recipe-index-body">
-              <div class="recipe-item-header">
-                <a class="recipe-link" href="${escapeHtml(recipe.url)}" target="_blank" rel="noopener">${escapeHtml(recipe.url)}</a>
-                <button class="history-delete" onclick="deleteRecipe(${index}, event)">🗑️</button>
-              </div>
-              <div class="recipe-ingredient-list">
-                ${renderRecipeIngredientsHTML(recipe, index)}
-              </div>
-            </div>
-          </details>
-        `,
-          )
+          .map(({ recipe, index }) => renderRecipeItemHTML(recipe, index))
           .join("");
+      }
+
+      function renderRecipeList(filterText) {
+        const searchInput = document.getElementById("recipeSearchInput");
+        const query =
+          filterText !== undefined
+            ? filterText
+            : searchInput
+              ? searchInput.value
+              : "";
+        renderRecipeFavoriteList(query);
+        renderRecipeMustTryList(query);
+        renderRecipeQuickList(query);
+        renderRecipeIndex(query);
+        renderIngredientsPage();
+      }
+
+      function switchRecipeSubTab(tabName, event) {
+        if (event) event.preventDefault();
+        document.querySelectorAll(".recipe-sub-tab-btn").forEach((btn) => {
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-recipe-tab") === tabName,
+          );
+        });
+        document.querySelectorAll(".recipe-section").forEach((sec) => {
+          sec.classList.toggle(
+            "active",
+            sec.id === "recipe-section-" + tabName,
+          );
+        });
       }
 
       document
@@ -4841,12 +6718,98 @@
         }
       }
 
+      function openChoreCalendar(key) {
+        const id = choreInputId(key);
+        const input = document.getElementById(id);
+        if (input) {
+          if (typeof input.showPicker === "function") {
+            try {
+              input.showPicker();
+            } catch (err) {
+              input.focus();
+            }
+          } else {
+            input.focus();
+          }
+        }
+      }
+
+      function onChoreDateChanged(key) {
+        const inputId = choreInputId(key);
+        const displayId =
+          "chore" + key.charAt(0).toUpperCase() + key.slice(1) + "DateDisplay";
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(displayId);
+        if (input && display) {
+          if (input.value) {
+            display.textContent = formatTypingDateDisplay(input.value);
+            display.classList.add("has-value");
+          } else {
+            display.textContent = "Select date";
+            display.classList.remove("has-value");
+          }
+        }
+      }
+
+      function calculateDaysAgo(dateStr) {
+        if (!dateStr) return null;
+        let d, m, y;
+        if (dateStr.includes("-")) {
+          const parts = dateStr.split("-");
+          if (parts[0].length === 4) {
+            y = parseInt(parts[0], 10);
+            m = parseInt(parts[1], 10) - 1;
+            d = parseInt(parts[2], 10);
+          } else {
+            d = parseInt(parts[0], 10);
+            m = parseInt(parts[1], 10) - 1;
+            y = 2000 + parseInt(parts[2], 10);
+          }
+        }
+        if (!d || isNaN(d) || isNaN(m) || isNaN(y)) return null;
+        const entryDate = new Date(y, m, d);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        entryDate.setHours(0, 0, 0, 0);
+        const diffTime = today - entryDate;
+        return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      }
+
+      function formatChoreDaysAgoText(days) {
+        if (days === null || isNaN(days)) return "";
+        if (days === 0) return "Today";
+        if (days === 1) return "Yesterday";
+        if (days < 0) return "Future date";
+        if (days < 30) return `${days}d ago`;
+        if (days < 60) return "1mo ago";
+        return `${Math.floor(days / 30)}mo ago`;
+      }
+
+      function logChoreToday(key) {
+        const todayISO = medicineTodayStr();
+        choreLogs[key].unshift({ date: isoToDDMMYY(todayISO) });
+        choreLogs[key] = choreLogs[key].slice(0, 50);
+        saveChoreLog(key);
+        renderChoreLog(key);
+        showToast("Logged for Today! ✨");
+        if (typeof renderSummary === "function") renderSummary();
+      }
+
+      function deleteChoreLogIndex(key, index) {
+        if (!confirm("Delete this history record?")) return;
+        choreLogs[key].splice(index, 1);
+        saveChoreLog(key);
+        renderChoreLog(key);
+        showToast("Record deleted 🗑️");
+        if (typeof renderSummary === "function") renderSummary();
+      }
+
       function addChoreLogEntry(key) {
         const dateEl = document.getElementById(choreInputId(key));
         const dateVal = dateEl.value;
 
         if (!dateVal) {
-          showToast("Please select the date");
+          showToast("Please select the date 📅");
           return;
         }
 
@@ -4855,36 +6818,158 @@
         saveChoreLog(key);
         renderChoreLog(key);
         dateEl.value = "";
+        const displayId =
+          "chore" + key.charAt(0).toUpperCase() + key.slice(1) + "DateDisplay";
+        const dispEl = document.getElementById(displayId);
+        if (dispEl) {
+          dispEl.textContent = "Select date";
+          dispEl.classList.remove("has-value");
+        }
         showToast("✅ Logged");
+        if (typeof renderSummary === "function") renderSummary();
       }
 
       function deleteSelectedChoreLogEntry(key) {
-        const selectEl = document.getElementById(choreSelectId(key));
-        const index = parseInt(selectEl.value, 10);
-        if (!Number.isFinite(index)) return;
-        choreLogs[key].splice(index, 1);
-        saveChoreLog(key);
-        renderChoreLog(key);
+        if (!choreLogs[key] || choreLogs[key].length === 0) return;
+        deleteChoreLogIndex(key, 0);
       }
 
       function renderChoreLog(key) {
-        const selectEl = document.getElementById(choreSelectId(key));
-        if (!selectEl) return;
+        const listEl = document.getElementById("choreList-" + key);
+        const badgeEl = document.getElementById("choreBadge-" + key);
+        const countEl = document.getElementById("choreCount-" + key);
+        if (!listEl) return;
 
-        if (choreLogs[key].length === 0) {
-          selectEl.innerHTML = '<option value="">📜 No history yet</option>';
+        const entries = choreLogs[key] || [];
+        if (countEl)
+          countEl.textContent = `${entries.length} log${entries.length === 1 ? "" : "s"}`;
+
+        if (entries.length === 0) {
+          listEl.innerHTML =
+            '<div class="chore-history-empty">No history recorded yet. Tap "Log Today" or select a date.</div>';
+          if (badgeEl) {
+            badgeEl.className = "chore-last-done-badge is-empty";
+            badgeEl.innerHTML = "🌱 No logs yet";
+          }
           return;
         }
 
-        let html = "";
-        choreLogs[key].forEach((entry, index) => {
-          html += `<option value="${index}">📅 ${entry.date}</option>`;
-        });
-        selectEl.innerHTML = html;
+        const latest = entries[0];
+        const daysAgo = calculateDaysAgo(latest.date);
+        if (badgeEl) {
+          if (daysAgo === 0) {
+            badgeEl.className = "chore-last-done-badge is-recent";
+            badgeEl.innerHTML = "✨ Done Today";
+          } else if (daysAgo !== null && daysAgo <= 14) {
+            badgeEl.className = "chore-last-done-badge is-recent";
+            badgeEl.innerHTML = `⏳ ${formatChoreDaysAgoText(daysAgo)}`;
+          } else if (daysAgo !== null && daysAgo <= 60) {
+            badgeEl.className = "chore-last-done-badge is-moderate";
+            badgeEl.innerHTML = `⚠️ ${formatChoreDaysAgoText(daysAgo)}`;
+          } else {
+            badgeEl.className = "chore-last-done-badge is-old";
+            badgeEl.innerHTML = `⚠️ ${formatChoreDaysAgoText(daysAgo) || latest.date}`;
+          }
+        }
+
+        listEl.innerHTML = entries
+          .map((entry, index) => {
+            const itemDays = calculateDaysAgo(entry.date);
+            const agoStr = formatChoreDaysAgoText(itemDays);
+            return `
+              <div class="chore-history-item ${index === 0 ? "is-first" : ""}">
+                <div class="chore-history-date-info">
+                  <span class="chore-history-date">📅 ${escapeHtml(entry.date)}</span>
+                  ${agoStr ? `<span class="chore-history-ago">${agoStr}</span>` : ""}
+                  ${index === 0 ? '<span title="Latest Record" style="font-size: 11px;">⭐</span>' : ""}
+                </div>
+                <button type="button" class="chore-history-del-btn" onclick="deleteChoreLogIndex('${key}', ${index})" title="Delete record">🗑️</button>
+              </div>
+            `;
+          })
+          .join("");
       }
 
       function loadAllChoreLogs() {
         ["mattress", "room", "computer"].forEach(loadChoreLog);
+      }
+
+      function formatTypingDateDisplay(isoDateStr) {
+        if (!isoDateStr) return "";
+        const parts = isoDateStr.split("-");
+        if (parts.length !== 3) return isoDateStr;
+        const year = parts[0];
+        const monthIdx = parseInt(parts[1], 10) - 1;
+        const day = parseInt(parts[2], 10);
+        const months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        const mName = months[monthIdx] || parts[1];
+        return `${day} ${mName} ${year}`;
+      }
+
+      function updateTypingDisplay() {
+        const startInput = document.getElementById("typingStartDateInput");
+        const endInput = document.getElementById("typingEndDateInput");
+        const startVal = startInput ? startInput.value : "";
+        const endVal = endInput ? endInput.value : "";
+        const startDisp = document.getElementById("typingStartDateDisplay");
+        const endDisp = document.getElementById("typingEndDateDisplay");
+
+        if (startDisp) {
+          if (startVal) {
+            startDisp.textContent = formatTypingDateDisplay(startVal);
+            startDisp.classList.add("has-value");
+          } else {
+            startDisp.textContent = "Start date";
+            startDisp.classList.remove("has-value");
+          }
+        }
+        if (endDisp) {
+          if (endVal) {
+            endDisp.textContent = formatTypingDateDisplay(endVal);
+            endDisp.classList.add("has-value");
+          } else {
+            endDisp.textContent = "End date";
+            endDisp.classList.remove("has-value");
+          }
+        }
+      }
+
+      function openTypingCalendar(type) {
+        const id =
+          type === "start"
+            ? "typingStartDateInput"
+            : "typingEndDateInput";
+        const input = document.getElementById(id);
+        if (input) {
+          if (typeof input.showPicker === "function") {
+            try {
+              input.showPicker();
+            } catch (err) {
+              input.focus();
+            }
+          } else {
+            input.focus();
+          }
+        }
+      }
+
+      function onTypingDateChanged(type) {
+        saveTypingRange();
+        updateTypingDisplay();
+        if (typeof renderSummary === "function") renderSummary();
       }
 
       function loadTypingRange() {
@@ -4892,19 +6977,24 @@
           const stored = localStorage.getItem("typing_range_v1");
           const data = stored ? JSON.parse(stored) : {};
           if (data.start) {
-            document.getElementById("typingStartDateInput").value = data.start;
+            const startEl = document.getElementById("typingStartDateInput");
+            if (startEl) startEl.value = data.start;
           }
           if (data.end) {
-            document.getElementById("typingEndDateInput").value = data.end;
+            const endEl = document.getElementById("typingEndDateInput");
+            if (endEl) endEl.value = data.end;
           }
         } catch (e) {
           // ignore corrupted storage
         }
+        updateTypingDisplay();
       }
 
       function saveTypingRange() {
-        const start = document.getElementById("typingStartDateInput").value;
-        const end = document.getElementById("typingEndDateInput").value;
+        const startEl = document.getElementById("typingStartDateInput");
+        const endEl = document.getElementById("typingEndDateInput");
+        const start = startEl ? startEl.value : "";
+        const end = endEl ? endEl.value : "";
         try {
           localStorage.setItem(
             "typing_range_v1",
@@ -5148,12 +7238,45 @@
         }
       }
 
+      function openWeekCalendar(key) {
+        const id = key === "zad" ? "zadLogDateInput" : "uqLogDateInput";
+        const input = document.getElementById(id);
+        if (input) {
+          if (typeof input.showPicker === "function") {
+            try {
+              input.showPicker();
+            } catch (err) {
+              input.focus();
+            }
+          } else {
+            input.focus();
+          }
+        }
+      }
+
+      function onWeekDateChanged(key) {
+        const inputId = key === "zad" ? "zadLogDateInput" : "uqLogDateInput";
+        const displayId =
+          key === "zad" ? "zadLogDateDisplay" : "uqLogDateDisplay";
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(displayId);
+        if (input && display) {
+          if (input.value) {
+            display.textContent = formatTypingDateDisplay(input.value);
+            display.classList.add("has-value");
+          } else {
+            display.textContent = "Select date";
+            display.classList.remove("has-value");
+          }
+        }
+      }
+
       function addZadLectureLogEntry() {
         const dateEl = document.getElementById("zadLogDateInput");
         const dateVal = dateEl.value;
 
         if (!dateVal) {
-          showToast("Please select the date");
+          showToast("Please select the date 📅");
           return;
         }
 
@@ -5165,6 +7288,11 @@
         saveZadLectureLog();
         renderZadLectureLog();
         dateEl.value = "";
+        const dispEl = document.getElementById("zadLogDateDisplay");
+        if (dispEl) {
+          dispEl.textContent = "Select date";
+          dispEl.classList.remove("has-value");
+        }
         showToast("✅ Added to log");
       }
 
@@ -5262,7 +7390,7 @@
         const dateVal = dateEl.value;
 
         if (!dateVal) {
-          showToast("Please select the date");
+          showToast("Please select the date 📅");
           return;
         }
 
@@ -5274,6 +7402,11 @@
         saveUqLectureLog();
         renderUqLectureLog();
         dateEl.value = "";
+        const dispEl = document.getElementById("uqLogDateDisplay");
+        if (dispEl) {
+          dispEl.textContent = "Select date";
+          dispEl.classList.remove("has-value");
+        }
         showToast("✅ Added to log");
       }
 
@@ -5391,9 +7524,13 @@
 
           function resetFn(e) {
             if (e) e.stopPropagation();
+            if (count > 0 && !confirm("Are you sure you want to reset this counter?")) {
+              return;
+            }
             count = 0;
             setStored(0);
             updateDisplay();
+            showToast("Counter reset 🔄");
           }
 
           count = Math.min(getStored(), MAX);
@@ -5992,6 +8129,7 @@
       // Initialize on load
       loadPeriodData();
       loadRecipeData();
+      loadMissingIngredients();
       loadNotesData();
       loadZadLecture();
       loadZadLectureLog();
