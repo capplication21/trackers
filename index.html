@@ -2278,6 +2278,24 @@
         font-size: 13px;
         flex-shrink: 0;
       }
+      .recipe-action-btn.ok-btn {
+        background: #f5f3ff;
+        border-color: #8b5cf6;
+        color: #6d28d9;
+      }
+      .recipe-action-btn.ok-btn.active {
+        background: #8b5cf6;
+        border-color: var(--ink);
+        color: #ffffff;
+        box-shadow: 0 1.5px 0 var(--ink);
+      }
+      .recipe-ok-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        flex-shrink: 0;
+      }
       .recipe-action-btn.edit-btn:hover {
         background: #eef6ff;
         border-color: var(--blue-deep);
@@ -2803,6 +2821,10 @@
       .recipe-sub-tab-btn[data-recipe-tab="quick"] {
         --rec-accent: #3B82F6;
         --rec-accent-2: #1D4ED8;
+      }
+      .recipe-sub-tab-btn[data-recipe-tab="okay"] {
+        --rec-accent: #8B5CF6;
+        --rec-accent-2: #6D28D9;
       }
       .recipe-sub-tab-btn[data-recipe-tab="ingredients"] {
         --rec-accent: #E0578F;
@@ -4210,6 +4232,10 @@
               <span class="recipe-sub-tab-icon">⚡</span>
               <span class="recipe-sub-tab-label">Quick</span>
             </button>
+            <button class="recipe-sub-tab-btn" data-recipe-tab="okay" onclick="switchRecipeSubTab('okay', event)">
+              <span class="recipe-sub-tab-icon">👌</span>
+              <span class="recipe-sub-tab-label">Okay</span>
+            </button>
             <button class="recipe-sub-tab-btn" data-recipe-tab="ingredients" onclick="switchRecipeSubTab('ingredients', event)">
               <span class="recipe-sub-tab-icon">🧾</span>
               <span class="recipe-sub-tab-label">Ingredients</span>
@@ -4287,6 +4313,25 @@
               <div class="ingredient-dropdown-body">
                 <div class="history-list" id="recipeQuickList">
                   <div class="history-empty">No quick recipes added yet.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 5: OKAY / NORMAL RECIPES (NOT SO GOOD) -->
+          <div id="recipe-section-okay" class="recipe-section">
+            <div class="ingredient-dropdown-card open" id="ingDrop-okay">
+              <div class="ingredient-dropdown-header" onclick="toggleIngredientDropdown('ingDrop-okay')">
+                <div class="ingredient-dropdown-icon-box">👌</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title">Okay / Normal Recipes (Not so good)</span>
+                  <span class="ingredient-dropdown-count" id="recipeOkayCount">0</span>
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
+              </div>
+              <div class="ingredient-dropdown-body">
+                <div class="history-list" id="recipeOkayList">
+                  <div class="history-empty">No normal/okay recipes marked yet.</div>
                 </div>
               </div>
             </div>
@@ -4893,6 +4938,10 @@
           <label class="recipe-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 13px; cursor: pointer; user-select: none;">
             <input type="checkbox" id="recipeQuickInput" style="width: 18px; height: 18px; accent-color: #3b82f6; cursor: pointer;" />
             <span>⚡ Quick Recipe (Less Time / Under 20 min)</span>
+          </label>
+          <label class="recipe-checkbox-label" style="display: flex; align-items: center; gap: 8px; font-weight: 400; font-size: 13px; cursor: pointer; user-select: none;">
+            <input type="checkbox" id="recipeOkayInput" style="width: 18px; height: 18px; accent-color: #8b5cf6; cursor: pointer;" />
+            <span>👌 Normal / Okay dish (Average taste / Not so good)</span>
           </label>
         </div>
 
@@ -5680,6 +5729,7 @@
                 if (r.favorite === undefined) r.favorite = false;
                 if (r.mustTry === undefined) r.mustTry = false;
                 if (r.quick === undefined) r.quick = false;
+                if (r.okay === undefined) r.okay = false;
                 if (r.addedItems === undefined) r.addedItems = "";
                 if (r.changes === undefined) r.changes = "";
                 if (Array.isArray(r.ingredients)) {
@@ -5738,6 +5788,7 @@
         const favEl = document.getElementById("recipeFavoriteInput");
         const mustTryEl = document.getElementById("recipeMustTryInput");
         const quickEl = document.getElementById("recipeQuickInput");
+        const okayEl = document.getElementById("recipeOkayInput");
         const addedItemsEl = document.getElementById("recipeAddedItemsInput");
         const changesEl = document.getElementById("recipeChangesInput");
         const editIdxEl = document.getElementById("recipeEditIndex");
@@ -5765,6 +5816,7 @@
           if (favEl) favEl.checked = !!recipe.favorite;
           if (mustTryEl) mustTryEl.checked = !!recipe.mustTry;
           if (quickEl) quickEl.checked = !!recipe.quick;
+          if (okayEl) okayEl.checked = !!recipe.okay;
           if (addedItemsEl) addedItemsEl.value = recipe.addedItems || "";
           if (changesEl) changesEl.value = recipe.changes || "";
 
@@ -5785,6 +5837,7 @@
           if (favEl) favEl.checked = false;
           if (mustTryEl) mustTryEl.checked = false;
           if (quickEl) quickEl.checked = false;
+          if (okayEl) okayEl.checked = false;
           if (addedItemsEl) addedItemsEl.value = "";
           if (changesEl) changesEl.value = "";
           pendingIngredients = [];
@@ -5859,6 +5912,8 @@
         const mustTry = mustTryEl ? mustTryEl.checked : false;
         const quickEl = document.getElementById("recipeQuickInput");
         const quick = quickEl ? quickEl.checked : false;
+        const okayEl = document.getElementById("recipeOkayInput");
+        const okay = okayEl ? okayEl.checked : false;
         const addedItemsEl = document.getElementById("recipeAddedItemsInput");
         const addedItems = addedItemsEl ? addedItemsEl.value.trim() : "";
         const changesEl = document.getElementById("recipeChangesInput");
@@ -5889,6 +5944,7 @@
               favorite,
               mustTry,
               quick,
+              okay,
               addedItems,
               changes,
               ingredients,
@@ -5902,18 +5958,21 @@
             favorite,
             mustTry,
             quick,
+            okay,
             addedItems,
             changes,
             ingredients,
           });
           showToast(
-            quick
-              ? "Added to Quick Recipes ⚡"
-              : favorite
-                ? "Recipe added to Favorites ⭐"
-                : mustTry
-                  ? "Recipe added to Have-To-Try list 🔥"
-                  : "Recipe added 🍳",
+            okay
+              ? "Added to Okay / Normal Recipes 👌"
+              : quick
+                ? "Added to Quick Recipes ⚡"
+                : favorite
+                  ? "Recipe added to Favorites ⭐"
+                  : mustTry
+                    ? "Recipe added to Have-To-Try list 🔥"
+                    : "Recipe added 🍳",
           );
         }
 
@@ -6437,13 +6496,15 @@
         const isFav = !!recipe.favorite;
         const isMustTry = !!recipe.mustTry;
         const isQuick = !!recipe.quick;
+        const isOk = !!recipe.okay;
         return `
-          <details class="recipe-index-item ${isFav ? "is-favorite" : ""} ${isMustTry ? "is-must-try" : ""} ${isQuick ? "is-quick" : ""}">
+          <details class="recipe-index-item ${isFav ? "is-favorite" : ""} ${isMustTry ? "is-must-try" : ""} ${isQuick ? "is-quick" : ""} ${isOk ? "is-ok" : ""}">
             <summary class="recipe-index-summary">
               <div class="recipe-summary-title">
                 ${isFav ? '<span class="recipe-fav-star-badge" title="Tried / Favorite">⭐</span>' : ""}
                 ${isMustTry ? '<span class="recipe-must-try-badge" title="Must Try / Have To Try">🔥</span>' : ""}
                 ${isQuick ? '<span class="recipe-quick-badge" title="Quick Recipe (Less Time)">⚡</span>' : ""}
+                ${isOk ? '<span class="recipe-ok-badge" title="Normal / Okay Recipe">👌</span>' : ""}
                 <span>${escapeHtml(recipe.title || "Untitled Recipe")}</span>
               </div>
               <div class="recipe-item-actions" onclick="event.stopPropagation()">
@@ -6455,6 +6516,9 @@
                 </button>
                 <button type="button" class="recipe-action-btn quick-btn ${isQuick ? "active" : ""}" onclick="toggleRecipeQuick(${index}, event)" title="${isQuick ? "Quick Recipe (Click to remove)" : "Mark as Quick Recipe (Less Time)"}">
                   ⚡
+                </button>
+                <button type="button" class="recipe-action-btn ok-btn ${isOk ? "active" : ""}" onclick="toggleRecipeOkay(${index}, event)" title="${isOk ? "Normal / Okay (Click to remove)" : "Mark as Normal / Okay (Not so good, just OK)"}">
+                  👌
                 </button>
                 <button type="button" class="recipe-action-btn edit-btn" onclick="openRecipeModal(${index})" title="Edit recipe and notes">
                   ✏️
@@ -6607,6 +6671,44 @@
           .join("");
       }
 
+      function toggleRecipeOkay(index, event) {
+        if (event) event.stopPropagation();
+        const recipe = recipeData.recipes[index];
+        if (!recipe) return;
+        recipe.okay = !recipe.okay;
+        saveRecipeDataToStorage();
+        renderRecipeList(document.getElementById("recipeSearchInput")?.value || "");
+        showToast(
+          recipe.okay
+            ? `Marked "${recipe.title}" as Okay / Normal 👌`
+            : `Removed "${recipe.title}" from Okay / Normal list`,
+        );
+      }
+
+      function renderRecipeOkayList(filterText) {
+        const countEl = document.getElementById("recipeOkayCount");
+        const listEl = document.getElementById("recipeOkayList");
+        if (!countEl || !listEl) return;
+
+        const totalOkay = recipeData.recipes.filter((r) => r.okay).length;
+        countEl.textContent = totalOkay;
+
+        const okayEntries = getFilteredRecipeEntries(filterText).filter(
+          ({ recipe }) => recipe.okay,
+        );
+
+        if (okayEntries.length === 0) {
+          listEl.innerHTML = filterText
+            ? `<div class="history-empty">No normal/okay recipes found for "${escapeHtml(filterText)}".</div>`
+            : '<div class="history-empty">No normal/okay recipes marked yet. Tap "👌" on any recipe to add it here!</div>';
+          return;
+        }
+
+        listEl.innerHTML = okayEntries
+          .map(({ recipe, index }) => renderRecipeItemHTML(recipe, index))
+          .join("");
+      }
+
       function renderRecipeList(filterText) {
         const searchInput = document.getElementById("recipeSearchInput");
         const query =
@@ -6618,6 +6720,7 @@
         renderRecipeFavoriteList(query);
         renderRecipeMustTryList(query);
         renderRecipeQuickList(query);
+        renderRecipeOkayList(query);
         renderRecipeIndex(query);
         renderIngredientsPage();
       }
