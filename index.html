@@ -532,6 +532,10 @@
       .tab-btn.active[onclick*="recipe"] .tab-icon {
         background: #f5b729;
       }
+      .tab-btn.active[onclick*="english"] .tab-icon {
+        background: #2f8fd1;
+        color: #ffffff;
+      }
       .tab-btn.active[onclick*="summary"] .tab-icon {
         background: #6366f1;
         color: #ffffff;
@@ -599,6 +603,109 @@
       .notes-title {
         background: #fef3c7;
         color: #78350f;
+      }
+      .english-title {
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+      .english-hero-card {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin-bottom: 14px;
+        box-shadow: 0 3px 0 var(--ink);
+      }
+      .english-hero-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+      .english-hero-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--ink);
+      }
+      .english-hero-desc {
+        font-size: 12px;
+        color: #475569;
+        line-height: 1.4;
+      }
+      .english-module-card {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        padding: 14px;
+        margin-bottom: 14px;
+        box-shadow: 0 3px 0 var(--ink);
+      }
+      .english-module-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .english-module-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .english-module-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: #e0f2fe;
+        border: 1.5px solid var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+      .english-module-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+      }
+      .english-prompt-pill {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: #f8fafc;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 12px;
+        color: #1e293b;
+        cursor: pointer;
+        margin-top: 6px;
+        font-family: inherit;
+        transition: all 0.15s ease;
+      }
+      .english-prompt-pill:hover {
+        background: #f0f9ff;
+        border-color: #38bdf8;
+      }
+      .english-vocab-item {
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-top: 8px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .english-vocab-word {
+        font-weight: 500;
+        font-size: 13px;
+        color: #0369a1;
+      }
+      .english-vocab-meaning {
+        font-size: 12px;
+        color: #334155;
+        margin-top: 2px;
       }
       .water-title {
         background: #e0f2fe;
@@ -3588,6 +3695,10 @@
           <span class="tab-icon">🍳</span>
           <span class="tab-label">Recipe</span>
         </button>
+        <button class="tab-btn" onclick="switchTab('english', this)">
+          <span class="tab-icon">🔤</span>
+          <span class="tab-label">English</span>
+        </button>
         <button class="tab-btn" onclick="switchTab('notes', this)">
           <span class="tab-icon">📝</span>
           <span class="tab-label">Notes</span>
@@ -4457,6 +4568,147 @@
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <!-- ENGLISH LEARNING & PRACTICE TAB -->
+        <div class="tab-content" id="tab-english">
+          <div class="section-title english-title">
+            <span>🔤</span> ENGLISH LEARNING &amp; PRACTICE
+          </div>
+
+          <div class="english-hero-card">
+            <div class="english-hero-header">
+              <span class="english-hero-title">🇬🇧 Daily English Toolkit</span>
+              <span style="font-size: 18px;">🎯</span>
+            </div>
+            <div class="english-hero-desc">
+              All your English grammar, phonics, typing speed, and AI conversation tools in one focused space.
+            </div>
+          </div>
+
+          <!-- 1. GRAMMAR SESSION -->
+          <div class="english-module-card">
+            <div class="english-module-header">
+              <div class="english-module-title-wrap">
+                <div class="english-module-icon">📝</div>
+                <div>
+                  <div class="english-module-name">Grammar Session</div>
+                  <div style="font-size: 11px; color: #64748b;">Daily lessons &amp; exercises</div>
+                </div>
+              </div>
+              <a class="yt-link" href="https://www.youtube.com/@letstalk" target="_blank" style="margin: 0;">
+                <span>▶️</span> @letstalk
+              </a>
+            </div>
+            <div class="timer-wrap" style="margin-top: 6px;">
+              <div class="timer-display" id="timer-display-grammar-hub">10:00</div>
+              <div class="timer-info">
+                <div class="adhkar-label" style="margin-bottom: 2px">⏱️ Grammar 10-Min Timer</div>
+                <div class="timer-controls">
+                  <button class="timer-btn" id="timer-toggle-grammar-hub" onclick="toggleTimerDirect('grammar')">Start</button>
+                  <button class="timer-reset-btn" id="timer-reset-grammar-hub" onclick="resetTimerDirect('grammar')" title="Reset">↺</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. PHONICS -->
+          <div class="english-module-card">
+            <div class="english-module-header">
+              <div class="english-module-title-wrap">
+                <div class="english-module-icon">🔤</div>
+                <div>
+                  <div class="english-module-name">Phonics &amp; Pronunciation</div>
+                  <div style="font-size: 11px; color: #64748b;">Alphabet sounds &amp; drills</div>
+                </div>
+              </div>
+              <a class="yt-link" href="https://www.instagram.com/the.alphabet_/" target="_blank" style="margin: 0;">
+                <span>📷</span> @the.alphabet_
+              </a>
+            </div>
+            <div class="timer-wrap" style="margin-top: 6px;">
+              <div class="timer-display" id="timer-display-phonics-hub">10:00</div>
+              <div class="timer-info">
+                <div class="adhkar-label" style="margin-bottom: 2px">⏱️ Phonics 10-Min Timer</div>
+                <div class="timer-controls">
+                  <button class="timer-btn" id="timer-toggle-phonics-hub" onclick="toggleTimerDirect('phonics')">Start</button>
+                  <button class="timer-reset-btn" id="timer-reset-phonics-hub" onclick="resetTimerDirect('phonics')" title="Reset">↺</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. TYPING SPEED & ACCURACY -->
+          <div class="english-module-card">
+            <div class="english-module-header">
+              <div class="english-module-title-wrap">
+                <div class="english-module-icon">⌨️</div>
+                <div>
+                  <div class="english-module-name">Typing Practice</div>
+                  <div style="font-size: 11px; color: #64748b;">Typing.com Lessons &amp; Streak</div>
+                </div>
+              </div>
+              <a class="yt-link" href="https://www.typing.com/student/lessons" target="_blank" style="margin: 0;">
+                <span>⌨️</span> Open Lessons
+              </a>
+            </div>
+            <div style="font-size: 12px; color: #475569; margin-top: 4px;">
+              💡 Daily touch-typing builds faster English writing and spelling confidence.
+            </div>
+          </div>
+
+          <!-- 4. KIMI AI ENGLISH CONVERSATION -->
+          <div class="english-module-card">
+            <div class="english-module-header">
+              <div class="english-module-title-wrap">
+                <div class="english-module-icon">🤖</div>
+                <div>
+                  <div class="english-module-name">Kimi AI Conversation &amp; Activity</div>
+                  <div style="font-size: 11px; color: #64748b;">Practice speaking, grammar &amp; writing</div>
+                </div>
+              </div>
+              <a class="yt-link" href="https://kimi.moonshot.cn" target="_blank" style="margin: 0;">
+                <span>🤖</span> Open Kimi
+              </a>
+            </div>
+            <div style="font-size: 12px; color: #475569; margin-bottom: 6px;">Tap any prompt to copy &amp; practice:</div>
+            <button class="english-prompt-pill" onclick="copyEnglishPrompt('Practice daily conversational English with me. Ask me 1 friendly question at a time and correct any grammar mistakes I make.')">
+              💬 "Practice daily English conversation with me (1 question at a time)"
+            </button>
+            <button class="english-prompt-pill" onclick="copyEnglishPrompt('Please correct the grammar and spelling in this sentence and explain how to say it more naturally in English: ')">
+              ✏️ "Correct my English sentence and show a more natural way to say it"
+            </button>
+            <button class="english-prompt-pill" onclick="copyEnglishPrompt('Give me 3 useful daily English idioms with simple meanings and example conversations.')">
+              💡 "Teach me 3 daily English idioms with simple examples"
+            </button>
+          </div>
+
+          <!-- 5. VOCABULARY & WORD BANK -->
+          <div class="english-module-card">
+            <div class="english-module-header">
+              <div class="english-module-title-wrap">
+                <div class="english-module-icon">📖</div>
+                <div>
+                  <div class="english-module-name">Vocabulary &amp; Word Bank</div>
+                  <div style="font-size: 11px; color: #64748b;">Save new words, phrases &amp; rules</div>
+                </div>
+              </div>
+              <span class="ingredient-dropdown-count" id="englishVocabCount">0</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+              <input type="text" class="input-field" id="englishWordInput" placeholder="New Word / Phrase (e.g. Ubiquitous)" />
+              <input type="text" class="input-field" id="englishMeaningInput" placeholder="Meaning or Example (e.g. Present everywhere)" onkeydown="if(event.key==='Enter'){addEnglishWord();}" />
+              <button class="btn" style="background: #2f8fd1; color: white;" onclick="addEnglishWord()">➕ Add to Word Bank</button>
+            </div>
+
+            <div style="margin-top: 12px;">
+              <input type="text" class="input-field" id="englishVocabSearch" placeholder="🔍 Search saved words..." oninput="filterEnglishWords()" style="margin-bottom: 8px;" />
+              <div id="englishVocabList">
+                <div class="history-empty">No words added to your bank yet.</div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -6765,6 +7017,7 @@
         if (targetContent) targetContent.classList.add("active");
         if (tabName === "summary") renderSummary();
         if (tabName === "notes") renderNotesList();
+        if (tabName === "english") renderEnglishTab();
       }
 
       function toggleTask(taskId) {
@@ -8748,6 +9001,128 @@
       loadTrackerDaily();
       renderSummary();
       switchTab("schedule");
+      // ==================== ENGLISH HUB FUNCTIONS ====================
+      let englishVocabList = [];
+
+      function loadEnglishVocab() {
+        try {
+          const stored = localStorage.getItem("english_vocabulary_list_v1");
+          englishVocabList = stored ? JSON.parse(stored) : [];
+          if (!Array.isArray(englishVocabList)) englishVocabList = [];
+        } catch (e) {
+          englishVocabList = [];
+        }
+      }
+
+      function saveEnglishVocab() {
+        try {
+          localStorage.setItem(
+            "english_vocabulary_list_v1",
+            JSON.stringify(englishVocabList),
+          );
+        } catch (e) {}
+      }
+
+      function addEnglishWord() {
+        const wordEl = document.getElementById("englishWordInput");
+        const meanEl = document.getElementById("englishMeaningInput");
+        const word = wordEl ? wordEl.value.trim() : "";
+        const meaning = meanEl ? meanEl.value.trim() : "";
+        if (!word) {
+          showToast("Please enter a word or phrase 📝");
+          return;
+        }
+        englishVocabList.unshift({
+          id: Date.now(),
+          word,
+          meaning,
+          date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+        });
+        saveEnglishVocab();
+        if (wordEl) wordEl.value = "";
+        if (meanEl) meanEl.value = "";
+        renderEnglishVocabList();
+        showToast(`Added "${word}" to Word Bank 🔤`);
+      }
+
+      function deleteEnglishWord(id) {
+        englishVocabList = englishVocabList.filter((item) => item.id !== id);
+        saveEnglishVocab();
+        renderEnglishVocabList();
+        showToast("Word removed 🗑️");
+      }
+
+      function filterEnglishWords() {
+        const query = (document.getElementById("englishVocabSearch")?.value || "").trim().toLowerCase();
+        renderEnglishVocabList(query);
+      }
+
+      function renderEnglishVocabList(filterText = "") {
+        const listEl = document.getElementById("englishVocabList");
+        const countEl = document.getElementById("englishVocabCount");
+        if (countEl) countEl.textContent = englishVocabList.length;
+        if (!listEl) return;
+
+        const filtered = filterText
+          ? englishVocabList.filter(
+              (item) =>
+                item.word.toLowerCase().includes(filterText) ||
+                item.meaning.toLowerCase().includes(filterText),
+            )
+          : englishVocabList;
+
+        if (filtered.length === 0) {
+          listEl.innerHTML = filterText
+            ? `<div class="history-empty">No words found for "${escapeHtml(filterText)}".</div>`
+            : '<div class="history-empty">No words added yet. Add words and phrases above!</div>';
+          return;
+        }
+
+        listEl.innerHTML = filtered
+          .map(
+            (item) => `
+          <div class="english-vocab-item">
+            <div style="flex: 1;">
+              <div class="english-vocab-word">${escapeHtml(item.word)}</div>
+              ${item.meaning ? `<div class="english-vocab-meaning">${escapeHtml(item.meaning)}</div>` : ""}
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">📅 ${escapeHtml(item.date)}</div>
+            </div>
+            <button class="history-delete" onclick="deleteEnglishWord(${item.id})" title="Delete word">🗑️</button>
+          </div>
+        `,
+          )
+          .join("");
+      }
+
+      function copyEnglishPrompt(text) {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast("Prompt copied to clipboard! Opening Kimi 🤖");
+            window.open("https://kimi.moonshot.cn", "_blank");
+          });
+        } else {
+          showToast("Opening Kimi 🤖");
+          window.open("https://kimi.moonshot.cn", "_blank");
+        }
+      }
+
+      function toggleTimerDirect(type) {
+        const toggleBtn = document.getElementById("timer-toggle-" + type);
+        if (toggleBtn) toggleBtn.click();
+      }
+
+      function resetTimerDirect(type) {
+        const resetBtn = document.getElementById("timer-reset-" + type);
+        if (resetBtn) resetBtn.click();
+      }
+
+      function renderEnglishTab() {
+        loadEnglishVocab();
+        renderEnglishVocabList();
+      }
+
+      // Initialize English vocab on page load
+      loadEnglishVocab();
     </script>
   </body>
 </html>
