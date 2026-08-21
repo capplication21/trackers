@@ -1762,6 +1762,27 @@
         font-size: 11px;
         color: var(--muted);
       }
+      .chicken-sound-test-btn {
+        margin-left: auto;
+        background: #ede7d2;
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 500;
+        font-family: inherit;
+        color: var(--ink);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        box-shadow: 0 2px 0 var(--ink);
+        transition: all 0.15s ease;
+      }
+      .chicken-sound-test-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
       .hair-wash-row {
         display: flex;
         align-items: center;
@@ -4004,8 +4025,10 @@
                 </div>
                 <div class="chicken-time-row">
                   <label class="chicken-time-label" for="chickenReminderTime">Alert at:</label>
-                  <input type="time" class="chicken-time-input" id="chickenReminderTime" value="22:30" min="22:00" max="23:00" onchange="updateChickenReminderTime(this.value)" />
-                  <span class="chicken-time-hint">(Between 10:00 PM - 11:00 PM)</span>
+                  <input type="time" class="chicken-time-input" id="chickenReminderTime" value="22:30" onchange="updateChickenReminderTime(this.value)" />
+                  <button class="chicken-sound-test-btn" onclick="testNotificationSound()" title="Test notification sound chime">
+                    <span>🔊</span> Test Sound
+                  </button>
                 </div>
               </div>
             </div>
@@ -7391,6 +7414,61 @@
         showToast("Chicken reminder set to " + formatTimeDisplay(newTime));
       }
 
+      function playNotificationChime() {
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          const ctx = new AudioContextClass();
+          if (ctx.state === "suspended") {
+            ctx.resume();
+          }
+
+          const now = ctx.currentTime;
+
+          // First chime tone (D5 -> A5)
+          const osc1 = ctx.createOscillator();
+          const gain1 = ctx.createGain();
+          osc1.type = "sine";
+          osc1.frequency.setValueAtTime(587.33, now);
+          osc1.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+          gain1.gain.setValueAtTime(0, now);
+          gain1.gain.linearRampToValueAtTime(0.35, now + 0.04);
+          gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+          osc1.connect(gain1);
+          gain1.connect(ctx.destination);
+          osc1.start(now);
+          osc1.stop(now + 0.6);
+
+          // Second higher chime harmony (A5 -> D6)
+          const osc2 = ctx.createOscillator();
+          const gain2 = ctx.createGain();
+          osc2.type = "triangle";
+          osc2.frequency.setValueAtTime(880, now + 0.2);
+          osc2.frequency.exponentialRampToValueAtTime(1174.66, now + 0.35);
+          gain2.gain.setValueAtTime(0, now + 0.2);
+          gain2.gain.linearRampToValueAtTime(0.4, now + 0.25);
+          gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+          osc2.start(now + 0.2);
+          osc2.stop(now + 0.9);
+        } catch (e) {
+          console.warn("Chime playback error:", e);
+        }
+      }
+
+      function testNotificationSound() {
+        playNotificationChime();
+        showToast("🔊 Playing notification sound chime!");
+        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+          try {
+            new Notification("🔔 Test Sound Notification", {
+              body: "Notification sound chime is working!",
+            });
+          } catch (e) {}
+        }
+      }
+
       function checkChickenReminder() {
         if (!chickenReminderStatus.remindersEnabled) return;
         if (completedTasks.has("n6")) return;
@@ -7408,14 +7486,18 @@
         const today = medicineTodayStr();
         if (chickenReminderStatus.lastReminded === today) return;
 
-        if (currentTotalMins >= targetTotalMins && currentTotalMins <= 23 * 60 + 59) {
+        if (currentTotalMins >= targetTotalMins) {
           chickenReminderStatus.lastReminded = today;
           saveChickenReminderStatus();
 
+          playNotificationChime();
+
           if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-            new Notification("🍗 Chicken Defrost Reminder", {
-              body: "Don't forget to take chicken out from the freezer to the fridge for tomorrow!",
-            });
+            try {
+              new Notification("🍗 Chicken Defrost Reminder", {
+                body: "Don't forget to take chicken out from the freezer to the fridge for tomorrow!",
+              });
+            } catch (e) {}
           }
           showToast("🍗 Reminder: Move chicken from freezer to fridge for tomorrow!");
         }
