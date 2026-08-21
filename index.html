@@ -1700,6 +1700,97 @@
         background: var(--green);
         box-shadow: 0 3px 0 var(--green-deep);
       }
+      .chicken-reminder-box {
+        margin-top: 10px;
+        background: #fdfaf2;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .chicken-reminder-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .chicken-reminder-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .chicken-reminder-icon {
+        font-size: 18px;
+      }
+      .chicken-reminder-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink);
+      }
+      .chicken-reminder-desc {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .chicken-time-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-top: 8px;
+        border-top: 1px dashed var(--line-soft);
+        font-size: 12px;
+        color: var(--ink-soft);
+        flex-wrap: wrap;
+      }
+      .chicken-time-label {
+        font-weight: 500;
+        font-size: 12px;
+      }
+      .chicken-time-input {
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        padding: 4px 8px;
+        font-family: inherit;
+        font-size: 12px;
+        background: #fff;
+        color: var(--ink);
+        outline: none;
+      }
+      .chicken-time-hint {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .chicken-action-row {
+        padding-top: 8px;
+        border-top: 1px dashed var(--line-soft);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .chicken-clock-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: var(--yellow);
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        padding: 9px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        font-family: inherit;
+        cursor: pointer;
+        box-shadow: 0 2.5px 0 var(--ink);
+        transition: all 0.15s ease;
+      }
+      .chicken-clock-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
       .hair-wash-row {
         display: flex;
         align-items: center;
@@ -3907,6 +3998,52 @@
               </div>
             </div>
           </div>
+          <div class="task-card" id="task-n5-s" onclick="toggleTask('n5')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Surah Mulk <span>📖</span></div>
+              <a class="yt-link" href="https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF" target="_blank" onclick="event.stopPropagation()">
+                <span>▶️</span> Listen Surah Mulk
+              </a>
+            </div>
+          </div>
+          <div class="task-card" id="task-n6-s" onclick="toggleTask('n6')">
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1">
+              <div class="task-text">Chicken: Freezer ➔ Fridge <span>🍗❄️</span></div>
+              <div class="task-sub sub-not-taken" id="sub-n6">❓ Pending for tomorrow</div>
+              <div class="chicken-reminder-box" onclick="event.stopPropagation()">
+                <div class="chicken-reminder-header">
+                  <div class="chicken-reminder-info">
+                    <span class="chicken-reminder-icon">⏰</span>
+                    <div>
+                      <div class="chicken-reminder-title">Night Reminder (10 PM – 11 PM)</div>
+                      <div class="chicken-reminder-desc" id="chickenReminderSub">Get a reminder between 10:00 PM – 11:00 PM.</div>
+                    </div>
+                  </div>
+                  <button class="medicine-reminder-btn" id="chickenReminderBtn" onclick="toggleChickenReminder()">Enable</button>
+                </div>
+                <div class="chicken-time-row">
+                  <label class="chicken-time-label" for="chickenReminderTime">Alert at:</label>
+                  <input type="time" class="chicken-time-input" id="chickenReminderTime" value="22:30" min="22:00" max="23:00" onchange="updateChickenReminderTime(this.value)" />
+                  <span class="chicken-time-hint">(Between 10:00 PM - 11:00 PM)</span>
+                </div>
+                <div class="chicken-action-row">
+                  <button class="chicken-clock-btn" onclick="openClockOnPhone()">
+                    <span>⏰</span> Set Alarm in Phone Clock (Vivo / Android)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="task-card" id="task-n4-s" onclick="toggleTask('n4')">
             <div class="checkbox">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -4808,7 +4945,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      const TOTAL_TASKS = 11;
+      const TOTAL_TASKS = 13;
       let completedTasks = new Set();
       let weekDaysCompleted = new Set();
       let weekDaysCompleted2 = new Set();
@@ -4848,6 +4985,8 @@
         { id: "e4", label: "Lumosity", icon: "🧠" },
         { id: "n2", label: "Grammar Session", icon: "📝" },
         { id: "n3", label: "Phonics", icon: "🔤" },
+        { id: "n5", label: "Surah Mulk", icon: "📖" },
+        { id: "n6", label: "Chicken: Freezer to Fridge", icon: "🍗" },
         { id: "n4", label: "Freedase 30 medicine", icon: "💊" },
       ];
       const WALK_WATER_TASKS = WALK_WATER_PERIODS.map((p) => ({
@@ -4857,6 +4996,14 @@
       }));
       const ALL_SCHEDULE_TASKS = SCHEDULE_TASKS.concat(WALK_WATER_TASKS);
       const SCHEDULE_HISTORY_MAX_DAYS = 30;
+
+      let chickenReminderStatus = {
+        remindersEnabled: false,
+        reminderTime: "22:30",
+        lastReminded: "",
+      };
+      let chickenReminderIntervalId = null;
+      const CHICKEN_REMINDER_CHECK_INTERVAL_MS = 30 * 1000;
 
 
 
@@ -6417,6 +6564,13 @@
             sub.textContent = "❓ Not taken";
             sub.className = "task-sub sub-not-taken";
           }
+          if (taskId === "n6") {
+            const sub = document.getElementById("sub-n6");
+            if (sub) {
+              sub.textContent = "❓ Pending for tomorrow";
+              sub.className = "task-sub sub-not-taken";
+            }
+          }
         } else {
           card.classList.add("completed");
           completedTasks.add(taskId);
@@ -6434,6 +6588,13 @@
             const sub = document.getElementById("sub-n4");
             sub.textContent = "✅ Taken";
             sub.className = "task-sub sub-taken";
+          }
+          if (taskId === "n6") {
+            const sub = document.getElementById("sub-n6");
+            if (sub) {
+              sub.textContent = "✅ Defrosting in fridge for tomorrow";
+              sub.className = "task-sub sub-taken";
+            }
           }
         }
         saveScheduleStatus();
@@ -6588,6 +6749,13 @@
                   const sub = document.getElementById("sub-n4");
                   sub.textContent = "✅ Taken";
                   sub.className = "task-sub sub-taken";
+                }
+                if (id === "n6") {
+                  const sub = document.getElementById("sub-n6");
+                  if (sub) {
+                    sub.textContent = "✅ Defrosting in fridge for tomorrow";
+                    sub.className = "task-sub sub-taken";
+                  }
                 }
               });
             }
@@ -7190,6 +7358,172 @@
         }
       }
 
+      function loadChickenReminderStatus() {
+        try {
+          const stored = localStorage.getItem("chicken_reminder_status_v1");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            chickenReminderStatus.remindersEnabled = !!parsed.remindersEnabled;
+            chickenReminderStatus.reminderTime = parsed.reminderTime || "22:30";
+            chickenReminderStatus.lastReminded = parsed.lastReminded || "";
+          }
+        } catch (e) {
+          console.error("Error loading chicken reminder:", e);
+        }
+        renderChickenReminderStatus();
+        if (
+          chickenReminderStatus.remindersEnabled &&
+          typeof Notification !== "undefined" &&
+          Notification.permission === "granted"
+        ) {
+          startChickenReminderInterval();
+        }
+      }
+
+      function saveChickenReminderStatus() {
+        try {
+          localStorage.setItem(
+            "chicken_reminder_status_v1",
+            JSON.stringify(chickenReminderStatus),
+          );
+        } catch (e) {}
+      }
+
+      function formatTimeDisplay(timeStr) {
+        if (!timeStr) return "10:30 PM";
+        const parts = timeStr.split(":");
+        let h = parseInt(parts[0], 10);
+        const m = parts[1] || "00";
+        const ampm = h >= 12 ? "PM" : "AM";
+        h = h % 12 || 12;
+        return h + ":" + m + " " + ampm;
+      }
+
+      function renderChickenReminderStatus() {
+        const btn = document.getElementById("chickenReminderBtn");
+        const sub = document.getElementById("chickenReminderSub");
+        const timeInput = document.getElementById("chickenReminderTime");
+        if (timeInput) timeInput.value = chickenReminderStatus.reminderTime || "22:30";
+        if (btn && sub) {
+          if (chickenReminderStatus.remindersEnabled) {
+            btn.textContent = "🔕 Disable";
+            btn.classList.add("active");
+            sub.textContent = "Active at " + formatTimeDisplay(chickenReminderStatus.reminderTime) + " (10 PM – 11 PM).";
+          } else {
+            btn.textContent = "Enable";
+            btn.classList.remove("active");
+            sub.textContent = "Get a night reminder between 10:00 PM – 11:00 PM.";
+          }
+        }
+      }
+
+      function updateChickenReminderTime(newTime) {
+        if (!newTime) return;
+        chickenReminderStatus.reminderTime = newTime;
+        saveChickenReminderStatus();
+        renderChickenReminderStatus();
+        showToast("Chicken reminder set to " + formatTimeDisplay(newTime));
+      }
+
+      function checkChickenReminder() {
+        if (!chickenReminderStatus.remindersEnabled) return;
+        if (completedTasks.has("n6")) return;
+
+        const now = new Date();
+        const hours = now.getHours();
+        const mins = now.getMinutes();
+        const targetHM = chickenReminderStatus.reminderTime || "22:30";
+        const targetParts = targetHM.split(":");
+        const targetH = parseInt(targetParts[0], 10);
+        const targetM = parseInt(targetParts[1], 10);
+        const currentTotalMins = hours * 60 + mins;
+        const targetTotalMins = targetH * 60 + targetM;
+
+        const today = medicineTodayStr();
+        if (chickenReminderStatus.lastReminded === today) return;
+
+        if (currentTotalMins >= targetTotalMins && currentTotalMins <= 23 * 60 + 59) {
+          chickenReminderStatus.lastReminded = today;
+          saveChickenReminderStatus();
+
+          if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+            new Notification("🍗 Chicken Defrost Reminder", {
+              body: "Don't forget to take chicken out from the freezer to the fridge for tomorrow!",
+            });
+          }
+          showToast("🍗 Reminder: Move chicken from freezer to fridge for tomorrow!");
+        }
+      }
+
+      function startChickenReminderInterval() {
+        if (chickenReminderIntervalId) clearInterval(chickenReminderIntervalId);
+        chickenReminderIntervalId = setInterval(
+          checkChickenReminder,
+          CHICKEN_REMINDER_CHECK_INTERVAL_MS,
+        );
+      }
+
+      function toggleChickenReminder() {
+        if (chickenReminderStatus.remindersEnabled) {
+          chickenReminderStatus.remindersEnabled = false;
+          if (chickenReminderIntervalId) {
+            clearInterval(chickenReminderIntervalId);
+            chickenReminderIntervalId = null;
+          }
+          saveChickenReminderStatus();
+          renderChickenReminderStatus();
+          showToast("Chicken reminders turned off");
+          return;
+        }
+
+        if (typeof Notification === "undefined") {
+          showToast("Notifications aren't supported in this browser");
+          return;
+        }
+
+        if (Notification.permission === "granted") {
+          chickenReminderStatus.remindersEnabled = true;
+          saveChickenReminderStatus();
+          renderChickenReminderStatus();
+          startChickenReminderInterval();
+          showToast("🔔 Chicken reminder enabled (" + formatTimeDisplay(chickenReminderStatus.reminderTime) + ")");
+          checkChickenReminder();
+        } else if (Notification.permission === "denied") {
+          showToast("Notifications are blocked — enable them in browser settings");
+        } else {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              chickenReminderStatus.remindersEnabled = true;
+              saveChickenReminderStatus();
+              renderChickenReminderStatus();
+              startChickenReminderInterval();
+              showToast("🔔 Chicken reminder enabled (" + formatTimeDisplay(chickenReminderStatus.reminderTime) + ")");
+              checkChickenReminder();
+            } else {
+              showToast("Notification permission not granted");
+            }
+          });
+        }
+      }
+
+      function openClockOnPhone() {
+        const targetHM = chickenReminderStatus.reminderTime || "22:30";
+        const parts = targetHM.split(":");
+        const hour = parseInt(parts[0], 10) || 22;
+        const minute = parseInt(parts[1], 10) || 30;
+        const label = "Defrost Chicken for Tomorrow";
+
+        showToast("Opening Clock app on phone ⏰");
+
+        const alarmUri = `intent:#Intent;action=android.intent.action.SET_ALARM;i.android.intent.extra.HOUR=${hour};i.android.intent.extra.MINUTES=${minute};S.android.intent.extra.MESSAGE=${encodeURIComponent(label)};B.android.intent.extra.SKIP_UI=false;end`;
+
+        const link = document.createElement("a");
+        link.href = alarmUri;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
 
 
       function updateWaterLitrePreview(period) {
@@ -7458,6 +7792,11 @@
         document.getElementById("sub-a2").className = "task-sub sub-not-taken";
         document.getElementById("sub-n4").textContent = "❓ Not taken";
         document.getElementById("sub-n4").className = "task-sub sub-not-taken";
+        const subN6 = document.getElementById("sub-n6");
+        if (subN6) {
+          subN6.textContent = "❓ Pending for tomorrow";
+          subN6.className = "task-sub sub-not-taken";
+        }
         WALK_WATER_PERIODS.forEach((p) => {
           document.getElementById("trackerWalkInput-" + p).value = "";
           document.getElementById("trackerWaterInput-" + p).value = "";
@@ -8138,6 +8477,7 @@
       loadAllChoreLogs();
       loadTypingRange();
       loadHairWashStatus();
+      loadChickenReminderStatus();
       loadScheduleStatus();
       loadTrackerDaily();
       renderSummary();
