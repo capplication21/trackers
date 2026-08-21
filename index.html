@@ -4679,9 +4679,9 @@
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
-              <input type="text" class="input-field" id="englishWordInput" placeholder="New Word / Phrase (e.g. Ubiquitous)" />
-              <input type="text" class="input-field" id="englishMeaningInput" placeholder="Meaning or Example (e.g. Present everywhere)" onkeydown="if(event.key==='Enter'){addEnglishWord();}" />
-              <button class="btn" style="background: #2f8fd1; color: white;" onclick="addEnglishWord()">➕ Add to Word Bank</button>
+              <input type="text" class="input-field" id="englishWordInput" placeholder="New Word / Phrase (e.g. Ubiquitous)" onkeydown="if(event.key==='Enter'){event.preventDefault(); document.getElementById('englishMeaningInput')?.focus();}" />
+              <input type="text" class="input-field" id="englishMeaningInput" placeholder="Meaning or Example (e.g. Present everywhere)" onkeydown="if(event.key==='Enter'){event.preventDefault(); addEnglishWord();}" />
+              <button type="button" class="btn" id="addEnglishWordBtn" style="background: #2f8fd1; color: white; cursor: pointer;" onclick="addEnglishWord()">➕ Add to Word Bank</button>
             </div>
 
             <div style="margin-top: 12px;">
@@ -9007,26 +9007,31 @@
       function addEnglishWord() {
         const wordEl = document.getElementById("englishWordInput");
         const meanEl = document.getElementById("englishMeaningInput");
-        const word = wordEl ? wordEl.value.trim() : "";
+        if (!wordEl) return;
+        const word = wordEl.value.trim();
         const meaning = meanEl ? meanEl.value.trim() : "";
         if (!word) {
           showToast("Please enter a word or phrase 📝");
+          wordEl.focus();
           return;
         }
+        if (!Array.isArray(englishVocabList)) englishVocabList = [];
         englishVocabList.unshift({
           id: Date.now(),
-          word,
-          meaning,
+          word: word,
+          meaning: meaning,
           date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }),
         });
         saveEnglishVocab();
-        if (wordEl) wordEl.value = "";
+        wordEl.value = "";
         if (meanEl) meanEl.value = "";
         renderEnglishVocabList();
         showToast(`Added "${word}" to Word Bank 🔤`);
+        wordEl.focus();
       }
 
       function deleteEnglishWord(id) {
+        if (!Array.isArray(englishVocabList)) englishVocabList = [];
         englishVocabList = englishVocabList.filter((item) => item.id !== id);
         saveEnglishVocab();
         renderEnglishVocabList();
@@ -9041,14 +9046,15 @@
       function renderEnglishVocabList(filterText = "") {
         const listEl = document.getElementById("englishVocabList");
         const countEl = document.getElementById("englishVocabCount");
+        if (!Array.isArray(englishVocabList)) englishVocabList = [];
         if (countEl) countEl.textContent = englishVocabList.length;
         if (!listEl) return;
 
         const filtered = filterText
           ? englishVocabList.filter(
               (item) =>
-                item.word.toLowerCase().includes(filterText) ||
-                item.meaning.toLowerCase().includes(filterText),
+                (item.word || "").toLowerCase().includes(filterText) ||
+                (item.meaning || "").toLowerCase().includes(filterText),
             )
           : englishVocabList;
 
@@ -9064,9 +9070,9 @@
             (item) => `
           <div class="english-vocab-item">
             <div style="flex: 1;">
-              <div class="english-vocab-word">${escapeHtml(item.word)}</div>
+              <div class="english-vocab-word">${escapeHtml(item.word || "")}</div>
               ${item.meaning ? `<div class="english-vocab-meaning">${escapeHtml(item.meaning)}</div>` : ""}
-              <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">📅 ${escapeHtml(item.date)}</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">📅 ${escapeHtml(item.date || "")}</div>
             </div>
             <button class="history-delete" onclick="deleteEnglishWord(${item.id})" title="Delete word">🗑️</button>
           </div>
@@ -9103,7 +9109,7 @@
       }
 
       // Initialize English vocab on page load
-      loadEnglishVocab();
+      renderEnglishTab();
     </script>
   </body>
 </html>
