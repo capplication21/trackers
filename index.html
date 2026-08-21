@@ -2552,6 +2552,61 @@
       .recipe-ingredient-subheading:first-child {
         margin-top: 0;
       }
+      .recipe-instruction-highlight {
+        margin: 10px 0 12px;
+        background: linear-gradient(135deg, #fffcf0 0%, #fff7d6 100%);
+        border: 2px solid #f5b729;
+        border-radius: 14px;
+        padding: 10px 14px;
+        box-shadow: 0 3px 0 #e8a317;
+      }
+      .recipe-instruction-highlight-header {
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: #8a5c10;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .recipe-instruction-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #ffffff;
+        padding: 6px 10px;
+        border-radius: 9px;
+        border: 1.5px solid #ebd69b;
+        margin-top: 5px;
+      }
+      .recipe-instruction-badge {
+        background: #f5b729;
+        color: #1a1a1a;
+        border: 1.5px solid #1a1a1a;
+        font-size: 10px;
+        font-weight: 500;
+        padding: 2px 7px;
+        border-radius: 6px;
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .recipe-instruction-text {
+        font-size: 13px;
+        color: #1a1a1a;
+        font-weight: 500;
+      }
+      .form-ingredient-item.is-instruction {
+        background: #fff8dc;
+        border: 1.5px solid #f5b729;
+      }
+      .form-ingredient-item.is-instruction span {
+        color: #8a5c10;
+        font-weight: 500;
+      }
       .ingredient-chip-list {
         display: flex;
         flex-wrap: wrap;
@@ -5530,12 +5585,12 @@
         {
           title: "Crispy chilli beef",
           url: "https://youtube.com/shorts/9q0_UO9s8w4?si=xWRo9eK9GHp9dRfm",
-          ingredients: ["Cornstarch", "All-purpose flour", "Salt", "Beef", "Soy sauce", "Rice vinegar", "Sweet chilli sauce", "Water", "Garlic (chopped)"],
+          ingredients: ["Cornstarch", "All-purpose flour", "Salt", "Beef", "Soy sauce", "Rice vinegar", "Sweet chilli sauce", "Water", "Garlic (chopped)", "Marinate for 5mint"],
         },
         {
           title: "Sweet honey chicken",
           url: "https://youtube.com/shorts/Syy1FeNc1tw?si=PljSaNO78Pgla6kf",
-          ingredients: ["Chicken", "Honey", "Soy sauce", "Vinegar", "Ketchup", "Garlic"],
+          ingredients: ["Chicken", "Honey", "Soy sauce", "Vinegar", "Ketchup", "Garlic", "Marinate for 5mint"],
         },
         {
           title: "Sticky sweet ground beef",
@@ -5628,20 +5683,16 @@
                 if (r.addedItems === undefined) r.addedItems = "";
                 if (r.changes === undefined) r.changes = "";
                 if (Array.isArray(r.ingredients)) {
-                  r.ingredients = r.ingredients
-                    .filter(
-                      (ing) =>
-                        !isInstructionText(
-                          typeof ing === "string" ? ing : ing.name,
-                        ),
-                    )
-                    .map((ing) => {
-                      const rawName = typeof ing === "string" ? ing : ing.name;
-                      const norm = normalizeIngredientName(rawName);
-                      if (typeof ing === "string")
-                        return { name: norm, checked: false };
-                      return { ...ing, name: norm };
-                    });
+                  r.ingredients = r.ingredients.map((ing) => {
+                    const rawName = typeof ing === "string" ? ing : ing.name;
+                    if (isInstructionText(rawName)) {
+                      return typeof ing === "string" ? { name: rawName, checked: false } : ing;
+                    }
+                    const norm = normalizeIngredientName(rawName);
+                    if (typeof ing === "string")
+                      return { name: norm, checked: false };
+                    return { ...ing, name: norm };
+                  });
                 }
               });
             }
@@ -5753,15 +5804,14 @@
         const input = document.getElementById("recipeIngredientInput");
         const rawName = input.value.trim();
         if (!rawName) return;
-        if (isInstructionText(rawName)) {
-          showToast("That looks like a temperature/timing step, not an ingredient 🚫");
-          input.value = "";
-          return;
-        }
-        const name = normalizeIngredientName(rawName);
+        const isInst = isInstructionText(rawName);
+        const name = isInst ? rawName : normalizeIngredientName(rawName);
         pendingIngredients.push({ name, checked: false });
         input.value = "";
         renderFormIngredientList();
+        if (isInst) {
+          showToast("Added highlighted instruction step ⏱️");
+        }
         input.focus();
       }
 
@@ -5784,13 +5834,16 @@
         }
         listEl.innerHTML = pendingIngredients
           .map(
-            (ing, index) => `
-          <div class="form-ingredient-item">
+            (ing, index) => {
+              const isInst = isInstructionText(ing.name);
+              return `
+          <div class="form-ingredient-item ${isInst ? "is-instruction" : ""}">
             <input type="checkbox" ${ing.checked ? "checked" : ""} onchange="toggleFormIngredientChecked(${index})" />
-            <span>${escapeHtml(ing.name)}</span>
+            <span>${isInst ? "⏱️ " : ""}${escapeHtml(ing.name)}</span>
             <button type="button" class="form-ingredient-remove" onclick="removeIngredientFromForm(${index})">✕</button>
           </div>
-        `,
+        `;
+            },
           )
           .join("");
       }
@@ -5960,16 +6013,18 @@
       ];
 
       function isInstructionText(name) {
-        const normalized = name.toLowerCase();
+        if (!name || typeof name !== "string") return false;
+        const normalized = name.toLowerCase().trim();
         return (
-          /degree/.test(normalized) ||
-          /marinate/.test(normalized) ||
-          /\d+\s*mint\b/.test(normalized) ||
-          /^add\b/.test(normalized) ||
-          /^fry\b/.test(normalized) ||
-          /\btill\b/.test(normalized) ||
-          /\buntil\b/.test(normalized) ||
-          /^sauce:?$/.test(normalized.trim())
+          /degree|°c|°f/.test(normalized) ||
+          /marinat/.test(normalized) ||
+          /\b\d+\s*(mint|min|mins|minute|minutes|hr|hrs|hour|hours)\b/.test(normalized) ||
+          /^(add|fry|deep fry|air fry|bake|roast|boil|simmer|steam|stir|rest|soak|mix|coat|toss)\b/.test(normalized) ||
+          /\b(till|until|before|after|overnight)\b/.test(normalized) ||
+          /^(sauce|step|instruction|note|tip):?$/i.test(normalized) ||
+          /^sauce:/i.test(normalized) ||
+          /^tip:/i.test(normalized) ||
+          /^note:/i.test(normalized)
         );
       }
 
@@ -6325,15 +6380,41 @@
 
         const commonItems = [];
         const uncommonItems = [];
-        recipe.ingredients.forEach((ing, ingIndex) => {
+        const instructionItems = [];
+
+        (recipe.ingredients || []).forEach((ing, ingIndex) => {
           const name = ingredientName(ing);
-          if (isInstructionText(name)) return;
-          (isCommonIngredient(name) ? commonItems : uncommonItems).push(
-            renderIngredientItem(ing, ingIndex),
-          );
+          if (isInstructionText(name)) {
+            instructionItems.push({ name, ingIndex });
+          } else {
+            (isCommonIngredient(name) ? commonItems : uncommonItems).push(
+              renderIngredientItem(ing, ingIndex),
+            );
+          }
         });
 
+        const instructionsHTML = instructionItems.length
+          ? `
+            <div class="recipe-instruction-highlight">
+              <div class="recipe-instruction-highlight-header">
+                <span>⏱️ Highlighted Instructions & Steps</span>
+              </div>
+              ${instructionItems
+                .map(
+                  (item) => `
+                <div class="recipe-instruction-item">
+                  <span class="recipe-instruction-badge">💡 Tip</span>
+                  <span class="recipe-instruction-text">${escapeHtml(item.name)}</span>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          `
+          : "";
+
         return `
+          ${instructionsHTML}
           ${
             uncommonItems.length
               ? `<div class="recipe-ingredient-subheading">Uncommon</div>${uncommonItems.join("")}`
