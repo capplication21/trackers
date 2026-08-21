@@ -915,9 +915,18 @@
         gap: 28px;
         margin-top: 14px;
         padding: 12px 16px;
-        background: rgba(0, 0, 0, 0.02);
+        background: linear-gradient(135deg, #fdfbf7 0%, #f7f2e4 100%);
         border-radius: 16px;
-        border: 1px dashed #E7E0C9;
+        border: 1.5px solid #e7dfcb;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      }
+      #morning-section .timer-wrap {
+        background: linear-gradient(135deg, #fffdf5 0%, #fff6dd 100%);
+        border: 1.5px solid #ebdcb0;
+      }
+      #night-section .timer-wrap {
+        background: linear-gradient(135deg, #f8faff 0%, #edf2ff 100%);
+        border: 1.5px solid #d4defc;
       }
       .timer-display {
         width: 64px;
@@ -935,6 +944,11 @@
         border: 2.5px solid var(--ink);
         box-shadow: 0 3px 0 #e8a317;
         transition: background 0.2s ease;
+      }
+      #morning-section #timer-display-exercise {
+        background: #f5b729;
+        box-shadow: 0 3px 0 #e8a317;
+        color: var(--ink);
       }
       #night-section #timer-display-grammar {
         background: #2f8fd1;
@@ -967,27 +981,34 @@
         gap: 10px;
       }
       .timer-btn {
-        background: #E4F2F1;
-        color: #0E7A78;
-        border: none;
-        border-radius: 10px;
+        background: linear-gradient(180deg, #ffffff 0%, #e6f6f5 100%);
+        color: #0e7a78;
+        border: 1.5px solid #bddedc;
+        border-radius: 999px;
         padding: 5px 12px;
         font-size: 11px;
         font-weight: 500;
         cursor: pointer;
         font-family: inherit;
         flex-shrink: 0;
+        box-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.05);
+        transition: all 0.15s ease;
+      }
+      .timer-btn:hover {
+        background: #ffffff;
+        border-color: #0e7a78;
       }
       .timer-btn:active {
-        transform: scale(0.95);
+        transform: translateY(1px);
+        box-shadow: none;
       }
       .timer-reset-btn {
         width: 26px;
         height: 26px;
-        border-radius: 8px;
-        border: 1.5px solid #dcd5be;
-        background: #ffffff;
-        color: #7A7460;
+        border-radius: 999px;
+        border: 1.5px solid #dcd3ba;
+        background: linear-gradient(180deg, #ffffff 0%, #faf5e8 100%);
+        color: #5c5440;
         font-size: 13px;
         line-height: 1;
         display: inline-flex;
@@ -997,15 +1018,18 @@
         font-family: inherit;
         flex-shrink: 0;
         margin-left: 4px;
+        box-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.05);
         transition: all 0.15s ease;
       }
       .timer-reset-btn:hover {
         border-color: var(--ink);
         color: var(--ink);
-        background: #fdfbf7;
+        background: #ffffff;
+        box-shadow: 0 2px 0 var(--ink);
       }
       .timer-reset-btn:active {
-        transform: scale(0.9);
+        transform: translateY(1px);
+        box-shadow: none;
       }
       .timer-adjust {
         display: flex;
