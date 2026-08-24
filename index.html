@@ -1057,12 +1057,14 @@
         box-shadow: 0 3px 0 #e8a317;
         color: var(--ink);
       }
-      #night-section #timer-display-grammar {
+      #night-section #timer-display-grammar,
+      #timer-display-grammar-hub {
         background: #2f8fd1;
         box-shadow: 0 3px 0 #1f72ae;
         color: white;
       }
-      #night-section #timer-display-phonics {
+      #night-section #timer-display-phonics,
+      #timer-display-phonics-hub {
         background: #6366f1;
         box-shadow: 0 3px 0 #4f46e5;
         color: white;
@@ -4574,16 +4576,16 @@
         <!-- ENGLISH LEARNING & PRACTICE TAB -->
         <div class="tab-content" id="tab-english">
           <div class="section-title english-title">
-            <span>🔤</span> ENGLISH LEARNING &amp; PRACTICE
+            <span>🇬🇧</span> DAILY ENGLISH TOOLKIT
           </div>
 
           <div class="english-hero-card">
             <div class="english-hero-header">
-              <span class="english-hero-title">🇬🇧 Daily English Toolkit</span>
+              <span class="english-hero-title">🔤 English Learning &amp; Practice</span>
               <span style="font-size: 18px;">🎯</span>
             </div>
             <div class="english-hero-desc">
-              All your English grammar, phonics, typing speed, and AI conversation tools in one focused space.
+              All your English grammar, phonics, and vocabulary tools in one focused space.
             </div>
           </div>
 
@@ -4604,10 +4606,15 @@
             <div class="timer-wrap" style="margin-top: 6px;">
               <div class="timer-display" id="timer-display-grammar-hub">10:00</div>
               <div class="timer-info">
-                <div class="adhkar-label" style="margin-bottom: 2px">⏱️ Grammar 10-Min Timer</div>
+                <div class="adhkar-label" style="margin-bottom: 2px">⏱️ Grammar Timer</div>
                 <div class="timer-controls">
-                  <button class="timer-btn" id="timer-toggle-grammar-hub" onclick="toggleTimerDirect('grammar')">Start</button>
-                  <button class="timer-reset-btn" id="timer-reset-grammar-hub" onclick="resetTimerDirect('grammar')" title="Reset">↺</button>
+                  <button class="timer-btn" id="timer-toggle-grammar-hub">Start</button>
+                  <button class="timer-reset-btn" id="timer-reset-grammar-hub" title="Reset">↺</button>
+                  <div class="timer-adjust">
+                    <button class="timer-adjust-btn" id="timer-minus-grammar-hub">−</button>
+                    <span class="timer-minutes" id="timer-minutes-grammar-hub">10m</span>
+                    <button class="timer-adjust-btn" id="timer-plus-grammar-hub">+</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -4630,62 +4637,70 @@
             <div class="timer-wrap" style="margin-top: 6px;">
               <div class="timer-display" id="timer-display-phonics-hub">10:00</div>
               <div class="timer-info">
-                <div class="adhkar-label" style="margin-bottom: 2px">⏱️ Phonics 10-Min Timer</div>
+                <div class="adhkar-label" style="margin-bottom: 2px">⏱️ Phonics Timer</div>
                 <div class="timer-controls">
-                  <button class="timer-btn" id="timer-toggle-phonics-hub" onclick="toggleTimerDirect('phonics')">Start</button>
-                  <button class="timer-reset-btn" id="timer-reset-phonics-hub" onclick="resetTimerDirect('phonics')" title="Reset">↺</button>
+                  <button class="timer-btn" id="timer-toggle-phonics-hub">Start</button>
+                  <button class="timer-reset-btn" id="timer-reset-phonics-hub" title="Reset">↺</button>
+                  <div class="timer-adjust">
+                    <button class="timer-adjust-btn" id="timer-minus-phonics-hub">−</button>
+                    <span class="timer-minutes" id="timer-minutes-phonics-hub">10m</span>
+                    <button class="timer-adjust-btn" id="timer-plus-phonics-hub">+</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- 3. KIMI AI ENGLISH CONVERSATION -->
-          <div class="english-module-card">
-            <div class="english-module-header">
-              <div class="english-module-title-wrap">
-                <div class="english-module-icon">🤖</div>
-                <div>
-                  <div class="english-module-name">Kimi AI Conversation &amp; Activity</div>
-                  <div style="font-size: 11px; color: #64748b;">Practice speaking, grammar &amp; writing</div>
-                </div>
-              </div>
-              <a class="yt-link" href="https://kimi.moonshot.cn" target="_blank" style="margin: 0;">
-                <span>🤖</span> Open Kimi
-              </a>
-            </div>
-            <div style="font-size: 12px; color: #475569; margin-bottom: 6px;">Tap any prompt to copy &amp; practice:</div>
-            <button class="english-prompt-pill" onclick="copyEnglishPrompt('Practice daily conversational English with me. Ask me 1 friendly question at a time and correct any grammar mistakes I make.')">
-              💬 "Practice daily English conversation with me (1 question at a time)"
-            </button>
-            <button class="english-prompt-pill" onclick="copyEnglishPrompt('Please correct the grammar and spelling in this sentence and explain how to say it more naturally in English: ')">
-              ✏️ "Correct my English sentence and show a more natural way to say it"
-            </button>
-            <button class="english-prompt-pill" onclick="copyEnglishPrompt('Give me 3 useful daily English idioms with simple meanings and example conversations.')">
-              💡 "Teach me 3 daily English idioms with simple examples"
-            </button>
-          </div>
-
-          <!-- 5. VOCABULARY & WORD BANK -->
+          <!-- 3. VOCABULARY & WORD BANK -->
           <div class="english-module-card">
             <div class="english-module-header">
               <div class="english-module-title-wrap">
                 <div class="english-module-icon">📖</div>
                 <div>
                   <div class="english-module-name">Vocabulary &amp; Word Bank</div>
-                  <div style="font-size: 11px; color: #64748b;">Save new words, phrases &amp; rules</div>
+                  <div style="font-size: 11px; color: #64748b;">English definitions &amp; Urdu meanings (اردو معنی)</div>
                 </div>
               </div>
               <span class="ingredient-dropdown-count" id="englishVocabCount">0</span>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
-              <input type="text" class="input-field" id="englishWordInput" placeholder="New Word / Phrase (e.g. Ubiquitous)" onkeydown="if(event.key==='Enter'){event.preventDefault(); document.getElementById('englishMeaningInput')?.focus();}" />
-              <input type="text" class="input-field" id="englishMeaningInput" placeholder="Meaning or Example (e.g. Present everywhere)" onkeydown="if(event.key==='Enter'){event.preventDefault(); addEnglishWord();}" />
-              <button type="button" class="btn" id="addEnglishWordBtn" style="background: #2f8fd1; color: white; cursor: pointer;" onclick="addEnglishWord()">➕ Add to Word Bank</button>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+              <div style="display: flex; gap: 6px; align-items: center;">
+                <input
+                  type="text"
+                  class="input-field"
+                  id="englishWordInput"
+                  placeholder="Type any word (e.g. Ubiquitous, Grateful)..."
+                  oninput="handleWordInputDebounced()"
+                  onkeydown="if(event.key==='Enter'){event.preventDefault(); addEnglishWord();}"
+                  style="flex: 1;"
+                />
+                <button
+                  type="button"
+                  class="btn"
+                  id="addEnglishWordBtn"
+                  style="background: #2f8fd1; color: white; cursor: pointer; font-weight: 500; padding: 10px 14px; border-radius: 10px; white-space: nowrap;"
+                  onclick="addEnglishWord()"
+                >
+                  ➕ Add Word
+                </button>
+              </div>
+              <div id="vocabLookupStatus" style="font-size: 11px; min-height: 16px; margin-top: -3px; color: #64748b;"></div>
+              <div id="vocabMeaningPreview" style="display: none; padding: 10px 12px; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; font-size: 12px; line-height: 1.5;">
+                <div id="vocabPreviewUrdu" style="font-size: 16px; font-weight: 700; color: #047857; margin-bottom: 3px; direction: rtl; text-align: left;"></div>
+                <div id="vocabMeaningPreviewText" style="color: #334155;"></div>
+              </div>
             </div>
 
             <div style="margin-top: 12px;">
-              <input type="text" class="input-field" id="englishVocabSearch" placeholder="🔍 Search saved words..." oninput="filterEnglishWords()" style="margin-bottom: 8px;" />
+              <input
+                type="text"
+                class="input-field"
+                id="englishVocabSearch"
+                placeholder="🔍 Search saved words (English or اردو)..."
+                oninput="filterEnglishWords()"
+                style="margin-bottom: 8px;"
+              />
               <div id="englishVocabList">
                 <div class="history-empty">No words added to your bank yet.</div>
               </div>
@@ -8388,18 +8403,42 @@
         initCounter("evening");
       })();
 
-      // Countdown Timers (user-adjustable duration)
+      // Countdown Timers (user-adjustable duration, multi-instance synchronized)
       function initCountdownTimer(suffix, defaultMinutes, doneMessage) {
         const MIN_MINUTES = 1;
         const MAX_MINUTES = 60;
         const lsKey = "tm_" + suffix + "_minutes";
 
-        const displayEl = document.getElementById("timer-display-" + suffix);
-        const toggleEl = document.getElementById("timer-toggle-" + suffix);
-        const resetEl = document.getElementById("timer-reset-" + suffix);
-        const minutesEl = document.getElementById("timer-minutes-" + suffix);
-        const minusEl = document.getElementById("timer-minus-" + suffix);
-        const plusEl = document.getElementById("timer-plus-" + suffix);
+        const displayEls = Array.from(
+          document.querySelectorAll(
+            `#timer-display-${suffix}, #timer-display-${suffix}-hub`,
+          ),
+        );
+        const toggleEls = Array.from(
+          document.querySelectorAll(
+            `#timer-toggle-${suffix}, #timer-toggle-${suffix}-hub`,
+          ),
+        );
+        const resetEls = Array.from(
+          document.querySelectorAll(
+            `#timer-reset-${suffix}, #timer-reset-${suffix}-hub`,
+          ),
+        );
+        const minutesEls = Array.from(
+          document.querySelectorAll(
+            `#timer-minutes-${suffix}, #timer-minutes-${suffix}-hub`,
+          ),
+        );
+        const minusEls = Array.from(
+          document.querySelectorAll(
+            `#timer-minus-${suffix}, #timer-minus-${suffix}-hub`,
+          ),
+        );
+        const plusEls = Array.from(
+          document.querySelectorAll(
+            `#timer-plus-${suffix}, #timer-plus-${suffix}-hub`,
+          ),
+        );
 
         function getStoredMinutes() {
           try {
@@ -8426,11 +8465,23 @@
         }
 
         function updateDisplay() {
-          displayEl.textContent = format(remaining);
-          displayEl.classList.toggle("done", remaining === 0);
-          minutesEl.textContent = minutes + "m";
-          minusEl.disabled = !!intervalId || minutes <= MIN_MINUTES;
-          plusEl.disabled = !!intervalId || minutes >= MAX_MINUTES;
+          const formatted = format(remaining);
+          displayEls.forEach((el) => {
+            el.textContent = formatted;
+            el.classList.toggle("done", remaining === 0);
+          });
+          minutesEls.forEach((el) => {
+            el.textContent = minutes + "m";
+          });
+          minusEls.forEach((el) => {
+            el.disabled = !!intervalId || minutes <= MIN_MINUTES;
+          });
+          plusEls.forEach((el) => {
+            el.disabled = !!intervalId || minutes >= MAX_MINUTES;
+          });
+          toggleEls.forEach((el) => {
+            el.textContent = intervalId ? "Pause" : "Start";
+          });
         }
 
         function tick() {
@@ -8446,14 +8497,12 @@
           if (intervalId) return;
           if (remaining <= 0) remaining = minutes * 60;
           intervalId = setInterval(tick, 1000);
-          toggleEl.textContent = "Pause";
           updateDisplay();
         }
 
         function pause() {
           clearInterval(intervalId);
           intervalId = null;
-          toggleEl.textContent = "Start";
           updateDisplay();
         }
 
@@ -8485,10 +8534,10 @@
         }
 
         updateDisplay();
-        toggleEl.addEventListener("click", toggle);
-        resetEl.addEventListener("click", reset);
-        minusEl.addEventListener("click", (e) => adjust(-1, e));
-        plusEl.addEventListener("click", (e) => adjust(1, e));
+        toggleEls.forEach((el) => el.addEventListener("click", toggle));
+        resetEls.forEach((el) => el.addEventListener("click", reset));
+        minusEls.forEach((el) => el.addEventListener("click", (e) => adjust(-1, e)));
+        plusEls.forEach((el) => el.addEventListener("click", (e) => adjust(1, e)));
       }
 
       initCountdownTimer("grammar", 10, "Grammar session timer done! 🎉");
@@ -8982,8 +9031,45 @@
       loadTrackerDaily();
       renderSummary();
       switchTab("schedule");
-      // ==================== ENGLISH HUB FUNCTIONS ====================
+      // ==================== ENGLISH HUB & DICTIONARY FUNCTIONS ====================
       let englishVocabList = [];
+      let vocabLookupTimeout = null;
+
+      const OFFLINE_VOCAB_DICT = {
+        ubiquitous: { en: "(adj) Present, appearing, or found everywhere", ur: "ہر جگہ موجود / ہمہ گیر" },
+        resilient: { en: "(adj) Able to recover quickly from difficult conditions", ur: "باہمت / لچکدار / مضبوط" },
+        serendipity: { en: "(noun) Finding pleasant or valuable things by chance", ur: "خوش قسمتی / غیر متوقع نفع" },
+        diligent: { en: "(adj) Having or showing care and conscientiousness in work", ur: "محنتی / مستعد" },
+        meticulous: { en: "(adj) Showing great attention to detail; very careful", ur: "انتہائی باریک بین / محتاط" },
+        eloquent: { en: "(adj) Fluent or persuasive in speaking or writing", ur: "فصیح و بلیغ / شیریں بیان" },
+        ephemeral: { en: "(adj) Lasting for a very short time; fleeting", ur: "عارضی / چند روزہ / فانی" },
+        pragmatic: { en: "(adj) Dealing with things sensibly and realistically", ur: "عملی / حقیقت پسندانہ" },
+        benevolent: { en: "(adj) Well meaning and kindly; charitable", ur: "مہربان / فیاض / خیر خواہ" },
+        tenacious: { en: "(adj) Persistent and determined; holding fast", ur: "ثابت قدم / پرعزم / پکا" },
+        plethora: { en: "(noun) A large or excessive amount of something", ur: "کثرت / بہتات / فراوانی" },
+        inquisitive: { en: "(adj) Curious or inquiring; eager for knowledge", ur: "متجسس / جاننے کا شوقین" },
+        lucid: { en: "(adj) Expressed clearly; easy to understand", ur: "واضح / صاف / سلجھا ہوا" },
+        candid: { en: "(adj) Truthful and straightforward; frank", ur: "کھرا / بے باک / صاف گو" },
+        persevere: { en: "(verb) Continue despite difficulty or lack of success", ur: "ثابت قدم رہنا / لگے رہنا" },
+        empathy: { en: "(noun) The ability to understand and share others' feelings", ur: "ہمدردی / احساس" },
+        profound: { en: "(adj) Very great or intense; having deep insight", ur: "گہرا / عمیق / پر اثر" },
+        solitude: { en: "(noun) The state or situation of being alone peacefully", ur: "تنہائی / خلوت" },
+        authentic: { en: "(adj) Genuine; of undisputed origin", ur: "اصلی / مستند / سچا" },
+        vocabulary: { en: "(noun) The body of words used in a language", ur: "ذخیرہ الفاظ" },
+        grammar: { en: "(noun) The system and structure of a language", ur: "قواعد / گرامر" },
+        phonics: { en: "(noun) Method of teaching reading by sounds of letters", ur: "صوتیات / حروف کی آوازیں" },
+        exercise: { en: "(noun/verb) Physical activity to sustain health and fitness", ur: "ورزش / مشق" },
+        adhkar: { en: "(noun) Islamic remembrance and supplications to Allah", ur: "اذکار / دعائیں" },
+        habit: { en: "(noun) A settled or regular tendency or practice", ur: "عادت / معمول" },
+        fluent: { en: "(adj) Able to express oneself easily and articulately", ur: "روانی / شستہ بولنے والا" },
+        consistent: { en: "(adj) Acting or done in the same way over time", ur: "مستقل مزاج / باقاعدہ" },
+        grateful: { en: "(adj) Feeling or showing appreciation; thankful", ur: "شکر گزار / احسان مند" },
+        ambitious: { en: "(adj) Having a strong desire to succeed", ur: "بلند نظر / پرعزم" },
+        apple: { en: "(noun) A round edible fruit with red, green, or yellow skin", ur: "سیب" },
+        study: { en: "(verb/noun) Devoting time and attention to acquiring knowledge", ur: "پڑھائی / مطالعہ کرنا" },
+        happy: { en: "(adj) Feeling or showing pleasure or contentment", ur: "خوش / مسرور" },
+        patience: { en: "(noun) The capacity to accept delay or trouble calmly", ur: "صبر / برداشت" }
+      };
 
       function loadEnglishVocab() {
         try {
@@ -9004,27 +9090,197 @@
         } catch (e) {}
       }
 
-      function addEnglishWord() {
+      function handleWordInputDebounced() {
+        clearTimeout(vocabLookupTimeout);
+        const statusEl = document.getElementById("vocabLookupStatus");
+        const previewEl = document.getElementById("vocabMeaningPreview");
         const wordEl = document.getElementById("englishWordInput");
-        const meanEl = document.getElementById("englishMeaningInput");
+        const word = (wordEl?.value || "").trim();
+
+        if (!word) {
+          if (statusEl) statusEl.innerHTML = "";
+          if (previewEl) previewEl.style.display = "none";
+          return;
+        }
+
+        if (statusEl) {
+          statusEl.innerHTML = `<span style="color: #64748b;">⏳ Searching meaning & Urdu translation for "${escapeHtml(word)}"...</span>`;
+        }
+
+        vocabLookupTimeout = setTimeout(() => {
+          lookupWordDefinition(false);
+        }, 400);
+      }
+
+      async function fetchUrduTranslation(cleanQuery) {
+        try {
+          const res = await fetch(
+            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanQuery)}&langpair=en|ur`,
+          );
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.responseData && data.responseData.translatedText) {
+              const txt = data.responseData.translatedText.trim();
+              if (
+                txt &&
+                txt.toLowerCase() !== cleanQuery.toLowerCase() &&
+                !txt.includes("MYMEMORY WARNING")
+              ) {
+                return txt;
+              }
+            }
+          }
+        } catch (e) {}
+        return "";
+      }
+
+      async function lookupWordDefinition(isManual = false) {
+        const wordEl = document.getElementById("englishWordInput");
+        const statusEl = document.getElementById("vocabLookupStatus");
+        const previewEl = document.getElementById("vocabMeaningPreview");
+        const previewUrduEl = document.getElementById("vocabPreviewUrdu");
+        const previewTextEl = document.getElementById("vocabMeaningPreviewText");
+        const rawWord = (wordEl?.value || "").trim();
+
+        if (!rawWord) {
+          if (isManual) showToast("Please type a word first 📝");
+          if (previewEl) previewEl.style.display = "none";
+          return null;
+        }
+
+        const cleanQuery = rawWord.replace(/[^a-zA-Z\s-]/g, "").trim().toLowerCase();
+        if (!cleanQuery) return null;
+
+        function applyFoundMeaning(meaningText, urduText, badgeText = "") {
+          if (previewEl) {
+            if (previewUrduEl) {
+              if (urduText) {
+                previewUrduEl.innerHTML = `<span style="font-size: 11px; color: #065f46; font-weight: normal; margin-left: 6px;">اردو:</span> ${escapeHtml(urduText)}`;
+                previewUrduEl.style.display = "block";
+              } else {
+                previewUrduEl.style.display = "none";
+              }
+            }
+            if (previewTextEl) {
+              previewTextEl.textContent = meaningText || "Ready to save";
+            }
+            previewEl.style.display = "block";
+          }
+          if (statusEl) {
+            statusEl.innerHTML = `<span style="color: #16a34a; font-weight: 500;">✅ ${badgeText || "English & Urdu ready!"}</span>`;
+          }
+        }
+
+        // 1. Offline fast cache lookup
+        if (OFFLINE_VOCAB_DICT[cleanQuery]) {
+          const entry = OFFLINE_VOCAB_DICT[cleanQuery];
+          const meaningText = entry.en || "";
+          const urduText = entry.ur || "";
+          applyFoundMeaning(meaningText, urduText, "Instant match (English + اردو)");
+          return { meaningText, urduText };
+        }
+
+        if (statusEl) {
+          statusEl.innerHTML = `<span style="color: #0284c7;">🔍 Looking up "${escapeHtml(cleanQuery)}" (English & اردو)...</span>`;
+        }
+
+        // Parallel lookup: Dictionary Definition + Urdu Translation
+        const [dictData, urduText] = await Promise.all([
+          (async () => {
+            // Try Datamuse first for reliable, fast definitions
+            try {
+              const res = await fetch(
+                `https://api.datamuse.com/words?sp=${encodeURIComponent(cleanQuery)}&md=d&max=1`,
+              );
+              if (res.ok) {
+                const d = await res.json();
+                if (Array.isArray(d) && d.length > 0 && Array.isArray(d[0].defs) && d[0].defs.length > 0) {
+                  const rawDef = d[0].defs[0];
+                  const parts = rawDef.split("\t");
+                  const posMap = { n: "noun", v: "verb", adj: "adj", adv: "adv" };
+                  const pos = posMap[parts[0]] || parts[0];
+                  const def = parts[1] || rawDef;
+                  return { meaningText: `(${pos}) ${def.trim()}`, partOfSpeech: pos };
+                }
+              }
+            } catch (e) {}
+
+            // Try DictionaryAPI as backup
+            try {
+              const res2 = await fetch(
+                `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanQuery)}`,
+              );
+              if (res2.ok) {
+                const data2 = await res2.json();
+                if (Array.isArray(data2) && data2.length > 0) {
+                  const entry = data2[0];
+                  if (entry.meanings && entry.meanings.length > 0) {
+                    const m = entry.meanings[0];
+                    const pos = m.partOfSpeech || "";
+                    if (m.definitions && m.definitions.length > 0) {
+                      const def = m.definitions[0].definition || "";
+                      return { meaningText: pos ? `(${pos}) ${def}` : def, partOfSpeech: pos };
+                    }
+                  }
+                }
+              }
+            } catch (e2) {}
+            return null;
+          })(),
+          fetchUrduTranslation(cleanQuery),
+        ]);
+
+        const meaningText = dictData ? dictData.meaningText : "";
+        if (meaningText || urduText) {
+          applyFoundMeaning(
+            meaningText,
+            urduText,
+            urduText ? "Found with Urdu translation (اردو)" : "Definition ready!",
+          );
+          return { meaningText, urduText };
+        }
+
+        // Not found in online dictionaries
+        if (statusEl) {
+          statusEl.innerHTML = `<span style="color: #64748b;">💡 Ready to add to word bank</span>`;
+        }
+        if (previewEl) previewEl.style.display = "none";
+        return null;
+      }
+
+      async function addEnglishWord() {
+        const wordEl = document.getElementById("englishWordInput");
+        const statusEl = document.getElementById("vocabLookupStatus");
+        const previewEl = document.getElementById("vocabMeaningPreview");
         if (!wordEl) return;
         const word = wordEl.value.trim();
-        const meaning = meanEl ? meanEl.value.trim() : "";
+
         if (!word) {
-          showToast("Please enter a word or phrase 📝");
+          showToast("Please type a word first 📝");
           wordEl.focus();
           return;
         }
+
+        if (statusEl) {
+          statusEl.innerHTML = `<span style="color: #0284c7;">🔍 Getting English & Urdu meaning...</span>`;
+        }
+
+        const result = await lookupWordDefinition(false);
+        const meaning = result && result.meaningText ? result.meaningText : "";
+        const urdu = result && result.urduText ? result.urduText : "";
+
         if (!Array.isArray(englishVocabList)) englishVocabList = [];
         englishVocabList.unshift({
           id: Date.now(),
           word: word,
           meaning: meaning,
+          urdu: urdu,
           date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" }),
         });
         saveEnglishVocab();
         wordEl.value = "";
-        if (meanEl) meanEl.value = "";
+        if (statusEl) statusEl.innerHTML = "";
+        if (previewEl) previewEl.style.display = "none";
         renderEnglishVocabList();
         showToast(`Added "${word}" to Word Bank 🔤`);
         wordEl.focus();
@@ -9054,14 +9310,15 @@
           ? englishVocabList.filter(
               (item) =>
                 (item.word || "").toLowerCase().includes(filterText) ||
-                (item.meaning || "").toLowerCase().includes(filterText),
+                (item.meaning || "").toLowerCase().includes(filterText) ||
+                (item.urdu || "").toLowerCase().includes(filterText),
             )
           : englishVocabList;
 
         if (filtered.length === 0) {
           listEl.innerHTML = filterText
             ? `<div class="history-empty">No words found for "${escapeHtml(filterText)}".</div>`
-            : '<div class="history-empty">No words added yet. Add words and phrases above!</div>';
+            : '<div class="history-empty">No words added yet. Type any word above to look up meaning & Urdu translation!</div>';
           return;
         }
 
@@ -9070,8 +9327,11 @@
             (item) => `
           <div class="english-vocab-item">
             <div style="flex: 1;">
-              <div class="english-vocab-word">${escapeHtml(item.word || "")}</div>
-              ${item.meaning ? `<div class="english-vocab-meaning">${escapeHtml(item.meaning)}</div>` : ""}
+              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+                <span class="english-vocab-word">${escapeHtml(item.word || "")}</span>
+                ${item.urdu ? `<span style="font-size: 15px; font-weight: 700; color: #047857; direction: rtl; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;">${escapeHtml(item.urdu)}</span>` : ""}
+              </div>
+              ${item.meaning ? `<div class="english-vocab-meaning">${escapeHtml(item.meaning)}</div>` : '<div class="english-vocab-meaning" style="color: #94a3b8; font-style: italic;">No definition available</div>'}
               <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">📅 ${escapeHtml(item.date || "")}</div>
             </div>
             <button class="history-delete" onclick="deleteEnglishWord(${item.id})" title="Delete word">🗑️</button>
@@ -9079,28 +9339,6 @@
         `,
           )
           .join("");
-      }
-
-      function copyEnglishPrompt(text) {
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(text).then(() => {
-            showToast("Prompt copied to clipboard! Opening Kimi 🤖");
-            window.open("https://kimi.moonshot.cn", "_blank");
-          });
-        } else {
-          showToast("Opening Kimi 🤖");
-          window.open("https://kimi.moonshot.cn", "_blank");
-        }
-      }
-
-      function toggleTimerDirect(type) {
-        const toggleBtn = document.getElementById("timer-toggle-" + type);
-        if (toggleBtn) toggleBtn.click();
-      }
-
-      function resetTimerDirect(type) {
-        const resetBtn = document.getElementById("timer-reset-" + type);
-        if (resetBtn) resetBtn.click();
       }
 
       function renderEnglishTab() {
