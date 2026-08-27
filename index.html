@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -3562,15 +3562,111 @@
       .water-title {
         color: var(--teal-deep);
       }
-      .notes-title {
-        color: #d97706;
+      .notes-title,
+      .duaa-title {
+        color: #047857;
+        background: #ecfdf5;
       }
-      .tab-btn.active[onclick*="notes"] .tab-icon {
-        background: #f59e0b;
+      .tab-btn.active[onclick*="notes"] .tab-icon,
+      .tab-btn.active[onclick*="duaa"] .tab-icon {
+        background: #047857;
         color: #ffffff;
       }
 
-      /* Notes Tab Styles */
+      /* ==================== DUAA BOOK & JOURNAL STYLES ==================== */
+      .duaa-hero-card {
+        background: linear-gradient(135deg, #064e3b 0%, #065f46 60%, #047857 100%);
+        border: 2.5px solid var(--ink);
+        border-radius: var(--radius);
+        padding: 16px 18px;
+        margin-bottom: 14px;
+        box-shadow: var(--shadow-flat);
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+      .duaa-hero-card::after {
+        content: "﷽";
+        position: absolute;
+        right: 12px;
+        top: 6px;
+        font-family: 'Amiri', 'Traditional Arabic', serif;
+        font-size: 32px;
+        opacity: 0.15;
+        pointer-events: none;
+      }
+      .duaa-hero-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .duaa-hero-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+      .duaa-hero-info {
+        flex: 1;
+      }
+      .duaa-hero-title {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        color: #fef08a;
+        margin-bottom: 2px;
+      }
+      .duaa-hero-desc {
+        font-size: 12px;
+        color: #d1fae5;
+        line-height: 1.35;
+        opacity: 0.95;
+      }
+      .duaa-hero-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .duaa-hero-btn {
+        flex: 1;
+        padding: 9px 12px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        border: 2px solid var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.15s ease;
+      }
+      .duaa-hero-btn.primary-book-btn {
+        background: #f59e0b;
+        color: #1a1a1a;
+        box-shadow: 0 2.5px 0 var(--ink);
+      }
+      .duaa-hero-btn.primary-book-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .duaa-hero-btn.secondary-add-btn {
+        background: #ffffff;
+        color: #064e3b;
+        box-shadow: 0 2.5px 0 var(--ink);
+      }
+      .duaa-hero-btn.secondary-add-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+
       .notes-filter-row {
         display: flex;
         gap: 8px;
@@ -3578,6 +3674,7 @@
         overflow-x: auto;
         padding-bottom: 2px;
         scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
       }
       .notes-filter-row::-webkit-scrollbar {
         display: none;
@@ -3601,25 +3698,29 @@
         box-shadow: none;
       }
       .note-filter-pill.active {
-        background: #f59e0b;
-        color: #1a1a1a;
+        background: #047857;
+        color: #ffffff;
         box-shadow: 0 2px 0 var(--ink);
       }
 
+      .duaa-card,
       .note-card {
-        background: var(--surface);
+        background: #fffdf9;
         border: 2.5px solid var(--ink);
         border-radius: var(--radius);
         padding: 16px;
         margin-bottom: 14px;
         box-shadow: var(--shadow-flat);
         transition: transform 0.15s ease;
+        position: relative;
       }
+      .duaa-card.pinned,
       .note-card.pinned {
-        background: #fffdf5;
-        border-color: #d97706;
-        box-shadow: 0 3px 0 #d97706;
+        background: #fffdf2;
+        border-color: #047857;
+        box-shadow: 0 3.5px 0 #047857;
       }
+      .duaa-card-top,
       .note-card-top {
         display: flex;
         align-items: flex-start;
@@ -3627,63 +3728,145 @@
         gap: 10px;
         margin-bottom: 8px;
       }
+      .duaa-card-title,
       .note-card-title {
         font-size: 15px;
-        font-weight: 500;
+        font-weight: 700;
         color: #1a1a1a;
-        line-height: 1.3;
+        line-height: 1.35;
         flex: 1;
         word-break: break-word;
       }
+      .duaa-card-badges,
       .note-card-badges {
         display: flex;
         align-items: center;
         gap: 6px;
         flex-shrink: 0;
       }
+      .duaa-tag-badge,
       .note-tag-badge {
         font-size: 10.5px;
-        font-weight: 500;
+        font-weight: 600;
         padding: 2px 8px;
         border-radius: 6px;
         border: 1.5px solid var(--ink);
-        background: #ede7d2;
-        color: #1a1a1a;
+        background: #ecfdf5;
+        color: #065f46;
       }
+      .duaa-source-badge {
+        font-size: 10.5px;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        background: #f8fafc;
+        color: #475569;
+        display: inline-block;
+        margin-bottom: 8px;
+      }
+      .duaa-pin-btn,
       .note-pin-btn {
         background: none;
         border: none;
-        font-size: 16px;
+        font-size: 17px;
         cursor: pointer;
         padding: 2px;
         line-height: 1;
-        opacity: 0.5;
+        opacity: 0.45;
         transition: opacity 0.2s, transform 0.15s;
       }
+      .duaa-pin-btn:hover,
       .note-pin-btn:hover {
         opacity: 1;
         transform: scale(1.15);
       }
+      .duaa-card.pinned .duaa-pin-btn,
       .note-card.pinned .note-pin-btn {
         opacity: 1;
+        color: #eab308;
       }
+      .duaa-card-date,
       .note-card-date {
         font-size: 11px;
         color: #7a7460;
         font-weight: 500;
         margin-bottom: 8px;
       }
+
+      /* Arabic Typography for Duaas */
+      .duaa-arabic-text {
+        font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+        font-size: 21px;
+        line-height: 1.9;
+        color: #064e3b;
+        direction: rtl;
+        text-align: right;
+        background: #f0fdf4;
+        border: 1.5px solid #bbf7d0;
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin: 10px 0;
+        word-spacing: 2px;
+        letter-spacing: 0.2px;
+        text-shadow: 0 0 1px rgba(6, 78, 59, 0.2);
+      }
+      .duaa-transliteration {
+        font-size: 12.5px;
+        font-style: italic;
+        color: #0284c7;
+        margin-bottom: 8px;
+        line-height: 1.45;
+      }
+      .duaa-translation-text,
       .note-card-text {
         font-size: 13.5px;
-        line-height: 1.5;
-        color: #3a3627;
+        line-height: 1.55;
+        color: #1f2937;
         white-space: pre-wrap;
         word-break: break-word;
         margin-bottom: 10px;
       }
+      .duaa-translation-text:empty,
       .note-card-text:empty {
         display: none;
       }
+
+      .duaa-recited-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 6px 10px;
+        margin: 8px 0;
+      }
+      .duaa-recited-label {
+        font-size: 12px;
+        color: #475569;
+        font-weight: 500;
+      }
+      .duaa-recited-counter-btn {
+        background: #047857;
+        color: #ffffff;
+        border: 1.5px solid var(--ink);
+        border-radius: 999px;
+        padding: 3px 10px;
+        font-size: 11.5px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: transform 0.1s ease;
+      }
+      .duaa-recited-counter-btn:active {
+        transform: scale(0.92);
+      }
+
+      .duaa-img-thumb-wrap,
       .note-img-thumb-wrap {
         position: relative;
         margin: 10px 0;
@@ -3697,6 +3880,7 @@
         align-items: center;
         justify-content: center;
       }
+      .duaa-img-thumb,
       .note-img-thumb {
         width: 100%;
         max-height: 260px;
@@ -3704,9 +3888,11 @@
         display: block;
         transition: transform 0.2s ease;
       }
+      .duaa-img-thumb-wrap:hover .duaa-img-thumb,
       .note-img-thumb-wrap:hover .note-img-thumb {
         transform: scale(1.02);
       }
+      .duaa-img-zoom-tag,
       .note-img-zoom-tag {
         position: absolute;
         bottom: 8px;
@@ -3720,20 +3906,22 @@
         border-radius: 6px;
         pointer-events: none;
       }
+      .duaa-card-footer,
       .note-card-footer {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: 8px;
+        gap: 6px;
         margin-top: 10px;
         padding-top: 8px;
         border-top: 1px dashed #e7e0c9;
       }
+      .duaa-action-btn,
       .note-action-btn {
         background: var(--surface-muted);
         border: 1.5px solid var(--ink);
         border-radius: 8px;
-        padding: 4px 10px;
+        padding: 5px 10px;
         font-size: 12px;
         font-weight: 500;
         color: #1a1a1a;
@@ -3745,14 +3933,32 @@
         box-shadow: 0 1.5px 0 var(--ink);
         transition: all 0.15s ease;
       }
+      .duaa-action-btn:active,
       .note-action-btn:active {
         transform: translateY(1.5px);
         box-shadow: none;
       }
+      .duaa-action-btn.read-btn {
+        background: #fef08a;
+        color: #854d0e;
+        border-color: #854d0e;
+      }
+      .duaa-action-btn.delete-btn:hover,
       .note-action-btn.delete-btn:hover {
         background: #fee2e2;
         color: #e11d48;
         border-color: #e11d48;
+      }
+
+      /* Duaa Arabic Input in Modal */
+      .duaa-arabic-input {
+        font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+        font-size: 18px;
+        line-height: 1.8;
+        direction: rtl;
+        text-align: right;
+        background: #f0fdf4 !important;
+        border-color: #86efac !important;
       }
 
       /* Note Modal Image Drop Area */
@@ -3769,8 +3975,8 @@
       }
       .note-image-drop-area:hover,
       .note-image-drop-area.dragover {
-        border-color: #f59e0b;
-        background: #fff9eb;
+        border-color: #047857;
+        background: #ecfdf5;
       }
       .note-drop-icon {
         font-size: 28px;
@@ -3819,6 +4025,261 @@
         font-size: 14px;
         cursor: pointer;
         font-weight: 500;
+      }
+
+      /* ==================== DUAA BOOK READER MODAL ==================== */
+      .duaa-reader-overlay {
+        background: rgba(10, 20, 15, 0.85);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 2500;
+      }
+      .duaa-book-container {
+        background: #fffefb;
+        border: 3px solid var(--ink);
+        border-radius: 20px;
+        width: 100%;
+        max-width: 480px;
+        box-shadow: 0 8px 0 var(--ink);
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100dvh - 30px);
+        overflow: hidden;
+        position: relative;
+      }
+      .duaa-book-top-bar {
+        background: #064e3b;
+        color: #ffffff;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2.5px solid var(--ink);
+      }
+      .duaa-book-meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .duaa-book-page-badge {
+        font-size: 12px;
+        font-weight: 700;
+        background: #f59e0b;
+        color: #1a1a1a;
+        padding: 2px 8px;
+        border-radius: 6px;
+        border: 1.5px solid var(--ink);
+      }
+      .duaa-book-category-pill {
+        font-size: 11px;
+        color: #d1fae5;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 2px 7px;
+        border-radius: 6px;
+      }
+      .duaa-book-top-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .duaa-reader-font-btn {
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: #ffffff;
+        border-radius: 6px;
+        padding: 3px 8px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .duaa-reader-bookmark-btn {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 2px 4px;
+        line-height: 1;
+        transition: transform 0.15s;
+      }
+      .duaa-reader-bookmark-btn.active {
+        color: #facc15;
+      }
+      .duaa-reader-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
+        color: #ffffff;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: 700;
+        margin-left: 4px;
+      }
+
+      .duaa-book-page {
+        padding: 20px 18px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        flex: 1;
+        background: radial-gradient(circle at center, #ffffff 0%, #fffbf2 100%);
+      }
+      .duaa-reader-bismillah {
+        text-align: center;
+        font-family: 'Amiri', 'Traditional Arabic', serif;
+        font-size: 20px;
+        color: #047857;
+        margin-bottom: 12px;
+        opacity: 0.85;
+      }
+      .duaa-reader-title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 4px;
+      }
+      .duaa-reader-source {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        color: #059669;
+        margin-bottom: 16px;
+      }
+      .duaa-reader-arabic {
+        font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+        font-size: 24px;
+        line-height: 2.1;
+        color: #064e3b;
+        direction: rtl;
+        text-align: center;
+        background: #f0fdf4;
+        border: 2px solid #a7f3d0;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 14px;
+        word-spacing: 3px;
+        text-shadow: 0 0 1px rgba(6, 78, 59, 0.15);
+      }
+      .duaa-reader-translit {
+        font-size: 13.5px;
+        font-style: italic;
+        color: #0369a1;
+        text-align: center;
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
+      .duaa-reader-trans {
+        font-size: 14.5px;
+        line-height: 1.6;
+        color: #1f2937;
+        text-align: center;
+        margin-bottom: 16px;
+        padding: 0 6px;
+      }
+      .duaa-reader-screenshot-wrap {
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 16px;
+        background: #000;
+        text-align: center;
+      }
+      .duaa-reader-screenshot {
+        max-width: 100%;
+        max-height: 380px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+      }
+      .duaa-reader-counter-box {
+        background: #ecfdf5;
+        border: 2px solid #059669;
+        border-radius: 14px;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 14px;
+      }
+      .duaa-reader-counter-info {
+        font-size: 13px;
+        font-weight: 600;
+        color: #065f46;
+      }
+      .duaa-reader-counter-btn {
+        background: #059669;
+        color: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 2px 0 var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .duaa-reader-counter-btn:active {
+        transform: scale(0.94);
+        box-shadow: none;
+      }
+
+      .duaa-book-nav-bar {
+        background: #f1f5f9;
+        border-top: 2.5px solid var(--ink);
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .duaa-nav-arrow-btn {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        padding: 8px 12px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #1a1a1a;
+        cursor: pointer;
+        box-shadow: 0 2px 0 var(--ink);
+        transition: all 0.15s ease;
+      }
+      .duaa-nav-arrow-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .duaa-nav-arrow-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+      }
+      .duaa-nav-middle {
+        flex: 1;
+      }
+      .duaa-book-jump-select {
+        width: 100%;
+        padding: 8px 10px;
+        border: 2px solid #cbd5e1;
+        border-radius: 10px;
+        font-size: 12.5px;
+        font-weight: 600;
+        background: #ffffff;
+        color: #1e293b;
+        text-overflow: ellipsis;
+      }
+
+      /* Modal Save Button Duaa Theme */
+      .duaa-save-btn {
+        background: #047857 !important;
+        color: #ffffff !important;
+        box-shadow: 0 3px 0 #064e3b !important;
       }
 
       /* Image Viewer Full-Screen Modal */
@@ -4037,8 +4498,8 @@
           <span class="tab-label">English</span>
         </button>
         <button class="tab-btn" onclick="switchTab('notes', this)">
-          <span class="tab-icon">📝</span>
-          <span class="tab-label">Notes</span>
+          <span class="tab-icon">🤲</span>
+          <span class="tab-label">Duaa</span>
         </button>
         <button class="tab-btn" onclick="switchTab('summary', this)">
           <span class="tab-icon">📊</span>
@@ -5992,33 +6453,50 @@
           </div>
         </div>
 
-        <!-- NOTES TAB -->
+        <!-- DUAA BOOK & JOURNAL TAB -->
         <div class="tab-content" id="tab-notes">
-          <div class="section-title notes-title">
-            <span>📝</span> NOTES &amp; SCREENSHOTS
+          <div class="section-title duaa-title">
+            <span>🤲</span> DUAA BOOK &amp; JOURNAL
           </div>
 
-          <!-- Add Note Button -->
-          <button
-            class="add-period-btn"
-            style="
-              background: var(--yellow);
-              color: var(--ink);
-              box-shadow: 0 3px 0 var(--yellow-deep);
-              margin-bottom: 12px;
-            "
-            onclick="openNoteModal()"
-          >
-            <span>➕</span> Add New Note / Screenshot
-          </button>
+          <!-- Hero Book Banner -->
+          <div class="duaa-hero-card">
+            <div class="duaa-hero-top">
+              <div class="duaa-hero-icon-wrap">
+                <span class="duaa-hero-icon">📖</span>
+              </div>
+              <div class="duaa-hero-info">
+                <div class="duaa-hero-title">كِتَابُ الدُّعَاءِ • My Duaa Book</div>
+                <div class="duaa-hero-desc">
+                  Collect powerful Duas, screenshots &amp; reflections. Read page by page like a book.
+                </div>
+              </div>
+            </div>
+            <div class="duaa-hero-actions">
+              <button
+                type="button"
+                class="duaa-hero-btn primary-book-btn"
+                onclick="openDuaaBookReader()"
+              >
+                <span>📖</span> Open Duaa Book
+              </button>
+              <button
+                type="button"
+                class="duaa-hero-btn secondary-add-btn"
+                onclick="openNoteModal()"
+              >
+                <span>➕</span> Add Duaa
+              </button>
+            </div>
+          </div>
 
-          <!-- Search Notes -->
+          <!-- Search Duaas -->
           <div class="recipe-search-row">
             <input
               type="text"
               class="input-field"
               id="notesSearchInput"
-              placeholder="Search notes, writings, tags..."
+              placeholder="Search Arabic, translation, title, topic..."
               oninput="filterNotes()"
             />
             <button class="recipe-search-btn" onclick="filterNotes()">
@@ -6040,14 +6518,35 @@
               data-filter="pinned"
               onclick="setNotesFilter('pinned', this)"
             >
-              ⭐ Pinned (<span id="notesCountPinned">0</span>)
+              ⭐ Bookmarked (<span id="notesCountPinned">0</span>)
             </button>
             <button
               class="note-filter-pill"
-              data-filter="Writing"
-              onclick="setNotesFilter('Writing', this)"
+              data-filter="Quranic"
+              onclick="setNotesFilter('Quranic', this)"
             >
-              ✍️ Writing (<span id="notesCountWriting">0</span>)
+              📖 Quranic (<span id="notesCountQuranic">0</span>)
+            </button>
+            <button
+              class="note-filter-pill"
+              data-filter="Sunnah"
+              onclick="setNotesFilter('Sunnah', this)"
+            >
+              🕌 Sunnah (<span id="notesCountSunnah">0</span>)
+            </button>
+            <button
+              class="note-filter-pill"
+              data-filter="Morning"
+              onclick="setNotesFilter('Morning', this)"
+            >
+              🌅 Morning/Evening (<span id="notesCountMorning">0</span>)
+            </button>
+            <button
+              class="note-filter-pill"
+              data-filter="Personal"
+              onclick="setNotesFilter('Personal', this)"
+            >
+              💖 Personal &amp; Family (<span id="notesCountPersonal">0</span>)
             </button>
             <button
               class="note-filter-pill"
@@ -6058,11 +6557,10 @@
             </button>
           </div>
 
-          <!-- Notes List Container -->
+          <!-- Duaa List Container -->
           <div id="notesListContainer">
             <div class="history-empty">
-              No notes added yet. Tap "Add New Note" to write or upload/paste a
-              screenshot!
+              No Duaas in your book yet. Tap ➕ Add Duaa or paste a screenshot!
             </div>
           </div>
         </div>
@@ -6721,52 +7219,83 @@
       </div>
     </div>
 
-    <!-- Note Input Modal -->
+    <!-- Add / Edit Duaa Modal -->
     <div class="modal-overlay" id="noteModal">
-      <div class="modal-card">
-        <div class="modal-title" id="noteModalTitle">📝 Add Note</div>
+      <div class="modal-card duaa-modal-card">
+        <div class="modal-title" id="noteModalTitle">🤲 Add to Duaa Book</div>
         <div class="modal-subtitle">
-          Write thoughts or attach screenshots / images
+          Type Arabic &amp; translation, or attach a Duaa screenshot
         </div>
 
         <input type="hidden" id="noteEditId" value="" />
 
         <div class="input-group">
-          <label class="input-label">Note Title (optional)</label>
+          <label class="input-label">Duaa Title / Purpose</label>
           <input
             type="text"
             class="input-field"
             id="noteTitleInput"
-            placeholder="e.g. Grammar session note, workout summary, reminder..."
+            placeholder="e.g. For Parents, Forgiveness, Ease in Hardship, Protection..."
           />
         </div>
 
         <div class="input-group">
-          <label class="input-label">Category / Tag</label>
+          <label class="input-label">Category / Shelf</label>
           <select class="input-field" id="noteCategoryInput">
-            <option value="General">📝 General</option>
-            <option value="Writing">✍️ Writing</option>
-            <option value="Screenshot">📸 Screenshot</option>
-            <option value="Study">📚 Study</option>
-            <option value="Routine">⏰ Routine</option>
-            <option value="Recipe">🍳 Recipe</option>
-            <option value="Idea">💡 Idea</option>
+            <option value="Quranic">📖 Quranic (رَبَّنَا)</option>
+            <option value="Sunnah">🕌 Sunnah / Hadith</option>
+            <option value="Morning">🌅 Morning &amp; Evening</option>
+            <option value="Personal">💖 Personal &amp; Family</option>
+            <option value="Protection">🛡️ Protection &amp; Healing</option>
+            <option value="Screenshot">📸 Screenshot / Photo</option>
+            <option value="General">🤲 General Duaa</option>
           </select>
         </div>
 
         <div class="input-group">
-          <label class="input-label">Note Text / Writing</label>
-          <textarea
+          <label class="input-label">Source / Reference (optional)</label>
+          <input
+            type="text"
             class="input-field"
-            id="noteContentInput"
-            rows="4"
-            placeholder="Write your note here..."
-            style="resize: vertical; min-height: 90px; line-height: 1.4"
+            id="noteSourceInput"
+            placeholder="e.g. Surah Al-Baqarah 2:201, Sahih Bukhari, Hisn al-Muslim"
+          />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Arabic Text (optional)</label>
+          <textarea
+            class="input-field duaa-arabic-input"
+            id="noteArabicInput"
+            rows="3"
+            dir="rtl"
+            placeholder="رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً..."
           ></textarea>
         </div>
 
         <div class="input-group">
-          <label class="input-label">Attach Screenshot / Image</label>
+          <label class="input-label">Transliteration / Pronunciation (optional)</label>
+          <input
+            type="text"
+            class="input-field"
+            id="noteTransliterationInput"
+            placeholder="e.g. Rabbana atina fid-dunya hasanatan..."
+          />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Translation / Urdu / Personal Reflection</label>
+          <textarea
+            class="input-field"
+            id="noteContentInput"
+            rows="3"
+            placeholder="Write the English/Urdu meaning, reflection, or when to recite..."
+            style="resize: vertical; min-height: 75px; line-height: 1.4"
+          ></textarea>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Attach Duaa Screenshot / Page Photo</label>
           <input
             type="file"
             id="noteFileInput"
@@ -6781,7 +7310,7 @@
           >
             <div class="note-drop-icon">📸</div>
             <div class="note-drop-text">
-              Click to choose image or screenshot
+              Click to choose Duaa screenshot / photo
             </div>
             <div class="note-drop-hint">Or paste directly with Ctrl+V</div>
           </div>
@@ -6794,13 +7323,13 @@
               class="note-modal-preview-img"
               id="noteModalPreviewImg"
               src=""
-              alt="Preview"
+              alt="Duaa Screenshot Preview"
             />
             <button
               type="button"
               class="note-remove-preview-btn"
               onclick="removeNoteImageAttachment()"
-              title="Remove image"
+              title="Remove screenshot"
             >
               ✕
             </button>
@@ -6817,10 +7346,65 @@
           </button>
           <button
             type="button"
-            class="modal-btn modal-btn-save"
+            class="modal-btn modal-btn-save duaa-save-btn"
             onclick="saveNoteData()"
           >
-            Save Note
+            Save Duaa 💾
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Duaa Book Reader Modal -->
+    <div class="modal-overlay duaa-reader-overlay" id="duaaBookModal">
+      <div class="duaa-book-container">
+        <!-- Book Header -->
+        <div class="duaa-book-top-bar">
+          <div class="duaa-book-meta">
+            <span class="duaa-book-page-badge" id="duaaBookPageBadge">Page 1 of 1</span>
+            <span class="duaa-book-category-pill" id="duaaBookCategoryPill">Quranic</span>
+          </div>
+          <div class="duaa-book-top-actions">
+            <button class="duaa-reader-font-btn" onclick="adjustDuaaReaderFontSize(-2)" title="Smaller font">A-</button>
+            <button class="duaa-reader-font-btn" onclick="adjustDuaaReaderFontSize(2)" title="Larger font">A+</button>
+            <button class="duaa-reader-bookmark-btn" id="duaaReaderBookmarkBtn" onclick="toggleCurrentDuaaBookmark()" title="Bookmark">⭐</button>
+            <button class="duaa-reader-close-btn" onclick="closeDuaaBookReader()" title="Close Book">✕</button>
+          </div>
+        </div>
+
+        <!-- Book Page Body -->
+        <div class="duaa-book-page" id="duaaBookPageContent">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Book Navigation Bar -->
+        <div class="duaa-book-nav-bar">
+          <button
+            type="button"
+            class="duaa-nav-arrow-btn"
+            id="duaaBookPrevBtn"
+            onclick="navigateDuaaBook(-1)"
+          >
+            ◀ Previous
+          </button>
+          
+          <div class="duaa-nav-middle">
+            <select
+              class="duaa-book-jump-select"
+              id="duaaBookJumpSelect"
+              onchange="jumpToDuaaPage(parseInt(this.value, 10))"
+            >
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+
+          <button
+            type="button"
+            class="duaa-nav-arrow-btn"
+            id="duaaBookNextBtn"
+            onclick="navigateDuaaBook(1)"
+          >
+            Next ▶
           </button>
         </div>
       </div>
@@ -10580,17 +11164,22 @@
           acEvening + " / 1000";
       }
 
-      // ==================== NOTES & SCREENSHOTS FUNCTIONS ====================
+      // ==================== DUAA BOOK & JOURNAL FUNCTIONS ====================
 
       let notesData = {
         notes: [],
       };
       let activeNotesFilter = "all";
       let pendingNoteImage = null;
+      let currentDuaaReaderIndex = 0;
+      let duaaReaderArabicFontSize = 24;
 
       function loadNotesData() {
         try {
-          const stored = localStorage.getItem("notes_data_v1");
+          let stored = localStorage.getItem("duaa_book_data_v1");
+          if (!stored) {
+            stored = localStorage.getItem("notes_data_v1");
+          }
           if (stored) {
             notesData = JSON.parse(stored);
             if (!Array.isArray(notesData.notes)) notesData.notes = [];
@@ -10598,15 +11187,74 @@
         } catch (e) {
           notesData = { notes: [] };
         }
+
+        // Populate sample starter Duas if empty
+        if (!notesData.notes || notesData.notes.length === 0) {
+          const todayStr = new Date().toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          });
+          notesData = {
+            notes: [
+              {
+                id: "duaa_starter_1",
+                title: "Dua for Good in Dunya & Akhirah",
+                category: "Quranic",
+                source: "Surah Al-Baqarah 2:201",
+                arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+                transliteration: "Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
+                text: "Our Lord, give us in this world [that which is] good and in the Hereafter [that which is] good and protect us from the punishment of the Fire.",
+                image: null,
+                pinned: true,
+                recitedCount: 3,
+                date: todayStr,
+                createdAt: Date.now(),
+              },
+              {
+                id: "duaa_starter_2",
+                title: "Dua for Parents (والدین کے لیے دعا)",
+                category: "Personal",
+                source: "Surah Al-Isra 17:24",
+                arabic: "رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+                transliteration: "Rabbi-rhamhuma kama rabbayani sagheera",
+                text: "My Lord, have mercy upon them as they brought me up [when I was] small.",
+                image: null,
+                pinned: true,
+                recitedCount: 1,
+                date: todayStr,
+                createdAt: Date.now() - 1000,
+              },
+              {
+                id: "duaa_starter_3",
+                title: "Dua for Well-being & Afiyah (عافیت)",
+                category: "Sunnah",
+                source: "Sunan Abi Dawud",
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+                transliteration: "Allahumma inni as'aluka al-'afwa wal-'afiyata fid-dunya wal-akhirah",
+                text: "O Allah, I ask You for forgiveness and well-being in this world and in the Hereafter.",
+                image: null,
+                pinned: false,
+                recitedCount: 0,
+                date: todayStr,
+                createdAt: Date.now() - 2000,
+              },
+            ],
+          };
+          saveNotesDataToStorage();
+        }
+
         renderNotesList();
       }
 
       function saveNotesDataToStorage() {
         try {
-          localStorage.setItem("notes_data_v1", JSON.stringify(notesData));
+          const json = JSON.stringify(notesData);
+          localStorage.setItem("duaa_book_data_v1", json);
+          localStorage.setItem("notes_data_v1", json);
         } catch (e) {
-          console.warn("Storage error saving notes:", e);
-          showToast("Storage full — note saved with smaller size ⚠️");
+          console.warn("Storage error saving Duaa book:", e);
+          showToast("Storage full — Duaa saved with smaller size ⚠️");
         }
       }
 
@@ -10614,6 +11262,9 @@
         const editIdInput = document.getElementById("noteEditId");
         const titleInput = document.getElementById("noteTitleInput");
         const categoryInput = document.getElementById("noteCategoryInput");
+        const sourceInput = document.getElementById("noteSourceInput");
+        const arabicInput = document.getElementById("noteArabicInput");
+        const translitInput = document.getElementById("noteTransliterationInput");
         const contentInput = document.getElementById("noteContentInput");
         const previewWrap = document.getElementById("noteModalPreviewWrap");
         const previewImg = document.getElementById("noteModalPreviewImg");
@@ -10625,18 +11276,24 @@
           if (note) {
             editIdInput.value = note.id;
             titleInput.value = note.title || "";
-            categoryInput.value = note.category || "General";
+            categoryInput.value = note.category || "Quranic";
+            if (sourceInput) sourceInput.value = note.source || "";
+            if (arabicInput) arabicInput.value = note.arabic || "";
+            if (translitInput) translitInput.value = note.transliteration || "";
             contentInput.value = note.text || "";
             pendingNoteImage = note.image || null;
-            modalTitle.textContent = "✏️ Edit Note";
+            modalTitle.textContent = "✏️ Edit Duaa";
           }
         } else {
           editIdInput.value = "";
           titleInput.value = "";
-          categoryInput.value = "General";
+          categoryInput.value = "Quranic";
+          if (sourceInput) sourceInput.value = "";
+          if (arabicInput) arabicInput.value = "";
+          if (translitInput) translitInput.value = "";
           contentInput.value = "";
           pendingNoteImage = null;
-          modalTitle.textContent = "📝 Add Note";
+          modalTitle.textContent = "🤲 Add to Duaa Book";
         }
 
         if (pendingNoteImage) {
@@ -10688,7 +11345,7 @@
             const ctx = canvas.getContext("2d");
             ctx.drawImage(img, 0, 0, width, height);
 
-            pendingNoteImage = canvas.toDataURL("image/jpeg", 0.82);
+            pendingNoteImage = canvas.toDataURL("image/jpeg", 0.84);
 
             const previewWrap = document.getElementById("noteModalPreviewWrap");
             const previewImg = document.getElementById("noteModalPreviewImg");
@@ -10697,7 +11354,7 @@
             previewImg.src = pendingNoteImage;
             previewWrap.style.display = "flex";
             dropArea.style.display = "none";
-            showToast("Screenshot attached! 📸");
+            showToast("Duaa screenshot attached! 📸");
           };
           img.src = e.target.result;
         };
@@ -10722,10 +11379,13 @@
         const editId = document.getElementById("noteEditId").value;
         const title = document.getElementById("noteTitleInput").value.trim();
         const category = document.getElementById("noteCategoryInput").value;
+        const source = (document.getElementById("noteSourceInput")?.value || "").trim();
+        const arabic = (document.getElementById("noteArabicInput")?.value || "").trim();
+        const transliteration = (document.getElementById("noteTransliterationInput")?.value || "").trim();
         const text = document.getElementById("noteContentInput").value.trim();
 
-        if (!title && !text && !pendingNoteImage) {
-          showToast("Please write a note or attach an image ✍️");
+        if (!title && !text && !arabic && !pendingNoteImage) {
+          showToast("Please write Arabic, translation or attach a screenshot ✍️");
           return;
         }
 
@@ -10734,47 +11394,44 @@
           month: "short",
           day: "numeric",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         });
+
+        const fallbackTitle = title || (arabic ? arabic.slice(0, 25) + "..." : text ? text.slice(0, 25) + "..." : "Duaa Screenshot");
 
         if (editId) {
           const index = notesData.notes.findIndex((n) => n.id === editId);
           if (index !== -1) {
-            notesData.notes[index].title =
-              title ||
-              (text
-                ? text.slice(0, 30) + (text.length > 30 ? "..." : "")
-                : "Screenshot Note");
+            notesData.notes[index].title = fallbackTitle;
             notesData.notes[index].category = category;
+            notesData.notes[index].source = source;
+            notesData.notes[index].arabic = arabic;
+            notesData.notes[index].transliteration = transliteration;
             notesData.notes[index].text = text;
             notesData.notes[index].image = pendingNoteImage;
             notesData.notes[index].updatedAt = formattedDate;
           }
-          showToast("Note updated 📝");
+          showToast("Duaa updated 🤲");
         } else {
           const newNote = {
             id:
-              "note_" +
+              "duaa_" +
               Date.now() +
               "_" +
               Math.random().toString(36).substr(2, 5),
-            title:
-              title ||
-              (text
-                ? text.slice(0, 30) + (text.length > 30 ? "..." : "")
-                : category === "Screenshot"
-                  ? "Screenshot Note"
-                  : "Quick Note"),
+            title: fallbackTitle,
             category: category,
+            source: source,
+            arabic: arabic,
+            transliteration: transliteration,
             text: text,
             image: pendingNoteImage,
             date: formattedDate,
             pinned: false,
+            recitedCount: 0,
             createdAt: Date.now(),
           };
           notesData.notes.unshift(newNote);
-          showToast("Note saved 💾");
+          showToast("Duaa added to Book 📖");
         }
 
         saveNotesDataToStorage();
@@ -10784,11 +11441,11 @@
 
       function deleteNote(id, event) {
         if (event) event.stopPropagation();
-        if (!confirm("Delete this note?")) return;
+        if (!confirm("Remove this Duaa from your book?")) return;
         notesData.notes = notesData.notes.filter((n) => n.id !== id);
         saveNotesDataToStorage();
         renderNotesList();
-        showToast("Note deleted 🗑️");
+        showToast("Duaa removed 🗑️");
       }
 
       function togglePinNote(id, event) {
@@ -10798,7 +11455,20 @@
         note.pinned = !note.pinned;
         saveNotesDataToStorage();
         renderNotesList();
-        showToast(note.pinned ? "Pinned to top ⭐" : "Unpinned");
+        showToast(note.pinned ? "Bookmarked ⭐" : "Bookmark removed");
+      }
+
+      function incrementDuaaRecited(id, event) {
+        if (event) event.stopPropagation();
+        const note = notesData.notes.find((n) => n.id === id);
+        if (!note) return;
+        note.recitedCount = (note.recitedCount || 0) + 1;
+        saveNotesDataToStorage();
+        renderNotesList();
+        if (document.getElementById("duaaBookModal")?.classList.contains("show")) {
+          renderDuaaBookPage();
+        }
+        showToast(`Recited ${note.recitedCount}x 📿`);
       }
 
       function setNotesFilter(filter, el) {
@@ -10814,54 +11484,66 @@
         renderNotesList();
       }
 
-      function renderNotesList() {
-        const container = document.getElementById("notesListContainer");
-        if (!container) return;
-
+      function getFilteredDuaas() {
         const searchQuery = (
           document.getElementById("notesSearchInput")?.value || ""
         )
           .toLowerCase()
           .trim();
 
-        // Update count badges
         const allNotes = notesData.notes || [];
-        const pinnedCount = allNotes.filter((n) => n.pinned).length;
-        const writingCount = allNotes.filter((n) => n.text && !n.image).length;
-        const screenshotCount = allNotes.filter((n) => !!n.image).length;
 
-        if (document.getElementById("notesCountAll"))
-          document.getElementById("notesCountAll").textContent =
-            allNotes.length;
-        if (document.getElementById("notesCountPinned"))
-          document.getElementById("notesCountPinned").textContent = pinnedCount;
-        if (document.getElementById("notesCountWriting"))
-          document.getElementById("notesCountWriting").textContent =
-            writingCount;
-        if (document.getElementById("notesCountScreenshot"))
-          document.getElementById("notesCountScreenshot").textContent =
-            screenshotCount;
-
-        let filtered = allNotes.filter((note) => {
+        return allNotes.filter((note) => {
           if (activeNotesFilter === "pinned" && !note.pinned) return false;
-          if (activeNotesFilter === "Writing" && (!note.text || note.image))
-            return false;
-          if (activeNotesFilter === "Screenshot" && !note.image) return false;
+          if (activeNotesFilter === "Quranic" && note.category !== "Quranic") return false;
+          if (activeNotesFilter === "Sunnah" && note.category !== "Sunnah") return false;
+          if (activeNotesFilter === "Morning" && note.category !== "Morning") return false;
+          if (activeNotesFilter === "Personal" && note.category !== "Personal") return false;
+          if (activeNotesFilter === "Screenshot" && !note.image && note.category !== "Screenshot") return false;
 
           if (searchQuery) {
-            const matchesTitle = (note.title || "")
-              .toLowerCase()
-              .includes(searchQuery);
-            const matchesText = (note.text || "")
-              .toLowerCase()
-              .includes(searchQuery);
-            const matchesCat = (note.category || "")
-              .toLowerCase()
-              .includes(searchQuery);
-            if (!matchesTitle && !matchesText && !matchesCat) return false;
+            const matchesTitle = (note.title || "").toLowerCase().includes(searchQuery);
+            const matchesText = (note.text || "").toLowerCase().includes(searchQuery);
+            const matchesArabic = (note.arabic || "").includes(searchQuery);
+            const matchesTranslit = (note.transliteration || "").toLowerCase().includes(searchQuery);
+            const matchesSource = (note.source || "").toLowerCase().includes(searchQuery);
+            const matchesCat = (note.category || "").toLowerCase().includes(searchQuery);
+            if (!matchesTitle && !matchesText && !matchesArabic && !matchesTranslit && !matchesSource && !matchesCat) {
+              return false;
+            }
           }
           return true;
         });
+      }
+
+      function renderNotesList() {
+        const container = document.getElementById("notesListContainer");
+        if (!container) return;
+
+        const allNotes = notesData.notes || [];
+        const pinnedCount = allNotes.filter((n) => n.pinned).length;
+        const quranicCount = allNotes.filter((n) => n.category === "Quranic").length;
+        const sunnahCount = allNotes.filter((n) => n.category === "Sunnah").length;
+        const morningCount = allNotes.filter((n) => n.category === "Morning").length;
+        const personalCount = allNotes.filter((n) => n.category === "Personal").length;
+        const screenshotCount = allNotes.filter((n) => !!n.image || n.category === "Screenshot").length;
+
+        if (document.getElementById("notesCountAll"))
+          document.getElementById("notesCountAll").textContent = allNotes.length;
+        if (document.getElementById("notesCountPinned"))
+          document.getElementById("notesCountPinned").textContent = pinnedCount;
+        if (document.getElementById("notesCountQuranic"))
+          document.getElementById("notesCountQuranic").textContent = quranicCount;
+        if (document.getElementById("notesCountSunnah"))
+          document.getElementById("notesCountSunnah").textContent = sunnahCount;
+        if (document.getElementById("notesCountMorning"))
+          document.getElementById("notesCountMorning").textContent = morningCount;
+        if (document.getElementById("notesCountPersonal"))
+          document.getElementById("notesCountPersonal").textContent = personalCount;
+        if (document.getElementById("notesCountScreenshot"))
+          document.getElementById("notesCountScreenshot").textContent = screenshotCount;
+
+        const filtered = getFilteredDuaas();
 
         // Sort: pinned first, then newest
         filtered.sort((a, b) => {
@@ -10871,11 +11553,14 @@
         });
 
         if (filtered.length === 0) {
+          const searchQuery = (
+            document.getElementById("notesSearchInput")?.value || ""
+          ).trim();
           container.innerHTML = searchQuery
-            ? '<div class="history-empty">No notes match "' +
+            ? '<div class="history-empty">No Duaas match "' +
               escapeHtml(searchQuery) +
               '".</div>'
-            : '<div class="history-empty">No notes in this category yet. Tap ➕ Add New Note!</div>';
+            : '<div class="history-empty">No Duaas in this shelf yet. Tap ➕ Add Duaa or "Open Duaa Book"!</div>';
           return;
         }
 
@@ -10883,30 +11568,47 @@
           .map((note) => {
             const hasImage = !!note.image;
             const hasText = !!note.text;
+            const hasArabic = !!note.arabic;
+            const hasTranslit = !!note.transliteration;
+            const hasSource = !!note.source;
+            const recited = note.recitedCount || 0;
+
             return `
-              <div class="note-card ${note.pinned ? "pinned" : ""}">
-                <div class="note-card-top">
-                  <div class="note-card-title">${escapeHtml(note.title || "Untitled Note")}</div>
-                  <div class="note-card-badges">
-                    <span class="note-tag-badge">${escapeHtml(note.category || "General")}</span>
-                    <button class="note-pin-btn" onclick="togglePinNote('${note.id}', event)" title="${note.pinned ? "Unpin note" : "Pin note to top"}">${note.pinned ? "⭐" : "☆"}</button>
+              <div class="duaa-card ${note.pinned ? "pinned" : ""}">
+                <div class="duaa-card-top">
+                  <div class="duaa-card-title">${escapeHtml(note.title || "Untitled Duaa")}</div>
+                  <div class="duaa-card-badges">
+                    <span class="duaa-tag-badge">${escapeHtml(note.category || "Duaa")}</span>
+                    <button class="duaa-pin-btn" onclick="togglePinNote('${note.id}', event)" title="${note.pinned ? "Unbookmark" : "Bookmark this Duaa"}">${note.pinned ? "⭐" : "☆"}</button>
                   </div>
                 </div>
-                <div class="note-card-date">🕒 ${escapeHtml(note.date || "")}</div>
-                ${hasText ? `<div class="note-card-text">${escapeHtml(note.text)}</div>` : ""}
+
+                ${hasSource ? `<div class="duaa-source-badge">📖 ${escapeHtml(note.source)}</div>` : ""}
+
+                ${hasArabic ? `<div class="duaa-arabic-text">${escapeHtml(note.arabic)}</div>` : ""}
+                ${hasTranslit ? `<div class="duaa-transliteration">"${escapeHtml(note.transliteration)}"</div>` : ""}
+                ${hasText ? `<div class="duaa-translation-text">${escapeHtml(note.text)}</div>` : ""}
+
                 ${
                   hasImage
                     ? `
-                  <div class="note-img-thumb-wrap" onclick="viewFullImage('${note.id}')" title="Click to view full screenshot">
-                    <img class="note-img-thumb" src="${note.image}" alt="Screenshot" loading="lazy" />
-                    <span class="note-img-zoom-tag">🔍 Tap to Zoom</span>
+                  <div class="duaa-img-thumb-wrap" onclick="viewFullImage('${note.id}')" title="Click to view full screenshot">
+                    <img class="duaa-img-thumb" src="${note.image}" alt="Duaa Screenshot" loading="lazy" />
+                    <span class="duaa-img-zoom-tag">🔍 Tap to Zoom</span>
                   </div>
                 `
                     : ""
                 }
-                <div class="note-card-footer">
-                  <button class="note-action-btn" onclick="openNoteModal('${note.id}')">✏️ Edit</button>
-                  <button class="note-action-btn delete-btn" onclick="deleteNote('${note.id}', event)">🗑️ Delete</button>
+
+                <div class="duaa-recited-row">
+                  <span class="duaa-recited-label">📿 Times Recited: <strong>${recited}</strong></span>
+                  <button class="duaa-recited-counter-btn" onclick="incrementDuaaRecited('${note.id}', event)">+1 Recited</button>
+                </div>
+
+                <div class="duaa-card-footer">
+                  <button class="duaa-action-btn read-btn" onclick="openDuaaBookReaderForId('${note.id}')">📖 Read in Book</button>
+                  <button class="duaa-action-btn" onclick="openNoteModal('${note.id}')">✏️ Edit</button>
+                  <button class="duaa-action-btn delete-btn" onclick="deleteNote('${note.id}', event)">🗑️ Delete</button>
                 </div>
               </div>
             `;
@@ -10914,8 +11616,150 @@
           .join("");
       }
 
+      // ==================== INTERACTIVE DUAA BOOK READER ====================
+
+      function openDuaaBookReader(startIndex = 0) {
+        const allNotes = notesData.notes || [];
+        if (allNotes.length === 0) {
+          showToast("Add your first Duaa to open the book! 📖");
+          openNoteModal();
+          return;
+        }
+
+        currentDuaaReaderIndex = Math.max(0, Math.min(startIndex, allNotes.length - 1));
+        document.getElementById("duaaBookModal").classList.add("show");
+        populateDuaaJumpSelect();
+        renderDuaaBookPage();
+      }
+
+      function openDuaaBookReaderForId(duaaId) {
+        const allNotes = notesData.notes || [];
+        const index = allNotes.findIndex((n) => n.id === duaaId);
+        openDuaaBookReader(index !== -1 ? index : 0);
+      }
+
+      function closeDuaaBookReader() {
+        document.getElementById("duaaBookModal").classList.remove("show");
+      }
+
+      function populateDuaaJumpSelect() {
+        const select = document.getElementById("duaaBookJumpSelect");
+        if (!select) return;
+        const allNotes = notesData.notes || [];
+        select.innerHTML = allNotes
+          .map(
+            (note, idx) =>
+              `<option value="${idx}">Page ${idx + 1}: ${escapeHtml(note.title || "Duaa " + (idx + 1))}</option>`,
+          )
+          .join("");
+        select.value = currentDuaaReaderIndex;
+      }
+
+      function jumpToDuaaPage(idx) {
+        const allNotes = notesData.notes || [];
+        if (idx >= 0 && idx < allNotes.length) {
+          currentDuaaReaderIndex = idx;
+          renderDuaaBookPage();
+        }
+      }
+
+      function navigateDuaaBook(direction) {
+        const allNotes = notesData.notes || [];
+        const nextIndex = currentDuaaReaderIndex + direction;
+        if (nextIndex >= 0 && nextIndex < allNotes.length) {
+          currentDuaaReaderIndex = nextIndex;
+          renderDuaaBookPage();
+        }
+      }
+
+      function adjustDuaaReaderFontSize(delta) {
+        duaaReaderArabicFontSize = Math.max(18, Math.min(38, duaaReaderArabicFontSize + delta));
+        const arabicEl = document.querySelector(".duaa-reader-arabic");
+        if (arabicEl) arabicEl.style.fontSize = duaaReaderArabicFontSize + "px";
+      }
+
+      function toggleCurrentDuaaBookmark() {
+        const allNotes = notesData.notes || [];
+        const note = allNotes[currentDuaaReaderIndex];
+        if (!note) return;
+        togglePinNote(note.id);
+        const bookmarkBtn = document.getElementById("duaaReaderBookmarkBtn");
+        if (bookmarkBtn) {
+          bookmarkBtn.classList.toggle("active", note.pinned);
+          bookmarkBtn.textContent = note.pinned ? "⭐" : "☆";
+        }
+      }
+
+      function renderDuaaBookPage() {
+        const allNotes = notesData.notes || [];
+        const pageBadge = document.getElementById("duaaBookPageBadge");
+        const categoryPill = document.getElementById("duaaBookCategoryPill");
+        const bookmarkBtn = document.getElementById("duaaReaderBookmarkBtn");
+        const pageContent = document.getElementById("duaaBookPageContent");
+        const prevBtn = document.getElementById("duaaBookPrevBtn");
+        const nextBtn = document.getElementById("duaaBookNextBtn");
+        const jumpSelect = document.getElementById("duaaBookJumpSelect");
+
+        if (allNotes.length === 0) {
+          pageContent.innerHTML = '<div class="history-empty">Book is empty. Add a Duaa to start reading.</div>';
+          return;
+        }
+
+        const note = allNotes[currentDuaaReaderIndex];
+        if (!note) return;
+
+        if (pageBadge) pageBadge.textContent = `Page ${currentDuaaReaderIndex + 1} of ${allNotes.length}`;
+        if (categoryPill) categoryPill.textContent = note.category || "Quranic";
+        if (bookmarkBtn) {
+          bookmarkBtn.classList.toggle("active", !!note.pinned);
+          bookmarkBtn.textContent = note.pinned ? "⭐" : "☆";
+        }
+
+        if (prevBtn) prevBtn.disabled = currentDuaaReaderIndex === 0;
+        if (nextBtn) nextBtn.disabled = currentDuaaReaderIndex === allNotes.length - 1;
+        if (jumpSelect) jumpSelect.value = currentDuaaReaderIndex;
+
+        const hasArabic = !!note.arabic;
+        const hasTranslit = !!note.transliteration;
+        const hasText = !!note.text;
+        const hasSource = !!note.source;
+        const hasImage = !!note.image;
+        const recited = note.recitedCount || 0;
+
+        pageContent.innerHTML = `
+          <div class="duaa-reader-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+          <div class="duaa-reader-title">${escapeHtml(note.title || "Duaa")}</div>
+          ${hasSource ? `<div class="duaa-reader-source">📖 ${escapeHtml(note.source)}</div>` : ""}
+
+          ${hasArabic ? `<div class="duaa-reader-arabic" style="font-size: ${duaaReaderArabicFontSize}px;">${escapeHtml(note.arabic)}</div>` : ""}
+          ${hasTranslit ? `<div class="duaa-reader-translit">"${escapeHtml(note.transliteration)}"</div>` : ""}
+          ${hasText ? `<div class="duaa-reader-trans">${escapeHtml(note.text)}</div>` : ""}
+
+          ${
+            hasImage
+              ? `
+            <div class="duaa-reader-screenshot-wrap" onclick="viewFullImage('${note.id}')" title="Tap to zoom">
+              <img class="duaa-reader-screenshot" src="${note.image}" alt="Duaa Page" />
+            </div>
+          `
+              : ""
+          }
+
+          <div class="duaa-reader-counter-box">
+            <div class="duaa-reader-counter-info">
+              📿 Recited: <strong>${recited}</strong> times
+            </div>
+            <button class="duaa-reader-counter-btn" onclick="incrementDuaaRecited('${note.id}', event)">
+              <span>📿</span> +1 Recite
+            </button>
+          </div>
+        `;
+
+        pageContent.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       function viewFullImage(noteId) {
-        const note = notesData.notes.find((n) => n.id === noteId);
+        const note = (notesData.notes || []).find((n) => n.id === noteId);
         if (!note || !note.image) return;
         const modal = document.getElementById("imageViewerModal");
         const img = document.getElementById("imageViewerImg");
@@ -10959,11 +11803,10 @@
       window.addEventListener("paste", function (e) {
         const noteModal = document.getElementById("noteModal");
         if (!noteModal || !noteModal.classList.contains("show")) {
-          // If in notes tab, auto open modal and attach pasted image
+          // If in duaa/notes tab, auto open modal and attach pasted image
           const notesTab = document.getElementById("tab-notes");
           if (notesTab && notesTab.classList.contains("active")) {
-            const items = (e.clipboardData || e.originalEvent.clipboardData)
-              .items;
+            const items = (e.clipboardData || e.originalEvent.clipboardData)?.items || [];
             for (let i = 0; i < items.length; i++) {
               if (items[i].type.indexOf("image") !== -1) {
                 const blob = items[i].getAsFile();
@@ -10976,7 +11819,7 @@
           return;
         }
 
-        const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        const items = (e.clipboardData || e.originalEvent.clipboardData)?.items || [];
         for (let i = 0; i < items.length; i++) {
           if (items[i].type.indexOf("image") !== -1) {
             const blob = items[i].getAsFile();
@@ -10986,10 +11829,26 @@
         }
       });
 
+      // Keyboard arrow listener for Duaa Book Reader
+      window.addEventListener("keydown", function (e) {
+        const readerModal = document.getElementById("duaaBookModal");
+        if (readerModal && readerModal.classList.contains("show")) {
+          if (e.key === "ArrowLeft") navigateDuaaBook(-1);
+          if (e.key === "ArrowRight") navigateDuaaBook(1);
+          if (e.key === "Escape") closeDuaaBookReader();
+        }
+      });
+
       document
         .getElementById("noteModal")
-        .addEventListener("click", function (e) {
+        ?.addEventListener("click", function (e) {
           if (e.target === this) closeNoteModal();
+        });
+
+      document
+        .getElementById("duaaBookModal")
+        ?.addEventListener("click", function (e) {
+          if (e.target === this) closeDuaaBookReader();
         });
 
       document
