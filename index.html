@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#f4efdc" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Daily Tracker" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Daily Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,6 +57,11 @@
         --radius-sm: 14px;
         --shadow-flat: 0 3px 0 var(--ink);
       }
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        overflow-x: hidden;
+      }
       body {
         font-family:
           "Plus Jakarta Sans",
@@ -51,10 +71,12 @@
           sans-serif;
         background: var(--bg);
         min-height: 100vh;
+        min-height: 100dvh;
         display: flex;
         justify-content: center;
-        padding: 16px;
-        padding-bottom: calc(88px + env(safe-area-inset-bottom));
+        padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) calc(78px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+        overflow-x: hidden;
+        touch-action: pan-y;
       }
       button,
       input[type="button"],
@@ -429,8 +451,8 @@
 
       .tabs {
         display: flex;
-        justify-content: stretch;
-        gap: 0;
+        justify-content: flex-start;
+        gap: 2px;
         position: fixed;
         left: 0;
         right: 0;
@@ -438,32 +460,38 @@
         width: 100%;
         max-width: 100%;
         margin: 0;
-        padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+        padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
         background: var(--surface);
         border-radius: 0;
         border-top: 2.5px solid var(--ink);
-        z-index: 100;
+        z-index: 1000;
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        touch-action: pan-x;
+        scroll-behavior: smooth;
       }
       .tabs::-webkit-scrollbar {
         display: none;
       }
       .tab-btn {
-        flex: 1 1 0;
-        min-width: 0;
+        flex: 0 0 auto;
+        min-width: 58px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 3px;
-        padding: 6px 1px;
-        border-radius: 14px;
+        gap: 2px;
+        padding: 5px 4px;
+        border-radius: 12px;
         border: none;
         background: transparent;
         color: var(--muted-light);
         cursor: pointer;
         font-family: inherit;
-        transition: all 0.15s;
+        transition: all 0.15s ease;
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-user-select: none;
       }
       .tab-btn .tab-icon {
         width: 30px;
@@ -472,7 +500,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        transition: all 0.15s;
+        transition: all 0.15s ease;
       }
       .tab-btn.active {
         color: var(--ink);
@@ -516,12 +544,13 @@
         margin-bottom: 0;
       }
       .tab-label {
-        font-size: 8.5px;
-        font-weight: 500;
+        font-size: 9.5px;
+        font-weight: 600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 100%;
+        letter-spacing: -0.2px;
       }
 
       .tab-content {
@@ -3840,6 +3869,134 @@
         font-weight: 500;
         cursor: pointer;
         box-shadow: 0 2px 0 #1a1a1a;
+      }
+
+      /* ==========================================================================
+         Mobile Responsiveness & Touch Optimization
+         ========================================================================== */
+      @media (min-width: 560px) {
+        .tabs {
+          justify-content: center;
+        }
+        .tab-btn {
+          flex: 1 1 0;
+          min-width: 0;
+          max-width: 68px;
+        }
+      }
+
+      /* Mobile input zoom prevention & touch response */
+      input,
+      select,
+      textarea {
+        font-size: 16px !important; /* Prevents auto-zoom on iOS */
+        touch-action: manipulation;
+      }
+      
+      button,
+      a,
+      .btn,
+      .task-card,
+      .modal-btn,
+      .note-card,
+      .recipe-action-btn,
+      .note-filter-pill,
+      .english-prompt-pill,
+      .hair-wash-btn,
+      .adhkar-btn {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Mobile Screen Optimizations (<= 480px) */
+      @media (max-width: 480px) {
+        body {
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: max(8px, env(safe-area-inset-top, 0px));
+        }
+
+        .app-container {
+          max-width: 100%;
+        }
+
+        .modal-overlay {
+          padding: 12px;
+          align-items: flex-end; /* Bottom-sheet feel on mobile */
+        }
+
+        .modal-card {
+          max-width: 100%;
+          border-radius: 20px 20px 14px 14px;
+          padding: 20px 16px;
+          max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px));
+        }
+
+        .nav-bar {
+          padding: 12px 14px;
+          gap: 8px;
+        }
+
+        .nav-title-value {
+          font-size: 17px;
+        }
+
+        .nav-countdown-box {
+          padding: 6px 12px;
+          min-width: 70px;
+        }
+
+        .nav-countdown-box .days {
+          font-size: 24px;
+        }
+
+        .task-card {
+          padding: 13px 14px;
+          gap: 10px;
+        }
+
+        .timer-wrap {
+          padding: 12px;
+        }
+
+        .timer-controls {
+          flex-wrap: wrap;
+        }
+
+        .history-stats {
+          gap: 6px;
+        }
+
+        .stat-box {
+          padding: 8px 4px;
+        }
+
+        .stat-value {
+          font-size: 16px;
+        }
+
+        .history-card {
+          padding: 14px 12px;
+        }
+      }
+
+      /* Extra small screens (<= 360px) */
+      @media (max-width: 360px) {
+        .tab-btn {
+          min-width: 52px;
+          padding: 4px 2px;
+        }
+        .tab-btn .tab-icon {
+          width: 28px;
+          height: 28px;
+          font-size: 14px;
+        }
+        .tab-label {
+          font-size: 8.5px;
+        }
+        .nav-title-value {
+          font-size: 15px;
+        }
       }
     </style>
     <base target="_blank" />
@@ -8535,12 +8692,21 @@
         document
           .querySelectorAll(".tab-content")
           .forEach((content) => content.classList.remove("active"));
-        if (el) el.classList.add("active");
-        else {
+        if (el) {
+          el.classList.add("active");
+          if (typeof el.scrollIntoView === "function") {
+            el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+          }
+        } else {
           const targetBtn = document.querySelector(
             '.tab-btn[onclick*="' + tabName + '"]',
           );
-          if (targetBtn) targetBtn.classList.add("active");
+          if (targetBtn) {
+            targetBtn.classList.add("active");
+            if (typeof targetBtn.scrollIntoView === "function") {
+              targetBtn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            }
+          }
         }
         const targetContent = document.getElementById("tab-" + tabName);
         if (targetContent) {
