@@ -4333,16 +4333,209 @@
       }
 
       /* ==========================================================================
-         Mobile Responsiveness & Touch Optimization
+         iPad Air 5th Gen (820px x 1180px / 1180px x 820px) & Tablet Responsiveness
          ========================================================================== */
-      @media (min-width: 560px) {
-        .tabs {
-          justify-content: center;
+      @media (min-width: 768px) {
+        body {
+          padding: max(20px, env(safe-area-inset-top, 0px)) 24px calc(96px + env(safe-area-inset-bottom, 0px)) 24px;
         }
+
+        .app-container {
+          max-width: 780px;
+          width: 100%;
+        }
+
+        /* Floating iPad Bottom Navigation Dock */
+        .tabs {
+          max-width: 740px;
+          left: 50%;
+          right: auto;
+          transform: translateX(-50%);
+          bottom: 16px;
+          border-radius: 24px;
+          border: 2.5px solid var(--ink);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 3px 0 var(--ink);
+          padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+          justify-content: center;
+          gap: 6px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+        }
+
         .tab-btn {
-          flex: 1 1 0;
-          min-width: 0;
-          max-width: 68px;
+          flex: 0 1 76px;
+          max-width: 80px;
+          min-width: 64px;
+          padding: 6px 6px;
+          border-radius: 14px;
+        }
+
+        .tab-btn:hover {
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-btn .tab-icon {
+          width: 32px;
+          height: 32px;
+          font-size: 18px;
+        }
+
+        .tab-label {
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: -0.2px;
+        }
+
+        /* iPad Modals */
+        .modal-overlay {
+          align-items: center;
+          padding: 24px;
+        }
+
+        .modal-card {
+          max-width: 540px;
+          border-radius: 24px;
+          padding: 28px;
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 6px 0 var(--ink);
+        }
+
+        /* Duaa Grid on iPad */
+        #notesListContainer {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+
+        #notesListContainer .duaa-card {
+          margin-bottom: 0;
+          display: flex;
+          flex-direction: column;
+        }
+
+        #notesListContainer .duaa-card-footer {
+          margin-top: auto;
+        }
+
+        #notesListContainer .history-empty {
+          grid-column: 1 / -1;
+        }
+
+        .duaa-book-container {
+          max-width: 680px;
+          border-radius: 24px;
+        }
+
+        .duaa-reader-arabic {
+          font-size: 28px;
+          line-height: 2.2;
+          padding: 24px 20px;
+        }
+
+        .duaa-reader-trans {
+          font-size: 16px;
+        }
+
+        /* Recipe Grid on iPad */
+        #recipeList,
+        #recipeFavoritesList,
+        #recipeMustTryList,
+        #recipeQuickList,
+        #recipeOkayList {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+
+        #recipeList .recipe-card,
+        #recipeFavoritesList .recipe-card,
+        #recipeMustTryList .recipe-card,
+        #recipeQuickList .recipe-card,
+        #recipeOkayList .recipe-card {
+          margin-bottom: 0;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .recipe-card .recipe-card-footer {
+          margin-top: auto;
+        }
+
+        /* English Vocab Grid on iPad */
+        #englishVocabList {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+
+        .english-vocab-item {
+          margin-top: 0;
+        }
+
+        /* Period History & Stats */
+        .history-stats {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+        }
+
+        .stat-box {
+          padding: 14px 10px;
+        }
+
+        .stat-value {
+          font-size: 24px;
+        }
+
+        /* Summary Tab Cards Grid */
+        #tab-summary {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+
+        #tab-summary .section-title {
+          grid-column: 1 / -1;
+          margin-bottom: 0;
+        }
+
+        #tab-summary .summary-card {
+          margin-bottom: 0;
+        }
+      }
+
+      /* iPad Air Landscape (1180px) & Desktop Viewports */
+      @media (min-width: 1024px) {
+        .app-container {
+          max-width: 980px;
+        }
+
+        .tabs {
+          max-width: 860px;
+          gap: 8px;
+        }
+
+        .tab-btn {
+          flex: 0 1 84px;
+          max-width: 88px;
+        }
+
+        #notesListContainer {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        #recipeList,
+        #recipeFavoritesList,
+        #recipeMustTryList,
+        #recipeQuickList,
+        #recipeOkayList {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+
+        .duaa-book-container {
+          max-width: 760px;
         }
       }
 
@@ -4814,6 +5007,14 @@
               </div>
               <div style="flex: 1">
                 <div class="task-text">Exercise <span>🏋️</span></div>
+                <a
+                  class="yt-link"
+                  href="https://youtu.be/IT94xC35u6k?si=CXCFkwumv4jICfbE"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                >
+                  <span>▶️</span> Watch Exercise Video
+                </a>
                 <div class="timer-wrap" onclick="event.stopPropagation()">
                   <div class="timer-display" id="timer-display-exercise">
                     30:00
@@ -7962,7 +8163,7 @@
 
       const SEED_RECIPES = [
         {
-          title: "Crispy chilli beef",
+          title: "Crispy Chilli Beef",
           url: "https://youtube.com/shorts/9q0_UO9s8w4?si=xWRo9eK9GHp9dRfm",
           ingredients: [
             "Cornstarch",
@@ -7974,11 +8175,11 @@
             "Sweet chilli sauce",
             "Water",
             "Garlic (chopped)",
-            "Marinate for 5mint",
+            "Marinate for 5 mins",
           ],
         },
         {
-          title: "Sweet honey chicken",
+          title: "Sweet Honey Chicken",
           url: "https://youtube.com/shorts/Syy1FeNc1tw?si=PljSaNO78Pgla6kf",
           ingredients: [
             "Chicken",
@@ -7987,11 +8188,11 @@
             "Vinegar",
             "Ketchup",
             "Garlic",
-            "Marinate for 5mint",
+            "Marinate for 5 mins",
           ],
         },
         {
-          title: "Sticky sweet ground beef",
+          title: "Sticky Sweet Ground Beef",
           url: "https://youtube.com/shorts/fzp3VFh-ORE?si=mvLiwWqhRW39vwAS",
           ingredients: [
             "Oil",
@@ -8004,7 +8205,7 @@
           ],
         },
         {
-          title: "Crispy chilli oil chicken",
+          title: "Crispy Chilli Oil Chicken",
           url: "https://youtube.com/shorts/9zBqB6cmQJs?si=8ptuNoY4dxzq1e50",
           ingredients: [
             "Cornstarch",
@@ -8019,7 +8220,7 @@
           ],
         },
         {
-          title: "Tree cup chicken",
+          title: "Three Cup Chicken",
           url: "https://youtube.com/shorts/Z4alSEQeees?si=6FlcUkRNZWqiYeur",
           ingredients: [
             "Ginger (chopped)",
@@ -8035,7 +8236,7 @@
           ],
         },
         {
-          title: "Honey Garlic chicken stir fry",
+          title: "Honey Garlic Chicken Stir-Fry",
           url: "https://youtube.com/shorts/qtltYrd-oUM?si=Pzr3GRMse3iLzzON",
           ingredients: [
             "Chicken",
@@ -8053,7 +8254,7 @@
           ],
         },
         {
-          title: "Crispy honey garlic beef",
+          title: "Crispy Honey Garlic Beef",
           url: "https://youtube.com/shorts/SpkG2YvbGMY?si=_ArptvhsVl_onUB7",
           ingredients: [
             "Cornstarch",
@@ -8068,7 +8269,7 @@
           ],
         },
         {
-          title: "Crispy GOCHUJANG chicken",
+          title: "Crispy Gochujang Chicken",
           url: "https://youtube.com/shorts/gZUnkbVZ8PY?si=kPAzjgAR0Ej5GPvX",
           ingredients: [
             "Cornstarch",
@@ -8085,7 +8286,7 @@
           ],
         },
         {
-          title: "Crispy hot honey chicken",
+          title: "Crispy Hot Honey Chicken",
           url: "https://youtube.com/shorts/gzFtQ1n2_8o?si=RtqSXVv0waHC2b8G",
           ingredients: [
             "Cornstarch",
@@ -8101,7 +8302,7 @@
           ],
         },
         {
-          title: "Sticky sweet chicken",
+          title: "Sticky Sweet Chicken",
           url: "https://youtube.com/shorts/wlFMS79ycm8?si=dAcNLQ324PW7eg0W",
           ingredients: [
             "Chicken",
@@ -8116,7 +8317,7 @@
           ],
         },
         {
-          title: "Honey butter fried chicken",
+          title: "Honey Butter Fried Chicken",
           url: "https://youtube.com/shorts/b46s1FI-hEI?si=ltbazSrTivLRPUeh",
           ingredients: [
             "Rice flour",
@@ -8131,7 +8332,7 @@
           ],
         },
         {
-          title: "Sticky ground beef",
+          title: "Sticky Ground Beef",
           url: "https://youtube.com/shorts/NzS_73MSILE?si=A-9_Bhfclbwo_MW9",
           ingredients: [
             "Oil",
@@ -8147,7 +8348,7 @@
           ],
         },
         {
-          title: "Ground beef egg bowl",
+          title: "Ground Beef Egg Bowl",
           url: "https://youtube.com/shorts/M_SyOXXqGJ4?si=jL9K2PWQ2aN_nloO",
           ingredients: [
             "Eggs",
@@ -8160,7 +8361,7 @@
           ],
         },
         {
-          title: "Lemongrass beef",
+          title: "Lemongrass Beef",
           url: "https://youtube.com/shorts/Dwgq-nwcHLU?si=-kAt3Ajna9u_8_aZ",
           ingredients: [
             "Beef",
@@ -8189,7 +8390,7 @@
           ],
         },
         {
-          title: "Honey butter chicken tenders",
+          title: "Honey Butter Chicken Tenders",
           url: "https://youtube.com/shorts/zqxTIBr6MbA?si=42vEYp6pW43lDBzS",
           ingredients: [
             "Rice flour",
@@ -8218,6 +8419,9 @@
             recipeData = JSON.parse(stored);
             if (recipeData && Array.isArray(recipeData.recipes)) {
               recipeData.recipes.forEach((r) => {
+                if (r.title === "Tree cup chicken") r.title = "Three Cup Chicken";
+                if (r.title === "Crispy GOCHUJANG chicken") r.title = "Crispy Gochujang Chicken";
+                if (r.title === "Honey Garlic chicken stir fry") r.title = "Honey Garlic Chicken Stir-Fry";
                 if (r.favorite === undefined) r.favorite = false;
                 if (r.mustTry === undefined) r.mustTry = false;
                 if (r.quick === undefined) r.quick = false;
@@ -8226,11 +8430,12 @@
                 if (r.changes === undefined) r.changes = "";
                 if (Array.isArray(r.ingredients)) {
                   r.ingredients = r.ingredients.map((ing) => {
-                    const rawName = typeof ing === "string" ? ing : ing.name;
+                    let rawName = typeof ing === "string" ? ing : ing.name;
+                    if (rawName === "Marinate for 5mint") rawName = "Marinate for 5 mins";
                     if (isInstructionText(rawName)) {
                       return typeof ing === "string"
                         ? { name: rawName, checked: false }
-                        : ing;
+                        : { ...ing, name: rawName };
                     }
                     const norm = normalizeIngredientName(rawName);
                     if (typeof ing === "string")
