@@ -539,6 +539,10 @@
         background: #6366f1;
         color: #ffffff;
       }
+      .tab-btn.active[onclick*="pdf"] .tab-icon {
+        background: #8b5cf6;
+        color: #ffffff;
+      }
       .tab-icon {
         font-size: 16px;
         margin-bottom: 0;
@@ -555,6 +559,9 @@
 
       .tab-content {
         display: none;
+      }
+      .tab-content:not(.active) {
+        display: none !important;
       }
       .tab-content.active {
         display: block;
@@ -4488,7 +4495,7 @@
         }
 
         /* Summary Tab Cards Grid */
-        #tab-summary {
+        #tab-summary.active {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 16px;
@@ -4652,6 +4659,463 @@
           font-size: 15px;
         }
       }
+
+      /* ==================== PDF READER & FLIPBOOK STYLES ==================== */
+      .pdf-title {
+        background: #ede9fe;
+        color: #5b21b6;
+        border-color: #7c3aed;
+      }
+
+      .pdf-reader-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      /* Upload / Drop Card */
+      .pdf-drop-card {
+        background: var(--surface);
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        box-shadow: 0 3px 0 var(--ink);
+        padding: 28px 20px;
+        text-align: center;
+        transition: all 0.2s ease;
+      }
+
+      .pdf-drop-zone {
+        border: 2px dashed #8b5cf6;
+        border-radius: 14px;
+        background: #faf8ff;
+        padding: 32px 16px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+      }
+
+      .pdf-drop-zone:hover,
+      .pdf-drop-zone.dragover {
+        border-color: #6d28d9;
+        background: #f3e8ff;
+        transform: translateY(-2px);
+      }
+
+      .pdf-drop-icon {
+        font-size: 44px;
+        line-height: 1;
+        filter: drop-shadow(0 2px 4px rgba(139, 92, 246, 0.25));
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .pdf-drop-zone:hover .pdf-drop-icon {
+        transform: scale(1.1) rotate(-4deg);
+      }
+
+      .pdf-drop-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1e1b4b;
+      }
+
+      .pdf-drop-sub {
+        font-size: 12px;
+        color: var(--muted);
+        max-width: 320px;
+        line-height: 1.4;
+      }
+
+      .pdf-btn-group {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+
+      .pdf-action-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 18px;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 10px;
+        border: 2px solid var(--ink);
+        box-shadow: 0 2px 0 var(--ink);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        background: var(--surface);
+        color: var(--ink);
+        user-select: none;
+      }
+
+      .pdf-action-btn:hover {
+        transform: translateY(-1.5px);
+        box-shadow: 0 3.5px 0 var(--ink);
+      }
+
+      .pdf-action-btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 1px 0 var(--ink);
+      }
+
+      .pdf-btn-primary {
+        background: #8b5cf6;
+        color: #ffffff;
+      }
+
+      .pdf-btn-secondary {
+        background: #ede9fe;
+        color: #5b21b6;
+      }
+
+      .pdf-feature-badges {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line-soft);
+      }
+
+      .pdf-feature-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #f4efdc;
+        border: 1px solid var(--ink);
+        color: var(--ink-soft);
+      }
+
+      /* Recent Book Card / Resume */
+      .pdf-recent-card {
+        background: #fdfbf7;
+        border: 2px solid #8b5cf6;
+        border-radius: 14px;
+        box-shadow: 0 2.5px 0 #7c3aed;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .pdf-recent-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .pdf-recent-icon {
+        font-size: 26px;
+      }
+
+      .pdf-recent-text {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e1b4b;
+      }
+
+      .pdf-recent-meta {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      /* Main Viewer Card */
+      .pdf-viewer-card {
+        background: var(--surface);
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        box-shadow: 0 3px 0 var(--ink);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.25s ease;
+      }
+
+      /* Fullscreen viewer mode */
+      .pdf-viewer-card.is-fullscreen {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        width: 100vw;
+        height: 100vh;
+        background: #18181b;
+      }
+
+      .pdf-viewer-card.is-fullscreen .pdf-toolbar {
+        background: #27272a;
+        border-bottom: 2px solid #3f3f46;
+        color: #f4f4f5;
+      }
+
+      .pdf-viewer-card.is-fullscreen .pdf-action-btn {
+        border-color: #52525b;
+        background: #3f3f46;
+        color: #f4f4f5;
+        box-shadow: 0 2px 0 #18181b;
+      }
+
+      .pdf-viewer-card.is-fullscreen .pdf-doc-title {
+        color: #fafafa;
+      }
+
+      .pdf-viewer-card.is-fullscreen .pdf-stage-wrapper {
+        background: radial-gradient(circle at center, #27272a 0%, #18181b 100%);
+      }
+
+      /* Reader Toolbar */
+      .pdf-toolbar {
+        background: #faf8f5;
+        border-bottom: 2px solid var(--ink);
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        z-index: 10;
+      }
+
+      .pdf-toolbar-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .pdf-doc-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ink);
+        max-width: 220px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .pdf-page-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 10px;
+        background: var(--surface);
+        border: 1.5px solid var(--ink);
+        border-radius: 8px;
+      }
+
+      .pdf-page-input {
+        width: 38px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 2px 4px;
+        border: 1px solid var(--line-soft);
+        border-radius: 4px;
+        background: transparent;
+      }
+
+      .pdf-page-slider {
+        width: 110px;
+        height: 6px;
+        accent-color: #8b5cf6;
+        cursor: pointer;
+      }
+
+      /* The Flipbook Stage Area */
+      .pdf-stage-wrapper {
+        position: relative;
+        min-height: 480px;
+        height: 70vh;
+        max-height: 760px;
+        background: radial-gradient(circle at center, #ede6d1 0%, #ded5bd 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        user-select: none;
+        padding: 20px 10px;
+      }
+
+      .pdf-viewer-card.is-fullscreen .pdf-stage-wrapper {
+        height: calc(100vh - 120px);
+        max-height: none;
+      }
+
+      .pdf-flipbook-host {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+
+      /* Single page wrapper inside PageFlip */
+      .pdf-page-wrapper {
+        background: #ffffff;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .pdf-page-wrapper canvas {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .pdf-page-footer-badge {
+        position: absolute;
+        bottom: 8px;
+        font-size: 10px;
+        font-weight: 700;
+        color: #71717a;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 2px 8px;
+        border-radius: 6px;
+        pointer-events: none;
+      }
+
+      /* Floating Overlay Arrows */
+      .pdf-floating-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid var(--ink);
+        box-shadow: 0 3px 0 var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+        z-index: 50;
+        transition: all 0.15s ease;
+      }
+
+      .pdf-floating-arrow:hover {
+        background: #ffffff;
+        transform: translateY(-50%) scale(1.08);
+      }
+
+      .pdf-floating-arrow.prev {
+        left: 12px;
+      }
+
+      .pdf-floating-arrow.next {
+        right: 12px;
+      }
+
+      /* Bottom Bar / Thumbnails */
+      .pdf-bottom-bar {
+        background: #faf8f5;
+        border-top: 2px solid var(--ink);
+        padding: 8px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .pdf-hints {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      /* Loading Progress Overlay */
+      .pdf-loading-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(244, 239, 220, 0.92);
+        backdrop-filter: blur(4px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        z-index: 100;
+      }
+
+      .pdf-spinner {
+        width: 42px;
+        height: 42px;
+        border: 4px solid #ddd6fe;
+        border-top-color: #7c3aed;
+        border-radius: 50%;
+        animation: pdfSpin 0.75s linear infinite;
+      }
+
+      @keyframes pdfSpin {
+        to { transform: rotate(360deg); }
+      }
+
+      .pdf-loading-text {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1e1b4b;
+      }
+
+      .pdf-progress-bar-wrap {
+        width: 220px;
+        height: 8px;
+        background: #e2e8f0;
+        border: 1.5px solid var(--ink);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .pdf-progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: #8b5cf6;
+        transition: width 0.15s ease;
+      }
+
+      @media (max-width: 640px) {
+        .pdf-stage-wrapper {
+          min-height: 380px;
+          height: 60vh;
+          padding: 8px 4px;
+        }
+        .pdf-floating-arrow {
+          width: 36px;
+          height: 36px;
+          font-size: 13px;
+        }
+        .pdf-floating-arrow.prev { left: 4px; }
+        .pdf-floating-arrow.next { right: 4px; }
+        .pdf-page-slider { width: 80px; }
+        .pdf-doc-title { max-width: 130px; }
+      }
     </style>
     <base target="_blank" />
   </head>
@@ -4693,6 +5157,10 @@
         <button class="tab-btn" onclick="switchTab('notes', this)">
           <span class="tab-icon">🤲</span>
           <span class="tab-label">Duaa</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('pdf', this)">
+          <span class="tab-icon">📖</span>
+          <span class="tab-label">PDF Reader</span>
         </button>
         <button class="tab-btn" onclick="switchTab('summary', this)">
           <span class="tab-icon">📊</span>
@@ -6338,6 +6806,54 @@
               </div>
             </div>
           </div>
+
+          <!-- 4. INTERACTIVE GEMINI QUIZ -->
+          <div class="english-module-card gemini-quiz-card" style="margin-top: 14px;">
+            <div class="english-module-header">
+              <div class="english-module-title-wrap">
+                <div class="english-module-icon" style="background: linear-gradient(135deg, #e0e7ff 0%, #fdf4ff 100%);">✨</div>
+                <div>
+                  <div class="english-module-name">Interactive English Quiz</div>
+                  <div style="font-size: 11px; color: #64748b">
+                    20 Questions • Grammar, Tenses, Spelling &amp; Subject-Verb Agreement
+                  </div>
+                </div>
+              </div>
+              <span class="pdf-feature-pill" style="background: #e0f2fe; color: #0369a1; border-color: #0284c7;">
+                AI Powered
+              </span>
+            </div>
+
+            <div class="gemini-quiz-body" style="margin-top: 12px; padding: 14px; background: #faf8ff; border: 1.5px solid #cbd5e1; border-radius: 12px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <div style="font-size: 13px; font-weight: 700; color: #1e1b4b;">
+                  🎯 20-Question Practice Challenge
+                </div>
+                <div style="font-size: 11px; color: #64748b;">
+                  Interactive choices • Live hints • Instant explanations
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px;">
+                <button
+                  type="button"
+                  class="pdf-action-btn pdf-btn-primary"
+                  onclick="openGeminiQuizPopup()"
+                  style="background: linear-gradient(135deg, #4285f4 0%, #9b72cf 50%, #d96570 100%); color: #ffffff; border: 2px solid var(--ink); box-shadow: 0 2.5px 0 var(--ink); padding: 8px 18px;"
+                >
+                  🚀 Launch Interactive Quiz Window
+                </button>
+                <a
+                  href="https://gemini.google.com/share/e219c8ef0eee?skid=10fd6e4e-9d56-4b96-b6dc-2fc5b45879d9"
+                  target="_blank"
+                  class="pdf-action-btn"
+                  style="background: var(--surface); padding: 8px 14px; text-decoration: none;"
+                >
+                  🔗 Open in New Tab
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- HISTORY TAB -->
@@ -6876,6 +7392,180 @@
               <span class="summary-row-value" id="summaryAdhkarEvening"
                 >--</span
               >
+            </div>
+          </div>
+        </div>
+
+      <!-- PDF READER & INTERACTIVE FLIPBOOK TAB -->
+      <div class="tab-content" id="tab-pdf">
+        <div class="section-title pdf-title">
+          <span>📖</span> PDF FLIPBOOK READER
+        </div>
+
+        <div class="pdf-reader-container">
+          <!-- Upload / Drop Zone Card -->
+          <div class="pdf-drop-card" id="pdfUploadCard">
+            <input
+              type="file"
+              id="pdfFileInput"
+              accept="application/pdf"
+              style="display: none"
+              onchange="handlePdfFileInputChange(event)"
+            />
+            <div
+              class="pdf-drop-zone"
+              id="pdfDropZone"
+              onclick="document.getElementById('pdfFileInput').click()"
+            >
+              <div class="pdf-drop-icon">📑</div>
+              <div class="pdf-drop-title">Drop your PDF here, or click to browse</div>
+              <div class="pdf-drop-sub">
+                Supports any document, book, notes, or slides. Rendered privately &amp; securely right on your device.
+              </div>
+              <div class="pdf-btn-group" onclick="event.stopPropagation()">
+                <button
+                  type="button"
+                  class="pdf-action-btn pdf-btn-primary"
+                  onclick="document.getElementById('pdfFileInput').click()"
+                >
+                  📂 Choose PDF File
+                </button>
+                <button
+                  type="button"
+                  class="pdf-action-btn pdf-btn-secondary"
+                  onclick="loadSampleDemoPdf()"
+                  title="Try with an instant interactive sample guide"
+                >
+                  ✨ Try Sample Flipbook
+                </button>
+              </div>
+            </div>
+
+            <!-- Cached PDF Resume Banner (populated dynamically) -->
+            <div id="pdfResumeCard" style="display: none; margin-top: 14px;"></div>
+
+            <div class="pdf-feature-badges">
+              <span class="pdf-feature-pill">📖 Realistic 3D Page Turns</span>
+              <span class="pdf-feature-pill">⚡ Crisp Retina PDF Rendering</span>
+              <span class="pdf-feature-pill">📱 Mobile &amp; Touch Gestures</span>
+              <span class="pdf-feature-pill">🔒 100% Private (No upload to server)</span>
+            </div>
+          </div>
+
+          <!-- Active Viewer Card (Shown when PDF is loaded) -->
+          <div class="pdf-viewer-card" id="pdfViewerCard" style="display: none;">
+            <!-- Top Toolbar -->
+            <div class="pdf-toolbar">
+              <div class="pdf-toolbar-group">
+                <span class="pdf-doc-title" id="pdfDocTitle" title="Document Title">document.pdf</span>
+                <div class="pdf-page-pill">
+                  <span>Page</span>
+                  <input
+                    type="number"
+                    id="pdfPageNumberInput"
+                    class="pdf-page-input"
+                    min="1"
+                    value="1"
+                    onchange="jumpToPdfPage(parseInt(this.value, 10))"
+                  />
+                  <span>/</span>
+                  <span id="pdfTotalPagesDisplay">1</span>
+                </div>
+                <input
+                  type="range"
+                  id="pdfPageSlider"
+                  class="pdf-page-slider"
+                  min="1"
+                  max="1"
+                  value="1"
+                  oninput="handlePdfSliderChange(this.value)"
+                />
+              </div>
+
+              <div class="pdf-toolbar-group">
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  id="pdfSpreadModeBtn"
+                  onclick="togglePdfSpreadMode()"
+                  title="Toggle Two-Page Book / Single Page"
+                >
+                  📖 Book View
+                </button>
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  id="pdfSoundBtn"
+                  onclick="togglePdfSound()"
+                  title="Toggle page flip sound"
+                >
+                  🔊 Sound On
+                </button>
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  onclick="togglePdfFullscreen()"
+                  title="Toggle Fullscreen"
+                >
+                  ⛶ Fullscreen
+                </button>
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  onclick="resetPdfUpload()"
+                  title="Open another PDF"
+                >
+                  📤 New PDF
+                </button>
+              </div>
+            </div>
+
+            <!-- Flipbook Stage Area -->
+            <div class="pdf-stage-wrapper" id="pdfStageWrapper">
+              <!-- Floating Nav Arrows -->
+              <button
+                type="button"
+                class="pdf-floating-arrow prev"
+                id="pdfPrevBtn"
+                onclick="navigatePdfFlip(-1)"
+                title="Previous Page (or Left Arrow)"
+              >
+                ◀
+              </button>
+              <button
+                type="button"
+                class="pdf-floating-arrow next"
+                id="pdfNextBtn"
+                onclick="navigatePdfFlip(1)"
+                title="Next Page (or Right Arrow)"
+              >
+                ▶
+              </button>
+
+              <!-- Flipbook container element (where St.PageFlip mounts) -->
+              <div class="pdf-flipbook-host" id="pdfFlipbookContainer">
+                <div id="pdfBookElement"></div>
+              </div>
+
+              <!-- Loading Progress Overlay -->
+              <div class="pdf-loading-overlay" id="pdfLoadingOverlay" style="display: none;">
+                <div class="pdf-spinner"></div>
+                <div class="pdf-loading-text" id="pdfLoadingText">Processing PDF...</div>
+                <div class="pdf-progress-bar-wrap">
+                  <div class="pdf-progress-bar-fill" id="pdfProgressBarFill"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Bar / Navigation hints -->
+            <div class="pdf-bottom-bar">
+              <div class="pdf-hints">
+                <span>💡 Drag page corners or swipe to flip</span>
+                <span>• Keyboard: ◀ ▶ Arrow keys</span>
+              </div>
+              <div id="pdfZoomHint" style="font-weight: 600;">
+                Click corner or buttons to turn
+              </div>
             </div>
           </div>
         </div>
@@ -7631,6 +8321,11 @@
     </div>
 
     <div class="toast" id="toast"></div>
+
+    <!-- PDF.js library for high-DPI PDF parsing & canvas rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- StPageFlip (Modern 3D interactive page turning flipbook engine) -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 
     <script>
       const TOTAL_TASKS = 13;
@@ -9504,6 +10199,7 @@
         }
         if (tabName === "summary") renderSummary();
         if (tabName === "notes") renderNotesList();
+        if (tabName === "pdf") renderPdfTab();
         if (tabName === "english") {
           renderGrammarRevisionDisplay();
           renderPhonicsRevisionDisplay();
@@ -13268,6 +13964,754 @@
 
       // Initialize English vocab on page load
       renderEnglishTab();
+
+      // ==================== PDF READER & INTERACTIVE FLIPBOOK MODULE ====================
+      const pdfFlipState = {
+        pdfDoc: null,
+        fileName: "",
+        numPages: 0,
+        currentPage: 1,
+        pageFlipInstance: null,
+        isSoundEnabled: true,
+        isFullscreen: false,
+        isSpreadMode: true,
+        pageDataUrls: [],
+        pageAspectRatios: [],
+        isRendering: false
+      };
+
+      // Set PDF.js Global Worker
+      if (typeof window !== "undefined" && window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      }
+
+      // IndexedDB Storage for PDF caching & resume
+      const PDF_DB_NAME = "DailyTrackerPdfDB";
+      const PDF_DB_STORE = "recentPdfs";
+
+      function openPdfDatabase() {
+        return new Promise((resolve, reject) => {
+          if (!window.indexedDB) {
+            return reject(new Error("IndexedDB not supported"));
+          }
+          const req = window.indexedDB.open(PDF_DB_NAME, 1);
+          req.onupgradeneeded = function (e) {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains(PDF_DB_STORE)) {
+              db.createObjectStore(PDF_DB_STORE, { keyPath: "id" });
+            }
+          };
+          req.onsuccess = function (e) {
+            resolve(e.target.result);
+          };
+          req.onerror = function (e) {
+            reject(e.target.error);
+          };
+        });
+      }
+
+      async function savePdfToCache(fileName, arrayBuffer, totalPages, lastPage = 1) {
+        try {
+          const db = await openPdfDatabase();
+          const tx = db.transaction(PDF_DB_STORE, "readwrite");
+          const store = tx.objectStore(PDF_DB_STORE);
+          store.put({
+            id: "currentActivePdf",
+            fileName: fileName,
+            buffer: arrayBuffer,
+            totalPages: totalPages,
+            lastPage: lastPage,
+            savedAt: new Date().toISOString()
+          });
+        } catch (err) {
+          console.warn("Could not cache PDF in IndexedDB:", err);
+        }
+      }
+
+      async function getCachedPdf() {
+        try {
+          const db = await openPdfDatabase();
+          return new Promise((resolve) => {
+            const tx = db.transaction(PDF_DB_STORE, "readonly");
+            const store = tx.objectStore(PDF_DB_STORE);
+            const req = store.get("currentActivePdf");
+            req.onsuccess = function () {
+              resolve(req.result || null);
+            };
+            req.onerror = function () {
+              resolve(null);
+            };
+          });
+        } catch (e) {
+          return null;
+        }
+      }
+
+      async function removeCachedPdf() {
+        try {
+          const db = await openPdfDatabase();
+          const tx = db.transaction(PDF_DB_STORE, "readwrite");
+          tx.objectStore(PDF_DB_STORE).delete("currentActivePdf");
+        } catch (e) {}
+      }
+
+      // Realistic Web Audio Page Turning Sound Synthesizer
+      function playPageFlipSound() {
+        if (!pdfFlipState.isSoundEnabled) return;
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          const ctx = new AudioContextClass();
+          if (ctx.state === "suspended") {
+            ctx.resume();
+          }
+          const duration = 0.14;
+          const bufferSize = Math.floor(ctx.sampleRate * duration);
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            // Decaying white noise imitating paper rustle
+            const progress = i / bufferSize;
+            data[i] = (Math.random() * 2 - 1) * Math.pow(1 - progress, 2.2);
+          }
+
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+
+          const filter = ctx.createBiquadFilter();
+          filter.type = "bandpass";
+          filter.frequency.setValueAtTime(1400, ctx.currentTime);
+          filter.frequency.exponentialRampToValueAtTime(700, ctx.currentTime + duration);
+          filter.Q.setValueAtTime(1.5, ctx.currentTime);
+
+          const gain = ctx.createGain();
+          gain.gain.setValueAtTime(0.22, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+
+          noise.start();
+        } catch (err) {
+          // Audio autoplay or context restriction
+        }
+      }
+
+      // Initialize or check PDF tab state
+      async function renderPdfTab() {
+        initPdfDropEvents();
+        checkAndShowRecentPdfBanner();
+      }
+
+      async function checkAndShowRecentPdfBanner() {
+        const resumeEl = document.getElementById("pdfResumeCard");
+        if (!resumeEl) return;
+        const cached = await getCachedPdf();
+        if (cached && cached.fileName && cached.buffer) {
+          resumeEl.style.display = "block";
+          resumeEl.innerHTML = `
+            <div class="pdf-recent-card">
+              <div class="pdf-recent-info">
+                <span class="pdf-recent-icon">📑</span>
+                <div>
+                  <div class="pdf-recent-text">Resume: ${escapeHtml(cached.fileName)}</div>
+                  <div class="pdf-recent-meta">${cached.totalPages} pages • Last read on page ${cached.lastPage || 1}</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <button type="button" class="pdf-action-btn pdf-btn-primary" onclick="resumeCachedPdf()">
+                  📖 Open Book
+                </button>
+                <button type="button" class="pdf-action-btn" onclick="discardCachedPdf()" title="Clear saved document">
+                  ✕
+                </button>
+              </div>
+            </div>
+          `;
+        } else {
+          resumeEl.style.display = "none";
+          resumeEl.innerHTML = "";
+        }
+      }
+
+      async function resumeCachedPdf() {
+        const cached = await getCachedPdf();
+        if (!cached || !cached.buffer) {
+          showToast("No cached PDF found.");
+          return;
+        }
+        await processPdfBuffer(cached.buffer, cached.fileName, cached.lastPage || 1);
+      }
+
+      async function discardCachedPdf() {
+        await removeCachedPdf();
+        checkAndShowRecentPdfBanner();
+        showToast("Cached PDF cleared 🗑️");
+      }
+
+      // Drag and Drop Event Listeners
+      let pdfDropEventsBound = false;
+      function initPdfDropEvents() {
+        if (pdfDropEventsBound) return;
+        const dropZone = document.getElementById("pdfDropZone");
+        if (!dropZone) return;
+
+        ["dragenter", "dragover"].forEach((evtName) => {
+          dropZone.addEventListener(evtName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add("dragover");
+          });
+        });
+
+        ["dragleave", "dragend"].forEach((evtName) => {
+          dropZone.addEventListener(evtName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove("dragover");
+          });
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.classList.remove("dragover");
+          const files = e.dataTransfer.files;
+          if (files && files.length > 0) {
+            handlePdfFile(files[0]);
+          }
+        });
+
+        pdfDropEventsBound = true;
+      }
+
+      function handlePdfFileInputChange(event) {
+        const file = event.target.files && event.target.files[0];
+        if (file) {
+          handlePdfFile(file);
+        }
+        event.target.value = "";
+      }
+
+      function handlePdfFile(file) {
+        if (!file) return;
+        if (!file.name.toLowerCase().endsWith(".pdf") && file.type !== "application/pdf") {
+          showToast("Please choose a valid PDF file (.pdf) ⚠️");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onloadstart = function () {
+          showPdfLoading("Reading PDF file...", 10);
+        };
+        reader.onload = async function (e) {
+          const arrayBuffer = e.target.result;
+          await processPdfBuffer(arrayBuffer, file.name, 1);
+        };
+        reader.onerror = function () {
+          hidePdfLoading();
+          showToast("Error reading file from disk ❌");
+        };
+        reader.readAsArrayBuffer(file);
+      }
+
+      function showPdfLoading(text, percent = 0) {
+        const overlay = document.getElementById("pdfLoadingOverlay");
+        const label = document.getElementById("pdfLoadingText");
+        const bar = document.getElementById("pdfProgressBarFill");
+        if (overlay) overlay.style.display = "flex";
+        if (label) label.textContent = text;
+        if (bar) bar.style.width = Math.max(0, Math.min(100, percent)) + "%";
+      }
+
+      function updatePdfLoading(text, percent) {
+        const label = document.getElementById("pdfLoadingText");
+        const bar = document.getElementById("pdfProgressBarFill");
+        if (label) label.textContent = text;
+        if (bar) bar.style.width = Math.max(0, Math.min(100, percent)) + "%";
+      }
+
+      function hidePdfLoading() {
+        const overlay = document.getElementById("pdfLoadingOverlay");
+        if (overlay) overlay.style.display = "none";
+      }
+
+      // Process and render PDF pages using PDF.js
+      async function processPdfBuffer(arrayBuffer, fileName, initialPage = 1) {
+        if (!window.pdfjsLib) {
+          showToast("PDF.js library is still loading. Please try in a moment!");
+          return;
+        }
+
+        pdfFlipState.isRendering = true;
+        pdfFlipState.fileName = fileName;
+        document.getElementById("pdfUploadCard").style.display = "none";
+        document.getElementById("pdfViewerCard").style.display = "flex";
+        document.getElementById("pdfDocTitle").textContent = fileName;
+        showPdfLoading("Parsing PDF document...", 20);
+
+        try {
+          const loadingTask = window.pdfjsLib.getDocument({
+            data: arrayBuffer,
+            cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/",
+            cMapPacked: true
+          });
+
+          const pdfDoc = await loadingTask.promise;
+          pdfFlipState.pdfDoc = pdfDoc;
+          pdfFlipState.numPages = pdfDoc.numPages;
+
+          document.getElementById("pdfTotalPagesDisplay").textContent = pdfDoc.numPages;
+          const slider = document.getElementById("pdfPageSlider");
+          if (slider) {
+            slider.min = 1;
+            slider.max = pdfDoc.numPages;
+            slider.value = initialPage;
+          }
+
+          // Cache in IndexedDB
+          savePdfToCache(fileName, arrayBuffer, pdfDoc.numPages, initialPage);
+
+          // Render each page into an HTML canvas inside a flip wrapper
+          await renderPdfPagesIntoFlipbook(pdfDoc, initialPage);
+        } catch (err) {
+          console.error("PDF load error:", err);
+          hidePdfLoading();
+          pdfFlipState.isRendering = false;
+          showToast("Failed to open PDF: " + (err.message || "Unknown error") + " ❌");
+          resetPdfUpload();
+        }
+      }
+
+      async function renderPdfPagesIntoFlipbook(pdfDoc, initialPage = 1) {
+        const bookContainer = document.getElementById("pdfBookElement");
+        if (!bookContainer) return;
+
+        // Destroy previous PageFlip instance if any
+        if (pdfFlipState.pageFlipInstance) {
+          try {
+            pdfFlipState.pageFlipInstance.destroy();
+          } catch (e) {}
+          pdfFlipState.pageFlipInstance = null;
+        }
+
+        bookContainer.innerHTML = "";
+
+        const totalPages = pdfDoc.numPages;
+        const pageWrappers = [];
+
+        // Sample first page to determine aspect ratio
+        const firstPage = await pdfDoc.getPage(1);
+        const initialViewport = firstPage.getViewport({ scale: 1.0 });
+        const baseWidth = Math.round(initialViewport.width);
+        const baseHeight = Math.round(initialViewport.height);
+
+        // Normalize base flipbook dimensions to fit well within viewport
+        const targetHeight = Math.min(650, Math.max(480, window.innerHeight * 0.65));
+        const scaleFactor = targetHeight / baseHeight;
+        const bookPageWidth = Math.round(baseWidth * scaleFactor);
+        const bookPageHeight = Math.round(targetHeight);
+
+        for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+          const percent = Math.round((pageNum / totalPages) * 75) + 20;
+          updatePdfLoading(`Rendering page ${pageNum} of ${totalPages}...`, percent);
+
+          const page = await pdfDoc.getPage(pageNum);
+          // Scale for crisp retina display
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          const viewport = page.getViewport({ scale: (bookPageHeight / page.getViewport({ scale: 1.0 }).height) * dpr });
+
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          canvas.style.width = "100%";
+          canvas.style.height = "100%";
+
+          const renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+          };
+          await page.render(renderContext).promise;
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "pdf-page-wrapper";
+          wrapper.setAttribute("data-density", pageNum === 1 || pageNum === totalPages ? "hard" : "soft");
+
+          const badge = document.createElement("span");
+          badge.className = "pdf-page-footer-badge";
+          badge.textContent = `${pageNum} / ${totalPages}`;
+
+          wrapper.appendChild(canvas);
+          wrapper.appendChild(badge);
+          bookContainer.appendChild(wrapper);
+          pageWrappers.push(wrapper);
+        }
+
+        updatePdfLoading("Assembling 3D flipbook...", 98);
+
+        // Wait a tick for DOM layout
+        await new Promise((r) => setTimeout(r, 60));
+
+        mountStPageFlip(bookPageWidth, bookPageHeight, initialPage);
+      }
+
+      function mountStPageFlip(pageWidth, pageHeight, initialPage = 1) {
+        const bookElement = document.getElementById("pdfBookElement");
+        if (!bookElement) return;
+
+        if (!window.St || !window.St.PageFlip) {
+          hidePdfLoading();
+          showToast("Interactive Flipbook engine ready! (Standard view active)");
+          pdfFlipState.isRendering = false;
+          return;
+        }
+
+        try {
+          const isMobile = window.innerWidth <= 680;
+          const pageFlip = new window.St.PageFlip(bookElement, {
+            width: Math.max(260, Math.min(540, pageWidth)),
+            height: Math.max(380, Math.min(740, pageHeight)),
+            size: "stretch",
+            minWidth: 260,
+            maxWidth: 1000,
+            minHeight: 360,
+            maxHeight: 1200,
+            maxShadowOpacity: 0.45,
+            showCover: false,
+            mobileScrollSupport: false,
+            usePortrait: isMobile || !pdfFlipState.isSpreadMode,
+            flippingTime: 650,
+            startPage: Math.max(0, initialPage - 1)
+          });
+
+          pageFlip.loadFromHTML(bookElement.querySelectorAll(".pdf-page-wrapper"));
+
+          pageFlip.on("flip", (e) => {
+            const pageIndex = e.data;
+            const humanPage = pageIndex + 1;
+            pdfFlipState.currentPage = humanPage;
+
+            const input = document.getElementById("pdfPageNumberInput");
+            if (input) input.value = humanPage;
+
+            const slider = document.getElementById("pdfPageSlider");
+            if (slider) slider.value = humanPage;
+
+            // Save last read page in cache
+            if (pdfFlipState.fileName) {
+              getCachedPdf().then((cached) => {
+                if (cached && cached.buffer) {
+                  savePdfToCache(pdfFlipState.fileName, cached.buffer, pdfFlipState.numPages, humanPage);
+                }
+              });
+            }
+
+            playPageFlipSound();
+          });
+
+          pdfFlipState.pageFlipInstance = pageFlip;
+          pdfFlipState.currentPage = initialPage;
+
+          const input = document.getElementById("pdfPageNumberInput");
+          if (input) input.value = initialPage;
+        } catch (err) {
+          console.error("PageFlip init error:", err);
+          showToast("Book initialized in simplified viewer mode.");
+        } finally {
+          hidePdfLoading();
+          pdfFlipState.isRendering = false;
+        }
+      }
+
+      // Flip Navigation controls
+      function navigatePdfFlip(direction) {
+        if (!pdfFlipState.pageFlipInstance) return;
+        if (direction > 0) {
+          pdfFlipState.pageFlipInstance.flipNext();
+        } else {
+          pdfFlipState.pageFlipInstance.flipPrev();
+        }
+      }
+
+      function jumpToPdfPage(pageNum) {
+        if (!pdfFlipState.pageFlipInstance || isNaN(pageNum)) return;
+        const target = Math.max(1, Math.min(pageNum, pdfFlipState.numPages));
+        pdfFlipState.pageFlipInstance.turnToPage(target - 1);
+        const input = document.getElementById("pdfPageNumberInput");
+        if (input) input.value = target;
+        const slider = document.getElementById("pdfPageSlider");
+        if (slider) slider.value = target;
+      }
+
+      function handlePdfSliderChange(val) {
+        jumpToPdfPage(parseInt(val, 10));
+      }
+
+      function togglePdfSpreadMode() {
+        pdfFlipState.isSpreadMode = !pdfFlipState.isSpreadMode;
+        const btn = document.getElementById("pdfSpreadModeBtn");
+        if (btn) {
+          btn.textContent = pdfFlipState.isSpreadMode ? "📖 Book View" : "📄 Single Page";
+        }
+        if (pdfFlipState.pageFlipInstance && pdfFlipState.pdfDoc) {
+          renderPdfPagesIntoFlipbook(pdfFlipState.pdfDoc, pdfFlipState.currentPage);
+        }
+      }
+
+      function togglePdfSound() {
+        pdfFlipState.isSoundEnabled = !pdfFlipState.isSoundEnabled;
+        const btn = document.getElementById("pdfSoundBtn");
+        if (btn) {
+          btn.textContent = pdfFlipState.isSoundEnabled ? "🔊 Sound On" : "🔇 Sound Off";
+        }
+        showToast(pdfFlipState.isSoundEnabled ? "Page flip sound enabled 🔊" : "Page flip sound muted 🔇");
+      }
+
+      function togglePdfFullscreen() {
+        const viewer = document.getElementById("pdfViewerCard");
+        if (!viewer) return;
+        pdfFlipState.isFullscreen = !pdfFlipState.isFullscreen;
+        viewer.classList.toggle("is-fullscreen", pdfFlipState.isFullscreen);
+
+        // Adjust Stage sizing after transition
+        setTimeout(() => {
+          if (pdfFlipState.pageFlipInstance) {
+            try {
+              pdfFlipState.pageFlipInstance.update();
+            } catch (e) {}
+          }
+        }, 200);
+      }
+
+      function resetPdfUpload() {
+        if (pdfFlipState.pageFlipInstance) {
+          try {
+            pdfFlipState.pageFlipInstance.destroy();
+          } catch (e) {}
+          pdfFlipState.pageFlipInstance = null;
+        }
+        if (pdfFlipState.isFullscreen) {
+          togglePdfFullscreen();
+        }
+        pdfFlipState.pdfDoc = null;
+        pdfFlipState.currentPage = 1;
+        document.getElementById("pdfViewerCard").style.display = "none";
+        document.getElementById("pdfUploadCard").style.display = "block";
+        checkAndShowRecentPdfBanner();
+      }
+
+      // Demo sample flipbook generator (Instant offline sample guide)
+      async function loadSampleDemoPdf() {
+        pdfFlipState.isRendering = true;
+        document.getElementById("pdfUploadCard").style.display = "none";
+        document.getElementById("pdfViewerCard").style.display = "flex";
+        document.getElementById("pdfDocTitle").textContent = "Tracker_Guide_Sample.pdf";
+        showPdfLoading("Generating interactive sample book...", 25);
+
+        const samplePages = [
+          {
+            title: "Daily Tracker & Duaa Guide",
+            subtitle: "Interactive Flipbook Edition",
+            content: "Welcome to your interactive flipbook reader!\n\nThis reader supports realistic 3D paper turning, page curls, sound effects, and gesture navigation.\n\n👉 Turn the page to learn how to upload your own PDFs.",
+            badge: "Cover Page",
+            bg: "#fef3c7",
+            headerColor: "#78350f"
+          },
+          {
+            title: "Chapter 1: Uploading PDFs",
+            subtitle: "Read Books, Notes & Slide Decks",
+            content: "• Drag & drop any .pdf file from your phone or computer.\n• Everything runs completely offline inside your browser—no file is ever sent to a remote server.\n• High-DPI retina rendering keeps all typography razor-sharp at any zoom level.",
+            badge: "Page 2",
+            bg: "#ffffff",
+            headerColor: "#1e1b4b"
+          },
+          {
+            title: "Chapter 2: Gesture & Controls",
+            subtitle: "Intuitive Reading Experience",
+            content: "• Drag mouse or swipe finger across the corners to pull and flip pages.\n• Use Left / Right arrow keys on your physical keyboard.\n• Use the Page Slider in the top toolbar to jump instantly to any page.\n• Toggle 🔊 Sound for realistic paper acoustics.",
+            badge: "Page 3",
+            bg: "#ffffff",
+            headerColor: "#1e1b4b"
+          },
+          {
+            title: "Chapter 3: Study Habits & Dhikr",
+            subtitle: "Daily Reflection Tips",
+            content: "1. Consistency over intensity: Track your 3x/week learning goals.\n2. Utilize the English Vocabulary tab to capture new words.\n3. Keep your favourite Duaas bookmarked in the Duaa Book for easy morning & evening recitation.",
+            badge: "Page 4",
+            bg: "#ffffff",
+            headerColor: "#1e1b4b"
+          },
+          {
+            title: "Chapter 4: Reading Duaas",
+            subtitle: "Spiritual Growth & Reflection",
+            content: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا\n\n'O Allah, I ask You for beneficial knowledge, goodly provision, and acceptable deeds.'\n\nMay this tool bring clarity and blessing to your daily schedule!",
+            badge: "Page 5",
+            bg: "#f0fdf4",
+            headerColor: "#14532d"
+          },
+          {
+            title: "End of Guide",
+            subtitle: "Ready to load your own PDF?",
+            content: "Click '📤 New PDF' in the top bar anytime to open your own textbooks, Quran PDFs, or study guides.\n\nHappy reading!",
+            badge: "Back Cover",
+            bg: "#ede9fe",
+            headerColor: "#5b21b6"
+          }
+        ];
+
+        const bookContainer = document.getElementById("pdfBookElement");
+        if (!bookContainer) return;
+
+        if (pdfFlipState.pageFlipInstance) {
+          try {
+            pdfFlipState.pageFlipInstance.destroy();
+          } catch (e) {}
+          pdfFlipState.pageFlipInstance = null;
+        }
+
+        bookContainer.innerHTML = "";
+        pdfFlipState.numPages = samplePages.length;
+        document.getElementById("pdfTotalPagesDisplay").textContent = samplePages.length;
+        const slider = document.getElementById("pdfPageSlider");
+        if (slider) {
+          slider.min = 1;
+          slider.max = samplePages.length;
+          slider.value = 1;
+        }
+
+        const pageWidth = 440;
+        const pageHeight = 600;
+
+        for (let i = 0; i < samplePages.length; i++) {
+          const p = samplePages[i];
+          const canvas = document.createElement("canvas");
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = pageWidth * dpr;
+          canvas.height = pageHeight * dpr;
+          canvas.style.width = "100%";
+          canvas.style.height = "100%";
+          const ctx = canvas.getContext("2d");
+          ctx.scale(dpr, dpr);
+
+          // Background
+          ctx.fillStyle = p.bg;
+          ctx.fillRect(0, 0, pageWidth, pageHeight);
+
+          // Subtle paper texture border
+          ctx.strokeStyle = "#e2e8f0";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(16, 16, pageWidth - 32, pageHeight - 32);
+
+          // Header badge
+          ctx.fillStyle = p.headerColor;
+          ctx.font = "bold 11px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+          ctx.fillText(p.badge.toUpperCase(), 32, 48);
+
+          // Title
+          ctx.fillStyle = "#1e1b4b";
+          ctx.font = "bold 20px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+          ctx.fillText(p.title, 32, 85);
+
+          // Subtitle
+          ctx.fillStyle = "#6b7280";
+          ctx.font = "italic 13px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+          ctx.fillText(p.subtitle, 32, 110);
+
+          // Divider
+          ctx.strokeStyle = "#cbd5e1";
+          ctx.beginPath();
+          ctx.moveTo(32, 125);
+          ctx.lineTo(pageWidth - 32, 125);
+          ctx.stroke();
+
+          // Body text wrapped
+          ctx.fillStyle = "#334155";
+          ctx.font = "14px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+          const lines = p.content.split("\n");
+          let curY = 160;
+          for (const line of lines) {
+            if (!line.trim()) {
+              curY += 12;
+              continue;
+            }
+            // Simple word wrap
+            const words = line.split(" ");
+            let currentLine = "";
+            for (let w = 0; w < words.length; w++) {
+              const testLine = currentLine + words[w] + " ";
+              const metrics = ctx.measureText(testLine);
+              if (metrics.width > pageWidth - 64 && w > 0) {
+                ctx.fillText(currentLine, 32, curY);
+                currentLine = words[w] + " ";
+                curY += 22;
+              } else {
+                currentLine = testLine;
+              }
+            }
+            ctx.fillText(currentLine, 32, curY);
+            curY += 22;
+          }
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "pdf-page-wrapper";
+          wrapper.setAttribute("data-density", i === 0 || i === samplePages.length - 1 ? "hard" : "soft");
+
+          const badge = document.createElement("span");
+          badge.className = "pdf-page-footer-badge";
+          badge.textContent = `${i + 1} / ${samplePages.length}`;
+
+          wrapper.appendChild(canvas);
+          wrapper.appendChild(badge);
+          bookContainer.appendChild(wrapper);
+        }
+
+        updatePdfLoading("Ready!", 100);
+        await new Promise((r) => setTimeout(r, 60));
+        mountStPageFlip(pageWidth, pageHeight, 1);
+      }
+
+      // Keyboard navigation listener for PDF Flipbook
+      window.addEventListener("keydown", function (e) {
+        const tabPdf = document.getElementById("tab-pdf");
+        const viewer = document.getElementById("pdfViewerCard");
+        const isPdfActive =
+          (tabPdf && tabPdf.classList.contains("active") && viewer && viewer.style.display !== "none") ||
+          (viewer && viewer.classList.contains("is-fullscreen"));
+
+        if (!isPdfActive) return;
+
+        if (e.key === "ArrowLeft") {
+          navigatePdfFlip(-1);
+        } else if (e.key === "ArrowRight") {
+          navigatePdfFlip(1);
+        } else if (e.key === "Escape" && pdfFlipState.isFullscreen) {
+          togglePdfFullscreen();
+        }
+      });
+
+      // Gemini Interactive Quiz Popup Launcher
+      function openGeminiQuizPopup() {
+        const url = "https://gemini.google.com/share/e219c8ef0eee?skid=10fd6e4e-9d56-4b96-b6dc-2fc5b45879d9";
+        const width = Math.min(1080, Math.floor(window.screen.availWidth * 0.85));
+        const height = Math.min(880, Math.floor(window.screen.availHeight * 0.9));
+        const left = Math.max(0, Math.floor((window.screen.availWidth - width) / 2));
+        const top = Math.max(0, Math.floor((window.screen.availHeight - height) / 2));
+
+        const popup = window.open(
+          url,
+          "GeminiQuizWindow",
+          `width=${width},height=${height},left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes`
+        );
+
+        if (!popup || popup.closed || typeof popup.closed === "undefined") {
+          window.open(url, "_blank");
+        } else {
+          popup.focus();
+        }
+      }
     </script>
   </body>
 </html>
