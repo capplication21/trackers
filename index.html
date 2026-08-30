@@ -714,6 +714,327 @@
         color: #334155;
         margin-top: 2px;
       }
+
+      /* ==================== B1-B2 ENGLISH AESTHETIC LEARNING STUDIO ==================== */
+      .tech-routine-module {
+        background: linear-gradient(180deg, #ffffff 0%, #fffbfd 100%);
+        border: 2.5px solid var(--ink);
+        border-radius: 22px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 10px 30px -5px rgba(244, 114, 182, 0.2), 0 4px 0 var(--ink);
+        position: relative;
+      }
+      .tech-progress-card {
+        background: linear-gradient(135deg, #f0fdf4 0%, #fdf2f8 50%, #eff6ff 100%);
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 3px 0 var(--ink);
+      }
+      .tech-progress-bar-bg {
+        width: 100%;
+        height: 12px;
+        background: #f1f5f9;
+        border: 1.5px solid var(--ink);
+        border-radius: 999px;
+        overflow: hidden;
+        margin: 10px 0 8px;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+      }
+      .tech-progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #10b981 0%, #06b6d4 50%, #ec4899 100%);
+        border-radius: 999px;
+        transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .tech-step-nav {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        margin-bottom: 16px;
+        scrollbar-width: thin;
+      }
+      .tech-step-tab {
+        flex: 1;
+        min-width: 130px;
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        padding: 10px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #334155;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 2.5px 0 var(--ink);
+        white-space: nowrap;
+      }
+      .tech-step-tab:hover {
+        background: #fdf2f8;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 0 var(--ink);
+        color: #9d174d;
+      }
+      .tech-step-tab.active {
+        background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        color: #831843;
+        border-color: var(--ink);
+        box-shadow: 0 4px 0 var(--ink);
+        transform: translateY(-2px);
+      }
+      .tech-step-tab.completed-tab {
+        border-color: #15803d;
+      }
+      .tech-step-badge {
+        font-size: 10.5px;
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #cbd5e1;
+        border-radius: 999px;
+        padding: 2px 7px;
+        font-weight: 700;
+      }
+      .tech-step-pane {
+        display: none;
+        animation: fadeInStudioPane 0.25s ease-in-out;
+      }
+      .tech-step-pane.active {
+        display: block;
+      }
+      @keyframes fadeInStudioPane {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .tech-scenario-card {
+        background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+        border: 2px solid #cbd5e1;
+        border-radius: 18px;
+        padding: 18px;
+        margin-bottom: 14px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+      }
+      .tech-scenario-select {
+        width: 100%;
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #0f172a;
+        outline: none;
+        margin-top: 6px;
+        box-shadow: 0 2.5px 0 var(--ink);
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+      .tech-scenario-select:focus {
+        border-color: #db2777;
+      }
+      .tech-input-box {
+        width: 100%;
+        min-height: 80px;
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13.5px;
+        font-family: inherit;
+        color: #0f172a;
+        resize: vertical;
+        box-shadow: 0 2.5px 0 var(--ink);
+        outline: none;
+        transition: all 0.2s ease;
+      }
+      .tech-input-box:focus {
+        border-color: #ec4899;
+        box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2), 0 2.5px 0 var(--ink);
+      }
+      .tech-btn-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .tech-action-btn {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        padding: 8px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 2.5px 0 var(--ink);
+        transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+        user-select: none;
+      }
+      .tech-action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 0 var(--ink);
+      }
+      .tech-action-btn:active {
+        transform: translateY(2px);
+        box-shadow: 0 0.5px 0 var(--ink);
+      }
+      .tech-action-btn.primary {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: #ffffff;
+      }
+      .tech-action-btn.success {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: #ffffff;
+      }
+      .tech-action-btn.warning {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: #ffffff;
+      }
+      .b1-day-pill {
+        padding: 6px 11px;
+        font-size: 11.5px;
+        font-weight: 600;
+        border-radius: 10px;
+        background: #f8fafc;
+        color: #334155;
+        border: 1.5px solid #cbd5e1;
+        box-shadow: 0 2px 0 #94a3b8;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .b1-day-pill:hover {
+        background: #fdf2f8;
+        border-color: #f472b6;
+        color: #9d174d;
+        transform: translateY(-1.5px);
+      }
+      .b1-day-pill.active {
+        background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #d946ef 100%);
+        color: #ffffff !important;
+        border: 2px solid var(--ink);
+        box-shadow: 0 3px 0 var(--ink), 0 4px 12px rgba(236, 72, 153, 0.35);
+        font-weight: 800;
+        transform: translateY(-2px);
+      }
+      .tech-model-answer-card {
+        background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+        border: 2px solid #60a5fa;
+        border-radius: 14px;
+        padding: 14px;
+        margin-top: 14px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #1e3a8a;
+        box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);
+      }
+      .tech-inversion-box {
+        background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: 0 3px 0 var(--ink);
+        margin-bottom: 12px;
+      }
+      .tech-inversion-target {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        padding: 12px;
+        margin-top: 10px;
+        box-shadow: 0 2px 0 var(--ink);
+      }
+      .tech-colloc-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .tech-colloc-option {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        padding: 12px 14px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1e293b;
+        cursor: pointer;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 2.5px 0 var(--ink);
+        transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .tech-colloc-option:hover {
+        background: #fdf4ff;
+        border-color: #c084fc;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 0 var(--ink);
+      }
+      .tech-colloc-option.correct {
+        background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
+        border-color: #16a34a !important;
+        color: #14532d !important;
+        box-shadow: 0 3px 0 #16a34a !important;
+        transform: scale(1.01);
+      }
+      .tech-colloc-option.wrong {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%) !important;
+        border-color: #dc2626 !important;
+        color: #7f1d1d !important;
+        box-shadow: 0 3px 0 #dc2626 !important;
+      }
+      .tech-timer-container {
+        background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 0 var(--ink);
+      }
+      .tech-timer-digits {
+        font-size: 44px;
+        font-weight: 900;
+        color: #0284c7;
+        letter-spacing: 3px;
+        margin: 10px 0;
+        font-variant-numeric: tabular-nums;
+        text-shadow: 0 2px 10px rgba(14, 165, 233, 0.25);
+      }
+      .tech-checklist-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        border: 1.5px solid var(--ink);
+        border-radius: 10px;
+        padding: 8px 12px;
+        margin-top: 8px;
+        font-size: 12px;
+        cursor: pointer;
+        box-shadow: 0 1.5px 0 var(--ink);
+        transition: background 0.12s ease;
+      }
+      .tech-checklist-label:hover {
+        background: #f1f5f9;
+      }
+      .tech-checklist-label input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: #10b981;
+        cursor: pointer;
+      }
+
       .water-title {
         background: #e0f2fe;
         color: #075985;
@@ -6855,50 +7176,551 @@
             </div>
           </div>
 
-          <!-- 5. ENGLISH LEVEL ASSESSMENT & DAILY READING -->
-          <div class="english-module-card gemini-assessment-card" style="margin-top: 14px;">
+          <!-- 5.5. DAILY LIFE PRACTICAL MATHS & GROCERY CALCULATOR -->
+          <div class="tech-routine-module" id="dailyMathsRoutineModule" style="background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%); border: 2.5px solid var(--ink); border-radius: 22px; padding: 20px; box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.2), 0 4px 0 var(--ink); margin-top: 18px;">
             <div class="english-module-header">
               <div class="english-module-title-wrap">
-                <div class="english-module-icon" style="background: linear-gradient(135deg, #dcfce7 0%, #ecfdf5 100%);">📖</div>
+                <div class="english-module-icon" style="background: linear-gradient(135deg, #dcfce7 0%, #a7f3d0 100%);">🧺</div>
                 <div>
-                  <div class="english-module-name">English Level Test &amp; Reading Practice</div>
-                  <div style="font-size: 11px; color: #64748b">
-                    Proficiency Evaluation • Daily Paragraph Reading • Vocabulary &amp; Pronunciation
+                  <div class="english-module-name" style="color: #065f46;">Daily Life Practical Maths: Grocery &amp; Market Suite</div>
+                  <div style="font-size: 11.5px; color: #047857;">
+                    Grams to Kg • Cash &amp; Change at Counter • 10%/20% Discount Hacks • Live Bill Simulator
                   </div>
                 </div>
               </div>
-              <span class="pdf-feature-pill" style="background: #dcfce7; color: #166534; border-color: #22c55e;">
-                Level &amp; Reading
+              <span class="pdf-feature-pill" style="background: #dcfce7; color: #065f46; border-color: #34d399; font-weight: 800;">
+                🛒 Everyday Shopping Math
               </span>
             </div>
 
-            <div class="gemini-quiz-body" style="margin-top: 12px; padding: 14px; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; display: flex; flex-direction: column; gap: 10px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                <div style="font-size: 13px; font-weight: 700; color: #14532d;">
-                  📊 Personalized Proficiency &amp; Daily Paragraph
+            <!-- Math Mode Navigation Tabs -->
+            <div class="tech-step-nav" style="margin: 14px 0 12px;">
+              <button type="button" class="tech-step-tab active" id="mathTabBtn-1" onclick="switchMathStep(1)" style="min-width: 120px;">
+                <span>⚖️ 1. Grams &amp; Kg Math</span>
+              </button>
+              <button type="button" class="tech-step-tab" id="mathTabBtn-2" onclick="switchMathStep(2)" style="min-width: 120px;">
+                <span>💵 2. Cash &amp; Change</span>
+              </button>
+              <button type="button" class="tech-step-tab" id="mathTabBtn-3" onclick="switchMathStep(3)" style="min-width: 120px;">
+                <span>🏷️ 3. Discounts &amp; Sales</span>
+              </button>
+              <button type="button" class="tech-step-tab" id="mathTabBtn-4" onclick="switchMathStep(4)" style="min-width: 120px;">
+                <span>🧮 4. Grocery Bill Simulator</span>
+              </button>
+            </div>
+
+            <!-- PANE 1: GRAMS & KG MATH -->
+            <div class="math-step-pane active" id="mathStepPane-1">
+              <div class="tech-scenario-card" style="background: #ffffff; border: 2px solid #a7f3d0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                  <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #065f46; background: #d1fae5; padding: 3px 8px; border-radius: 6px;">Weight &amp; Price Challenge</span>
+                  <span style="font-size: 12px; font-weight: 700; color: #047857;">Scenario <span id="mathGramsIndexDisplay">1</span> of 4</span>
                 </div>
-                <div style="font-size: 11px; color: #475569;">
-                  Quick level test • Highlighted new words • Pronunciation &amp; dictation
+
+                <div style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border: 1.5px solid #a7f3d0; border-radius: 12px; padding: 12px 14px; margin-top: 10px;">
+                  <div style="font-size: 11px; font-weight: 800; color: #047857; text-transform: uppercase;">🛒 Market Situation:</div>
+                  <div id="mathGramsPromptText" style="font-size: 13.5px; font-weight: 700; color: #064e3b; margin-top: 4px; line-height: 1.5;"></div>
+                  <div id="mathGramsUrduPrompt" style="font-size: 12.5px; color: #047857; margin-top: 4px; font-weight: 600;"></div>
+                </div>
+
+                <div class="tech-colloc-grid" id="mathGramsOptionsContainer" style="margin-top: 12px;"></div>
+
+                <div id="mathGramsFeedbackBox" style="display: none; padding: 12px 14px; border-radius: 12px; margin-top: 12px; font-size: 12.5px; line-height: 1.55;"></div>
+
+                <div class="tech-btn-row">
+                  <button type="button" class="tech-action-btn primary" onclick="nextMathGramsScenario()">
+                    Next Weight Challenge ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANE 2: CASH & CHANGE COUNTER -->
+            <div class="math-step-pane" id="mathStepPane-2" style="display: none;">
+              <div class="tech-scenario-card" style="background: #ffffff; border: 2px solid #fed7aa;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                  <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #9a3412; background: #ffedd5; padding: 3px 8px; border-radius: 6px;">Cash Register &amp; Change</span>
+                  <span style="font-size: 12px; font-weight: 700; color: #c2410c;">Scenario <span id="mathChangeIndexDisplay">1</span> of 4</span>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 1.5px solid #fed7aa; border-radius: 12px; padding: 12px 14px; margin-top: 10px;">
+                  <div style="font-size: 11px; font-weight: 800; color: #c2410c; text-transform: uppercase;">💵 Cashier Situation:</div>
+                  <div id="mathChangePromptText" style="font-size: 13.5px; font-weight: 700; color: #7c2d12; margin-top: 4px; line-height: 1.5;"></div>
+                  <div id="mathChangeUrduPrompt" style="font-size: 12.5px; color: #9a3412; margin-top: 4px; font-weight: 600;"></div>
+                </div>
+
+                <div class="tech-colloc-grid" id="mathChangeOptionsContainer" style="margin-top: 12px;"></div>
+
+                <div id="mathChangeFeedbackBox" style="display: none; padding: 12px 14px; border-radius: 12px; margin-top: 12px; font-size: 12.5px; line-height: 1.55;"></div>
+
+                <div class="tech-btn-row">
+                  <button type="button" class="tech-action-btn warning" onclick="nextMathChangeScenario()">
+                    Next Change Challenge ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANE 3: DISCOUNTS & SALES HACKS -->
+            <div class="math-step-pane" id="mathStepPane-3" style="display: none;">
+              <div class="tech-scenario-card" style="background: #ffffff; border: 2px solid #e9d5ff;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                  <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #6b21a8; background: #f3e8ff; padding: 3px 8px; border-radius: 6px;">Sale &amp; Discount Hack</span>
+                  <span style="font-size: 12px; font-weight: 700; color: #7e22ce;">Scenario <span id="mathDiscountIndexDisplay">1</span> of 4</span>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border: 1.5px solid #d8b4fe; border-radius: 12px; padding: 12px 14px; margin-top: 10px;">
+                  <div style="font-size: 11px; font-weight: 800; color: #6b21a8; text-transform: uppercase;">🏷️ Supermarket Offer:</div>
+                  <div id="mathDiscountPromptText" style="font-size: 13.5px; font-weight: 700; color: #3b0764; margin-top: 4px; line-height: 1.5;"></div>
+                  <div id="mathDiscountUrduPrompt" style="font-size: 12.5px; color: #7e22ce; margin-top: 4px; font-weight: 600;"></div>
+                </div>
+
+                <div class="tech-colloc-grid" id="mathDiscountOptionsContainer" style="margin-top: 12px;"></div>
+
+                <div id="mathDiscountFeedbackBox" style="display: none; padding: 12px 14px; border-radius: 12px; margin-top: 12px; font-size: 12.5px; line-height: 1.55;"></div>
+
+                <div class="tech-btn-row">
+                  <button type="button" class="tech-action-btn" onclick="nextMathDiscountScenario()" style="background: #ede9fe; color: #5b21b6; border-color: #8b5cf6;">
+                    Next Discount Challenge ➔
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANE 4: GROCERY BILL REGISTER SIMULATOR -->
+            <div class="math-step-pane" id="mathStepPane-4" style="display: none;">
+              <div class="tech-scenario-card" style="background: #ffffff; border: 2px solid #cbd5e1;">
+                <div style="font-size: 13.5px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                  <span>🧮 Live Market Register &amp; Change Calculator</span>
+                </div>
+                <div style="font-size: 12px; color: #64748b; margin-top: 3px;">
+                  Add items to your basket to calculate the exact total and change from large notes.
+                </div>
+
+                <!-- Quick Preset Buttons -->
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
+                  <button type="button" class="tech-action-btn" onclick="addPresetGrocery('Potatoes', 1, 'kg', 80)" style="font-size: 11px; padding: 4px 8px;">+ 1kg Potatoes (Rs. 80)</button>
+                  <button type="button" class="tech-action-btn" onclick="addPresetGrocery('Tomatoes', 500, 'g', 120)" style="font-size: 11px; padding: 4px 8px;">+ 500g Tomatoes (Rs. 60)</button>
+                  <button type="button" class="tech-action-btn" onclick="addPresetGrocery('Fresh Milk', 2, 'liter', 160)" style="font-size: 11px; padding: 4px 8px;">+ 2L Milk (Rs. 320)</button>
+                  <button type="button" class="tech-action-btn" onclick="addPresetGrocery('Eggs (Dozen)', 1, 'dozen', 360)" style="font-size: 11px; padding: 4px 8px;">+ 1 Dozen Eggs (Rs. 360)</button>
+                  <button type="button" class="tech-action-btn" onclick="clearGroceryBill()" style="font-size: 11px; padding: 4px 8px; margin-left: auto; background: #fee2e2; color: #991b1b; border-color: #fca5a5;">Clear All</button>
+                </div>
+
+                <!-- Add Custom Item Form -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 12px; background: #f8fafc; padding: 10px; border-radius: 12px; border: 1.5px solid #e2e8f0;">
+                  <div>
+                    <label style="font-size: 11px; font-weight: 700; color: #475569; display: block;">Item Name:</label>
+                    <input type="text" id="customItemName" placeholder="E.g., Onions" style="width: 100%; padding: 6px 8px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12px;">
+                  </div>
+                  <div>
+                    <label style="font-size: 11px; font-weight: 700; color: #475569; display: block;">Quantity:</label>
+                    <input type="number" id="customItemQty" placeholder="1" step="0.1" style="width: 100%; padding: 6px 8px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12px;">
+                  </div>
+                  <div>
+                    <label style="font-size: 11px; font-weight: 700; color: #475569; display: block;">Unit:</label>
+                    <select id="customItemUnit" style="width: 100%; padding: 6px 8px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12px;">
+                      <option value="kg">kg (Kilogram)</option>
+                      <option value="g">grams (e.g. 250g)</option>
+                      <option value="liter">liters</option>
+                      <option value="dozen">dozen</option>
+                      <option value="piece">pieces</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="font-size: 11px; font-weight: 700; color: #475569; display: block;">Rate per Unit (Rs):</label>
+                    <input type="number" id="customItemRate" placeholder="Rate" style="width: 100%; padding: 6px 8px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12px;">
+                  </div>
+                  <div style="display: flex; align-items: flex-end;">
+                    <button type="button" class="tech-action-btn success" onclick="addCustomGroceryItem()" style="width: 100%; padding: 7px; justify-content: center;">
+                      + Add Item
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Grocery Items Table -->
+                <div style="margin-top: 14px; overflow-x: auto;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+                    <thead>
+                      <tr style="background: #f1f5f9; border-bottom: 2px solid var(--ink); text-align: left;">
+                        <th style="padding: 8px 10px;">Item</th>
+                        <th style="padding: 8px 10px;">Qty &amp; Unit</th>
+                        <th style="padding: 8px 10px;">Rate</th>
+                        <th style="padding: 8px 10px;">Line Total</th>
+                        <th style="padding: 8px 10px; text-align: center;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="groceryBillItemsTableBody">
+                      <!-- Populated dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Total Bill & Cash Change Row -->
+                <div style="background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%); border: 2px solid var(--ink); border-radius: 14px; padding: 14px; margin-top: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                  <div>
+                    <div style="font-size: 11px; font-weight: 800; color: #047857; text-transform: uppercase;">Total Grocery Bill:</div>
+                    <div style="font-size: 24px; font-weight: 900; color: #065f46;" id="groceryGrandTotalDisplay">Rs. 0</div>
+                  </div>
+
+                  <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <div>
+                      <label style="font-size: 11px; font-weight: 700; color: #334155; display: block;">Cash Paid (Rs):</label>
+                      <input type="number" id="groceryCashPaidInput" oninput="recalcGroceryChange()" placeholder="e.g. 500" style="width: 110px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13px; font-weight: 700;">
+                    </div>
+                    <div>
+                      <div style="font-size: 11px; font-weight: 800; color: #0369a1; text-transform: uppercase;">Change to Get Back:</div>
+                      <div style="font-size: 22px; font-weight: 900; color: #0284c7;" id="groceryChangeReturnDisplay">Rs. 0</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. B1 PRACTICAL ENGLISH: DAILY FLUENCY ROUTINE -->
+          <div class="tech-routine-module" id="techEnglishRoutineModule">
+            <div class="english-module-header">
+              <div class="english-module-title-wrap">
+                <div class="english-module-icon" id="routineModuleIcon" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);">🌸</div>
+                <div>
+                  <div class="english-module-name" id="routineModuleName">B1 Practical English: Daily Fluency Routine</div>
+                  <div id="routineModuleSubtitle" style="font-size: 11px; color: #64748b">
+                    Everyday "What-If" Sentences • Polite Social Phrasing • Expressive Vocabulary • Spoken Self-Talk
+                  </div>
+                </div>
+              </div>
+              <span class="pdf-feature-pill" id="routineModuleBadge" style="background: #fce7f3; color: #9d174d; border-color: #f472b6;">
+                B1 Fluency &amp; Confidence
+              </span>
+            </div>
+
+            <!-- 7-Day Thematic Schedule & Day Selector Bar -->
+            <div style="background: linear-gradient(135deg, #fff5f7 0%, #fdf2f8 50%, #faf5ff 100%); border: 2px solid #fbcfe8; border-radius: 16px; padding: 14px 16px; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(244, 114, 182, 0.12);">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                <div style="font-size: 13.5px; font-weight: 800; color: #831843; display: flex; align-items: center; gap: 8px;">
+                  <span id="currentDayIcon" style="font-size: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));">🍳</span>
+                  <span id="currentDayThemeTitle">Monday: Kitchen &amp; Cooking Delights</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <button type="button" class="tech-action-btn" onclick="pickRandomScenario()" style="padding: 5px 12px; font-size: 11.5px; background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%); color: #ffffff; border: 1.5px solid #be185d; box-shadow: 0 3px 10px rgba(236, 72, 153, 0.3); font-weight: 700;">
+                    ✨ 🎲 Random Topic
+                  </button>
+                </div>
+              </div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="b1DayPillsContainer">
+                <button type="button" class="tech-action-btn b1-day-pill" id="dayPill-1" onclick="switchDayTheme(1)">Mon: 🍳 Cooking</button>
+                <button type="button" class="tech-action-btn b1-day-pill" id="dayPill-2" onclick="switchDayTheme(2)">Tue: 🏥 Clinic</button>
+                <button type="button" class="tech-action-btn b1-day-pill" id="dayPill-3" onclick="switchDayTheme(3)">Wed: 🛒 Market</button>
+                <button type="button" class="tech-action-btn b1-day-pill" id="dayPill-4" onclick="switchDayTheme(4)">Thu: 🎒 School</button>
+                <button type="button" class="tech-action-btn b1-day-pill" id="dayPill-5" onclick="switchDayTheme(5)">Fri: ☕ Guests</button>
+                <button type="button" class="tech-action-btn b1-day-pill" id="dayPill-6" onclick="switchDayTheme(6)">Sat: 🌳 Outings</button>
+                <button type="button" class="tech-action-btn b1-day-pill" id="dayPill-0" onclick="switchDayTheme(0)">Sun: 🌸 Self-Care</button>
+              </div>
+            </div>
+
+            <!-- Daily Progress Card -->
+            <div class="tech-progress-card">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <div style="font-size: 13.5px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                  <span>🎯 Today's Routine Progress</span>
+                  <span id="techRoutineStreakBadge" style="font-size: 11.5px; font-weight: 800; background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%); color: #c2410c; border: 1.5px solid #fb923c; border-radius: 999px; padding: 2px 10px; box-shadow: 0 2px 6px rgba(251, 146, 60, 0.25);">🔥 0 Day Streak</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span id="techRoutineProgressText" style="font-size: 12px; font-weight: 800; color: #0369a1; background: #e0f2fe; padding: 3px 10px; border-radius: 999px;">0 / 4 completed (0%)</span>
+                  <button type="button" class="tech-action-btn" onclick="resetTechRoutineToday()" style="padding: 4px 10px; font-size: 11px;">
+                    ↺ Reset
+                  </button>
                 </div>
               </div>
 
-              <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px;">
-                <button
-                  type="button"
-                  class="pdf-action-btn pdf-btn-primary"
-                  onclick="openGeminiAssessmentPopup()"
-                  style="background: linear-gradient(135deg, #059669 0%, #10b981 50%, #14b8a6 100%); color: #ffffff; border: 2px solid var(--ink); box-shadow: 0 2.5px 0 var(--ink); padding: 8px 18px;"
-                >
-                  🚀 Launch Level Test &amp; Reading
-                </button>
-                <a
-                  href="https://share.gemini.google/up2W333Melwq"
-                  target="_blank"
-                  class="pdf-action-btn"
-                  style="background: var(--surface); padding: 8px 14px; text-decoration: none;"
-                >
-                  🔗 Open in New Tab
-                </a>
+              <div class="tech-progress-bar-bg">
+                <div class="tech-progress-bar-fill" id="techRoutineProgressBar"></div>
+              </div>
+              <div id="routineTargetTimeText" style="font-size: 11.5px; color: #475569; font-weight: 500;">
+                Target time: ~15 mins daily • Complete all 4 steps to build your confidence and streak!
+              </div>
+            </div>
+
+            <!-- Step Navigation Tabs -->
+            <div class="tech-step-nav" id="techStepNav">
+              <button type="button" class="tech-step-tab active" id="techTabBtn-1" onclick="switchTechStep(1)">
+                <span id="tabLabel-1">🔀 1. What-If Sentences</span>
+                <span class="tech-step-badge" id="techStepStatus-1">Pending</span>
+              </button>
+              <button type="button" class="tech-step-tab" id="techTabBtn-2" onclick="switchTechStep(2)">
+                <span id="tabLabel-2">🤝 2. Polite Social Phrasing</span>
+                <span class="tech-step-badge" id="techStepStatus-2">Pending</span>
+              </button>
+              <button type="button" class="tech-step-tab" id="techTabBtn-3" onclick="switchTechStep(3)">
+                <span id="tabLabel-3">🌸 3. Expressive Vocabulary</span>
+                <span class="tech-step-badge" id="techStepStatus-3">Pending</span>
+              </button>
+              <button type="button" class="tech-step-tab" id="techTabBtn-4" onclick="switchTechStep(4)">
+                <span id="tabLabel-4">🎙️ 4. Spoken Self-Talk</span>
+                <span class="tech-step-badge" id="techStepStatus-4">Pending</span>
+              </button>
+            </div>
+
+            <!-- STEP 1 PANE: CONDITIONALS SIMULATOR -->
+            <div class="tech-step-pane active" id="techStepPane-1">
+              <div class="tech-scenario-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                  <div>
+                    <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #4338ca; background: #e0e7ff; padding: 3px 8px; border-radius: 6px;">Step 1: 5 Mins</span>
+                    <h4 id="step1Heading" style="font-size: 15px; color: #1e1b4b; margin-top: 5px; font-weight: 800;">Everyday Life "What-If" Sentences (B1 Conditionals)</h4>
+                  </div>
+                  <span id="techScenarioTypeBadge" style="font-size: 11.5px; font-weight: 800; background: #fef3c7; color: #92400e; border: 1.5px solid #f59e0b; border-radius: 999px; padding: 3px 10px; box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);">
+                    Daily Life &amp; Family
+                  </span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 8px; flex-wrap: wrap;">
+                  <label id="step1SelectLabel" style="font-size: 12.5px; font-weight: 700; color: #334155;">
+                    Select Daily Life Scenario:
+                  </label>
+                  <button type="button" class="tech-action-btn" onclick="cycleNextScenarioInDay()" style="font-size: 11.5px; padding: 4px 10px; background: #f8fafc; border-color: #cbd5e1;">
+                    ➡️ Next Topic in Theme
+                  </button>
+                </div>
+                <select class="tech-scenario-select" id="techScenarioSelect" onchange="onTechScenarioChange()">
+                  <option value="mon_prep">1. Evening Dinner Prep (1st Conditional)</option>
+                  <option value="mon_recipe">2. Trying a Royal Biryani Recipe (2nd Conditional - Imagination)</option>
+                  <option value="mon_milk">3. Boiling Milk on the Stove (3rd Conditional - Past Reflection)</option>
+                </select>
+
+                <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 14px; margin-top: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+                  <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                    <span>📖 Situation / Story Context:</span>
+                  </div>
+                  <div id="techScenarioContext" style="font-size: 13px; color: #1e293b; margin-top: 4px; line-height: 1.5; font-weight: 500;"></div>
+                </div>
+
+                <div style="margin-top: 12px;">
+                  <label id="step1InputLabel" style="font-size: 12.5px; font-weight: 700; color: #1e293b; display: block; margin-bottom: 5px;">
+                    ✍️ Your Turn: Practice Writing Your Sentence
+                  </label>
+                  <textarea
+                    class="tech-input-box"
+                    id="techConditionalInput"
+                    placeholder="E.g., If I prep the vegetables this afternoon, cooking dinner will take only twenty minutes..."
+                  ></textarea>
+                </div>
+
+                <div class="tech-btn-row">
+                  <button type="button" class="tech-action-btn primary" onclick="toggleTechStep1Hint()">
+                    💡 <span id="techHintBtnLabel">Show Hint &amp; Rule</span>
+                  </button>
+                  <button type="button" class="tech-action-btn" onclick="compareMySentence()" style="background: #f3e8ff; color: #6b21a8; border-color: #c084fc; font-weight: 700;">
+                    ✨ Check My Sentence
+                  </button>
+                  <button type="button" class="tech-action-btn warning" onclick="revealTechStep1Answer()">
+                    👁️ <span id="techAnswerBtnLabel">Reveal Model Answer</span>
+                  </button>
+                  <button type="button" class="tech-action-btn" onclick="speakCurrentModelAnswer()">
+                    🔊 Listen
+                  </button>
+                  <button type="button" class="tech-action-btn success" id="techCompleteBtn-1" onclick="toggleTechStepComplete(1)" style="margin-left: auto;">
+                    ✅ Mark Step 1 Complete
+                  </button>
+                </div>
+
+                <div id="techStep1HintBox" style="display: none; background: #fffbeb; border: 1.5px solid #fde047; border-radius: 10px; padding: 10px 12px; margin-top: 10px; font-size: 12px; color: #713f12; line-height: 1.5;"></div>
+
+                <!-- Interactive Comparison & Feedback Box -->
+                <div id="techStep1FeedbackBox" style="display: none; background: #faf5ff; border: 1.5px solid #c084fc; border-radius: 10px; padding: 12px; margin-top: 10px;">
+                  <div style="font-weight: 800; font-size: 12.5px; color: #6b21a8; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <span>✨ Sentence Comparison &amp; Feedback</span>
+                  </div>
+                  <div id="techStep1FeedbackContent" style="font-size: 12.5px; color: #3b0764; line-height: 1.5;"></div>
+                </div>
+
+                <div id="techStep1AnswerBox" style="display: none;" class="tech-model-answer-card">
+                  <div id="step1ModelTitle" style="font-weight: 700; font-size: 13px; color: #1e3a8a; margin-bottom: 4px;">
+                    🌟 Best Sentence Example:
+                  </div>
+                  <div id="techStep1AnswerText" style="font-size: 13px; font-weight: 600; color: #1e40af; background: #ffffff; padding: 8px 10px; border-radius: 8px; border: 1px solid #bfdbfe; margin-bottom: 6px;"></div>
+                  <div id="techStep1AnswerExplanation" style="font-size: 11.5px; color: #3b82f6;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2 PANE: POLITE SOCIAL ENGLISH -->
+            <div class="tech-step-pane" id="techStepPane-2">
+              <div class="tech-scenario-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                  <div>
+                    <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #b45309; background: #fef3c7; padding: 3px 8px; border-radius: 6px;">Step 2: 4 Mins</span>
+                    <h4 id="step2Heading" style="font-size: 15px; color: #1e1b4b; margin-top: 5px; font-weight: 800;">Polite Real-Life &amp; Social English</h4>
+                  </div>
+                  <span style="font-size: 11.5px; font-weight: 800; background: #e0f2fe; color: #0369a1; border: 1.5px solid #38bdf8; border-radius: 999px; padding: 3px 10px; box-shadow: 0 2px 6px rgba(56, 189, 248, 0.15);">
+                    Example <span id="inversionCurrentIndex">1</span> of 3
+                  </span>
+                </div>
+
+                <div id="step2Subtitle" style="font-size: 12.5px; color: #475569; margin: 8px 0 12px; line-height: 1.45;">
+                  Practice speaking with confidence and warmth in real situations: Parent-Teacher meetings, clinics, guests, and phone calls.
+                </div>
+
+                <div class="tech-inversion-box" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 1.5px solid #fde047; border-radius: 14px; padding: 14px 16px; box-shadow: 0 3px 10px rgba(245, 158, 11, 0.1);">
+                  <div id="step2PromptTag" style="font-size: 11px; font-weight: 800; color: #854d0e; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                    <span>💬 Direct / Casual Expression:</span>
+                  </div>
+                  <div id="inversionCasualText" style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 5px; line-height: 1.45;"></div>
+                  <div style="margin-top: 10px; font-size: 12.5px; color: #92400e; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <span>🎯 Polite starter:</span>
+                    <strong id="inversionTargetWord" style="color: #9d174d; background: #ffffff; padding: 3px 8px; border-radius: 8px; border: 1.5px solid #f472b6; font-size: 13px;">Could you please...</strong>
+                  </div>
+                </div>
+
+                <div style="margin-top: 12px;">
+                  <textarea
+                    class="tech-input-box"
+                    id="inversionUserInput"
+                    placeholder="Type the polite sentence here to practice..."
+                  ></textarea>
+                </div>
+
+                <div class="tech-btn-row">
+                  <button type="button" class="tech-action-btn" onclick="prevInversionScenario()">
+                    ◀️ Previous
+                  </button>
+                  <button type="button" class="tech-action-btn" onclick="nextInversionScenario()">
+                    ▶️ Next Phrase
+                  </button>
+                  <button type="button" class="tech-action-btn warning" onclick="toggleInversionAnswer()">
+                    👁️ <span id="inversionToggleBtnLabel">Reveal Answer</span>
+                  </button>
+                  <button type="button" class="tech-action-btn" onclick="speakInversionAnswer()">
+                    🔊 Listen Audio
+                  </button>
+                  <button type="button" class="tech-action-btn success" id="techCompleteBtn-2" onclick="toggleTechStepComplete(2)" style="margin-left: auto;">
+                    ✅ Mark Step 2 Complete
+                  </button>
+                </div>
+
+                <div id="inversionAnswerBox" style="display: none;" class="tech-model-answer-card">
+                  <div id="step2ModelTitle" style="font-weight: 800; font-size: 13.5px; color: #1e3a8a; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <span>✨ Warm &amp; Polite Native Phrasing:</span>
+                  </div>
+                  <div id="inversionAnswerText" style="font-size: 14px; font-weight: 700; color: #1e40af; background: #ffffff; padding: 10px 12px; border-radius: 10px; border: 1.5px solid #bfdbfe; margin-bottom: 6px; line-height: 1.45;"></div>
+                  <div id="inversionExplanation" style="font-size: 12px; color: #2563eb; line-height: 1.5;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3 PANE: EXPRESSIVE VOCABULARY QUIZ -->
+            <div class="tech-step-pane" id="techStepPane-3">
+              <div class="tech-scenario-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                  <div>
+                    <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #be185d; background: #fce7f3; padding: 3px 8px; border-radius: 6px;">Step 3: 5 Mins</span>
+                    <h4 id="step3Heading" style="font-size: 15px; color: #1e1b4b; margin-top: 5px; font-weight: 800;">B1 Expressive Vocabulary &amp; Smart Word Upgrades</h4>
+                  </div>
+                  <div style="font-size: 12px; font-weight: 800; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); color: #9d174d; border: 1.5px solid #fbcfe8; border-radius: 999px; padding: 3px 12px; box-shadow: 0 2px 6px rgba(244, 114, 182, 0.2);">
+                    ⭐ Score: <span id="collocScore">0</span> / <span id="collocTotal">3</span>
+                  </div>
+                </div>
+
+                <div style="background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%); border: 2px solid #e9d5ff; border-radius: 14px; padding: 14px 16px; margin-top: 14px; box-shadow: 0 3px 10px rgba(192, 132, 252, 0.08);">
+                  <div style="font-size: 11.5px; font-weight: 800; color: #7e22ce; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                    <span>🎯 Word Upgrade <span id="collocQuestionNum">1</span> of 3:</span>
+                  </div>
+                  <div id="collocBasicPrompt" style="font-size: 14px; font-weight: 700; color: #0f172a; margin-top: 6px; line-height: 1.45;"></div>
+                </div>
+
+                <div class="tech-colloc-grid" id="collocOptionsList"></div>
+
+                <div id="collocFeedbackBox" style="display: none; padding: 12px 14px; border-radius: 12px; margin-top: 12px; font-size: 12.5px; line-height: 1.55;"></div>
+
+                <div class="tech-btn-row">
+                  <button type="button" class="tech-action-btn primary" id="nextCollocBtn" onclick="nextCollocQuestion()">
+                    Next Word Challenge ➔
+                  </button>
+                  <button type="button" class="tech-action-btn success" id="techCompleteBtn-3" onclick="toggleTechStepComplete(3)" style="margin-left: auto;">
+                    ✅ Mark Step 3 Complete
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 4 PANE: SPOKEN SELF-TALK & ACTIVE RECALL -->
+            <div class="tech-step-pane" id="techStepPane-4">
+              <div class="tech-scenario-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap;">
+                  <div>
+                    <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #0369a1; background: #e0f2fe; padding: 3px 8px; border-radius: 6px;">Step 4: 3 Mins</span>
+                    <h4 id="step4Heading" style="font-size: 15px; color: #1e1b4b; margin-top: 5px; font-weight: 800;">Active Recall Spoken Self-Talk (3 Mins)</h4>
+                  </div>
+                  <span id="step4Badge" style="font-size: 11.5px; font-weight: 800; background: #fce7f3; color: #9d174d; border: 1.5px solid #fbcfe8; border-radius: 999px; padding: 3px 10px; box-shadow: 0 2px 6px rgba(244, 114, 182, 0.15);">
+                    Spoken Self-Talk
+                  </span>
+                </div>
+
+                <div class="tech-timer-container" style="margin-top: 14px;">
+                  <div id="step4TimerTitle" style="font-size: 12px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">
+                    ⏱️ Spoken Practice Timer
+                  </div>
+                  <div class="tech-timer-digits" id="techStandupTimerDisplay">03:00</div>
+                  <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
+                    <button type="button" class="tech-action-btn primary" id="techTimerToggleBtn" onclick="toggleTechStandupTimer()" style="font-size: 13px; padding: 10px 18px;">
+                      ▶️ Start Timer
+                    </button>
+                    <button type="button" class="tech-action-btn" onclick="resetTechStandupTimer()" style="font-size: 13px; padding: 10px 16px;">
+                      ↺ Reset Timer
+                    </button>
+                  </div>
+                </div>
+
+                <div style="margin-top: 16px;">
+                  <div id="step4PromptsTitle" style="font-size: 13px; font-weight: 800; color: #1e293b; margin-bottom: 8px;">
+                    🎙️ Speak Aloud (Describe your day naturally without reading from notes):
+                  </div>
+
+                  <div id="standupPrompt1Box" style="background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%); border: 1.5px solid #bae6fd; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(14, 165, 233, 0.06);">
+                    <div id="standupPrompt1Header" style="font-size: 11px; font-weight: 800; color: #0284c7; text-transform: uppercase;">1. TODAY'S STORY &amp; HOUSEHOLD ROUTINE:</div>
+                    <div id="standupPrompt1Text" style="font-size: 13px; color: #334155; margin-top: 3px; font-weight: 600; line-height: 1.45;">
+                      "What did your morning and afternoon look like today? Mention one task you accomplished or cooked."
+                    </div>
+                  </div>
+
+                  <div id="standupPrompt2Box" style="background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%); border: 1.5px solid #bbf7d0; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.06);">
+                    <div id="standupPrompt2Header" style="font-size: 11px; font-weight: 800; color: #16a34a; text-transform: uppercase;">2. A PLEASANT MOMENT / HIGHLIGHT:</div>
+                    <div id="standupPrompt2Text" style="font-size: 13px; color: #334155; margin-top: 3px; font-weight: 600; line-height: 1.45;">
+                      "Describe one pleasant moment from today (a nice conversation, a cup of tea, or a recipe you enjoyed)."
+                    </div>
+                  </div>
+
+                  <div id="standupPrompt3Box" style="background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%); border: 1.5px solid #fed7aa; border-radius: 12px; padding: 12px 14px; box-shadow: 0 2px 6px rgba(234, 88, 12, 0.06);">
+                    <div id="standupPrompt3Header" style="font-size: 11px; font-weight: 800; color: #ea580c; text-transform: uppercase;">3. TOMORROW'S GOAL:</div>
+                    <div id="standupPrompt3Text" style="font-size: 13px; color: #334155; margin-top: 3px; font-weight: 600; line-height: 1.45;">
+                      "What is one thing you look forward to doing tomorrow if everything goes as planned?"
+                    </div>
+                  </div>
+                </div>
+
+                <div style="margin-top: 14px;">
+                  <div style="font-size: 12px; font-weight: 800; color: #1e293b; margin-bottom: 6px;">
+                    📋 Self-Reflection Checklist (Check as you finish speaking):
+                  </div>
+                  <label class="tech-checklist-label">
+                    <input type="checkbox" id="standupCheck1" onchange="updateStandupChecklist()" />
+                    <span id="standupCheckLabel1">🗣️ I spoke aloud continuously in English for 2 to 3 minutes without stopping to translate in my head.</span>
+                  </label>
+                  <label class="tech-checklist-label">
+                    <input type="checkbox" id="standupCheck2" onchange="updateStandupChecklist()" />
+                    <span id="standupCheckLabel2">🌸 I practiced using a smart new word (like cluttered, hectic, or flavorful).</span>
+                  </label>
+                  <label class="tech-checklist-label">
+                    <input type="checkbox" id="standupCheck3" onchange="updateStandupChecklist()" />
+                    <span id="standupCheckLabel3">💖 I spoke clearly, calmly, and with growing confidence.</span>
+                  </label>
+                </div>
+
+                <div class="tech-btn-row" style="margin-top: 14px;">
+                  <button type="button" class="tech-action-btn success" id="techCompleteBtn-4" onclick="toggleTechStepComplete(4)" style="width: 100%; justify-content: center; padding: 10px 16px;">
+                    <span id="step4CompleteBtnText">✅ Mark Step 4 (Spoken Self-Talk) Complete</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -8376,6 +9198,7 @@
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 
     <script>
+      var b1RoutineReady = false;
       const TOTAL_TASKS = 13;
       let completedTasks = new Set();
       let weekDaysCompleted = new Set();
@@ -10252,6 +11075,9 @@
           renderGrammarRevisionDisplay();
           renderPhonicsRevisionDisplay();
           renderEnglishTab();
+          if (typeof b1RoutineReady !== "undefined" && b1RoutineReady && typeof initB1EnglishRoutine === "function") {
+            initB1EnglishRoutine();
+          }
         }
       }
 
@@ -14008,6 +14834,9 @@
         renderPhonicsRevisionDisplay();
         loadEnglishVocab();
         renderEnglishVocabList();
+        if (typeof b1RoutineReady !== "undefined" && b1RoutineReady && typeof initB1EnglishRoutine === "function") {
+          initB1EnglishRoutine();
+        }
       }
 
       // Initialize English vocab on page load
@@ -14780,6 +15609,1795 @@
         } else {
           popup.focus();
         }
+      }
+
+      // ==================== B1 PRACTICAL ENGLISH: 7-DAY ROTATING ENGINE ====================
+      var B1_ROUTINE_STORAGE_KEY = "b1_english_routine_v1";
+
+      var B1_WEEKLY_THEMES = {
+        1: {
+          dayName: "Monday",
+          themeTitle: "Kitchen, Cooking & Recipe Delights",
+          icon: "🍳",
+          scenarios: {
+            mon_prep: {
+              name: "1. Evening Dinner Prep (1st Conditional)",
+              badge: "Kitchen Planning (Present ➔ Future)",
+              context: "You want dinner preparation to be relaxed and stress-free this evening instead of rushing at the last minute.",
+              formula: "<strong>B1 Rule:</strong> <code>If + present simple ..., will + [base verb]</code>",
+              hint: "Think: What happens if you chop vegetables and marinate meat earlier in the afternoon?<br>Starter: <em>'If I prep the vegetables this afternoon, cooking dinner will...'</em>",
+              answer: "If I prep the vegetables this afternoon, cooking dinner will take only twenty minutes.",
+              explanation: "The 1st conditional connects a real present action ('prep the vegetables') with a practical future benefit ('cooking dinner will take...')."
+            },
+            mon_recipe: {
+              name: "2. Trying a Royal Biryani Recipe (2nd Conditional - Imagination)",
+              badge: "Culinary Creativity (Past ➔ Would + Verb)",
+              context: "You saw a delicious royal saffron biryani recipe online, but you don't have saffron and heavy cream in the pantry today.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had ..., would try / make + [verb]</code>",
+              hint: "Starter: <em>'If I had saffron and fresh cream at home, I would...'</em>",
+              answer: "If I had saffron and fresh cream at home, I would try making that royal biryani recipe tonight.",
+              explanation: "The 2nd conditional ('If I had... I would try...') is ideal for talking about fun recipe ideas and imaginary meals."
+            },
+            mon_milk: {
+              name: "3. Boiling Milk on the Stove (3rd Conditional - Past Reflection)",
+              badge: "Kitchen Reflection (Past ➔ Past)",
+              context: "Earlier today, while attending a phone call, the boiling milk spilled over the stovetop because the flame was too high.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had kept ..., wouldn't have spilled</code>",
+              hint: "Starter: <em>'If I had kept the milk on low flame, it wouldn't have...'</em>",
+              answer: "If I had kept the milk on low flame, it wouldn't have spilled over the stove.",
+              explanation: "The 3rd conditional reflects on everyday household slips calmly without self-blame."
+            }
+          },
+          politePhrases: [
+            {
+              casual: "How did you make this curry? Tell me.",
+              targetWord: "This curry is delightful! Could you please share...",
+              answer: "This curry is delightful! Could you please share which spices you used in the gravy?",
+              explanation: "Complimenting the host before asking for the recipe sounds graceful and flattering."
+            },
+            {
+              casual: "The chicken is cooked nicely.",
+              targetWord: "Everything is cooked to perfection, especially...",
+              answer: "Everything is cooked to perfection, especially the tender chicken roast!",
+              explanation: "'Cooked to perfection' and 'tender' are elegant B1 food compliments."
+            },
+            {
+              casual: "Do you want more rice?",
+              targetWord: "Would you care for another...",
+              answer: "Would you care for another serving of warm pulao?",
+              explanation: "'Would you care for another serving' is classic, polite English hospitality."
+            }
+          ],
+          vocabQuestions: [
+            {
+              prompt: "Instead of saying: 'The food I cooked was very tasty.'",
+              options: [
+                { text: "The food had lots of sweet taste in the mouth.", correct: false },
+                { text: "The dinner turned out wonderfully flavorful and aromatic. (اردو: نہایت ذائقہ دار اور خوشبودار)", correct: true },
+                { text: "The curry was super good to eat.", correct: false }
+              ],
+              explanation: "'Flavorful and aromatic' (نہایت ذائقہ دار اور خوشبودار) vividly describes rich homemade cuisine."
+            },
+            {
+              prompt: "Instead of saying: 'The curry is very spicy and burning.'",
+              options: [
+                { text: "The gravy is quite pungent and zesty with chillies. (اردو: کافی تیز اور چٹپٹا)", correct: true },
+                { text: "It has too much fire on my tongue.", correct: false },
+                { text: "The dish is spicy very much badly.", correct: false }
+              ],
+              explanation: "'Pungent and zesty' (کافی تیز اور چٹپٹا) precisely explains high-spice flavor."
+            },
+            {
+              prompt: "Instead of saying: 'The roti is totally burnt and bad.'",
+              options: [
+                { text: "The flatbread is black-feeling all over.", correct: false },
+                { text: "The flatbread got slightly charred on the edges. (اردو: کناروں سے ذرا سا جھلس گیا)", correct: true },
+                { text: "It was finished by fire completely.", correct: false }
+              ],
+              explanation: "'Slightly charred on the edges' (کناروں سے ذرا سا جھلس گیا) is refined and gentle."
+            }
+          ],
+          spokenPrompts: {
+            p1: "What meals or dishes did you prepare in the kitchen today?",
+            p2: "What is your favorite comfort dish to make when you want something quick and delicious?",
+            p3: "If you were hosting a family dinner tomorrow, what special 3-course menu would you cook?"
+          }
+        },
+
+        2: {
+          dayName: "Tuesday",
+          themeTitle: "Health, Clinic & Doctor Visits",
+          icon: "🏥",
+          scenarios: {
+            tue_clinic: {
+              name: "1. Doctor Appointment & Waiting Room (3rd Conditional)",
+              badge: "Clinic Reflection (Past ➔ Past)",
+              context: "You visited the family clinic today without a prior appointment, and had to wait for over an hour in a crowded waiting room.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had booked ..., wouldn't have waited</code>",
+              hint: "Starter: <em>'If I had booked the appointment yesterday, we wouldn't have...'</em>",
+              answer: "If I had booked the appointment yesterday, we wouldn't have waited so long in the clinic today.",
+              explanation: "Using 3rd conditional ('If I had booked... wouldn't have waited...') is a standard way to reflect on time management."
+            },
+            tue_water: {
+              name: "2. Staying Hydrated (1st Conditional)",
+              badge: "Daily Wellness (Present ➔ Future)",
+              context: "You often forget to drink sufficient water during busy household mornings and end up with mild headaches by evening.",
+              formula: "<strong>B1 Rule:</strong> <code>If + drink ..., will feel</code>",
+              hint: "Starter: <em>'If I drink at least eight glasses of water every day, I will...'</em>",
+              answer: "If I drink at least eight glasses of water every day, I will feel more energized and active.",
+              explanation: "1st conditional links positive daily health habits with clear future well-being."
+            },
+            tue_rest: {
+              name: "3. Recovering from Seasonal Flu (1st Conditional)",
+              badge: "Family Care & Recovery",
+              context: "Your family member has caught a seasonal fever and needs rest and timely prescribed medicines to recover quickly.",
+              formula: "<strong>B1 Rule:</strong> <code>If + takes medicines ..., will recover</code>",
+              hint: "Starter: <em>'If she takes her prescribed medicines on time, she will...'</em>",
+              answer: "If she takes her prescribed medicines on time, she will recover from the cold within two days.",
+              explanation: "Expresses confident, supportive care in family healthcare situations."
+            }
+          },
+          politePhrases: [
+            {
+              casual: "I have pain in my stomach since yesterday.",
+              targetWord: "Doctor, I've been experiencing...",
+              answer: "Doctor, I've been experiencing a persistent dull ache in my stomach since yesterday evening.",
+              explanation: "'A persistent dull ache' gives the doctor clear, professional medical information."
+            },
+            {
+              casual: "When should I take this syrup?",
+              targetWord: "Could you please clarify whether this syrup...",
+              answer: "Could you please clarify whether this syrup should be taken before or after meals?",
+              explanation: "'Could you please clarify whether...' is polite and ensures patient safety."
+            },
+            {
+              casual: "Change my doctor appointment to Thursday.",
+              targetWord: "I apologize, but could we please reschedule...",
+              answer: "I apologize, but could we please reschedule my appointment to Thursday afternoon?",
+              explanation: "'Reschedule my appointment' is the standard polite phrase used by clinic receptionists."
+            }
+          ],
+          vocabQuestions: [
+            {
+              prompt: "Instead of saying: 'I am very worried about my child's recurring fever.'",
+              options: [
+                { text: "I'm genuinely concerned (anxious) about my child's recurring fever. (اردو: فکر مند / متفکر)", correct: true },
+                { text: "My heart is beating in deep tension.", correct: false },
+                { text: "I am feeling too much scared.", correct: false }
+              ],
+              explanation: "'Genuinely concerned' (فکر مند / متفکر) expresses responsible maternal attention."
+            },
+            {
+              prompt: "Instead of saying: 'After sickness, I am very weak and falling.'",
+              options: [
+                { text: "I was feeling frail and slightly lightheaded today. (اردو: کمزور اور چکر آنا)", correct: true },
+                { text: "My energy was gone to zero level.", correct: false },
+                { text: "I was very much falling down.", correct: false }
+              ],
+              explanation: "'Frail and lightheaded' (کمزور اور چکر آنا) is accurate medical vocabulary."
+            },
+            {
+              prompt: "Instead of saying: 'This cough is not stopping at all.'",
+              options: [
+                { text: "This is a persistent, stubborn cough that lingers at night. (اردو: مسلسل رہنے والی کھانسی)", correct: true },
+                { text: "The throat is shouting cough again.", correct: false },
+                { text: "Cough is repeating non-stop.", correct: false }
+              ],
+              explanation: "'A persistent cough' (مسلسل رہنے والی کھانسی) is what physicians look for."
+            }
+          ],
+          spokenPrompts: {
+            p1: "How is your energy and health feeling today?",
+            p2: "What healthy habit (such as warm water, herbal tea, or a walk) did you practice today?",
+            p3: "What is one self-care routine you want to stick to for the rest of the week?"
+          }
+        },
+
+        3: {
+          dayName: "Wednesday",
+          themeTitle: "Shopping, Grocery Market & Fresh Produce",
+          icon: "🛒",
+          scenarios: {
+            wed_list: {
+              name: "1. Making a Shopping List (1st Conditional)",
+              badge: "Smart Budgeting (Present ➔ Future)",
+              context: "You are heading to the grocery supermarket and want to avoid impulse purchases and stay within your budget.",
+              formula: "<strong>B1 Rule:</strong> <code>If + make a clear list ..., won't buy</code>",
+              hint: "Starter: <em>'If I make a clear grocery list beforehand, I won't...'</em>",
+              answer: "If I make a clear grocery list beforehand, I won't buy unnecessary items.",
+              explanation: "A practical conditional sentence every smart homemaker uses for budgeting."
+            },
+            wed_sale: {
+              name: "2. Supermarket Discount Sale (3rd Conditional)",
+              badge: "Saving & Offers (Past ➔ Past)",
+              context: "The departmental store had a 40% discount on laundry detergent and pantry staples, but you only heard about it after the sale ended.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had checked ..., would have saved</code>",
+              hint: "Starter: <em>'If I had checked the store flyer on Monday, I would have...'</em>",
+              answer: "If I had checked the supermarket flyer on Monday, I would have saved money on household supplies.",
+              explanation: "Reflects on missed deals and planning future shopping."
+            },
+            wed_morning: {
+              name: "3. Fresh Vegetable Market (1st Conditional)",
+              badge: "Fresh Produce & Quality",
+              context: "You want fresh coriander, mint, and crisp spinach for this week's meals.",
+              formula: "<strong>B1 Rule:</strong> <code>If + visit early ..., will find</code>",
+              hint: "Starter: <em>'If we visit the vegetable market early in the morning, we will...'</em>",
+              answer: "If we visit the vegetable market early in the morning, we will find the freshest produce.",
+              explanation: "'Freshest produce' refers to fresh greens, fruits, and vegetables."
+            }
+          },
+          politePhrases: [
+            {
+              casual: "Give me fresh vegetables, not old ones.",
+              targetWord: "Could you please help me pick...",
+              answer: "Could you please help me pick a fresh bunch of coriander and check if these tomatoes are firm?",
+              explanation: "Gentle and specific requests at the market guarantee the best produce."
+            },
+            {
+              casual: "How much for one kilo of apples?",
+              targetWord: "Excuse me, could you please tell me the price per...",
+              answer: "Excuse me, could you please tell me the price per kilogram for these apples?",
+              explanation: "'Price per kilogram' is standard polite shopping terminology."
+            },
+            {
+              casual: "You charged me twice for this oil.",
+              targetWord: "Could you please check my receipt? I believe...",
+              answer: "Could you please check my receipt? I believe this item was scanned twice.",
+              explanation: "'I believe this item was scanned twice' resolves billing mistakes politely."
+            }
+          ],
+          vocabQuestions: [
+            {
+              prompt: "Instead of saying: 'The vegetables were very cheap.'",
+              options: [
+                { text: "The groceries were low class price.", correct: false },
+                { text: "The fresh vegetables were quite economical and affordable. (اردو: سستا اور مناسب قیمت)", correct: true },
+                { text: "The rate was down greatly.", correct: false }
+              ],
+              explanation: "'Economical and affordable' (سستا اور مناسب قیمت) is positive and respectful."
+            },
+            {
+              prompt: "Instead of saying: 'The imported olive oil is very expensive.'",
+              options: [
+                { text: "The imported olive oil is rather exorbitant and overpriced. (اردو: بے جا مہنگا)", correct: true },
+                { text: "The money asked was too giant.", correct: false },
+                { text: "It is taking huge cash from pockets.", correct: false }
+              ],
+              explanation: "'Rather exorbitant' (بے جا مہنگا) is an advanced adjective for overpriced items."
+            },
+            {
+              prompt: "Instead of saying: 'The spinach was very fresh and green.'",
+              options: [
+                { text: "The spinach was crisp, farm-fresh, and vibrant. (اردو: تازہ اور خستہ ترکاریاں)", correct: true },
+                { text: "Spinach had high greenness.", correct: false },
+                { text: "It was newly born from trees.", correct: false }
+              ],
+              explanation: "'Crisp and farm-fresh' (تازہ اور خستہ ترکاریاں) paints a mouth-watering picture."
+            }
+          ],
+          spokenPrompts: {
+            p1: "What items do you need to restock in your kitchen or pantry this week?",
+            p2: "Do you prefer shopping at a local neighborhood bazaar or a modern supermarket, and why?",
+            p3: "If you had an extra budget to spend on your home, what would you purchase?"
+          }
+        },
+
+        4: {
+          dayName: "Thursday",
+          themeTitle: "Children, School Routine & Parenting",
+          icon: "🎒",
+          scenarios: {
+            thu_study: {
+              name: "1. Children's Evening Study Routine (1st Conditional)",
+              badge: "Family Support & Routine",
+              context: "Your children have school term exams next month, and you want them to study calmly every evening.",
+              formula: "<strong>B1 Rule:</strong> <code>If + revise consistently ..., will feel</code>",
+              hint: "Starter: <em>'If my children revise their lessons consistently every evening, they will...'</em>",
+              answer: "If my children revise their lessons consistently every evening, they will feel much more confident during exams.",
+              explanation: "1st conditional builds structured encouragement into parenting conversations."
+            },
+            thu_bags: {
+              name: "2. Packing School Bags at Night (1st Conditional)",
+              badge: "Peaceful Mornings",
+              context: "Morning rush is stressful when school bags, uniforms, and shoes aren't prepared the night before.",
+              formula: "<strong>B1 Rule:</strong> <code>If + pack bags before bedtime ..., will be</code>",
+              hint: "Starter: <em>'If the children pack their school bags before bedtime, our mornings will...'</em>",
+              answer: "If the children pack their school bags before bedtime, our mornings will be completely peaceful.",
+              explanation: "Practical, real-world conditional for household peace."
+            },
+            thu_sports: {
+              name: "3. School Sports Competition (3rd Conditional)",
+              badge: "Encouraging Effort (Past ➔ Past)",
+              context: "Your son ran in the school sports day race today. He practiced hard, but a small slip cost him first place.",
+              formula: "<strong>B1 Rule:</strong> <code>If + hadn't slipped ..., would have won</code>",
+              hint: "Starter: <em>'If he hadn't slipped near the finish line, he would have...'</em>",
+              answer: "If he hadn't slipped near the finish line, he would have won the gold medal.",
+              explanation: "Reflecting on sports with empathy and encouragement."
+            }
+          },
+          politePhrases: [
+            {
+              casual: "How is my child doing in class?",
+              targetWord: "Could you please share how my child is progressing in class, and...",
+              answer: "Could you please share how my child is progressing in class, and where they might need extra support at home?",
+              explanation: "The perfect opening question for a Parent-Teacher Meeting (PTM)."
+            },
+            {
+              casual: "Is tomorrow a half-day in school?",
+              targetWord: "I'm calling to inquire whether tomorrow is a...",
+              answer: "I'm calling to inquire whether tomorrow is a half-day for the middle school section.",
+              explanation: "'I am calling to inquire whether...' is formal, polite telephone etiquette."
+            },
+            {
+              casual: "Good job on your marks.",
+              targetWord: "You put in sincere effort, and I'm genuinely proud of...",
+              answer: "You put in sincere effort, and I'm genuinely proud of your hard work!",
+              explanation: "'Genuinely proud of your hard work' builds children's inner confidence."
+            }
+          ],
+          vocabQuestions: [
+            {
+              prompt: "Instead of saying: 'The children are very naughty today.'",
+              options: [
+                { text: "The children are exceptionally mischievous and energetic today. (اردو: شرارتی اور زندہ دل)", correct: true },
+                { text: "Kids are breaking rules badly.", correct: false },
+                { text: "They are too much troublesome.", correct: false }
+              ],
+              explanation: "'Mischievous and energetic' (شرارتی اور زندہ دل) is affectionate and descriptive."
+            },
+            {
+              prompt: "Instead of saying: 'My daughter is very smart in learning.'",
+              options: [
+                { text: "She has a remarkably sharp and inquisitive mind. (اردو: تیز فہم اور متجسس ذہن)", correct: true },
+                { text: "She has big brain power.", correct: false },
+                { text: "She catches books fast.", correct: false }
+              ],
+              explanation: "'Inquisitive mind' (متجسس ذہن) means curious and eager to learn."
+            },
+            {
+              prompt: "Instead of saying: 'The living room is dirty after kids play.'",
+              options: [
+                { text: "The room is full of bad trash.", correct: false },
+                { text: "The living room is quite cluttered (disorganised) after the children played. (اردو: بکھرا ہوا / بے ترتیب)", correct: true },
+                { text: "The children ruined the whole carpet.", correct: false }
+              ],
+              explanation: "'Cluttered' (بکھرا ہوا / بے ترتیب) accurately distinguishes toys from actual filth."
+            }
+          ],
+          spokenPrompts: {
+            p1: "How did your children's day or school routine go today?",
+            p2: "What was one sweet, funny, or proud moment you shared with family today?",
+            p3: "What is one routine you want your household to follow smoothly tomorrow morning?"
+          }
+        },
+
+        5: {
+          dayName: "Friday",
+          themeTitle: "Welcoming Guests, Relatives & Warm Hospitality",
+          icon: "☕",
+          scenarios: {
+            fri_tea: {
+              name: "1. Welcoming Friday Guests (1st Conditional)",
+              badge: "Hospitality Prep (Present ➔ Future)",
+              context: "Your cousins or relatives are coming over after Friday prayers, and you want to welcome them warmly.",
+              formula: "<strong>B1 Rule:</strong> <code>If + arrive ..., will have warm chai ready</code>",
+              hint: "Starter: <em>'If our relatives arrive this afternoon, I will have...'</em>",
+              answer: "If our relatives arrive this afternoon, I will have warm chai and fresh snacks ready for them.",
+              explanation: "1st conditional expresses thoughtful host planning."
+            },
+            fri_unannounced: {
+              name: "2. Unexpected Visitors (3rd Conditional)",
+              badge: "Social Reflection (Past ➔ Past)",
+              context: "Some family friends visited unexpectedly around lunch time when the kitchen was already cleaned up.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had informed us an hour earlier ..., would have prepared</code>",
+              hint: "Starter: <em>'If they had informed us an hour in advance, we would have...'</em>",
+              answer: "If they had informed us an hour in advance, we would have prepared a full lunch spread.",
+              explanation: "'In advance' and 'a full lunch spread' are natural B1 collocations."
+            },
+            fri_patio: {
+              name: "3. Garden Tea Gathering (2nd Conditional - Imagination)",
+              badge: "Social Dreams (Past ➔ Would + Verb)",
+              context: "Imagine your house had a spacious green garden patio to host pleasant evening tea gatherings.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had a larger garden ..., would host</code>",
+              hint: "Starter: <em>'If our house had a larger garden patio, we would...'</em>",
+              answer: "If our house had a larger garden patio, we would host a pleasant tea party for all the cousins.",
+              explanation: "2nd conditional for imagining lovely social occasions."
+            }
+          },
+          politePhrases: [
+            {
+              casual: "Come inside and sit down.",
+              targetWord: "Please come in and make yourself at home! May I...",
+              answer: "Please come in and make yourself at home! May I get you a warm cup of tea or some refreshments?",
+              explanation: "'Make yourself at home' is the hallmark of gracious hospitality."
+            },
+            {
+              casual: "Eat the snacks, I made them for you.",
+              targetWord: "Please help yourself to some fresh snacks; they were...",
+              answer: "Please help yourself to some fresh snacks; they were prepared just for you.",
+              explanation: "'Please help yourself' invites guests warmly without being pushy."
+            },
+            {
+              casual: "Bye, visit again.",
+              targetWord: "It was truly wonderful having you over! Please...",
+              answer: "It was truly wonderful having you over! Please visit us again very soon.",
+              explanation: "A heartfelt goodbye leaves a lasting warm impression."
+            }
+          ],
+          vocabQuestions: [
+            {
+              prompt: "Instead of saying: 'She is a very good host.'",
+              options: [
+                { text: "She is a remarkably gracious and hospitable host. (اردو: مہمان نواز اور پرخلوص)", correct: true },
+                { text: "She gives too much food to eat.", correct: false },
+                { text: "She is very welcoming for mouth-food.", correct: false }
+              ],
+              explanation: "'Gracious and hospitable' (مہمان نواز اور پرخلوص) is the highest compliment for hospitality."
+            },
+            {
+              prompt: "Instead of saying: 'The living room is very comfortable and nice.'",
+              options: [
+                { text: "The room has a cozy, warm, and welcoming atmosphere. (اردو: پرسکون اور آرام دہ ماحول)", correct: true },
+                { text: "The sofa gives easy sitting.", correct: false },
+                { text: "The room has full luxury feelings.", correct: false }
+              ],
+              explanation: "'A cozy and welcoming atmosphere' (پرسکون اور آرام دہ ماحول) describes a comfortable home."
+            },
+            {
+              prompt: "Instead of saying: 'The house was full of too much loud talking.'",
+              options: [
+                { text: "The house was bustling with lively laughter and joyous chatter. (اردو: قہقہوں اور رونق سے بھرا گھر)", correct: true },
+                { text: "Every person was shouting words.", correct: false },
+                { text: "There was big noise inside the walls.", correct: false }
+              ],
+              explanation: "'Joyous chatter' (رونق اور چہچہاہٹ) conveys happy family bonding."
+            }
+          ],
+          spokenPrompts: {
+            p1: "Who is your favorite guest or relative to host at home, and why?",
+            p2: "How do you like to welcome people to make them feel comfortable and appreciated?",
+            p3: "If you were planning an evening high tea for close friends, what 3 snacks and tea would you serve?"
+          }
+        },
+
+        6: {
+          dayName: "Saturday",
+          themeTitle: "Weekend Family Outings & Leisure",
+          icon: "🌳",
+          scenarios: {
+            sat_picnic: {
+              name: "1. Sunny Weather Picnic (1st Conditional)",
+              badge: "Weekend Plans (Present ➔ Future)",
+              context: "Your family plans to visit the lake park for an open-air picnic if the weather remains sunny tomorrow morning.",
+              formula: "<strong>B1 Rule:</strong> <code>If + stays clear and sunny ..., will go for a picnic</code>",
+              hint: "Starter: <em>'If the weather stays clear and sunny tomorrow, our family will...'</em>",
+              answer: "If the weather stays clear and sunny tomorrow morning, our family will go for a picnic at the lake park.",
+              explanation: "1st conditional for planning weekend family outings."
+            },
+            sat_traffic: {
+              name: "2. Beating the Weekend City Traffic (1st Conditional)",
+              badge: "Road Travel & Timing",
+              context: "You want to visit your grandparents across town without getting stuck in Saturday evening traffic.",
+              formula: "<strong>B1 Rule:</strong> <code>If + leave before 9 AM ..., will easily beat the traffic</code>",
+              hint: "Starter: <em>'If we leave the house before 9 AM, we will...'</em>",
+              answer: "If we leave the house before 9 AM, we will easily beat the weekend city traffic.",
+              explanation: "'Beat the traffic' is a high-frequency native idiom for arriving before congestion."
+            },
+            sat_umbrella: {
+              name: "3. Sudden Downpour (3rd Conditional)",
+              badge: "Weather Surprise (Past ➔ Past)",
+              context: "While strolling in the garden this afternoon, an unseasonal rain shower started, and you had left your umbrella in the car.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had carried ..., wouldn't have been caught</code>",
+              hint: "Starter: <em>'If we had carried an umbrella in the car, we wouldn't have...'</em>",
+              answer: "If we had carried an umbrella in the car, we wouldn't have been caught in the sudden downpour.",
+              explanation: "'Caught in a sudden downpour' is expressive B1 English for unexpected rain."
+            }
+          },
+          politePhrases: [
+            {
+              casual: "Give us a quiet table near the window.",
+              targetWord: "Excuse me, could we please get a quiet table...",
+              answer: "Excuse me, could we please get a quiet table near the window for four people?",
+              explanation: "Courteous restaurant requests ensure prompt, warm hospitality."
+            },
+            {
+              casual: "Where is the parking area?",
+              targetWord: "Pardon me, could you please point us in the direction of...",
+              answer: "Pardon me, could you please point us in the direction of the nearest parking area?",
+              explanation: "'Point us in the direction of...' sounds mature and polished."
+            },
+            {
+              casual: "I cannot come to your dinner party.",
+              targetWord: "Thank you so much for the invitation, but unfortunately...",
+              answer: "Thank you so much for the invitation, but unfortunately I won't be able to attend due to prior family commitments.",
+              explanation: "'Due to prior family commitments' is the most elegant way to decline an invitation."
+            }
+          ],
+          vocabQuestions: [
+            {
+              prompt: "Instead of saying: 'The lake park was very crowded.'",
+              options: [
+                { text: "The park was bustling and packed with families enjoying the sun. (اردو: پر رونق اور ہجوم والا)", correct: true },
+                { text: "There were too many humans standing.", correct: false },
+                { text: "The park had overflowing population.", correct: false }
+              ],
+              explanation: "'Bustling and packed' (پر رونق اور ہجوم والا) is vibrant and descriptive."
+            },
+            {
+              prompt: "Instead of saying: 'The view from the hill was very beautiful.'",
+              options: [
+                { text: "The landscape was breathtaking and picturesque. (اردو: دلکش اور خوبصورت منظر)", correct: true },
+                { text: "The view was looking excessively fine.", correct: false },
+                { text: "It was having super eyesight pleasure.", correct: false }
+              ],
+              explanation: "'Breathtaking and picturesque' (دلکش اور خوبصورت منظر) is rich descriptive writing."
+            },
+            {
+              prompt: "Instead of saying: 'The afternoon sun was very hot and sweating.'",
+              options: [
+                { text: "The afternoon was scorching and humid outdoors. (اردو: شدید گرم اور حبس زدہ)", correct: true },
+                { text: "The sun was throwing too much burn.", correct: false },
+                { text: "I had giant sweat coming out.", correct: false }
+              ],
+              explanation: "'Scorching and humid' (شدید گرم اور حبس زدہ) describes summer weather vividly."
+            }
+          ],
+          spokenPrompts: {
+            p1: "What was the most enjoyable or relaxing part of your weekend so far?",
+            p2: "Describe a favorite park, market, or restaurant you love visiting with family.",
+            p3: "What pleasant activity do you want to enjoy before the new week begins?"
+          }
+        },
+
+        0: {
+          dayName: "Sunday",
+          themeTitle: "Self-Care, Peaceful Mornings & Personal Reflection",
+          icon: "🌸",
+          scenarios: {
+            sun_calm: {
+              name: "1. Quiet Morning Routine & Self-Care (2nd Conditional - Imagination)",
+              badge: "Self-Care & Dreams (Past ➔ Would + Verb)",
+              context: "Imagine having a peaceful, uninterrupted hour for yourself every morning before the family wakes up and the daily rush begins.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had an uninterrupted hour ..., would enjoy</code>",
+              hint: "Starter: <em>'If I had an uninterrupted quiet hour every morning, I would...'</em>",
+              answer: "If I had an uninterrupted quiet hour every morning, I would enjoy my tea peacefully and go for a morning walk.",
+              explanation: "2nd conditional for personal dreams and self-care."
+            },
+            sun_chores: {
+              name: "2. Finishing Chores Early for Personal Time (1st Conditional)",
+              badge: "Daily Productivity & Peace",
+              context: "You have laundry and organizing to finish, but you want protected quiet time for yourself in the afternoon.",
+              formula: "<strong>B1 Rule:</strong> <code>If + finish by noon ..., will have peaceful time</code>",
+              hint: "Starter: <em>'If I finish the household chores by noon, I will...'</em>",
+              answer: "If I finish the household chores by noon, I will have peaceful time to relax and practice English.",
+              explanation: "Connects morning efficiency with afternoon self-development."
+            },
+            sun_reflection: {
+              name: "3. Weekly Routine Reflection (3rd Conditional)",
+              badge: "Weekly Reflection (Past ➔ Past)",
+              context: "Reflecting on the past week: some days felt rushed because tasks weren't organized in a written planner.",
+              formula: "<strong>B1 Rule:</strong> <code>If + had planned out ..., wouldn't have felt overwhelmed</code>",
+              hint: "Starter: <em>'If I had planned out my priorities earlier in the week, I wouldn't have...'</em>",
+              answer: "If I had planned out my priorities earlier in the week, I wouldn't have felt so overwhelmed by Sunday.",
+              explanation: "'Felt so overwhelmed' is authentic emotional expression at B1 level."
+            }
+          },
+          politePhrases: [
+            {
+              casual: "I cannot do your work today.",
+              targetWord: "I would love to help, but I need to dedicate this evening to...",
+              answer: "I would love to help, but I need to dedicate this evening to some rest and family time.",
+              explanation: "A graceful, firm way to set personal boundaries politely."
+            },
+            {
+              casual: "Help me wash the dishes.",
+              targetWord: "Could you please give me a hand with the dishes so...",
+              answer: "Could you please give me a hand with the dishes so we can both relax earlier tonight?",
+              explanation: "'Give me a hand' is a warm, collaborative way to invite family help."
+            },
+            {
+              casual: "Thanks for the help today.",
+              targetWord: "I genuinely appreciate your support today; it made a...",
+              answer: "I genuinely appreciate your support today; it made a huge difference to my day.",
+              explanation: "'I genuinely appreciate your support' expresses deep, heartfelt gratitude."
+            }
+          ],
+          vocabQuestions: [
+            {
+              prompt: "Instead of saying: 'I am very busy today with household work.'",
+              options: [
+                { text: "I have a rather hectic schedule today with errands and cooking. (اردو: بہت مصروف / بھاگ دوڑ والا دن)", correct: true },
+                { text: "I am trapped in giant work today.", correct: false },
+                { text: "My hours are totally running fast.", correct: false }
+              ],
+              explanation: "'A rather hectic schedule' (بہت مصروف / بھاگ دوڑ والا دن) is natural and mature."
+            },
+            {
+              prompt: "Instead of saying: 'After deep cleaning, I was very tired and sleepy.'",
+              options: [
+                { text: "After deep cleaning the house, I felt completely exhausted (drained). (اردو: تھکا ہوا / نڈھال)", correct: true },
+                { text: "I was having dead batteries inside.", correct: false },
+                { text: "My eyes were shutting like stone.", correct: false }
+              ],
+              explanation: "'Completely exhausted / drained' (تھکا ہوا / نڈھال) captures honest fatigue."
+            },
+            {
+              prompt: "Instead of saying: 'Sitting with my tea felt very calm.'",
+              options: [
+                { text: "Sipping my morning tea brought a serene and tranquil feeling. (اردو: پرسکون اور اطمینان بخش)", correct: true },
+                { text: "The tea made my heart silent.", correct: false },
+                { text: "It gave easy calm sitting.", correct: false }
+              ],
+              explanation: "'Serene and tranquil' (پرسکون اور اطمینان بخش) is evocative and soothing."
+            }
+          ],
+          spokenPrompts: {
+            p1: "What was one small moment that brought you genuine peace or joy this past week?",
+            p2: "Mention one personal goal or positive habit you want to practice in the coming week.",
+            p3: "Speak about your English learning journey: how do you feel speaking English aloud today compared to before?"
+          }
+        }
+      };
+
+      // State Management
+      var b1RoutineReady = true;
+      var techRoutineState = {
+        date: "",
+        completedSteps: [],
+        streak: 0,
+        lastCompletedDate: ""
+      };
+
+      var currentSelectedDay = new Date().getDay(); // 0 = Sun, 1 = Mon ...
+      var currentInversionIndex = 0;
+      var currentCollocIndex = 0;
+      var currentCollocScore = 0;
+      var standupTimerInterval = null;
+      var standupTimerSeconds = 180; // 3:00
+      var standupTimerRunning = false;
+
+      function getTodayDateStr() {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      function switchDayTheme(dayIndex) {
+        currentSelectedDay = dayIndex;
+        const theme = B1_WEEKLY_THEMES[dayIndex] || B1_WEEKLY_THEMES[1];
+
+        // Update day pills
+        document.querySelectorAll(".b1-day-pill").forEach((btn) => btn.classList.remove("active"));
+        const activePill = document.getElementById(`dayPill-${dayIndex}`);
+        if (activePill) activePill.classList.add("active");
+
+        // Update theme header
+        const iconEl = document.getElementById("currentDayIcon");
+        if (iconEl) iconEl.textContent = theme.icon;
+
+        const titleEl = document.getElementById("currentDayThemeTitle");
+        if (titleEl) titleEl.textContent = `${theme.dayName}: ${theme.themeTitle}`;
+
+        // Populate scenarios for this day
+        populateScenarioDropdown();
+        onTechScenarioChange();
+
+        // Reset & render Step 2 (Polite Phrases)
+        currentInversionIndex = 0;
+        renderInversionScenario();
+
+        // Reset & render Step 3 (Vocab Quiz)
+        currentCollocIndex = 0;
+        currentCollocScore = 0;
+        renderCollocQuestion();
+
+        // Update Step 4 Prompts
+        const p1 = document.getElementById("standupPrompt1Text");
+        if (p1 && theme.spokenPrompts) p1.textContent = `"${theme.spokenPrompts.p1}"`;
+        const p2 = document.getElementById("standupPrompt2Text");
+        if (p2 && theme.spokenPrompts) p2.textContent = `"${theme.spokenPrompts.p2}"`;
+        const p3 = document.getElementById("standupPrompt3Text");
+        if (p3 && theme.spokenPrompts) p3.textContent = `"${theme.spokenPrompts.p3}"`;
+
+        // Hide Step 1 Feedback & Hints
+        const hintBox = document.getElementById("techStep1HintBox");
+        if (hintBox) hintBox.style.display = "none";
+        const fbBox = document.getElementById("techStep1FeedbackBox");
+        if (fbBox) fbBox.style.display = "none";
+        const ansBox = document.getElementById("techStep1AnswerBox");
+        if (ansBox) ansBox.style.display = "none";
+        const inputEl = document.getElementById("techConditionalInput");
+        if (inputEl) inputEl.value = "";
+      }
+
+      function populateScenarioDropdown() {
+        const select = document.getElementById("techScenarioSelect");
+        if (!select) return;
+        select.innerHTML = "";
+
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        for (const [key, item] of Object.entries(theme.scenarios)) {
+          const opt = document.createElement("option");
+          opt.value = key;
+          opt.textContent = item.name;
+          select.appendChild(opt);
+        }
+      }
+
+      function getCurrentScenarioData() {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const select = document.getElementById("techScenarioSelect");
+        if (!select || !select.value) {
+          const firstKey = Object.keys(theme.scenarios)[0];
+          return theme.scenarios[firstKey];
+        }
+        return theme.scenarios[select.value] || Object.values(theme.scenarios)[0];
+      }
+
+      function cycleNextScenarioInDay() {
+        const select = document.getElementById("techScenarioSelect");
+        if (!select || select.options.length === 0) return;
+        const nextIdx = (select.selectedIndex + 1) % select.options.length;
+        select.selectedIndex = nextIdx;
+        onTechScenarioChange();
+        showToast("Switched to next scenario in today's theme! ➡️");
+      }
+
+      function pickRandomScenario() {
+        const days = [0, 1, 2, 3, 4, 5, 6];
+        const randomDay = days[Math.floor(Math.random() * days.length)];
+        switchDayTheme(randomDay);
+
+        const select = document.getElementById("techScenarioSelect");
+        if (select && select.options.length > 0) {
+          const randomIdx = Math.floor(Math.random() * select.options.length);
+          select.selectedIndex = randomIdx;
+          onTechScenarioChange();
+        }
+
+        const theme = B1_WEEKLY_THEMES[randomDay];
+        showToast(`🎲 Random Topic: ${theme.dayName} • ${theme.themeTitle}!`);
+      }
+
+      function onTechScenarioChange() {
+        const data = getCurrentScenarioData();
+        if (!data) return;
+
+        const badge = document.getElementById("techScenarioTypeBadge");
+        if (badge) badge.textContent = data.badge;
+
+        const ctx = document.getElementById("techScenarioContext");
+        if (ctx) ctx.textContent = data.context;
+
+        const formula = document.getElementById("techScenarioFormula");
+        if (formula) formula.innerHTML = data.formula;
+
+        const hintBox = document.getElementById("techStep1HintBox");
+        if (hintBox) {
+          hintBox.style.display = "none";
+          hintBox.innerHTML = `
+            ${data.formula ? `<div style="background: #ffffff; border: 1.5px solid #fde047; border-radius: 10px; padding: 8px 12px; margin-bottom: 8px; color: #713f12; font-weight: 600;">${data.formula}</div>` : ""}
+            <div>${data.hint}</div>
+          `;
+        }
+
+        const answerBox = document.getElementById("techStep1AnswerBox");
+        if (answerBox) answerBox.style.display = "none";
+
+        const answerTxt = document.getElementById("techStep1AnswerText");
+        if (answerTxt) answerTxt.textContent = data.answer;
+
+        const answerExp = document.getElementById("techStep1AnswerExplanation");
+        if (answerExp) answerExp.textContent = data.explanation;
+
+        const fbBox = document.getElementById("techStep1FeedbackBox");
+        if (fbBox) fbBox.style.display = "none";
+
+        const hintLabel = document.getElementById("techHintBtnLabel");
+        if (hintLabel) hintLabel.textContent = "Show Hint & Rule";
+
+        const ansLabel = document.getElementById("techAnswerBtnLabel");
+        if (ansLabel) ansLabel.textContent = "Reveal Model Answer";
+      }
+
+      function compareMySentence() {
+        const inputEl = document.getElementById("techConditionalInput");
+        const feedbackBox = document.getElementById("techStep1FeedbackBox");
+        const feedbackContent = document.getElementById("techStep1FeedbackContent");
+        if (!inputEl || !feedbackBox || !feedbackContent) return;
+
+        const userText = inputEl.value.trim();
+        if (!userText) {
+          showToast("✍️ Please type your sentence in the box first!");
+          return;
+        }
+
+        const data = getCurrentScenarioData();
+        const modelText = data.answer;
+
+        const hasIf = /\bif\b/i.test(userText);
+        const hasWill = /\bwill\b/i.test(userText);
+        const hasWould = /\bwould\b/i.test(userText);
+        const hasHad = /\bhad\b/i.test(userText);
+
+        let tips = [];
+        if (!hasIf) {
+          tips.push("• Try starting or joining your sentence with the word <strong>'If'</strong>.");
+        }
+        if (data.formula.includes("had") && !hasHad) {
+          tips.push("• Remember to use past reflection: <strong>'had + 3rd form of verb'</strong>.");
+        }
+        if (data.formula.includes("would") && !hasWould) {
+          tips.push("• Notice the result clause uses <strong>'would'</strong> or <strong>'would have'</strong>.");
+        }
+        if (data.formula.includes("will") && !hasWill && !hasWould) {
+          tips.push("• Connect the present action with future certainty using <strong>'will'</strong>.");
+        }
+
+        feedbackBox.style.display = "block";
+        feedbackContent.innerHTML = `
+          <div style="margin-bottom: 8px;">
+            <span style="font-size: 11px; font-weight: 800; color: #7e22ce; text-transform: uppercase;">Your Written Sentence:</span>
+            <div style="background: #ffffff; padding: 7px 10px; border-radius: 6px; border: 1.5px solid #d8b4fe; font-weight: 600; color: #1e293b; margin-top: 2px;">
+              "${escapeHtml(userText)}"
+            </div>
+          </div>
+          <div style="margin-bottom: 8px;">
+            <span style="font-size: 11px; font-weight: 800; color: #1e40af; text-transform: uppercase;">Model Sentence to Compare:</span>
+            <div style="background: #eff6ff; padding: 7px 10px; border-radius: 6px; border: 1.5px solid #93c5fd; font-weight: 600; color: #1e40af; margin-top: 2px;">
+              "${escapeHtml(modelText)}"
+            </div>
+          </div>
+          <div style="font-size: 12px; color: #166534; background: #f0fdf4; padding: 8px 10px; border-radius: 6px; border: 1px solid #86efac; line-height: 1.45;">
+            🌸 <strong>Wonderful effort!</strong> Writing your own sentences builds natural fluency. Comparing your phrasing with the model sentence trains your brain to adopt natural English structures.
+            ${tips.length > 0 ? `<div style="margin-top: 6px; color: #854d0e; font-weight: 500;">${tips.join("<br>")}</div>` : ""}
+          </div>
+        `;
+
+        showToast("✨ Sentence checked! Compare your sentence with the model.");
+      }
+
+      function toggleTechStep1Hint() {
+        const box = document.getElementById("techStep1HintBox");
+        const label = document.getElementById("techHintBtnLabel");
+        if (!box) return;
+        if (box.style.display === "none" || !box.style.display) {
+          box.style.display = "block";
+          if (label) label.textContent = "Hide Hint";
+        } else {
+          box.style.display = "none";
+          if (label) label.textContent = "Show Hint & Rule";
+        }
+      }
+
+      function revealTechStep1Answer() {
+        const box = document.getElementById("techStep1AnswerBox");
+        const label = document.getElementById("techAnswerBtnLabel");
+        if (!box) return;
+        if (box.style.display === "none" || !box.style.display) {
+          box.style.display = "block";
+          if (label) label.textContent = "Hide Model Answer";
+        } else {
+          box.style.display = "none";
+          if (label) label.textContent = "Reveal Model Answer";
+        }
+      }
+
+      function speakEnglishText(text) {
+        if (!window.speechSynthesis) {
+          showToast("Speech synthesis not supported on this browser.");
+          return;
+        }
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-US";
+        utterance.rate = 0.90;
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function speakCurrentModelAnswer() {
+        const data = getCurrentScenarioData();
+        if (data && data.answer) {
+          speakEnglishText(data.answer);
+          showToast("🔊 Playing pronunciation...");
+        }
+      }
+
+      // ---------- STEP 2: POLITE SOCIAL ENGLISH ----------
+      function renderInversionScenario() {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const phrases = theme.politePhrases || [];
+        const data = phrases[currentInversionIndex];
+        if (!data) return;
+
+        const idxEl = document.getElementById("inversionCurrentIndex");
+        if (idxEl) idxEl.textContent = currentInversionIndex + 1;
+
+        const casualEl = document.getElementById("inversionCasualText");
+        if (casualEl) casualEl.textContent = `"${data.casual}"`;
+
+        const targetWordEl = document.getElementById("inversionTargetWord");
+        if (targetWordEl) targetWordEl.textContent = data.targetWord;
+
+        const answerTextEl = document.getElementById("inversionAnswerText");
+        if (answerTextEl) answerTextEl.textContent = data.answer;
+
+        const expEl = document.getElementById("inversionExplanation");
+        if (expEl) expEl.textContent = data.explanation;
+
+        const inputEl = document.getElementById("inversionUserInput");
+        if (inputEl) inputEl.value = "";
+
+        const answerBox = document.getElementById("inversionAnswerBox");
+        if (answerBox) answerBox.style.display = "none";
+
+        const label = document.getElementById("inversionToggleBtnLabel");
+        if (label) label.textContent = "Reveal Answer";
+      }
+
+      function nextInversionScenario() {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const phrases = theme.politePhrases || [];
+        currentInversionIndex = (currentInversionIndex + 1) % phrases.length;
+        renderInversionScenario();
+      }
+
+      function prevInversionScenario() {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const phrases = theme.politePhrases || [];
+        currentInversionIndex = (currentInversionIndex - 1 + phrases.length) % phrases.length;
+        renderInversionScenario();
+      }
+
+      function toggleInversionAnswer() {
+        const box = document.getElementById("inversionAnswerBox");
+        const label = document.getElementById("inversionToggleBtnLabel");
+        if (!box) return;
+        if (box.style.display === "none" || !box.style.display) {
+          box.style.display = "block";
+          if (label) label.textContent = "Hide Answer";
+        } else {
+          box.style.display = "none";
+          if (label) label.textContent = "Reveal Answer";
+        }
+      }
+
+      function speakInversionAnswer() {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const phrases = theme.politePhrases || [];
+        const data = phrases[currentInversionIndex];
+        if (data && data.answer) {
+          speakEnglishText(data.answer);
+          showToast("🔊 Playing pronunciation...");
+        }
+      }
+
+      // ---------- STEP 3: EXPRESSIVE VOCABULARY QUIZ ----------
+      function renderCollocQuestion() {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const quizList = theme.vocabQuestions || [];
+        const data = quizList[currentCollocIndex];
+        if (!data) return;
+
+        const numEl = document.getElementById("collocQuestionNum");
+        if (numEl) numEl.textContent = currentCollocIndex + 1;
+
+        const totalEl = document.getElementById("collocTotal");
+        if (totalEl) totalEl.textContent = quizList.length;
+
+        const scoreEl = document.getElementById("collocScore");
+        if (scoreEl) scoreEl.textContent = currentCollocScore;
+
+        const promptEl = document.getElementById("collocBasicPrompt");
+        if (promptEl) promptEl.textContent = `"${data.prompt}"`;
+
+        const optionsContainer = document.getElementById("collocOptionsList");
+        if (optionsContainer) {
+          optionsContainer.innerHTML = "";
+          data.options.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "tech-colloc-option";
+            btn.id = `collocOptBtn-${idx}`;
+            btn.innerHTML = `<span style="font-size: 15px;">🔘</span> <span>${escapeHtml(opt.text)}</span>`;
+            btn.onclick = () => selectCollocOption(idx);
+            optionsContainer.appendChild(btn);
+          });
+        }
+
+        const feedbackBox = document.getElementById("collocFeedbackBox");
+        if (feedbackBox) feedbackBox.style.display = "none";
+      }
+
+      function selectCollocOption(selectedIndex) {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const quizList = theme.vocabQuestions || [];
+        const data = quizList[currentCollocIndex];
+        if (!data) return;
+
+        const options = data.options;
+        const isCorrect = options[selectedIndex] && options[selectedIndex].correct;
+
+        options.forEach((opt, idx) => {
+          const btn = document.getElementById(`collocOptBtn-${idx}`);
+          if (!btn) return;
+          btn.disabled = true;
+          if (opt.correct) {
+            btn.classList.add("correct");
+            btn.querySelector("span").textContent = "✅";
+          } else if (idx === selectedIndex) {
+            btn.classList.add("wrong");
+            btn.querySelector("span").textContent = "❌";
+          }
+        });
+
+        if (isCorrect) {
+          currentCollocScore++;
+          const scoreEl = document.getElementById("collocScore");
+          if (scoreEl) scoreEl.textContent = currentCollocScore;
+          showToast("🌸 Excellent choice! That is natural, expressive English!");
+        } else {
+          showToast("Not quite. Check the model answer!");
+        }
+
+        const feedbackBox = document.getElementById("collocFeedbackBox");
+        if (feedbackBox) {
+          feedbackBox.style.display = "block";
+          feedbackBox.style.background = isCorrect ? "#fdf2f8" : "#fef2f2";
+          feedbackBox.style.border = isCorrect ? "1.5px solid #fbcfe8" : "1.5px solid #fca5a5";
+          feedbackBox.style.color = isCorrect ? "#9d174d" : "#991b1b";
+          feedbackBox.innerHTML = `<strong>💡 Explanation & Daily Tip:</strong> ${escapeHtml(data.explanation)}`;
+        }
+      }
+
+      function nextCollocQuestion() {
+        const theme = B1_WEEKLY_THEMES[currentSelectedDay] || B1_WEEKLY_THEMES[1];
+        const quizList = theme.vocabQuestions || [];
+        currentCollocIndex = (currentCollocIndex + 1) % quizList.length;
+        renderCollocQuestion();
+      }
+
+      // ---------- STEP 4: SPOKEN SELF-TALK TIMER ----------
+      function updateStandupTimerDisplay() {
+        const display = document.getElementById("techStandupTimerDisplay");
+        if (!display) return;
+        const mins = Math.floor(standupTimerSeconds / 60);
+        const secs = standupTimerSeconds % 60;
+        display.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      }
+
+      function toggleTechStandupTimer() {
+        const btn = document.getElementById("techTimerToggleBtn");
+        if (standupTimerRunning) {
+          clearInterval(standupTimerInterval);
+          standupTimerRunning = false;
+          if (btn) btn.textContent = "▶️ Resume Timer";
+        } else {
+          standupTimerRunning = true;
+          if (btn) btn.textContent = "⏸️ Pause Timer";
+
+          standupTimerInterval = setInterval(() => {
+            if (standupTimerSeconds > 0) {
+              standupTimerSeconds--;
+              updateStandupTimerDisplay();
+            } else {
+              clearInterval(standupTimerInterval);
+              standupTimerRunning = false;
+              if (btn) btn.textContent = "▶️ Start Timer";
+              showToast("🔔 3 Minutes Completed! Wonderful spoken practice!");
+            }
+          }, 1000);
+        }
+      }
+
+      function resetTechStandupTimer() {
+        clearInterval(standupTimerInterval);
+        standupTimerRunning = false;
+        standupTimerSeconds = 180;
+        updateStandupTimerDisplay();
+        const btn = document.getElementById("techTimerToggleBtn");
+        if (btn) btn.textContent = "▶️ Start Timer";
+      }
+
+      function updateStandupChecklist() {
+        const c1 = document.getElementById("standupCheck1")?.checked;
+        const c2 = document.getElementById("standupCheck2")?.checked;
+        const c3 = document.getElementById("standupCheck3")?.checked;
+
+        if (c1 && c2 && c3) {
+          if (!techRoutineState.completedSteps.includes(4)) {
+            toggleTechStepComplete(4);
+          }
+        }
+      }
+
+      // Persistence & Routine Progress
+      function loadTechRoutineState() {
+        const today = getTodayDateStr();
+        try {
+          const raw = localStorage.getItem(B1_ROUTINE_STORAGE_KEY);
+          if (raw) {
+            techRoutineState = JSON.parse(raw);
+          }
+        } catch (e) {
+          console.warn("Failed to load routine state", e);
+        }
+
+        if (!techRoutineState || typeof techRoutineState !== "object") {
+          techRoutineState = { date: today, completedSteps: [], streak: 0, lastCompletedDate: "" };
+        }
+
+        if (techRoutineState.date !== today) {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          const yStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, "0")}-${String(yesterday.getDate()).padStart(2, "0")}`;
+
+          if (techRoutineState.lastCompletedDate === yStr) {
+            // Streak preserved
+          } else if (techRoutineState.lastCompletedDate !== today) {
+            techRoutineState.streak = 0;
+          }
+
+          techRoutineState.date = today;
+          techRoutineState.completedSteps = [];
+          saveTechRoutineState();
+        }
+
+        renderTechRoutineProgress();
+      }
+
+      function saveTechRoutineState() {
+        try {
+          localStorage.setItem(B1_ROUTINE_STORAGE_KEY, JSON.stringify(techRoutineState));
+        } catch (e) {}
+      }
+
+      function renderTechRoutineProgress() {
+        const completed = techRoutineState.completedSteps || [];
+        const count = completed.length;
+        const pct = Math.round((count / 4) * 100);
+
+        const bar = document.getElementById("techRoutineProgressBar");
+        if (bar) bar.style.width = pct + "%";
+
+        const txt = document.getElementById("techRoutineProgressText");
+        if (txt) txt.textContent = `${count} / 4 completed (${pct}%)`;
+
+        const streakBadge = document.getElementById("techRoutineStreakBadge");
+        if (streakBadge) {
+          streakBadge.textContent = `🔥 ${techRoutineState.streak || 0} Day Streak`;
+        }
+
+        for (let i = 1; i <= 4; i++) {
+          const isDone = completed.includes(i);
+          const statusBadge = document.getElementById(`techStepStatus-${i}`);
+          const tabBtn = document.getElementById(`techTabBtn-${i}`);
+          const compBtn = document.getElementById(`techCompleteBtn-${i}`);
+
+          if (statusBadge) {
+            statusBadge.textContent = isDone ? "✓ Done" : "Pending";
+            statusBadge.style.background = isDone ? "#fce7f3" : "#f1f5f9";
+            statusBadge.style.color = isDone ? "#9d174d" : "#475569";
+            statusBadge.style.borderColor = isDone ? "#f472b6" : "#cbd5e1";
+          }
+
+          if (tabBtn) {
+            if (isDone) tabBtn.classList.add("completed-tab");
+            else tabBtn.classList.remove("completed-tab");
+          }
+
+          if (compBtn) {
+            if (isDone) {
+              compBtn.textContent = `✅ Step ${i} Completed (Click to Undo)`;
+              compBtn.classList.remove("primary", "warning");
+              compBtn.classList.add("success");
+            } else {
+              compBtn.textContent = `✅ Mark Step ${i} Complete`;
+            }
+          }
+        }
+      }
+
+      function toggleTechStepComplete(stepNum) {
+        if (!Array.isArray(techRoutineState.completedSteps)) {
+          techRoutineState.completedSteps = [];
+        }
+
+        const idx = techRoutineState.completedSteps.indexOf(stepNum);
+        if (idx >= 0) {
+          techRoutineState.completedSteps.splice(idx, 1);
+          showToast(`Step ${stepNum} marked pending.`);
+        } else {
+          techRoutineState.completedSteps.push(stepNum);
+          showToast(`🌸 Step ${stepNum} Completed! Wonderful progress!`);
+
+          if (techRoutineState.completedSteps.length === 4) {
+            const today = getTodayDateStr();
+            if (techRoutineState.lastCompletedDate !== today) {
+              techRoutineState.streak = (techRoutineState.streak || 0) + 1;
+              techRoutineState.lastCompletedDate = today;
+            }
+            showToast(`🏆 MashaAllah! You completed today's entire English Fluency Routine! Streak: ${techRoutineState.streak} days!`);
+          }
+        }
+
+        saveTechRoutineState();
+        renderTechRoutineProgress();
+      }
+
+      function resetTechRoutineToday() {
+        techRoutineState.completedSteps = [];
+        saveTechRoutineState();
+        renderTechRoutineProgress();
+        showToast("Today's routine steps reset for fresh practice. ↺");
+      }
+
+      function switchTechStep(stepNum) {
+        document.querySelectorAll(".tech-step-tab").forEach((tab) => tab.classList.remove("active"));
+        document.querySelectorAll(".tech-step-pane").forEach((pane) => pane.classList.remove("active"));
+
+        const targetTab = document.getElementById(`techTabBtn-${stepNum}`);
+        const targetPane = document.getElementById(`techStepPane-${stepNum}`);
+
+        if (targetTab) targetTab.classList.add("active");
+        if (targetPane) targetPane.classList.add("active");
+      }
+
+      function updateStandupTimerDisplay() {
+        const display = document.getElementById("techStandupTimerDisplay");
+        if (!display) return;
+        const mins = String(Math.floor(standupTimerSeconds / 60)).padStart(2, "0");
+        const secs = String(standupTimerSeconds % 60).padStart(2, "0");
+        display.textContent = `${mins}:${secs}`;
+      }
+
+      function toggleTechStandupTimer() {
+        const btn = document.getElementById("techTimerToggleBtn");
+        if (standupTimerRunning) {
+          clearInterval(standupTimerInterval);
+          standupTimerRunning = false;
+          if (btn) btn.textContent = "▶️ Resume Timer";
+        } else {
+          standupTimerRunning = true;
+          if (btn) btn.textContent = "⏸️ Pause Timer";
+          standupTimerInterval = setInterval(() => {
+            if (standupTimerSeconds > 0) {
+              standupTimerSeconds--;
+              updateStandupTimerDisplay();
+            } else {
+              clearInterval(standupTimerInterval);
+              standupTimerRunning = false;
+              if (btn) btn.textContent = "▶️ Start Timer";
+              showToast("🔔 3 Minutes Completed! Wonderful spoken practice!");
+            }
+          }, 1000);
+        }
+      }
+
+      function resetTechStandupTimer() {
+        clearInterval(standupTimerInterval);
+        standupTimerRunning = false;
+        standupTimerSeconds = 180;
+        updateStandupTimerDisplay();
+        const btn = document.getElementById("techTimerToggleBtn");
+        if (btn) btn.textContent = "▶️ Start Timer";
+      }
+
+      // Persistence & Routine Progress
+      function loadTechRoutineState() {
+        const today = getTodayDateStr();
+        try {
+          const raw = localStorage.getItem(B1_ROUTINE_STORAGE_KEY);
+          if (raw) {
+            techRoutineState = JSON.parse(raw);
+          }
+        } catch (e) {
+          console.warn("Failed to load routine state", e);
+        }
+
+        if (!techRoutineState || typeof techRoutineState !== "object") {
+          techRoutineState = { date: today, completedSteps: [], streak: 0, lastCompletedDate: "" };
+        }
+
+        if (techRoutineState.date !== today) {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          const yStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, "0")}-${String(yesterday.getDate()).padStart(2, "0")}`;
+
+          if (techRoutineState.lastCompletedDate === yStr) {
+            // Streak preserved
+          } else if (techRoutineState.lastCompletedDate !== today) {
+            techRoutineState.streak = 0;
+          }
+
+          techRoutineState.date = today;
+          techRoutineState.completedSteps = [];
+          saveTechRoutineState();
+        }
+
+        renderTechRoutineProgress();
+      }
+
+      function saveTechRoutineState() {
+        try {
+          localStorage.setItem(B1_ROUTINE_STORAGE_KEY, JSON.stringify(techRoutineState));
+        } catch (e) {
+          console.warn("Failed to save routine state", e);
+        }
+      }
+
+      function renderTechRoutineProgress() {
+        if (!techRoutineState) return;
+        const completed = techRoutineState.completedSteps || [];
+        const count = completed.length;
+        const pct = Math.round((count / 4) * 100);
+
+        const fillEl = document.getElementById("techRoutineProgressBar");
+        if (fillEl) fillEl.style.width = `${pct}%`;
+
+        const textEl = document.getElementById("techRoutineProgressText");
+        if (textEl) textEl.textContent = `${count} / 4 completed (${pct}%)`;
+
+        const streakEl = document.getElementById("techRoutineStreakBadge");
+        if (streakEl) {
+          streakEl.textContent = `🔥 ${techRoutineState.streak || 0} Day Streak`;
+        }
+
+        for (let i = 1; i <= 4; i++) {
+          const statusBadge = document.getElementById(`techStepStatus-${i}`);
+          const completeBtn = document.getElementById(`techCompleteBtn-${i}`);
+          const isDone = completed.includes(i);
+
+          if (statusBadge) {
+            statusBadge.textContent = isDone ? "Completed" : "Pending";
+            statusBadge.classList.toggle("completed", isDone);
+          }
+          if (completeBtn) {
+            completeBtn.textContent = isDone ? `✅ Step ${i} Done (Undo)` : `✅ Mark Step ${i} Complete`;
+          }
+        }
+      }
+
+      // ==================== DAILY LIFE PRACTICAL MATHS & GROCERY SUITE ====================
+      var currentMathStep = 1;
+      var currentMathGramsIdx = 0;
+      var currentMathChangeIdx = 0;
+      var currentMathDiscountIdx = 0;
+      var groceryBasket = [
+        { name: "Fresh Potatoes (آلو)", qty: 2, unit: "kg", rate: 80, lineTotal: 160 },
+        { name: "Tomatoes (ٹماٹر)", qty: 500, unit: "g", rate: 120, lineTotal: 60 },
+        { name: "Fresh Milk (دودھ)", qty: 1.5, unit: "liter", rate: 160, lineTotal: 240 }
+      ];
+
+      var MATH_GRAMS_DATA = [
+        {
+          story: "You are at the vegetable vendor. Fresh tomatoes cost Rs. 80 per kg. You ask for 250 grams (1 پاؤ). How much will you pay?",
+          urdu: "ٹماٹر 80 روپے فی کلو ہیں۔ آپ کو 250 گرام (ایک پاؤ) چاہئیں۔ آپ کتنے پیسے دیں گی؟",
+          options: [
+            { text: "Rs. 20", correct: true },
+            { text: "Rs. 25", correct: false },
+            { text: "Rs. 40", correct: false }
+          ],
+          trick: "💡 Mental Shortcut for 250g: Divide the 1 kg rate by 4 (or halve it twice: half of 80 is 40, half of 40 is 20!). 80 ÷ 4 = Rs. 20.",
+          urduTrick: "اردو شارٹ کٹ: 250 گرام یعنی پاؤ کے لیے کلو کے ریٹ کا آدھے کا آدھا کریں۔ 80 کا آدھا 40، اور 40 کا آدھا 20 روپے!"
+        },
+        {
+          story: "Fresh chicken costs Rs. 600 per kg at the meat shop. You buy 750 grams (تین پاؤ). How much is the total?",
+          urdu: "چکن کا ریٹ 600 روپے فی کلو ہے۔ آپ نے 750 گرام (تین پاؤ) خریدا۔ کل قیمت کیا ہوگی؟",
+          options: [
+            { text: "Rs. 450", correct: true },
+            { text: "Rs. 400", correct: false },
+            { text: "Rs. 500", correct: false }
+          ],
+          trick: "💡 Mental Shortcut for 750g: 750g is 3 quarters. 1 quarter (250g) of 600 is 150. Now multiply by 3: 150 × 3 = Rs. 450!",
+          urduTrick: "اردو شارٹ کٹ: پہلے ایک پاؤ کی قیمت نکالیں (600 کا چوتھائی 150 روپے)، پھر 3 سے ضرب دیں: 150 × 3 = 450 روپے!"
+        },
+        {
+          story: "Red onions are priced at Rs. 90 per kg. You buy 1.5 kg (ڈیڑھ کلو). How much will they cost?",
+          urdu: "پیاز 90 روپے کلو ہے۔ آپ نے ڈیڑھ کلو (1.5 kg) خریدی۔ کتنے پیسے بنیں گے؟",
+          options: [
+            { text: "Rs. 135", correct: true },
+            { text: "Rs. 120", correct: false },
+            { text: "Rs. 150", correct: false }
+          ],
+          trick: "💡 Mental Shortcut: 1 kg is 90. Half a kg (500g) is 45. Add them together: 90 + 45 = Rs. 135!",
+          urduTrick: "اردو شارٹ کٹ: 1 کلو کے 90 روپے، آدھے کلو کے 45 روپے۔ دونوں کو جمع کریں: 90 + 45 = 135 روپے!"
+        },
+        {
+          story: "A dozen bananas (12 bananas) cost Rs. 180. You only want to buy 4 bananas for the children. How much do they cost?",
+          urdu: "ایک درجن کیلے 180 روپے کے ہیں۔ آپ کو صرف 4 کیلے چاہئیں۔ کتنی قیمت بنے گی؟",
+          options: [
+            { text: "Rs. 60", correct: true },
+            { text: "Rs. 45", correct: false },
+            { text: "Rs. 75", correct: false }
+          ],
+          trick: "💡 Mental Shortcut: 4 is one-third of 12! So just divide 180 by 3: 180 ÷ 3 = Rs. 60 (or Rs. 15 per banana × 4)!",
+          urduTrick: "اردو شارٹ کٹ: 4 کیلے درجن کا ایک تہائی (1/3) ہیں۔ 180 کو 3 پر تقسیم کریں: 60 روپے!"
+        }
+      ];
+
+      var MATH_CHANGE_DATA = [
+        {
+          story: "Your grocery items total Rs. 340 at the counter. You pay with a 500-rupee note. How much change should the cashier hand you?",
+          urdu: "گروسری کا کل بل 340 روپے بنا۔ آپ نے 500 کا نوٹ دیا۔ کیشیئر سے کتنے روپے بقایا ملنے چاہئیں؟",
+          options: [
+            { text: "Rs. 160", correct: true },
+            { text: "Rs. 140", correct: false },
+            { text: "Rs. 180", correct: false }
+          ],
+          trick: "💡 Counting-Up Trick: Count up from 340 to 500! 340 + 60 = 400, and 400 + 100 = 500. Change = 60 + 100 = Rs. 160!",
+          urduTrick: "اردو شارٹ کٹ: 340 میں 60 ملائیں تو 400، اور 100 ملائیں تو 500۔ کل بقایا 160 روپے!"
+        },
+        {
+          story: "At the pharmacy, the medicine bill is Rs. 720. You pay with a 1000-rupee note. What is your exact change?",
+          urdu: "میڈیکل سٹور پر بل 720 روپے ہے۔ آپ نے 1000 کا نوٹ دیا۔ بقایا رقم کتنی ہونی چاہیے؟",
+          options: [
+            { text: "Rs. 280", correct: true },
+            { text: "Rs. 260", correct: false },
+            { text: "Rs. 320", correct: false }
+          ],
+          trick: "💡 Counting-Up Trick: 720 + 80 = 800. And 800 + 200 = 1000. Total change = Rs. 280!",
+          urduTrick: "اردو شارٹ کٹ: 720 میں 80 ملائے 800، اور مزید 200 ملائے تو 1000۔ بقایا 280 روپے!"
+        },
+        {
+          story: "At the bakery, bread and biscuits cost Rs. 185. You give a 500-rupee note. How much change should you receive?",
+          urdu: "بیکری کا بل 185 روپے ہے۔ آپ نے 500 کا نوٹ دیا۔ کتنے روپے واپس ملیں گے؟",
+          options: [
+            { text: "Rs. 315", correct: true },
+            { text: "Rs. 325", correct: false },
+            { text: "Rs. 295", correct: false }
+          ],
+          trick: "💡 Counting-Up Trick: 185 + 15 = 200, and 200 + 300 = 500. Total change = Rs. 315!",
+          urduTrick: "اردو شارٹ کٹ: 185 میں 15 ملائے 200، اور 300 ملائے تو 500۔ بقایا 315 روپے!"
+        },
+        {
+          story: "Your family mutton purchase totals Rs. 1650. You hand over two 1000-rupee notes (Rs. 2000). What is your change?",
+          urdu: "گوشت کا بل 1650 روپے بنا۔ آپ نے 1000 کے دو نوٹ (2000 روپے) دیے۔ بقایا کتنے ملیں گے؟",
+          options: [
+            { text: "Rs. 350", correct: true },
+            { text: "Rs. 450", correct: false },
+            { text: "Rs. 250", correct: false }
+          ],
+          trick: "💡 Counting-Up Trick: 1650 + 350 = 2000. Your change is Rs. 350!",
+          urduTrick: "اردو شارٹ کٹ: 1650 میں 350 ملائیں تو پورے 2000 بنتے ہیں۔ بقایا 350 روپے!"
+        }
+      ];
+
+      var MATH_DISCOUNT_DATA = [
+        {
+          story: "A washing powder pack of Rs. 500 is on a '10% Discount' offer. How much will you actually pay?",
+          urdu: "500 روپے کے سرف پر 10 فیصد رعایت (ڈسکاؤنٹ) ہے۔ آپ کو کتنے روپے ادا کرنے ہوں گے؟",
+          options: [
+            { text: "Rs. 450", correct: true },
+            { text: "Rs. 480", correct: false },
+            { text: "Rs. 420", correct: false }
+          ],
+          trick: "💡 10% Shortcut: Just drop the last zero! 10% of 500 is 50. Price to pay: 500 - 50 = Rs. 450!",
+          urduTrick: "اردو شارٹ کٹ: 10 فیصد معلوم کرنے کے لئے آخری صفر ہٹا دیں! 500 کا 10 فیصد 50 روپے ہے۔ 500 میں سے 50 نکالیں: 450 روپے!"
+        },
+        {
+          story: "A 5-liter cooking oil tin priced at Rs. 2000 has a special '20% Off' sale. How much money do you save?",
+          urdu: "2000 روپے کے آئل ٹن پر 20 فیصد کی رعایت ہے۔ آپ کی کتنے روپے کی بچت ہوگی؟",
+          options: [
+            { text: "Rs. 400 saved", correct: true },
+            { text: "Rs. 200 saved", correct: false },
+            { text: "Rs. 500 saved", correct: false }
+          ],
+          trick: "💡 20% Shortcut: Find 10% first (drop a zero = 200), then double it! 200 × 2 = Rs. 400 saved! (You pay Rs. 1600).",
+          urduTrick: "اردو شارٹ کٹ: پہلے 10 فیصد معلوم کریں (200 روپے)، پھر اسے ڈبل کر دیں: 200 × 2 = 400 روپے بچت!"
+        },
+        {
+          story: "A non-stick frying pan priced at Rs. 1400 is on 'Flat 50% Off / Half Price' weekend sale. How much does it cost now?",
+          urdu: "1400 روپے کے فرائنگ پین پر 50 فیصد کی چھوٹ (آدھی قیمت) ہے۔ اب یہ کتنے کا ملے گا؟",
+          options: [
+            { text: "Rs. 700", correct: true },
+            { text: "Rs. 650", correct: false },
+            { text: "Rs. 800", correct: false }
+          ],
+          trick: "💡 50% Shortcut: 50% is simply half! Half of 1400 is Rs. 700.",
+          urduTrick: "اردو شارٹ کٹ: 50 فیصد کا مطلب سیدھا سیدھا آدھا کرنا ہے! 1400 کا آدھا 700 روپے!"
+        },
+        {
+          story: "A supermarket offers 'Buy 2 Get 1 Free' on premium soap bars priced at Rs. 90 each. What is the total cost for 3 bars?",
+          urdu: "سوپ پر آفر ہے: 2 خریدیں 1 مفت (Buy 2 Get 1 Free)۔ ایک صابن 90 روپے کا ہے۔ 3 صابن کتنے میں پڑیں گے؟",
+          options: [
+            { text: "Rs. 180", correct: true },
+            { text: "Rs. 270", correct: false },
+            { text: "Rs. 240", correct: false }
+          ],
+          trick: "💡 Offer Shortcut: You take 3 bars but pay only for 2! 90 × 2 = Rs. 180 (Effective price is just Rs. 60 per bar!).",
+          urduTrick: "اردو شارٹ کٹ: 3 صابن ملیں گے لیکن بل صرف 2 کا بنے گا: 90 × 2 = 180 روپے!"
+        }
+      ];
+
+      function switchMathStep(stepNum) {
+        currentMathStep = stepNum;
+        for (let i = 1; i <= 4; i++) {
+          const btn = document.getElementById(`mathTabBtn-${i}`);
+          const pane = document.getElementById(`mathStepPane-${i}`);
+          if (btn) btn.classList.toggle("active", i === stepNum);
+          if (pane) {
+            pane.style.display = (i === stepNum) ? "block" : "none";
+            pane.classList.toggle("active", i === stepNum);
+          }
+        }
+      }
+
+      function renderMathGramsScenario() {
+        const item = MATH_GRAMS_DATA[currentMathGramsIdx];
+        if (!item) return;
+        const promptEl = document.getElementById("mathGramsPromptText");
+        const urduEl = document.getElementById("mathGramsUrduPrompt");
+        const indexEl = document.getElementById("mathGramsIndexDisplay");
+        const optionsEl = document.getElementById("mathGramsOptionsContainer");
+        const feedbackEl = document.getElementById("mathGramsFeedbackBox");
+
+        if (promptEl) promptEl.textContent = item.story;
+        if (urduEl) urduEl.textContent = item.urdu;
+        if (indexEl) indexEl.textContent = currentMathGramsIdx + 1;
+        if (feedbackEl) feedbackEl.style.display = "none";
+
+        if (optionsEl) {
+          optionsEl.innerHTML = item.options.map((opt, i) => `
+            <button type="button" class="tech-colloc-option" onclick="selectMathOption('grams', ${i})">
+              <span>⚪</span> <strong>${escapeHtml(opt.text)}</strong>
+            </button>
+          `).join("");
+        }
+      }
+
+      function renderMathChangeScenario() {
+        const item = MATH_CHANGE_DATA[currentMathChangeIdx];
+        if (!item) return;
+        const promptEl = document.getElementById("mathChangePromptText");
+        const urduEl = document.getElementById("mathChangeUrduPrompt");
+        const indexEl = document.getElementById("mathChangeIndexDisplay");
+        const optionsEl = document.getElementById("mathChangeOptionsContainer");
+        const feedbackEl = document.getElementById("mathChangeFeedbackBox");
+
+        if (promptEl) promptEl.textContent = item.story;
+        if (urduEl) urduEl.textContent = item.urdu;
+        if (indexEl) indexEl.textContent = currentMathChangeIdx + 1;
+        if (feedbackEl) feedbackEl.style.display = "none";
+
+        if (optionsEl) {
+          optionsEl.innerHTML = item.options.map((opt, i) => `
+            <button type="button" class="tech-colloc-option" onclick="selectMathOption('change', ${i})">
+              <span>⚪</span> <strong>${escapeHtml(opt.text)}</strong>
+            </button>
+          `).join("");
+        }
+      }
+
+      function renderMathDiscountScenario() {
+        const item = MATH_DISCOUNT_DATA[currentMathDiscountIdx];
+        if (!item) return;
+        const promptEl = document.getElementById("mathDiscountPromptText");
+        const urduEl = document.getElementById("mathDiscountUrduPrompt");
+        const indexEl = document.getElementById("mathDiscountIndexDisplay");
+        const optionsEl = document.getElementById("mathDiscountOptionsContainer");
+        const feedbackEl = document.getElementById("mathDiscountFeedbackBox");
+
+        if (promptEl) promptEl.textContent = item.story;
+        if (urduEl) urduEl.textContent = item.urdu;
+        if (indexEl) indexEl.textContent = currentMathDiscountIdx + 1;
+        if (feedbackEl) feedbackEl.style.display = "none";
+
+        if (optionsEl) {
+          optionsEl.innerHTML = item.options.map((opt, i) => `
+            <button type="button" class="tech-colloc-option" onclick="selectMathOption('discount', ${i})">
+              <span>⚪</span> <strong>${escapeHtml(opt.text)}</strong>
+            </button>
+          `).join("");
+        }
+      }
+
+      function selectMathOption(category, selectedIndex) {
+        let list, currentIdx, containerId, feedbackId;
+        if (category === 'grams') {
+          list = MATH_GRAMS_DATA;
+          currentIdx = currentMathGramsIdx;
+          containerId = "mathGramsOptionsContainer";
+          feedbackId = "mathGramsFeedbackBox";
+        } else if (category === 'change') {
+          list = MATH_CHANGE_DATA;
+          currentIdx = currentMathChangeIdx;
+          containerId = "mathChangeOptionsContainer";
+          feedbackId = "mathChangeFeedbackBox";
+        } else {
+          list = MATH_DISCOUNT_DATA;
+          currentIdx = currentMathDiscountIdx;
+          containerId = "mathDiscountOptionsContainer";
+          feedbackId = "mathDiscountFeedbackBox";
+        }
+
+        const data = list[currentIdx];
+        const isCorrect = data.options[selectedIndex].correct;
+        const container = document.getElementById(containerId);
+        if (container) {
+          const buttons = container.querySelectorAll("button");
+          buttons.forEach((btn, idx) => {
+            btn.disabled = true;
+            if (data.options[idx].correct) {
+              btn.classList.add("correct");
+              btn.querySelector("span").textContent = "✅";
+            } else if (idx === selectedIndex) {
+              btn.classList.add("wrong");
+              btn.querySelector("span").textContent = "❌";
+            }
+          });
+        }
+
+        const fb = document.getElementById(feedbackId);
+        if (fb) {
+          fb.style.display = "block";
+          fb.style.background = isCorrect ? "#f0fdf4" : "#fef2f2";
+          fb.style.border = isCorrect ? "1.5px solid #86efac" : "1.5px solid #fca5a5";
+          fb.style.color = isCorrect ? "#065f46" : "#991b1b";
+          fb.innerHTML = `
+            <div style="font-weight: 800; margin-bottom: 4px;">${isCorrect ? "🎉 Correct! Shabash!" : "💡 Solution & Practical Trick:"}</div>
+            <div>${escapeHtml(data.trick)}</div>
+            <div style="margin-top: 4px; font-size: 12px;">${escapeHtml(data.urduTrick)}</div>
+          `;
+        }
+
+        if (isCorrect) {
+          showToast("🎉 Perfect calculation! Smart homemaker math!");
+        } else {
+          showToast("Check the easy shortcut trick below! 💡");
+        }
+      }
+
+      function nextMathGramsScenario() {
+        currentMathGramsIdx = (currentMathGramsIdx + 1) % MATH_GRAMS_DATA.length;
+        renderMathGramsScenario();
+      }
+
+      function nextMathChangeScenario() {
+        currentMathChangeIdx = (currentMathChangeIdx + 1) % MATH_CHANGE_DATA.length;
+        renderMathChangeScenario();
+      }
+
+      function nextMathDiscountScenario() {
+        currentMathDiscountIdx = (currentMathDiscountIdx + 1) % MATH_DISCOUNT_DATA.length;
+        renderMathDiscountScenario();
+      }
+
+      // Grocery Register Simulator Functions
+      function renderGroceryBillTable() {
+        const tbody = document.getElementById("groceryBillItemsTableBody");
+        const totalDisplay = document.getElementById("groceryGrandTotalDisplay");
+        if (!tbody) return;
+
+        if (groceryBasket.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 14px; color: #94a3b8;">Your shopping basket is empty. Click a quick item above or add custom groceries!</td></tr>`;
+          if (totalDisplay) totalDisplay.textContent = "Rs. 0";
+          recalcGroceryChange();
+          return;
+        }
+
+        let grandTotal = 0;
+        tbody.innerHTML = groceryBasket.map((item, idx) => {
+          grandTotal += item.lineTotal;
+          return `
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 8px 10px; font-weight: 700; color: #1e293b;">${escapeHtml(item.name)}</td>
+              <td style="padding: 8px 10px; color: #475569;">${item.qty} ${item.unit}</td>
+              <td style="padding: 8px 10px; color: #475569;">Rs. ${item.rate}</td>
+              <td style="padding: 8px 10px; font-weight: 800; color: #065f46;">Rs. ${Math.round(item.lineTotal)}</td>
+              <td style="padding: 8px 10px; text-align: center;">
+                <button type="button" class="tech-action-btn" onclick="removeGroceryItem(${idx})" style="padding: 2px 8px; font-size: 11px; background: #fee2e2; color: #991b1b; border-color: #fca5a5;">✕</button>
+              </td>
+            </tr>
+          `;
+        }).join("");
+
+        if (totalDisplay) totalDisplay.textContent = `Rs. ${Math.round(grandTotal)}`;
+        recalcGroceryChange();
+      }
+
+      function addPresetGrocery(name, qty, unit, rate) {
+        let lineTotal = 0;
+        if (unit === 'g') {
+          lineTotal = rate * (qty / 1000);
+        } else {
+          lineTotal = rate * qty;
+        }
+        groceryBasket.push({ name, qty, unit, rate, lineTotal });
+        renderGroceryBillTable();
+        showToast(`Added ${name} to basket! 🧺`);
+      }
+
+      function addCustomGroceryItem() {
+        const nameInput = document.getElementById("customItemName");
+        const qtyInput = document.getElementById("customItemQty");
+        const unitInput = document.getElementById("customItemUnit");
+        const rateInput = document.getElementById("customItemRate");
+
+        const name = (nameInput?.value || "").trim();
+        const qty = parseFloat(qtyInput?.value || "0");
+        const unit = unitInput?.value || "kg";
+        const rate = parseFloat(rateInput?.value || "0");
+
+        if (!name || isNaN(qty) || qty <= 0 || isNaN(rate) || rate <= 0) {
+          alert("Please enter a valid Item Name, Quantity, and Rate per Unit.");
+          return;
+        }
+
+        let lineTotal = 0;
+        if (unit === 'g') {
+          lineTotal = rate * (qty / 1000);
+        } else {
+          lineTotal = rate * qty;
+        }
+
+        groceryBasket.push({ name, qty, unit, rate, lineTotal });
+        renderGroceryBillTable();
+
+        if (nameInput) nameInput.value = "";
+        if (qtyInput) qtyInput.value = "";
+        if (rateInput) rateInput.value = "";
+        showToast(`Added ${name} (Rs. ${Math.round(lineTotal)})! 🧺`);
+      }
+
+      function removeGroceryItem(index) {
+        groceryBasket.splice(index, 1);
+        renderGroceryBillTable();
+      }
+
+      function clearGroceryBill() {
+        groceryBasket = [];
+        renderGroceryBillTable();
+        showToast("Basket cleared! 🧺");
+      }
+
+      function recalcGroceryChange() {
+        const cashInput = document.getElementById("groceryCashPaidInput");
+        const changeDisplay = document.getElementById("groceryChangeReturnDisplay");
+        if (!changeDisplay) return;
+
+        let total = 0;
+        groceryBasket.forEach(it => total += it.lineTotal);
+
+        const cashGiven = parseFloat(cashInput?.value || "0");
+        if (!cashInput || isNaN(cashGiven) || cashGiven <= 0) {
+          changeDisplay.textContent = "Rs. 0";
+          changeDisplay.style.color = "#0284c7";
+          return;
+        }
+
+        const diff = cashGiven - total;
+        if (diff >= 0) {
+          changeDisplay.textContent = `Rs. ${Math.round(diff)}`;
+          changeDisplay.style.color = "#0284c7";
+        } else {
+          changeDisplay.textContent = `Short Rs. ${Math.abs(Math.round(diff))}`;
+          changeDisplay.style.color = "#dc2626";
+        }
+      }
+
+      function initDailyMathsSuite() {
+        renderMathGramsScenario();
+        renderMathChangeScenario();
+        renderMathDiscountScenario();
+        renderGroceryBillTable();
+      }
+
+      // Initialize B1 English Routine module
+      function initB1EnglishRoutine() {
+        initDailyMathsSuite();
+        loadTechRoutineState();
+        const currentDayOfWeek = new Date().getDay();
+        switchDayTheme(currentDayOfWeek);
+        updateStandupTimerDisplay();
+      }
+
+      window.addEventListener("DOMContentLoaded", initB1EnglishRoutine);
+      window.addEventListener("load", initB1EnglishRoutine);
+      if (document.readyState === "complete" || document.readyState === "interactive") {
+        initB1EnglishRoutine();
       }
     </script>
   </body>
