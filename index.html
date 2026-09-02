@@ -1290,235 +1290,125 @@
         box-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.06);
       }
 
-      .hub-window {
-        background: #0f172a;
-        border: 2px solid #334155;
-        border-radius: 22px;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-        overflow: hidden;
-        margin: 10px auto 26px;
-        max-width: 680px;
+      /* ==================== NAVIGATOR HUB (FULL PAGE WITH ORANGE GLOW) ==================== */
+      #tab-navigator {
+        position: relative;
+        padding: 6px 0 36px;
+      }
+      .nav-hub-wrapper {
+        position: relative;
+        max-width: 740px;
+        margin: 0 auto 20px;
+        padding: 24px 16px 32px;
         color: #f8fafc;
-        animation: navGridFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        background: radial-gradient(circle at 50% -10%, rgba(249, 115, 22, 0.22) 0%, rgba(234, 88, 12, 0.08) 35%, transparent 65%), #0c1220;
+        border: 1.5px solid #1e293b;
+        border-radius: 28px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 30px rgba(249, 115, 22, 0.12);
+        overflow: hidden;
       }
 
-      /* Window Header Bar */
-      .hub-window-header {
-        background: #1e293b;
-        border-bottom: 1.5px solid #334155;
-        padding: 10px 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
+      /* Full Page Ambient Orange Glow Effect */
+      .nav-hub-glow {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 720px;
+        height: 380px;
+        background: radial-gradient(ellipse at 50% 0%, rgba(249, 115, 22, 0.35) 0%, rgba(234, 88, 12, 0.14) 45%, transparent 72%);
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(12px);
       }
-      .hub-dots {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .hub-dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        display: inline-block;
-        cursor: pointer;
-        transition: transform 0.15s ease;
-      }
-      .hub-dot:hover {
-        transform: scale(1.15);
-      }
-      .hub-dot.red { background: #ef4444; }
-      .hub-dot.yellow { background: #eab308; }
-      .hub-dot.green { background: #22c55e; }
 
-      .hub-back-pill {
+      /* Header Banner */
+      .nav-hub-header {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin-bottom: 22px;
+        padding: 6px 4px 10px;
+      }
+      .nav-hub-badge {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
-        background: rgba(255, 255, 255, 0.12);
-        color: #fed7aa;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 999px;
-        padding: 3px 9px;
-        font-size: 11px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.15s ease;
-        margin-left: 6px;
-      }
-      .hub-back-pill:hover {
-        background: #ea580c;
-        color: #ffffff;
-        border-color: #ea580c;
-        transform: scale(1.05);
-      }
-
-      .hub-header-tabs {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        background: linear-gradient(135deg, rgba(234, 88, 12, 0.22) 0%, rgba(249, 115, 22, 0.35) 100%);
-        border: 1px solid rgba(249, 115, 22, 0.5);
-        border-radius: 999px;
-        padding: 3px 6px;
-        overflow-x: auto;
-        scrollbar-width: none;
-      }
-      .hub-header-tabs::-webkit-scrollbar {
-        display: none;
-      }
-      .hub-header-tab {
-        background: transparent;
-        border: none;
-        color: #fed7aa;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 3px 10px;
-        border-radius: 999px;
-        cursor: pointer;
-        transition: all 0.15s ease;
-        white-space: nowrap;
-      }
-      .hub-header-tab.active,
-      .hub-header-tab:hover {
-        background: #ea580c;
-        color: #ffffff;
-      }
-
-      .hub-header-actions {
-        display: flex;
-        align-items: center;
         gap: 6px;
-      }
-      .hub-action-btn {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        color: #e2e8f0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        cursor: pointer;
-        transition: all 0.15s ease;
-      }
-      .hub-action-btn:hover {
-        background: #ef4444;
-        color: #ffffff;
-        border-color: #ef4444;
-        transform: scale(1.08);
-      }
-
-      /* Hub Body Area */
-      .hub-body {
-        padding: 14px 12px 18px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      /* Floating Orange Search Bar */
-      .hub-search-container {
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-        border-radius: 16px;
-        padding: 8px 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35), 0 2px 0 #9a3412;
-      }
-      .hub-search-input-wrapper {
-        flex: 1;
-        position: relative;
-        display: flex;
-        align-items: center;
-      }
-      .hub-search-input {
-        width: 100%;
-        background: #ffffff;
-        border: 2px solid transparent;
-        border-radius: 12px;
-        padding: 9px 12px 9px 34px;
-        font-size: 13.5px;
-        font-weight: 600;
-        color: #0f172a;
-        outline: none;
-        transition: border-color 0.15s ease;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-      .hub-search-input:focus {
-        border-color: #0f172a;
-      }
-      .hub-search-icon {
-        position: absolute;
-        left: 10px;
-        font-size: 14px;
-        pointer-events: none;
-        color: #64748b;
-      }
-      .hub-search-btn {
-        background: #0f172a;
-        color: #ffffff;
-        border: none;
-        border-radius: 10px;
-        padding: 9px 16px;
-        font-size: 13px;
+        background: linear-gradient(135deg, rgba(234, 88, 12, 0.22) 0%, rgba(249, 115, 22, 0.32) 100%);
+        border: 1.5px solid rgba(249, 115, 22, 0.6);
+        color: #fdba74;
+        font-size: 11px;
         font-weight: 800;
-        cursor: pointer;
-        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
-        transition: all 0.15s ease;
-        white-space: nowrap;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 4px 14px;
+        border-radius: 999px;
+        box-shadow: 0 4px 14px rgba(234, 88, 12, 0.25);
+        margin-bottom: 8px;
       }
-      .hub-search-btn:hover {
-        background: #1e293b;
-        transform: translateY(-1px);
+      .nav-hub-title {
+        font-size: 25px;
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        margin: 0 0 5px 0;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
       }
-      .hub-search-btn:active {
-        transform: translateY(1px);
+      .nav-hub-sub {
+        font-size: 13px;
+        color: #94a3b8;
+        font-weight: 500;
+        margin: 0;
       }
 
       /* Cards Grid */
       .hub-cards-grid {
+        position: relative;
+        z-index: 1;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 14px;
       }
-      @media (min-width: 620px) {
+      @media (min-width: 640px) {
         .hub-cards-grid {
           grid-template-columns: repeat(3, 1fr);
-          gap: 14px;
+          gap: 16px;
+        }
+      }
+      @media (max-width: 440px) {
+        .hub-cards-grid {
+          gap: 10px;
         }
       }
 
-      /* Hub Card */
+      /* Sleek Dark Card Matching User's Reference Screenshot */
       .hub-card {
-        background: #1e293b;
-        border: 1.5px solid #334155;
-        border-radius: 16px;
-        padding: 14px 12px;
+        background: #131c2e;
+        border: 1.5px solid #253349;
+        border-radius: 18px;
+        padding: 16px 14px 14px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         gap: 10px;
         cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
         text-align: left;
         user-select: none;
         -webkit-tap-highlight-color: transparent;
         position: relative;
-        overflow: hidden;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
       }
       .hub-card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-4px);
         border-color: #f97316;
-        background: #243048;
-        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.22);
+        background: #18243b;
+        box-shadow: 0 12px 28px rgba(249, 115, 22, 0.22), 0 0 0 1px rgba(249, 115, 22, 0.4);
       }
       .hub-card:active {
         transform: translateY(1.5px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
       .hub-card-top {
         display: flex;
@@ -1527,129 +1417,65 @@
         gap: 6px;
       }
       .hub-card-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 11px;
-        background: rgba(249, 115, 22, 0.15);
-        border: 1px solid rgba(249, 115, 22, 0.35);
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        background: rgba(249, 115, 22, 0.12);
+        border: 1.5px solid rgba(249, 115, 22, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
+        font-size: 22px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.2s ease;
       }
       .hub-card:hover .hub-card-icon {
         transform: scale(1.1) rotate(4deg);
-        background: rgba(249, 115, 22, 0.28);
+        background: rgba(249, 115, 22, 0.24);
+        border-color: #f97316;
       }
       .hub-card-badge {
         font-size: 9.5px;
-        font-weight: 700;
+        font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.3px;
+        letter-spacing: 0.6px;
         color: #94a3b8;
-        background: #0f172a;
-        padding: 3px 7px;
+        background: #0b1320;
+        padding: 4px 9px;
         border-radius: 999px;
-        border: 1px solid #334155;
+        border: 1px solid #1e293b;
       }
       .hub-card-title {
-        font-size: 13.5px;
+        font-size: 15.5px;
         font-weight: 800;
-        color: #f8fafc;
+        color: #ffffff;
         line-height: 1.25;
+        margin-top: 4px;
       }
       .hub-card-desc {
-        font-size: 11px;
+        font-size: 11.5px;
         color: #94a3b8;
-        line-height: 1.35;
+        line-height: 1.4;
+        margin-top: 3px;
       }
       .hub-card-footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding-top: 6px;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
       }
       .hub-card-action {
-        font-size: 11px;
-        font-weight: 700;
-        color: #fb923c;
+        font-size: 12.5px;
+        font-weight: 800;
+        color: #f97316;
         display: flex;
         align-items: center;
         gap: 4px;
-        transition: color 0.15s ease;
+        transition: all 0.15s ease;
       }
       .hub-card:hover .hub-card-action {
-        color: #ffedd5;
-      }
-
-      /* Orange Bottom Pagination Bar */
-      .hub-pagination {
-        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
-        border-radius: 16px;
-        padding: 6px 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin: 4px auto 0;
-        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35), 0 2px 0 #9a3412;
-        width: fit-content;
-        max-width: 100%;
-        user-select: none;
-      }
-      .hub-page-btn {
-        background: transparent;
-        border: none;
-        color: #ffffff;
-        font-size: 14px;
-        font-weight: 800;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.15s ease;
-      }
-      .hub-page-btn:hover:not(:disabled) {
-        background: rgba(0, 0, 0, 0.2);
-        transform: scale(1.08);
-      }
-      .hub-page-btn:disabled {
-        opacity: 0.35;
-        cursor: not-allowed;
-      }
-      .hub-page-pill {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 800;
-        color: #ffffff;
-        cursor: pointer;
-        transition: all 0.15s ease;
-        background: transparent;
-        border: none;
-      }
-      .hub-page-pill:hover {
-        background: rgba(0, 0, 0, 0.15);
-      }
-      .hub-page-pill.active {
-        background: #ffffff;
-        color: #ea580c;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      }
-      .hub-page-pill.all-pill {
-        width: auto;
-        padding: 0 10px;
-        border-radius: 999px;
+        color: #fdba74;
+        transform: translateX(2px);
       }
 
       /* Floating Nav Pill with Breathing Pulse Glow & Compass Spin */
@@ -6379,240 +6205,201 @@
       </div>
 
       <div id="content-area">
-        <!-- MASTER NAVIGATOR HUB TAB (MATCHING REFERENCE DESIGN) -->
+        <!-- MASTER NAVIGATOR HUB TAB (CLEAN FULL PAGE WITH ORANGE GLOW) -->
         <div class="tab-content active" id="tab-navigator">
-          <div class="hub-window">
-            <!-- Top macOS-style window header -->
-            <div class="hub-window-header">
-              <div class="hub-dots">
-                <span class="hub-dot red" title="Close" onclick="closeNavigatorHub()"></span>
-                <span class="hub-dot yellow" title="Minimize" onclick="closeNavigatorHub()"></span>
-                <span class="hub-dot green" title="Maximize"></span>
-                <button type="button" class="hub-back-pill" onclick="closeNavigatorHub()" title="Back to previous page">
-                  <span>←</span> Back
-                </button>
+          <div class="nav-hub-wrapper">
+            <!-- Full Page Ambient Orange Glow -->
+            <div class="nav-hub-glow"></div>
+
+            <!-- Header -->
+            <div class="nav-hub-header">
+              <div class="nav-hub-badge">
+                <span>🧭</span> All Navigators
               </div>
-              <div class="hub-header-tabs">
-                <button type="button" class="hub-header-tab active" data-cat="all" onclick="filterHubCategory('all', this)">All</button>
-                <button type="button" class="hub-header-tab" data-cat="routine" onclick="filterHubCategory('routine', this)">Routine</button>
-                <button type="button" class="hub-header-tab" data-cat="study" onclick="filterHubCategory('study', this)">Study</button>
-                <button type="button" class="hub-header-tab" data-cat="lifestyle" onclick="filterHubCategory('lifestyle', this)">Lifestyle</button>
-              </div>
-              <div class="hub-header-actions">
-                <button type="button" class="hub-action-btn" onclick="filterHubCategory('all')" title="Reset Filters">⠇</button>
-                <button type="button" class="hub-action-btn" onclick="closeNavigatorHub()" title="Close Navigator">✕</button>
-              </div>
+              <h1 class="nav-hub-title">Daily Launchpad</h1>
+              <p class="nav-hub-sub">Select any tool or tracker below to begin</p>
             </div>
 
-            <!-- Hub Body -->
-            <div class="hub-body">
-              <!-- Floating Orange Search Bar -->
-              <div class="hub-search-container">
-                <div class="hub-search-input-wrapper">
-                  <span class="hub-search-icon">🔍</span>
-                  <input
-                    type="text"
-                    class="hub-search-input"
-                    id="hubSearchInput"
-                    placeholder="Type something..."
-                    autocomplete="off"
-                    oninput="filterHubCards()"
-                    onkeydown="if(event.key==='Enter') filterHubCards()"
-                  />
+            <!-- Sleek Cards Grid (Matching User's Screenshot) -->
+            <div class="hub-cards-grid" id="hubCardsGrid">
+              <!-- Card 1: Schedule -->
+              <div class="hub-card" onclick="switchTab('schedule')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">⏰</span>
+                  <span class="hub-card-badge">DAILY</span>
                 </div>
-                <button type="button" class="hub-search-btn" onclick="filterHubCards()">Search</button>
-              </div>
-
-              <!-- Sleek Cards Grid -->
-              <div class="hub-cards-grid" id="hubCardsGrid">
-                <!-- Card 1 -->
-                <div class="hub-card" data-category="routine" data-keywords="schedule daily timetable alarm morning evening prayer" onclick="switchTab('schedule')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">⏰</span>
-                    <span class="hub-card-badge">Daily</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">Schedule</div>
-                    <div class="hub-card-desc">Daily timetable, routines & prayer alerts</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
+                <div>
+                  <div class="hub-card-title">Schedule</div>
+                  <div class="hub-card-desc">Daily timetable, routines &amp; prayer alerts</div>
                 </div>
-
-                <!-- Card 2 -->
-                <div class="hub-card" data-category="routine" data-keywords="tracker habit water hydration medication exercise chores" onclick="switchTab('water')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">✅</span>
-                    <span class="hub-card-badge">Habits</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">Tracker</div>
-                    <div class="hub-card-desc">Hydration, habits, medicine & daily chores</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="hub-card" data-category="study" data-keywords="3x week weekly zad uq lecture classes study" onclick="switchTab('week')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">📅</span>
-                    <span class="hub-card-badge">3x/Week</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">3x/Week</div>
-                    <div class="hub-card-desc">Zad Academy & Understand Quran courses</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="hub-card" data-category="routine" data-keywords="history logs past archive daily completed" onclick="switchTab('history')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">📜</span>
-                    <span class="hub-card-badge">Archive</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">History</div>
-                    <div class="hub-card-desc">Past 30 days completed routine logs</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="hub-card" data-category="lifestyle" data-keywords="period cycle ovulation cycle tracker women health" onclick="switchTab('period')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">🩸</span>
-                    <span class="hub-card-badge">Health</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">Period</div>
-                    <div class="hub-card-desc">Cycle tracking, countdown & cycle stats</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="hub-card" data-category="lifestyle" data-keywords="recipe food cooking grocery ingredients kitchen dishes" onclick="switchTab('recipe')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">🍳</span>
-                    <span class="hub-card-badge">Kitchen</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">Recipe</div>
-                    <div class="hub-card-desc">Cookbook studio, ingredients & groceries</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 7: English Studio -->
-                <div class="hub-card" data-category="study" data-keywords="english grammar vocab phonics b1 routine learning studio" onclick="switchTab('english')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">🔤</span>
-                    <span class="hub-card-badge">Study</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">English Studio</div>
-                    <div class="hub-card-desc">B1 English routine, phonics & vocabulary</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 7b: English Test -->
-                <div class="hub-card" data-category="study" data-keywords="english test quiz exam assessment grammar level b1 b2 questions" onclick="switchTab('englishtest')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon" style="background: rgba(147, 51, 234, 0.2); border-color: rgba(147, 51, 234, 0.4);">📝</span>
-                    <span class="hub-card-badge" style="color: #c084fc; border-color: #9333ea;">Exam</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">English Test</div>
-                    <div class="hub-card-desc">CEFR level assessment, grammar & vocabulary exam</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action" style="color: #c084fc;">Take Test ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 7c: Math Test -->
-                <div class="hub-card" data-category="study" data-keywords="math test grocery calculation grams kg discount change cash mental exam" onclick="switchTab('mathtest')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4);">🧮</span>
-                    <span class="hub-card-badge" style="color: #6ee7b7; border-color: #10b981;">Maths</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">Math Test</div>
-                    <div class="hub-card-desc">Everyday grocery, grams, cash & discount challenges</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action" style="color: #6ee7b7;">Start Quiz ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="hub-card" data-category="lifestyle" data-keywords="duaa prayers supplications dhikr notes book" onclick="switchTab('notes')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">🤲</span>
-                    <span class="hub-card-badge">Spiritual</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">Duaa Book</div>
-                    <div class="hub-card-desc">Daily duas, Arabic calligraphy & translations</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 9 -->
-                <div class="hub-card" data-category="study" data-keywords="pdf reader flipbook 3d books library document" onclick="switchTab('pdf')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">📖</span>
-                    <span class="hub-card-badge">Books</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">PDF Reader</div>
-                    <div class="hub-card-desc">3D flipbook library & interactive book reader</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
-                </div>
-
-                <!-- Card 10 -->
-                <div class="hub-card" data-category="routine" data-keywords="summary analytics report charts completion day" onclick="switchTab('summary')">
-                  <div class="hub-card-top">
-                    <span class="hub-card-icon">📊</span>
-                    <span class="hub-card-badge">Analytics</span>
-                  </div>
-                  <div>
-                    <div class="hub-card-title">Summary</div>
-                    <div class="hub-card-desc">Daily achievements, percentages & stats</div>
-                  </div>
-                  <div class="hub-card-footer">
-                    <span class="hub-card-action">Open ➔</span>
-                  </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
                 </div>
               </div>
 
-              <!-- Vibrant Orange Bottom Pagination Bar -->
-              <div class="hub-pagination">
-                <button type="button" class="hub-page-btn" id="hubPrevPageBtn" onclick="changeHubPage(-1)" title="Previous Page">←</button>
-                <button type="button" class="hub-page-pill active" id="hubPageBtn-1" onclick="setHubPage(1)">1</button>
-                <button type="button" class="hub-page-pill" id="hubPageBtn-2" onclick="setHubPage(2)">2</button>
-                <button type="button" class="hub-page-pill all-pill" id="hubPageBtn-all" onclick="setHubPage('all')">All</button>
-                <button type="button" class="hub-page-btn" id="hubNextPageBtn" onclick="changeHubPage(1)" title="Next Page">→</button>
+              <!-- Card 2: Tracker -->
+              <div class="hub-card" onclick="switchTab('water')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">✅</span>
+                  <span class="hub-card-badge">HABITS</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">Tracker</div>
+                  <div class="hub-card-desc">Hydration, habits, medicine &amp; daily chores</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 3: 3x/Week -->
+              <div class="hub-card" onclick="switchTab('week')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">📅</span>
+                  <span class="hub-card-badge">3X/WEEK</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">3x/Week</div>
+                  <div class="hub-card-desc">Zad Academy &amp; Understand Quran courses</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 4: History -->
+              <div class="hub-card" onclick="switchTab('history')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">📜</span>
+                  <span class="hub-card-badge">ARCHIVE</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">History</div>
+                  <div class="hub-card-desc">Past 30 days completed routine logs</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 5: Period -->
+              <div class="hub-card" onclick="switchTab('period')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">🩸</span>
+                  <span class="hub-card-badge">HEALTH</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">Period</div>
+                  <div class="hub-card-desc">Cycle tracking, countdown &amp; cycle stats</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 6: Recipe -->
+              <div class="hub-card" onclick="switchTab('recipe')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">🍳</span>
+                  <span class="hub-card-badge">KITCHEN</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">Recipe</div>
+                  <div class="hub-card-desc">Cookbook studio, ingredients &amp; groceries</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 7: English Studio -->
+              <div class="hub-card" onclick="switchTab('english')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">🔤</span>
+                  <span class="hub-card-badge">STUDY</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">English Studio</div>
+                  <div class="hub-card-desc">Grammar, phonics &amp; reading sessions</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 8: English Test -->
+              <div class="hub-card" onclick="switchTab('englishtest')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon" style="background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.4);">📝</span>
+                  <span class="hub-card-badge">EXAM</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">English Test</div>
+                  <div class="hub-card-desc">CEFR level assessment &amp; grammar test</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 9: Math Test -->
+              <div class="hub-card" onclick="switchTab('mathtest')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4);">🧮</span>
+                  <span class="hub-card-badge">PRACTICAL</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">Math Test</div>
+                  <div class="hub-card-desc">Grams, cash change &amp; discount math</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 10: Duaa Book -->
+              <div class="hub-card" onclick="switchTab('notes')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">🤲</span>
+                  <span class="hub-card-badge">SPIRITUAL</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">Duaa Book</div>
+                  <div class="hub-card-desc">Daily duas, Arabic calligraphy &amp; translations</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 11: PDF Reader -->
+              <div class="hub-card" onclick="switchTab('pdf')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">📖</span>
+                  <span class="hub-card-badge">LIBRARY</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">PDF Reader</div>
+                  <div class="hub-card-desc">3D flipbook library &amp; interactive book reader</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
+              </div>
+
+              <!-- Card 12: Summary -->
+              <div class="hub-card" onclick="switchTab('summary')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">📊</span>
+                  <span class="hub-card-badge">ANALYTICS</span>
+                </div>
+                <div>
+                  <div class="hub-card-title">Summary</div>
+                  <div class="hub-card-desc">Daily achievements, percentages &amp; stats</div>
+                </div>
+                <div class="hub-card-footer">
+                  <span class="hub-card-action">Open ➔</span>
+                </div>
               </div>
             </div>
           </div>
@@ -11790,73 +11577,14 @@
         switchTab(previousActiveTab && previousActiveTab !== "navigator" ? previousActiveTab : "schedule");
       }
 
-      function filterHubCategory(cat, btn) {
-        hubCurrentCategory = cat || "all";
-        document.querySelectorAll(".hub-header-tab").forEach((b) => b.classList.remove("active"));
-        if (btn) btn.classList.add("active");
-        else {
-          const matchBtn = document.querySelector(`.hub-header-tab[data-cat="${cat}"]`);
-          if (matchBtn) matchBtn.classList.add("active");
-        }
-        hubCurrentPage = 1;
-        updateHubCardsDisplay();
-      }
-
-      function filterHubCards() {
-        hubCurrentPage = "all";
-        updateHubCardsDisplay();
-      }
-
-      function setHubPage(page) {
-        hubCurrentPage = page;
-        updateHubCardsDisplay();
-      }
-
-      function changeHubPage(delta) {
-        if (hubCurrentPage === "all") {
-          hubCurrentPage = delta > 0 ? 2 : 1;
-        } else {
-          hubCurrentPage = Math.max(1, Math.min(2, hubCurrentPage + delta));
-        }
-        updateHubCardsDisplay();
-      }
+      function filterHubCategory(cat, btn) {}
+      function filterHubCards() {}
+      function setHubPage(page) {}
+      function changeHubPage(delta) {}
 
       function updateHubCardsDisplay() {
-        const input = document.getElementById("hubSearchInput");
-        const query = (input ? input.value : "").trim().toLowerCase();
-        const cards = Array.from(document.querySelectorAll("#hubCardsGrid .hub-card"));
-
-        // Match category & query
-        const matchingCards = cards.filter((card) => {
-          const cat = card.getAttribute("data-category") || "";
-          const kw = (card.getAttribute("data-keywords") || "").toLowerCase();
-          const text = (card.innerText || "").toLowerCase();
-          const matchCat = (hubCurrentCategory === "all" || cat === hubCurrentCategory);
-          const matchQuery = !query || kw.includes(query) || text.includes(query);
-          return matchCat && matchQuery;
-        });
-
-        // Hide all first
-        cards.forEach((c) => (c.style.display = "none"));
-
-        // Apply pagination
-        let visibleCards = matchingCards;
-        if (!query && hubCurrentPage !== "all") {
-          const start = (hubCurrentPage - 1) * HUB_ITEMS_PER_PAGE;
-          visibleCards = matchingCards.slice(start, start + HUB_ITEMS_PER_PAGE);
-        }
-
-        visibleCards.forEach((c) => (c.style.display = "flex"));
-
-        // Update pagination buttons state
-        document.querySelectorAll(".hub-page-pill").forEach((p) => p.classList.remove("active"));
-        const activePill = document.getElementById(`hubPageBtn-${hubCurrentPage}`);
-        if (activePill) activePill.classList.add("active");
-
-        const prevBtn = document.getElementById("hubPrevPageBtn");
-        const nextBtn = document.getElementById("hubNextPageBtn");
-        if (prevBtn) prevBtn.disabled = hubCurrentPage === 1 || hubCurrentPage === "all";
-        if (nextBtn) nextBtn.disabled = hubCurrentPage === 2 || hubCurrentPage === "all";
+        const cards = document.querySelectorAll("#hubCardsGrid .hub-card");
+        cards.forEach((c) => (c.style.display = "flex"));
       }
 
       const TAB_DISPLAY_NAMES = {
