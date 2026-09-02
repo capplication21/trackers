@@ -1232,115 +1232,345 @@
         }
       }
 
-      /* ==================== NAVIGATOR-ONLY PAGE STYLES & EFFECTS ==================== */
-      .navigator-title {
-        background: linear-gradient(135deg, #ede9fe 0%, #fae8ff 100%);
-        color: #5b21b6;
-        border-color: #8b5cf6;
-        box-shadow: 0 3px 12px rgba(139, 92, 246, 0.15);
+      /* ==================== NAVIGATOR HUB (MATCHING REFERENCE DESIGN) ==================== */
+      .hub-window {
+        background: #0f172a;
+        border: 2px solid #334155;
+        border-radius: 22px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+        margin: 10px auto 26px;
+        max-width: 680px;
+        color: #f8fafc;
+        animation: navGridFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .nav-only-container {
-        max-width: 580px;
-        margin: 16px auto 30px;
-        padding: 0 8px;
+
+      /* Window Header Bar */
+      .hub-window-header {
+        background: #1e293b;
+        border-bottom: 1.5px solid #334155;
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
       }
-      .nav-only-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-        animation: navGridFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      .hub-dots {
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
-      @media (min-width: 600px) {
-        .nav-only-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-        }
+      .hub-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        transition: transform 0.15s ease;
       }
-      .nav-tile-btn {
+      .hub-dot:hover {
+        transform: scale(1.15);
+      }
+      .hub-dot.red { background: #ef4444; }
+      .hub-dot.yellow { background: #eab308; }
+      .hub-dot.green { background: #22c55e; }
+
+      .hub-header-tabs {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: linear-gradient(135deg, rgba(234, 88, 12, 0.22) 0%, rgba(249, 115, 22, 0.35) 100%);
+        border: 1px solid rgba(249, 115, 22, 0.5);
+        border-radius: 999px;
+        padding: 3px 6px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .hub-header-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .hub-header-tab {
+        background: transparent;
+        border: none;
+        color: #fed7aa;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+      .hub-header-tab.active,
+      .hub-header-tab:hover {
+        background: #ea580c;
+        color: #ffffff;
+      }
+
+      .hub-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .hub-action-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .hub-action-btn:hover {
+        background: #ef4444;
+        color: #ffffff;
+        border-color: #ef4444;
+        transform: scale(1.08);
+      }
+
+      /* Hub Body Area */
+      .hub-body {
+        padding: 14px 12px 18px;
         display: flex;
         flex-direction: column;
+        gap: 14px;
+      }
+
+      /* Floating Orange Search Bar */
+      .hub-search-container {
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        border-radius: 16px;
+        padding: 8px 10px;
+        display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 18px 12px 16px;
-        background: #ffffff;
-        border: 2.5px solid var(--ink);
-        border-radius: 20px;
-        box-shadow: 0 4px 0 var(--ink);
-        cursor: pointer;
-        font-family: inherit;
+        gap: 8px;
+        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35), 0 2px 0 #9a3412;
+      }
+      .hub-search-input-wrapper {
+        flex: 1;
         position: relative;
-        overflow: hidden;
-        transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                    box-shadow 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
-                    background-color 0.2s ease,
-                    border-color 0.2s ease;
-        text-align: center;
+        display: flex;
+        align-items: center;
+      }
+      .hub-search-input {
+        width: 100%;
+        background: #ffffff;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        padding: 9px 12px 9px 34px;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #0f172a;
+        outline: none;
+        transition: border-color 0.15s ease;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      .hub-search-input:focus {
+        border-color: #0f172a;
+      }
+      .hub-search-icon {
+        position: absolute;
+        left: 10px;
+        font-size: 14px;
+        pointer-events: none;
+        color: #64748b;
+      }
+      .hub-search-btn {
+        background: #0f172a;
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        padding: 9px 16px;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+        transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+      .hub-search-btn:hover {
+        background: #1e293b;
+        transform: translateY(-1px);
+      }
+      .hub-search-btn:active {
+        transform: translateY(1px);
+      }
+
+      /* Cards Grid */
+      .hub-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      @media (min-width: 620px) {
+        .hub-cards-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+        }
+      }
+
+      /* Hub Card */
+      .hub-card {
+        background: #1e293b;
+        border: 1.5px solid #334155;
+        border-radius: 16px;
+        padding: 14px 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-align: left;
         user-select: none;
         -webkit-tap-highlight-color: transparent;
+        position: relative;
+        overflow: hidden;
       }
-
-      /* Shimmer sweep effect on hover */
-      .nav-tile-btn::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -60%;
-        width: 40%;
-        height: 200%;
-        background: linear-gradient(
-          to right,
-          rgba(255, 255, 255, 0) 0%,
-          rgba(255, 255, 255, 0.6) 50%,
-          rgba(255, 255, 255, 0) 100%
-        );
-        transform: rotate(25deg);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+      .hub-card:hover {
+        transform: translateY(-3px);
+        border-color: #f97316;
+        background: #243048;
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.22);
       }
-      .nav-tile-btn:hover::after {
-        opacity: 1;
-        animation: navShimmerSweep 0.75s ease-out;
+      .hub-card:active {
+        transform: translateY(1.5px);
       }
-
-      .nav-tile-btn:hover {
-        transform: translateY(-4px) scale(1.02);
-        box-shadow: 0 7px 0 var(--ink), 0 10px 20px rgba(0, 0, 0, 0.08);
-        background: var(--tile-hover-bg, #fdf4ff);
+      .hub-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
       }
-      .nav-tile-btn:active {
-        transform: translateY(2px) scale(0.97);
-        box-shadow: 0 1.5px 0 var(--ink);
-      }
-
-      .nav-tile-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 15px;
-        border: 2px solid var(--ink);
+      .hub-card-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: rgba(249, 115, 22, 0.15);
+        border: 1px solid rgba(249, 115, 22, 0.35);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 25px;
-        box-shadow: 0 2.5px 0 var(--ink);
-        transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+        font-size: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease;
       }
-      .nav-tile-btn:hover .nav-tile-icon {
-        transform: scale(1.12) rotate(6deg);
-        box-shadow: 0 4px 0 var(--ink);
+      .hub-card:hover .hub-card-icon {
+        transform: scale(1.1) rotate(4deg);
+        background: rgba(249, 115, 22, 0.28);
       }
-
-      .nav-tile-label {
+      .hub-card-badge {
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        color: #94a3b8;
+        background: #0f172a;
+        padding: 3px 7px;
+        border-radius: 999px;
+        border: 1px solid #334155;
+      }
+      .hub-card-title {
         font-size: 13.5px;
         font-weight: 800;
-        color: #0f172a;
+        color: #f8fafc;
         line-height: 1.25;
-        letter-spacing: -0.2px;
+      }
+      .hub-card-desc {
+        font-size: 11px;
+        color: #94a3b8;
+        line-height: 1.35;
+      }
+      .hub-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 6px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .hub-card-action {
+        font-size: 11px;
+        font-weight: 700;
+        color: #fb923c;
+        display: flex;
+        align-items: center;
+        gap: 4px;
         transition: color 0.15s ease;
       }
-      .nav-tile-btn:hover .nav-tile-label {
-        color: var(--tile-hover-color, #4338ca);
+      .hub-card:hover .hub-card-action {
+        color: #ffedd5;
+      }
+
+      /* Orange Bottom Pagination Bar */
+      .hub-pagination {
+        background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+        border-radius: 16px;
+        padding: 6px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 4px auto 0;
+        box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35), 0 2px 0 #9a3412;
+        width: fit-content;
+        max-width: 100%;
+        user-select: none;
+      }
+      .hub-page-btn {
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 800;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .hub-page-btn:hover:not(:disabled) {
+        background: rgba(0, 0, 0, 0.2);
+        transform: scale(1.08);
+      }
+      .hub-page-btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .hub-page-pill {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 800;
+        color: #ffffff;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        background: transparent;
+        border: none;
+      }
+      .hub-page-pill:hover {
+        background: rgba(0, 0, 0, 0.15);
+      }
+      .hub-page-pill.active {
+        background: #ffffff;
+        color: #ea580c;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+      .hub-page-pill.all-pill {
+        width: auto;
+        padding: 0 10px;
+        border-radius: 999px;
       }
 
       /* Floating Nav Pill with Breathing Pulse Glow & Compass Spin */
@@ -5802,53 +6032,208 @@
 
       <div id="content-area">
         <!-- MASTER NAVIGATOR HUB TAB -->
+        <!-- MASTER NAVIGATOR HUB TAB (MATCHING REFERENCE DESIGN) -->
         <div class="tab-content active" id="tab-navigator">
-          <div class="section-title navigator-title">
-            <span>🧭</span> ALL NAVIGATORS
-          </div>
+          <div class="hub-window">
+            <!-- Top macOS-style window header -->
+            <div class="hub-window-header">
+              <div class="hub-dots">
+                <span class="hub-dot red" title="Close" onclick="closeNavigatorHub()"></span>
+                <span class="hub-dot yellow" title="Minimize" onclick="closeNavigatorHub()"></span>
+                <span class="hub-dot green" title="Maximize"></span>
+              </div>
+              <div class="hub-header-tabs">
+                <button type="button" class="hub-header-tab active" data-cat="all" onclick="filterHubCategory('all', this)">All</button>
+                <button type="button" class="hub-header-tab" data-cat="routine" onclick="filterHubCategory('routine', this)">Routine</button>
+                <button type="button" class="hub-header-tab" data-cat="study" onclick="filterHubCategory('study', this)">Study</button>
+                <button type="button" class="hub-header-tab" data-cat="lifestyle" onclick="filterHubCategory('lifestyle', this)">Lifestyle</button>
+              </div>
+              <div class="hub-header-actions">
+                <button type="button" class="hub-action-btn" onclick="filterHubCategory('all')" title="Reset Filters">⠇</button>
+                <button type="button" class="hub-action-btn" onclick="closeNavigatorHub()" title="Close Navigator">✕</button>
+              </div>
+            </div>
 
-          <div class="nav-only-container">
-            <div class="nav-only-grid">
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #fff7ed; --tile-hover-color: #ea580c;" onclick="switchTab('schedule')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);">⏰</span>
-                <span class="nav-tile-label">Schedule</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #f0f9ff; --tile-hover-color: #0284c7;" onclick="switchTab('water')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);">✅</span>
-                <span class="nav-tile-label">Tracker</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #fefce8; --tile-hover-color: #ca8a04;" onclick="switchTab('week')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);">📅</span>
-                <span class="nav-tile-label">3x/Week</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #f8fafc; --tile-hover-color: #475569;" onclick="switchTab('history')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);">📜</span>
-                <span class="nav-tile-label">History</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #fff1f2; --tile-hover-color: #e11d48;" onclick="switchTab('period')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);">🩸</span>
-                <span class="nav-tile-label">Period</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #fef9c3; --tile-hover-color: #b45309;" onclick="switchTab('recipe')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);">🍳</span>
-                <span class="nav-tile-label">Recipe</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #fdf2f8; --tile-hover-color: #db2777;" onclick="switchTab('english')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);">🔤</span>
-                <span class="nav-tile-label">English</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #f0fdf4; --tile-hover-color: #16a34a;" onclick="switchTab('notes')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);">🤲</span>
-                <span class="nav-tile-label">Duaa</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #f5f3ff; --tile-hover-color: #7c3aed;" onclick="switchTab('pdf')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);">📖</span>
-                <span class="nav-tile-label">PDF Reader</span>
-              </button>
-              <button type="button" class="nav-tile-btn" style="--tile-hover-bg: #f0f9ff; --tile-hover-color: #0284c7;" onclick="switchTab('summary')">
-                <span class="nav-tile-icon" style="background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);">📊</span>
-                <span class="nav-tile-label">Summary</span>
-              </button>
+            <!-- Hub Body -->
+            <div class="hub-body">
+              <!-- Floating Orange Search Bar -->
+              <div class="hub-search-container">
+                <div class="hub-search-input-wrapper">
+                  <span class="hub-search-icon">🔍</span>
+                  <input
+                    type="text"
+                    class="hub-search-input"
+                    id="hubSearchInput"
+                    placeholder="Type something..."
+                    autocomplete="off"
+                    oninput="filterHubCards()"
+                    onkeydown="if(event.key==='Enter') filterHubCards()"
+                  />
+                </div>
+                <button type="button" class="hub-search-btn" onclick="filterHubCards()">Search</button>
+              </div>
+
+              <!-- Sleek Cards Grid -->
+              <div class="hub-cards-grid" id="hubCardsGrid">
+                <!-- Card 1 -->
+                <div class="hub-card" data-category="routine" data-keywords="schedule daily timetable alarm morning evening prayer" onclick="switchTab('schedule')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">⏰</span>
+                    <span class="hub-card-badge">Daily</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">Schedule</div>
+                    <div class="hub-card-desc">Daily timetable, routines & prayer alerts</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="hub-card" data-category="routine" data-keywords="tracker habit water hydration medication exercise chores" onclick="switchTab('water')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">✅</span>
+                    <span class="hub-card-badge">Habits</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">Tracker</div>
+                    <div class="hub-card-desc">Hydration, habits, medicine & daily chores</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="hub-card" data-category="study" data-keywords="3x week weekly zad uq lecture classes study" onclick="switchTab('week')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">📅</span>
+                    <span class="hub-card-badge">3x/Week</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">3x/Week</div>
+                    <div class="hub-card-desc">Zad Academy & Understand Quran courses</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="hub-card" data-category="routine" data-keywords="history logs past archive daily completed" onclick="switchTab('history')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">📜</span>
+                    <span class="hub-card-badge">Archive</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">History</div>
+                    <div class="hub-card-desc">Past 30 days completed routine logs</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="hub-card" data-category="lifestyle" data-keywords="period cycle ovulation cycle tracker women health" onclick="switchTab('period')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">🩸</span>
+                    <span class="hub-card-badge">Health</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">Period</div>
+                    <div class="hub-card-desc">Cycle tracking, countdown & cycle stats</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="hub-card" data-category="lifestyle" data-keywords="recipe food cooking grocery ingredients kitchen dishes" onclick="switchTab('recipe')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">🍳</span>
+                    <span class="hub-card-badge">Kitchen</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">Recipe</div>
+                    <div class="hub-card-desc">Cookbook studio, ingredients & groceries</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="hub-card" data-category="study" data-keywords="english grammar vocab phonics b1 daily maths grocery suite" onclick="switchTab('english')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">🔤</span>
+                    <span class="hub-card-badge">Study</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">English & Maths</div>
+                    <div class="hub-card-desc">B1 English fluency & practical maths suite</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="hub-card" data-category="lifestyle" data-keywords="duaa prayers supplications dhikr notes book" onclick="switchTab('notes')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">🤲</span>
+                    <span class="hub-card-badge">Spiritual</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">Duaa Book</div>
+                    <div class="hub-card-desc">Daily duas, Arabic calligraphy & translations</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="hub-card" data-category="study" data-keywords="pdf reader flipbook 3d books library document" onclick="switchTab('pdf')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">📖</span>
+                    <span class="hub-card-badge">Books</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">PDF Reader</div>
+                    <div class="hub-card-desc">3D flipbook library & interactive book reader</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 10 -->
+                <div class="hub-card" data-category="routine" data-keywords="summary analytics report charts completion day" onclick="switchTab('summary')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon">📊</span>
+                    <span class="hub-card-badge">Analytics</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">Summary</div>
+                    <div class="hub-card-desc">Daily achievements, percentages & stats</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Vibrant Orange Bottom Pagination Bar -->
+              <div class="hub-pagination">
+                <button type="button" class="hub-page-btn" id="hubPrevPageBtn" onclick="changeHubPage(-1)" title="Previous Page">←</button>
+                <button type="button" class="hub-page-pill active" id="hubPageBtn-1" onclick="setHubPage(1)">1</button>
+                <button type="button" class="hub-page-pill" id="hubPageBtn-2" onclick="setHubPage(2)">2</button>
+                <button type="button" class="hub-page-pill all-pill" id="hubPageBtn-all" onclick="setHubPage('all')">All</button>
+                <button type="button" class="hub-page-btn" id="hubNextPageBtn" onclick="changeHubPage(1)" title="Next Page">→</button>
+              </div>
             </div>
           </div>
         </div>
@@ -11536,7 +11921,89 @@
         switchTab("english");
       }
 
+      // ==================== NAVIGATOR HUB LOGIC ====================
+      let previousActiveTab = "schedule";
+      let hubCurrentCategory = "all";
+      let hubCurrentPage = 1;
+      const HUB_ITEMS_PER_PAGE = 6;
+
+      function closeNavigatorHub() {
+        switchTab(previousActiveTab && previousActiveTab !== "navigator" ? previousActiveTab : "schedule");
+      }
+
+      function filterHubCategory(cat, btn) {
+        hubCurrentCategory = cat || "all";
+        document.querySelectorAll(".hub-header-tab").forEach((b) => b.classList.remove("active"));
+        if (btn) btn.classList.add("active");
+        else {
+          const matchBtn = document.querySelector(`.hub-header-tab[data-cat="${cat}"]`);
+          if (matchBtn) matchBtn.classList.add("active");
+        }
+        hubCurrentPage = 1;
+        updateHubCardsDisplay();
+      }
+
+      function filterHubCards() {
+        hubCurrentPage = "all";
+        updateHubCardsDisplay();
+      }
+
+      function setHubPage(page) {
+        hubCurrentPage = page;
+        updateHubCardsDisplay();
+      }
+
+      function changeHubPage(delta) {
+        if (hubCurrentPage === "all") {
+          hubCurrentPage = delta > 0 ? 2 : 1;
+        } else {
+          hubCurrentPage = Math.max(1, Math.min(2, hubCurrentPage + delta));
+        }
+        updateHubCardsDisplay();
+      }
+
+      function updateHubCardsDisplay() {
+        const input = document.getElementById("hubSearchInput");
+        const query = (input ? input.value : "").trim().toLowerCase();
+        const cards = Array.from(document.querySelectorAll("#hubCardsGrid .hub-card"));
+
+        // Match category & query
+        const matchingCards = cards.filter((card) => {
+          const cat = card.getAttribute("data-category") || "";
+          const kw = (card.getAttribute("data-keywords") || "").toLowerCase();
+          const text = (card.innerText || "").toLowerCase();
+          const matchCat = (hubCurrentCategory === "all" || cat === hubCurrentCategory);
+          const matchQuery = !query || kw.includes(query) || text.includes(query);
+          return matchCat && matchQuery;
+        });
+
+        // Hide all first
+        cards.forEach((c) => (c.style.display = "none"));
+
+        // Apply pagination
+        let visibleCards = matchingCards;
+        if (!query && hubCurrentPage !== "all") {
+          const start = (hubCurrentPage - 1) * HUB_ITEMS_PER_PAGE;
+          visibleCards = matchingCards.slice(start, start + HUB_ITEMS_PER_PAGE);
+        }
+
+        visibleCards.forEach((c) => (c.style.display = "flex"));
+
+        // Update pagination buttons state
+        document.querySelectorAll(".hub-page-pill").forEach((p) => p.classList.remove("active"));
+        const activePill = document.getElementById(`hubPageBtn-${hubCurrentPage}`);
+        if (activePill) activePill.classList.add("active");
+
+        const prevBtn = document.getElementById("hubPrevPageBtn");
+        const nextBtn = document.getElementById("hubNextPageBtn");
+        if (prevBtn) prevBtn.disabled = hubCurrentPage === 1 || hubCurrentPage === "all";
+        if (nextBtn) nextBtn.disabled = hubCurrentPage === 2 || hubCurrentPage === "all";
+      }
+
       function switchTab(tabName) {
+        if (tabName !== "navigator") {
+          previousActiveTab = tabName;
+        }
         document
           .querySelectorAll(".tab-content")
           .forEach((content) => content.classList.remove("active"));
@@ -11552,6 +12019,9 @@
           floatingBtn.style.display = tabName === "navigator" ? "none" : "flex";
         }
 
+        if (tabName === "navigator") {
+          updateHubCardsDisplay();
+        }
         if (tabName === "summary") renderSummary();
         if (tabName === "notes") renderNotesList();
         if (tabName === "pdf") renderPdfTab();
