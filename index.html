@@ -450,111 +450,7 @@
 
 
       .tabs {
-        display: flex;
-        justify-content: flex-start;
-        gap: 2px;
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px));
-        background: var(--surface);
-        border-radius: 0;
-        border-top: 2.5px solid var(--ink);
-        z-index: 1000;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        touch-action: pan-x;
-        scroll-behavior: smooth;
-      }
-      .tabs::-webkit-scrollbar {
-        display: none;
-      }
-      .tab-btn {
-        flex: 0 0 auto;
-        min-width: 58px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2px;
-        padding: 5px 4px;
-        border-radius: 12px;
-        border: none;
-        background: transparent;
-        color: var(--muted-light);
-        cursor: pointer;
-        font-family: inherit;
-        transition: all 0.15s ease;
-        touch-action: manipulation;
-        user-select: none;
-        -webkit-user-select: none;
-      }
-      .tab-btn .tab-icon {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: all 0.15s ease;
-      }
-      .tab-btn.active {
-        color: var(--ink);
-      }
-      .tab-btn.active .tab-icon {
-        background: var(--yellow);
-        border: 2px solid var(--ink);
-        transform: translateY(-2px);
-      }
-      .tab-btn.active[onclick*="schedule"] .tab-icon {
-        background: #f5b729;
-      }
-      .tab-btn.active[onclick*="water"] .tab-icon {
-        background: #159895;
-        color: #ffffff;
-      }
-      .tab-btn.active[onclick*="week"] .tab-icon {
-        background: #e8772e;
-        color: #ffffff;
-      }
-      .tab-btn.active[onclick*="history"] .tab-icon {
-        background: #e8a317;
-      }
-      .tab-btn.active[onclick*="period"] .tab-icon {
-        background: #e0578f;
-        color: #ffffff;
-      }
-      .tab-btn.active[onclick*="recipe"] .tab-icon {
-        background: #f5b729;
-      }
-      .tab-btn.active[onclick*="english"] .tab-icon {
-        background: #2f8fd1;
-        color: #ffffff;
-      }
-      .tab-btn.active[onclick*="summary"] .tab-icon {
-        background: #6366f1;
-        color: #ffffff;
-      }
-      .tab-btn.active[onclick*="pdf"] .tab-icon {
-        background: #8b5cf6;
-        color: #ffffff;
-      }
-      .tab-icon {
-        font-size: 16px;
-        margin-bottom: 0;
-      }
-      .tab-label {
-        font-size: 9.5px;
-        font-weight: 600;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-        letter-spacing: -0.2px;
+        display: none !important;
       }
 
       .tab-content {
@@ -5163,54 +5059,12 @@
          ========================================================================== */
       @media (min-width: 768px) {
         body {
-          padding: max(20px, env(safe-area-inset-top, 0px)) 24px calc(96px + env(safe-area-inset-bottom, 0px)) 24px;
+          padding: max(20px, env(safe-area-inset-top, 0px)) 24px max(30px, env(safe-area-inset-bottom, 0px)) 24px;
         }
 
         .app-container {
           max-width: 780px;
           width: 100%;
-        }
-
-        /* Floating iPad Bottom Navigation Dock */
-        .tabs {
-          max-width: 740px;
-          left: 50%;
-          right: auto;
-          transform: translateX(-50%);
-          bottom: 16px;
-          border-radius: 24px;
-          border: 2.5px solid var(--ink);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 3px 0 var(--ink);
-          padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
-          justify-content: center;
-          gap: 6px;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-        }
-
-        .tab-btn {
-          flex: 0 1 76px;
-          max-width: 80px;
-          min-width: 64px;
-          padding: 6px 6px;
-          border-radius: 14px;
-        }
-
-        .tab-btn:hover {
-          background: rgba(0, 0, 0, 0.05);
-        }
-
-        .tab-btn .tab-icon {
-          width: 32px;
-          height: 32px;
-          font-size: 18px;
-        }
-
-        .tab-label {
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: -0.2px;
         }
 
         /* iPad Modals */
@@ -5944,48 +5798,7 @@
         <div class="live-clock" id="liveClock">Loading...</div>
       </div>
 
-      <div class="tabs">
-        <button class="tab-btn" onclick="switchTab('schedule', this)">
-          <span class="tab-icon">⏰</span>
-          <span class="tab-label">Schedule</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('water', this)">
-          <span class="tab-icon">✅</span>
-          <span class="tab-label">Tracker</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('week', this)">
-          <span class="tab-icon">📅</span>
-          <span class="tab-label">3x/Week</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('history', this)">
-          <span class="tab-icon">📜</span>
-          <span class="tab-label">History</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('period', this)">
-          <span class="tab-icon">🩸</span>
-          <span class="tab-label">Period</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('recipe', this)">
-          <span class="tab-icon">🍳</span>
-          <span class="tab-label">Recipe</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('english', this)">
-          <span class="tab-icon">🔤</span>
-          <span class="tab-label">English</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('notes', this)">
-          <span class="tab-icon">🤲</span>
-          <span class="tab-label">Duaa</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('pdf', this)">
-          <span class="tab-icon">📖</span>
-          <span class="tab-label">PDF Reader</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('summary', this)">
-          <span class="tab-icon">📊</span>
-          <span class="tab-label">Summary</span>
-        </button>
-      </div>
+
 
       <div id="content-area">
         <!-- MASTER NAVIGATOR HUB TAB -->
@@ -11723,43 +11536,20 @@
         switchTab("english");
       }
 
-      function switchTab(tabName, el) {
-        document
-          .querySelectorAll(".tab-btn")
-          .forEach((btn) => btn.classList.remove("active"));
+      function switchTab(tabName) {
         document
           .querySelectorAll(".tab-content")
           .forEach((content) => content.classList.remove("active"));
-        if (el) {
-          el.classList.add("active");
-          if (typeof el.scrollIntoView === "function") {
-            el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-          }
-        } else {
-          const targetBtn = document.querySelector(
-            '.tab-btn[onclick*="' + tabName + '"]',
-          );
-          if (targetBtn) {
-            targetBtn.classList.add("active");
-            if (typeof targetBtn.scrollIntoView === "function") {
-              targetBtn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-            }
-          }
-        }
         const targetContent = document.getElementById("tab-" + tabName);
         if (targetContent) {
           targetContent.classList.add("active");
           window.scrollTo(0, 0);
         }
 
-        // Show bottom navigation bar ONLY on 'navigator' page!
+        // Show floating navigation button on individual pages, hide on navigator home page
         const floatingBtn = document.getElementById("floatingNavBtn");
-        if (tabName === "navigator") {
-          document.body.classList.remove("hide-bottom-nav");
-          if (floatingBtn) floatingBtn.style.display = "none";
-        } else {
-          document.body.classList.add("hide-bottom-nav");
-          if (floatingBtn) floatingBtn.style.display = "flex";
+        if (floatingBtn) {
+          floatingBtn.style.display = tabName === "navigator" ? "none" : "flex";
         }
 
         if (tabName === "summary") renderSummary();
