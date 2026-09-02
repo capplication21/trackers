@@ -1696,6 +1696,268 @@
         animation: tabFadeSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
+      /* ==================== TEST PAGES (ENGLISH & MATH TESTS) ==================== */
+      .test-page-container {
+        max-width: 680px;
+        margin: 0 auto 30px;
+      }
+      .test-hero-card {
+        background: #ffffff;
+        border: 2.5px solid var(--ink);
+        border-radius: 20px;
+        padding: 16px 18px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 0 var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .test-hero-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .test-hero-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        border: 2px solid var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        box-shadow: 0 2px 0 var(--ink);
+      }
+      .test-hero-title {
+        font-size: 17px;
+        font-weight: 900;
+        color: #0f172a;
+        line-height: 1.2;
+      }
+      .test-hero-sub {
+        font-size: 11.5px;
+        color: #64748b;
+        margin-top: 2px;
+      }
+      .test-mode-tabs {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin-bottom: 14px;
+        scrollbar-width: none;
+      }
+      .test-mode-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .test-mode-tab {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #334155;
+        cursor: pointer;
+        box-shadow: 0 2.5px 0 var(--ink);
+        white-space: nowrap;
+        transition: all 0.15s ease;
+      }
+      .test-mode-tab:hover {
+        background: #f8fafc;
+        transform: translateY(-1px);
+      }
+      .test-mode-tab.active {
+        background: #ea580c;
+        color: #ffffff;
+        border-color: var(--ink);
+      }
+      .test-card-box {
+        background: #ffffff;
+        border: 2.5px solid var(--ink);
+        border-radius: 20px;
+        padding: 18px 16px;
+        box-shadow: 0 4px 0 var(--ink);
+        margin-bottom: 16px;
+      }
+      .test-question-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        gap: 8px;
+      }
+      .test-q-badge {
+        font-size: 11px;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1.5px solid var(--ink);
+        background: #f1f5f9;
+        color: #1e293b;
+      }
+      .test-score-badge {
+        font-size: 12px;
+        font-weight: 900;
+        color: #0f172a;
+        background: #fef08a;
+        border: 1.5px solid var(--ink);
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+      .test-question-text {
+        font-size: 15.5px;
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1.4;
+        margin-bottom: 16px;
+      }
+      .test-options-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .test-option-btn {
+        background: #f8fafc;
+        border: 2px solid #cbd5e1;
+        border-radius: 14px;
+        padding: 12px 14px;
+        text-align: left;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #1e293b;
+        cursor: pointer;
+        transition: all 0.16s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .test-option-btn:hover:not(:disabled) {
+        border-color: #f97316;
+        background: #fff7ed;
+        transform: translateY(-1.5px);
+      }
+      .test-option-btn.selected {
+        border-color: var(--ink);
+        background: #eff6ff;
+        color: #1d4ed8;
+        box-shadow: 0 2px 0 var(--ink);
+      }
+      .test-option-btn.correct {
+        border-color: #16a34a !important;
+        background: #dcfce7 !important;
+        color: #14532d !important;
+      }
+      .test-option-btn.wrong {
+        border-color: #dc2626 !important;
+        background: #fee2e2 !important;
+        color: #7f1d1d !important;
+      }
+      .test-feedback-box {
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 12.5px;
+        line-height: 1.45;
+        margin-bottom: 14px;
+        border: 2px solid transparent;
+        display: none;
+      }
+      .test-feedback-box.correct {
+        background: #dcfce7;
+        border-color: #16a34a;
+        color: #14532d;
+      }
+      .test-feedback-box.wrong {
+        background: #fef2f2;
+        border-color: #ef4444;
+        color: #991b1b;
+      }
+      .test-actions-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .test-main-btn {
+        background: #0f172a;
+        color: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 13.5px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 3px 0 var(--ink);
+        transition: all 0.15s ease;
+      }
+      .test-main-btn:hover {
+        background: #ea580c;
+        transform: translateY(-1.5px);
+        box-shadow: 0 4.5px 0 var(--ink);
+      }
+      .test-main-btn:active {
+        transform: translateY(1.5px);
+        box-shadow: 0 1px 0 var(--ink);
+      }
+
+      /* Practical Math Test Specifics */
+      .math-scenario-banner {
+        background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+        border: 2px solid #86efac;
+        border-radius: 14px;
+        padding: 14px;
+        margin-bottom: 14px;
+      }
+      .math-scenario-heading {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #15803d;
+        margin-bottom: 4px;
+      }
+      .math-scenario-story {
+        font-size: 15px;
+        font-weight: 800;
+        color: #064e3b;
+        line-height: 1.4;
+      }
+      .math-input-group {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .math-answer-input {
+        flex: 1;
+        background: #ffffff;
+        border: 2.5px solid var(--ink);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 16px;
+        font-weight: 800;
+        color: #0f172a;
+        box-shadow: 0 2px 0 var(--ink);
+        outline: none;
+      }
+      .math-answer-input:focus {
+        border-color: #ea580c;
+      }
+      .math-shortcut-card {
+        background: #fffbeb;
+        border: 2px dashed #f59e0b;
+        border-radius: 12px;
+        padding: 12px;
+        margin-top: 12px;
+        font-size: 12px;
+        line-height: 1.45;
+        color: #78350f;
+        display: none;
+      }
+
       /* Keyframe animations */
       @keyframes navGridFadeIn {
         0% {
@@ -6253,18 +6515,48 @@
                   </div>
                 </div>
 
-                <!-- Card 7 -->
-                <div class="hub-card" data-category="study" data-keywords="english grammar vocab phonics b1 daily maths grocery suite" onclick="switchTab('english')">
+                <!-- Card 7: English Studio -->
+                <div class="hub-card" data-category="study" data-keywords="english grammar vocab phonics b1 routine learning studio" onclick="switchTab('english')">
                   <div class="hub-card-top">
                     <span class="hub-card-icon">🔤</span>
                     <span class="hub-card-badge">Study</span>
                   </div>
                   <div>
-                    <div class="hub-card-title">English & Maths</div>
-                    <div class="hub-card-desc">B1 English fluency & practical maths suite</div>
+                    <div class="hub-card-title">English Studio</div>
+                    <div class="hub-card-desc">B1 English routine, phonics & vocabulary</div>
                   </div>
                   <div class="hub-card-footer">
                     <span class="hub-card-action">Open ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 7b: English Test -->
+                <div class="hub-card" data-category="study" data-keywords="english test quiz exam assessment grammar level b1 b2 questions" onclick="switchTab('englishtest')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon" style="background: rgba(147, 51, 234, 0.2); border-color: rgba(147, 51, 234, 0.4);">📝</span>
+                    <span class="hub-card-badge" style="color: #c084fc; border-color: #9333ea;">Exam</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">English Test</div>
+                    <div class="hub-card-desc">CEFR level assessment, grammar & vocabulary exam</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action" style="color: #c084fc;">Take Test ➔</span>
+                  </div>
+                </div>
+
+                <!-- Card 7c: Math Test -->
+                <div class="hub-card" data-category="study" data-keywords="math test grocery calculation grams kg discount change cash mental exam" onclick="switchTab('mathtest')">
+                  <div class="hub-card-top">
+                    <span class="hub-card-icon" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4);">🧮</span>
+                    <span class="hub-card-badge" style="color: #6ee7b7; border-color: #10b981;">Maths</span>
+                  </div>
+                  <div>
+                    <div class="hub-card-title">Math Test</div>
+                    <div class="hub-card-desc">Everyday grocery, grams, cash & discount challenges</div>
+                  </div>
+                  <div class="hub-card-footer">
+                    <span class="hub-card-action" style="color: #6ee7b7;">Start Quiz ➔</span>
                   </div>
                 </div>
 
@@ -8690,6 +8982,168 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEDICATED ENGLISH TEST TAB -->
+        <div class="tab-content" id="tab-englishtest">
+          <div class="test-page-container">
+            <!-- Hero Header -->
+            <div class="test-hero-card">
+              <div class="test-hero-info">
+                <div class="test-hero-icon" style="background: #ede9fe; color: #7c3aed;">📝</div>
+                <div>
+                  <div class="test-hero-title">English Proficiency &amp; Grammar Test</div>
+                  <div class="test-hero-sub">CEFR Levels B1/B2 Assessment • Vocabulary • Tenses • Error Correction</div>
+                </div>
+              </div>
+              <button type="button" class="pdf-action-btn pdf-btn-primary" onclick="openGeminiAssessmentPopup()" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #fff; font-size: 11.5px; padding: 6px 12px;">
+                ✨ AI Assessment
+              </button>
+            </div>
+
+            <!-- Mode Tabs -->
+            <div class="test-mode-tabs">
+              <button type="button" class="test-mode-tab active" id="engModeTab-all" onclick="setEnglishTestMode('all')">🎯 Full Assessment (15 Qs)</button>
+              <button type="button" class="test-mode-tab" id="engModeTab-grammar" onclick="setEnglishTestMode('grammar')">📖 Grammar &amp; Tenses</button>
+              <button type="button" class="test-mode-tab" id="engModeTab-vocab" onclick="setEnglishTestMode('vocab')">💎 Vocabulary &amp; Collocations</button>
+            </div>
+
+            <!-- Test Engine Box -->
+            <div class="test-card-box" id="engTestCardBox">
+              <div class="test-question-header">
+                <span class="test-q-badge" id="engQuestionBadge">Question 1 of 15</span>
+                <span class="test-score-badge" id="engScoreBadge">Score: 0</span>
+              </div>
+
+              <!-- Question Content -->
+              <div class="test-question-text" id="engQuestionText">Loading question...</div>
+
+              <!-- Options -->
+              <div class="test-options-grid" id="engOptionsGrid">
+                <!-- Dynamically Rendered Option Buttons -->
+              </div>
+
+              <!-- Feedback / Explanation Box -->
+              <div class="test-feedback-box" id="engFeedbackBox">
+                <div id="engFeedbackTitle" style="font-weight: 800; margin-bottom: 4px;"></div>
+                <div id="engFeedbackExplanation"></div>
+              </div>
+
+              <!-- Actions -->
+              <div class="test-actions-bar">
+                <button type="button" class="pdf-action-btn" onclick="restartEnglishTest()" style="background: #f1f5f9; color: #475569; font-size: 12px; padding: 8px 14px;">
+                  🔄 Restart
+                </button>
+                <button type="button" class="test-main-btn" id="engNextBtn" onclick="nextEnglishQuestion()" disabled>
+                  Next Question ➔
+                </button>
+              </div>
+            </div>
+
+            <!-- Scorecard Summary Banner (hidden until finished) -->
+            <div class="test-card-box" id="engResultBox" style="display: none; text-align: center;">
+              <div style="font-size: 42px; margin-bottom: 8px;" id="engResultEmoji">🏆</div>
+              <div style="font-size: 20px; font-weight: 900; color: #0f172a; margin-bottom: 4px;" id="engResultTitle">Test Completed!</div>
+              <div style="font-size: 13.5px; color: #64748b; margin-bottom: 16px;" id="engResultSubtitle">Your final assessment summary:</div>
+              <div style="display: inline-block; background: #ede9fe; color: #5b21b6; border: 2px solid #8b5cf6; padding: 12px 26px; border-radius: 16px; font-size: 26px; font-weight: 900; margin-bottom: 18px;" id="engFinalScore">
+                0 / 15
+              </div>
+              <div style="font-size: 12.5px; color: #334155; line-height: 1.5; max-width: 440px; margin: 0 auto 20px;" id="engLevelEval">
+                Evaluating your CEFR proficiency level...
+              </div>
+              <button type="button" class="test-main-btn" onclick="restartEnglishTest()" style="margin: 0 auto;">
+                Retake English Test
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEDICATED PRACTICAL MATH TEST TAB -->
+        <div class="tab-content" id="tab-mathtest">
+          <div class="test-page-container">
+            <!-- Hero Header -->
+            <div class="test-hero-card" style="border-color: #059669; box-shadow: 0 4px 0 #059669;">
+              <div class="test-hero-info">
+                <div class="test-hero-icon" style="background: #dcfce7; color: #059669; border-color: #059669;">🧮</div>
+                <div>
+                  <div class="test-hero-title">Practical Daily Life Maths Test</div>
+                  <div class="test-hero-sub">Weight &amp; Grams • Cash &amp; Change • Discounts % • Mental Shortcuts</div>
+                </div>
+              </div>
+              <span class="test-score-badge" id="mathOverallStreak" style="background: #dcfce7; color: #065f46; border-color: #059669;">
+                🔥 Streak: 0
+              </span>
+            </div>
+
+            <!-- Mode Tabs -->
+            <div class="test-mode-tabs">
+              <button type="button" class="test-mode-tab active" id="mathModeTab-mixed" onclick="setMathTestMode('mixed')">⚡ Mixed Speed Test</button>
+              <button type="button" class="test-mode-tab" id="mathModeTab-weight" onclick="setMathTestMode('weight')">⚖️ Grams &amp; Kg</button>
+              <button type="button" class="test-mode-tab" id="mathModeTab-change" onclick="setMathTestMode('change')">💵 Cash &amp; Change</button>
+              <button type="button" class="test-mode-tab" id="mathModeTab-discount" onclick="setMathTestMode('discount')">🏷️ Discounts %</button>
+            </div>
+
+            <!-- Problem Card Box -->
+            <div class="test-card-box" id="mathTestCardBox">
+              <div class="test-question-header">
+                <span class="test-q-badge" id="mathQuestionBadge" style="background: #dcfce7; color: #065f46; border-color: #059669;">Scenario Challenge</span>
+                <span class="test-score-badge" id="mathScoreBadge">Correct: 0 / 0</span>
+              </div>
+
+              <!-- Scenario Banner -->
+              <div class="math-scenario-banner">
+                <div class="math-scenario-heading" id="mathScenarioTag">Everyday Market Math</div>
+                <div class="math-scenario-story" id="mathScenarioStory">Loading math challenge...</div>
+              </div>
+
+              <!-- Input Group -->
+              <div class="math-input-group">
+                <input
+                  type="number"
+                  class="math-answer-input"
+                  id="mathAnswerInput"
+                  placeholder="Enter your calculation (Rs.)"
+                  autocomplete="off"
+                  onkeydown="if(event.key==='Enter') submitMathAnswer()"
+                />
+                <button type="button" class="test-main-btn" id="mathSubmitBtn" onclick="submitMathAnswer()" style="background: #059669; border-color: var(--ink);">
+                  Check Answer
+                </button>
+              </div>
+
+              <!-- Quick Answer Choices -->
+              <div style="font-size: 11.5px; font-weight: 700; color: #64748b; margin-bottom: 6px;">
+                💡 Or tap multiple-choice estimate:
+              </div>
+              <div class="test-options-grid" id="mathChoicesGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                <!-- Choice buttons dynamically rendered -->
+              </div>
+
+              <!-- Feedback / Explanation Box -->
+              <div class="test-feedback-box" id="mathFeedbackBox">
+                <div id="mathFeedbackTitle" style="font-weight: 800; margin-bottom: 4px;"></div>
+                <div id="mathFeedbackExplanation"></div>
+              </div>
+
+              <!-- Mental Math Shortcut Card -->
+              <div class="math-shortcut-card" id="mathShortcutCard">
+                <div style="font-weight: 800; display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
+                  <span>⚡</span> Mental Math Shortcut:
+                </div>
+                <div id="mathShortcutText"></div>
+              </div>
+
+              <!-- Actions Bar -->
+              <div class="test-actions-bar" style="margin-top: 16px;">
+                <button type="button" class="pdf-action-btn" onclick="generateNewMathProblem()" style="background: #f1f5f9; color: #475569; font-size: 12px; padding: 8px 14px;">
+                  🎲 New Random Problem
+                </button>
+                <button type="button" class="test-main-btn" id="mathNextBtn" onclick="nextMathProblem()" style="background: #0f172a;" disabled>
+                  Next Problem ➔
+                </button>
               </div>
             </div>
           </div>
@@ -12095,12 +12549,500 @@
         history: "📜 History Log",
         period: "🩸 Period Tracker",
         recipe: "🍳 Recipe Studio",
-        english: "🔤 English & Maths",
+        english: "🔤 English Studio",
+        englishtest: "📝 English Test",
+        mathtest: "🧮 Math Test",
         notes: "🤲 Duaa Book",
         pdf: "📖 PDF Reader",
         summary: "📊 Day Summary",
         navigator: "🧭 All Navigators",
       };
+
+      // ==================== ENGLISH TEST ENGINE ====================
+      const ENGLISH_TEST_QUESTIONS = [
+        {
+          id: 1,
+          category: "grammar",
+          level: "B1",
+          question: "Choose the correct sentence in the Present Perfect tense:",
+          options: [
+            "I have seen that movie yesterday evening.",
+            "I have already finished my assignment.",
+            "She has went to London last week.",
+            "They has lived in this city since ten years."
+          ],
+          correctIndex: 1,
+          explanation: "Present Perfect ('have finished') connects past actions to now with 'already'. Specific past time ('yesterday', 'last week') requires Simple Past."
+        },
+        {
+          id: 2,
+          category: "grammar",
+          level: "B1",
+          question: "If I _______ more free time, I would learn how to code.",
+          options: ["have", "had", "will have", "would have"],
+          correctIndex: 1,
+          explanation: "Second Conditional for hypothetical/unreal situations: 'If + Simple Past (had) ..., would + base verb (would learn)'."
+        },
+        {
+          id: 3,
+          category: "vocab",
+          level: "B1",
+          question: "Which word best completes the sentence: 'Smartphones have become _______ in modern society; almost everyone owns one.'",
+          options: ["ubiquitous", "reluctant", "scarce", "hostile"],
+          correctIndex: 0,
+          explanation: "'Ubiquitous' means present, appearing, or found everywhere."
+        },
+        {
+          id: 4,
+          category: "grammar",
+          level: "B1",
+          question: "Neither the manager nor the employees _______ satisfied with the new decision.",
+          options: ["was", "were", "is", "be"],
+          correctIndex: 1,
+          explanation: "With 'neither... nor...', the verb agrees with the closer subject. 'Employees' is plural, so we use 'were'."
+        },
+        {
+          id: 5,
+          category: "vocab",
+          level: "B1",
+          question: "Choose the correct natural collocation: 'Could you please _______ me a favor and close the door?'",
+          options: ["make", "do", "give", "take"],
+          correctIndex: 1,
+          explanation: "In English, the standard fixed collocation is always 'do someone a favor', never 'make a favor'."
+        },
+        {
+          id: 6,
+          category: "grammar",
+          level: "B2",
+          question: "By the time we arrived at the airport, the flight _______ already taken off.",
+          options: ["has", "had", "was", "would have"],
+          correctIndex: 1,
+          explanation: "Past Perfect ('had taken off') is used for an action completed before another past event ('arrived')."
+        },
+        {
+          id: 7,
+          category: "vocab",
+          level: "B1",
+          question: "The team demonstrated incredible _______ by recovering quickly after failing their first inspection.",
+          options: ["resilience", "hesitation", "fragility", "indifference"],
+          correctIndex: 0,
+          explanation: "'Resilience' is the capacity to recover quickly from difficulties or setbacks."
+        },
+        {
+          id: 8,
+          category: "grammar",
+          level: "B1",
+          question: "She is accustomed to _______ early every morning for her workout.",
+          options: ["wake up", "waking up", "woke up", "wakes up"],
+          correctIndex: 1,
+          explanation: "The phrase 'be accustomed to' is followed by a gerund (-ing form), so 'waking up' is correct."
+        },
+        {
+          id: 9,
+          category: "grammar",
+          level: "B1",
+          question: "Spot the error: 'He suggested that she _______ a specialist doctor.'",
+          options: ["sees", "see", "saw", "will see"],
+          correctIndex: 1,
+          explanation: "The subjunctive mood after verbs like 'suggest that' takes the bare infinitive ('see') for all persons."
+        },
+        {
+          id: 10,
+          category: "vocab",
+          level: "B2",
+          question: "Choose the correct antonym of 'Diligent':",
+          options: ["Hardworking", "Careful", "Slothful / Lazy", "Attentive"],
+          correctIndex: 2,
+          explanation: "'Diligent' means showing steady and earnest care/effort. Its opposite is 'lazy' or 'slothful'."
+        },
+        {
+          id: 11,
+          category: "grammar",
+          level: "B1",
+          question: "I look forward to _______ you at the annual convention next month.",
+          options: ["see", "seeing", "have seen", "saw"],
+          correctIndex: 1,
+          explanation: "'Look forward to' has 'to' as a preposition, which requires a noun or gerund: 'seeing you'."
+        },
+        {
+          id: 12,
+          category: "vocab",
+          level: "B1",
+          question: "Finding a 100-dollar bill in an old coat pocket was pure _______.",
+          options: ["adversity", "serendipity", "catastrophe", "monotony"],
+          correctIndex: 1,
+          explanation: "'Serendipity' is the occurrence of finding valuable or pleasant things by chance."
+        },
+        {
+          id: 13,
+          category: "grammar",
+          level: "B2",
+          question: "Hardly _______ into the house when the storm began.",
+          options: ["we had stepped", "had we stepped", "we stepped", "did we stepped"],
+          correctIndex: 1,
+          explanation: "Inversion with negative adverbs: 'Hardly had we stepped...' puts the auxiliary verb before the subject."
+        },
+        {
+          id: 14,
+          category: "vocab",
+          level: "B1",
+          question: "Choose the best phrasal verb: 'I was exhausted, so I decided to _______ for the night.'",
+          options: ["turn in", "turn out", "turn over", "turn away"],
+          correctIndex: 0,
+          explanation: "'Turn in' is an idiomatic phrasal verb meaning to go to bed for the night."
+        },
+        {
+          id: 15,
+          category: "grammar",
+          level: "B1",
+          question: "The project was approved _______ some initial budget constraints.",
+          options: ["despite of", "despite", "although", "even though"],
+          correctIndex: 1,
+          explanation: "'Despite' is followed directly by a noun phrase without 'of'. ('In spite of' uses 'of', but 'despite' does not)."
+        }
+      ];
+
+      let engCurrentQuestions = [];
+      let engCurrentIndex = 0;
+      let engScore = 0;
+      let engSelectedOption = null;
+      let engAnswered = false;
+
+      function initEnglishTest() {
+        setEnglishTestMode("all");
+      }
+
+      function setEnglishTestMode(mode) {
+        document.querySelectorAll(".test-mode-tab[id^='engModeTab']").forEach(t => t.classList.remove("active"));
+        const activeTab = document.getElementById("engModeTab-" + mode);
+        if (activeTab) activeTab.classList.add("active");
+
+        if (mode === "grammar") {
+          engCurrentQuestions = ENGLISH_TEST_QUESTIONS.filter(q => q.category === "grammar");
+        } else if (mode === "vocab") {
+          engCurrentQuestions = ENGLISH_TEST_QUESTIONS.filter(q => q.category === "vocab");
+        } else {
+          engCurrentQuestions = [...ENGLISH_TEST_QUESTIONS];
+        }
+
+        restartEnglishTest();
+      }
+
+      function restartEnglishTest() {
+        engCurrentIndex = 0;
+        engScore = 0;
+        engSelectedOption = null;
+        engAnswered = false;
+
+        const cardBox = document.getElementById("engTestCardBox");
+        const resultBox = document.getElementById("engResultBox");
+        if (cardBox) cardBox.style.display = "block";
+        if (resultBox) resultBox.style.display = "none";
+
+        renderEnglishQuestion();
+      }
+
+      function renderEnglishQuestion() {
+        const q = engCurrentQuestions[engCurrentIndex];
+        if (!q) {
+          showEnglishResults();
+          return;
+        }
+
+        engSelectedOption = null;
+        engAnswered = false;
+
+        const badge = document.getElementById("engQuestionBadge");
+        const scoreBadge = document.getElementById("engScoreBadge");
+        const qText = document.getElementById("engQuestionText");
+        const optionsGrid = document.getElementById("engOptionsGrid");
+        const feedbackBox = document.getElementById("engFeedbackBox");
+        const nextBtn = document.getElementById("engNextBtn");
+
+        if (badge) badge.textContent = `Question ${engCurrentIndex + 1} of ${engCurrentQuestions.length} • Level ${q.level}`;
+        if (scoreBadge) scoreBadge.textContent = `Score: ${engScore}`;
+        if (qText) qText.textContent = q.question;
+        if (feedbackBox) feedbackBox.style.display = "none";
+        if (nextBtn) {
+          nextBtn.disabled = true;
+          nextBtn.textContent = engCurrentIndex === engCurrentQuestions.length - 1 ? "Finish Test 🏁" : "Next Question ➔";
+        }
+
+        if (optionsGrid) {
+          optionsGrid.innerHTML = q.options.map((opt, i) => `
+            <button type="button" class="test-option-btn" id="engOpt-${i}" onclick="selectEnglishOption(${i})">
+              <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#e2e8f0; font-size:12px; font-weight:800; color:#334155;">
+                ${String.fromCharCode(65 + i)}
+              </span>
+              <span>${escapeHtml(opt)}</span>
+            </button>
+          `).join("");
+        }
+      }
+
+      function selectEnglishOption(index) {
+        if (engAnswered) return;
+        engAnswered = true;
+        engSelectedOption = index;
+
+        const q = engCurrentQuestions[engCurrentIndex];
+        const isCorrect = index === q.correctIndex;
+        if (isCorrect) engScore++;
+
+        const scoreBadge = document.getElementById("engScoreBadge");
+        if (scoreBadge) scoreBadge.textContent = `Score: ${engScore}`;
+
+        // Highlight options
+        q.options.forEach((_, i) => {
+          const btn = document.getElementById("engOpt-" + i);
+          if (!btn) return;
+          btn.disabled = true;
+          if (i === q.correctIndex) {
+            btn.classList.add("correct");
+          } else if (i === index) {
+            btn.classList.add("wrong");
+          }
+        });
+
+        // Show feedback
+        const feedbackBox = document.getElementById("engFeedbackBox");
+        const feedbackTitle = document.getElementById("engFeedbackTitle");
+        const feedbackExp = document.getElementById("engFeedbackExplanation");
+        if (feedbackBox && feedbackTitle && feedbackExp) {
+          feedbackBox.className = "test-feedback-box " + (isCorrect ? "correct" : "wrong");
+          feedbackTitle.textContent = isCorrect ? "🎉 Correct Answer!" : "❌ Incorrect!";
+          feedbackExp.textContent = q.explanation;
+          feedbackBox.style.display = "block";
+        }
+
+        const nextBtn = document.getElementById("engNextBtn");
+        if (nextBtn) nextBtn.disabled = false;
+      }
+
+      function nextEnglishQuestion() {
+        engCurrentIndex++;
+        if (engCurrentIndex >= engCurrentQuestions.length) {
+          showEnglishResults();
+        } else {
+          renderEnglishQuestion();
+        }
+      }
+
+      function showEnglishResults() {
+        const cardBox = document.getElementById("engTestCardBox");
+        const resultBox = document.getElementById("engResultBox");
+        if (cardBox) cardBox.style.display = "none";
+        if (resultBox) resultBox.style.display = "block";
+
+        const total = engCurrentQuestions.length;
+        const pct = Math.round((engScore / total) * 100);
+
+        const scoreEl = document.getElementById("engFinalScore");
+        const emojiEl = document.getElementById("engResultEmoji");
+        const titleEl = document.getElementById("engResultTitle");
+        const evalEl = document.getElementById("engLevelEval");
+
+        if (scoreEl) scoreEl.textContent = `${engScore} / ${total} (${pct}%)`;
+
+        if (pct >= 85) {
+          if (emojiEl) emojiEl.textContent = "🌟";
+          if (titleEl) titleEl.textContent = "Outstanding Performance!";
+          if (evalEl) evalEl.textContent = "CEFR Level: Solid B2 (Upper Intermediate). You have exceptional grasp of grammatical subtleties, collocations, and advanced structure!";
+        } else if (pct >= 65) {
+          if (emojiEl) emojiEl.textContent = "🎯";
+          if (titleEl) titleEl.textContent = "Great Job!";
+          if (evalEl) evalEl.textContent = "CEFR Level: Confident B1 (Intermediate). You handle daily conversations and common grammatical tenses very well with high communicative competence!";
+        } else {
+          if (emojiEl) emojiEl.textContent = "💪";
+          if (titleEl) titleEl.textContent = "Keep Practicing!";
+          if (evalEl) evalEl.textContent = "CEFR Level: A2/Early B1. Focus on irregular verbs, fixed collocations ('do a favor'), and conditional sentence structures.";
+        }
+      }
+
+      // ==================== PRACTICAL MATH TEST ENGINE ====================
+      let mathTestMode = "mixed";
+      let mathScoreTotal = 0;
+      let mathScoreCorrect = 0;
+      let mathStreak = 0;
+      let currentMathProblem = null;
+      let mathProblemAnswered = false;
+
+      function initMathTest() {
+        setMathTestMode("mixed");
+      }
+
+      function setMathTestMode(mode) {
+        mathTestMode = mode || "mixed";
+        document.querySelectorAll(".test-mode-tab[id^='mathModeTab']").forEach(t => t.classList.remove("active"));
+        const tab = document.getElementById("mathModeTab-" + mathTestMode);
+        if (tab) tab.classList.add("active");
+        generateNewMathProblem();
+      }
+
+      function generateNewMathProblem() {
+        mathProblemAnswered = false;
+        const input = document.getElementById("mathAnswerInput");
+        if (input) {
+          input.value = "";
+          input.disabled = false;
+          input.focus();
+        }
+
+        const feedbackBox = document.getElementById("mathFeedbackBox");
+        if (feedbackBox) feedbackBox.style.display = "none";
+        const shortcutCard = document.getElementById("mathShortcutCard");
+        if (shortcutCard) shortcutCard.style.display = "none";
+
+        const submitBtn = document.getElementById("mathSubmitBtn");
+        if (submitBtn) submitBtn.disabled = false;
+        const nextBtn = document.getElementById("mathNextBtn");
+        if (nextBtn) nextBtn.disabled = true;
+
+        let type = mathTestMode;
+        if (type === "mixed") {
+          const types = ["weight", "change", "discount"];
+          type = types[Math.floor(Math.random() * types.length)];
+        }
+
+        if (type === "weight") {
+          const items = [
+            { name: "Apples", baseKg: 240 },
+            { name: "Bananas", baseKg: 120 },
+            { name: "Tomatoes", baseKg: 80 },
+            { name: "Chicken", baseKg: 640 },
+            { name: "Almonds", baseKg: 1200 },
+            { name: "Mutton", baseKg: 1600 }
+          ];
+          const gramsOptions = [250, 500, 750, 400, 300, 150];
+          const item = items[Math.floor(Math.random() * items.length)];
+          const grams = gramsOptions[Math.floor(Math.random() * gramsOptions.length)];
+          const correctVal = Math.round((item.baseKg * grams) / 1000);
+
+          currentMathProblem = {
+            tag: "⚖️ Grams to Kg Calculation",
+            story: `At the market, 1 kg of ${item.name} costs Rs. ${item.baseKg}. You buy exactly ${grams} grams. How much should you pay?`,
+            correctAnswer: correctVal,
+            shortcut: `Mental Trick: ${grams === 500 ? 'Half of Rs. ' + item.baseKg + ' = Rs. ' + correctVal : grams === 250 ? 'Quarter (half of half) of Rs. ' + item.baseKg + ' = Rs. ' + correctVal : grams === 750 ? '500g (half = ' + (item.baseKg/2) + ') + 250g (quarter = ' + (item.baseKg/4) + ') = Rs. ' + correctVal : '100g costs Rs. ' + (item.baseKg/10) + '. Multiply by ' + (grams/100) + ' = Rs. ' + correctVal}.`
+          };
+        } else if (type === "change") {
+          const notes = [500, 1000, 2000];
+          const note = notes[Math.floor(Math.random() * notes.length)];
+          const bill = Math.floor(Math.random() * (note - 50) / 10) * 10 + (Math.random() > 0.5 ? 5 : 0);
+          const correctVal = note - bill;
+
+          currentMathProblem = {
+            tag: "💵 Cash Counter Change",
+            story: `Your grocery bill is Rs. ${bill}. You hand the cashier a Rs. ${note} currency note. Exactly how much change should you receive?`,
+            correctAnswer: correctVal,
+            shortcut: `Counting-up Hack: From Rs. ${bill}, add ${100 - (bill % 100)} to reach Rs. ${Math.ceil(bill/100)*100}. Then count up to Rs. ${note}. Total change = Rs. ${correctVal}.`
+          };
+        } else {
+          const discounts = [10, 15, 20, 25, 30, 50];
+          const prices = [600, 800, 1200, 1500, 2000, 2400, 3000];
+          const discount = discounts[Math.floor(Math.random() * discounts.length)];
+          const price = prices[Math.floor(Math.random() * prices.length)];
+          const discountAmt = Math.round((price * discount) / 100);
+          const correctVal = price - discountAmt;
+
+          currentMathProblem = {
+            tag: "🏷️ Sales Discount Calculation",
+            story: `A garment with an original tag of Rs. ${price} has a special ${discount}% store discount. What is the final price after discount?`,
+            correctAnswer: correctVal,
+            shortcut: `Percentage Hack: 10% of Rs. ${price} is Rs. ${price / 10}. ${discount === 20 ? 'Double that for 20% = Rs. ' + discountAmt : discount === 15 ? 'Add half for 15% (Rs. ' + (price/10) + ' + ' + (price/20) + ' = Rs. ' + discountAmt + ')' : discount === 25 ? 'Quarter of Rs. ' + price + ' = Rs. ' + discountAmt : 'Discount = Rs. ' + discountAmt}. Subtract from Rs. ${price} = Rs. ${correctVal}.`
+          };
+        }
+
+        const tagEl = document.getElementById("mathScenarioTag");
+        const storyEl = document.getElementById("mathScenarioStory");
+        if (tagEl) tagEl.textContent = currentMathProblem.tag;
+        if (storyEl) storyEl.textContent = currentMathProblem.story;
+
+        const correct = currentMathProblem.correctAnswer;
+        const deltas = [-30, -10, 10, 20, 50, -50].sort(() => Math.random() - 0.5);
+        const choices = [correct];
+        for (let d of deltas) {
+          const fake = correct + d;
+          if (fake > 0 && !choices.includes(fake)) {
+            choices.push(fake);
+            if (choices.length === 4) break;
+          }
+        }
+        choices.sort(() => Math.random() - 0.5);
+
+        const choicesGrid = document.getElementById("mathChoicesGrid");
+        if (choicesGrid) {
+          choicesGrid.innerHTML = choices.map(c => `
+            <button type="button" class="test-option-btn" style="padding: 10px 12px; font-size: 13px;" onclick="submitMathAnswer(${c})">
+              <span>👉 Rs. <strong>${c}</strong></span>
+            </button>
+          `).join("");
+        }
+      }
+
+      function submitMathAnswer(customVal) {
+        if (mathProblemAnswered || !currentMathProblem) return;
+
+        let userVal;
+        if (typeof customVal === "number") {
+          userVal = customVal;
+          const input = document.getElementById("mathAnswerInput");
+          if (input) input.value = customVal;
+        } else {
+          const input = document.getElementById("mathAnswerInput");
+          userVal = parseFloat(input ? input.value : "");
+        }
+
+        if (isNaN(userVal)) {
+          showToast("Please enter or tap an answer value");
+          return;
+        }
+
+        mathProblemAnswered = true;
+        mathScoreTotal++;
+
+        const isCorrect = Math.abs(userVal - currentMathProblem.correctAnswer) < 1;
+        if (isCorrect) {
+          mathScoreCorrect++;
+          mathStreak++;
+        } else {
+          mathStreak = 0;
+        }
+
+        const scoreBadge = document.getElementById("mathScoreBadge");
+        if (scoreBadge) scoreBadge.textContent = `Correct: ${mathScoreCorrect} / ${mathScoreTotal}`;
+        const streakBadge = document.getElementById("mathOverallStreak");
+        if (streakBadge) streakBadge.textContent = `🔥 Streak: ${mathStreak}`;
+
+        const input = document.getElementById("mathAnswerInput");
+        if (input) input.disabled = true;
+        const submitBtn = document.getElementById("mathSubmitBtn");
+        if (submitBtn) submitBtn.disabled = true;
+        const nextBtn = document.getElementById("mathNextBtn");
+        if (nextBtn) nextBtn.disabled = false;
+
+        const feedbackBox = document.getElementById("mathFeedbackBox");
+        const feedbackTitle = document.getElementById("mathFeedbackTitle");
+        const feedbackExp = document.getElementById("mathFeedbackExplanation");
+        if (feedbackBox && feedbackTitle && feedbackExp) {
+          feedbackBox.className = "test-feedback-box " + (isCorrect ? "correct" : "wrong");
+          feedbackTitle.textContent = isCorrect ? "🎉 Correct Calculation!" : "❌ Not Quite Right!";
+          feedbackExp.textContent = isCorrect
+            ? `Exact answer is Rs. ${currentMathProblem.correctAnswer}.`
+            : `Your answer was Rs. ${userVal}. The correct amount is Rs. ${currentMathProblem.correctAnswer}.`;
+          feedbackBox.style.display = "block";
+        }
+
+        const shortcutCard = document.getElementById("mathShortcutCard");
+        const shortcutText = document.getElementById("mathShortcutText");
+        if (shortcutCard && shortcutText) {
+          shortcutText.textContent = currentMathProblem.shortcut;
+          shortcutCard.style.display = "block";
+        }
+      }
+
+      function nextMathProblem() {
+        generateNewMathProblem();
+      }
 
       function goBackToNavigator() {
         switchTab("navigator");
@@ -12150,6 +13092,12 @@
 
         if (tabName === "navigator") {
           updateHubCardsDisplay();
+        }
+        if (tabName === "englishtest") {
+          initEnglishTest();
+        }
+        if (tabName === "mathtest") {
+          initMathTest();
         }
         if (tabName === "summary") renderSummary();
         if (tabName === "notes") renderNotesList();
