@@ -1232,7 +1232,64 @@
         }
       }
 
-      /* ==================== NAVIGATOR HUB (MATCHING REFERENCE DESIGN) ==================== */
+      /* ==================== TOP BACK BAR & NAVIGATOR HUB STYLES ==================== */
+      /* Top Back Bar on individual pages */
+      .page-top-back-bar {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin: 0 0 14px 0;
+        padding: 4px 2px;
+        animation: tabFadeSlideIn 0.2s ease-out;
+      }
+      .page-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: #ffffff;
+        color: #0f172a;
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        padding: 8px 15px;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 3px 0 var(--ink);
+        transition: all 0.16s cubic-bezier(0.34, 1.56, 0.64, 1);
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .page-back-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 0 var(--ink);
+        background: #fff7ed;
+        color: #ea580c;
+      }
+      .page-back-btn:active {
+        transform: translateY(1.5px);
+        box-shadow: 0 1px 0 var(--ink);
+      }
+      .page-back-btn .back-arrow {
+        font-size: 15px;
+        font-weight: 900;
+        transition: transform 0.16s ease;
+      }
+      .page-back-btn:hover .back-arrow {
+        transform: translateX(-3px);
+      }
+      .page-current-badge {
+        font-size: 12px;
+        font-weight: 800;
+        color: #475569;
+        background: #f8fafc;
+        border: 1.5px solid #cbd5e1;
+        padding: 6px 14px;
+        border-radius: 999px;
+        white-space: nowrap;
+        box-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.06);
+      }
+
       .hub-window {
         background: #0f172a;
         border: 2px solid #334155;
@@ -1274,6 +1331,28 @@
       .hub-dot.red { background: #ef4444; }
       .hub-dot.yellow { background: #eab308; }
       .hub-dot.green { background: #22c55e; }
+
+      .hub-back-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #fed7aa;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        padding: 3px 9px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        margin-left: 6px;
+      }
+      .hub-back-pill:hover {
+        background: #ea580c;
+        color: #ffffff;
+        border-color: #ea580c;
+        transform: scale(1.05);
+      }
 
       .hub-header-tabs {
         display: flex;
@@ -6028,10 +6107,16 @@
         <div class="live-clock" id="liveClock">Loading...</div>
       </div>
 
-
+      <!-- Top Back Navigation Bar on Individual Pages -->
+      <div class="page-top-back-bar" id="pageTopBackBar" style="display: none;">
+        <button type="button" class="page-back-btn" onclick="goBackToNavigator()" title="Back to All Navigators">
+          <span class="back-arrow">←</span>
+          <span>Back to Navigators</span>
+        </button>
+        <span class="page-current-badge" id="pageCurrentBadge">Daily Tracker</span>
+      </div>
 
       <div id="content-area">
-        <!-- MASTER NAVIGATOR HUB TAB -->
         <!-- MASTER NAVIGATOR HUB TAB (MATCHING REFERENCE DESIGN) -->
         <div class="tab-content active" id="tab-navigator">
           <div class="hub-window">
@@ -6041,6 +6126,9 @@
                 <span class="hub-dot red" title="Close" onclick="closeNavigatorHub()"></span>
                 <span class="hub-dot yellow" title="Minimize" onclick="closeNavigatorHub()"></span>
                 <span class="hub-dot green" title="Maximize"></span>
+                <button type="button" class="hub-back-pill" onclick="closeNavigatorHub()" title="Back to previous page">
+                  <span>←</span> Back
+                </button>
               </div>
               <div class="hub-header-tabs">
                 <button type="button" class="hub-header-tab active" data-cat="all" onclick="filterHubCategory('all', this)">All</button>
@@ -12000,10 +12088,37 @@
         if (nextBtn) nextBtn.disabled = hubCurrentPage === 2 || hubCurrentPage === "all";
       }
 
-      function switchTab(tabName) {
+      const TAB_DISPLAY_NAMES = {
+        schedule: "⏰ Schedule",
+        water: "✅ Daily Tracker",
+        week: "📅 3x/Week",
+        history: "📜 History Log",
+        period: "🩸 Period Tracker",
+        recipe: "🍳 Recipe Studio",
+        english: "🔤 English & Maths",
+        notes: "🤲 Duaa Book",
+        pdf: "📖 PDF Reader",
+        summary: "📊 Day Summary",
+        navigator: "🧭 All Navigators",
+      };
+
+      function goBackToNavigator() {
+        switchTab("navigator");
+      }
+
+      function switchTab(tabName, shouldPushHistory = true) {
+        if (!tabName) tabName = "navigator";
         if (tabName !== "navigator") {
           previousActiveTab = tabName;
         }
+
+        // Browser history push for device and browser back button support
+        if (shouldPushHistory) {
+          try {
+            window.history.pushState({ tab: tabName }, "", "#" + tabName);
+          } catch (e) {}
+        }
+
         document
           .querySelectorAll(".tab-content")
           .forEach((content) => content.classList.remove("active"));
@@ -12011,6 +12126,20 @@
         if (targetContent) {
           targetContent.classList.add("active");
           window.scrollTo(0, 0);
+        }
+
+        // Show/hide Top Back Navigation Bar
+        const topBackBar = document.getElementById("pageTopBackBar");
+        const currentBadge = document.getElementById("pageCurrentBadge");
+        if (topBackBar) {
+          if (tabName === "navigator") {
+            topBackBar.style.display = "none";
+          } else {
+            topBackBar.style.display = "flex";
+            if (currentBadge) {
+              currentBadge.textContent = TAB_DISPLAY_NAMES[tabName] || tabName;
+            }
+          }
         }
 
         // Show floating navigation button on individual pages, hide on navigator home page
@@ -12034,6 +12163,12 @@
           }
         }
       }
+
+      // Listen to popstate (handles device and browser back button)
+      window.addEventListener("popstate", function (event) {
+        const tab = (event.state && event.state.tab) || window.location.hash.replace("#", "") || "navigator";
+        switchTab(tab, false);
+      });
 
       function jumpToSection(tabName, elementId) {
         switchTab(tabName);
@@ -15366,8 +15501,8 @@
       loadQuranRevisionData();
       loadScheduleStatus();
       loadTrackerDaily();
-      renderSummary();
-      switchTab("navigator");
+      const initialTab = window.location.hash.replace("#", "") || "navigator";
+      switchTab(initialTab, false);
       // ==================== ENGLISH HUB & DICTIONARY FUNCTIONS ====================
       let englishVocabList = [];
       let vocabLookupTimeout = null;
