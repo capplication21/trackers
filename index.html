@@ -1406,22 +1406,57 @@
         gap: 4px;
       }
       .hub-card-icon {
-        width: 32px;
-        height: 32px;
-        border-radius: 9px;
-        background: #fff7ed;
-        border: 1.5px solid #fed7aa;
+        position: relative;
+        overflow: hidden;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #ffffff 0%, #fff7ed 45%, #fed7aa 100%);
+        border: 1.5px solid #fb923c;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 17px;
-        box-shadow: 0 1px 3px rgba(234, 88, 12, 0.12);
-        transition: transform 0.18s ease;
+        box-shadow: 0 2px 6px rgba(234, 88, 12, 0.18), inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95);
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      /* Shiny Specular Sheen Sweep Across Icon */
+      .hub-card-icon::after {
+        content: '';
+        position: absolute;
+        top: -60%;
+        left: -80%;
+        width: 60%;
+        height: 220%;
+        background: linear-gradient(
+          110deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.95) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        transform: rotate(25deg);
+        animation: iconShine 3.2s infinite ease-in-out;
+        pointer-events: none;
+      }
+      @keyframes iconShine {
+        0%, 25% { left: -80%; opacity: 0; }
+        35% { opacity: 1; }
+        55% { left: 140%; opacity: 0; }
+        100% { left: 140%; opacity: 0; }
       }
       .hub-card:hover .hub-card-icon {
-        transform: scale(1.1) rotate(4deg);
-        background: #ffedd5;
+        transform: scale(1.12) rotate(4deg);
+        background: linear-gradient(135deg, #ffffff 0%, #ffedd5 40%, #fdba74 100%);
         border-color: #ea580c;
+        box-shadow: 0 4px 10px rgba(234, 88, 12, 0.35), inset 0 2px 2px #ffffff;
+      }
+      .hub-card:hover .hub-card-icon::after {
+        animation: iconShineFast 0.5s ease-out forwards;
+      }
+      @keyframes iconShineFast {
+        0% { left: -80%; opacity: 0; }
+        30% { opacity: 1; }
+        100% { left: 140%; opacity: 0; }
       }
       .hub-card-badge {
         font-size: 8px;
