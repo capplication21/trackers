@@ -1278,16 +1278,39 @@
       .page-back-btn:hover .back-arrow {
         transform: translateX(-3px);
       }
+
+      /* Specific Rich Styling for Top Back to Navigator Button */
+      .page-top-back-bar .page-back-btn {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        color: #ffffff;
+        border: 2px solid var(--ink);
+        box-shadow: 0 3px 0 var(--ink);
+        padding: 7px 15px;
+        font-size: 12.5px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+      }
+      .page-top-back-bar .page-back-btn:hover {
+        background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%);
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 0 var(--ink);
+      }
+      .page-top-back-bar .page-back-btn:active {
+        transform: translateY(1.5px);
+        box-shadow: 0 1px 0 var(--ink);
+      }
+
       .page-current-badge {
         font-size: 12px;
         font-weight: 800;
-        color: #475569;
-        background: #f8fafc;
-        border: 1.5px solid #cbd5e1;
-        padding: 6px 14px;
+        color: #1e1b4b;
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        padding: 7px 14px;
         border-radius: 999px;
         white-space: nowrap;
-        box-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.06);
+        box-shadow: 0 2.5px 0 var(--ink);
       }
 
       /* ==================== NAVIGATOR HUB (FULL SCREEN LIGHT THEME COMPACT) ==================== */
@@ -1570,14 +1593,9 @@
       }
       .test-mode-tabs {
         display: flex;
+        flex-wrap: wrap;
         gap: 8px;
-        overflow-x: auto;
-        padding-bottom: 4px;
         margin-bottom: 14px;
-        scrollbar-width: none;
-      }
-      .test-mode-tabs::-webkit-scrollbar {
-        display: none;
       }
       .test-mode-tab {
         background: #ffffff;
@@ -1591,6 +1609,11 @@
         box-shadow: 0 2.5px 0 var(--ink);
         white-space: nowrap;
         transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1 1 auto;
+        text-align: center;
       }
       .test-mode-tab:hover {
         background: #f8fafc;
@@ -1600,6 +1623,44 @@
         background: #ea580c;
         color: #ffffff;
         border-color: var(--ink);
+      }
+      .test-mode-tab-big {
+        padding: 10px 22px !important;
+        font-size: 13.5px !important;
+        font-weight: 900 !important;
+        border: 2.5px solid var(--ink) !important;
+        box-shadow: 0 3.5px 0 var(--ink) !important;
+        flex: 2.2 1 auto !important;
+        letter-spacing: 0.2px;
+      }
+      .test-mode-tab-big:hover {
+        transform: translateY(-1.5px);
+        box-shadow: 0 4.5px 0 var(--ink) !important;
+      }
+      .test-mode-tab-small {
+        padding: 5px 11px !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        border: 1.5px solid var(--ink) !important;
+        box-shadow: 0 1.5px 0 var(--ink) !important;
+        flex: 1 1 auto !important;
+        opacity: 0.92;
+      }
+      @media (max-width: 520px) {
+        .test-mode-tabs {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px;
+        }
+        .test-mode-tab-big {
+          grid-column: 1 / -1 !important;
+          padding: 11px 14px !important;
+          font-size: 13px !important;
+        }
+        .test-mode-tab-small {
+          padding: 6px 8px !important;
+          font-size: 11px !important;
+        }
       }
       .test-card-box {
         background: #ffffff;
@@ -1707,7 +1768,25 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        margin-top: 10px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 520px) {
+        .test-actions-bar {
+          flex-direction: column-reverse;
+          align-items: stretch;
+          gap: 8px;
+        }
+        .test-actions-bar > div {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px;
+          width: 100%;
+        }
+        .test-actions-bar .test-main-btn {
+          width: 100%;
+          text-align: center;
+        }
       }
       .test-main-btn {
         background: #0f172a;
@@ -1729,6 +1808,101 @@
       .test-main-btn:active {
         transform: translateY(1.5px);
         box-shadow: 0 1px 0 var(--ink);
+      }
+
+      /* English Test History & Mistakes Review Styles */
+      .eng-history-item {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 0 var(--ink);
+        transition: all 0.16s ease;
+      }
+      .eng-history-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .eng-history-date {
+        font-size: 12.5px;
+        font-weight: 800;
+        color: #1e293b;
+      }
+      .eng-history-pills {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .eng-score-tag {
+        font-size: 11.5px;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 6px;
+        border: 1.5px solid var(--ink);
+      }
+      .eng-score-tag.high {
+        background: #dcfce7;
+        color: #15803d;
+      }
+      .eng-score-tag.medium {
+        background: #fef3c7;
+        color: #b45309;
+      }
+      .eng-score-tag.low {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
+      .eng-review-list {
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1.5px dashed #cbd5e1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .eng-review-item {
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1.5px solid #cbd5e1;
+        background: #f8fafc;
+        font-size: 12.5px;
+      }
+      .eng-review-item.is-correct {
+        border-color: #86efac;
+        background: #f0fdf4;
+      }
+      .eng-review-item.is-wrong {
+        border-color: #fca5a5;
+        background: #fef2f2;
+      }
+      .eng-review-q-title {
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 6px;
+      }
+      .eng-review-ans-row {
+        margin: 4px 0;
+        font-size: 12px;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .eng-review-explanation {
+        margin-top: 6px;
+        padding-top: 6px;
+        border-top: 1px dashed rgba(0, 0, 0, 0.1);
+        font-size: 11.5px;
+        color: #475569;
+        line-height: 1.4;
       }
 
       /* Practical Math Test Specifics */
@@ -6210,15 +6384,6 @@
         <div class="live-clock" id="liveClock">Loading...</div>
       </div>
 
-      <!-- Top Back Navigation Bar on Individual Pages -->
-      <div class="page-top-back-bar" id="pageTopBackBar" style="display: none;">
-        <button type="button" class="page-back-btn" onclick="goBackToNavigator()" title="Back to All Navigators">
-          <span class="back-arrow">←</span>
-          <span>Back to Navigators</span>
-        </button>
-        <span class="page-current-badge" id="pageCurrentBadge">Daily Tracker</span>
-      </div>
-
       <div id="content-area">
         <!-- MASTER NAVIGATOR HUB TAB (FULL SCREEN LIGHT THEME COMPACT) -->
         <div class="tab-content active" id="tab-navigator">
@@ -6460,6 +6625,14 @@
           <div class="schedule-tabs">
             <button
               class="schedule-tab-btn active"
+              data-period="activities"
+              onclick="scrollToScheduleSection('activities-section')"
+            >
+              <span class="schedule-tab-icon">🎯</span>
+              <span class="schedule-tab-label">Activities</span>
+            </button>
+            <button
+              class="schedule-tab-btn"
               data-period="morning"
               onclick="scrollToScheduleSection('morning-section')"
             >
@@ -6490,17 +6663,141 @@
               <span class="schedule-tab-icon">🌙</span>
               <span class="schedule-tab-label">Night</span>
             </button>
-            <button
-              class="schedule-tab-btn"
-              data-period="activities"
-              onclick="scrollToScheduleSection('activities-section')"
-            >
-              <span class="schedule-tab-icon">🎯</span>
-              <span class="schedule-tab-label">Activities</span>
-            </button>
           </div>
 
-          <div id="morning-section" class="schedule-section active">
+          <!-- ACTIVITIES / STUDY HUBS SECTION -->
+          <div id="activities-section" class="schedule-section active">
+            <div class="section-title activities-title" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-left-color: #7c3aed; color: #5b21b6;">
+              <span>🎯</span> DAILY ACTIVITIES &amp; STUDY HUBS
+            </div>
+
+            <!-- 5 Activity Hub Cards -->
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+              <!-- 1. 3 DAYS A WEEK -->
+              <div class="activity-link-card" onclick="switchTab('week')" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="hub-card-icon" style="width: 40px; height: 40px; background: #ffffff; border: 2px solid #f59e0b; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(217, 119, 6, 0.35); flex-shrink: 0;">
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="2" y="4.5" width="20" height="18.5" rx="5" fill="#EEF2FF" stroke="#C7D2FE" stroke-width="1"/>
+                      <path d="M2 9.5C2 6.73858 4.23858 4.5 7 4.5H17C19.7614 4.5 22 6.73858 22 9.5V10.5H2V9.5Z" fill="url(#calGradBlue)"/>
+                      <rect x="5.5" y="2" width="3" height="4.5" rx="1.5" fill="#3B82F6"/>
+                      <rect x="15.5" y="2" width="3" height="4.5" rx="1.5" fill="#3B82F6"/>
+                      <circle cx="7" cy="14" r="1.3" fill="#94A3B8"/>
+                      <circle cx="12" cy="14" r="1.3" fill="#94A3B8"/>
+                      <circle cx="17" cy="14" r="1.3" fill="#94A3B8"/>
+                      <circle cx="7" cy="18" r="1.3" fill="#94A3B8"/>
+                      <circle cx="12" cy="18" r="1.3" fill="#94A3B8"/>
+                      <circle cx="17" cy="18" r="1.5" fill="#2563EB"/>
+                      <defs>
+                        <linearGradient id="calGradBlue" x1="2" y1="4.5" x2="22" y2="10.5" gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#3B82F6"/>
+                          <stop offset="1" stop-color="#1D4ED8"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                      <span style="font-size: 14px; font-weight: 800; color: #78350f;">3 DAYS A WEEK</span>
+                      <span class="hub-card-badge" style="background: #fde68a; color: #92400e; border-color: #f59e0b;">COURSES</span>
+                    </div>
+                    <div style="font-size: 11.5px; color: #92400e; opacity: 0.85; margin-top: 2px;">
+                      Zad Academy &amp; Understand Quran weekly courses &amp; study logs
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #d97706; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+                  Open ↗
+                </button>
+              </div>
+
+              <!-- 2. @understandquran -->
+              <div class="activity-link-card" onclick="switchTab('week')" style="background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #0d9488; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(13, 148, 136, 0.35); flex-shrink: 0;">
+                    📖
+                  </div>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                      <span style="font-size: 14px; font-weight: 800; color: #0f766e;">@understandquran</span>
+                      <span class="hub-card-badge" style="background: #99f6e4; color: #115e59; border-color: #14b8a6;">ACADEMY</span>
+                    </div>
+                    <div style="font-size: 11.5px; color: #0f766e; opacity: 0.85; margin-top: 2px;">
+                      Understand Al-Qur'an official lectures, grammar &amp; vocabulary
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #0d9488; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+                  Course ↗
+                </button>
+              </div>
+
+              <!-- 3. DAILY ENGLISH TOOLKIT -->
+              <div class="activity-link-card" onclick="switchTab('english')" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #0284c7; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(2, 132, 199, 0.35); flex-shrink: 0;">
+                    🔤
+                  </div>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                      <span style="font-size: 14px; font-weight: 800; color: #0369a1;">DAILY ENGLISH TOOLKIT</span>
+                      <span class="hub-card-badge" style="background: #bae6fd; color: #0369a1; border-color: #0284c7;">PRACTICE</span>
+                    </div>
+                    <div style="font-size: 11.5px; color: #0369a1; opacity: 0.85; margin-top: 2px;">
+                      Grammar session, phonics, vocabulary bank &amp; daily fluency routine
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #4f46e5; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+                  Open ↗
+                </button>
+              </div>
+
+              <!-- 4. English Proficiency & Grammar Test -->
+              <div class="activity-link-card" onclick="switchTab('englishtest')" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #7c3aed; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(124, 58, 237, 0.35); flex-shrink: 0;">
+                    📝
+                  </div>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                      <span style="font-size: 14px; font-weight: 800; color: #6d28d9;">English Proficiency &amp; Grammar Test</span>
+                      <span class="hub-card-badge" style="background: #ddd6fe; color: #6d28d9; border-color: #7c3aed;">EXAM</span>
+                    </div>
+                    <div style="font-size: 11.5px; color: #6d28d9; opacity: 0.85; margin-top: 2px;">
+                      15-question CEFR test with instant score, explanations &amp; AI evaluation
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #7c3aed; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+                  Test ↗
+                </button>
+              </div>
+
+              <!-- 5. Practical Daily Life Maths Test -->
+              <div class="activity-link-card" onclick="switchTab('mathtest')" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #16a34a; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(22, 163, 74, 0.35); flex-shrink: 0;">
+                    🧮
+                  </div>
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                      <span style="font-size: 14px; font-weight: 800; color: #15803d;">Practical Daily Life Maths Test</span>
+                      <span class="hub-card-badge" style="background: #bbf7d0; color: #15803d; border-color: #16a34a;">MATHS</span>
+                    </div>
+                    <div style="font-size: 11.5px; color: #15803d; opacity: 0.85; margin-top: 2px;">
+                      Grams to kg pricing, grocery counter change &amp; discount calculation shortcuts
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #059669; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+                  Maths ↗
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="morning-section" class="schedule-section">
             <div class="section-title morning-title">
               <span>🌅</span> MORNING ROUTINES
             </div>
@@ -7113,153 +7410,6 @@
                 <div class="task-sub sub-not-taken" id="sub-n4">
                   ❓ Not taken
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ACTIVITIES / STUDY HUBS SECTION -->
-          <div id="activities-section" class="schedule-section">
-            <div class="section-title activities-title" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border-left-color: #7c3aed; color: #5b21b6;">
-              <span>🎯</span> DAILY ACTIVITIES &amp; STUDY HUBS
-            </div>
-
-            <!-- Intro Overview Card -->
-            <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; margin-bottom: 12px; box-shadow: var(--shadow-flat); display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-              <div>
-                <div style="font-size: 13.5px; font-weight: 800; color: var(--ink);">
-                  ⚡ Activity &amp; Learning Portals
-                </div>
-                <div style="font-size: 11.5px; color: #64748b; margin-top: 2px;">
-                  Quick shortcuts to your study courses, Quran lessons, English tools &amp; diagnostic tests.
-                </div>
-              </div>
-              <button type="button" class="page-back-btn" onclick="switchTab('navigator')" style="padding: 5px 12px; font-size: 11px; box-shadow: 0 2px 0 var(--ink);" title="View All Navigators">
-                <span>🧭 All Hub</span>
-              </button>
-            </div>
-
-            <!-- 5 Activity Hub Cards -->
-            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
-              <!-- 1. 3 DAYS A WEEK -->
-              <div class="activity-link-card" onclick="switchTab('week')" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div class="hub-card-icon" style="width: 40px; height: 40px; background: #ffffff; border: 2px solid #f59e0b; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(217, 119, 6, 0.35); flex-shrink: 0;">
-                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="2" y="4.5" width="20" height="18.5" rx="5" fill="#EEF2FF" stroke="#C7D2FE" stroke-width="1"/>
-                      <path d="M2 9.5C2 6.73858 4.23858 4.5 7 4.5H17C19.7614 4.5 22 6.73858 22 9.5V10.5H2V9.5Z" fill="url(#calGradBlue)"/>
-                      <rect x="5.5" y="2" width="3" height="4.5" rx="1.5" fill="#3B82F6"/>
-                      <rect x="15.5" y="2" width="3" height="4.5" rx="1.5" fill="#3B82F6"/>
-                      <circle cx="7" cy="14" r="1.3" fill="#94A3B8"/>
-                      <circle cx="12" cy="14" r="1.3" fill="#94A3B8"/>
-                      <circle cx="17" cy="14" r="1.3" fill="#94A3B8"/>
-                      <circle cx="7" cy="18" r="1.3" fill="#94A3B8"/>
-                      <circle cx="12" cy="18" r="1.3" fill="#94A3B8"/>
-                      <circle cx="17" cy="18" r="1.5" fill="#2563EB"/>
-                      <defs>
-                        <linearGradient id="calGradBlue" x1="2" y1="4.5" x2="22" y2="10.5" gradientUnits="userSpaceOnUse">
-                          <stop stop-color="#3B82F6"/>
-                          <stop offset="1" stop-color="#1D4ED8"/>
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                      <span style="font-size: 14px; font-weight: 800; color: #78350f;">3 DAYS A WEEK</span>
-                      <span class="hub-card-badge" style="background: #fde68a; color: #92400e; border-color: #f59e0b;">COURSES</span>
-                    </div>
-                    <div style="font-size: 11.5px; color: #92400e; opacity: 0.85; margin-top: 2px;">
-                      Zad Academy &amp; Understand Quran weekly courses &amp; study logs
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #d97706; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
-                  Open ↗
-                </button>
-              </div>
-
-              <!-- 2. @understandquran -->
-              <div class="activity-link-card" onclick="switchTab('week')" style="background: linear-gradient(135deg, #fff1f2 0%, #fee2e2 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #ef4444; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(239, 68, 68, 0.35); flex-shrink: 0;">
-                    📖
-                  </div>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                      <span style="font-size: 14px; font-weight: 800; color: #991b1b;">@understandquran</span>
-                      <span class="hub-card-badge" style="background: #fecaca; color: #991b1b; border-color: #ef4444;">ACADEMY</span>
-                    </div>
-                    <div style="font-size: 11.5px; color: #991b1b; opacity: 0.85; margin-top: 2px;">
-                      Understand Al-Qur'an official lectures, grammar &amp; vocabulary
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #dc2626; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
-                  Course ↗
-                </button>
-              </div>
-
-              <!-- 3. DAILY ENGLISH TOOLKIT -->
-              <div class="activity-link-card" onclick="switchTab('english')" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #0284c7; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(2, 132, 199, 0.35); flex-shrink: 0;">
-                    🔤
-                  </div>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                      <span style="font-size: 14px; font-weight: 800; color: #0369a1;">DAILY ENGLISH TOOLKIT</span>
-                      <span class="hub-card-badge" style="background: #bae6fd; color: #0369a1; border-color: #0284c7;">PRACTICE</span>
-                    </div>
-                    <div style="font-size: 11.5px; color: #0369a1; opacity: 0.85; margin-top: 2px;">
-                      Grammar session, phonics, vocabulary bank &amp; daily fluency routine
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #4f46e5; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
-                  Open ↗
-                </button>
-              </div>
-
-              <!-- 4. English Proficiency & Grammar Test -->
-              <div class="activity-link-card" onclick="switchTab('englishtest')" style="background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #7c3aed; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(124, 58, 237, 0.35); flex-shrink: 0;">
-                    📝
-                  </div>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                      <span style="font-size: 14px; font-weight: 800; color: #6d28d9;">English Proficiency &amp; Grammar Test</span>
-                      <span class="hub-card-badge" style="background: #ddd6fe; color: #6d28d9; border-color: #7c3aed;">EXAM</span>
-                    </div>
-                    <div style="font-size: 11.5px; color: #6d28d9; opacity: 0.85; margin-top: 2px;">
-                      15-question CEFR test with instant score, explanations &amp; AI evaluation
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #7c3aed; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
-                  Test ↗
-                </button>
-              </div>
-
-              <!-- 5. Practical Daily Life Maths Test -->
-              <div class="activity-link-card" onclick="switchTab('mathtest')" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: all 0.16s ease;">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div class="hub-card-icon" style="width: 40px; height: 40px; font-size: 20px; background: #ffffff; border: 2px solid #16a34a; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(22, 163, 74, 0.35); flex-shrink: 0;">
-                    🧮
-                  </div>
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                      <span style="font-size: 14px; font-weight: 800; color: #15803d;">Practical Daily Life Maths Test</span>
-                      <span class="hub-card-badge" style="background: #bbf7d0; color: #15803d; border-color: #16a34a;">MATHS</span>
-                    </div>
-                    <div style="font-size: 11.5px; color: #15803d; opacity: 0.85; margin-top: 2px;">
-                      Grams to kg pricing, grocery counter change &amp; discount calculation shortcuts
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #059669; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
-                  Maths ↗
-                </button>
               </div>
             </div>
           </div>
@@ -8029,9 +8179,15 @@
                 <div>
                   <div class="test-hero-title">English Proficiency &amp; Grammar Test</div>
                   <div class="test-hero-sub">CEFR Levels B1/B2 Assessment • Vocabulary • Tenses • Error Correction</div>
+                  <div id="engDailyDateBadge" style="display: inline-flex; align-items: center; gap: 6px; background: #fef3c7; color: #92400e; border: 1.5px solid #f59e0b; border-radius: 999px; padding: 2px 10px; font-size: 11px; font-weight: 700; margin-top: 5px;">
+                    📅 Daily Challenge: Loading...
+                  </div>
                 </div>
               </div>
               <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                <button type="button" class="pdf-action-btn" onclick="generateNewDailyEnglishSet(event)" style="background: #ede9fe; color: #6d28d9; border: 2px solid var(--ink); font-size: 11.5px; padding: 6px 12px; font-weight: 800; box-shadow: 0 2px 0 var(--ink);">
+                  🎲 New Daily Set
+                </button>
                 <button type="button" class="pdf-action-btn" onclick="openGeminiQuizPopup()" style="background: linear-gradient(135deg, #4285f4 0%, #9b72cf 100%); color: #fff; font-size: 11.5px; padding: 6px 12px; font-weight: 700; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink);">
                   ✨ 20-Q Quiz
                 </button>
@@ -8043,9 +8199,9 @@
 
             <!-- Mode Tabs -->
             <div class="test-mode-tabs">
-              <button type="button" class="test-mode-tab active" id="engModeTab-all" onclick="setEnglishTestMode('all')">🎯 Full Assessment (15 Qs)</button>
-              <button type="button" class="test-mode-tab" id="engModeTab-grammar" onclick="setEnglishTestMode('grammar')">📖 Grammar &amp; Tenses</button>
-              <button type="button" class="test-mode-tab" id="engModeTab-vocab" onclick="setEnglishTestMode('vocab')">💎 Vocabulary &amp; Collocations</button>
+              <button type="button" class="test-mode-tab test-mode-tab-big active" id="engModeTab-all" onclick="setEnglishTestMode('all')">🎯 Full Daily Assessment (15 Qs)</button>
+              <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-grammar" onclick="setEnglishTestMode('grammar')">📖 Grammar &amp; Tenses</button>
+              <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-vocab" onclick="setEnglishTestMode('vocab')">💎 Vocabulary &amp; Collocations</button>
             </div>
 
             <!-- Test Engine Box -->
@@ -8071,9 +8227,14 @@
 
               <!-- Actions -->
               <div class="test-actions-bar">
-                <button type="button" class="pdf-action-btn" onclick="restartEnglishTest()" style="background: #f1f5f9; color: #475569; font-size: 12px; padding: 8px 14px;">
-                  🔄 Restart
-                </button>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button type="button" class="pdf-action-btn" onclick="restartEnglishTest()" style="background: #f1f5f9; color: #475569; font-size: 12px; padding: 8px 14px;">
+                    🔄 Restart Set
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="generateNewDailyEnglishSet(event)" style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #c4b5fd; font-size: 12px; padding: 8px 14px; font-weight: 800;" title="Get a fresh new set of questions">
+                    🎲 New Daily Set
+                  </button>
+                </div>
                 <button type="button" class="test-main-btn" id="engNextBtn" onclick="nextEnglishQuestion()" disabled>
                   Next Question ➔
                 </button>
@@ -8091,9 +8252,56 @@
               <div style="font-size: 12.5px; color: #334155; line-height: 1.5; max-width: 440px; margin: 0 auto 20px;" id="engLevelEval">
                 Evaluating your CEFR proficiency level...
               </div>
-              <button type="button" class="test-main-btn" onclick="restartEnglishTest()" style="margin: 0 auto;">
-                Retake English Test
-              </button>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px;">
+                <button type="button" class="test-main-btn" onclick="generateNewDailyEnglishSet(event)" style="background: #4f46e5;">
+                  🎲 Start New Exam (Fresh Questions) ➔
+                </button>
+                <button type="button" class="pdf-action-btn" onclick="restartEnglishTest(false)" style="background: #ffffff; color: #475569; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); padding: 10px 18px; font-weight: 700; border-radius: 12px;">
+                  🔄 Retake Same Questions
+                </button>
+                <button type="button" class="pdf-action-btn" onclick="openCurrentEnglishTestInPdfReader()" style="background: #ede9fe; color: #6d28d9; border: 2px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); padding: 10px 18px; font-weight: 800; border-radius: 12px;" title="Store and read in built-in PDF Reader">
+                  📖 Open Review in PDF Reader
+                </button>
+              </div>
+
+              <!-- Question-by-Question Review Toggle -->
+              <div>
+                <button type="button" class="pdf-action-btn" id="engToggleReviewBtn" onclick="toggleCurrentTestReview()" style="background: #ffffff; color: #4338ca; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); padding: 8px 18px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                  <span>📋 Review Questions (Correct vs Wrong)</span>
+                  <span id="engReviewChevron">▼</span>
+                </button>
+                <div id="engCurrentReviewDetails" style="display: none; text-align: left; margin-top: 16px;"></div>
+              </div>
+            </div>
+
+            <!-- Test History & Mistakes Review Card -->
+            <div class="test-card-box" id="engHistoryCard" style="margin-top: 18px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 22px;">📜</span>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 900; color: #0f172a;">Test History &amp; Mistakes Review</div>
+                    <div style="font-size: 11.5px; color: #64748b;">Review all your completed tests, correct answers &amp; errors</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="hub-card-badge" id="engHistoryCountBadge" style="background: #ede9fe; color: #6d28d9; border-color: #8b5cf6;">0 Tests</span>
+                  <button type="button" class="pdf-action-btn" onclick="openEnglishMistakesInPdfReader()" style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; font-size: 11px; padding: 5px 11px; font-weight: 800;" title="Store and open in built-in PDF Reader">
+                    📖 Open in PDF Reader
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="downloadEnglishMistakesPdf()" style="background: #f8fafc; color: #334155; border: 1.5px solid var(--ink); font-size: 11px; padding: 5px 11px; font-weight: 800;" title="Download PDF Study Guide">
+                    📥 Download PDF
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="clearEnglishTestHistory()" style="background: #fff1f2; color: #be123c; border: 1.5px solid #fca5a5; font-size: 11px; padding: 5px 10px; font-weight: 700;" title="Clear Test History">
+                    🗑️ Clear
+                  </button>
+                </div>
+              </div>
+              <div id="engHistoryListContainer">
+                <!-- Dynamically filled with past tests -->
+              </div>
             </div>
 
             <!-- Interactive English Quiz (Gemini AI) -->
@@ -8165,10 +8373,10 @@
 
             <!-- Mode Tabs -->
             <div class="test-mode-tabs">
-              <button type="button" class="test-mode-tab active" id="mathModeTab-mixed" onclick="setMathTestMode('mixed')">⚡ Mixed Speed Test</button>
-              <button type="button" class="test-mode-tab" id="mathModeTab-weight" onclick="setMathTestMode('weight')">⚖️ Grams &amp; Kg</button>
-              <button type="button" class="test-mode-tab" id="mathModeTab-change" onclick="setMathTestMode('change')">💵 Cash &amp; Change</button>
-              <button type="button" class="test-mode-tab" id="mathModeTab-discount" onclick="setMathTestMode('discount')">🏷️ Discounts %</button>
+              <button type="button" class="test-mode-tab test-mode-tab-big active" id="mathModeTab-mixed" onclick="setMathTestMode('mixed')">⚡ Mixed Speed Test</button>
+              <button type="button" class="test-mode-tab test-mode-tab-small" id="mathModeTab-weight" onclick="setMathTestMode('weight')">⚖️ Grams &amp; Kg</button>
+              <button type="button" class="test-mode-tab test-mode-tab-small" id="mathModeTab-change" onclick="setMathTestMode('change')">💵 Cash &amp; Change</button>
+              <button type="button" class="test-mode-tab test-mode-tab-small" id="mathModeTab-discount" onclick="setMathTestMode('discount')">🏷️ Discounts %</button>
             </div>
 
             <!-- Problem Card Box -->
@@ -8229,6 +8437,34 @@
                 <button type="button" class="test-main-btn" id="mathNextBtn" onclick="nextMathProblem()" style="background: #0f172a;" disabled>
                   Next Problem ➔
                 </button>
+              </div>
+            </div>
+
+            <!-- Math Test History & Mistakes Review Card -->
+            <div class="test-card-box" id="mathHistoryCard" style="margin-top: 18px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 22px;">📜</span>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 900; color: #064e3b;">Math Mistakes &amp; Practice History</div>
+                    <div style="font-size: 11.5px; color: #64748b;">Review your calculations, errors &amp; mental shortcuts</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="hub-card-badge" id="mathHistoryCountBadge" style="background: #dcfce7; color: #065f46; border-color: #86efac;">0 Challenges</span>
+                  <button type="button" class="pdf-action-btn" onclick="openMathMistakesInPdfReader()" style="background: #dcfce7; color: #065f46; border: 1.5px solid #86efac; font-size: 11px; padding: 5px 11px; font-weight: 800;" title="Store and open in built-in PDF Reader">
+                    📖 Open in PDF Reader
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="downloadMathMistakesPdf()" style="background: #f8fafc; color: #334155; border: 1.5px solid var(--ink); font-size: 11px; padding: 5px 11px; font-weight: 800;" title="Download PDF Study Guide">
+                    📥 Download PDF
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="clearMathTestHistory()" style="background: #fff1f2; color: #be123c; border: 1.5px solid #fca5a5; font-size: 11px; padding: 5px 10px; font-weight: 700;" title="Clear Math History">
+                    🗑️ Clear
+                  </button>
+                </div>
+              </div>
+              <div id="mathHistoryListContainer">
+                <!-- Dynamically filled with past math exercises -->
               </div>
             </div>
           </div>
@@ -11586,187 +11822,178 @@
         navigator: "🧭 All Navigators",
       };
 
-      // ==================== ENGLISH TEST ENGINE ====================
-      const ENGLISH_TEST_QUESTIONS = [
-        {
-          id: 1,
-          category: "grammar",
-          level: "B1",
-          question: "Choose the correct sentence in the Present Perfect tense:",
-          options: [
-            "I have seen that movie yesterday evening.",
-            "I have already finished my assignment.",
-            "She has went to London last week.",
-            "They has lived in this city since ten years."
-          ],
-          correctIndex: 1,
-          explanation: "Present Perfect ('have finished') connects past actions to now with 'already'. Specific past time ('yesterday', 'last week') requires Simple Past."
-        },
-        {
-          id: 2,
-          category: "grammar",
-          level: "B1",
-          question: "If I _______ more free time, I would learn how to code.",
-          options: ["have", "had", "will have", "would have"],
-          correctIndex: 1,
-          explanation: "Second Conditional for hypothetical/unreal situations: 'If + Simple Past (had) ..., would + base verb (would learn)'."
-        },
-        {
-          id: 3,
-          category: "vocab",
-          level: "B1",
-          question: "Which word best completes the sentence: 'Smartphones have become _______ in modern society; almost everyone owns one.'",
-          options: ["ubiquitous", "reluctant", "scarce", "hostile"],
-          correctIndex: 0,
-          explanation: "'Ubiquitous' means present, appearing, or found everywhere."
-        },
-        {
-          id: 4,
-          category: "grammar",
-          level: "B1",
-          question: "Neither the manager nor the employees _______ satisfied with the new decision.",
-          options: ["was", "were", "is", "be"],
-          correctIndex: 1,
-          explanation: "With 'neither... nor...', the verb agrees with the closer subject. 'Employees' is plural, so we use 'were'."
-        },
-        {
-          id: 5,
-          category: "vocab",
-          level: "B1",
-          question: "Choose the correct natural collocation: 'Could you please _______ me a favor and close the door?'",
-          options: ["make", "do", "give", "take"],
-          correctIndex: 1,
-          explanation: "In English, the standard fixed collocation is always 'do someone a favor', never 'make a favor'."
-        },
-        {
-          id: 6,
-          category: "grammar",
-          level: "B2",
-          question: "By the time we arrived at the airport, the flight _______ already taken off.",
-          options: ["has", "had", "was", "would have"],
-          correctIndex: 1,
-          explanation: "Past Perfect ('had taken off') is used for an action completed before another past event ('arrived')."
-        },
-        {
-          id: 7,
-          category: "vocab",
-          level: "B1",
-          question: "The team demonstrated incredible _______ by recovering quickly after failing their first inspection.",
-          options: ["resilience", "hesitation", "fragility", "indifference"],
-          correctIndex: 0,
-          explanation: "'Resilience' is the capacity to recover quickly from difficulties or setbacks."
-        },
-        {
-          id: 8,
-          category: "grammar",
-          level: "B1",
-          question: "She is accustomed to _______ early every morning for her workout.",
-          options: ["wake up", "waking up", "woke up", "wakes up"],
-          correctIndex: 1,
-          explanation: "The phrase 'be accustomed to' is followed by a gerund (-ing form), so 'waking up' is correct."
-        },
-        {
-          id: 9,
-          category: "grammar",
-          level: "B1",
-          question: "Spot the error: 'He suggested that she _______ a specialist doctor.'",
-          options: ["sees", "see", "saw", "will see"],
-          correctIndex: 1,
-          explanation: "The subjunctive mood after verbs like 'suggest that' takes the bare infinitive ('see') for all persons."
-        },
-        {
-          id: 10,
-          category: "vocab",
-          level: "B2",
-          question: "Choose the correct antonym of 'Diligent':",
-          options: ["Hardworking", "Careful", "Slothful / Lazy", "Attentive"],
-          correctIndex: 2,
-          explanation: "'Diligent' means showing steady and earnest care/effort. Its opposite is 'lazy' or 'slothful'."
-        },
-        {
-          id: 11,
-          category: "grammar",
-          level: "B1",
-          question: "I look forward to _______ you at the annual convention next month.",
-          options: ["see", "seeing", "have seen", "saw"],
-          correctIndex: 1,
-          explanation: "'Look forward to' has 'to' as a preposition, which requires a noun or gerund: 'seeing you'."
-        },
-        {
-          id: 12,
-          category: "vocab",
-          level: "B1",
-          question: "Finding a 100-dollar bill in an old coat pocket was pure _______.",
-          options: ["adversity", "serendipity", "catastrophe", "monotony"],
-          correctIndex: 1,
-          explanation: "'Serendipity' is the occurrence of finding valuable or pleasant things by chance."
-        },
-        {
-          id: 13,
-          category: "grammar",
-          level: "B2",
-          question: "Hardly _______ into the house when the storm began.",
-          options: ["we had stepped", "had we stepped", "we stepped", "did we stepped"],
-          correctIndex: 1,
-          explanation: "Inversion with negative adverbs: 'Hardly had we stepped...' puts the auxiliary verb before the subject."
-        },
-        {
-          id: 14,
-          category: "vocab",
-          level: "B1",
-          question: "Choose the best phrasal verb: 'I was exhausted, so I decided to _______ for the night.'",
-          options: ["turn in", "turn out", "turn over", "turn away"],
-          correctIndex: 0,
-          explanation: "'Turn in' is an idiomatic phrasal verb meaning to go to bed for the night."
-        },
-        {
-          id: 15,
-          category: "grammar",
-          level: "B1",
-          question: "The project was approved _______ some initial budget constraints.",
-          options: ["despite of", "despite", "although", "even though"],
-          correctIndex: 1,
-          explanation: "'Despite' is followed directly by a noun phrase without 'of'. ('In spite of' uses 'of', but 'despite' does not)."
-        }
+      // ==================== ENGLISH TEST ENGINE (DAILY QUESTIONS & PERSISTENT HISTORY) ====================
+      const ENGLISH_TEST_QUESTIONS_POOL = [
+        // 1 to 15
+        { id: 1, category: "grammar", level: "B1", question: "Choose the correct sentence in the Present Perfect tense:", options: ["I have seen that movie yesterday evening.", "I have already finished my assignment.", "She has went to London last week.", "They has lived in this city since ten years."], correctIndex: 1, explanation: "Present Perfect ('have finished') connects past actions to now with 'already'. Specific past time ('yesterday', 'last week') requires Simple Past." },
+        { id: 2, category: "grammar", level: "B1", question: "If I _______ more free time, I would learn how to code.", options: ["have", "had", "will have", "would have"], correctIndex: 1, explanation: "Second Conditional for hypothetical/unreal situations: 'If + Simple Past (had) ..., would + base verb (would learn)'." },
+        { id: 3, category: "vocab", level: "B1", question: "Which word best completes the sentence: 'Smartphones have become _______ in modern society; almost everyone owns one.'", options: ["ubiquitous", "reluctant", "scarce", "hostile"], correctIndex: 0, explanation: "'Ubiquitous' means present, appearing, or found everywhere." },
+        { id: 4, category: "grammar", level: "B1", question: "Neither the manager nor the employees _______ satisfied with the new decision.", options: ["was", "were", "is", "be"], correctIndex: 1, explanation: "With 'neither... nor...', the verb agrees with the closer subject. 'Employees' is plural, so we use 'were'." },
+        { id: 5, category: "vocab", level: "B1", question: "Choose the correct natural collocation: 'Could you please _______ me a favor and close the door?'", options: ["make", "do", "give", "take"], correctIndex: 1, explanation: "In English, the standard fixed collocation is always 'do someone a favor', never 'make a favor'." },
+        { id: 6, category: "grammar", level: "B2", question: "By the time we arrived at the airport, the flight _______ already taken off.", options: ["has", "had", "was", "would have"], correctIndex: 1, explanation: "Past Perfect ('had taken off') is used for an action completed before another past event ('arrived')." },
+        { id: 7, category: "vocab", level: "B1", question: "The team demonstrated incredible _______ by recovering quickly after failing their first inspection.", options: ["resilience", "hesitation", "fragility", "indifference"], correctIndex: 0, explanation: "'Resilience' is the capacity to recover quickly from difficulties or setbacks." },
+        { id: 8, category: "grammar", level: "B1", question: "She is accustomed to _______ early every morning for her workout.", options: ["wake up", "waking up", "woke up", "wakes up"], correctIndex: 1, explanation: "The phrase 'be accustomed to' is followed by a gerund (-ing form), so 'waking up' is correct." },
+        { id: 9, category: "grammar", level: "B1", question: "Spot the error: 'He suggested that she _______ a specialist doctor.'", options: ["sees", "see", "saw", "will see"], correctIndex: 1, explanation: "The subjunctive mood after verbs like 'suggest that' takes the bare infinitive ('see') for all persons." },
+        { id: 10, category: "vocab", level: "B2", question: "Choose the correct antonym of 'Diligent':", options: ["Hardworking", "Careful", "Slothful / Lazy", "Attentive"], correctIndex: 2, explanation: "'Diligent' means showing steady and earnest care/effort. Its opposite is 'lazy' or 'slothful'." },
+        { id: 11, category: "grammar", level: "B1", question: "I look forward to _______ you at the annual convention next month.", options: ["see", "seeing", "have seen", "saw"], correctIndex: 1, explanation: "'Look forward to' has 'to' as a preposition, which requires a noun or gerund: 'seeing you'." },
+        { id: 12, category: "vocab", level: "B1", question: "Finding a 100-dollar bill in an old coat pocket was pure _______.", options: ["adversity", "serendipity", "catastrophe", "monotony"], correctIndex: 1, explanation: "'Serendipity' is the occurrence of finding valuable or pleasant things by chance." },
+        { id: 13, category: "grammar", level: "B2", question: "Hardly _______ into the house when the storm began.", options: ["we had stepped", "had we stepped", "we stepped", "did we stepped"], correctIndex: 1, explanation: "Inversion with negative adverbs: 'Hardly had we stepped...' puts the auxiliary verb before the subject." },
+        { id: 14, category: "vocab", level: "B1", question: "Choose the best phrasal verb: 'I was exhausted, so I decided to _______ for the night.'", options: ["turn in", "turn out", "turn over", "turn away"], correctIndex: 0, explanation: "'Turn in' is an idiomatic phrasal verb meaning to go to bed for the night." },
+        { id: 15, category: "grammar", level: "B1", question: "The project was approved _______ some initial budget constraints.", options: ["despite of", "despite", "although", "even though"], correctIndex: 1, explanation: "'Despite' is followed directly by a noun phrase without 'of'. ('In spite of' uses 'of', but 'despite' does not)." },
+
+        // 16 to 30
+        { id: 16, category: "grammar", level: "B2", question: "If she _______ harder, she would have passed the examination.", options: ["studied", "had studied", "would study", "has studied"], correctIndex: 1, explanation: "Third Conditional for past unreal situations: 'If + Past Perfect (had studied) ..., would have + past participle'." },
+        { id: 17, category: "vocab", level: "B1", question: "The medical team made a significant _______ in gene therapy research.", options: ["breakdown", "breakthrough", "breakout", "breakoff"], correctIndex: 1, explanation: "A 'breakthrough' is an important discovery or development that helps solve a major challenge." },
+        { id: 18, category: "grammar", level: "B1", question: "She distinctly prefers drinking green tea _______ coffee in the mornings.", options: ["than", "to", "from", "over to"], correctIndex: 1, explanation: "In standard grammar, the verb 'prefer' is followed by the preposition 'to' (prefer X to Y)." },
+        { id: 19, category: "vocab", level: "B2", question: "Despite the sudden turbulence, the flight attendant remained completely _______.", options: ["composed", "reckless", "frantic", "turbulent"], correctIndex: 0, explanation: "'Composed' means calm, tranquil, and in full control of one's emotions." },
+        { id: 20, category: "grammar", level: "B2", question: "By this time next summer, the engineers _______ constructing the new bridge.", options: ["will finish", "will have finished", "have finished", "are finishing"], correctIndex: 1, explanation: "Future Perfect ('will have finished') describes an action that will be completed prior to a specific future time." },
+        { id: 21, category: "grammar", level: "B1", question: "Neither of the submitted applications _______ all the minimum eligibility criteria.", options: ["meet", "meets", "are meeting", "have met"], correctIndex: 1, explanation: "'Neither of + plural noun' takes a singular verb ('meets') in formal standard English." },
+        { id: 22, category: "vocab", level: "B2", question: "The wording of the legal contract was so _______ that both parties interpreted it differently.", options: ["lucid", "ambiguous", "transparent", "definitive"], correctIndex: 1, explanation: "'Ambiguous' means open to more than one interpretation; unclear or having a double meaning." },
+        { id: 23, category: "grammar", level: "B1", question: "The suspect denied _______ any confidential company documents to the competitor.", options: ["to leak", "leaking", "leaked", "having to leak"], correctIndex: 1, explanation: "The verb 'deny' is followed by a gerund (-ing form), so 'leaking' is correct." },
+        { id: 24, category: "vocab", level: "B1", question: "Choose the correct idiom: 'Stop talking in circles and stop beating around the _______!'", options: ["fence", "bush", "tree", "corner"], correctIndex: 1, explanation: "'Beat around the bush' is an English idiom meaning to avoid talking about what is important." },
+        { id: 25, category: "grammar", level: "B2", question: "No sooner _______ home than the unexpected thunderstorm started.", options: ["she had arrived", "had she arrived", "did she arrived", "she arrived"], correctIndex: 1, explanation: "'No sooner' at the beginning of a clause triggers subject-auxiliary inversion: 'had she arrived'." },
+        { id: 26, category: "vocab", level: "B2", question: "The laboratory implements _______ safety measures to prevent contamination.", options: ["stringent", "negligent", "feeble", "lenient"], correctIndex: 0, explanation: "'Stringent' means strict, precise, and rigorously binding or exacting." },
+        { id: 27, category: "grammar", level: "B2", question: "I would rather you _______ me the truth during yesterday's meeting.", options: ["told", "had told", "would tell", "have told"], correctIndex: 1, explanation: "'Would rather + subject + Past Perfect' refers to a past regret or preference about an event that already occurred." },
+        { id: 28, category: "vocab", level: "B1", question: "An action or decision that cannot be changed or reversed is called _______.", options: ["temporary", "irreversible", "flexible", "tentative"], correctIndex: 1, explanation: "'Irreversible' means impossible to undo or alter once completed." },
+        { id: 29, category: "grammar", level: "B2", question: "In the courtroom, the witness was made _______ the timeline of events.", options: ["repeat", "to repeat", "repeating", "repeated"], correctIndex: 1, explanation: "In passive voice ('was made'), the causative verb make takes a full infinitive with to: 'was made to repeat'." },
+        { id: 30, category: "vocab", level: "B2", question: "Select the best antonym for the word 'Meticulous':", options: ["Careful", "Precise", "Careless", "Thorough"], correctIndex: 2, explanation: "'Meticulous' means showing great attention to detail. Its direct antonym is 'careless'." },
+
+        // 31 to 45
+        { id: 31, category: "grammar", level: "B2", question: "Scarcely _______ the presentation when the fire alarm began ringing.", options: ["we had started", "had we started", "did we started", "were we started"], correctIndex: 1, explanation: "'Scarcely' at the beginning of a clause requires inversion: 'had we started'." },
+        { id: 32, category: "vocab", level: "B2", question: "His campaign promises turned out to be empty _______ with no real substance.", options: ["rhetoric", "authenticity", "accuracy", "modesty"], correctIndex: 0, explanation: "'Rhetoric' often refers to language that sounds impressive but lacks sincerity or meaningful substance." },
+        { id: 33, category: "grammar", level: "B1", question: "It is high time we _______ concrete steps to improve our sleep schedule.", options: ["take", "took", "have taken", "will take"], correctIndex: 1, explanation: "The structure 'it is high time + subject' requires the Unreal Simple Past ('took') to express urgency." },
+        { id: 34, category: "vocab", level: "B1", question: "A scholar who speaks and writes fluently in several languages is known as a _______.", options: ["biologist", "polyglot", "novelist", "philanthropist"], correctIndex: 1, explanation: "A 'polyglot' is a person who knows and uses several languages fluently." },
+        { id: 35, category: "grammar", level: "B2", question: "Not only _______ the national tournament, but she also set a new record.", options: ["she won", "did she win", "she has won", "won she"], correctIndex: 1, explanation: "Inversion follows negative correlative conjunctions: 'Not only did she win...'." },
+        { id: 36, category: "vocab", level: "B1", question: "Choose the correct phrasal verb: 'We will have to _______ the project launch until next month.'", options: ["put off", "put on", "put out", "put up"], correctIndex: 0, explanation: "'Put off' is a phrasal verb meaning to postpone or delay an event." },
+        { id: 37, category: "grammar", level: "B1", question: "The local police _______ currently investigating the source of the cyberattack.", options: ["is", "are", "was", "has been"], correctIndex: 1, explanation: "In standard English grammar, the collective noun 'police' is plural and takes a plural verb ('are')." },
+        { id: 38, category: "vocab", level: "B1", question: "The panoramic view of the snow-covered mountains from the peak was _______.", options: ["monotonous", "breathtaking", "tedious", "dismal"], correctIndex: 1, explanation: "'Breathtaking' describes something astonishing, awe-inspiring, or magnificent in beauty." },
+        { id: 39, category: "grammar", level: "B2", question: "You _______ have left your keys in the office; the car door was completely unlocked.", options: ["must", "should", "can", "would"], correctIndex: 0, explanation: "'Must have + past participle' is used for logical deductions of high certainty in the past." },
+        { id: 40, category: "vocab", level: "B2", question: "Which word is the closest synonym to 'Ephemeral'?", options: ["Permanent", "Short-lived", "Everlasting", "Constant"], correctIndex: 1, explanation: "'Ephemeral' means lasting for a very short time; transient or short-lived." },
+        { id: 41, category: "grammar", level: "B1", question: "The jury _______ unable to reach a unanimous verdict after two days of deliberation.", options: ["was", "were", "are", "have been"], correctIndex: 0, explanation: "When a collective noun acts as a single unified body in formal English, it takes a singular verb ('was')." },
+        { id: 42, category: "vocab", level: "B1", question: "She gave a very _______ and detailed description of what happened that evening.", options: ["vivid", "vague", "dim", "hazy"], correctIndex: 0, explanation: "'Vivid' means producing powerful, distinct, and clear feelings or mental images." },
+        { id: 43, category: "grammar", level: "B2", question: "Were you _______ more time, how would you invest it differently?", options: ["give", "given", "to give", "giving"], correctIndex: 1, explanation: "Inverted conditional with 'were + subject + past participle (passive)': 'Were you given' = 'If you were given'." },
+        { id: 44, category: "vocab", level: "B1", question: "To make a long story _______, we resolved the issue before the deadline arrived.", options: ["brief", "short", "little", "fast"], correctIndex: 1, explanation: "The standard fixed English idiom is 'to make a long story short'." },
+        { id: 45, category: "grammar", level: "B1", question: "Sarah has been working _______ a certified financial planner for over six years.", options: ["like", "as", "same", "such"], correctIndex: 1, explanation: "We use 'as' (not 'like') when stating someone's actual job, role, or profession." },
+
+        // 46 to 60
+        { id: 46, category: "vocab", level: "B2", question: "Her quiet and gentle demeanor belied her _______ determination to succeed.", options: ["feeble", "fierce", "hesitant", "passive"], correctIndex: 1, explanation: "'Fierce determination' is a strong collocation meaning intense, passionate, and powerful commitment." },
+        { id: 47, category: "grammar", level: "B2", question: "I really wish I _______ more attentive during the chemistry lecture yesterday.", options: ["am", "was", "had been", "would be"], correctIndex: 2, explanation: "'Wish + Past Perfect' expresses a regret about a past situation ('had been')." },
+        { id: 48, category: "vocab", level: "B1", question: "Choose the correct collocation: 'The guest speaker made a profound _______ on the students.'", options: ["impression", "result", "doing", "consequence"], correctIndex: 0, explanation: "The natural verb-noun collocation in English is 'to make an impression on someone'." },
+        { id: 49, category: "grammar", level: "B2", question: "Seldom _______ such remarkable discipline in so young an athlete.", options: ["we have seen", "have we seen", "we saw", "did we saw"], correctIndex: 1, explanation: "Negative adverb 'seldom' at the beginning of a sentence requires inversion: 'have we seen'." },
+        { id: 50, category: "vocab", level: "B2", question: "The sudden proposal faced _______ resistance from community representatives.", options: ["docile", "stiff", "mild", "gentle"], correctIndex: 1, explanation: "'Stiff resistance' is a natural collocation meaning tough, stubborn, or severe opposition." },
+        { id: 51, category: "grammar", level: "B2", question: "Had they warned us about the blizzard, we _______ our travel plans immediately.", options: ["will change", "would have changed", "have changed", "changed"], correctIndex: 1, explanation: "Inverted third conditional: 'Had they warned us' = 'If they had warned us ..., would have changed'." },
+        { id: 52, category: "vocab", level: "B1", question: "The word 'Candid' most nearly means:", options: ["Secretive", "Frank and honest", "Arrogant", "Polite but false"], correctIndex: 1, explanation: "'Candid' means truthful, straightforward, and sincere in speech or expression." },
+        { id: 53, category: "grammar", level: "B1", question: "He is senior _______ me by two years in the marketing division.", options: ["than", "to", "from", "over"], correctIndex: 1, explanation: "Adjectives of Latin origin ending in -ior (senior, junior, superior, inferior) take 'to', not 'than'." },
+        { id: 54, category: "vocab", level: "B2", question: "A deadlock in negotiations where neither side can make progress is called a _______.", options: ["stalemate", "triumph", "compromise", "concord"], correctIndex: 0, explanation: "A 'stalemate' is a situation in which no progress can be made or no advancement is possible." },
+        { id: 55, category: "grammar", level: "B2", question: "Little _______ that this modest experiment would revolutionize clean energy.", options: ["did they know", "they knew", "they had known", "do they knew"], correctIndex: 0, explanation: "Negative adverb 'little' at the beginning requires subject-verb inversion: 'Little did they know'." },
+        { id: 56, category: "vocab", level: "B1", question: "Complete the idiom: 'Take rumors on social media with a grain of _______.'", options: ["pepper", "sugar", "salt", "wheat"], correctIndex: 2, explanation: "The idiom 'take with a grain of salt' means to view something with skepticism." },
+        { id: 57, category: "grammar", level: "B2", question: "We would have reached the summit before noon if the weather _______ so harsh.", options: ["was not", "had not been", "is not", "would not be"], correctIndex: 1, explanation: "Third conditional requires Past Perfect in the if-clause: 'if the weather had not been'." },
+        { id: 58, category: "vocab", level: "B1", question: "Select the direct antonym for the adjective 'Vague':", options: ["Unclear", "Precise", "Hazy", "Ambiguous"], correctIndex: 1, explanation: "'Vague' means indefinite or indistinct. Its direct opposite is 'precise' or 'specific'." },
+        { id: 59, category: "grammar", level: "B2", question: "The chairperson insisted that the financial audit _______ conducted impartially.", options: ["is", "be", "was", "being"], correctIndex: 1, explanation: "The present subjunctive mood (base form 'be') is used after verbs of demanding or insisting." },
+        { id: 60, category: "vocab", level: "B1", question: "The sudden flash flood caused _______ damage to road infrastructure.", options: ["trivial", "extensive", "negligible", "scanty"], correctIndex: 1, explanation: "'Extensive' means large in amount, wide-ranging, or comprehensive." }
       ];
 
+      let engTestMode = "all";
+      let engDailyTestIndex = 0;
       let engCurrentQuestions = [];
       let engCurrentIndex = 0;
       let engScore = 0;
       let engSelectedOption = null;
       let engAnswered = false;
+      let engUserAnswers = [];
+      let engLastCompletedTestRecord = null;
+
+      function getDailyEnglishTestQuestions(mode = "all", setOffset = 0) {
+        const today = new Date();
+        const dateStr = today.toISOString().slice(0, 10);
+        let seed = 0;
+        for (let i = 0; i < dateStr.length; i++) {
+          seed = (seed << 5) - seed + dateStr.charCodeAt(i);
+          seed |= 0;
+        }
+        seed = Math.abs(seed) + (setOffset * 997);
+
+        let pool = [...ENGLISH_TEST_QUESTIONS_POOL];
+        if (mode === "grammar") {
+          pool = pool.filter(q => q.category === "grammar");
+        } else if (mode === "vocab") {
+          pool = pool.filter(q => q.category === "vocab");
+        }
+
+        const shuffled = [...pool];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.abs(Math.sin(seed + i)) * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        const count = mode === "all" ? 15 : Math.min(10, shuffled.length);
+        return shuffled.slice(0, count);
+      }
+
+      function updateDailyEnglishBadge() {
+        const badge = document.getElementById("engDailyDateBadge");
+        if (badge) {
+          const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+          badge.textContent = `📅 Daily Challenge: ${dateStr} • Set #${engDailyTestIndex + 1}`;
+        }
+      }
+
+      function generateNewDailyEnglishSet(e) {
+        if (e && typeof e.preventDefault === "function") e.preventDefault();
+        engDailyTestIndex++;
+        updateDailyEnglishBadge();
+        restartEnglishTest(true);
+
+        if (typeof showToast === "function") {
+          showToast(`🎲 Loaded Fresh Daily Set #${engDailyTestIndex + 1}! (15 New Questions)`);
+        }
+
+        const box = document.getElementById("engTestCardBox");
+        if (box) {
+          box.scrollIntoView({ behavior: "smooth", block: "start" });
+          box.style.transition = "transform 0.18s ease";
+          box.style.transform = "scale(0.99)";
+          setTimeout(() => { box.style.transform = "none"; }, 180);
+        }
+      }
 
       function initEnglishTest() {
+        updateDailyEnglishBadge();
         setEnglishTestMode("all");
+        renderEnglishTestHistory();
       }
 
       function setEnglishTestMode(mode) {
+        engTestMode = mode || "all";
         document.querySelectorAll(".test-mode-tab[id^='engModeTab']").forEach(t => t.classList.remove("active"));
-        const activeTab = document.getElementById("engModeTab-" + mode);
+        const activeTab = document.getElementById("engModeTab-" + engTestMode);
         if (activeTab) activeTab.classList.add("active");
 
-        if (mode === "grammar") {
-          engCurrentQuestions = ENGLISH_TEST_QUESTIONS.filter(q => q.category === "grammar");
-        } else if (mode === "vocab") {
-          engCurrentQuestions = ENGLISH_TEST_QUESTIONS.filter(q => q.category === "vocab");
-        } else {
-          engCurrentQuestions = [...ENGLISH_TEST_QUESTIONS];
-        }
-
-        restartEnglishTest();
+        restartEnglishTest(true);
       }
 
-      function restartEnglishTest() {
+      function restartEnglishTest(loadNew = false) {
+        if (loadNew || engCurrentQuestions.length === 0) {
+          engCurrentQuestions = getDailyEnglishTestQuestions(engTestMode, engDailyTestIndex);
+        }
+
         engCurrentIndex = 0;
         engScore = 0;
         engSelectedOption = null;
         engAnswered = false;
+        engUserAnswers = [];
 
         const cardBox = document.getElementById("engTestCardBox");
         const resultBox = document.getElementById("engResultBox");
         if (cardBox) cardBox.style.display = "block";
         if (resultBox) resultBox.style.display = "none";
 
+        const reviewDetails = document.getElementById("engCurrentReviewDetails");
+        if (reviewDetails) reviewDetails.style.display = "none";
+        const chevron = document.getElementById("engReviewChevron");
+        if (chevron) chevron.textContent = "▼";
+
+        updateDailyEnglishBadge();
         renderEnglishQuestion();
       }
 
@@ -11817,10 +12044,22 @@
         const isCorrect = index === q.correctIndex;
         if (isCorrect) engScore++;
 
+        engUserAnswers.push({
+          qIndex: engCurrentIndex + 1,
+          question: q.question,
+          options: q.options,
+          userIndex: index,
+          userText: q.options[index],
+          correctIndex: q.correctIndex,
+          correctText: q.options[q.correctIndex],
+          isCorrect: isCorrect,
+          explanation: q.explanation,
+          level: q.level
+        });
+
         const scoreBadge = document.getElementById("engScoreBadge");
         if (scoreBadge) scoreBadge.textContent = `Score: ${engScore}`;
 
-        // Highlight options
         q.options.forEach((_, i) => {
           const btn = document.getElementById("engOpt-" + i);
           if (!btn) return;
@@ -11832,7 +12071,6 @@
           }
         });
 
-        // Show feedback
         const feedbackBox = document.getElementById("engFeedbackBox");
         const feedbackTitle = document.getElementById("engFeedbackTitle");
         const feedbackExp = document.getElementById("engFeedbackExplanation");
@@ -11872,19 +12110,508 @@
 
         if (scoreEl) scoreEl.textContent = `${engScore} / ${total} (${pct}%)`;
 
+        let evalText = "";
         if (pct >= 85) {
           if (emojiEl) emojiEl.textContent = "🌟";
           if (titleEl) titleEl.textContent = "Outstanding Performance!";
-          if (evalEl) evalEl.textContent = "CEFR Level: Solid B2 (Upper Intermediate). You have exceptional grasp of grammatical subtleties, collocations, and advanced structure!";
+          evalText = "CEFR Level: Solid B2 (Upper Intermediate). You have exceptional grasp of grammatical subtleties, collocations, and advanced structure!";
         } else if (pct >= 65) {
           if (emojiEl) emojiEl.textContent = "🎯";
           if (titleEl) titleEl.textContent = "Great Job!";
-          if (evalEl) evalEl.textContent = "CEFR Level: Confident B1 (Intermediate). You handle daily conversations and common grammatical tenses very well with high communicative competence!";
+          evalText = "CEFR Level: Confident B1 (Intermediate). You handle daily conversations and common grammatical tenses very well with high communicative competence!";
         } else {
           if (emojiEl) emojiEl.textContent = "💪";
           if (titleEl) titleEl.textContent = "Keep Practicing!";
-          if (evalEl) evalEl.textContent = "CEFR Level: A2/Early B1. Focus on irregular verbs, fixed collocations ('do a favor'), and conditional sentence structures.";
+          evalText = "CEFR Level: A2/Early B1. Focus on irregular verbs, fixed collocations ('do a favor'), and conditional sentence structures.";
         }
+        if (evalEl) evalEl.textContent = evalText;
+
+        const testRecord = {
+          id: "eng_test_" + Date.now(),
+          timestamp: Date.now(),
+          dateStr: new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" }),
+          timeStr: new Date().toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+          score: engScore,
+          total: total,
+          percentage: pct,
+          levelEval: evalText,
+          mode: engTestMode,
+          setNum: engDailyTestIndex + 1,
+          answers: [...engUserAnswers]
+        };
+
+        engLastCompletedTestRecord = testRecord;
+        saveEnglishTestHistory(testRecord);
+        renderEnglishTestHistory();
+        prepareCurrentTestReview(testRecord);
+      }
+
+      function prepareCurrentTestReview(record) {
+        const container = document.getElementById("engCurrentReviewDetails");
+        if (!container || !record || !record.answers) return;
+
+        container.innerHTML = `
+          <div style="font-weight: 800; font-size: 13.5px; margin-bottom: 8px; color: #1e1b4b;">
+            Detailed Questions Breakdown:
+          </div>
+          <div class="eng-review-list">
+            ${record.answers.map((a, idx) => `
+              <div class="eng-review-item ${a.isCorrect ? 'is-correct' : 'is-wrong'}">
+                <div class="eng-review-q-title">
+                  <span>Q${idx + 1}. ${escapeHtml(a.question)}</span>
+                  <span class="eng-score-tag ${a.isCorrect ? 'high' : 'low'}" style="font-size:10.5px;">
+                    ${a.isCorrect ? '✅ Correct' : '❌ Wrong'}
+                  </span>
+                </div>
+                <div class="eng-review-ans-row">
+                  <span style="font-weight:700; color: ${a.isCorrect ? '#15803d' : '#b91c1c'};">Your Answer:</span>
+                  <span>${escapeHtml(a.userText || "None")}</span>
+                </div>
+                ${!a.isCorrect ? `
+                  <div class="eng-review-ans-row">
+                    <span style="font-weight:700; color:#15803d;">Correct Answer:</span>
+                    <span style="font-weight:700; color:#15803d;">${escapeHtml(a.correctText)}</span>
+                  </div>
+                ` : ''}
+                <div class="eng-review-explanation">
+                  <strong>💡 Grammar Rule:</strong> ${escapeHtml(a.explanation)}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      function toggleCurrentTestReview() {
+        const container = document.getElementById("engCurrentReviewDetails");
+        const chevron = document.getElementById("engReviewChevron");
+        if (!container) return;
+        const isHidden = container.style.display === "none" || !container.style.display;
+        container.style.display = isHidden ? "block" : "none";
+        if (chevron) chevron.textContent = isHidden ? "▲" : "▼";
+      }
+
+      function saveEnglishTestHistory(record) {
+        try {
+          const raw = localStorage.getItem("bushra_english_test_history");
+          let list = raw ? JSON.parse(raw) : [];
+          if (!Array.isArray(list)) list = [];
+          list.unshift(record);
+          if (list.length > 50) list = list.slice(0, 50);
+          localStorage.setItem("bushra_english_test_history", JSON.stringify(list));
+        } catch (e) {
+          console.error("Failed to save English test history:", e);
+        }
+      }
+
+      function renderEnglishTestHistory() {
+        const countBadge = document.getElementById("engHistoryCountBadge");
+        const container = document.getElementById("engHistoryListContainer");
+        if (!container) return;
+
+        let list = [];
+        try {
+          const raw = localStorage.getItem("bushra_english_test_history");
+          if (raw) list = JSON.parse(raw);
+        } catch (e) {
+          list = [];
+        }
+
+        if (!Array.isArray(list)) list = [];
+
+        if (countBadge) {
+          countBadge.textContent = `${list.length} Test${list.length === 1 ? '' : 's'}`;
+        }
+
+        if (list.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 20px 14px; color: #64748b; font-size: 12.5px; background: #f8fafc; border-radius: 12px; border: 1.5px dashed #cbd5e1;">
+              <div style="font-size: 24px; margin-bottom: 4px;">📝</div>
+              <div style="font-weight: 700; color: #334155; margin-bottom: 2px;">No Test History Yet</div>
+              <div>Complete today's English test above to record your score, correct answers &amp; mistake review!</div>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = list.map((item, idx) => {
+          const correctCount = item.answers ? item.answers.filter(a => a.isCorrect).length : item.score;
+          const wrongCount = item.total - correctCount;
+          const scoreClass = item.percentage >= 85 ? "high" : (item.percentage >= 65 ? "medium" : "low");
+          const modeLabel = item.mode === "grammar" ? "📖 Grammar" : (item.mode === "vocab" ? "💎 Vocab" : "🎯 Full Assessment");
+
+          return `
+            <div class="eng-history-item" id="engHistoryCard-${item.id || idx}">
+              <div class="eng-history-header-row">
+                <div>
+                  <div class="eng-history-date">📅 ${item.dateStr} • ${item.timeStr}</div>
+                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">
+                    ${modeLabel} • Set #${item.setNum || 1}
+                  </div>
+                </div>
+                <div class="eng-history-pills">
+                  <span class="eng-score-tag ${scoreClass}">
+                    ${item.score} / ${item.total} (${item.percentage}%)
+                  </span>
+                  <span style="font-size: 11px; font-weight: 700; color: #15803d; background: #dcfce7; padding: 2px 7px; border-radius: 6px; border: 1px solid #86efac;">
+                    ✅ ${correctCount}
+                  </span>
+                  <span style="font-size: 11px; font-weight: 700; color: #b91c1c; background: #fee2e2; padding: 2px 7px; border-radius: 6px; border: 1px solid #fca5a5;">
+                    ❌ ${wrongCount}
+                  </span>
+                  <button type="button" class="pdf-action-btn" onclick="toggleHistoryItemReview('${item.id || idx}')" style="font-size: 11px; padding: 4px 9px; background: #f8fafc; border: 1.5px solid var(--ink); font-weight: 800;">
+                    Review ▼
+                  </button>
+                </div>
+              </div>
+
+              <!-- Collapsible Question Breakdown -->
+              <div id="engHistoryReview-${item.id || idx}" class="eng-review-list" style="display: none;">
+                ${item.answers && item.answers.length > 0 ? item.answers.map((ans, qIdx) => `
+                  <div class="eng-review-item ${ans.isCorrect ? 'is-correct' : 'is-wrong'}">
+                    <div class="eng-review-q-title">
+                      <span>Q${qIdx + 1}. ${escapeHtml(ans.question)}</span>
+                      <span class="eng-score-tag ${ans.isCorrect ? 'high' : 'low'}" style="font-size: 10px;">
+                        ${ans.isCorrect ? '✅ Correct' : '❌ Wrong'}
+                      </span>
+                    </div>
+                    <div class="eng-review-ans-row">
+                      <span style="font-weight: 700; color: ${ans.isCorrect ? '#15803d' : '#b91c1c'};">Your Answer:</span>
+                      <span>${escapeHtml(ans.userText || "None")}</span>
+                    </div>
+                    ${!ans.isCorrect ? `
+                      <div class="eng-review-ans-row">
+                        <span style="font-weight: 700; color: #15803d;">Correct Answer:</span>
+                        <span style="font-weight: 700; color: #15803d;">${escapeHtml(ans.correctText)}</span>
+                      </div>
+                    ` : ''}
+                    <div class="eng-review-explanation">
+                      <strong>💡 Grammar Rule:</strong> ${escapeHtml(ans.explanation)}
+                    </div>
+                  </div>
+                `).join("") : '<div style="font-size: 11.5px; color: #64748b;">Detailed question log not available for this legacy entry.</div>'}
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      function toggleHistoryItemReview(id) {
+        const el = document.getElementById("engHistoryReview-" + id);
+        if (!el) return;
+        el.style.display = el.style.display === "none" || !el.style.display ? "flex" : "none";
+      }
+
+      function clearEnglishTestHistory() {
+        if (!confirm("Are you sure you want to clear your English Test history? This will delete all past score records.")) return;
+        localStorage.removeItem("bushra_english_test_history");
+        renderEnglishTestHistory();
+      }
+
+      // ==================== PURE JS PDF GENERATOR ENGINE (OFFLINE CAPABLE) ====================
+      class SimplePdfWriter {
+        constructor() {
+          this.pages = [];
+          this.currentPage = null;
+        }
+
+        addPage() {
+          this.currentPage = { stream: [] };
+          this.pages.push(this.currentPage);
+          return this.currentPage;
+        }
+
+        addText(text, x, y, size = 10, font = "F1", color = [0.1, 0.1, 0.1]) {
+          if (!this.currentPage) this.addPage();
+          const clean = String(text || "")
+            .replace(/\\/g, "\\\\")
+            .replace(/\(/g, "\\(")
+            .replace(/\)/g, "\\)")
+            .replace(/[^\x20-\x7E]/g, " ");
+          const [r, g, b] = color;
+          this.currentPage.stream.push(
+            `BT /${font} ${size} Tf ${r.toFixed(2)} ${g.toFixed(2)} ${b.toFixed(2)} rg ${x.toFixed(1)} ${y.toFixed(1)} Td (${clean}) Tj ET`
+          );
+        }
+
+        addRect(x, y, w, h, fillColor = null, strokeColor = null, lineWidth = 1) {
+          if (!this.currentPage) this.addPage();
+          let cmd = "";
+          if (fillColor) {
+            const [r, g, b] = fillColor;
+            cmd += `${r.toFixed(2)} ${g.toFixed(2)} ${b.toFixed(2)} rg `;
+          }
+          if (strokeColor) {
+            const [r, g, b] = strokeColor;
+            cmd += `${r.toFixed(2)} ${g.toFixed(2)} ${b.toFixed(2)} RG ${lineWidth} w `;
+          }
+          cmd += `${x.toFixed(1)} ${y.toFixed(1)} ${w.toFixed(1)} ${h.toFixed(1)} re `;
+          if (fillColor && strokeColor) cmd += "B";
+          else if (fillColor) cmd += "f";
+          else if (strokeColor) cmd += "S";
+          this.currentPage.stream.push(cmd);
+        }
+
+        buildPdf() {
+          const pageWidth = 595.28;
+          const pageHeight = 841.89;
+          let objId = 1;
+
+          const catalogId = objId++;
+          const pagesId = objId++;
+          const fontF1Id = objId++;
+          const fontF2Id = objId++;
+
+          const pageObjIds = [];
+          const streamObjIds = [];
+
+          this.pages.forEach(() => {
+            pageObjIds.push(objId++);
+            streamObjIds.push(objId++);
+          });
+
+          let pdf = "%PDF-1.4\n";
+          const offsets = [];
+
+          function addObj(id, content) {
+            offsets[id] = pdf.length;
+            pdf += `${id} 0 obj\n${content}\nendobj\n`;
+          }
+
+          addObj(catalogId, `<< /Type /Catalog /Pages ${pagesId} 0 R >>`);
+          addObj(
+            pagesId,
+            `<< /Type /Pages /Kids [${pageObjIds.map(id => `${id} 0 R`).join(" ")}] /Count ${pageObjIds.length} >>`
+          );
+          addObj(fontF1Id, `<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>`);
+          addObj(fontF2Id, `<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>`);
+
+          this.pages.forEach((page, idx) => {
+            const pId = pageObjIds[idx];
+            const sId = streamObjIds[idx];
+            const streamContent = page.stream.join("\n");
+            const streamLen = streamContent.length;
+
+            addObj(
+              pId,
+              `<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${pageWidth} ${pageHeight}] /Contents ${sId} 0 R /Resources << /Font << /F1 ${fontF1Id} 0 R /F2 ${fontF2Id} 0 R >> >> >>`
+            );
+            addObj(sId, `<< /Length ${streamLen} >>\nstream\n${streamContent}\nendstream`);
+          });
+
+          const startXref = pdf.length;
+          pdf += `xref\n0 ${objId}\n0000000000 65535 f \n`;
+          for (let i = 1; i < objId; i++) {
+            const off = String(offsets[i]).padStart(10, "0");
+            pdf += `${off} 00000 n \n`;
+          }
+          pdf += `trailer\n<< /Size ${objId} /Root ${catalogId} 0 R >>\nstartxref\n${startXref}\n%%EOF`;
+
+          const uint8 = new Uint8Array(pdf.length);
+          for (let i = 0; i < pdf.length; i++) {
+            uint8[i] = pdf.charCodeAt(i) & 0xff;
+          }
+          return uint8.buffer;
+        }
+      }
+
+      function wrapPdfLine(text, maxChars = 75) {
+        const words = String(text || "").split(" ");
+        const lines = [];
+        let cur = "";
+        words.forEach(w => {
+          if ((cur + " " + w).trim().length > maxChars) {
+            if (cur) lines.push(cur.trim());
+            cur = w;
+          } else {
+            cur += " " + w;
+          }
+        });
+        if (cur.trim()) lines.push(cur.trim());
+        return lines.slice(0, 4);
+      }
+
+      function buildStudyMistakesPdf({ docTitle, subtitle, scoreSummary, items }) {
+        const writer = new SimplePdfWriter();
+        let currentY = 800;
+
+        function ensureSpace(needed) {
+          if (currentY - needed < 50) {
+            writer.addPage();
+            currentY = 800;
+            drawHeader(false);
+          }
+        }
+
+        function drawHeader(isFirstPage = true) {
+          writer.addRect(30, currentY - 36, 535, 42, [0.95, 0.95, 0.98], [0.3, 0.3, 0.6], 1.5);
+          writer.addText(docTitle, 42, currentY - 14, 13, "F2", [0.15, 0.15, 0.4]);
+          writer.addText(subtitle, 42, currentY - 28, 9, "F1", [0.35, 0.35, 0.45]);
+          currentY -= 50;
+
+          if (isFirstPage && scoreSummary) {
+            writer.addRect(30, currentY - 22, 535, 26, [0.93, 0.98, 0.94], [0.15, 0.6, 0.3], 1);
+            writer.addText(scoreSummary, 42, currentY - 14, 10.5, "F2", [0.08, 0.45, 0.2]);
+            currentY -= 36;
+          }
+        }
+
+        writer.addPage();
+        drawHeader(true);
+
+        items.forEach((item, index) => {
+          const expLines = wrapPdfLine(item.explanation || "", 80);
+          const boxHeight = 44 + (expLines.length * 12);
+          ensureSpace(boxHeight + 10);
+
+          const isCorrect = !!item.isCorrect;
+          const bgColor = isCorrect ? [0.95, 0.99, 0.96] : [0.99, 0.94, 0.94];
+          const borderColor = isCorrect ? [0.4, 0.8, 0.5] : [0.9, 0.4, 0.4];
+
+          writer.addRect(30, currentY - boxHeight, 535, boxHeight, bgColor, borderColor, 1);
+
+          const qTitle = `Q${index + 1}. ${item.question || item.story || "Question"}`;
+          const truncatedQ = wrapPdfLine(qTitle, 78)[0] || qTitle;
+          writer.addText(truncatedQ, 40, currentY - 14, 9.5, "F2", [0.1, 0.1, 0.15]);
+
+          const tagText = isCorrect ? "[ CORRECT ]" : "[ WRONG ]";
+          const tagColor = isCorrect ? [0.1, 0.6, 0.2] : [0.8, 0.1, 0.1];
+          writer.addText(tagText, 490, currentY - 14, 9, "F2", tagColor);
+
+          writer.addText(`Your Answer: ${item.userAnswer || "None"}`, 40, currentY - 26, 8.5, "F1", isCorrect ? [0.1, 0.5, 0.2] : [0.8, 0.1, 0.1]);
+
+          if (!isCorrect) {
+            writer.addText(`Correct: ${item.correctAnswer || ""}`, 260, currentY - 26, 8.5, "F2", [0.1, 0.55, 0.2]);
+          }
+
+          let expY = currentY - 38;
+          expLines.forEach((line, lIdx) => {
+            const prefix = lIdx === 0 ? (item.ruleLabel ? `${item.ruleLabel}: ` : "Rule / Tip: ") : "   ";
+            writer.addText(prefix + line, 40, expY, 8, "F1", [0.25, 0.25, 0.35]);
+            expY -= 12;
+          });
+
+          currentY -= (boxHeight + 10);
+        });
+
+        return writer.buildPdf();
+      }
+
+      function downloadPdfBuffer(buffer, fileName) {
+        const blob = new Blob([buffer], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }, 1000);
+      }
+
+      async function openPdfBufferInReader(buffer, fileName) {
+        if (typeof processPdfBuffer === "function") {
+          await processPdfBuffer(buffer, fileName, 1);
+          switchTab("pdf");
+          if (typeof showToast === "function") {
+            showToast(`📖 ${fileName} loaded into PDF Reader!`);
+          }
+        } else {
+          downloadPdfBuffer(buffer, fileName);
+        }
+      }
+
+      // ==================== ENGLISH TEST PDF EXPORTS ====================
+      function getEnglishTestMistakesItems(testId = null) {
+        let list = [];
+        try {
+          const raw = localStorage.getItem("bushra_english_test_history");
+          if (raw) list = JSON.parse(raw);
+        } catch (e) {}
+
+        if (!Array.isArray(list)) list = [];
+        if (list.length === 0 && engLastCompletedTestRecord) {
+          list = [engLastCompletedTestRecord];
+        }
+
+        let targetTests = list;
+        if (testId) {
+          targetTests = list.filter(t => (t.id || "") === testId);
+        }
+
+        const items = [];
+        targetTests.forEach(t => {
+          if (t.answers && Array.isArray(t.answers)) {
+            t.answers.forEach(a => {
+              items.push({
+                question: a.question,
+                isCorrect: a.isCorrect,
+                userAnswer: a.userText || "None",
+                correctAnswer: a.correctText || "",
+                ruleLabel: "Grammar Rule",
+                explanation: a.explanation
+              });
+            });
+          }
+        });
+        return { items, targetTests };
+      }
+
+      async function openEnglishMistakesInPdfReader(testId = null) {
+        const { items } = getEnglishTestMistakesItems(testId);
+        if (items.length === 0) {
+          showToast("No test records found to generate PDF 📝");
+          return;
+        }
+
+        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        const correct = items.filter(i => i.isCorrect).length;
+        const total = items.length;
+        const pct = Math.round((correct / total) * 100);
+
+        const buffer = buildStudyMistakesPdf({
+          docTitle: "English Proficiency & Grammar Test — Mistakes & Review",
+          subtitle: `Study Report • ${total} Questions • Generated on ${dateStr}`,
+          scoreSummary: `Overall Score: ${correct} / ${total} (${pct}%) • Recorded in History`,
+          items: items
+        });
+
+        const fileName = `English_Test_Mistakes_Review_${Date.now().toString().slice(-4)}.pdf`;
+        await openPdfBufferInReader(buffer, fileName);
+      }
+
+      function downloadEnglishMistakesPdf(testId = null) {
+        const { items } = getEnglishTestMistakesItems(testId);
+        if (items.length === 0) {
+          showToast("No test records found to generate PDF 📝");
+          return;
+        }
+
+        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        const correct = items.filter(i => i.isCorrect).length;
+        const total = items.length;
+        const pct = Math.round((correct / total) * 100);
+
+        const buffer = buildStudyMistakesPdf({
+          docTitle: "English Proficiency & Grammar Test — Mistakes & Review",
+          subtitle: `Study Report • ${total} Questions • Generated on ${dateStr}`,
+          scoreSummary: `Overall Score: ${correct} / ${total} (${pct}%) • Recorded in History`,
+          items: items
+        });
+
+        const fileName = `English_Test_Mistakes_Review_${Date.now().toString().slice(-4)}.pdf`;
+        downloadPdfBuffer(buffer, fileName);
+        showToast("📥 PDF Study Guide downloaded!");
+      }
+
+      async function openCurrentEnglishTestInPdfReader() {
+        if (!engLastCompletedTestRecord || !engLastCompletedTestRecord.answers) {
+          await openEnglishMistakesInPdfReader();
+          return;
+        }
+        await openEnglishMistakesInPdfReader(engLastCompletedTestRecord.id);
       }
 
       // ==================== PRACTICAL MATH TEST ENGINE ====================
@@ -11897,6 +12624,7 @@
 
       function initMathTest() {
         setMathTestMode("mixed");
+        renderMathTestHistory();
       }
 
       function setMathTestMode(mode) {
@@ -12066,10 +12794,201 @@
           shortcutText.textContent = currentMathProblem.shortcut;
           shortcutCard.style.display = "block";
         }
+
+        // Record problem into persistent Math History
+        const mathRecord = {
+          id: "math_" + Date.now(),
+          timestamp: Date.now(),
+          dateStr: new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }),
+          timeStr: new Date().toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+          tag: currentMathProblem.tag,
+          story: currentMathProblem.story,
+          userAnswer: "Rs. " + userVal,
+          correctAnswer: "Rs. " + currentMathProblem.correctAnswer,
+          isCorrect: isCorrect,
+          shortcut: currentMathProblem.shortcut
+        };
+        saveMathProblemToHistory(mathRecord);
+        renderMathTestHistory();
       }
 
       function nextMathProblem() {
         generateNewMathProblem();
+      }
+
+      // ==================== MATH TEST HISTORY & PDF ENGINE ====================
+      function saveMathProblemToHistory(record) {
+        try {
+          const raw = localStorage.getItem("bushra_math_test_history");
+          let list = raw ? JSON.parse(raw) : [];
+          if (!Array.isArray(list)) list = [];
+          list.unshift(record);
+          if (list.length > 50) list = list.slice(0, 50);
+          localStorage.setItem("bushra_math_test_history", JSON.stringify(list));
+        } catch (e) {
+          console.error("Failed to save math history:", e);
+        }
+      }
+
+      function renderMathTestHistory() {
+        const badge = document.getElementById("mathHistoryCountBadge");
+        const container = document.getElementById("mathHistoryListContainer");
+        if (!container) return;
+
+        let list = [];
+        try {
+          const raw = localStorage.getItem("bushra_math_test_history");
+          if (raw) list = JSON.parse(raw);
+        } catch (e) {}
+
+        if (!Array.isArray(list)) list = [];
+
+        if (badge) {
+          badge.textContent = `${list.length} Challenge${list.length === 1 ? "" : "s"}`;
+        }
+
+        if (list.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 20px 14px; color: #64748b; font-size: 12.5px; background: #f8fafc; border-radius: 12px; border: 1.5px dashed #cbd5e1;">
+              <div style="font-size: 24px; margin-bottom: 4px;">🧮</div>
+              <div style="font-weight: 700; color: #334155; margin-bottom: 2px;">No Math Practice History Yet</div>
+              <div>Solve calculations above to record your answers, mistakes &amp; mental shortcuts!</div>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = list.map((item, idx) => {
+          const isCorrect = !!item.isCorrect;
+          return `
+            <div class="eng-history-item" id="mathHistoryCard-${item.id || idx}">
+              <div class="eng-history-header-row">
+                <div>
+                  <div class="eng-history-date">📅 ${item.dateStr || "Today"} • ${item.timeStr || ""}</div>
+                  <div style="font-size: 11.5px; font-weight: 800; color: #059669; margin-top: 2px;">
+                    ${escapeHtml(item.tag || "Math Challenge")}
+                  </div>
+                </div>
+                <div class="eng-history-pills">
+                  <span class="eng-score-tag ${isCorrect ? 'high' : 'low'}">
+                    ${isCorrect ? '✅ Correct' : '❌ Wrong'}
+                  </span>
+                  <button type="button" class="pdf-action-btn" onclick="openMathMistakesInPdfReader('${item.id || idx}')" style="font-size: 11px; padding: 4px 8px; background: #dcfce7; color: #065f46; border: 1.5px solid #86efac; font-weight: 800;" title="Open this math challenge in PDF Reader">
+                    📄 PDF
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="toggleMathHistoryItem('${item.id || idx}')" style="font-size: 11px; padding: 4px 9px; background: #f8fafc; border: 1.5px solid var(--ink); font-weight: 800;">
+                    Review ▼
+                  </button>
+                </div>
+              </div>
+
+              <!-- Collapsible Details -->
+              <div id="mathHistoryReview-${item.id || idx}" class="eng-review-list" style="display: none;">
+                <div class="eng-review-item ${isCorrect ? 'is-correct' : 'is-wrong'}">
+                  <div style="font-weight: 800; color: #0f172a; margin-bottom: 6px;">
+                    Scenario: ${escapeHtml(item.story || "")}
+                  </div>
+                  <div class="eng-review-ans-row">
+                    <span style="font-weight: 700; color: ${isCorrect ? '#15803d' : '#b91c1c'};">Your Calculation:</span>
+                    <span>${escapeHtml(item.userAnswer || "")}</span>
+                  </div>
+                  ${!isCorrect ? `
+                    <div class="eng-review-ans-row">
+                      <span style="font-weight: 700; color: #15803d;">Correct Amount:</span>
+                      <span style="font-weight: 700; color: #15803d;">${escapeHtml(item.correctAnswer || "")}</span>
+                    </div>
+                  ` : ''}
+                  <div class="eng-review-explanation">
+                    <strong>⚡ Mental Shortcut:</strong> ${escapeHtml(item.shortcut || "")}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      function toggleMathHistoryItem(id) {
+        const el = document.getElementById("mathHistoryReview-" + id);
+        if (!el) return;
+        el.style.display = el.style.display === "none" || !el.style.display ? "flex" : "none";
+      }
+
+      function clearMathTestHistory() {
+        if (!confirm("Are you sure you want to clear your Math Test history?")) return;
+        localStorage.removeItem("bushra_math_test_history");
+        renderMathTestHistory();
+      }
+
+      function getMathTestMistakesItems(mathId = null) {
+        let list = [];
+        try {
+          const raw = localStorage.getItem("bushra_math_test_history");
+          if (raw) list = JSON.parse(raw);
+        } catch (e) {}
+
+        if (!Array.isArray(list)) list = [];
+        let targetList = list;
+        if (mathId) {
+          targetList = list.filter(m => (m.id || "") === mathId);
+        }
+
+        const items = targetList.map(m => ({
+          question: `${m.tag}: ${m.story}`,
+          isCorrect: m.isCorrect,
+          userAnswer: m.userAnswer,
+          correctAnswer: m.correctAnswer,
+          ruleLabel: "Mental Math Trick",
+          explanation: m.shortcut
+        }));
+        return { items, targetList };
+      }
+
+      async function openMathMistakesInPdfReader(mathId = null) {
+        const { items } = getMathTestMistakesItems(mathId);
+        if (items.length === 0) {
+          showToast("No math challenge records to generate PDF 🧮");
+          return;
+        }
+
+        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        const correct = items.filter(i => i.isCorrect).length;
+        const total = items.length;
+        const pct = Math.round((correct / total) * 100);
+
+        const buffer = buildStudyMistakesPdf({
+          docTitle: "Practical Daily Life Maths — Mistakes & Review",
+          subtitle: `Study Report • ${total} Market Calculations • Generated on ${dateStr}`,
+          scoreSummary: `Overall Accuracy: ${correct} / ${total} (${pct}%) • Recorded in History`,
+          items: items
+        });
+
+        const fileName = `Math_Mistakes_Review_${Date.now().toString().slice(-4)}.pdf`;
+        await openPdfBufferInReader(buffer, fileName);
+      }
+
+      function downloadMathMistakesPdf(mathId = null) {
+        const { items } = getMathTestMistakesItems(mathId);
+        if (items.length === 0) {
+          showToast("No math challenge records to generate PDF 🧮");
+          return;
+        }
+
+        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+        const correct = items.filter(i => i.isCorrect).length;
+        const total = items.length;
+        const pct = Math.round((correct / total) * 100);
+
+        const buffer = buildStudyMistakesPdf({
+          docTitle: "Practical Daily Life Maths — Mistakes & Review",
+          subtitle: `Study Report • ${total} Market Calculations • Generated on ${dateStr}`,
+          scoreSummary: `Overall Accuracy: ${correct} / ${total} (${pct}%) • Recorded in History`,
+          items: items
+        });
+
+        const fileName = `Math_Mistakes_Review_${Date.now().toString().slice(-4)}.pdf`;
+        downloadPdfBuffer(buffer, fileName);
+        showToast("📥 Math PDF Study Guide downloaded!");
       }
 
       function goBackToNavigator() {
@@ -12096,20 +13015,6 @@
         if (targetContent) {
           targetContent.classList.add("active");
           window.scrollTo(0, 0);
-        }
-
-        // Show/hide Top Back Navigation Bar
-        const topBackBar = document.getElementById("pageTopBackBar");
-        const currentBadge = document.getElementById("pageCurrentBadge");
-        if (topBackBar) {
-          if (tabName === "navigator") {
-            topBackBar.style.display = "none";
-          } else {
-            topBackBar.style.display = "flex";
-            if (currentBadge) {
-              currentBadge.textContent = TAB_DISPLAY_NAMES[tabName] || tabName;
-            }
-          }
         }
 
         // Show floating navigation button on individual pages, hide on navigator home page
