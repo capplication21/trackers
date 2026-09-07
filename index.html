@@ -8578,7 +8578,7 @@
                       title="Ask Gemini AI Grammar Tutor about this question"
                     >
                       <span>✨</span>
-                      <span>Ask AI About Rule</span>
+                      <span>Ask with Gemini</span>
                     </button>
                   </div>
                 </div>
@@ -10108,10 +10108,10 @@
             </div>
             <div>
               <div style="font-size: 15px; font-weight: 900; color: #ffffff;" id="aiGrammarModalTitle">
-                Ask AI About Grammar Rule
+                Ask with Gemini
               </div>
               <div style="font-size: 11px; color: #e0e7ff; font-weight: 700;">
-                Ask your question &amp; get instant answer from AI
+                Ask your question &amp; get instant answers from Gemini AI
               </div>
             </div>
           </div>
@@ -14084,7 +14084,7 @@
         const correctOpt = q.options[q.correctIndex];
         
         if (titleEl) {
-          titleEl.textContent = `Ask AI: Question ${idx + 1} Grammar Rule`;
+          titleEl.textContent = `Ask with Gemini: Question ${idx + 1}`;
         }
 
         currentAITutorAudioText = `Question: ${q.question}. The correct answer is ${correctOpt}. ${q.explanation}`;
@@ -14107,7 +14107,7 @@
           <!-- Question Input from User -->
           <div style="background: #ffffff; border: 2px solid #8b5cf6; border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink);">
             <div style="font-size: 12.5px; font-weight: 900; color: #5b21b6; margin-bottom: 6px;">
-              ✍️ Enter Your Question / Doubt About This Grammar Rule:
+              ✍️ Ask Your Grammar Doubt with Gemini:
             </div>
             <div style="display: flex; gap: 6px;">
               <input
@@ -14123,7 +14123,7 @@
                 onclick="submitCustomGrammarDoubt()"
                 style="padding: 8px 16px; font-size: 12.5px; background: #6d28d9; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); white-space: nowrap; flex-shrink: 0;"
               >
-                Ask AI ➔
+                Ask Gemini ➔
               </button>
             </div>
           </div>
@@ -14132,7 +14132,7 @@
           <div id="aiInAppTutorResponse" style="padding: 14px; background: linear-gradient(135deg, #fdf4ff 0%, #faf5ff 100%); border: 2px solid #d946ef; border-radius: 12px; line-height: 1.6; font-size: 13px; color: #1e1b4b; box-shadow: 0 2px 0 var(--ink);">
             <div style="font-weight: 900; color: #86198f; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
               <span>🤖</span>
-              <span id="aiTutorResponseTitle">AI Answer &amp; Detailed Grammar Breakdown:</span>
+              <span id="aiTutorResponseTitle">Gemini AI Answer &amp; Detailed Grammar Breakdown:</span>
             </div>
             <div id="aiTutorResponseContent">
               ${generateDeepAIAnswer(q, "").html}
