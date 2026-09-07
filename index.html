@@ -14132,15 +14132,10 @@
           <div id="aiInAppTutorResponse" style="padding: 14px; background: linear-gradient(135deg, #fdf4ff 0%, #faf5ff 100%); border: 2px solid #d946ef; border-radius: 12px; line-height: 1.6; font-size: 13px; color: #1e1b4b; box-shadow: 0 2px 0 var(--ink);">
             <div style="font-weight: 900; color: #86198f; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
               <span>🤖</span>
-              <span id="aiTutorResponseTitle">AI Answer &amp; Explanation:</span>
+              <span id="aiTutorResponseTitle">AI Answer &amp; Detailed Grammar Breakdown:</span>
             </div>
-            <div id="aiTutorResponseContent" style="font-size: 13.5px; color: #334155;">
-              <p style="margin-bottom: 8px;">
-                <strong>💡 Rule Explanation:</strong> ${escapeHtml(q.explanation)}
-              </p>
-              <div style="padding: 8px 12px; background: #ffffff; border: 1.5px solid #10b981; border-radius: 8px; color: #065f46; font-size: 12.5px; font-weight: 700;">
-                ✅ <strong>Grammatical Solution:</strong> "${escapeHtml(correctOpt)}" is the correct form fitting this rule.
-              </div>
+            <div id="aiTutorResponseContent">
+              ${generateDeepAIAnswer(q, "").html}
             </div>
           </div>
         `;
@@ -14150,6 +14145,107 @@
           const inp = document.getElementById("aiCustomGrammarInput");
           if (inp) inp.focus();
         }, 100);
+      }
+
+      function generateDeepAIAnswer(q, userQuery) {
+        const correctOpt = q.options[q.correctIndex];
+        const otherOpts = q.options.filter((_, i) => i !== q.correctIndex);
+        const qText = q.question;
+        const explanation = q.explanation;
+        const query = userQuery ? userQuery.trim() : "";
+        const qLower = query.toLowerCase();
+
+        // Detect if user asked about a specific option (A, B, C, D or words in options)
+        let queriedOpt = null;
+        if (qLower.includes("option a") || qLower.includes("choice a") || qLower === "a" || qLower === "why not a") queriedOpt = q.options[0];
+        else if (qLower.includes("option b") || qLower.includes("choice b") || qLower === "b" || qLower === "why not b") queriedOpt = q.options[1];
+        else if (qLower.includes("option c") || qLower.includes("choice c") || qLower === "c" || qLower === "why not c") queriedOpt = q.options[2];
+        else if (qLower.includes("option d") || qLower.includes("choice d") || qLower === "d" || qLower === "why not d") queriedOpt = q.options[3];
+        else {
+          for (const opt of q.options) {
+            if (opt && opt.length > 2 && qLower.includes(opt.toLowerCase())) {
+              queriedOpt = opt;
+              break;
+            }
+          }
+        }
+
+        let specificAnswer = "";
+        if (queriedOpt) {
+          if (queriedOpt === correctOpt) {
+            specificAnswer = `<strong>"${escapeHtml(queriedOpt)}" is the correct answer!</strong> It correctly fulfills the grammatical requirement: ${escapeHtml(explanation)}`;
+          } else {
+            specificAnswer = `<strong>Why "${escapeHtml(queriedOpt)}" is incorrect:</strong> In this sentence, choosing "${escapeHtml(queriedOpt)}" creates a grammatical error (such as a tense mismatch, incorrect mood, or improper agreement). Only <strong>"${escapeHtml(correctOpt)}"</strong> is grammatically correct because: ${escapeHtml(explanation)}`;
+          }
+        } else if (qLower.includes("urdu") || qLower.includes("اردو") || qLower.includes("meaning") || qLower.includes("matlab")) {
+          specificAnswer = `<strong>اردو میں گرامر کی وضاحت:</strong><br>اس سوال کا درست جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ انگریزی اصول کے مطابق: ${escapeHtml(explanation)}`;
+        } else if (qLower.includes("formula") || qLower.includes("rule") || qLower.includes("structure") || qLower.includes("pattern")) {
+          specificAnswer = `<strong>Grammar Formula &amp; Structure:</strong><br>Pattern: <code>[Subject] + [Proper Form: ${escapeHtml(correctOpt)}] + [Complement]</code>.<br><strong>Rule:</strong> ${escapeHtml(explanation)}`;
+        } else if (qLower.includes("example") || qLower.includes("sentence")) {
+          specificAnswer = `<strong>Examples using this grammar rule:</strong><br>1. <em>"She has already finished her work on time."</em><br>2. <em>"If he had practiced more, he would have succeeded."</em><br>3. <em>"They insisted that the report be submitted immediately."</em>`;
+        } else if (query) {
+          specificAnswer = `<strong>Regarding your question "${escapeHtml(query)}":</strong><br>${escapeHtml(explanation)}<br>Therefore, <strong>"${escapeHtml(correctOpt)}"</strong> is the only grammatically acceptable choice.`;
+        } else {
+          specificAnswer = `<strong>Core Grammar Principle:</strong> ${escapeHtml(explanation)}`;
+        }
+
+        const html = `
+          <!-- Main Direct Answer -->
+          <div style="background: #ffffff; border: 1.5px solid #d946ef; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1.5px 0 var(--ink);">
+            <div style="font-size: 13.5px; color: #1e1b4b; line-height: 1.6;">
+              ${specificAnswer}
+            </div>
+          </div>
+
+          <!-- Deep Grammar Breakdown -->
+          <div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 10px;">
+            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 12px;">
+              <div style="font-weight: 800; color: #15803d; font-size: 12.5px; margin-bottom: 3px;">
+                ✅ Correct Choice: "${escapeHtml(correctOpt)}"
+              </div>
+              <div style="font-size: 12px; color: #166534; line-height: 1.5;">
+                ${escapeHtml(explanation)}
+              </div>
+            </div>
+
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 4px;">
+                ❌ Why other options are wrong:
+              </div>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px; color: #881337; line-height: 1.5;">
+                ${otherOpts.map(opt => `<li><strong>"${escapeHtml(opt)}"</strong>: Incorrect grammar form or tense for this structure.</li>`).join("")}
+              </ul>
+            </div>
+
+            <!-- Urdu Translation & Explanation Box -->
+            <div style="background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 8px; padding: 10px 12px;">
+              <div style="font-weight: 800; color: #86198f; font-size: 12px; margin-bottom: 3px;">
+                🇵🇰 اردو میں وضاحت (Urdu Explanation):
+              </div>
+              <div style="font-size: 13px; color: #701a75; font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif; line-height: 1.7;">
+                اس جملے میں صحیح جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ ${escapeHtml(explanation)}
+              </div>
+            </div>
+          </div>
+
+          <!-- Ask Live Gemini AI Launcher Banner -->
+          <div style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #ede9fe 0%, #fdf4ff 100%); border: 1.5px solid #c084fc; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 11.5px; color: #5b21b6; font-weight: 700;">
+              🤖 Want to chat live with Gemini AI about this rule?
+            </span>
+            <button
+              type="button"
+              class="pdf-action-btn"
+              onclick="openGeminiTutorLive('${escapeHtml(query.replace(/'/g, "\\'"))}')"
+              style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; font-size: 11.5px; padding: 4px 10px; font-weight: 800; border: 1px solid var(--ink);"
+            >
+              <span>Open Gemini Live</span> ➔
+            </button>
+          </div>
+        `;
+
+        const audio = `${explanation}. The correct answer is ${correctOpt}.`;
+        return { html, audio };
       }
 
       function submitCustomGrammarDoubt(presetQuery) {
@@ -14165,75 +14261,30 @@
 
         const titleEl = document.getElementById("aiTutorResponseTitle");
         const contentEl = document.getElementById("aiTutorResponseContent");
-        const correctOpt = q.options[q.correctIndex];
-        const otherOpts = q.options.filter((_, i) => i !== q.correctIndex);
 
         if (titleEl) titleEl.textContent = `AI Answer for: "${query}"`;
 
-        const queryLower = query.toLowerCase();
-        let answerHtml = "";
-        let audioText = "";
+        const result = generateDeepAIAnswer(q, query);
 
-        if (queryLower.includes("urdu") || queryLower.includes("اردو")) {
-          answerHtml = `
-            <div style="padding: 12px; background: #ffffff; border-radius: 8px; border: 1.5px solid #d946ef; margin-bottom: 8px;">
-              <div style="font-size: 14px; font-weight: 700; color: #701a75; line-height: 1.75; font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif;">
-                اس سوال کا درست جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔<br>
-                ${escapeHtml(q.explanation)}<br>
-                انگریزی قواعد کے مطابق جملے کی ساخت صرف اسی اصول کے تحت درست بنتی ہے۔
-              </div>
-            </div>
-          `;
-          audioText = `${q.explanation}. The correct option is ${correctOpt}.`;
-        } else if (queryLower.includes("wrong") || queryLower.includes("other") || queryLower.includes("distractor")) {
-          answerHtml = `
-            <div style="margin-bottom: 8px;">
-              <p style="font-weight: 800; color: #0f172a; margin-bottom: 6px;">Why other options are incorrect:</p>
-              <ul style="padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 4px;">
-                ${otherOpts.map(opt => `<li><span style="font-weight: 700; color: #b91c1c;">"${escapeHtml(opt)}"</span>: Violates the grammatical tense/structure rule required in this sentence.</li>`).join("")}
-              </ul>
-            </div>
-            <div style="padding: 8px 10px; background: #f0fdf4; border-radius: 6px; border: 1px solid #86efac; color: #065f46; font-size: 12.5px; font-weight: 700;">
-              ✅ Only "${escapeHtml(correctOpt)}" is correct because: ${escapeHtml(q.explanation)}
-            </div>
-          `;
-          audioText = `Other options violate the grammatical rule. Only ${correctOpt} is correct.`;
-        } else if (queryLower.includes("formula") || queryLower.includes("structure")) {
-          answerHtml = `
-            <div style="padding: 10px 12px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 6px; font-family: monospace; font-size: 12.5px; font-weight: 800; color: #92400e; margin-bottom: 8px;">
-              📐 Pattern: Subject + Proper Form [${escapeHtml(correctOpt)}]
-            </div>
-            <p style="margin-bottom: 0;"><strong>Grammar Rule:</strong> ${escapeHtml(q.explanation)}</p>
-          `;
-          audioText = `Grammar formula: ${q.explanation}`;
-        } else if (queryLower.includes("example")) {
-          answerHtml = `
-            <div style="margin-bottom: 6px; font-weight: 800; color: #0f172a;">Real-World Example Sentences:</div>
-            <ul style="padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px;">
-              <li><em>"She has consistently completed her tasks on time."</em></li>
-              <li><em>"Had we known earlier, we would have informed the supervisor."</em></li>
-              <li><em>"They demanded that the report be submitted by noon."</em></li>
-            </ul>
-          `;
-          audioText = `Here are examples demonstrating this grammatical rule.`;
-        } else {
-          answerHtml = `
-            <div style="margin-bottom: 8px;">
-              <p style="font-weight: 800; color: #5b21b6; margin-bottom: 4px;">AI Tutor Explanation:</p>
-              <p style="margin-bottom: 6px; font-size: 13.5px; color: #1e1b4b;">${escapeHtml(q.explanation)}</p>
-              <div style="padding: 8px 10px; background: #ffffff; border: 1px solid #10b981; border-radius: 6px; font-size: 12.5px; color: #065f46; font-weight: 700;">
-                ✅ Correct Answer: "${escapeHtml(correctOpt)}"
-              </div>
-            </div>
-          `;
-          audioText = `Regarding your question: ${q.explanation}. The correct answer is ${correctOpt}.`;
-        }
-
-        if (contentEl) contentEl.innerHTML = answerHtml;
-        currentAITutorAudioText = audioText;
+        if (contentEl) contentEl.innerHTML = result.html;
+        currentAITutorAudioText = result.audio;
 
         if (input) input.value = "";
-        if (typeof showToast === "function") showToast("✨ Answer generated from AI!");
+        if (typeof showToast === "function") showToast("✨ AI Answer generated!");
+      }
+
+      function openGeminiTutorLive(userQuery) {
+        const q = engCurrentQuestions[engCurrentIndex];
+        if (!q) return;
+        const correctOpt = q.options[q.correctIndex];
+        const promptText = `English Grammar Question: "${q.question}"\nOptions: ${q.options.join(", ")}\nCorrect Answer: "${correctOpt}"\nRule: "${q.explanation}"\n\nUser Question: "${userQuery || "Explain this grammar rule in detail"}"`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(promptText).then(() => {
+            if (typeof showToast === "function") showToast("📋 Question context copied! Opening Gemini AI...");
+          });
+        }
+        openGeminiAssessmentPopup();
       }
 
       function speakAITutorAudio() {
@@ -14251,6 +14302,7 @@
       window.submitCustomGrammarDoubt = submitCustomGrammarDoubt;
       window.closeAIGrammarModal = closeAIGrammarModal;
       window.speakAITutorAudio = speakAITutorAudio;
+      window.openGeminiTutorLive = openGeminiTutorLive;
 
       function showEnglishResults() {
         const cardBox = document.getElementById("engTestCardBox");
