@@ -8814,17 +8814,11 @@
               <div style="margin-top: 14px;">
                 <!-- Filter & Search Bar -->
                 <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
-                  <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                    <span style="font-size: 14px; font-weight: 900; color: #0f172a; margin-right: 4px;">📚 Saved Word List:</span>
-                    <button type="button" class="eng-vocab-tab active" id="engVocabTab-all" onclick="filterVocabList('all')">
-                      All (<span id="engVocabCountAll">0</span>)
-                    </button>
-                    <button type="button" class="eng-vocab-tab" id="engVocabTab-learning" onclick="filterVocabList('learning')">
-                      🎯 Needs Practice (<span id="engVocabCountLearning">0</span>)
-                    </button>
-                    <button type="button" class="eng-vocab-tab" id="engVocabTab-learned" onclick="filterVocabList('learned')">
-                      ✅ Learned (<span id="engVocabCountLearned">0</span>)
-                    </button>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span style="font-size: 14px; font-weight: 900; color: #0f172a;">📚 Saved Words:</span>
+                    <span class="hub-card-badge" id="engVocabCountBadgeTop" style="background: #ede9fe; color: #6d28d9; border-color: #8b5cf6; font-weight: 800; font-size: 11px;">
+                      <span id="engVocabCountAll">0</span> Words
+                    </span>
                     <button type="button" class="pdf-action-btn" id="toggleAllMeaningsBtn" onclick="toggleAllVocabMeanings()" style="font-size: 11px; padding: 4px 10px; background: #ffffff; color: #4338ca; border: 1.5px solid var(--ink); font-weight: 800;" title="Reveal or hide all meanings at once">
                       👁️ Show All Meanings
                     </button>
@@ -8833,7 +8827,7 @@
                     <input
                       type="text"
                       id="engVocabSearchFilter"
-                      placeholder="🔎 Filter list..."
+                      placeholder="🔎 Search words..."
                       oninput="filterVocabList()"
                       style="width: 100%; padding: 6px 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 12px;"
                     />
@@ -14108,16 +14102,8 @@
                   </button>
                 </div>
 
-                <!-- Right: Status & Delete Actions -->
+                <!-- Right: Delete Action -->
                 <div style="display: flex; align-items: center; gap: 5px; flex-shrink: 0;">
-                  <button
-                    type="button"
-                    class="pdf-action-btn"
-                    onclick="toggleVocabLearned('${item.id}')"
-                    style="font-size: 10.5px; padding: 2px 8px; font-weight: 800; background: ${isLearned ? '#dcfce7' : '#ffffff'}; color: ${isLearned ? '#15803d' : '#334155'}; border: 1.5px solid ${isLearned ? '#86efac' : 'var(--ink)'}; cursor: pointer;"
-                  >
-                    ${isLearned ? '✅ Learned' : '🎯 Practice'}
-                  </button>
                   <button
                     type="button"
                     class="pdf-action-btn"
