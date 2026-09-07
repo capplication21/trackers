@@ -1905,6 +1905,64 @@
         line-height: 1.4;
       }
 
+      /* Meaning Finder & My New Words (Vocab Diary) Styles */
+      .eng-vocab-tab {
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 5px 11px;
+        border-radius: 8px;
+        border: 1.5px solid #cbd5e1;
+        background: #f8fafc;
+        color: #475569;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .eng-vocab-tab:hover {
+        background: #f1f5f9;
+        color: #0f172a;
+        border-color: #94a3b8;
+      }
+      .eng-vocab-tab.active {
+        background: #4f46e5;
+        color: #ffffff;
+        border-color: #3730a3;
+        box-shadow: 0 1.5px 0 var(--ink);
+      }
+      .eng-vocab-card {
+        background: #ffffff;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        transition: all 0.16s ease;
+        box-shadow: 0 1.5px 0 rgba(0, 0, 0, 0.04);
+      }
+      .eng-vocab-card:hover {
+        border-color: #6366f1;
+        box-shadow: 0 3px 6px rgba(99, 102, 241, 0.08);
+      }
+      .eng-vocab-card.is-learned {
+        background: #f8fafc;
+        border-color: #86efac;
+      }
+      .urdu-vocab-pill {
+        font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', Tahoma, sans-serif;
+        background: #fdf4ff;
+        color: #701a75;
+        border: 1.5px solid #f0abfc;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-block;
+        direction: rtl;
+        line-height: 1.6;
+      }
+
       /* Practical Math Test Specifics */
       .math-scenario-banner {
         background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
@@ -3804,6 +3862,11 @@
         color: #1e40af;
         border: 1px solid #bfdbfe;
       }
+      .recipe-badge-pill.pill-veg {
+        background: #dcfce7;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+      }
       .recipe-badge-pill.pill-ok {
         background: #f3e8ff;
         color: #6b21a8;
@@ -3889,6 +3952,17 @@
         justify-content: center;
         font-size: 13px;
         flex-shrink: 0;
+      }
+      .recipe-action-btn.veg-btn {
+        background: #f0fdf4;
+        border-color: #10b981;
+        color: #15803d;
+      }
+      .recipe-action-btn.veg-btn.active {
+        background: #10b981;
+        border-color: var(--ink);
+        color: #ffffff;
+        box-shadow: 0 1.5px 0 var(--ink);
       }
       .recipe-action-btn.ok-btn {
         background: #f5f3ff;
@@ -4112,6 +4186,124 @@
         font-size: 12px;
         font-weight: 500;
         color: #1A1A1A;
+      }
+      .ingredient-quick-tools {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+      .ingredient-tool-btn {
+        background: #f1f5f9;
+        border: 1.5px solid var(--ink);
+        border-radius: 8px;
+        padding: 5px 9px;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--ink);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        box-shadow: 0 1.5px 0 var(--ink);
+        transition: all 0.15s ease;
+        font-family: inherit;
+      }
+      .ingredient-tool-btn:hover {
+        background: #e2e8f0;
+        transform: translateY(-1px);
+      }
+      .ingredient-tool-btn:active {
+        transform: translateY(1px);
+      }
+      .ingredient-tool-btn.btn-ocr {
+        background: #eff6ff;
+        border-color: #2563eb;
+        color: #1d4ed8;
+      }
+      .ingredient-tool-btn.btn-paste {
+        background: #fefce8;
+        border-color: #ca8a04;
+        color: #854d0e;
+      }
+      .ingredient-tool-btn.btn-heading {
+        background: #f0fdf4;
+        border-color: #16a34a;
+        color: #15803d;
+      }
+      .recipe-bulk-paste-box {
+        display: none;
+        background: #fffbeb;
+        border: 2px dashed #d97706;
+        border-radius: 12px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .recipe-bulk-paste-box.open {
+        display: block;
+        animation: fadeIn 0.2s ease;
+      }
+      .recipe-ocr-status {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        background: #dbeafe;
+        border: 1.5px solid #3b82f6;
+        border-radius: 8px;
+        padding: 8px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #1e40af;
+        margin-bottom: 8px;
+      }
+      .form-ingredient-heading-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border: 1.5px solid #d97706;
+        border-radius: 10px;
+        padding: 7px 10px;
+        margin-top: 6px;
+      }
+      .form-heading-tag {
+        background: #d97706;
+        color: #ffffff;
+        font-size: 9px;
+        font-weight: 800;
+        padding: 1px 5px;
+        border-radius: 4px;
+        letter-spacing: 0.5px;
+      }
+      .recipe-ingredient-group {
+        margin-top: 12px;
+        margin-bottom: 4px;
+      }
+      .recipe-ingredient-group:first-child {
+        margin-top: 4px;
+      }
+      .recipe-ingredient-section-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #1e293b;
+        background: #f1f5f9;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 4px 8px;
+        margin-bottom: 6px;
+        letter-spacing: 0.2px;
+      }
+      .recipe-ingredient-section-icon {
+        font-size: 14px;
+      }
+      .recipe-ingredient-group-items {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-left: 4px;
       }
       .form-ingredient-remove {
         background: none;
@@ -4426,6 +4618,10 @@
         --rec-accent: #159895;
         --rec-accent-2: #0E7A78;
       }
+      .recipe-sub-tab-btn[data-recipe-tab="veg"] {
+        --rec-accent: #10B981;
+        --rec-accent-2: #059669;
+      }
       .recipe-sub-tab-btn[data-recipe-tab="musttry"] {
         --rec-accent: #E8772E;
         --rec-accent-2: #C85F1E;
@@ -4433,10 +4629,6 @@
       .recipe-sub-tab-btn[data-recipe-tab="quick"] {
         --rec-accent: #3B82F6;
         --rec-accent-2: #1D4ED8;
-      }
-      .recipe-sub-tab-btn[data-recipe-tab="okay"] {
-        --rec-accent: #8B5CF6;
-        --rec-accent-2: #6D28D9;
       }
       .recipe-sub-tab-btn[data-recipe-tab="ingredients"] {
         --rec-accent: #E0578F;
@@ -4973,6 +5165,223 @@
       .duaa-hero-btn.secondary-add-btn:active {
         transform: translateY(2px);
         box-shadow: none;
+      }
+
+      /* ==================== DEEP GRAMMAR MODAL & MEANING FINDER STYLES ==================== */
+      .deep-grammar-modal {
+        max-width: 680px !important;
+        width: 95% !important;
+        max-height: 88vh !important;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 18px !important;
+        background: #fffdfa !important;
+      }
+      .deep-grammar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--ink);
+        margin-bottom: 12px;
+        flex-shrink: 0;
+      }
+      .deep-grammar-nav-pills {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding: 4px 2px 8px;
+        scrollbar-width: none;
+        flex-shrink: 0;
+        -webkit-overflow-scrolling: touch;
+      }
+      .deep-grammar-nav-pills::-webkit-scrollbar {
+        display: none;
+      }
+      .deep-grammar-pill {
+        padding: 5px 12px;
+        font-size: 11.5px;
+        font-weight: 700;
+        border-radius: 999px;
+        border: 1.5px solid var(--ink);
+        background: #f1f5f9;
+        color: #334155;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: 0 1.5px 0 var(--ink);
+        transition: all 0.15s ease;
+      }
+      .deep-grammar-pill:hover,
+      .deep-grammar-pill.active {
+        background: #6d28d9;
+        color: #ffffff;
+        border-color: var(--ink);
+        transform: translateY(-1px);
+      }
+      .deep-grammar-scroll-body {
+        overflow-y: auto;
+        flex: 1;
+        padding-right: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .deep-grammar-card {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        padding: 14px 16px;
+        box-shadow: 0 3px 0 var(--ink);
+        transition: all 0.2s ease;
+      }
+      .deep-grammar-card:hover {
+        box-shadow: 0 4.5px 0 var(--ink);
+      }
+      .deep-grammar-card-title {
+        font-size: 15px;
+        font-weight: 900;
+        color: #1e1b4b;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .deep-grammar-formula-box {
+        background: #f0fdf4;
+        border: 1.5px solid #86efac;
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin: 8px 0;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #065f46;
+      }
+      .deep-grammar-table-wrap {
+        overflow-x: auto;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: 1.5px solid #e2e8f0;
+      }
+      .deep-grammar-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5px;
+        min-width: 440px;
+      }
+      .deep-grammar-table th {
+        background: #ede9fe;
+        color: #5b21b6;
+        padding: 7px 10px;
+        text-align: left;
+        font-weight: 800;
+        border-bottom: 1.5px solid #c4b5fd;
+      }
+      .deep-grammar-table td {
+        padding: 7px 10px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #334155;
+      }
+      .deep-grammar-table tr:nth-child(even) td {
+        background: #faf8ff;
+      }
+      .deep-grammar-ex-row {
+        background: #fffbeb;
+        border-left: 3.5px solid #f59e0b;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 12px;
+        color: #78350f;
+        margin: 5px 0;
+        line-height: 1.4;
+      }
+      .deep-grammar-mistake-box {
+        background: #fef2f2;
+        border: 1.5px dashed #f87171;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 11.5px;
+        margin-top: 8px;
+        color: #991b1b;
+      }
+
+      /* Meaning Finder & Urdu Card Styles */
+      .urdu-translation-badge {
+        font-family: 'Amiri', 'Scheherazade New', serif;
+        direction: rtl;
+        text-align: right;
+        font-size: 19px;
+        font-weight: 700;
+        color: #047857;
+        line-height: 1.6;
+        word-spacing: 2px;
+      }
+      .vocab-audio-btn {
+        background: #ffffff;
+        border: 1.5px solid var(--ink);
+        border-radius: 8px;
+        padding: 3px 8px;
+        font-size: 12px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        box-shadow: 0 1.5px 0 var(--ink);
+        transition: all 0.12s ease;
+        color: var(--ink);
+      }
+      .vocab-audio-btn:hover {
+        background: #ede9fe;
+        transform: translateY(-1px);
+      }
+      .vocab-audio-btn:active {
+        transform: translateY(1px);
+        box-shadow: none;
+      }
+      .new-word-card {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        padding: 12px 14px;
+        margin-bottom: 8px;
+        box-shadow: 0 2.5px 0 var(--ink);
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .new-word-card.is-learned {
+        background: #f0fdf4;
+        border-color: #16a34a;
+        box-shadow: 0 2.5px 0 #16a34a;
+      }
+      .new-word-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 0 var(--ink);
+      }
+      .new-word-filter-pills {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+      .new-word-filter-pill {
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 999px;
+        border: 1.5px solid var(--ink);
+        background: #ffffff;
+        color: #475569;
+        cursor: pointer;
+        box-shadow: 0 1.5px 0 var(--ink);
+        transition: all 0.12s ease;
+      }
+      .new-word-filter-pill.active {
+        background: #0284c7;
+        color: #ffffff;
+        border-color: var(--ink);
       }
 
       .notes-filter-row {
@@ -7446,7 +7855,15 @@
               onclick="switchRecipeSubTab('all', event)"
             >
               <span class="recipe-sub-tab-icon">📋</span>
-              <span class="recipe-sub-tab-label">All Recipes</span>
+              <span class="recipe-sub-tab-label">All</span>
+            </button>
+            <button
+              class="recipe-sub-tab-btn"
+              data-recipe-tab="veg"
+              onclick="switchRecipeSubTab('veg', event)"
+            >
+              <span class="recipe-sub-tab-icon">🥗</span>
+              <span class="recipe-sub-tab-label">Veg</span>
             </button>
             <button
               class="recipe-sub-tab-btn"
@@ -7471,14 +7888,6 @@
             >
               <span class="recipe-sub-tab-icon">⚡</span>
               <span class="recipe-sub-tab-label">Quick</span>
-            </button>
-            <button
-              class="recipe-sub-tab-btn"
-              data-recipe-tab="okay"
-              onclick="switchRecipeSubTab('okay', event)"
-            >
-              <span class="recipe-sub-tab-icon">👌</span>
-              <span class="recipe-sub-tab-label">Okay</span>
             </button>
             <button
               class="recipe-sub-tab-btn"
@@ -7509,6 +7918,36 @@
               <div class="ingredient-dropdown-body">
                 <div class="history-list" id="recipeTitleList">
                   <div class="history-empty">No recipes added yet.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION: VEG RECIPES -->
+          <div id="recipe-section-veg" class="recipe-section">
+            <div class="ingredient-dropdown-card open" id="ingDrop-veg">
+              <div
+                class="ingredient-dropdown-header"
+                onclick="toggleIngredientDropdown('ingDrop-veg')"
+              >
+                <div class="ingredient-dropdown-icon-box">🥗</div>
+                <div class="ingredient-dropdown-title-wrap">
+                  <span class="ingredient-dropdown-title"
+                    >Veg Recipes (Vegetarian)</span
+                  >
+                  <span
+                    class="ingredient-dropdown-count"
+                    id="recipeVegCount"
+                    >0</span
+                  >
+                </div>
+                <div class="ingredient-dropdown-chevron-box">▾</div>
+              </div>
+              <div class="ingredient-dropdown-body">
+                <div class="history-list" id="recipeVegList">
+                  <div class="history-empty">
+                    No vegetarian recipes added yet. Tap "🥗" on any recipe or add a new veg dish!
+                  </div>
                 </div>
               </div>
             </div>
@@ -7600,35 +8039,7 @@
             </div>
           </div>
 
-          <!-- SECTION 5: OKAY / NORMAL RECIPES (NOT SO GOOD) -->
-          <div id="recipe-section-okay" class="recipe-section">
-            <div class="ingredient-dropdown-card open" id="ingDrop-okay">
-              <div
-                class="ingredient-dropdown-header"
-                onclick="toggleIngredientDropdown('ingDrop-okay')"
-              >
-                <div class="ingredient-dropdown-icon-box">👌</div>
-                <div class="ingredient-dropdown-title-wrap">
-                  <span class="ingredient-dropdown-title"
-                    >Okay / Normal Recipes (Not so good)</span
-                  >
-                  <span class="ingredient-dropdown-count" id="recipeOkayCount"
-                    >0</span
-                  >
-                </div>
-                <div class="ingredient-dropdown-chevron-box">▾</div>
-              </div>
-              <div class="ingredient-dropdown-body">
-                <div class="history-list" id="recipeOkayList">
-                  <div class="history-empty">
-                    No normal/okay recipes marked yet.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- SECTION 5: INGREDIENT EXPLORER & SHOPPING NOTE -->
+          <!-- SECTION: INGREDIENT EXPLORER & SHOPPING NOTE -->
           <div id="recipe-section-ingredients" class="recipe-section">
             <!-- 1. HAVE TO BUY DROPDOWN -->
             <div class="ingredient-dropdown-card open" id="ingDrop-haveToBuy">
@@ -7907,17 +8318,28 @@
               <div class="grammar-revision-header-row">
                 <div class="grammar-revision-title-wrap">
                   <span class="grammar-pulse-dot"></span>
-                  <span class="grammar-revision-title">Revision Topics &amp; Links</span>
+                  <span class="grammar-revision-title">Revision Topics &amp; Rules</span>
                   <span class="grammar-revision-count-badge" id="grammarRevisionCountBadge-hub">0 topics</span>
                 </div>
-                <button
-                  type="button"
-                  class="grammar-add-topic-btn"
-                  onclick="openGrammarRevisionModal()"
-                  title="Add new revision topic, link & notes"
-                >
-                  <span>➕</span> Add Topic
-                </button>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <button
+                    type="button"
+                    class="grammar-add-topic-btn"
+                    onclick="openDeepGrammarGuide('all')"
+                    title="Read comprehensive English grammar rules, formulas & examples"
+                    style="background: #ede9fe; color: #5b21b6; border-color: #8b5cf6;"
+                  >
+                    <span>📖</span> Deep Grammar Guide
+                  </button>
+                  <button
+                    type="button"
+                    class="grammar-add-topic-btn"
+                    onclick="openGrammarRevisionModal()"
+                    title="Add new revision topic, link & notes"
+                  >
+                    <span>➕</span> Add Topic
+                  </button>
+                </div>
               </div>
 
               <div class="grammar-topics-list" id="grammarTopicsList-hub">
@@ -8054,119 +8476,6 @@
             </div>
           </div>
 
-          <!-- 3. VOCABULARY & WORD BANK -->
-          <div class="english-module-card">
-            <div class="english-module-header">
-              <div class="english-module-title-wrap">
-                <div class="english-module-icon">📖</div>
-                <div>
-                  <div class="english-module-name">
-                    Vocabulary &amp; Word Bank
-                  </div>
-                  <div style="font-size: 11px; color: #64748b">
-                    English definitions &amp; Urdu meanings (اردو معنی)
-                  </div>
-                </div>
-              </div>
-              <span class="ingredient-dropdown-count" id="englishVocabCount"
-                >0</span
-              >
-            </div>
-
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                margin-top: 8px;
-              "
-            >
-              <div style="display: flex; gap: 6px; align-items: center">
-                <input
-                  type="text"
-                  class="input-field"
-                  id="englishWordInput"
-                  placeholder="Type any word (e.g. Ubiquitous, Grateful)..."
-                  oninput="handleWordInputDebounced()"
-                  onkeydown="
-                    if (event.key === 'Enter') {
-                      event.preventDefault();
-                      addEnglishWord();
-                    }
-                  "
-                  style="flex: 1"
-                />
-                <button
-                  type="button"
-                  class="btn"
-                  id="addEnglishWordBtn"
-                  style="
-                    background: #2f8fd1;
-                    color: white;
-                    cursor: pointer;
-                    font-weight: 500;
-                    padding: 10px 14px;
-                    border-radius: 10px;
-                    white-space: nowrap;
-                  "
-                  onclick="addEnglishWord()"
-                >
-                  ➕ Add Word
-                </button>
-              </div>
-              <div
-                id="vocabLookupStatus"
-                style="
-                  font-size: 11px;
-                  min-height: 16px;
-                  margin-top: -3px;
-                  color: #64748b;
-                "
-              ></div>
-              <div
-                id="vocabMeaningPreview"
-                style="
-                  display: none;
-                  padding: 10px 12px;
-                  background: #f0fdf4;
-                  border: 1.5px solid #86efac;
-                  border-radius: 8px;
-                  font-size: 12px;
-                  line-height: 1.5;
-                "
-              >
-                <div
-                  id="vocabPreviewUrdu"
-                  style="
-                    font-size: 16px;
-                    font-weight: 700;
-                    color: #047857;
-                    margin-bottom: 3px;
-                    direction: rtl;
-                    text-align: left;
-                  "
-                ></div>
-                <div id="vocabMeaningPreviewText" style="color: #334155"></div>
-              </div>
-            </div>
-
-            <div style="margin-top: 12px">
-              <input
-                type="text"
-                class="input-field"
-                id="englishVocabSearch"
-                placeholder="🔍 Search saved words (English or اردو)..."
-                oninput="filterEnglishWords()"
-                style="margin-bottom: 8px"
-              />
-              <div id="englishVocabList">
-                <div class="history-empty">
-                  No words added to your bank yet.
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
 
         <!-- DEDICATED ENGLISH TEST TAB -->
@@ -8223,11 +8532,17 @@
               <div class="test-feedback-box" id="engFeedbackBox">
                 <div id="engFeedbackTitle" style="font-weight: 800; margin-bottom: 4px;"></div>
                 <div id="engFeedbackExplanation"></div>
+                <button type="button" class="pdf-action-btn" id="engFeedbackDeepGrammarBtn" onclick="openDeepGrammarGuideFromTest()" style="margin-top: 10px; background: #ffffff; font-size: 12px; padding: 5px 12px; border-color: #6366f1; color: #4338ca; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                  📖 Read Deep Grammar Guide
+                </button>
               </div>
 
               <!-- Actions -->
               <div class="test-actions-bar">
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button type="button" class="pdf-action-btn" id="engPrevBtn" onclick="prevEnglishQuestion()" style="background: #ffffff; color: #334155; font-size: 12px; padding: 8px 14px;" disabled>
+                    ⏮️ Prev Question
+                  </button>
                   <button type="button" class="pdf-action-btn" onclick="restartEnglishTest()" style="background: #f1f5f9; color: #475569; font-size: 12px; padding: 8px 14px;">
                     🔄 Restart Set
                   </button>
@@ -8304,50 +8619,191 @@
               </div>
             </div>
 
-            <!-- Interactive English Quiz (Gemini AI) -->
-            <div class="test-card-box gemini-quiz-card" style="margin-top: 18px;">
-              <div class="english-module-header" style="margin-bottom: 12px;">
-                <div class="english-module-title-wrap">
-                  <div class="english-module-icon" style="background: linear-gradient(135deg, #e0e7ff 0%, #fdf4ff 100%); width: 38px; height: 38px; border-radius: 12px; font-size: 18px;">✨</div>
+            <!-- Meaning Finder Tool & My New Words (نئے الفاظ اور معنی) -->
+            <div class="test-card-box eng-vocab-box" id="engMeaningFinderCard" style="margin-top: 18px;">
+              <!-- Header -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="background: linear-gradient(135deg, #e0e7ff 0%, #fae8ff 100%); width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink);">
+                    📖
+                  </div>
                   <div>
-                    <div style="font-size: 15px; font-weight: 800; color: #0f172a;">Interactive English Quiz</div>
-                    <div style="font-size: 11.5px; color: #64748b;">
-                      20 Questions • Grammar, Tenses, Spelling &amp; Subject-Verb Agreement
+                    <div style="font-size: 16px; font-weight: 900; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                      <span>Meaning Finder &amp; My New Words</span>
+                      <span style="font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif; font-size: 14px; color: #4338ca; font-weight: 700;">(نئے الفاظ اور معنی)</span>
+                    </div>
+                    <div style="font-size: 12px; color: #64748b;">
+                      Instant English + Urdu Dictionary Lookup &amp; Personal Vocabulary Notebook
                     </div>
                   </div>
                 </div>
-                <span class="pdf-feature-pill" style="background: #e0f2fe; color: #0369a1; border-color: #0284c7; font-weight: 700;">
-                  AI Powered
-                </span>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="hub-card-badge" id="engVocabCountBadge" style="background: #ede9fe; color: #6d28d9; border-color: #8b5cf6; font-weight: 800;">
+                    0 Saved Words
+                  </span>
+                  <button type="button" class="pdf-action-btn" onclick="downloadVocabPdf()" style="background: #f8fafc; color: #334155; border: 1.5px solid var(--ink); font-size: 11px; padding: 5px 11px; font-weight: 800;" title="Download Vocabulary Flashcard Sheet">
+                    📥 Download Vocab PDF
+                  </button>
+                </div>
               </div>
 
-              <div class="gemini-quiz-body" style="padding: 14px; background: #faf8ff; border: 1.5px solid #cbd5e1; border-radius: 14px; display: flex; flex-direction: column; gap: 10px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                  <div style="font-size: 13.5px; font-weight: 700; color: #1e1b4b;">
-                    🎯 20-Question Practice Challenge
+              <!-- Quick Search & Instant Meaning Lookup -->
+              <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 10px 12px; margin-bottom: 10px;">
+                <div style="font-size: 12px; font-weight: 800; color: #1e293b; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                  <span>🔍 Instant English-Urdu Dictionary &amp; Audio Pronunciation</span>
+                </div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 200px; position: relative;">
+                    <input
+                      type="text"
+                      id="engMeaningSearchInput"
+                      class="hub-search-input"
+                      placeholder="Type any English word (e.g. Resilient, Diligent)..."
+                      style="width: 100%; padding: 7px 11px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12.5px; font-weight: 600; box-shadow: 0 1.5px 0 var(--ink);"
+                      onkeydown="if(event.key === 'Enter') { lookupEnglishWordMeaning(); }"
+                    />
                   </div>
-                  <div style="font-size: 11px; color: #64748b;">
-                    Interactive choices • Live hints • Instant explanations
+                  <button
+                    type="button"
+                    class="test-main-btn"
+                    onclick="lookupEnglishWordMeaning()"
+                    style="padding: 7px 14px; font-size: 12px; background: #4f46e5; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink);"
+                  >
+                    🔍 Find Meaning
+                  </button>
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    onclick="speakLookupWord()"
+                    style="padding: 7px 11px; font-size: 12px; background: #ffffff; border: 1.5px solid var(--ink); box-shadow: 0 1.5px 0 var(--ink); font-weight: 800;"
+                    title="Listen to native pronunciation"
+                  >
+                    🔊 Listen
+                  </button>
+                </div>
+
+                <!-- Live Meaning Result Card (Shown when searched) -->
+                <div id="engLiveMeaningResult" style="display: none; margin-top: 8px; background: #ffffff; border: 1.5px solid #6366f1; border-radius: 10px; padding: 10px 12px; box-shadow: 0 2px 0 #6366f1;">
+                  <!-- Filled dynamically by lookupEnglishWordMeaning() -->
+                </div>
+              </div>
+
+              <!-- Add New Word Entry Row (Word near Urdu & English Meaning) -->
+              <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 11px 13px; margin-bottom: 12px; box-shadow: 0 2px 0 var(--ink);">
+                <div style="font-size: 12.5px; font-weight: 900; color: #0f172a; margin-bottom: 2px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                  <span style="display: flex; align-items: center; gap: 5px;">
+                    <span>✍️ Enter New Word &amp; Meanings</span>
+                    <span style="font-size: 10.5px; font-weight: 600; color: #64748b;">(One after another)</span>
+                  </span>
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    onclick="autoFillCustomWordMeaning()"
+                    style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; font-size: 10.5px; padding: 3px 8px; font-weight: 800;"
+                    title="Automatically fetch Urdu and English definitions for the word entered"
+                  >
+                    ⚡ Auto-Fill
+                  </button>
+                </div>
+
+                <form id="engAddVocabForm" onsubmit="addCustomNewWord(event)" style="margin-top: 8px; display: flex; flex-direction: column; gap: 7px;">
+                  <!-- 1. English Word -->
+                  <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                      <label style="font-size: 11.5px; font-weight: 800; color: #1e293b; display: flex; align-items: center; gap: 4px;">
+                        <span>🔤 English Word:</span>
+                      </label>
+                      <span style="font-size: 10px; color: #64748b; font-weight: 600;">Type word &amp; blur or click auto-fill</span>
+                    </div>
+                    <input
+                      type="text"
+                      id="engCustomWordInput"
+                      placeholder="e.g. Diligent, Resilient..."
+                      required
+                      style="width: 100%; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 7px; font-size: 12.5px; font-weight: 700;"
+                      onblur="if(!document.getElementById('engCustomUrduInput').value.trim()) autoFillCustomWordMeaning(false);"
+                    />
+                  </div>
+
+                  <!-- 2. Urdu Meaning -->
+                  <div>
+                    <label style="display: block; font-size: 11.5px; font-weight: 800; color: #1e293b; margin-bottom: 2px;">
+                      <span>🇵🇰 Urdu Meaning (اردو معنی):</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="engCustomUrduInput"
+                      placeholder="e.g. محنتی / جفاکش"
+                      dir="auto"
+                      style="width: 100%; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 7px; font-size: 13.5px; font-weight: 700; font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', Tahoma, sans-serif; background: #fdf4ff;"
+                    />
+                  </div>
+
+                  <!-- 3. English Meaning / Sentence -->
+                  <div>
+                    <label style="display: block; font-size: 11.5px; font-weight: 800; color: #1e293b; margin-bottom: 2px;">
+                      <span>💡 English Meaning / Sentence / Notes:</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="engCustomEnglishInput"
+                      placeholder="e.g. Hardworking and careful in work (e.g. He is a diligent worker)"
+                      style="width: 100%; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 7px; font-size: 12px;"
+                    />
+                  </div>
+
+                  <!-- Action Buttons Row -->
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px;">
+                    <button
+                      type="submit"
+                      class="test-main-btn"
+                      style="padding: 7px 18px; font-size: 12px; background: #059669; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-weight: 800; display: inline-flex; align-items: center; gap: 5px;"
+                    >
+                      ➕ Add Word to My Diary
+                    </button>
+                    <button
+                      type="button"
+                      class="pdf-action-btn"
+                      onclick="autoFillCustomWordMeaning()"
+                      style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 1.5px 0 var(--ink); font-size: 11.5px; padding: 7px 14px; font-weight: 800;"
+                      title="Automatically fetch Urdu and English definitions for the word entered"
+                    >
+                      ⚡ Auto-Fill Meanings
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- My New Words List Section -->
+              <div style="margin-top: 14px;">
+                <!-- Filter & Search Bar -->
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                  <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <span style="font-size: 14px; font-weight: 900; color: #0f172a; margin-right: 4px;">📚 Saved Word List:</span>
+                    <button type="button" class="eng-vocab-tab active" id="engVocabTab-all" onclick="filterVocabList('all')">
+                      All (<span id="engVocabCountAll">0</span>)
+                    </button>
+                    <button type="button" class="eng-vocab-tab" id="engVocabTab-learning" onclick="filterVocabList('learning')">
+                      🎯 Needs Practice (<span id="engVocabCountLearning">0</span>)
+                    </button>
+                    <button type="button" class="eng-vocab-tab" id="engVocabTab-learned" onclick="filterVocabList('learned')">
+                      ✅ Learned (<span id="engVocabCountLearned">0</span>)
+                    </button>
+                  </div>
+                  <div style="flex: 1; max-width: 260px; min-width: 180px;">
+                    <input
+                      type="text"
+                      id="engVocabSearchFilter"
+                      placeholder="🔎 Filter list..."
+                      oninput="filterVocabList()"
+                      style="width: 100%; padding: 6px 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 12px;"
+                    />
                   </div>
                 </div>
 
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px;">
-                  <button
-                    type="button"
-                    class="pdf-action-btn pdf-btn-primary"
-                    onclick="openGeminiQuizPopup()"
-                    style="background: linear-gradient(135deg, #4285f4 0%, #9b72cf 50%, #d96570 100%); color: #ffffff; border: 2px solid var(--ink); box-shadow: 0 2.5px 0 var(--ink); padding: 8px 18px; font-weight: 700;"
-                  >
-                    🚀 Launch Interactive Quiz Window
-                  </button>
-                  <a
-                    href="https://gemini.google.com/share/e219c8ef0eee?skid=10fd6e4e-9d56-4b96-b6dc-2fc5b45879d9"
-                    target="_blank"
-                    class="pdf-action-btn"
-                    style="background: var(--surface); padding: 8px 14px; text-decoration: none; font-weight: 600;"
-                  >
-                    🔗 Open in New Tab
-                  </a>
+                <!-- Word List Container -->
+                <div id="engVocabCardsContainer" style="display: flex; flex-direction: column; gap: 8px;">
+                  <!-- Dynamically rendered word cards -->
                 </div>
               </div>
             </div>
@@ -9269,13 +9725,82 @@
         </div>
 
         <div class="input-group">
-          <label class="input-label">Ingredients</label>
-          <div class="ingredient-input-row">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <label class="input-label" style="margin-bottom: 0;">Ingredients & Sections</label>
+            <div class="ingredient-quick-tools" style="margin-bottom: 0;">
+              <button
+                type="button"
+                class="ingredient-tool-btn btn-paste"
+                onclick="toggleRecipeBulkPaste()"
+                title="Paste full ingredients list or recipe text"
+              >
+                📋 Paste List
+              </button>
+              <button
+                type="button"
+                class="ingredient-tool-btn btn-ocr"
+                onclick="triggerRecipeImageOCR()"
+                title="Upload screenshot or photo of ingredients"
+              >
+                📷 Scan Photo
+              </button>
+            </div>
+          </div>
+
+          <!-- Hidden OCR file input -->
+          <input
+            type="file"
+            id="recipeOcrFileInput"
+            accept="image/*"
+            style="display: none;"
+            onchange="handleRecipeImageOCR(event)"
+          />
+
+          <!-- OCR Status Indicator -->
+          <div id="recipeOcrStatus" class="recipe-ocr-status">
+            <span>⏳</span>
+            <span>Scanning screenshot with OCR... Please wait</span>
+          </div>
+
+          <!-- Collapsible Bulk Paste Box -->
+          <div id="recipeBulkPasteBox" class="recipe-bulk-paste-box">
+            <div style="font-size: 11.5px; font-weight: 700; color: #92400e; margin-bottom: 4px;">
+              📋 Paste Multi-line Ingredients or Headings:
+            </div>
+            <textarea
+              id="recipeBulkPasteInput"
+              class="input-field"
+              rows="4"
+              placeholder="e.g.&#10;For Marination:&#10;- 500g Chicken&#10;- 1 tbsp Soy sauce&#10;For Sauce:&#10;- 2 tbsp Honey&#10;- 1 tbsp Chilli flakes&#10;For Salad:&#10;- Lettuce, Lemon juice"
+              style="font-family: inherit; font-size: 12px; resize: vertical; margin-bottom: 6px; background: #ffffff;"
+            ></textarea>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px;">
+              <button
+                type="button"
+                class="modal-btn modal-btn-save"
+                style="padding: 6px 12px; font-size: 11.5px; width: auto; background: #d97706; color: #ffffff;"
+                onclick="processBulkIngredients()"
+              >
+                ⚡ Auto-Add All Ingredients &amp; Sections
+              </button>
+              <button
+                type="button"
+                class="modal-btn modal-btn-cancel"
+                style="padding: 6px 10px; font-size: 11.5px; width: auto;"
+                onclick="toggleRecipeBulkPaste(false)"
+              >
+                ✕ Cancel
+              </button>
+            </div>
+          </div>
+
+          <div class="ingredient-input-row" style="display: flex; gap: 6px;">
             <input
               type="text"
               class="input-field"
               id="recipeIngredientInput"
-              placeholder="e.g. Rice"
+              placeholder="e.g. Rice, or type 'For Sauce:'"
+              style="flex: 1;"
               onkeydown="
                 if (event.key === 'Enter') {
                   event.preventDefault();
@@ -9287,8 +9812,18 @@
               type="button"
               class="ingredient-add-btn"
               onclick="addIngredientToForm()"
+              title="Add Ingredient (Enter)"
             >
               ➕
+            </button>
+            <button
+              type="button"
+              class="ingredient-tool-btn btn-heading"
+              onclick="addHeadingToForm()"
+              title="Add as Section Heading (e.g. Sauce, Salad)"
+              style="padding: 0 10px; height: 42px; font-size: 11.5px; border-radius: 12px;"
+            >
+              🏷️ Heading
             </button>
           </div>
           <div class="form-ingredient-list" id="formIngredientList"></div>
@@ -9303,6 +9838,30 @@
             gap: 8px;
           "
         >
+          <label
+            class="recipe-checkbox-label"
+            style="
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              font-weight: 400;
+              font-size: 13px;
+              cursor: pointer;
+              user-select: none;
+            "
+          >
+            <input
+              type="checkbox"
+              id="recipeVegInput"
+              style="
+                width: 18px;
+                height: 18px;
+                accent-color: #10b981;
+                cursor: pointer;
+              "
+            />
+            <span>🥗 Vegetarian / Veg Dish</span>
+          </label>
           <label
             class="recipe-checkbox-label"
             style="
@@ -9487,6 +10046,374 @@
             onclick="saveGrammarRevisionItem()"
           >
             Save Topic
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deep Grammar Reference Guide Modal -->
+    <div class="modal-overlay" id="deepGrammarModal">
+      <div class="modal-card deep-grammar-modal">
+        <!-- Modal Top Header -->
+        <div class="deep-grammar-header">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 38px; height: 38px; border-radius: 12px; background: #ede9fe; color: #6d28d9; border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 2px 0 var(--ink);">📖</div>
+            <div>
+              <div style="font-size: 16px; font-weight: 900; color: #1e1b4b;">Comprehensive Deep Grammar Guide</div>
+              <div style="font-size: 11.5px; color: #64748b;">Formulas • CEFR B1/B2 Rules • Sentence Examples • Mistake Traps</div>
+            </div>
+          </div>
+          <button type="button" class="pdf-action-btn" onclick="closeDeepGrammarGuide()" style="padding: 5px 10px; font-size: 13px; font-weight: 800; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+            ✕
+          </button>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div style="margin-bottom: 10px; flex-shrink: 0;">
+          <input
+            type="text"
+            class="input-field"
+            id="deepGrammarSearchInput"
+            placeholder="🔍 Search grammar topic (e.g. Conditionals, Passive Voice, Since/For, Tenses)..."
+            oninput="filterDeepGrammar()"
+            style="margin-bottom: 8px; font-size: 13.5px;"
+          />
+          <div class="deep-grammar-nav-pills" id="deepGrammarPills">
+            <button type="button" class="deep-grammar-pill active" onclick="filterDeepGrammarByCat('all')">📚 All Chapters</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('tenses')">⏳ Tenses Matrix</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('conditionals')">🔀 Conditionals</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('passive')">🔄 Passive Voice</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('modals')">🎯 Modal Verbs</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('agreement')">⚖️ Subject-Verb</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('prepositions')">📍 Prepositions</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('reported')">💬 Reported Speech</button>
+            <button type="button" class="deep-grammar-pill" onclick="filterDeepGrammarByCat('errors')">⚠️ Common Traps</button>
+          </div>
+        </div>
+
+        <!-- Scrollable Reference Guide Body -->
+        <div class="deep-grammar-scroll-body" id="deepGrammarBody">
+          <!-- Chapter 1: Tenses Matrix -->
+          <div class="deep-grammar-card" data-cat="tenses" id="grammar-ch-tenses">
+            <div class="deep-grammar-card-title">
+              <span>⏳</span> Chapter 1: 12 English Tenses &amp; Formulas Matrix
+            </div>
+            <div style="font-size: 12px; color: #475569; margin-bottom: 8px;">
+              Master verb forms, time markers, and grammatical formulas for all English tenses.
+            </div>
+            <div class="deep-grammar-table-wrap">
+              <table class="deep-grammar-table">
+                <thead>
+                  <tr>
+                    <th>Tense</th>
+                    <th>Formula / Structure</th>
+                    <th>Key Time Markers</th>
+                    <th>Example Sentence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Present Simple</strong></td>
+                    <td><code>Subject + V1 (s/es)</code></td>
+                    <td>Always, usually, daily, every day</td>
+                    <td>She <em>speaks</em> English fluently.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Present Continuous</strong></td>
+                    <td><code>Subject + is/am/are + V-ing</code></td>
+                    <td>Now, at the moment, currently</td>
+                    <td>They <em>are studying</em> for the test.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Present Perfect</strong></td>
+                    <td><code>Subject + have/has + V3</code></td>
+                    <td>Already, yet, ever, never, since, for</td>
+                    <td>I <em>have lived</em> here for 5 years.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Present Perfect Cont.</strong></td>
+                    <td><code>Subject + have/has + been + V-ing</code></td>
+                    <td>Since morning, for 3 hours, all day</td>
+                    <td>He <em>has been waiting</em> since 8 AM.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Past Simple</strong></td>
+                    <td><code>Subject + V2 (did + V1 for - / ?)</code></td>
+                    <td>Yesterday, ago, in 2020, last week</td>
+                    <td>She <em>visited</em> the museum yesterday.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Past Continuous</strong></td>
+                    <td><code>Subject + was/were + V-ing</code></td>
+                    <td>While, when, at 6 PM yesterday</td>
+                    <td>I <em>was reading</em> when you called.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Past Perfect</strong></td>
+                    <td><code>Subject + had + V3</code></td>
+                    <td>Before, after, by the time, already</td>
+                    <td>The train <em>had left</em> before we arrived.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Future Simple</strong></td>
+                    <td><code>Subject + will + V1</code></td>
+                    <td>Tomorrow, next week, soon, probably</td>
+                    <td>We <em>will finish</em> the project soon.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Future Continuous</strong></td>
+                    <td><code>Subject + will be + V-ing</code></td>
+                    <td>At this time tomorrow</td>
+                    <td>This time tomorrow, I <em>will be flying</em>.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Future Perfect</strong></td>
+                    <td><code>Subject + will have + V3</code></td>
+                    <td>By 5 PM, by next year, by then</td>
+                    <td>By next month, I <em>will have completed</em> it.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="deep-grammar-mistake-box">
+              <strong>⚠️ Common Mistake:</strong> Don't use Present Perfect with specific past time markers! (Say: <em>"I finished yesterday"</em>, NOT <em>"I have finished yesterday"</em>).
+            </div>
+          </div>
+
+          <!-- Chapter 2: Conditionals -->
+          <div class="deep-grammar-card" data-cat="conditionals" id="grammar-ch-conditionals">
+            <div class="deep-grammar-card-title">
+              <span>🔀</span> Chapter 2: Conditionals (Zero, 1st, 2nd, 3rd &amp; Mixed)
+            </div>
+            <div style="font-size: 12px; color: #475569; margin-bottom: 8px;">
+              Conditional clauses express factual truths, future possibilities, hypothetical imaginations, and past regrets.
+            </div>
+
+            <div class="deep-grammar-ex-row">
+              <strong>1. Zero Conditional (Scientific / General Facts):</strong>
+              <div class="deep-grammar-formula-box">If + Present Simple, ... Present Simple</div>
+              <div><em>Example:</em> If you heat ice, it melts. (Whenever condition happens, result is 100% automatic).</div>
+            </div>
+
+            <div class="deep-grammar-ex-row">
+              <strong>2. First Conditional (Real Future Possibility):</strong>
+              <div class="deep-grammar-formula-box">If + Present Simple, ... will / can / may + V1 (Base Form)</div>
+              <div><em>Example:</em> If it rains tomorrow, we will stay at home.</div>
+            </div>
+
+            <div class="deep-grammar-ex-row">
+              <strong>3. Second Conditional (Hypothetical / Unreal Present or Future):</strong>
+              <div class="deep-grammar-formula-box">If + Past Simple (were for all subjects), ... would / could + V1</div>
+              <div><em>Example:</em> If I had a million dollars, I would travel the world. (I don't have it right now).</div>
+              <div><em>Example:</em> If I <strong>were</strong> you, I would accept the job offer. (Always use <em>were</em> with I/he/she in formal English).</div>
+            </div>
+
+            <div class="deep-grammar-ex-row">
+              <strong>4. Third Conditional (Past Regrets / Unreal Past):</strong>
+              <div class="deep-grammar-formula-box">If + Past Perfect (had + V3), ... would have + V3</div>
+              <div><em>Example:</em> If she had studied harder, she would have passed the exam. (She didn't study, so she failed).</div>
+            </div>
+
+            <div class="deep-grammar-mistake-box">
+              <strong>⚠️ Golden Rule:</strong> Never use <em>will</em> or <em>would</em> directly in the <em>If-clause</em>! (Say: <em>"If she comes, I will call you"</em>, NOT <em>"If she will come..."</em>).
+            </div>
+          </div>
+
+          <!-- Chapter 3: Passive Voice -->
+          <div class="deep-grammar-card" data-cat="passive" id="grammar-ch-passive">
+            <div class="deep-grammar-card-title">
+              <span>🔄</span> Chapter 3: Active vs. Passive Voice Transformations
+            </div>
+            <div style="font-size: 12px; color: #475569; margin-bottom: 8px;">
+              Use passive voice when the action or object is more important than who did it, or when the agent is unknown.
+            </div>
+            <div class="deep-grammar-formula-box">
+              Passive Formula: Object + Appropriate form of BE + Past Participle (V3) (+ by Subject)
+            </div>
+            <div class="deep-grammar-table-wrap">
+              <table class="deep-grammar-table">
+                <thead>
+                  <tr>
+                    <th>Tense</th>
+                    <th>Active Voice</th>
+                    <th>Passive Voice Transformation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Present Simple</td>
+                    <td>The chef cooks the meal.</td>
+                    <td>The meal <strong>is cooked</strong> by the chef.</td>
+                  </tr>
+                  <tr>
+                    <td>Past Simple</td>
+                    <td>Shakespeare wrote Hamlet.</td>
+                    <td>Hamlet <strong>was written</strong> by Shakespeare.</td>
+                  </tr>
+                  <tr>
+                    <td>Present Continuous</td>
+                    <td>They are repairing the road.</td>
+                    <td>The road <strong>is being repaired</strong>.</td>
+                  </tr>
+                  <tr>
+                    <td>Present Perfect</td>
+                    <td>Someone has stolen my keys.</td>
+                    <td>My keys <strong>have been stolen</strong>.</td>
+                  </tr>
+                  <tr>
+                    <td>Modals (can/must/should)</td>
+                    <td>You must submit the report.</td>
+                    <td>The report <strong>must be submitted</strong>.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Chapter 4: Modal Verbs -->
+          <div class="deep-grammar-card" data-cat="modals" id="grammar-ch-modals">
+            <div class="deep-grammar-card-title">
+              <span>🎯</span> Chapter 4: Modal Verbs &amp; Degrees of Certainty
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Must vs Have to:</strong> <em>Must</em> = personal obligation / strong deduction (<em>"You must see this movie!"</em> / <em>"He must be tired"</em>). <em>Have to</em> = external rule/law (<em>"I have to wear a uniform"</em>).
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Should / Ought to:</strong> Giving advice or recommendation (<em>"You should drink more water daily"</em>).
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Might / May / Could:</strong> Expressing 30% - 50% possibility (<em>"It might rain later"</em>).
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Past Modals (Deductions &amp; Regrets):</strong>
+              <div>- <code>Must have + V3</code>: 99% certainty in past (<em>"She must have forgotten her phone"</em>).</div>
+              <div>- <code>Can't have + V3</code>: 99% impossibility in past (<em>"He can't have said that!"</em>).</div>
+              <div>- <code>Should have + V3</code>: Regret about past (<em>"I should have left earlier"</em>).</div>
+            </div>
+          </div>
+
+          <!-- Chapter 5: Subject-Verb Agreement -->
+          <div class="deep-grammar-card" data-cat="agreement" id="grammar-ch-agreement">
+            <div class="deep-grammar-card-title">
+              <span>⚖️</span> Chapter 5: Subject-Verb Agreement &amp; Tricky Plurals
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>1. Neither / Either:</strong> When connecting two singular nouns with <em>neither...nor</em> or <em>either...or</em>, the verb agrees with the closer subject! (<em>"Neither the teacher nor the students <strong>were</strong> ready"</em>).
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>2. Collective Nouns &amp; Quantifiers:</strong> <em>"Everyone / Everybody / Each / Nobody"</em> always take a <strong>singular verb</strong>! (<em>"Everyone <strong>has</strong> submitted their test"</em>, NOT <em>have</em>).
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>3. Uncountable Nouns:</strong> <em>Information, advice, furniture, luggage, bread, news, weather</em> are uncountable and take singular verbs! (<em>"The news <strong>is</strong> exciting"</em>, NOT <em>are</em>).
+            </div>
+          </div>
+
+          <!-- Chapter 6: Prepositions -->
+          <div class="deep-grammar-card" data-cat="prepositions" id="grammar-ch-prepositions">
+            <div class="deep-grammar-card-title">
+              <span>📍</span> Chapter 6: Prepositions of Time, Place &amp; Dependent Prepositions
+            </div>
+            <div class="deep-grammar-table-wrap">
+              <table class="deep-grammar-table">
+                <thead>
+                  <tr>
+                    <th>Preposition</th>
+                    <th>Time Rules</th>
+                    <th>Place Rules</th>
+                    <th>Examples</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>AT</strong></td>
+                    <td>Exact clock time, night, weekend</td>
+                    <td>Exact points, addresses</td>
+                    <td>at 5:00 PM, at night, at the station</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ON</strong></td>
+                    <td>Days, dates, specific holidays</td>
+                    <td>Surfaces, streets, transport (bus/train)</td>
+                    <td>on Monday, on May 12th, on the table</td>
+                  </tr>
+                  <tr>
+                    <td><strong>IN</strong></td>
+                    <td>Months, years, seasons, decades</td>
+                    <td>Enclosed spaces, cities, countries</td>
+                    <td>in July, in 2025, in the room, in London</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• For vs Since:</strong> <em>For</em> = duration / period of time (<em>for 3 hours, for 10 years</em>). <em>Since</em> = starting point in time (<em>since Monday, since 2018, since 9 AM</em>).
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Fixed Dependent Prepositions:</strong> <em>Depend on, interested in, good at, afraid of, insist on, believe in, listen to, fond of, proud of</em>.
+            </div>
+          </div>
+
+          <!-- Chapter 7: Reported Speech -->
+          <div class="deep-grammar-card" data-cat="reported" id="grammar-ch-reported">
+            <div class="deep-grammar-card-title">
+              <span>💬</span> Chapter 7: Direct &amp; Indirect (Reported) Speech
+            </div>
+            <div style="font-size: 12px; color: #475569; margin-bottom: 8px;">
+              When reporting what someone said in the past, shift tenses one step back (Backshifting):
+            </div>
+            <div class="deep-grammar-table-wrap">
+              <table class="deep-grammar-table">
+                <thead>
+                  <tr>
+                    <th>Direct Speech</th>
+                    <th>Reported / Indirect Speech</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>"I am tired." (Present Simple)</td>
+                    <td>He said that he <strong>was</strong> tired. (Past Simple)</td>
+                  </tr>
+                  <tr>
+                    <td>"I will help you." (Will)</td>
+                    <td>She promised that she <strong>would</strong> help me. (Would)</td>
+                  </tr>
+                  <tr>
+                    <td>"I have lost my key." (Present Perfect)</td>
+                    <td>He said that he <strong>had lost</strong> his key. (Past Perfect)</td>
+                  </tr>
+                  <tr>
+                    <td>"I bought a car." (Past Simple)</td>
+                    <td>She said that she <strong>had bought</strong> a car. (Past Perfect)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Chapter 8: Common Mistakes -->
+          <div class="deep-grammar-card" data-cat="errors" id="grammar-ch-errors">
+            <div class="deep-grammar-card-title">
+              <span>⚠️</span> Chapter 8: Tricky Common Mistakes &amp; Collocations
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Make vs Do:</strong> 
+              <div>- <strong>Do:</strong> <em>do homework, do business, do a favor, do exercise, do the laundry.</em></div>
+              <div>- <strong>Make:</strong> <em>make a mistake, make a decision, make coffee, make money, make progress.</em></div>
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Say vs Tell:</strong> <em>Say something (to someone)</em> (<em>"She said that she was happy"</em>). <em>Tell someone something</em> (<em>"She told me a story"</em>). Never say <em>"She told to me"</em>!
+            </div>
+            <div class="deep-grammar-ex-row">
+              <strong>• Affect vs Effect:</strong> <em>Affect</em> is usually a <strong>verb</strong> (<em>"The weather affects my mood"</em>). <em>Effect</em> is usually a <strong>noun</strong> (<em>"The side effect of the medicine"</em>).
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="display: flex; justify-content: flex-end; margin-top: 12px; padding-top: 8px; border-top: 1.5px dashed #cbd5e1; flex-shrink: 0;">
+          <button type="button" class="pdf-action-btn pdf-btn-primary" onclick="closeDeepGrammarGuide()" style="padding: 8px 22px; font-weight: 800;">
+            ✓ Done Reading
           </button>
         </div>
       </div>
@@ -10716,6 +11643,39 @@
             "Ginger (chopped)",
           ],
         },
+        {
+          title: "Crispy Honey Chilli Paneer",
+          url: "https://youtube.com/shorts/sample-veg-paneer",
+          veg: true,
+          ingredients: [
+            "Paneer (cubed)",
+            "Cornstarch",
+            "All-purpose flour",
+            "Soy sauce",
+            "Honey",
+            "Chilli flakes",
+            "Garlic (chopped)",
+            "Spring onion",
+            "Oil",
+            "Salt",
+          ],
+        },
+        {
+          title: "Sticky Sweet Crispy Cauliflower",
+          url: "https://youtube.com/shorts/sample-veg-gobi",
+          veg: true,
+          ingredients: [
+            "Cauliflower",
+            "Cornstarch",
+            "Dark soy sauce",
+            "Light soy sauce",
+            "Honey",
+            "Garlic (grated)",
+            "Ginger (chopped)",
+            "Sesame oil",
+            "Oil",
+          ],
+        },
       ];
 
       function escapeHtml(str) {
@@ -10738,6 +11698,10 @@
                 if (r.mustTry === undefined) r.mustTry = false;
                 if (r.quick === undefined) r.quick = false;
                 if (r.okay === undefined) r.okay = false;
+                if (r.veg === undefined) {
+                  const lower = (r.title || "").toLowerCase();
+                  r.veg = lower.includes("paneer") || lower.includes("tofu") || lower.includes("veg") || lower.includes("cauliflower") || lower.includes("gobi");
+                }
                 if (r.addedItems === undefined) r.addedItems = "";
                 if (r.changes === undefined) r.changes = "";
                 if (Array.isArray(r.ingredients)) {
@@ -10769,9 +11733,11 @@
             recipeData.recipes.push({
               title: seed.title,
               url: seed.url,
+              veg: !!seed.veg,
               favorite: false,
               mustTry: false,
               quick: false,
+              okay: false,
               addedItems: "",
               changes: "",
               ingredients: seed.ingredients.map((name) => ({
@@ -10796,6 +11762,7 @@
         const titleEl = document.getElementById("recipeTitleInput");
         const urlEl = document.getElementById("recipeUrlInput");
         const ingEl = document.getElementById("recipeIngredientInput");
+        const vegEl = document.getElementById("recipeVegInput");
         const favEl = document.getElementById("recipeFavoriteInput");
         const mustTryEl = document.getElementById("recipeMustTryInput");
         const quickEl = document.getElementById("recipeQuickInput");
@@ -10825,6 +11792,7 @@
 
           if (titleEl) titleEl.value = recipe.title || "";
           if (urlEl) urlEl.value = recipe.url || "";
+          if (vegEl) vegEl.checked = !!recipe.veg;
           if (favEl) favEl.checked = !!recipe.favorite;
           if (mustTryEl) mustTryEl.checked = !!recipe.mustTry;
           if (quickEl) quickEl.checked = !!recipe.quick;
@@ -10847,6 +11815,7 @@
 
           if (titleEl) titleEl.value = "";
           if (urlEl) urlEl.value = "";
+          if (vegEl) vegEl.checked = false;
           if (favEl) favEl.checked = false;
           if (mustTryEl) mustTryEl.checked = false;
           if (quickEl) quickEl.checked = false;
@@ -10856,6 +11825,13 @@
           pendingIngredients = [];
         }
 
+        const bulkBox = document.getElementById("recipeBulkPasteBox");
+        if (bulkBox) bulkBox.classList.remove("open");
+        const bulkInput = document.getElementById("recipeBulkPasteInput");
+        if (bulkInput) bulkInput.value = "";
+        const ocrStatus = document.getElementById("recipeOcrStatus");
+        if (ocrStatus) ocrStatus.style.display = "none";
+
         renderFormIngredientList();
         document.getElementById("recipeModal").classList.add("show");
       }
@@ -10864,12 +11840,279 @@
         document.getElementById("recipeModal").classList.remove("show");
         const editIdxEl = document.getElementById("recipeEditIndex");
         if (editIdxEl) editIdxEl.value = "";
+        const bulkBox = document.getElementById("recipeBulkPasteBox");
+        if (bulkBox) bulkBox.classList.remove("open");
+        const ocrStatus = document.getElementById("recipeOcrStatus");
+        if (ocrStatus) ocrStatus.style.display = "none";
+      }
+
+      function isIngredientHeading(item) {
+        if (!item) return false;
+        if (typeof item === "object" && item.isHeading) return true;
+        const name = (typeof item === "string" ? item : (item.name || "")).trim();
+        if (!name) return false;
+        if (name.startsWith("##") || name.startsWith("🏷️") || name.startsWith("SECTION:")) return true;
+        if (/^\[.+\]$/.test(name)) return true;
+        if (/^==+.+==+$/.test(name) || /^--+.+--+$/.test(name)) return true;
+        if (/^(for\s+.*|.*sauce.*|.*salad.*|.*marin.*|.*dressing.*|.*seasoning.*|.*topping.*|.*garnish.*|.*batter.*|.*dough.*|.*gravy.*|.*curry.*|.*base.*|.*filling.*|.*assembly.*):$/i.test(name)) return true;
+        if (/^(sauce|salad|marination|dressing|seasoning|toppings|batter|dough|gravy|curry|main ingredients|for the sauce|for the salad|for marinating)$/i.test(name)) return true;
+        return false;
+      }
+
+      function cleanHeadingTitle(name) {
+        if (!name) return "";
+        let clean = name
+          .replace(/^##\s*/, "")
+          .replace(/^🏷️\s*/, "")
+          .replace(/^SECTION:\s*/i, "")
+          .replace(/^\[|\]$/g, "")
+          .replace(/^==+|==+$/g, "")
+          .replace(/^--+|--+$/g, "")
+          .replace(/:$/, "")
+          .trim();
+        return clean ? clean.charAt(0).toUpperCase() + clean.slice(1) : "Section";
+      }
+
+      function getHeadingIcon(name) {
+        const lower = (name || "").toLowerCase();
+        if (lower.includes("sauce") || lower.includes("dip") || lower.includes("gravy") || lower.includes("curry")) return "🥣";
+        if (lower.includes("salad") || lower.includes("veg") || lower.includes("green")) return "🥗";
+        if (lower.includes("marin") || lower.includes("chicken") || lower.includes("beef") || lower.includes("meat")) return "🍗";
+        if (lower.includes("dressing") || lower.includes("oil") || lower.includes("vinegar")) return "🫒";
+        if (lower.includes("season") || lower.includes("spice") || lower.includes("masala") || lower.includes("rub")) return "🧂";
+        if (lower.includes("batter") || lower.includes("dough") || lower.includes("flour") || lower.includes("coat")) return "🥟";
+        if (lower.includes("topping") || lower.includes("garnish")) return "🌿";
+        if (lower.includes("noodle") || lower.includes("rice") || lower.includes("pasta")) return "🍜";
+        return "🏷️";
+      }
+
+      function parseBulkIngredientsText(rawText) {
+        if (!rawText || !rawText.trim()) return [];
+        const lines = rawText
+          .split(/\r?\n|;/)
+          .map((l) => l.trim())
+          .filter(Boolean);
+
+        const results = [];
+
+        lines.forEach((line) => {
+          if (isIngredientHeading(line)) {
+            results.push({
+              name: cleanHeadingTitle(line),
+              isHeading: true,
+              checked: false,
+            });
+            return;
+          }
+
+          let cleaned = line
+            .replace(/^[\s\-\*\•\d+\.\)\:\>\–\—]+\s*/, "")
+            .trim();
+
+          if (!cleaned) return;
+
+          if (isIngredientHeading(cleaned)) {
+            results.push({
+              name: cleanHeadingTitle(cleaned),
+              isHeading: true,
+              checked: false,
+            });
+            return;
+          }
+
+          if (
+            cleaned.includes(",") &&
+            !isInstructionText(cleaned) &&
+            cleaned.split(",").length > 1
+          ) {
+            const parts = cleaned
+              .split(",")
+              .map((p) => p.trim())
+              .filter(Boolean);
+            parts.forEach((part) => {
+              let pClean = part
+                .replace(/^[\s\-\*\•\d+\.\)\:\>\–\—]+\s*/, "")
+                .trim();
+              if (!pClean) return;
+              if (isInstructionText(pClean)) {
+                results.push({ name: pClean, checked: false });
+              } else {
+                results.push({
+                  name: normalizeIngredientName(pClean),
+                  checked: false,
+                });
+              }
+            });
+            return;
+          }
+
+          if (isInstructionText(cleaned)) {
+            results.push({ name: cleaned, checked: false });
+          } else {
+            results.push({
+              name: normalizeIngredientName(cleaned),
+              checked: false,
+            });
+          }
+        });
+
+        return results;
+      }
+
+      function toggleRecipeBulkPaste(show) {
+        const box = document.getElementById("recipeBulkPasteBox");
+        if (!box) return;
+        if (show === undefined) {
+          box.classList.toggle("open");
+        } else if (show) {
+          box.classList.add("open");
+        } else {
+          box.classList.remove("open");
+        }
+        if (box.classList.contains("open")) {
+          const textarea = document.getElementById("recipeBulkPasteInput");
+          if (textarea) textarea.focus();
+        }
+      }
+
+      function processBulkIngredients() {
+        const textarea = document.getElementById("recipeBulkPasteInput");
+        if (!textarea) return;
+        const rawText = textarea.value.trim();
+        if (!rawText) {
+          showToast("Please paste your ingredients list first 📋");
+          return;
+        }
+        const parsed = parseBulkIngredientsText(rawText);
+        if (parsed.length === 0) {
+          showToast("No ingredients recognized in pasted text 🧐");
+          return;
+        }
+
+        pendingIngredients.push(...parsed);
+        textarea.value = "";
+        toggleRecipeBulkPaste(false);
+        renderFormIngredientList();
+        showToast(`Added ${parsed.length} ingredients/sections! ⚡`);
+      }
+
+      function loadTesseract(callback) {
+        if (window.Tesseract) {
+          callback();
+          return;
+        }
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+        script.onload = () => callback();
+        script.onerror = () => {
+          showToast("Online OCR library could not be loaded. Please paste text directly 📋");
+        };
+        document.head.appendChild(script);
+      }
+
+      function triggerRecipeImageOCR() {
+        const fileInput = document.getElementById("recipeOcrFileInput");
+        if (fileInput) {
+          fileInput.value = "";
+          fileInput.click();
+        }
+      }
+
+      function handleRecipeImageOCR(event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        processImageFileForOCR(file);
+      }
+
+      function processImageFileForOCR(file) {
+        const statusEl = document.getElementById("recipeOcrStatus");
+        if (statusEl) {
+          statusEl.style.display = "flex";
+          statusEl.innerHTML = `<span>⏳</span> <span>Scanning screenshot with OCR... Please wait</span>`;
+        }
+
+        loadTesseract(() => {
+          if (!window.Tesseract) {
+            if (statusEl) statusEl.style.display = "none";
+            toggleRecipeBulkPaste(true);
+            return;
+          }
+
+          window.Tesseract.recognize(file, "eng", {
+            logger: (m) => {
+              if (m.status === "recognizing text" && m.progress && statusEl) {
+                statusEl.innerHTML = `<span>⏳</span> <span>Recognizing ingredients... ${Math.round(m.progress * 100)}%</span>`;
+              }
+            },
+          })
+            .then(({ data: { text } }) => {
+              if (statusEl) statusEl.style.display = "none";
+              if (!text || !text.trim()) {
+                showToast("Could not extract text. Please paste text directly 📋");
+                toggleRecipeBulkPaste(true);
+                return;
+              }
+
+              const parsed = parseBulkIngredientsText(text);
+              if (parsed.length > 0) {
+                pendingIngredients.push(...parsed);
+                renderFormIngredientList();
+                showToast(`✨ Extracted ${parsed.length} items from screenshot!`);
+              } else {
+                toggleRecipeBulkPaste(true);
+                const textarea = document.getElementById("recipeBulkPasteInput");
+                if (textarea) textarea.value = text;
+                showToast("Review extracted text & tap Auto-Add 📋");
+              }
+            })
+            .catch((err) => {
+              console.error("OCR recognition error:", err);
+              if (statusEl) statusEl.style.display = "none";
+              showToast("Error scanning screenshot. Please paste text directly 📋");
+              toggleRecipeBulkPaste(true);
+            });
+        });
+      }
+
+      function addHeadingToForm() {
+        const input = document.getElementById("recipeIngredientInput");
+        const rawName = input.value.trim();
+        if (!rawName) {
+          showToast("Type a section name (e.g. 'For Sauce', 'For Salad') 🏷️");
+          input.focus();
+          return;
+        }
+        const headingTitle = cleanHeadingTitle(rawName);
+        pendingIngredients.push({
+          name: headingTitle,
+          isHeading: true,
+          checked: false,
+        });
+        input.value = "";
+        renderFormIngredientList();
+        showToast(`Added section heading: "${headingTitle}" 🏷️`);
+        input.focus();
       }
 
       function addIngredientToForm() {
         const input = document.getElementById("recipeIngredientInput");
         const rawName = input.value.trim();
         if (!rawName) return;
+
+        if (isIngredientHeading(rawName)) {
+          const headingTitle = cleanHeadingTitle(rawName);
+          pendingIngredients.push({
+            name: headingTitle,
+            isHeading: true,
+            checked: false,
+          });
+          input.value = "";
+          renderFormIngredientList();
+          showToast(`Added section: "${headingTitle}" 🏷️`);
+          input.focus();
+          return;
+        }
+
         const isInst = isInstructionText(rawName);
         const name = isInst ? rawName : normalizeIngredientName(rawName);
         pendingIngredients.push({ name, checked: false });
@@ -10894,17 +12137,33 @@
         const listEl = document.getElementById("formIngredientList");
         if (pendingIngredients.length === 0) {
           listEl.innerHTML =
-            '<div class="form-ingredient-empty">No ingredients added yet.</div>';
+            '<div class="form-ingredient-empty">No ingredients added yet. Paste a list, scan screenshot, or type one by one.</div>';
           return;
         }
         listEl.innerHTML = pendingIngredients
           .map((ing, index) => {
-            const isInst = isInstructionText(ing.name);
+            const isHeading = isIngredientHeading(ing);
+            if (isHeading) {
+              const hTitle = cleanHeadingTitle(ingredientName(ing));
+              const hIcon = getHeadingIcon(hTitle);
+              return `
+            <div class="form-ingredient-heading-item">
+              <div style="display: flex; align-items: center; gap: 6px; font-weight: 700; color: #854d0e; font-size: 12.5px;">
+                <span>${hIcon}</span>
+                <span>${escapeHtml(hTitle)}</span>
+                <span class="form-heading-tag">SECTION</span>
+              </div>
+              <button type="button" class="form-ingredient-remove" onclick="removeIngredientFromForm(${index})" title="Remove section">✕</button>
+            </div>
+          `;
+            }
+
+            const isInst = isInstructionText(ingredientName(ing));
             return `
           <div class="form-ingredient-item ${isInst ? "is-instruction" : ""}">
             <input type="checkbox" ${ing.checked ? "checked" : ""} onchange="toggleFormIngredientChecked(${index})" />
-            <span>${isInst ? "⏱️ " : ""}${escapeHtml(ing.name)}</span>
-            <button type="button" class="form-ingredient-remove" onclick="removeIngredientFromForm(${index})">✕</button>
+            <span>${isInst ? "⏱️ " : ""}${escapeHtml(ingredientName(ing))}</span>
+            <button type="button" class="form-ingredient-remove" onclick="removeIngredientFromForm(${index})" title="Remove ingredient">✕</button>
           </div>
         `;
           })
@@ -10916,6 +12175,8 @@
         const editIdxVal = editIdxEl ? editIdxEl.value : "";
         const title = document.getElementById("recipeTitleInput").value.trim();
         const url = document.getElementById("recipeUrlInput").value.trim();
+        const vegEl = document.getElementById("recipeVegInput");
+        const veg = vegEl ? vegEl.checked : false;
         const favEl = document.getElementById("recipeFavoriteInput");
         const favorite = favEl ? favEl.checked : false;
         const mustTryEl = document.getElementById("recipeMustTryInput");
@@ -10951,6 +12212,7 @@
               ...recipeData.recipes[editIndex],
               title,
               url,
+              veg,
               favorite,
               mustTry,
               quick,
@@ -10965,6 +12227,7 @@
           recipeData.recipes.unshift({
             title,
             url,
+            veg,
             favorite,
             mustTry,
             quick,
@@ -10974,15 +12237,17 @@
             ingredients,
           });
           showToast(
-            okay
-              ? "Added to Okay / Normal Recipes 👌"
-              : quick
-                ? "Added to Quick Recipes ⚡"
-                : favorite
-                  ? "Recipe added to Favorites ⭐"
-                  : mustTry
-                    ? "Recipe added to Have-To-Try list 🔥"
-                    : "Recipe added 🍳",
+            veg
+              ? "Added to Veg Recipes 🥗"
+              : okay
+                ? "Added to Okay / Normal Recipes 👌"
+                : quick
+                  ? "Added to Quick Recipes ⚡"
+                  : favorite
+                    ? "Recipe added to Favorites ⭐"
+                    : mustTry
+                      ? "Recipe added to Have-To-Try list 🔥"
+                      : "Recipe added 🍳",
           );
         }
 
@@ -10990,6 +12255,22 @@
         closeRecipeModal();
         renderRecipeList(
           document.getElementById("recipeSearchInput")?.value || "",
+        );
+      }
+
+      function toggleRecipeVeg(index, event) {
+        if (event) event.stopPropagation();
+        const recipe = recipeData.recipes[index];
+        if (!recipe) return;
+        recipe.veg = !recipe.veg;
+        saveRecipeDataToStorage();
+        renderRecipeList(
+          document.getElementById("recipeSearchInput")?.value || "",
+        );
+        showToast(
+          recipe.veg
+            ? `Marked "${recipe.title}" as Veg 🥗`
+            : `Removed "${recipe.title}" from Veg list`,
         );
       }
 
@@ -11161,7 +12442,7 @@
         recipeData.recipes.forEach((recipe) => {
           recipe.ingredients.forEach((ing) => {
             const name = ingredientName(ing);
-            if (isInstructionText(name)) return;
+            if (isInstructionText(name) || isIngredientHeading(ing)) return;
             const key = normalizeIngredientKey(name);
             if (!key) return;
             if (isCommonIngredient(name)) {
@@ -11467,18 +12748,14 @@
             </label>
           `;
 
-        const commonItems = [];
-        const uncommonItems = [];
-        const instructionItems = [];
+        const ingredients = recipe.ingredients || [];
+        const hasHeadings = ingredients.some((ing) => isIngredientHeading(ing));
 
-        (recipe.ingredients || []).forEach((ing, ingIndex) => {
+        const instructionItems = [];
+        ingredients.forEach((ing, ingIndex) => {
           const name = ingredientName(ing);
           if (isInstructionText(name)) {
             instructionItems.push({ name, ingIndex });
-          } else {
-            (isCommonIngredient(name) ? commonItems : uncommonItems).push(
-              renderIngredientItem(ing, ingIndex),
-            );
           }
         });
 
@@ -11502,6 +12779,65 @@
           `
           : "";
 
+        if (hasHeadings) {
+          let sectionsHTML = "";
+          let currentSectionTitle = "";
+          let currentItems = [];
+
+          const flushSection = () => {
+            if (currentItems.length > 0 || currentSectionTitle) {
+              const icon = getHeadingIcon(currentSectionTitle);
+              const headerHTML = currentSectionTitle
+                ? `<div class="recipe-ingredient-section-header">
+                     <span class="recipe-ingredient-section-icon">${icon}</span>
+                     <span class="recipe-ingredient-section-title">${escapeHtml(cleanHeadingTitle(currentSectionTitle))}</span>
+                   </div>`
+                : `<div class="recipe-ingredient-section-header">
+                     <span class="recipe-ingredient-section-icon">🍳</span>
+                     <span class="recipe-ingredient-section-title">Main Ingredients</span>
+                   </div>`;
+              sectionsHTML += `
+                <div class="recipe-ingredient-group">
+                  ${headerHTML}
+                  <div class="recipe-ingredient-group-items">
+                    ${currentItems.join("")}
+                  </div>
+                </div>
+              `;
+              currentItems = [];
+            }
+          };
+
+          ingredients.forEach((ing, ingIndex) => {
+            const name = ingredientName(ing);
+            if (isInstructionText(name)) return;
+            if (isIngredientHeading(ing)) {
+              flushSection();
+              currentSectionTitle = name;
+            } else {
+              currentItems.push(renderIngredientItem(ing, ingIndex));
+            }
+          });
+          flushSection();
+
+          return `
+            ${instructionsHTML}
+            ${sectionsHTML}
+          `;
+        }
+
+        const commonItems = [];
+        const uncommonItems = [];
+
+        ingredients.forEach((ing, ingIndex) => {
+          const name = ingredientName(ing);
+          if (!isInstructionText(name)) {
+            (isCommonIngredient(name) ? commonItems : uncommonItems).push(
+              renderIngredientItem(ing, ingIndex),
+            );
+          }
+        });
+
         return `
           ${instructionsHTML}
           ${
@@ -11522,21 +12858,26 @@
           recipe.addedItems && recipe.addedItems.trim().length > 0;
         const hasChanges = recipe.changes && recipe.changes.trim().length > 0;
         const hasNotes = hasAdded || hasChanges;
+        const isVeg = !!recipe.veg;
         const isFav = !!recipe.favorite;
         const isMustTry = !!recipe.mustTry;
         const isQuick = !!recipe.quick;
         const isOk = !!recipe.okay;
         return `
-          <details class="recipe-index-item ${isFav ? "is-favorite" : ""} ${isMustTry ? "is-must-try" : ""} ${isQuick ? "is-quick" : ""} ${isOk ? "is-ok" : ""}">
+          <details class="recipe-index-item ${isVeg ? "is-veg" : ""} ${isFav ? "is-favorite" : ""} ${isMustTry ? "is-must-try" : ""} ${isQuick ? "is-quick" : ""} ${isOk ? "is-ok" : ""}">
             <summary class="recipe-index-summary">
               <div class="recipe-summary-title">
                 <span class="recipe-title-text">${escapeHtml(recipe.title || "Untitled Recipe")}</span>
+                ${isVeg ? '<span class="recipe-badge-pill pill-veg" title="Vegetarian / Veg Recipe">🥗 Veg</span>' : ""}
                 ${isFav ? '<span class="recipe-badge-pill pill-fav" title="Favorite Recipe">⭐ Favorite</span>' : ""}
                 ${isMustTry ? '<span class="recipe-badge-pill pill-must-try" title="Must Try / Have To Try">🔥 Must Try</span>' : ""}
                 ${isQuick ? '<span class="recipe-badge-pill pill-quick" title="Quick Recipe">⚡ Quick</span>' : ""}
                 ${isOk ? '<span class="recipe-badge-pill pill-ok" title="Okay Recipe">👌 Okay</span>' : ""}
               </div>
               <div class="recipe-item-actions" onclick="event.stopPropagation()">
+                <button type="button" class="recipe-action-btn veg-btn ${isVeg ? "active" : ""}" onclick="toggleRecipeVeg(${index}, event)" title="${isVeg ? "Vegetarian (Click to remove)" : "Mark as Vegetarian / Veg"}">
+                  🥗
+                </button>
                 <button type="button" class="recipe-action-btn fav-btn ${isFav ? "active" : ""}" onclick="toggleRecipeFavorite(${index}, event)" title="${isFav ? "Favorited (Click to remove)" : "Add to favorites"}">
                   ${isFav ? "⭐" : "☆"}
                 </button>
@@ -11601,6 +12942,30 @@
             </div>
           </details>
         `;
+      }
+
+      function renderRecipeVegList(filterText) {
+        const countEl = document.getElementById("recipeVegCount");
+        const listEl = document.getElementById("recipeVegList");
+        if (!countEl || !listEl) return;
+
+        const totalVeg = recipeData.recipes.filter((r) => r.veg).length;
+        countEl.textContent = totalVeg;
+
+        const vegEntries = getFilteredRecipeEntries(filterText).filter(
+          ({ recipe }) => recipe.veg,
+        );
+
+        if (vegEntries.length === 0) {
+          listEl.innerHTML = filterText
+            ? `<div class="history-empty">No vegetarian recipes found for "${escapeHtml(filterText)}".</div>`
+            : '<div class="history-empty">No vegetarian recipes added yet. Tap "🥗" on any recipe or add a new veg dish!</div>';
+          return;
+        }
+
+        listEl.innerHTML = vegEntries
+          .map(({ recipe, index }) => renderRecipeItemHTML(recipe, index))
+          .join("");
       }
 
       function renderRecipeFavoriteList(filterText) {
@@ -11746,10 +13111,10 @@
             : searchInput
               ? searchInput.value
               : "";
+        renderRecipeVegList(query);
         renderRecipeFavoriteList(query);
         renderRecipeMustTryList(query);
         renderRecipeQuickList(query);
-        renderRecipeOkayList(query);
         renderRecipeIndex(query);
         renderIngredientsPage();
       }
@@ -11775,6 +13140,45 @@
         .addEventListener("click", function (e) {
           if (e.target === this) closeRecipeModal();
         });
+
+      // Quick Paste & Clipboard Image OCR Listeners
+      const recipeIngInput = document.getElementById("recipeIngredientInput");
+      if (recipeIngInput) {
+        recipeIngInput.addEventListener("paste", function (e) {
+          const pasted = (e.clipboardData || window.clipboardData)?.getData("text");
+          if (pasted && (pasted.includes("\n") || (pasted.includes(",") && pasted.length > 25))) {
+            e.preventDefault();
+            const parsed = parseBulkIngredientsText(pasted);
+            if (parsed.length > 0) {
+              pendingIngredients.push(...parsed);
+              renderFormIngredientList();
+              showToast(`⚡ Added ${parsed.length} ingredients/sections!`);
+              this.value = "";
+            }
+          }
+        });
+      }
+
+      document.addEventListener("paste", function (e) {
+        const modal = document.getElementById("recipeModal");
+        if (!modal || !modal.classList.contains("show")) return;
+        const active = document.activeElement;
+        if (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) {
+          return;
+        }
+        const items = (e.clipboardData || window.clipboardData)?.items;
+        if (items) {
+          for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf("image") !== -1) {
+              const blob = items[i].getAsFile();
+              if (blob) {
+                processImageFileForOCR(blob);
+                break;
+              }
+            }
+          }
+        }
+      });
 
       // ==================== ROUTINE TRACKER FUNCTIONS ====================
 
@@ -11961,6 +13365,7 @@
         updateDailyEnglishBadge();
         setEnglishTestMode("all");
         renderEnglishTestHistory();
+        initEnglishVocab();
       }
 
       function setEnglishTestMode(mode) {
@@ -12004,34 +13409,74 @@
           return;
         }
 
-        engSelectedOption = null;
-        engAnswered = false;
-
         const badge = document.getElementById("engQuestionBadge");
         const scoreBadge = document.getElementById("engScoreBadge");
         const qText = document.getElementById("engQuestionText");
         const optionsGrid = document.getElementById("engOptionsGrid");
         const feedbackBox = document.getElementById("engFeedbackBox");
+        const feedbackTitle = document.getElementById("engFeedbackTitle");
+        const feedbackExp = document.getElementById("engFeedbackExplanation");
         const nextBtn = document.getElementById("engNextBtn");
+        const prevBtn = document.getElementById("engPrevBtn");
 
         if (badge) badge.textContent = `Question ${engCurrentIndex + 1} of ${engCurrentQuestions.length} • Level ${q.level}`;
         if (scoreBadge) scoreBadge.textContent = `Score: ${engScore}`;
         if (qText) qText.textContent = q.question;
-        if (feedbackBox) feedbackBox.style.display = "none";
-        if (nextBtn) {
-          nextBtn.disabled = true;
-          nextBtn.textContent = engCurrentIndex === engCurrentQuestions.length - 1 ? "Finish Test 🏁" : "Next Question ➔";
-        }
+        if (prevBtn) prevBtn.disabled = engCurrentIndex === 0;
 
-        if (optionsGrid) {
-          optionsGrid.innerHTML = q.options.map((opt, i) => `
-            <button type="button" class="test-option-btn" id="engOpt-${i}" onclick="selectEnglishOption(${i})">
-              <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#e2e8f0; font-size:12px; font-weight:800; color:#334155;">
-                ${String.fromCharCode(65 + i)}
-              </span>
-              <span>${escapeHtml(opt)}</span>
-            </button>
-          `).join("");
+        const previousAnswer = engUserAnswers[engCurrentIndex];
+
+        if (previousAnswer) {
+          engAnswered = true;
+          engSelectedOption = previousAnswer.userIndex;
+
+          if (optionsGrid) {
+            optionsGrid.innerHTML = q.options.map((opt, i) => {
+              let optClass = "test-option-btn";
+              if (i === q.correctIndex) optClass += " correct";
+              else if (i === previousAnswer.userIndex) optClass += " wrong";
+              return `
+                <button type="button" class="${optClass}" id="engOpt-${i}" disabled>
+                  <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#e2e8f0; font-size:12px; font-weight:800; color:#334155;">
+                    ${String.fromCharCode(65 + i)}
+                  </span>
+                  <span>${escapeHtml(opt)}</span>
+                </button>
+              `;
+            }).join("");
+          }
+
+          if (feedbackBox && feedbackTitle && feedbackExp) {
+            feedbackBox.className = "test-feedback-box " + (previousAnswer.isCorrect ? "correct" : "wrong");
+            feedbackTitle.textContent = previousAnswer.isCorrect ? "🎉 Correct Answer!" : "❌ Incorrect!";
+            feedbackExp.textContent = q.explanation;
+            feedbackBox.style.display = "block";
+          }
+
+          if (nextBtn) {
+            nextBtn.disabled = false;
+            nextBtn.textContent = engCurrentIndex === engCurrentQuestions.length - 1 ? "Finish Test 🏁" : "Next Question ➔";
+          }
+        } else {
+          engSelectedOption = null;
+          engAnswered = false;
+
+          if (feedbackBox) feedbackBox.style.display = "none";
+          if (nextBtn) {
+            nextBtn.disabled = true;
+            nextBtn.textContent = engCurrentIndex === engCurrentQuestions.length - 1 ? "Finish Test 🏁" : "Next Question ➔";
+          }
+
+          if (optionsGrid) {
+            optionsGrid.innerHTML = q.options.map((opt, i) => `
+              <button type="button" class="test-option-btn" id="engOpt-${i}" onclick="selectEnglishOption(${i})">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#e2e8f0; font-size:12px; font-weight:800; color:#334155;">
+                  ${String.fromCharCode(65 + i)}
+                </span>
+                <span>${escapeHtml(opt)}</span>
+              </button>
+            `).join("");
+          }
         }
       }
 
@@ -12042,9 +13487,8 @@
 
         const q = engCurrentQuestions[engCurrentIndex];
         const isCorrect = index === q.correctIndex;
-        if (isCorrect) engScore++;
 
-        engUserAnswers.push({
+        engUserAnswers[engCurrentIndex] = {
           qIndex: engCurrentIndex + 1,
           question: q.question,
           options: q.options,
@@ -12055,7 +13499,9 @@
           isCorrect: isCorrect,
           explanation: q.explanation,
           level: q.level
-        });
+        };
+
+        engScore = engUserAnswers.filter(a => a && a.isCorrect).length;
 
         const scoreBadge = document.getElementById("engScoreBadge");
         if (scoreBadge) scoreBadge.textContent = `Score: ${engScore}`;
@@ -12085,6 +13531,13 @@
         if (nextBtn) nextBtn.disabled = false;
       }
 
+      function prevEnglishQuestion() {
+        if (engCurrentIndex > 0) {
+          engCurrentIndex--;
+          renderEnglishQuestion();
+        }
+      }
+
       function nextEnglishQuestion() {
         engCurrentIndex++;
         if (engCurrentIndex >= engCurrentQuestions.length) {
@@ -12092,6 +13545,23 @@
         } else {
           renderEnglishQuestion();
         }
+      }
+
+      function openDeepGrammarGuideFromTest() {
+        const q = engCurrentQuestions[engCurrentIndex];
+        let topicKey = "all";
+        if (q) {
+          const text = (q.question + " " + q.explanation).toLowerCase();
+          if (text.includes("conditional") || text.includes("if i")) topicKey = "conditionals";
+          else if (text.includes("passive") || text.includes("written by")) topicKey = "passive";
+          else if (text.includes("modal") || text.includes("must") || text.includes("should") || text.includes("might")) topicKey = "modals";
+          else if (text.includes("preposition") || text.includes("since") || text.includes("for ")) topicKey = "prepositions";
+          else if (text.includes("neither") || text.includes("either") || text.includes("everyone") || text.includes("agreement")) topicKey = "agreement";
+          else if (text.includes("perfect") || text.includes("past") || text.includes("tense") || text.includes("continuous")) topicKey = "tenses";
+          else if (text.includes("said") || text.includes("told") || text.includes("reported")) topicKey = "reported";
+          else if (text.includes("favor") || text.includes("make") || text.includes("do") || text.includes("affect")) topicKey = "errors";
+        }
+        openDeepGrammarGuide(topicKey);
       }
 
       function showEnglishResults() {
@@ -12306,6 +13776,737 @@
         if (!confirm("Are you sure you want to clear your English Test history? This will delete all past score records.")) return;
         localStorage.removeItem("bushra_english_test_history");
         renderEnglishTestHistory();
+      }
+
+      // ==================== MEANING FINDER & MY NEW WORDS (VOCABULARY DIARY) ====================
+      const DEFAULT_ENGLISH_VOCAB_LIST = [
+        {
+          id: "vocab_1",
+          word: "Resilient",
+          urdu: "مضبوط / حالات کا مقابلہ کرنے والا / لچکدار",
+          meaning: "Able to withstand or recover quickly from difficult conditions",
+          example: "She remained resilient and stayed positive during challenging times.",
+          pos: "adjective",
+          phonetic: "/rɪˈzɪl.jənt/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 4
+        },
+        {
+          id: "vocab_2",
+          word: "Diligent",
+          urdu: "محنتی / انتھک / جفاکش",
+          meaning: "Having or showing care and conscientiousness in one's work or duties",
+          example: "He is a diligent student who practices English every single day.",
+          pos: "adjective",
+          phonetic: "/ˈdɪl.ɪ.dʒənt/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 3
+        },
+        {
+          id: "vocab_3",
+          word: "Accomplish",
+          urdu: "حاصل کرنا / مکمل کرنا / پایہ تکمیل تک پہنچانا",
+          meaning: "To achieve or complete successfully",
+          example: "With proper planning, you can accomplish all your daily goals.",
+          pos: "verb",
+          phonetic: "/əˈkʌm.plɪʃ/",
+          status: "learned",
+          createdAt: Date.now() - 86400000 * 2
+        },
+        {
+          id: "vocab_4",
+          word: "Fascinating",
+          urdu: "دلچسپ / مسحور کن / پرکشش",
+          meaning: "Extremely interesting and attractive",
+          example: "The new English grammar book has fascinating real-life examples.",
+          pos: "adjective",
+          phonetic: "/ˈfæs.ɪ.neɪ.tɪŋ/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 1
+        },
+        {
+          id: "vocab_5",
+          word: "Essential",
+          urdu: "لازمی / بنیادی / انتہائی ضروری",
+          meaning: "Absolutely necessary; extremely important",
+          example: "Daily practice is essential for mastering any new language.",
+          pos: "adjective",
+          phonetic: "/ɪˈsɛn.ʃəl/",
+          status: "learned",
+          createdAt: Date.now() - 86400000 * 5
+        },
+        {
+          id: "vocab_6",
+          word: "Punctual",
+          urdu: "وقت کا پابند",
+          meaning: "Doing something at the agreed or proper time; on time",
+          example: "Being punctual shows professionalism and respect for others' time.",
+          pos: "adjective",
+          phonetic: "/ˈpʌŋk.tʃu.əl/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 2
+        },
+        {
+          id: "vocab_7",
+          word: "Perseverance",
+          urdu: "ثابت قدمی / مستقل مزاجی / ہمت",
+          meaning: "Persistence in doing something despite difficulty or delay in achieving success",
+          example: "Through hard work and perseverance, she cleared the English test with top marks.",
+          pos: "noun",
+          phonetic: "/ˌpɜː.sɪˈvɪə.rəns/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 3
+        },
+        {
+          id: "vocab_8",
+          word: "Comprehend",
+          urdu: "سمجھنا / ادراک کرنا / ذہن نشین کرنا",
+          meaning: "To grasp mentally; understand fully",
+          example: "Reading slowly helps you comprehend complex sentences much better.",
+          pos: "verb",
+          phonetic: "/ˌkɒm.prɪˈhɛnd/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 1
+        },
+        {
+          id: "vocab_9",
+          word: "Meticulous",
+          urdu: "انتہائی باریک بین / احتیاط پسند",
+          meaning: "Showing great attention to detail; very careful and precise",
+          example: "He keeps meticulous notes of every new English vocabulary word.",
+          pos: "adjective",
+          phonetic: "/məˈtɪk.jə.ləs/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 4
+        },
+        {
+          id: "vocab_10",
+          word: "Versatile",
+          urdu: "ہر فن مولا / کثیر المقاصد / ہمہ جہت",
+          meaning: "Able to adapt or be adapted to many different functions or activities",
+          example: "She is a versatile writer who writes both technical and creative articles.",
+          pos: "adjective",
+          phonetic: "/ˈvɜː.sə.taɪl/",
+          status: "learned",
+          createdAt: Date.now() - 86400000 * 6
+        },
+        {
+          id: "vocab_11",
+          word: "Empathy",
+          urdu: "ہمدردی / دوسرے کا درد و احساس محسوس کرنا",
+          meaning: "The ability to understand and share the feelings of another person",
+          example: "Showing empathy helps build strong relationships and trust.",
+          pos: "noun",
+          phonetic: "/ˈɛm.pə.θi/",
+          status: "learning",
+          createdAt: Date.now() - 86400000 * 2
+        },
+        {
+          id: "vocab_12",
+          word: "Gratitude",
+          urdu: "شکر گزاری / احسان مندی",
+          meaning: "The quality of being thankful; readiness to show appreciation",
+          example: "Starting the day with gratitude brings peace and motivation.",
+          pos: "noun",
+          phonetic: "/ˈɡræt.ɪ.tjuːd/",
+          status: "learned",
+          createdAt: Date.now() - 86400000 * 7
+        }
+      ];
+
+      const OFFLINE_EN_UR_DICT = {
+        resilient: { urdu: "مضبوط / حالات کا مقابلہ کرنے والا / لچکدار", meaning: "Able to withstand or recover quickly from difficult conditions", pos: "adjective", phonetic: "/rɪˈzɪl.jənt/", example: "She remained resilient through every hardship." },
+        diligent: { urdu: "محنتی / انتھک / ہوشیار", meaning: "Showing care and conscientiousness in one's work", pos: "adjective", phonetic: "/ˈdɪl.ɪ.dʒənt/", example: "A diligent worker always earns high praise." },
+        accomplish: { urdu: "حاصل کرنا / مکمل کرنا / پایہ تکمیل تک پہنچانا", meaning: "To achieve or complete successfully", pos: "verb", phonetic: "/əˈkʌm.plɪʃ/", example: "We accomplished our main target on schedule." },
+        fascinating: { urdu: "دلچسپ / مسحور کن / پرکشش", meaning: "Extremely interesting and captivating", pos: "adjective", phonetic: "/ˈfæs.ɪ.neɪ.tɪŋ/", example: "The book offers a fascinating look into language history." },
+        essential: { urdu: "لازمی / بنیادی / انتہائی ضروری", meaning: "Absolutely necessary; extremely important", pos: "adjective", phonetic: "/ɪˈsɛn.ʃəl/", example: "Fresh fruits and water are essential for good health." },
+        punctual: { urdu: "وقت کا پابند", meaning: "Doing something at the agreed or proper time", pos: "adjective", phonetic: "/ˈpʌŋk.tʃu.əl/", example: "Always be punctual for your meetings." },
+        perseverance: { urdu: "ثابت قدمی / مستقل مزاجی", meaning: "Persistence in doing something despite difficulty", pos: "noun", phonetic: "/ˌpɜː.sɪˈvɪə.rəns/", example: "Perseverance will eventually turn failure into victory." },
+        comprehend: { urdu: "سمجھنا / ادراک کرنا", meaning: "To grasp mentally; understand fully", pos: "verb", phonetic: "/ˌkɒm.prɪˈhɛnd/", example: "Listen carefully to comprehend the main point." },
+        meticulous: { urdu: "انتہائی باریک بین / احتیاط پسند", meaning: "Showing great attention to detail; very precise", pos: "adjective", phonetic: "/məˈtɪk.jə.ləs/", example: "He gave meticulous attention to spelling accuracy." },
+        versatile: { urdu: "ہر فن مولا / کثیر المقاصد", meaning: "Able to adapt to many different functions", pos: "adjective", phonetic: "/ˈvɜː.sə.taɪl/", example: "She is a versatile professional in multiple fields." },
+        empathy: { urdu: "ہمدردی / دوسرے کا درد محسوس کرنا", meaning: "The ability to understand and share another's feelings", pos: "noun", phonetic: "/ˈɛm.pə.θi/", example: "Treat everyone with empathy and kindness." },
+        gratitude: { urdu: "شکر گزاری / احسان مندی", meaning: "The quality of being thankful and showing appreciation", pos: "noun", phonetic: "/ˈɡræt.ɪ.tjuːd/", example: "He expressed sincere gratitude to his teacher." },
+        innovative: { urdu: "جدت پسند / نیا اور تخلیقی", meaning: "Featuring new methods; advanced and original", pos: "adjective", phonetic: "/ˈɪn.ə.veɪ.tɪv/", example: "They developed an innovative mobile app." },
+        feasible: { urdu: "ممکن / قابل عمل", meaning: "Possible to do easily or conveniently", pos: "adjective", phonetic: "/ˈfiː.zə.bəl/", example: "The proposed timeline is completely feasible." },
+        reluctant: { urdu: "ہچکچانے والا / بے دل", meaning: "Unwilling and hesitant; disinclined", pos: "adjective", phonetic: "/rɪˈlʌk.tənt/", example: "He was reluctant to admit his mistake." },
+        ambitious: { urdu: "بڑے ارادے رکھنے والا / بلند حوصلہ", meaning: "Having or showing a strong desire and determination to succeed", pos: "adjective", phonetic: "/æmˈbɪʃ.əs/", example: "She has ambitious career plans for the future." },
+        curious: { urdu: "متجسس / جاننے کا شوقین", meaning: "Eager to know or learn something", pos: "adjective", phonetic: "/ˈkjʊə.ri.əs/", example: "Children are naturally curious about the world." },
+        candid: { urdu: "کھرا / بے باک / صاف گو", meaning: "Truthful and straightforward; frank", pos: "adjective", phonetic: "/ˈkæn.dɪd/", example: "She gave a candid opinion during the meeting." },
+        prudent: { urdu: "دانش مند / دور اندیش / محتاط", meaning: "Acting with or showing care and thought for the future", pos: "adjective", phonetic: "/ˈpruː.dənt/", example: "It is prudent to save some money for emergencies." },
+        lucid: { urdu: "واضح / صاف / آسانی سے سمجھ آنے والا", meaning: "Expressed clearly; easy to understand", pos: "adjective", phonetic: "/ˈluː.sɪd/", example: "The teacher gave a lucid explanation of the topic." },
+        eloquent: { urdu: "خوش بیان / فصیح و بلیغ", meaning: "Fluent or persuasive in speaking or writing", pos: "adjective", phonetic: "/ˈɛl.ə.kwənt/", example: "His eloquent speech moved the entire audience." },
+        genuine: { urdu: "اصلی / مخلص / حقیقی", meaning: "Truly what something is said to be; authentic and sincere", pos: "adjective", phonetic: "/ˈdʒɛn.ju.ɪn/", example: "She has a genuine passion for teaching." },
+        generous: { urdu: "سخی / فیاض / دریا دل", meaning: "Showing a readiness to give more of something than is strictly necessary", pos: "adjective", phonetic: "/ˈdʒɛn.ər.əs/", example: "He made a generous donation to the local clinic." },
+        enthusiastic: { urdu: "پرجوش / پرشوق", meaning: "Having or showing intense and eager enjoyment or interest", pos: "adjective", phonetic: "/ɪnˌθjuː.ziˈæs.tɪk/", example: "The students were enthusiastic about the science fair." },
+        optimistic: { urdu: "پرامید / مثبت سوچ رکھنے والا", meaning: "Hopeful and confident about the future", pos: "adjective", phonetic: "/ˌɒp.tɪˈmɪs.tɪk/", example: "Always stay optimistic even during tough days." }
+      };
+
+      let englishVocabList = [];
+      let currentVocabFilter = "all";
+      let lastLookedUpVocabWord = null;
+
+      function initEnglishVocab() {
+        try {
+          const raw = localStorage.getItem("bushra_english_vocab_words");
+          if (raw) {
+            englishVocabList = JSON.parse(raw);
+          }
+        } catch (e) {
+          console.error("Error loading vocab words:", e);
+        }
+
+        if (!Array.isArray(englishVocabList) || englishVocabList.length === 0) {
+          englishVocabList = [...DEFAULT_ENGLISH_VOCAB_LIST];
+          saveEnglishVocabList();
+        }
+
+        renderEnglishVocabList();
+      }
+
+      function saveEnglishVocabList() {
+        try {
+          localStorage.setItem("bushra_english_vocab_words", JSON.stringify(englishVocabList));
+        } catch (e) {
+          console.error("Error saving vocab list:", e);
+        }
+      }
+
+      function renderEnglishVocabList(filterMode = null, searchQuery = null) {
+        if (filterMode !== null) currentVocabFilter = filterMode;
+
+        const container = document.getElementById("engVocabCardsContainer");
+        const listEl = document.getElementById("englishVocabList");
+
+        const countBadge = document.getElementById("engVocabCountBadge");
+        const countAll = document.getElementById("engVocabCountAll");
+        const countLearning = document.getElementById("engVocabCountLearning");
+        const countLearned = document.getElementById("engVocabCountLearned");
+
+        const countLegacy = document.getElementById("englishVocabCount");
+        const countPillAll = document.getElementById("countPillAll");
+        const countPillReview = document.getElementById("countPillReview");
+        const countPillLearned = document.getElementById("countPillLearned");
+
+        const searchInput = document.getElementById("engVocabSearchFilter") || document.getElementById("englishVocabSearch");
+        const query = (searchQuery !== null ? searchQuery : (searchInput ? searchInput.value : "")).trim().toLowerCase();
+
+        const totalAll = englishVocabList.length;
+        const totalLearning = englishVocabList.filter(w => w.status === "learning").length;
+        const totalLearned = englishVocabList.filter(w => w.status === "learned").length;
+
+        if (countBadge) countBadge.textContent = `${totalAll} Saved Word${totalAll === 1 ? '' : 's'}`;
+        if (countAll) countAll.textContent = totalAll;
+        if (countLearning) countLearning.textContent = totalLearning;
+        if (countLearned) countLearned.textContent = totalLearned;
+
+        if (countLegacy) countLegacy.textContent = `${totalAll} Word${totalAll === 1 ? '' : 's'}`;
+        if (countPillAll) countPillAll.textContent = totalAll;
+        if (countPillReview) countPillReview.textContent = totalLearning;
+        if (countPillLearned) countPillLearned.textContent = totalLearned;
+
+        // Update active tab styling
+        document.querySelectorAll(".eng-vocab-tab, .new-word-filter-pill").forEach(tab => {
+          const id = tab.id || "";
+          tab.classList.toggle("active", id.endsWith(currentVocabFilter) || id.endsWith(currentVocabFilter === "learning" ? "review" : currentVocabFilter));
+        });
+
+        let filtered = englishVocabList.filter(item => {
+          if (currentVocabFilter === "learning" && item.status !== "learning") return false;
+          if (currentVocabFilter === "learned" && item.status !== "learned") return false;
+          if (query) {
+            const wordMatch = (item.word || "").toLowerCase().includes(query);
+            const urduMatch = (item.urdu || "").toLowerCase().includes(query);
+            const meanMatch = (item.meaning || "").toLowerCase().includes(query);
+            return wordMatch || urduMatch || meanMatch;
+          }
+          return true;
+        });
+
+        const emptyHtml = `
+          <div style="text-align: center; padding: 24px 16px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 12px; color: #64748b;">
+            <div style="font-size: 26px; margin-bottom: 4px;">📭</div>
+            <div style="font-size: 13.5px; font-weight: 700; color: #334155; margin-bottom: 2px;">No matching words found</div>
+            <div style="font-size: 11.5px;">Add a new word above or clear search filter to see all your saved vocabulary!</div>
+          </div>
+        `;
+
+        const cardsHtml = filtered.length === 0 ? emptyHtml : filtered.map(item => {
+          const isLearned = item.status === "learned";
+          const safeWord = escapeHtml(item.word);
+          const safeUrdu = escapeHtml(item.urdu || "");
+          const safeMeaning = escapeHtml(item.meaning || "");
+          const safeExample = escapeHtml(item.example || "");
+          const safePos = item.pos ? escapeHtml(item.pos) : "";
+          const safePhonetic = item.phonetic ? escapeHtml(item.phonetic) : "";
+
+          return `
+            <div class="eng-vocab-card ${isLearned ? 'is-learned' : ''}" id="vocabCard-${item.id}">
+              <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 240px;">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span style="font-size: 15px; font-weight: 900; color: #0f172a;">${safeWord}</span>
+                  ${safePhonetic ? `<span style="font-size: 11.5px; color: #64748b; font-family: monospace;">${safePhonetic}</span>` : ''}
+                  ${safePos ? `<span style="font-size: 10px; font-weight: 800; background: #f1f5f9; color: #475569; padding: 1px 6px; border-radius: 4px; text-transform: uppercase;">${safePos}</span>` : ''}
+                  <button type="button" class="pdf-action-btn" onclick="speakWord('${escapeHtml(item.word).replace(/'/g, "\\'")}')" style="font-size: 11px; padding: 2px 7px; background: #e0e7ff; color: #4338ca; border-color: #818cf8;" title="Listen to pronunciation">
+                    🔊 Listen
+                  </button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 2px;">
+                  <span class="urdu-vocab-pill">${safeUrdu}</span>
+                  ${safeMeaning ? `<span style="font-size: 12px; color: #334155; font-weight: 600;">${safeMeaning}</span>` : ''}
+                </div>
+                ${safeExample ? `
+                  <div style="font-size: 11px; color: #64748b; font-style: italic; margin-top: 2px;">
+                    📝 &ldquo;${safeExample}&rdquo;
+                  </div>
+                ` : ''}
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  onclick="toggleVocabLearned('${item.id}')"
+                  style="font-size: 11.5px; padding: 4px 10px; font-weight: 800; background: ${isLearned ? '#dcfce7' : '#ffffff'}; color: ${isLearned ? '#15803d' : '#334155'}; border: 1.5px solid ${isLearned ? '#86efac' : 'var(--ink)'};"
+                >
+                  ${isLearned ? '✅ Learned' : '🎯 Mark Learned'}
+                </button>
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  onclick="deleteVocabWord('${item.id}')"
+                  style="font-size: 11px; padding: 4px 8px; background: #fff1f2; color: #be123c; border: 1.5px solid #fca5a5; font-weight: 700;"
+                  title="Delete from My Words"
+                >
+                  🗑️
+                </button>
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        if (container) container.innerHTML = cardsHtml;
+        if (listEl) listEl.innerHTML = cardsHtml;
+      }
+
+      function filterVocabList(mode) {
+        if (mode) currentVocabFilter = mode;
+        const searchInput = document.getElementById("engVocabSearchFilter");
+        const q = searchInput ? searchInput.value : "";
+        renderEnglishVocabList(currentVocabFilter, q);
+      }
+
+      function toggleVocabLearned(id) {
+        const item = englishVocabList.find(w => w.id === id);
+        if (!item) return;
+        item.status = item.status === "learned" ? "learning" : "learned";
+        saveEnglishVocabList();
+        renderEnglishVocabList();
+        if (typeof showToast === "function") {
+          showToast(item.status === "learned" ? `🎉 Marked "${item.word}" as Learned!` : `🎯 Marked "${item.word}" for practice!`);
+        }
+      }
+
+      function deleteVocabWord(id) {
+        const item = englishVocabList.find(w => w.id === id);
+        const wordName = item ? item.word : "word";
+        if (!confirm(`Are you sure you want to remove "${wordName}" from your vocabulary notebook?`)) return;
+        englishVocabList = englishVocabList.filter(w => w.id !== id);
+        saveEnglishVocabList();
+        renderEnglishVocabList();
+        if (typeof showToast === "function") {
+          showToast(`🗑️ Removed "${wordName}" from saved words.`);
+        }
+      }
+
+      function addCustomNewWord(e) {
+        if (e && typeof e.preventDefault === "function") e.preventDefault();
+
+        const wordInput = document.getElementById("engCustomWordInput");
+        const urduInput = document.getElementById("engCustomUrduInput");
+        const engInput = document.getElementById("engCustomEnglishInput");
+
+        if (!wordInput) return;
+        const word = wordInput.value.trim();
+        if (!word) {
+          alert("Please enter an English word.");
+          return;
+        }
+
+        let urdu = urduInput ? urduInput.value.trim() : "";
+        let meaning = engInput ? engInput.value.trim() : "";
+        let example = "";
+        let pos = "word";
+        let phonetic = "";
+
+        // Check offline dictionary if Urdu or definition is blank
+        const lookupKey = word.toLowerCase();
+        if (OFFLINE_EN_UR_DICT[lookupKey]) {
+          const entry = OFFLINE_EN_UR_DICT[lookupKey];
+          if (!urdu) urdu = entry.urdu;
+          if (!meaning) meaning = entry.meaning;
+          example = entry.example || "";
+          pos = entry.pos || "word";
+          phonetic = entry.phonetic || "";
+        }
+
+        // Check if already in list
+        const existingIdx = englishVocabList.findIndex(w => w.word.toLowerCase() === word.toLowerCase());
+        if (existingIdx !== -1) {
+          englishVocabList[existingIdx].urdu = urdu || englishVocabList[existingIdx].urdu;
+          englishVocabList[existingIdx].meaning = meaning || englishVocabList[existingIdx].meaning;
+          saveEnglishVocabList();
+          renderEnglishVocabList();
+          if (typeof showToast === "function") showToast(`✨ Updated details for "${word}"!`);
+        } else {
+          const newEntry = {
+            id: "vocab_" + Date.now(),
+            word: word.charAt(0).toUpperCase() + word.slice(1),
+            urdu: urdu || "اردو معنی",
+            meaning: meaning || "Definition",
+            example: example,
+            pos: pos,
+            phonetic: phonetic,
+            status: "learning",
+            createdAt: Date.now()
+          };
+          englishVocabList.unshift(newEntry);
+          saveEnglishVocabList();
+          renderEnglishVocabList();
+          if (typeof showToast === "function") showToast(`✅ Saved "${word}" to My New Words!`);
+        }
+
+        // Clear input form
+        wordInput.value = "";
+        if (urduInput) urduInput.value = "";
+        if (engInput) engInput.value = "";
+        wordInput.focus();
+      }
+
+      async function autoFillCustomWordMeaning(showToastFeedback = true) {
+        const wordInput = document.getElementById("engCustomWordInput");
+        const urduInput = document.getElementById("engCustomUrduInput");
+        const engInput = document.getElementById("engCustomEnglishInput");
+
+        if (!wordInput) return;
+        const word = wordInput.value.trim();
+        if (!word) {
+          if (showToastFeedback && typeof showToast === "function") showToast("Please enter an English word first.");
+          return;
+        }
+
+        const key = word.toLowerCase();
+
+        // 1. Check local offline dictionary first
+        if (OFFLINE_EN_UR_DICT[key]) {
+          const match = OFFLINE_EN_UR_DICT[key];
+          if (urduInput) urduInput.value = match.urdu;
+          if (engInput) engInput.value = match.meaning + (match.example ? ` (e.g. ${match.example})` : "");
+          if (showToastFeedback && typeof showToast === "function") {
+            showToast(`⚡ Loaded instant Urdu & English meaning for "${word}"!`);
+          }
+          return;
+        }
+
+        // 2. Try online dictionary API
+        if (showToastFeedback && typeof showToast === "function") {
+          showToast(`🔍 Searching dictionary for "${word}"...`);
+        }
+
+        try {
+          const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+              const entry = data[0];
+              let defText = "";
+              let exText = "";
+              if (entry.meanings && entry.meanings.length > 0) {
+                const m = entry.meanings[0];
+                if (m.definitions && m.definitions.length > 0) {
+                  defText = m.definitions[0].definition || "";
+                  exText = m.definitions[0].example || "";
+                }
+              }
+              if (engInput && defText) {
+                engInput.value = defText + (exText ? ` (e.g. ${exText})` : "");
+              }
+            }
+          }
+        } catch (err) {
+          console.warn("Dictionary API fetch note:", err);
+        }
+
+        // 3. Try translation for Urdu
+        try {
+          const transRes = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|ur`);
+          if (transRes.ok) {
+            const transData = await transRes.json();
+            if (transData && transData.responseData && transData.responseData.translatedText) {
+              const translated = transData.responseData.translatedText;
+              if (urduInput && !urduInput.value.trim() && translated.toLowerCase() !== word.toLowerCase()) {
+                urduInput.value = translated;
+              }
+            }
+          }
+        } catch (err) {
+          console.warn("Urdu translation fetch note:", err);
+        }
+
+        if (showToastFeedback && typeof showToast === "function") {
+          showToast(`✨ Finished finding meanings for "${word}"!`);
+        }
+      }
+
+      async function lookupEnglishWordMeaning() {
+        const searchInput = document.getElementById("engMeaningSearchInput");
+        const resultBox = document.getElementById("engLiveMeaningResult");
+        if (!searchInput || !resultBox) return;
+
+        const word = searchInput.value.trim();
+        if (!word) {
+          if (typeof showToast === "function") showToast("Please type a word to lookup.");
+          searchInput.focus();
+          return;
+        }
+
+        resultBox.style.display = "block";
+        resultBox.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 10px; color: #4338ca; font-weight: 700; font-size: 13px;">
+            <span>⏳ Looking up "${escapeHtml(word)}" in English &amp; Urdu dictionary...</span>
+          </div>
+        `;
+
+        const key = word.toLowerCase();
+        let urduText = "";
+        let englishDef = "";
+        let phoneticText = "";
+        let posText = "";
+        let exampleText = "";
+
+        // 1. Check local dictionary first
+        if (OFFLINE_EN_UR_DICT[key]) {
+          const off = OFFLINE_EN_UR_DICT[key];
+          urduText = off.urdu;
+          englishDef = off.meaning;
+          phoneticText = off.phonetic || "";
+          posText = off.pos || "word";
+          exampleText = off.example || "";
+        }
+
+        // 2. Fetch definition from DictionaryAPI if needed
+        try {
+          const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+              const entry = data[0];
+              if (!phoneticText && entry.phonetic) phoneticText = entry.phonetic;
+              if (entry.phonetics && Array.isArray(entry.phonetics)) {
+                const pObj = entry.phonetics.find(p => p.text);
+                if (pObj && !phoneticText) phoneticText = pObj.text;
+              }
+              if (entry.meanings && entry.meanings.length > 0) {
+                const m = entry.meanings[0];
+                if (!posText && m.partOfSpeech) posText = m.partOfSpeech;
+                if (m.definitions && m.definitions.length > 0) {
+                  if (!englishDef) englishDef = m.definitions[0].definition || "";
+                  if (!exampleText && m.definitions[0].example) exampleText = m.definitions[0].example;
+                }
+              }
+            }
+          }
+        } catch (e) {
+          console.warn("Online dictionary lookup error:", e);
+        }
+
+        // 3. Fetch Urdu translation if still missing
+        if (!urduText) {
+          try {
+            const tRes = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|ur`);
+            if (tRes.ok) {
+              const tData = await tRes.json();
+              if (tData && tData.responseData && tData.responseData.translatedText) {
+                const tr = tData.responseData.translatedText;
+                if (tr && tr.toLowerCase() !== word.toLowerCase()) {
+                  urduText = tr;
+                }
+              }
+            }
+          } catch (e) {
+            console.warn("Translation API error:", e);
+          }
+        }
+
+        if (!urduText) urduText = "معنی دستیاب نہیں (اردو)";
+        if (!englishDef) englishDef = "No definition found. You can add your custom notes and save this word.";
+
+        lastLookedUpVocabWord = {
+          word: word.charAt(0).toUpperCase() + word.slice(1),
+          urdu: urduText,
+          meaning: englishDef,
+          example: exampleText,
+          pos: posText,
+          phonetic: phoneticText
+        };
+
+        const safeW = escapeHtml(lastLookedUpVocabWord.word);
+        const safeU = escapeHtml(urduText);
+        const safeD = escapeHtml(englishDef);
+        const safeE = escapeHtml(exampleText);
+        const safeP = escapeHtml(phoneticText);
+        const safePos = escapeHtml(posText);
+
+        resultBox.innerHTML = `
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: 18px; font-weight: 900; color: #1e1b4b;">${safeW}</span>
+                ${safeP ? `<span style="font-size: 13px; color: #64748b; font-family: monospace;">${safeP}</span>` : ''}
+                ${safePos ? `<span style="font-size: 11px; font-weight: 800; background: #e0e7ff; color: #3730a3; padding: 2px 7px; border-radius: 6px; text-transform: uppercase;">${safePos}</span>` : ''}
+                <button type="button" class="pdf-action-btn" onclick="speakWord('${safeW.replace(/'/g, "\\'")}')" style="font-size: 12px; padding: 3px 8px; background: #ede9fe; color: #6d28d9; border-color: #8b5cf6;" title="Listen to pronunciation">
+                  🔊 Pronounce
+                </button>
+              </div>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="test-main-btn"
+                onclick="saveWordFromLiveLookup()"
+                style="padding: 6px 14px; font-size: 12px; background: #059669; border-color: var(--ink); box-shadow: 0 2px 0 var(--ink);"
+              >
+                ➕ Save to My New Words
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px; padding: 10px 14px; background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 800; color: #86198f;">🇵🇰 اردو معنی و ترجمہ:</span>
+            <span class="urdu-vocab-pill" style="font-size: 16px; background: #ffffff;">${safeU}</span>
+          </div>
+
+          <div style="margin-top: 10px; font-size: 13px; color: #1e293b; line-height: 1.5;">
+            <strong>💡 English Meaning:</strong> ${safeD}
+          </div>
+
+          ${safeE ? `
+            <div style="margin-top: 6px; font-size: 12px; color: #475569; font-style: italic; background: #f8fafc; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #6366f1;">
+              📝 <strong>Example:</strong> &ldquo;${safeE}&rdquo;
+            </div>
+          ` : ''}
+        `;
+      }
+
+      function saveWordFromLiveLookup() {
+        if (!lastLookedUpVocabWord) return;
+        const w = lastLookedUpVocabWord;
+        const existingIdx = englishVocabList.findIndex(item => item.word.toLowerCase() === w.word.toLowerCase());
+        if (existingIdx !== -1) {
+          englishVocabList[existingIdx].urdu = w.urdu;
+          englishVocabList[existingIdx].meaning = w.meaning;
+          if (w.example) englishVocabList[existingIdx].example = w.example;
+          if (w.phonetic) englishVocabList[existingIdx].phonetic = w.phonetic;
+          if (w.pos) englishVocabList[existingIdx].pos = w.pos;
+        } else {
+          englishVocabList.unshift({
+            id: "vocab_" + Date.now(),
+            word: w.word,
+            urdu: w.urdu,
+            meaning: w.meaning,
+            example: w.example,
+            pos: w.pos,
+            phonetic: w.phonetic,
+            status: "learning",
+            createdAt: Date.now()
+          });
+        }
+        saveEnglishVocabList();
+        renderEnglishVocabList();
+        if (typeof showToast === "function") {
+          showToast(`🎉 Saved "${w.word}" to My New Words list!`);
+        }
+      }
+
+      function speakWord(text) {
+        if (!text || !('speechSynthesis' in window)) return;
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "en-US";
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function speakLookupWord() {
+        const input = document.getElementById("engMeaningSearchInput");
+        const word = (input ? input.value : "").trim();
+        if (word) speakWord(word);
+        else if (typeof showToast === "function") showToast("Enter a word first to listen.");
+      }
+
+      function downloadVocabPdf() {
+        if (!englishVocabList || englishVocabList.length === 0) {
+          alert("No words in your vocabulary notebook to export.");
+          return;
+        }
+
+        try {
+          const pdf = new SimplePdfWriter();
+          pdf.addPage();
+
+          // Header Banner
+          pdf.addRect(20, 750, 555, 65, [0.31, 0.27, 0.90], [0.1, 0.1, 0.1], 2);
+          pdf.addText("BUSHRA VOCABULARY & NEW WORDS DIARY", 35, 785, 14, "F2", [1, 1, 1]);
+          pdf.addText(`Total Saved Words: ${englishVocabList.length}  |  Generated on: ${new Date().toLocaleDateString()}`, 35, 765, 9, "F1", [0.9, 0.9, 1]);
+
+          let y = 720;
+          pdf.addText("Word", 35, y, 10, "F2", [0.1, 0.1, 0.1]);
+          pdf.addText("Part of Speech", 140, y, 10, "F2", [0.1, 0.1, 0.1]);
+          pdf.addText("English Definition & Notes", 240, y, 10, "F2", [0.1, 0.1, 0.1]);
+          pdf.addText("Status", 505, y, 10, "F2", [0.1, 0.1, 0.1]);
+          pdf.addLine(30, y - 6, 565, y - 6, [0.7, 0.7, 0.7], 1);
+
+          y -= 22;
+
+          englishVocabList.forEach((item, idx) => {
+            if (y < 60) {
+              pdf.addPage();
+              y = 770;
+            }
+
+            const isEven = idx % 2 === 0;
+            if (isEven) {
+              pdf.addRect(25, y - 12, 545, 22, [0.96, 0.97, 0.99], null, 0);
+            }
+
+            pdf.addText(`${idx + 1}. ${item.word}`, 35, y, 10, "F2", [0.1, 0.1, 0.2]);
+            pdf.addText(item.pos || "word", 140, y, 9, "F1", [0.4, 0.4, 0.5]);
+
+            const defShort = (item.meaning || "").length > 48 ? (item.meaning || "").slice(0, 45) + "..." : (item.meaning || "");
+            pdf.addText(defShort, 240, y, 9, "F1", [0.2, 0.2, 0.3]);
+
+            const statusText = item.status === "learned" ? "Learned [OK]" : "Practicing";
+            const statusColor = item.status === "learned" ? [0.08, 0.5, 0.24] : [0.7, 0.3, 0.05];
+            pdf.addText(statusText, 505, y, 8.5, "F2", statusColor);
+
+            y -= 24;
+          });
+
+          const blob = pdf.toBlob();
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `Bushra_English_Vocabulary_List_${new Date().toISOString().slice(0, 10)}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 4000);
+
+          if (typeof showToast === "function") showToast("📥 Downloaded Vocabulary PDF flashcard list!");
+        } catch (e) {
+          console.error("Error generating vocab PDF:", e);
+          alert("Vocabulary PDF generation failed: " + e.message);
+        }
       }
 
       // ==================== PURE JS PDF GENERATOR ENGINE (OFFLINE CAPABLE) ====================
@@ -16288,543 +18489,93 @@
         if (surahInput) surahInput.focus();
       }
 
-      function closeQuranRevisionModal() {
-        const modal = document.getElementById("quranRevisionModal");
+      // ==================== ENGLISH HUB & DICTIONARY BRIDGES ====================
+      function loadEnglishVocab() {
+        initEnglishVocab();
+      }
+
+      function saveEnglishVocab() {
+        saveEnglishVocabList();
+      }
+
+      function toggleEnglishWordLearned(id) {
+        toggleVocabLearned(String(id));
+      }
+
+      function deleteEnglishWord(id) {
+        deleteVocabWord(String(id));
+      }
+
+      function setEnglishVocabFilter(mode) {
+        filterVocabList(mode === "review" ? "learning" : mode);
+      }
+
+      function filterEnglishWords() {
+        const query = (document.getElementById("englishVocabSearch")?.value || "").trim().toLowerCase();
+        renderEnglishVocabList(null, query);
+      }
+
+      function saveWordFromMeaningFinder() {
+        saveWordFromLiveLookup();
+      }
+
+      function autoFillNewWordFromLookup() {
+        autoFillCustomWordMeaning(true);
+      }
+
+      // ==================== DEEP GRAMMAR GUIDE MODAL CONTROLS ====================
+      function openDeepGrammarGuide(topicKey = "all") {
+        const modal = document.getElementById("deepGrammarModal");
+        if (!modal) return;
+        modal.style.display = "flex";
+        modal.classList.add("show");
+
+        if (topicKey && topicKey !== "all") {
+          filterDeepGrammarByCat(topicKey);
+          setTimeout(() => {
+            const targetEl = document.getElementById("grammar-ch-" + topicKey);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+              targetEl.style.outline = "3px solid #7c3aed";
+              setTimeout(() => (targetEl.style.outline = ""), 2200);
+            }
+          }, 150);
+        } else {
+          filterDeepGrammarByCat("all");
+        }
+      }
+
+      function closeDeepGrammarGuide() {
+        const modal = document.getElementById("deepGrammarModal");
         if (modal) {
           modal.classList.remove("show");
           modal.style.display = "";
         }
       }
 
-      function saveQuranRevisionItem() {
-        const editIdInput = document.getElementById("quranRevisionEditId");
-        const surahInput = document.getElementById("quranSurahInput");
-        const ayatInput = document.getElementById("quranAyatInput");
-        const urlInput = document.getElementById("quranUrlInput");
-
-        const editId = editIdInput ? editIdInput.value.trim() : "";
-        const surah = surahInput ? surahInput.value.trim() : "";
-        const ayat = ayatInput ? ayatInput.value.trim() : "";
-        const url = urlInput ? urlInput.value.trim() : "";
-
-        if (!surah && !ayat && !url) {
-          showToast("Please enter Surah name, Ayat, or Link 📖");
-          if (surahInput) surahInput.focus();
-          return;
-        }
-
-        if (editId) {
-          const idx = quranRevisionTopics.findIndex((t) => t.id === editId);
-          if (idx !== -1) {
-            quranRevisionTopics[idx] = {
-              ...quranRevisionTopics[idx],
-              surah: surah || "Quran Recitation",
-              ayat: ayat,
-              url: url,
-              updatedAt: Date.now(),
-            };
-            showToast("Surah updated! 📌");
-          }
-        } else {
-          quranRevisionTopics.unshift({
-            id:
-              "qr_" +
-              Date.now() +
-              "_" +
-              Math.random().toString(36).substr(2, 5),
-            surah: surah || "Quran Recitation",
-            ayat: ayat,
-            url: url,
-            createdAt: Date.now(),
-          });
-          showToast("Added to Quran list! ✨");
-        }
-
-        closeQuranRevisionModal();
-        saveQuranRevisionData();
-        renderQuranRevisionDisplay();
-      }
-
-      function editQuranTopic(id) {
-        openQuranRevisionModal(id);
-      }
-
-      function deleteQuranTopic(id) {
-        if (!confirm("Are you sure you want to delete this Surah item?"))
-          return;
-        quranRevisionTopics = quranRevisionTopics.filter((t) => t.id !== id);
-        saveQuranRevisionData();
-        renderQuranRevisionDisplay();
-        showToast("Deleted 🗑️");
-      }
-
-      window.addEventListener("DOMContentLoaded", loadGrammarRevisionData);
-      window.addEventListener("DOMContentLoaded", loadPhonicsRevisionData);
-      window.addEventListener("DOMContentLoaded", loadQuranRevisionData);
-      window.addEventListener("load", loadGrammarRevisionData);
-      window.addEventListener("load", loadPhonicsRevisionData);
-      window.addEventListener("load", loadQuranRevisionData);
-
-      // Initialize on load
-      loadPeriodData();
-      loadRecipeData();
-      loadMissingIngredients();
-      loadNotesData();
-      loadZadLecture();
-      loadZadLectureLog();
-      loadUqLecture();
-      loadUqLectureLog();
-      loadAllChoreLogs();
-      loadTypingRange();
-      loadHairWashStatus();
-      loadGrammarRevisionData();
-      loadPhonicsRevisionData();
-      loadQuranRevisionData();
-      loadScheduleStatus();
-      loadTrackerDaily();
-      const initialTab = window.location.hash.replace("#", "") || "navigator";
-      switchTab(initialTab, false);
-      // ==================== ENGLISH HUB & DICTIONARY FUNCTIONS ====================
-      let englishVocabList = [];
-      let vocabLookupTimeout = null;
-
-      const OFFLINE_VOCAB_DICT = {
-        ubiquitous: {
-          en: "(adj) Present, appearing, or found everywhere",
-          ur: "ہر جگہ موجود / ہمہ گیر",
-        },
-        resilient: {
-          en: "(adj) Able to recover quickly from difficult conditions",
-          ur: "باہمت / لچکدار / مضبوط",
-        },
-        serendipity: {
-          en: "(noun) Finding pleasant or valuable things by chance",
-          ur: "خوش قسمتی / غیر متوقع نفع",
-        },
-        diligent: {
-          en: "(adj) Having or showing care and conscientiousness in work",
-          ur: "محنتی / مستعد",
-        },
-        meticulous: {
-          en: "(adj) Showing great attention to detail; very careful",
-          ur: "انتہائی باریک بین / محتاط",
-        },
-        eloquent: {
-          en: "(adj) Fluent or persuasive in speaking or writing",
-          ur: "فصیح و بلیغ / شیریں بیان",
-        },
-        ephemeral: {
-          en: "(adj) Lasting for a very short time; fleeting",
-          ur: "عارضی / چند روزہ / فانی",
-        },
-        pragmatic: {
-          en: "(adj) Dealing with things sensibly and realistically",
-          ur: "عملی / حقیقت پسندانہ",
-        },
-        benevolent: {
-          en: "(adj) Well meaning and kindly; charitable",
-          ur: "مہربان / فیاض / خیر خواہ",
-        },
-        tenacious: {
-          en: "(adj) Persistent and determined; holding fast",
-          ur: "ثابت قدم / پرعزم / پکا",
-        },
-        plethora: {
-          en: "(noun) A large or excessive amount of something",
-          ur: "کثرت / بہتات / فراوانی",
-        },
-        inquisitive: {
-          en: "(adj) Curious or inquiring; eager for knowledge",
-          ur: "متجسس / جاننے کا شوقین",
-        },
-        lucid: {
-          en: "(adj) Expressed clearly; easy to understand",
-          ur: "واضح / صاف / سلجھا ہوا",
-        },
-        candid: {
-          en: "(adj) Truthful and straightforward; frank",
-          ur: "کھرا / بے باک / صاف گو",
-        },
-        persevere: {
-          en: "(verb) Continue despite difficulty or lack of success",
-          ur: "ثابت قدم رہنا / لگے رہنا",
-        },
-        empathy: {
-          en: "(noun) The ability to understand and share others' feelings",
-          ur: "ہمدردی / احساس",
-        },
-        profound: {
-          en: "(adj) Very great or intense; having deep insight",
-          ur: "گہرا / عمیق / پر اثر",
-        },
-        solitude: {
-          en: "(noun) The state or situation of being alone peacefully",
-          ur: "تنہائی / خلوت",
-        },
-        authentic: {
-          en: "(adj) Genuine; of undisputed origin",
-          ur: "اصلی / مستند / سچا",
-        },
-        vocabulary: {
-          en: "(noun) The body of words used in a language",
-          ur: "ذخیرہ الفاظ",
-        },
-        grammar: {
-          en: "(noun) The system and structure of a language",
-          ur: "قواعد / گرامر",
-        },
-        phonics: {
-          en: "(noun) Method of teaching reading by sounds of letters",
-          ur: "صوتیات / حروف کی آوازیں",
-        },
-        exercise: {
-          en: "(noun/verb) Physical activity to sustain health and fitness",
-          ur: "ورزش / مشق",
-        },
-        adhkar: {
-          en: "(noun) Islamic remembrance and supplications to Allah",
-          ur: "اذکار / دعائیں",
-        },
-        habit: {
-          en: "(noun) A settled or regular tendency or practice",
-          ur: "عادت / معمول",
-        },
-        fluent: {
-          en: "(adj) Able to express oneself easily and articulately",
-          ur: "روانی / شستہ بولنے والا",
-        },
-        consistent: {
-          en: "(adj) Acting or done in the same way over time",
-          ur: "مستقل مزاج / باقاعدہ",
-        },
-        grateful: {
-          en: "(adj) Feeling or showing appreciation; thankful",
-          ur: "شکر گزار / احسان مند",
-        },
-        ambitious: {
-          en: "(adj) Having a strong desire to succeed",
-          ur: "بلند نظر / پرعزم",
-        },
-        apple: {
-          en: "(noun) A round edible fruit with red, green, or yellow skin",
-          ur: "سیب",
-        },
-        study: {
-          en: "(verb/noun) Devoting time and attention to acquiring knowledge",
-          ur: "پڑھائی / مطالعہ کرنا",
-        },
-        happy: {
-          en: "(adj) Feeling or showing pleasure or contentment",
-          ur: "خوش / مسرور",
-        },
-        patience: {
-          en: "(noun) The capacity to accept delay or trouble calmly",
-          ur: "صبر / برداشت",
-        },
-      };
-
-      function loadEnglishVocab() {
-        try {
-          const stored = localStorage.getItem("english_vocabulary_list_v1");
-          englishVocabList = stored ? JSON.parse(stored) : [];
-          if (!Array.isArray(englishVocabList)) englishVocabList = [];
-        } catch (e) {
-          englishVocabList = [];
-        }
-      }
-
-      function saveEnglishVocab() {
-        try {
-          localStorage.setItem(
-            "english_vocabulary_list_v1",
-            JSON.stringify(englishVocabList),
-          );
-        } catch (e) {}
-      }
-
-      function handleWordInputDebounced() {
-        clearTimeout(vocabLookupTimeout);
-        const statusEl = document.getElementById("vocabLookupStatus");
-        const previewEl = document.getElementById("vocabMeaningPreview");
-        const wordEl = document.getElementById("englishWordInput");
-        const word = (wordEl?.value || "").trim();
-
-        if (!word) {
-          if (statusEl) statusEl.innerHTML = "";
-          if (previewEl) previewEl.style.display = "none";
-          return;
-        }
-
-        if (statusEl) {
-          statusEl.innerHTML = `<span style="color: #64748b;">⏳ Searching meaning & Urdu translation for "${escapeHtml(word)}"...</span>`;
-        }
-
-        vocabLookupTimeout = setTimeout(() => {
-          lookupWordDefinition(false);
-        }, 400);
-      }
-
-      async function fetchUrduTranslation(cleanQuery) {
-        try {
-          const res = await fetch(
-            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanQuery)}&langpair=en|ur`,
-          );
-          if (res.ok) {
-            const data = await res.json();
-            if (data && data.responseData && data.responseData.translatedText) {
-              const txt = data.responseData.translatedText.trim();
-              if (
-                txt &&
-                txt.toLowerCase() !== cleanQuery.toLowerCase() &&
-                !txt.includes("MYMEMORY WARNING")
-              ) {
-                return txt;
-              }
-            }
-          }
-        } catch (e) {}
-        return "";
-      }
-
-      async function lookupWordDefinition(isManual = false) {
-        const wordEl = document.getElementById("englishWordInput");
-        const statusEl = document.getElementById("vocabLookupStatus");
-        const previewEl = document.getElementById("vocabMeaningPreview");
-        const previewUrduEl = document.getElementById("vocabPreviewUrdu");
-        const previewTextEl = document.getElementById(
-          "vocabMeaningPreviewText",
-        );
-        const rawWord = (wordEl?.value || "").trim();
-
-        if (!rawWord) {
-          if (isManual) showToast("Please type a word first 📝");
-          if (previewEl) previewEl.style.display = "none";
-          return null;
-        }
-
-        const cleanQuery = rawWord
-          .replace(/[^a-zA-Z\s-]/g, "")
-          .trim()
-          .toLowerCase();
-        if (!cleanQuery) return null;
-
-        function applyFoundMeaning(meaningText, urduText, badgeText = "") {
-          if (previewEl) {
-            if (previewUrduEl) {
-              if (urduText) {
-                previewUrduEl.innerHTML = `<span style="font-size: 11px; color: #065f46; font-weight: normal; margin-left: 6px;">اردو:</span> ${escapeHtml(urduText)}`;
-                previewUrduEl.style.display = "block";
-              } else {
-                previewUrduEl.style.display = "none";
-              }
-            }
-            if (previewTextEl) {
-              previewTextEl.textContent = meaningText || "Ready to save";
-            }
-            previewEl.style.display = "block";
-          }
-          if (statusEl) {
-            statusEl.innerHTML = `<span style="color: #16a34a; font-weight: 500;">✅ ${badgeText || "English & Urdu ready!"}</span>`;
-          }
-        }
-
-        // 1. Offline fast cache lookup
-        if (OFFLINE_VOCAB_DICT[cleanQuery]) {
-          const entry = OFFLINE_VOCAB_DICT[cleanQuery];
-          const meaningText = entry.en || "";
-          const urduText = entry.ur || "";
-          applyFoundMeaning(
-            meaningText,
-            urduText,
-            "Instant match (English + اردو)",
-          );
-          return { meaningText, urduText };
-        }
-
-        if (statusEl) {
-          statusEl.innerHTML = `<span style="color: #0284c7;">🔍 Looking up "${escapeHtml(cleanQuery)}" (English & اردو)...</span>`;
-        }
-
-        // Parallel lookup: Dictionary Definition + Urdu Translation
-        const [dictData, urduText] = await Promise.all([
-          (async () => {
-            // Try Datamuse first for reliable, fast definitions
-            try {
-              const res = await fetch(
-                `https://api.datamuse.com/words?sp=${encodeURIComponent(cleanQuery)}&md=d&max=1`,
-              );
-              if (res.ok) {
-                const d = await res.json();
-                if (
-                  Array.isArray(d) &&
-                  d.length > 0 &&
-                  Array.isArray(d[0].defs) &&
-                  d[0].defs.length > 0
-                ) {
-                  const rawDef = d[0].defs[0];
-                  const parts = rawDef.split("\t");
-                  const posMap = {
-                    n: "noun",
-                    v: "verb",
-                    adj: "adj",
-                    adv: "adv",
-                  };
-                  const pos = posMap[parts[0]] || parts[0];
-                  const def = parts[1] || rawDef;
-                  return {
-                    meaningText: `(${pos}) ${def.trim()}`,
-                    partOfSpeech: pos,
-                  };
-                }
-              }
-            } catch (e) {}
-
-            // Try DictionaryAPI as backup
-            try {
-              const res2 = await fetch(
-                `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(cleanQuery)}`,
-              );
-              if (res2.ok) {
-                const data2 = await res2.json();
-                if (Array.isArray(data2) && data2.length > 0) {
-                  const entry = data2[0];
-                  if (entry.meanings && entry.meanings.length > 0) {
-                    const m = entry.meanings[0];
-                    const pos = m.partOfSpeech || "";
-                    if (m.definitions && m.definitions.length > 0) {
-                      const def = m.definitions[0].definition || "";
-                      return {
-                        meaningText: pos ? `(${pos}) ${def}` : def,
-                        partOfSpeech: pos,
-                      };
-                    }
-                  }
-                }
-              }
-            } catch (e2) {}
-            return null;
-          })(),
-          fetchUrduTranslation(cleanQuery),
-        ]);
-
-        const meaningText = dictData ? dictData.meaningText : "";
-        if (meaningText || urduText) {
-          applyFoundMeaning(
-            meaningText,
-            urduText,
-            urduText
-              ? "Found with Urdu translation (اردو)"
-              : "Definition ready!",
-          );
-          return { meaningText, urduText };
-        }
-
-        // Not found in online dictionaries
-        if (statusEl) {
-          statusEl.innerHTML = `<span style="color: #64748b;">💡 Ready to add to word bank</span>`;
-        }
-        if (previewEl) previewEl.style.display = "none";
-        return null;
-      }
-
-      async function addEnglishWord() {
-        const wordEl = document.getElementById("englishWordInput");
-        const statusEl = document.getElementById("vocabLookupStatus");
-        const previewEl = document.getElementById("vocabMeaningPreview");
-        if (!wordEl) return;
-        const word = wordEl.value.trim();
-
-        if (!word) {
-          showToast("Please type a word first 📝");
-          wordEl.focus();
-          return;
-        }
-
-        if (statusEl) {
-          statusEl.innerHTML = `<span style="color: #0284c7;">🔍 Getting English & Urdu meaning...</span>`;
-        }
-
-        const result = await lookupWordDefinition(false);
-        const meaning = result && result.meaningText ? result.meaningText : "";
-        const urdu = result && result.urduText ? result.urduText : "";
-
-        if (!Array.isArray(englishVocabList)) englishVocabList = [];
-        englishVocabList.unshift({
-          id: Date.now(),
-          word: word,
-          meaning: meaning,
-          urdu: urdu,
-          date: new Date().toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-          }),
+      function filterDeepGrammar() {
+        const query = (document.getElementById("deepGrammarSearchInput")?.value || "").toLowerCase().trim();
+        const cards = document.querySelectorAll("#deepGrammarBody .deep-grammar-card");
+        cards.forEach((c) => {
+          const text = c.textContent.toLowerCase();
+          c.style.display = (!query || text.includes(query)) ? "block" : "none";
         });
-        saveEnglishVocab();
-        wordEl.value = "";
-        if (statusEl) statusEl.innerHTML = "";
-        if (previewEl) previewEl.style.display = "none";
-        renderEnglishVocabList();
-        showToast(`Added "${word}" to Word Bank 🔤`);
-        wordEl.focus();
       }
 
-      function deleteEnglishWord(id) {
-        if (!Array.isArray(englishVocabList)) englishVocabList = [];
-        englishVocabList = englishVocabList.filter((item) => item.id !== id);
-        saveEnglishVocab();
-        renderEnglishVocabList();
-        showToast("Word removed 🗑️");
-      }
+      function filterDeepGrammarByCat(cat) {
+        document.querySelectorAll("#deepGrammarPills .deep-grammar-pill").forEach((pill) => {
+          pill.classList.toggle("active", pill.textContent.toLowerCase().includes(cat) || (cat === "all" && pill.textContent.includes("All")));
+        });
 
-      function filterEnglishWords() {
-        const query = (
-          document.getElementById("englishVocabSearch")?.value || ""
-        )
-          .trim()
-          .toLowerCase();
-        renderEnglishVocabList(query);
-      }
-
-      function renderEnglishVocabList(filterText = "") {
-        const listEl = document.getElementById("englishVocabList");
-        const countEl = document.getElementById("englishVocabCount");
-        if (!Array.isArray(englishVocabList)) englishVocabList = [];
-        if (countEl) countEl.textContent = englishVocabList.length;
-        if (!listEl) return;
-
-        const filtered = filterText
-          ? englishVocabList.filter(
-              (item) =>
-                (item.word || "").toLowerCase().includes(filterText) ||
-                (item.meaning || "").toLowerCase().includes(filterText) ||
-                (item.urdu || "").toLowerCase().includes(filterText),
-            )
-          : englishVocabList;
-
-        if (filtered.length === 0) {
-          listEl.innerHTML = filterText
-            ? `<div class="history-empty">No words found for "${escapeHtml(filterText)}".</div>`
-            : '<div class="history-empty">No words added yet. Type any word above to look up meaning & Urdu translation!</div>';
-          return;
-        }
-
-        listEl.innerHTML = filtered
-          .map(
-            (item) => `
-          <div class="english-vocab-item">
-            <div style="flex: 1;">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap;">
-                <span class="english-vocab-word">${escapeHtml(item.word || "")}</span>
-                ${item.urdu ? `<span style="font-size: 15px; font-weight: 700; color: #047857; direction: rtl; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;">${escapeHtml(item.urdu)}</span>` : ""}
-              </div>
-              ${item.meaning ? `<div class="english-vocab-meaning">${escapeHtml(item.meaning)}</div>` : '<div class="english-vocab-meaning" style="color: #94a3b8; font-style: italic;">No definition available</div>'}
-              <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">📅 ${escapeHtml(item.date || "")}</div>
-            </div>
-            <button class="history-delete" onclick="deleteEnglishWord(${item.id})" title="Delete word">🗑️</button>
-          </div>
-        `,
-          )
-          .join("");
+        const cards = document.querySelectorAll("#deepGrammarBody .deep-grammar-card");
+        cards.forEach((c) => {
+          if (cat === "all") {
+            c.style.display = "block";
+          } else {
+            const cardCat = c.getAttribute("data-cat");
+            c.style.display = (cardCat === cat) ? "block" : "none";
+          }
+        });
       }
 
       function renderEnglishTab() {
