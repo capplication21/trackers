@@ -8515,120 +8515,159 @@
                   ✨ AI Assessment
                 </button>
               </div>
+            <!-- English Test Sub-Menu Navigation Bar -->
+            <div class="eng-subnav-menu" style="display: flex; align-items: center; gap: 8px; margin-top: 14px; margin-bottom: 14px; background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 6px 8px; box-shadow: 0 3px 0 var(--ink); flex-wrap: wrap;">
+              <button
+                type="button"
+                class="eng-subnav-tab active"
+                id="engSubTab-assessment"
+                onclick="switchEnglishSubMenu('assessment')"
+                style="flex: 1; min-width: 140px; padding: 8px 14px; border: 1.5px solid #4f46e5; border-radius: 10px; background: #4f46e5; color: #ffffff; font-size: 13px; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 2px 0 var(--ink); transition: all 0.15s ease;"
+              >
+                <span>🎯</span>
+                <span>Daily Assessment</span>
+              </button>
+
+              <button
+                type="button"
+                class="eng-subnav-tab"
+                id="engSubTab-history"
+                onclick="switchEnglishSubMenu('history')"
+                style="flex: 1; min-width: 140px; padding: 8px 14px; border: 1.5px solid transparent; border-radius: 10px; background: #f8fafc; color: #334155; font-size: 13px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s ease;"
+              >
+                <span>📜</span>
+                <span>Test History</span>
+                <span class="hub-card-badge" id="engMenuHistoryCountBadge" style="background: #ede9fe; color: #6d28d9; font-size: 10px; padding: 1px 6px;">0</span>
+              </button>
+
+              <button
+                type="button"
+                class="eng-subnav-tab"
+                id="engSubTab-vocab"
+                onclick="switchEnglishSubMenu('vocab')"
+                style="flex: 1; min-width: 140px; padding: 8px 14px; border: 1.5px solid transparent; border-radius: 10px; background: #f8fafc; color: #334155; font-size: 13px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s ease;"
+              >
+                <span>📖</span>
+                <span>My New Words</span>
+                <span class="hub-card-badge" id="engMenuVocabCountBadge" style="background: #dcfce7; color: #15803d; font-size: 10px; padding: 1px 6px;">0</span>
+              </button>
             </div>
 
-            <!-- Mode Tabs -->
-            <div class="test-mode-tabs">
-              <button type="button" class="test-mode-tab test-mode-tab-big active" id="engModeTab-all" onclick="setEnglishTestMode('all')">🎯 Full Daily Assessment (15 Qs)</button>
-              <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-grammar" onclick="setEnglishTestMode('grammar')">📖 Grammar &amp; Tenses</button>
-              <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-vocab" onclick="setEnglishTestMode('vocab')">💎 Vocabulary &amp; Collocations</button>
-            </div>
-
-            <!-- Test Engine Box -->
-            <div class="test-card-box" id="engTestCardBox">
-              <div class="test-question-header">
-                <span class="test-q-badge" id="engQuestionBadge">Question 1 of 15</span>
-                <span class="test-score-badge" id="engScoreBadge">Score: 0</span>
+            <!-- 1. Daily Assessment Section Wrapper -->
+            <div id="engAssessmentSectionWrapper">
+              <!-- Mode Tabs -->
+              <div class="test-mode-tabs">
+                <button type="button" class="test-mode-tab test-mode-tab-big active" id="engModeTab-all" onclick="setEnglishTestMode('all')">🎯 Full Daily Assessment (15 Qs)</button>
+                <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-grammar" onclick="setEnglishTestMode('grammar')">📖 Grammar &amp; Tenses</button>
+                <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-vocab" onclick="setEnglishTestMode('vocab')">💎 Vocabulary &amp; Collocations</button>
               </div>
 
-              <!-- Question Content -->
-              <div class="test-question-text" id="engQuestionText">Loading question...</div>
+              <!-- Test Engine Box -->
+              <div class="test-card-box" id="engTestCardBox">
+                <div class="test-question-header">
+                  <span class="test-q-badge" id="engQuestionBadge">Question 1 of 15</span>
+                  <span class="test-score-badge" id="engScoreBadge">Score: 0</span>
+                </div>
 
-              <!-- Options -->
-              <div class="test-options-grid" id="engOptionsGrid">
-                <!-- Dynamically Rendered Option Buttons -->
-              </div>
+                <!-- Question Content -->
+                <div class="test-question-text" id="engQuestionText">Loading question...</div>
 
-              <!-- Feedback / Explanation Box -->
-              <div class="test-feedback-box" id="engFeedbackBox">
-                <div id="engFeedbackTitle" style="font-weight: 800; margin-bottom: 4px;"></div>
-                <div id="engFeedbackExplanation"></div>
-                <button type="button" class="pdf-action-btn" id="engFeedbackDeepGrammarBtn" onclick="openDeepGrammarGuideFromTest()" style="margin-top: 10px; background: #ffffff; font-size: 12px; padding: 5px 12px; border-color: #6366f1; color: #4338ca; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
-                  📖 Read Deep Grammar Guide
-                </button>
-              </div>
+                <!-- Options -->
+                <div class="test-options-grid" id="engOptionsGrid">
+                  <!-- Dynamically Rendered Option Buttons -->
+                </div>
 
-              <!-- Actions: Combined Previous/Next Navigation Control & New Set of Questions Button (Strictly Single Line) -->
-              <div class="test-actions-bar eng-single-line-bar" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; flex-wrap: nowrap; width: 100%;">
-                <!-- New Set of Questions Button -->
-                <button
-                  type="button"
-                  class="pdf-action-btn"
-                  id="engNewSetBtn"
-                  onclick="generateNewDailyEnglishSet(event)"
-                  style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); font-size: 12px; padding: 7px 12px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
-                  title="Take a fresh new set of questions"
-                >
-                  <span style="font-size: 14px;">🎲</span>
-                  <span>New Set of Questions</span>
-                </button>
+                <!-- Feedback / Explanation Box -->
+                <div class="test-feedback-box" id="engFeedbackBox">
+                  <div id="engFeedbackTitle" style="font-weight: 800; margin-bottom: 4px;"></div>
+                  <div id="engFeedbackExplanation"></div>
+                  <button type="button" class="pdf-action-btn" id="engFeedbackDeepGrammarBtn" onclick="openDeepGrammarGuideFromTest()" style="margin-top: 10px; background: #ffffff; font-size: 12px; padding: 5px 12px; border-color: #6366f1; color: #4338ca; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                    📖 Read Deep Grammar Guide
+                  </button>
+                </div>
 
-                <!-- Combined Unified Previous & Next Navigation Control (One Button Bar) -->
-                <div class="eng-nav-group" style="display: inline-flex; align-items: stretch; border: 2px solid var(--ink); border-radius: 9px; overflow: hidden; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; white-space: nowrap;">
+                <!-- Actions: Combined Previous/Next Navigation Control & New Set of Questions Button (Strictly Single Line) -->
+                <div class="test-actions-bar eng-single-line-bar" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; flex-wrap: nowrap; width: 100%;">
+                  <!-- New Set of Questions Button -->
                   <button
                     type="button"
-                    id="engPrevBtn"
-                    onclick="prevEnglishQuestion()"
-                    style="border: none; border-right: 1.5px solid var(--ink); background: #ffffff; color: #334155; font-size: 12.5px; font-weight: 800; padding: 7px 14px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
-                    disabled
-                    title="Go to Previous Question"
+                    class="pdf-action-btn"
+                    id="engNewSetBtn"
+                    onclick="generateNewDailyEnglishSet(event)"
+                    style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); font-size: 12px; padding: 7px 12px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
+                    title="Take a fresh new set of questions"
                   >
-                    <span style="font-size: 13px; line-height: 1;">⬅️</span>
-                    <span>Prev</span>
+                    <span style="font-size: 14px;">🎲</span>
+                    <span>New Set of Questions</span>
                   </button>
 
-                  <button
-                    type="button"
-                    id="engNextBtn"
-                    onclick="nextEnglishQuestion()"
-                    style="border: none; background: #4f46e5; color: #ffffff; font-size: 12.5px; font-weight: 800; padding: 7px 16px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
-                    disabled
-                    title="Go to Next Question"
-                  >
-                    <span>Next</span>
-                    <span style="font-size: 13px; line-height: 1;">➔</span>
+                  <!-- Combined Unified Previous & Next Navigation Control (One Button Bar) -->
+                  <div class="eng-nav-group" style="display: inline-flex; align-items: stretch; border: 2px solid var(--ink); border-radius: 9px; overflow: hidden; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; white-space: nowrap;">
+                    <button
+                      type="button"
+                      id="engPrevBtn"
+                      onclick="prevEnglishQuestion()"
+                      style="border: none; border-right: 1.5px solid var(--ink); background: #ffffff; color: #334155; font-size: 12.5px; font-weight: 800; padding: 7px 14px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
+                      disabled
+                      title="Go to Previous Question"
+                    >
+                      <span style="font-size: 13px; line-height: 1;">⬅️</span>
+                      <span>Prev</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      id="engNextBtn"
+                      onclick="nextEnglishQuestion()"
+                      style="border: none; background: #4f46e5; color: #ffffff; font-size: 12.5px; font-weight: 800; padding: 7px 16px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
+                      disabled
+                      title="Go to Next Question"
+                    >
+                      <span>Next</span>
+                      <span style="font-size: 13px; line-height: 1;">➔</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Scorecard Summary Banner (hidden until finished) -->
+              <div class="test-card-box" id="engResultBox" style="display: none; text-align: center;">
+                <div style="font-size: 42px; margin-bottom: 8px;" id="engResultEmoji">🏆</div>
+                <div style="font-size: 20px; font-weight: 900; color: #0f172a; margin-bottom: 4px;" id="engResultTitle">Test Completed!</div>
+                <div style="font-size: 13.5px; color: #64748b; margin-bottom: 16px;" id="engResultSubtitle">Your final assessment summary:</div>
+                <div style="display: inline-block; background: #ede9fe; color: #5b21b6; border: 2px solid #8b5cf6; padding: 12px 26px; border-radius: 16px; font-size: 26px; font-weight: 900; margin-bottom: 18px;" id="engFinalScore">
+                  0 / 15
+                </div>
+                <div style="font-size: 12.5px; color: #334155; line-height: 1.5; max-width: 440px; margin: 0 auto 20px;" id="engLevelEval">
+                  Evaluating your CEFR proficiency level...
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px;">
+                  <button type="button" class="test-main-btn" onclick="generateNewDailyEnglishSet(event)" style="background: #4f46e5;">
+                    🎲 Start New Exam (Fresh Questions) ➔
                   </button>
+                  <button type="button" class="pdf-action-btn" onclick="restartEnglishTest(false)" style="background: #ffffff; color: #475569; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); padding: 10px 18px; font-weight: 700; border-radius: 12px;">
+                    🔄 Retake Same Questions
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="openCurrentEnglishTestInPdfReader()" style="background: #ede9fe; color: #6d28d9; border: 2px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); padding: 10px 18px; font-weight: 800; border-radius: 12px;" title="Store and read in built-in PDF Reader">
+                    📖 Open Review in PDF Reader
+                  </button>
+                </div>
+
+                <!-- Question-by-Question Review Toggle -->
+                <div>
+                  <button type="button" class="pdf-action-btn" id="engToggleReviewBtn" onclick="toggleCurrentTestReview()" style="background: #ffffff; color: #4338ca; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); padding: 8px 18px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                    <span>📋 Review Questions (Correct vs Wrong)</span>
+                    <span id="engReviewChevron">▼</span>
+                  </button>
+                  <div id="engCurrentReviewDetails" style="display: none; text-align: left; margin-top: 16px;"></div>
                 </div>
               </div>
             </div>
 
-            <!-- Scorecard Summary Banner (hidden until finished) -->
-            <div class="test-card-box" id="engResultBox" style="display: none; text-align: center;">
-              <div style="font-size: 42px; margin-bottom: 8px;" id="engResultEmoji">🏆</div>
-              <div style="font-size: 20px; font-weight: 900; color: #0f172a; margin-bottom: 4px;" id="engResultTitle">Test Completed!</div>
-              <div style="font-size: 13.5px; color: #64748b; margin-bottom: 16px;" id="engResultSubtitle">Your final assessment summary:</div>
-              <div style="display: inline-block; background: #ede9fe; color: #5b21b6; border: 2px solid #8b5cf6; padding: 12px 26px; border-radius: 16px; font-size: 26px; font-weight: 900; margin-bottom: 18px;" id="engFinalScore">
-                0 / 15
-              </div>
-              <div style="font-size: 12.5px; color: #334155; line-height: 1.5; max-width: 440px; margin: 0 auto 20px;" id="engLevelEval">
-                Evaluating your CEFR proficiency level...
-              </div>
-
-              <!-- Action Buttons -->
-              <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px;">
-                <button type="button" class="test-main-btn" onclick="generateNewDailyEnglishSet(event)" style="background: #4f46e5;">
-                  🎲 Start New Exam (Fresh Questions) ➔
-                </button>
-                <button type="button" class="pdf-action-btn" onclick="restartEnglishTest(false)" style="background: #ffffff; color: #475569; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); padding: 10px 18px; font-weight: 700; border-radius: 12px;">
-                  🔄 Retake Same Questions
-                </button>
-                <button type="button" class="pdf-action-btn" onclick="openCurrentEnglishTestInPdfReader()" style="background: #ede9fe; color: #6d28d9; border: 2px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); padding: 10px 18px; font-weight: 800; border-radius: 12px;" title="Store and read in built-in PDF Reader">
-                  📖 Open Review in PDF Reader
-                </button>
-              </div>
-
-              <!-- Question-by-Question Review Toggle -->
-              <div>
-                <button type="button" class="pdf-action-btn" id="engToggleReviewBtn" onclick="toggleCurrentTestReview()" style="background: #ffffff; color: #4338ca; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); padding: 8px 18px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
-                  <span>📋 Review Questions (Correct vs Wrong)</span>
-                  <span id="engReviewChevron">▼</span>
-                </button>
-                <div id="engCurrentReviewDetails" style="display: none; text-align: left; margin-top: 16px;"></div>
-              </div>
-            </div>
-
-            <!-- Test History & Mistakes Review Card -->
-            <div class="test-card-box" id="engHistoryCard" style="margin-top: 18px;">
+            <!-- 2. Test History & Mistakes Review Card -->
+            <div class="test-card-box" id="engHistoryCard" style="display: none; margin-top: 0;">
               <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <span style="font-size: 22px;">📜</span>
@@ -8655,8 +8694,8 @@
               </div>
             </div>
 
-            <!-- Meaning Finder Tool & My New Words (نئے الفاظ اور معنی) -->
-            <div class="test-card-box eng-vocab-box" id="engMeaningFinderCard" style="margin-top: 18px;">
+            <!-- 3. Meaning Finder Tool & My New Words (نئے الفاظ اور معنی) -->
+            <div class="test-card-box eng-vocab-box" id="engMeaningFinderCard" style="display: none; margin-top: 0;">
               <!-- Header -->
               <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 12px;">
                 <div style="display: flex; align-items: center; gap: 10px;">
@@ -13311,11 +13350,61 @@
         }
       }
 
+      let currentEnglishSubMenu = "assessment";
+
+      function switchEnglishSubMenu(menuId) {
+        currentEnglishSubMenu = menuId || "assessment";
+        const assessmentSec = document.getElementById("engAssessmentSectionWrapper");
+        const historyCard = document.getElementById("engHistoryCard");
+        const vocabCard = document.getElementById("engMeaningFinderCard");
+
+        if (assessmentSec) assessmentSec.style.display = currentEnglishSubMenu === "assessment" ? "block" : "none";
+        if (historyCard) historyCard.style.display = currentEnglishSubMenu === "history" ? "block" : "none";
+        if (vocabCard) vocabCard.style.display = currentEnglishSubMenu === "vocab" ? "block" : "none";
+
+        // Update active subnav menu styling
+        const tabs = ["assessment", "history", "vocab"];
+        tabs.forEach(t => {
+          const btn = document.getElementById("engSubTab-" + t);
+          if (!btn) return;
+          const isActive = t === currentEnglishSubMenu;
+          if (isActive) {
+            btn.classList.add("active");
+            btn.style.background = "#4f46e5";
+            btn.style.color = "#ffffff";
+            btn.style.borderColor = "#4f46e5";
+            btn.style.boxShadow = "0 2px 0 var(--ink)";
+          } else {
+            btn.classList.remove("active");
+            btn.style.background = "#f8fafc";
+            btn.style.color = "#334155";
+            btn.style.borderColor = "transparent";
+            btn.style.boxShadow = "none";
+          }
+        });
+
+        updateEnglishSubMenuBadges();
+      }
+
+      function updateEnglishSubMenuBadges() {
+        const histBadge = document.getElementById("engMenuHistoryCountBadge");
+        const vocabBadge = document.getElementById("engMenuVocabCountBadge");
+        try {
+          const histRaw = localStorage.getItem("bushra_english_test_history");
+          const histList = histRaw ? JSON.parse(histRaw) : [];
+          if (histBadge) histBadge.textContent = Array.isArray(histList) ? histList.length : 0;
+        } catch(e) {}
+
+        if (vocabBadge) vocabBadge.textContent = Array.isArray(englishVocabList) ? englishVocabList.length : 0;
+      }
+
       function initEnglishTest() {
         updateDailyEnglishBadge();
         setEnglishTestMode("all");
         renderEnglishTestHistory();
         initEnglishVocab();
+        switchEnglishSubMenu("assessment");
+        updateEnglishSubMenuBadges();
       }
 
       function setEnglishTestMode(mode) {
@@ -13717,6 +13806,7 @@
             </div>
           `;
         }).join("");
+        updateEnglishSubMenuBadges();
       }
 
       function toggleHistoryItemReview(id) {
@@ -14086,6 +14176,7 @@
 
         if (container) container.innerHTML = cardsHtml;
         if (listEl) listEl.innerHTML = cardsHtml;
+        updateEnglishSubMenuBadges();
       }
 
       let allVocabMeaningsVisible = false;
