@@ -8564,9 +8564,21 @@
 
               <!-- Test Engine Box -->
               <div class="test-card-box" id="engTestCardBox">
-                <div class="test-question-header">
-                  <span class="test-q-badge" id="engQuestionBadge">Question 1 of 15</span>
-                  <span class="test-score-badge" id="engScoreBadge">Score: 0</span>
+                <div class="test-question-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <span class="test-q-badge" id="engQuestionBadge">Question 1 of 15</span>
+                    <span class="test-score-badge" id="engScoreBadge">Score: 0</span>
+                  </div>
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    onclick="openDeepGrammarGuideFromTest()"
+                    style="background: linear-gradient(135deg, #ede9fe 0%, #fdf4ff 100%); color: #6d28d9; border: 1.5px solid #8b5cf6; font-size: 11px; padding: 4px 10px; font-weight: 800; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 1.5px 0 var(--ink); cursor: pointer;"
+                    title="Understand the exact grammar rules, formula, and explanation related to this question"
+                  >
+                    <span>💡</span>
+                    <span>Understand Grammar Rule</span>
+                  </button>
                 </div>
 
                 <!-- Question Content -->
@@ -8586,20 +8598,34 @@
                   </button>
                 </div>
 
-                <!-- Actions: Combined Previous/Next Navigation Control & New Set of Questions Button (Strictly Single Line) -->
-                <div class="test-actions-bar eng-single-line-bar" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; flex-wrap: nowrap; width: 100%;">
-                  <!-- New Set of Questions Button -->
-                  <button
-                    type="button"
-                    class="pdf-action-btn"
-                    id="engNewSetBtn"
-                    onclick="generateNewDailyEnglishSet(event)"
-                    style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); font-size: 12px; padding: 7px 12px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
-                    title="Take a fresh new set of questions"
-                  >
-                    <span style="font-size: 14px;">🎲</span>
-                    <span>New Set of Questions</span>
-                  </button>
+                <!-- Actions: Combined Previous/Next Navigation Control, Grammar Guide & New Set Button -->
+                <div class="test-actions-bar eng-single-line-bar" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; flex-wrap: nowrap; width: 100%; overflow-x: auto;">
+                  <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0; white-space: nowrap;">
+                    <!-- New Set of Questions Button -->
+                    <button
+                      type="button"
+                      class="pdf-action-btn"
+                      id="engNewSetBtn"
+                      onclick="generateNewDailyEnglishSet(event)"
+                      style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); font-size: 11.5px; padding: 6px 11px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
+                      title="Take a fresh new set of questions"
+                    >
+                      <span style="font-size: 13px;">🎲</span>
+                      <span>New Set</span>
+                    </button>
+
+                    <!-- Understand Grammar Deeply Button -->
+                    <button
+                      type="button"
+                      class="pdf-action-btn"
+                      onclick="openDeepGrammarGuideFromTest()"
+                      style="background: #ffffff; color: #4338ca; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-size: 11.5px; padding: 6px 11px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
+                      title="Open deep grammar explanation & rules for this question"
+                    >
+                      <span style="font-size: 13px;">💡</span>
+                      <span>Deep Grammar Guide</span>
+                    </button>
+                  </div>
 
                   <!-- Combined Unified Previous & Next Navigation Control (One Button Bar) -->
                   <div class="eng-nav-group" style="display: inline-flex; align-items: stretch; border: 2px solid var(--ink); border-radius: 9px; overflow: hidden; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; white-space: nowrap;">
@@ -8607,11 +8633,11 @@
                       type="button"
                       id="engPrevBtn"
                       onclick="prevEnglishQuestion()"
-                      style="border: none; border-right: 1.5px solid var(--ink); background: #ffffff; color: #334155; font-size: 12.5px; font-weight: 800; padding: 7px 14px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
+                      style="border: none; border-right: 1.5px solid var(--ink); background: #ffffff; color: #334155; font-size: 12px; font-weight: 800; padding: 6px 13px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
                       disabled
                       title="Go to Previous Question"
                     >
-                      <span style="font-size: 13px; line-height: 1;">⬅️</span>
+                      <span style="font-size: 12px; line-height: 1;">⬅️</span>
                       <span>Prev</span>
                     </button>
 
@@ -8619,12 +8645,12 @@
                       type="button"
                       id="engNextBtn"
                       onclick="nextEnglishQuestion()"
-                      style="border: none; background: #4f46e5; color: #ffffff; font-size: 12.5px; font-weight: 800; padding: 7px 16px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
+                      style="border: none; background: #4f46e5; color: #ffffff; font-size: 12px; font-weight: 800; padding: 6px 15px; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
                       disabled
                       title="Go to Next Question"
                     >
                       <span>Next</span>
-                      <span style="font-size: 13px; line-height: 1;">➔</span>
+                      <span style="font-size: 12px; line-height: 1;">➔</span>
                     </button>
                   </div>
                 </div>
@@ -13592,18 +13618,31 @@
       function openDeepGrammarGuideFromTest() {
         const q = engCurrentQuestions[engCurrentIndex];
         let topicKey = "all";
+        let topicName = "All Grammar Chapters";
         if (q) {
           const text = (q.question + " " + q.explanation).toLowerCase();
-          if (text.includes("conditional") || text.includes("if i")) topicKey = "conditionals";
-          else if (text.includes("passive") || text.includes("written by")) topicKey = "passive";
-          else if (text.includes("modal") || text.includes("must") || text.includes("should") || text.includes("might")) topicKey = "modals";
-          else if (text.includes("preposition") || text.includes("since") || text.includes("for ")) topicKey = "prepositions";
-          else if (text.includes("neither") || text.includes("either") || text.includes("everyone") || text.includes("agreement")) topicKey = "agreement";
-          else if (text.includes("perfect") || text.includes("past") || text.includes("tense") || text.includes("continuous")) topicKey = "tenses";
-          else if (text.includes("said") || text.includes("told") || text.includes("reported")) topicKey = "reported";
-          else if (text.includes("favor") || text.includes("make") || text.includes("do") || text.includes("affect")) topicKey = "errors";
+          if (text.includes("conditional") || text.includes("if i") || text.includes("would have") || text.includes("unless")) {
+            topicKey = "conditionals"; topicName = "Conditionals (If-Clauses)";
+          } else if (text.includes("passive") || text.includes("written by") || text.includes("was built") || text.includes("is being")) {
+            topicKey = "passive"; topicName = "Passive Voice";
+          } else if (text.includes("modal") || text.includes("must") || text.includes("should") || text.includes("might") || text.includes("could") || text.includes("ought to")) {
+            topicKey = "modals"; topicName = "Modals & Probability";
+          } else if (text.includes("preposition") || text.includes("since") || text.includes("for ") || text.includes("depend on") || text.includes("interested in")) {
+            topicKey = "prepositions"; topicName = "Prepositions & Collocations";
+          } else if (text.includes("neither") || text.includes("either") || text.includes("everyone") || text.includes("agreement") || text.includes("singular") || text.includes("plural")) {
+            topicKey = "agreement"; topicName = "Subject-Verb Agreement";
+          } else if (text.includes("perfect") || text.includes("past") || text.includes("tense") || text.includes("continuous") || text.includes("already") || text.includes("yet")) {
+            topicKey = "tenses"; topicName = "Tenses & Aspect";
+          } else if (text.includes("said") || text.includes("told") || text.includes("reported") || text.includes("asked whether")) {
+            topicKey = "reported"; topicName = "Reported Speech";
+          } else if (text.includes("favor") || text.includes("make") || text.includes("do") || text.includes("affect") || text.includes("effect") || text.includes("error") || text.includes("wrong")) {
+            topicKey = "errors"; topicName = "Common Traps & Tricky Errors";
+          }
         }
         openDeepGrammarGuide(topicKey);
+        if (typeof showToast === "function") {
+          showToast(`📖 Deep Grammar Guide: ${topicName}`);
+        }
       }
 
       function showEnglishResults() {
