@@ -1813,7 +1813,6 @@
       .eng-nav-group button:disabled {
         opacity: 0.45;
         cursor: not-allowed;
-        pointer-events: none;
       }
       .eng-nav-group button:not(:disabled):hover {
         filter: brightness(0.95);
@@ -13495,7 +13494,7 @@
 
           if (nextBtn) {
             nextBtn.disabled = false;
-            nextBtn.innerHTML = engCurrentIndex === engCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 15px;">🏁</span>' : '<span>Next</span> <span style="font-size: 15px;">➔</span>';
+            nextBtn.innerHTML = engCurrentIndex === engCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 13px;">🏁</span>' : '<span>Next</span> <span style="font-size: 13px;">➔</span>';
           }
         } else {
           engSelectedOption = null;
@@ -13503,8 +13502,8 @@
 
           if (feedbackBox) feedbackBox.style.display = "none";
           if (nextBtn) {
-            nextBtn.disabled = true;
-            nextBtn.innerHTML = engCurrentIndex === engCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 15px;">🏁</span>' : '<span>Next</span> <span style="font-size: 15px;">➔</span>';
+            nextBtn.disabled = false;
+            nextBtn.innerHTML = engCurrentIndex === engCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 13px;">🏁</span>' : '<span>Next</span> <span style="font-size: 13px;">➔</span>';
           }
 
           if (optionsGrid) {
@@ -13579,13 +13578,16 @@
       }
 
       function nextEnglishQuestion() {
-        engCurrentIndex++;
-        if (engCurrentIndex >= engCurrentQuestions.length) {
-          showEnglishResults();
-        } else {
+        if (engCurrentIndex < engCurrentQuestions.length - 1) {
+          engCurrentIndex++;
           renderEnglishQuestion();
+        } else {
+          showEnglishResults();
         }
       }
+
+      window.prevEnglishQuestion = prevEnglishQuestion;
+      window.nextEnglishQuestion = nextEnglishQuestion;
 
       function openDeepGrammarGuideFromTest() {
         const q = engCurrentQuestions[engCurrentIndex];
