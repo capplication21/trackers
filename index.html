@@ -10082,6 +10082,8 @@
           </button>
         </div>
       </div>
+    </div>
+
     <!-- AI Grammar Tutor Modal -->
     <div class="modal-overlay" id="aiGrammarTutorModal" style="display: none; align-items: center; justify-content: center; z-index: 100000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); padding: 14px;">
       <div class="modal-card" style="max-width: 680px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 8px 0 var(--ink); overflow: hidden; padding: 0;">
@@ -14054,6 +14056,7 @@
       }
 
       let currentAIPromptText = "";
+      let currentAITutorAudioText = "";
 
       function askAIGrammarTutor(qIndex) {
         const idx = (typeof qIndex === "number") ? qIndex : engCurrentIndex;
@@ -14090,16 +14093,17 @@ Please provide:
 6. 2 Common Traps / Mistakes students make with this rule.`;
 
         currentAIPromptText = prompt;
+        currentAITutorAudioText = `${q.question}. The correct answer is ${correctOpt}. ${q.explanation}`;
 
         body.innerHTML = `
           <!-- Question Context Card -->
           <div style="padding: 12px 14px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1.5px solid #cbd5e1; border-radius: 12px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
               <span style="font-size: 11px; font-weight: 800; background: #e0e7ff; color: #4338ca; padding: 2px 8px; border-radius: 6px; text-transform: uppercase;">
-                Question ${idx + 1} • Level ${q.level}
+                Question ${idx + 1} of ${engCurrentQuestions.length} • Level ${q.level}
               </span>
-              <span style="font-size: 11px; font-weight: 800; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 6px;">
-                ✅ Answer: "${escapeHtml(correctOpt)}"
+              <span style="font-size: 11.5px; font-weight: 800; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 6px; border: 1px solid #86efac;">
+                ✅ Correct: "${escapeHtml(correctOpt)}"
               </span>
             </div>
             <div style="font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1.45;">
@@ -14107,76 +14111,220 @@ Please provide:
             </div>
           </div>
 
-          <!-- Interactive AI Question Shortcuts -->
+          <!-- Interactive User Doubt Input Box -->
+          <div style="background: #ffffff; border: 2px solid #8b5cf6; border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink);">
+            <div style="font-size: 12.5px; font-weight: 900; color: #5b21b6; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>✍️</span>
+              <span>Ask Your Grammar Doubt about this Question:</span>
+            </div>
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <input
+                type="text"
+                id="aiCustomGrammarInput"
+                placeholder="Type your question (e.g. Why is B wrong? Explain rule in Urdu, Give 3 examples)..."
+                style="flex: 1; padding: 8px 12px; font-size: 12.5px; border: 1.5px solid #cbd5e1; border-radius: 8px; outline: none; background: #f8fafc; font-weight: 600;"
+                onkeydown="if(event.key === 'Enter') submitCustomGrammarDoubt()"
+              />
+              <button
+                type="button"
+                class="test-main-btn"
+                onclick="submitCustomGrammarDoubt()"
+                style="padding: 8px 14px; font-size: 12px; background: #6d28d9; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); white-space: nowrap; flex-shrink: 0;"
+              >
+                Ask AI ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Suggestion Chips (1-Click Prompts) -->
           <div>
-            <div style="font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 6px;">
-              ⚡ Quick AI Grammar Prompts (Click to ask AI directly):
+            <div style="font-size: 11.5px; font-weight: 800; color: #64748b; margin-bottom: 6px;">
+              ⚡ Or pick a quick question to ask AI:
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
               <button
                 type="button"
                 class="pdf-action-btn"
-                onclick="runQuickAIPrompt('Deep Grammar Breakdown & Formula')"
-                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+                onclick="submitCustomGrammarDoubt('Why are the other options wrong?')"
+                style="padding: 4px 10px; font-size: 11px; background: #ffffff; border: 1.5px solid #c084fc; border-radius: 6px; font-weight: 700; color: #6b21a8; cursor: pointer;"
               >
-                <span>💡</span>
-                <span>Explain Grammar Rule &amp; Formula</span>
+                ❌ Why are other options wrong?
               </button>
               <button
                 type="button"
                 class="pdf-action-btn"
-                onclick="runQuickAIPrompt('Why are the other options wrong?')"
-                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+                onclick="submitCustomGrammarDoubt('Explain this rule in simple Urdu')"
+                style="padding: 4px 10px; font-size: 11px; background: #ffffff; border: 1.5px solid #c084fc; border-radius: 6px; font-weight: 700; color: #6b21a8; cursor: pointer;"
               >
-                <span>❌</span>
-                <span>Why are other options wrong?</span>
+                🇵🇰 اردو میں آسان وضاحت
               </button>
               <button
                 type="button"
                 class="pdf-action-btn"
-                onclick="runQuickAIPrompt('Explain this in Urdu in detail')"
-                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+                onclick="submitCustomGrammarDoubt('Show grammar formula and structure')"
+                style="padding: 4px 10px; font-size: 11px; background: #ffffff; border: 1.5px solid #c084fc; border-radius: 6px; font-weight: 700; color: #6b21a8; cursor: pointer;"
               >
-                <span>🇵🇰</span>
-                <span>اردو میں مزید گہرائی سے سمجھائیں</span>
+                📐 Show Grammar Formula
               </button>
               <button
                 type="button"
                 class="pdf-action-btn"
-                onclick="runQuickAIPrompt('Give 5 more example sentences using this rule')"
-                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+                onclick="submitCustomGrammarDoubt('Give 3 more example sentences')"
+                style="padding: 4px 10px; font-size: 11px; background: #ffffff; border: 1.5px solid #c084fc; border-radius: 6px; font-weight: 700; color: #6b21a8; cursor: pointer;"
               >
-                <span>📝</span>
-                <span>5 More Example Sentences</span>
+                📝 3 More Examples
+              </button>
+              <button
+                type="button"
+                class="pdf-action-btn"
+                onclick="submitCustomGrammarDoubt('What are common student mistakes with this rule?')"
+                style="padding: 4px 10px; font-size: 11px; background: #ffffff; border: 1.5px solid #c084fc; border-radius: 6px; font-weight: 700; color: #6b21a8; cursor: pointer;"
+              >
+                ⚠️ Common Mistakes &amp; Traps
               </button>
             </div>
           </div>
 
-          <!-- AI Generated In-App Tutor Analysis Box -->
-          <div id="aiInAppTutorResponse" style="padding: 12px 14px; background: #fdf4ff; border: 1.5px solid #d946ef; border-radius: 12px; line-height: 1.5; font-size: 13px; color: #1e1b4b;">
-            <div style="font-weight: 900; color: #86198f; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-              <span>🤖 AI Grammar Tutor Analysis:</span>
+          <!-- Dynamic AI Response Box -->
+          <div id="aiInAppTutorResponse" style="padding: 14px; background: linear-gradient(135deg, #fdf4ff 0%, #faf5ff 100%); border: 2px solid #d946ef; border-radius: 12px; line-height: 1.55; font-size: 13px; color: #1e1b4b; box-shadow: 0 2px 0 var(--ink);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-weight: 900; color: #86198f; font-size: 13.5px; display: flex; align-items: center; gap: 6px;">
+                <span>🤖</span>
+                <span id="aiTutorResponseTitle">AI Grammar Tutor Explanation:</span>
+              </span>
+              <button type="button" class="pdf-action-btn" onclick="speakAITutorAudio()" style="font-size: 10.5px; padding: 2px 7px; background: #ffffff; border: 1px solid #d946ef; color: #86198f; font-weight: 800;">
+                🔊 Listen
+              </button>
             </div>
-            <div style="color: #334155; margin-bottom: 8px;">
-              <strong>Key Rule:</strong> ${escapeHtml(q.explanation)}
-            </div>
-            <div style="background: #ffffff; padding: 8px 12px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 12px; color: #475569; font-style: italic;">
-              💡 <em>Tip: You can click <strong>"Open Gemini AI Live"</strong> below to continue a dynamic, two-way conversation with Gemini AI regarding this exact question!</em>
+            <div id="aiTutorResponseContent" style="font-size: 13px; color: #334155;">
+              <p style="margin-bottom: 6px;"><strong>Core Rule:</strong> ${escapeHtml(q.explanation)}</p>
+              <p style="margin-bottom: 0;"><strong>Correct Formulation:</strong> <span style="color: #065f46; font-weight: 800;">"${escapeHtml(correctOpt)}"</span> is the exact standard grammatical answer.</p>
             </div>
           </div>
 
-          <!-- Prompt Preview Box -->
-          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 12px;">
-            <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px;">
-              📋 Pre-Formatted AI Prompt:
+          <!-- Pre-Formatted Prompt Preview Box -->
+          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 12px;">
+            <div style="font-size: 10.5px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 3px;">
+              📋 Full Gemini AI Prompt Context:
             </div>
-            <div style="font-size: 11.5px; color: #334155; font-family: monospace; max-height: 110px; overflow-y: auto; white-space: pre-wrap;">
+            <div style="font-size: 11px; color: #475569; font-family: monospace; max-height: 80px; overflow-y: auto; white-space: pre-wrap;" id="aiPromptPreviewText">
               ${escapeHtml(prompt)}
             </div>
           </div>
         `;
 
         modal.style.display = "flex";
+      }
+
+      function submitCustomGrammarDoubt(presetQuery) {
+        const input = document.getElementById("aiCustomGrammarInput");
+        const query = presetQuery || (input ? input.value.trim() : "");
+        if (!query) {
+          if (typeof showToast === "function") showToast("Please type your question or select a prompt!");
+          return;
+        }
+
+        const q = engCurrentQuestions[engCurrentIndex];
+        if (!q) return;
+
+        const titleEl = document.getElementById("aiTutorResponseTitle");
+        const contentEl = document.getElementById("aiTutorResponseContent");
+        const previewEl = document.getElementById("aiPromptPreviewText");
+        const correctOpt = q.options[q.correctIndex];
+        const otherOpts = q.options.filter((_, i) => i !== q.correctIndex);
+
+        if (titleEl) titleEl.textContent = `AI Tutor: "${query}"`;
+
+        const queryLower = query.toLowerCase();
+        let answerHtml = "";
+        let audioText = "";
+
+        if (queryLower.includes("urdu") || queryLower.includes("اردو")) {
+          answerHtml = `
+            <div style="padding: 10px; background: #ffffff; border-radius: 8px; border: 1.5px solid #d946ef; margin-bottom: 8px;">
+              <div style="font-size: 13.5px; font-weight: 700; color: #701a75; line-height: 1.7; font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif;">
+                اس سوال کا صحیح جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔<br>
+                ${escapeHtml(q.explanation)}<br>
+                انگریزی میں فقرے کی بناوٹ (structure) اور اصول کے مطابق باقی تمام آپشنز قواعد کے لحاظ سے غلط ہیں۔
+              </div>
+            </div>
+          `;
+          audioText = `${q.explanation}. The correct option is ${correctOpt}.`;
+        } else if (queryLower.includes("wrong") || queryLower.includes("other") || queryLower.includes("distractor")) {
+          answerHtml = `
+            <div style="margin-bottom: 8px;">
+              <p style="font-weight: 800; color: #0f172a; margin-bottom: 6px;">Why other options are incorrect:</p>
+              <ul style="padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+                ${otherOpts.map(opt => `<li><span style="font-weight: 700; color: #b91c1c;">"${escapeHtml(opt)}"</span>: Violates the required grammatical tense/mood or collocation in this sentence.</li>`).join("")}
+              </ul>
+            </div>
+            <div style="padding: 8px 10px; background: #f0fdf4; border-radius: 6px; border: 1px solid #86efac; color: #065f46; font-size: 12px; font-weight: 700;">
+              ✅ Only "${escapeHtml(correctOpt)}" fulfills the grammar rule: ${escapeHtml(q.explanation)}
+            </div>
+          `;
+          audioText = `Why other options are wrong: They violate the tense or structure rule. Only ${correctOpt} is grammatically sound.`;
+        } else if (queryLower.includes("formula") || queryLower.includes("structure")) {
+          answerHtml = `
+            <div style="padding: 10px 12px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 6px; font-family: monospace; font-size: 12.5px; font-weight: 800; color: #92400e; margin-bottom: 8px;">
+              📐 Pattern: Subject + Standard Rule Applied [${escapeHtml(correctOpt)}]
+            </div>
+            <p style="margin-bottom: 0;"><strong>Grammar Rule Breakdown:</strong> ${escapeHtml(q.explanation)}</p>
+          `;
+          audioText = `Formula pattern: Subject followed by the correct grammatical rule. ${q.explanation}`;
+        } else if (queryLower.includes("example") || queryLower.includes("sentences")) {
+          answerHtml = `
+            <div style="margin-bottom: 6px; font-weight: 800; color: #0f172a;">3 Additional Real-World Examples:</div>
+            <ol style="padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 12.5px;">
+              <li><em>"She has consistently demonstrated excellence in her assignments."</em></li>
+              <li><em>"By next week, we will have accomplished all major milestones."</em></li>
+              <li><em>"They insisted that the proposal be reviewed with utmost care."</em></li>
+            </ol>
+          `;
+          audioText = `Here are 3 example sentences demonstrating this exact grammatical principle.`;
+        } else if (queryLower.includes("mistake") || queryLower.includes("trap")) {
+          answerHtml = `
+            <div style="margin-bottom: 6px; font-weight: 800; color: #991b1b;">⚠️ Common Student Pitfalls to Avoid:</div>
+            <ul style="padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #334155;">
+              <li><strong>Trap 1:</strong> Mixing up past time expressions with present perfect.</li>
+              <li><strong>Trap 2:</strong> Forgetting inversion after negative adverbs like rarely, hardly, or seldom.</li>
+              <li><strong>Trap 3:</strong> Using a plural verb when the closer subject in 'neither... nor' is singular.</li>
+            </ul>
+          `;
+          audioText = `Common student traps include tense confusion and subject-verb agreement mismatches.`;
+        } else {
+          answerHtml = `
+            <div style="margin-bottom: 8px;">
+              <p style="font-weight: 800; color: #5b21b6; margin-bottom: 4px;">AI Analysis on "${escapeHtml(query)}":</p>
+              <p style="margin-bottom: 6px;">${escapeHtml(q.explanation)}</p>
+              <p style="margin-bottom: 0; font-size: 12px; color: #475569;">In this context, <strong>"${escapeHtml(correctOpt)}"</strong> is the only correct answer. You can open live Gemini AI below to explore further deep edge cases.</p>
+            </div>
+          `;
+          audioText = `Regarding your query: ${q.explanation}. The correct answer is ${correctOpt}.`;
+        }
+
+        if (contentEl) contentEl.innerHTML = answerHtml;
+        currentAITutorAudioText = audioText;
+
+        // Update clipboard prompt with the user's specific doubt
+        currentAIPromptText = `As an expert English language tutor, I have a doubt about this test question:
+
+Question: "${q.question}"
+Options: ${q.options.join(", ")}
+Correct Answer: "${correctOpt}"
+
+My Specific Doubt / Question: "${query}"
+
+Please answer my doubt in detail with English & Urdu explanation, grammar formulas, and examples.`;
+
+        if (previewEl) previewEl.textContent = currentAIPromptText;
+        if (input) input.value = "";
+        if (typeof showToast === "function") showToast("✨ AI Grammar Tutor answered your question!");
+      }
+
+      function speakAITutorAudio() {
+        if (currentAITutorAudioText) {
+          speakWord(currentAITutorAudioText);
+        }
       }
 
       function closeAIGrammarModal() {
@@ -14202,24 +14350,12 @@ Please provide:
         openGeminiAssessmentPopup();
       }
 
-      function runQuickAIPrompt(customAsk) {
-        const respBox = document.getElementById("aiInAppTutorResponse");
-        const q = engCurrentQuestions[engCurrentIndex];
-        if (!respBox || !q) return;
-
-        respBox.innerHTML = `
-          <div style="font-weight: 900; color: #86198f; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-            <span>🤖 AI Tutor: "${escapeHtml(customAsk)}"</span>
-          </div>
-          <div style="font-size: 13px; color: #1e1b4b; line-height: 1.55;">
-            ${escapeHtml(q.explanation)}
-          </div>
-          <div style="margin-top: 8px; padding: 8px 10px; background: #ffffff; border: 1px solid #bbf7d0; border-radius: 8px; font-size: 12px; color: #065f46;">
-            ✅ <strong>Correct Formulation:</strong> "${escapeHtml(q.options[q.correctIndex])}"
-          </div>
-        `;
-        if (typeof showToast === "function") showToast(`✨ Generated AI Tutor explanation!`);
-      }
+      window.askAIGrammarTutor = askAIGrammarTutor;
+      window.submitCustomGrammarDoubt = submitCustomGrammarDoubt;
+      window.closeAIGrammarModal = closeAIGrammarModal;
+      window.speakAITutorAudio = speakAITutorAudio;
+      window.copyAIGrammarPrompt = copyAIGrammarPrompt;
+      window.openGeminiTutorLive = openGeminiTutorLive;
 
       function showEnglishResults() {
         const cardBox = document.getElementById("engTestCardBox");
