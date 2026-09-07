@@ -8597,8 +8597,21 @@
                   <div id="engFeedbackExplanation"></div>
                 </div>
 
-                <!-- Actions: Combined Previous & Next Navigation Control Only -->
-                <div class="test-actions-bar" style="display: flex; align-items: center; justify-content: flex-end; margin-top: 14px; width: 100%;">
+                <!-- Actions: Combined Previous & Next Navigation Control & New 15 Set Button -->
+                <div class="test-actions-bar" style="display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 14px; width: 100%; flex-wrap: wrap;">
+                  <!-- New 15 Set Button -->
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    id="engNew15SetBtn"
+                    onclick="generateNewDailyEnglishSet(event)"
+                    style="background: #ede9fe; color: #6d28d9; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-size: 12.5px; padding: 7px 14px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
+                    title="Generate and load a new set of 15 questions"
+                  >
+                    <span style="font-size: 13px;">🎲</span>
+                    <span>New 15 Set</span>
+                  </button>
+
                   <div class="eng-nav-group" style="display: inline-flex; align-items: stretch; border: 2px solid var(--ink); border-radius: 9px; overflow: hidden; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; white-space: nowrap;">
                     <button
                       type="button"
@@ -13427,7 +13440,7 @@
           [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
 
-        const count = mode === "all" ? 15 : Math.min(10, shuffled.length);
+        const count = Math.min(15, shuffled.length);
         return shuffled.slice(0, count);
       }
 
