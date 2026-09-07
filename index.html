@@ -1772,18 +1772,18 @@
         flex-wrap: wrap;
       }
       @media (max-width: 520px) {
-        .test-actions-bar {
+        .test-actions-bar:not(.eng-single-line-bar) {
           flex-direction: column-reverse;
           align-items: stretch;
           gap: 8px;
         }
-        .test-actions-bar > div {
+        .test-actions-bar:not(.eng-single-line-bar) > div:not(.eng-nav-group) {
           display: grid !important;
           grid-template-columns: 1fr 1fr;
           gap: 6px;
           width: 100%;
         }
-        .test-actions-bar .test-main-btn {
+        .test-actions-bar:not(.eng-single-line-bar) .test-main-btn {
           width: 100%;
           text-align: center;
         }
@@ -8549,32 +8549,32 @@
                 </button>
               </div>
 
-              <!-- Actions: Combined Previous/Next Navigation Control & New Set of Questions Button -->
-              <div class="test-actions-bar" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
+              <!-- Actions: Combined Previous/Next Navigation Control & New Set of Questions Button (Strictly Single Line) -->
+              <div class="test-actions-bar eng-single-line-bar" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; flex-wrap: nowrap; width: 100%;">
                 <!-- New Set of Questions Button -->
                 <button
                   type="button"
                   class="pdf-action-btn"
                   id="engNewSetBtn"
                   onclick="generateNewDailyEnglishSet(event)"
-                  style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); font-size: 12.5px; padding: 8px 16px; font-weight: 800; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;"
+                  style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); font-size: 12px; padding: 7px 12px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
                   title="Take a fresh new set of questions"
                 >
-                  <span style="font-size: 15px;">🎲</span>
+                  <span style="font-size: 14px;">🎲</span>
                   <span>New Set of Questions</span>
                 </button>
 
                 <!-- Combined Unified Previous & Next Navigation Control (One Button Bar) -->
-                <div class="eng-nav-group" style="display: inline-flex; align-items: stretch; border: 2px solid var(--ink); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 0 var(--ink); margin-left: auto;">
+                <div class="eng-nav-group" style="display: inline-flex; align-items: stretch; border: 2px solid var(--ink); border-radius: 9px; overflow: hidden; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; white-space: nowrap;">
                   <button
                     type="button"
                     id="engPrevBtn"
                     onclick="prevEnglishQuestion()"
-                    style="border: none; border-right: 1.5px solid var(--ink); background: #ffffff; color: #334155; font-size: 13px; font-weight: 800; padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.15s ease;"
+                    style="border: none; border-right: 1.5px solid var(--ink); background: #ffffff; color: #334155; font-size: 12.5px; font-weight: 800; padding: 7px 14px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
                     disabled
                     title="Go to Previous Question"
                   >
-                    <span style="font-size: 14px; line-height: 1;">⬅️</span>
+                    <span style="font-size: 13px; line-height: 1;">⬅️</span>
                     <span>Prev</span>
                   </button>
 
@@ -8582,12 +8582,12 @@
                     type="button"
                     id="engNextBtn"
                     onclick="nextEnglishQuestion()"
-                    style="border: none; background: #4f46e5; color: #ffffff; font-size: 13px; font-weight: 800; padding: 8px 20px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.15s ease;"
+                    style="border: none; background: #4f46e5; color: #ffffff; font-size: 12.5px; font-weight: 800; padding: 7px 16px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;"
                     disabled
                     title="Go to Next Question"
                   >
                     <span>Next</span>
-                    <span style="font-size: 14px; line-height: 1;">➔</span>
+                    <span style="font-size: 13px; line-height: 1;">➔</span>
                   </button>
                 </div>
               </div>
