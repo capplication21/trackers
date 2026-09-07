@@ -13751,6 +13751,95 @@
           `;
         }).join("");
 
+        // Tailored Cross-Question generator based on the exact rule of this question
+        let crossQ = null;
+        if (text.includes("present perfect") || text.includes("have already")) {
+          crossQ = {
+            question: "Cross-Check Question: Which sentence correctly uses the Present Perfect tense?",
+            options: [
+              "I have seen that movie yesterday evening.",
+              "I have already submitted my project proposal.",
+              "She has went to London last month."
+            ],
+            correctIndex: 1,
+            explanation: "'have already submitted' is correct because 'already' pairs with Present Perfect for recent actions. 'Yesterday' and 'last month' require Simple Past, and 'has went' is wrong ('has gone')."
+          };
+        } else if (text.includes("second conditional") || text.includes("if i") || text.includes("more free time")) {
+          crossQ = {
+            question: "Cross-Check Question: If she _______ a billionaire, she would donate to charities worldwide.",
+            options: ["is", "were", "will be", "would be"],
+            correctIndex: 1,
+            explanation: "In the Second Conditional (unreal/hypothetical condition), the if-clause takes the subjunctive past form 'were', followed by 'would + verb'."
+          };
+        } else if (text.includes("neither") && text.includes("nor")) {
+          crossQ = {
+            question: "Cross-Check Question: Neither the professor nor the students _______ the answer.",
+            options: ["knows", "know", "is knowing", "has known"],
+            correctIndex: 1,
+            explanation: "With 'Neither... nor...', the verb agrees with the subject closest to it. 'Students' is plural, so we use 'know' (plural verb)."
+          };
+        } else if (text.includes("favor") || text.includes("do someone")) {
+          crossQ = {
+            question: "Cross-Check Question: The doctor asked the nurse to _______ her a favor with the records.",
+            options: ["make", "do", "give", "take"],
+            correctIndex: 1,
+            explanation: "The standard English collocation is always 'do someone a favor', never 'make a favor'."
+          };
+        } else if (text.includes("past perfect") || text.includes("by the time")) {
+          crossQ = {
+            question: "Cross-Check Question: By the time the doctor arrived, the patient _______ consciousness.",
+            options: ["has regained", "had regained", "regains", "was regaining"],
+            correctIndex: 1,
+            explanation: "Past Perfect ('had regained') is used for the earlier of two completed past events when connected with 'By the time'."
+          };
+        } else if (text.includes("accustomed to") || text.includes("look forward to")) {
+          crossQ = {
+            question: "Cross-Check Question: We are really looking forward to _______ your new home.",
+            options: ["visit", "visiting", "have visited", "visited"],
+            correctIndex: 1,
+            explanation: "In 'look forward to', 'to' is a preposition, so it must be followed by a gerund (-ing form): 'visiting'."
+          };
+        } else if (text.includes("suggested that") || text.includes("insisted that") || text.includes("subjunctive")) {
+          crossQ = {
+            question: "Cross-Check Question: The manager recommended that he _______ on time tomorrow.",
+            options: ["is", "be", "was", "will be"],
+            correctIndex: 1,
+            explanation: "The subjunctive mood after verbs like 'recommend that / insist that' takes the base verb 'be' for all subjects."
+          };
+        } else if (text.includes("inversion") || text.includes("hardly") || text.includes("scarcely") || text.includes("no sooner") || text.includes("seldom")) {
+          crossQ = {
+            question: "Cross-Check Question: Rarely _______ such exceptional teamwork in a young squad.",
+            options: ["we have witnessed", "have we witnessed", "we witnessed", "did we witnessed"],
+            correctIndex: 1,
+            explanation: "Negative adverbs like 'Rarely' placed at the beginning trigger subject-auxiliary inversion: 'have we witnessed'."
+          };
+        } else if (text.includes("despite") || text.includes("in spite of")) {
+          crossQ = {
+            question: "Cross-Check Question: _______ the heavy rain, the football match continued.",
+            options: ["Despite of", "Despite", "Although of", "Even though of"],
+            correctIndex: 1,
+            explanation: "'Despite' takes a noun phrase directly without 'of'. ('In spite of' has 'of', but 'despite' never takes 'of')."
+          };
+        } else if (text.includes("third conditional") || text.includes("would have passed") || text.includes("had studied")) {
+          crossQ = {
+            question: "Cross-Check Question: If we had taken the express train, we _______ on time.",
+            options: ["would arrive", "would have arrived", "will arrive", "had arrived"],
+            correctIndex: 1,
+            explanation: "Third conditional formula: 'If + had + V3 ..., Subject + would have + V3'."
+          };
+        } else {
+          crossQ = {
+            question: `Cross-Check Question: Practice applying this rule: Which statement is accurate?`,
+            options: [
+              `Option with error: Incorrect usage of "${correctOpt}"`,
+              `Correct application: "${correctOpt}" fits standard structure`,
+              `Another variation with incorrect tense`
+            ],
+            correctIndex: 1,
+            explanation: q.explanation
+          };
+        }
+
         currentSpeakingGrammarText = `${q.question}. The correct answer is ${correctOpt}. ${q.explanation}.`;
 
         body.innerHTML = `
@@ -13817,9 +13906,100 @@
               ${optionsBreakdown}
             </div>
           </div>
+
+          <!-- Interactive Cross-Question Challenge Box -->
+          <div style="padding: 13px 15px; background: linear-gradient(135deg, #fdf4ff 0%, #faf5ff 100%); border: 2px dashed #d946ef; border-radius: 12px; margin-top: 4px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 13px; font-weight: 900; color: #86198f; display: flex; align-items: center; gap: 6px;">
+                <span>🧪</span>
+                <span>Cross-Question Challenge (کراس سوال برائے تصدیق):</span>
+              </span>
+              <span style="font-size: 10.5px; font-weight: 800; background: #fae8ff; color: #a21caf; padding: 2px 8px; border-radius: 6px; border: 1px solid #f0abfc;">
+                Test This Rule Now
+              </span>
+            </div>
+            <div style="font-size: 13.5px; font-weight: 800; color: #1e1b4b; margin-bottom: 10px; line-height: 1.45;">
+              ${escapeHtml(crossQ.question)}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;" id="crossQOptionsContainer">
+              ${crossQ.options.map((cOpt, cIdx) => `
+                <button
+                  type="button"
+                  class="test-option-btn"
+                  onclick="checkGrammarCrossAnswer(${cIdx}, ${crossQ.correctIndex}, '${escapeHtml(crossQ.explanation).replace(/'/g, "\\'")}')"
+                  style="text-align: left; padding: 8px 12px; font-size: 12.5px; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #ffffff; color: #1e293b; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.15s ease;"
+                >
+                  <span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: #ede9fe; color: #6d28d9; font-size: 11px; font-weight: 900; flex-shrink: 0;">
+                    ${String.fromCharCode(65 + cIdx)}
+                  </span>
+                  <span>${escapeHtml(cOpt)}</span>
+                </button>
+              `).join("")}
+            </div>
+            <div id="crossQFeedback" style="display: none; margin-top: 10px; padding: 9px 12px; border-radius: 8px; font-size: 12.5px;"></div>
+          </div>
         `;
 
         modal.style.display = "flex";
+      }
+
+      function checkGrammarCrossAnswer(userIndex, correctIndex, explanation) {
+        const container = document.getElementById("crossQOptionsContainer");
+        const feedback = document.getElementById("crossQFeedback");
+        if (!container || !feedback) return;
+
+        const isCorrect = userIndex === correctIndex;
+        const buttons = container.querySelectorAll("button");
+        buttons.forEach((btn, i) => {
+          btn.disabled = true;
+          if (i === correctIndex) {
+            btn.style.background = "#dcfce7";
+            btn.style.borderColor = "#10b981";
+            btn.style.color = "#047857";
+            btn.style.fontWeight = "800";
+          } else if (i === userIndex && !isCorrect) {
+            btn.style.background = "#fee2e2";
+            btn.style.borderColor = "#ef4444";
+            btn.style.color = "#b91c1c";
+            btn.style.fontWeight = "800";
+          }
+        });
+
+        feedback.style.display = "block";
+        feedback.style.background = isCorrect ? "#f0fdf4" : "#fef2f2";
+        feedback.style.border = `1.5px solid ${isCorrect ? '#86efac' : '#fca5a5'}`;
+        feedback.style.color = isCorrect ? "#065f46" : "#991b1b";
+        feedback.innerHTML = `
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+            <div>
+              <div style="font-size: 13.5px; font-weight: 900;">
+                ${isCorrect ? '🎉 Correct! Excellent Mastery of this rule!' : '❌ Incorrect! Keep this rule in mind:'}
+              </div>
+              <div style="font-size: 12px; font-weight: 600; margin-top: 3px; line-height: 1.45;">
+                ${escapeHtml(explanation)}
+              </div>
+            </div>
+            <button type="button" class="pdf-action-btn" onclick="resetGrammarCrossAnswer()" style="font-size: 10.5px; padding: 2px 7px; background: #ffffff; border: 1px solid var(--ink); font-weight: 700; flex-shrink: 0;">
+              🔄 Retry
+            </button>
+          </div>
+        `;
+      }
+
+      function resetGrammarCrossAnswer() {
+        const container = document.getElementById("crossQOptionsContainer");
+        const feedback = document.getElementById("crossQFeedback");
+        if (!container || !feedback) return;
+
+        const buttons = container.querySelectorAll("button");
+        buttons.forEach((btn) => {
+          btn.disabled = false;
+          btn.style.background = "#ffffff";
+          btn.style.borderColor = "#cbd5e1";
+          btn.style.color = "#1e293b";
+          btn.style.fontWeight = "700";
+        });
+        feedback.style.display = "none";
       }
 
       function closeQuestionGrammarModal() {
