@@ -1810,6 +1810,18 @@
         box-shadow: 0 1px 0 var(--ink);
       }
 
+      .eng-nav-group button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+      .eng-nav-group button:not(:disabled):hover {
+        filter: brightness(0.95);
+      }
+      .eng-nav-group button:not(:disabled):active {
+        filter: brightness(0.9);
+      }
+
       /* English Test History & Mistakes Review Styles */
       .eng-history-item {
         background: #ffffff;
@@ -8537,22 +8549,47 @@
                 </button>
               </div>
 
-              <!-- Actions -->
-              <div class="test-actions-bar">
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                  <button type="button" class="pdf-action-btn" id="engPrevBtn" onclick="prevEnglishQuestion()" style="background: #ffffff; color: #334155; font-size: 12px; padding: 8px 14px;" disabled>
-                    ⏮️ Prev Question
+              <!-- Actions: Combined Previous/Next Navigation Control & New Set of Questions Button -->
+              <div class="test-actions-bar" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
+                <!-- New Set of Questions Button -->
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  id="engNewSetBtn"
+                  onclick="generateNewDailyEnglishSet(event)"
+                  style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; box-shadow: 0 2px 0 var(--ink); font-size: 12.5px; padding: 8px 16px; font-weight: 800; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;"
+                  title="Take a fresh new set of questions"
+                >
+                  <span style="font-size: 15px;">🎲</span>
+                  <span>New Set of Questions</span>
+                </button>
+
+                <!-- Combined Unified Previous & Next Navigation Control (One Button Bar) -->
+                <div class="eng-nav-group" style="display: inline-flex; align-items: stretch; border: 2px solid var(--ink); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 0 var(--ink); margin-left: auto;">
+                  <button
+                    type="button"
+                    id="engPrevBtn"
+                    onclick="prevEnglishQuestion()"
+                    style="border: none; border-right: 1.5px solid var(--ink); background: #ffffff; color: #334155; font-size: 13px; font-weight: 800; padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.15s ease;"
+                    disabled
+                    title="Go to Previous Question"
+                  >
+                    <span style="font-size: 14px; line-height: 1;">⬅️</span>
+                    <span>Prev</span>
                   </button>
-                  <button type="button" class="pdf-action-btn" onclick="restartEnglishTest()" style="background: #f1f5f9; color: #475569; font-size: 12px; padding: 8px 14px;">
-                    🔄 Restart Set
-                  </button>
-                  <button type="button" class="pdf-action-btn" onclick="generateNewDailyEnglishSet(event)" style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #c4b5fd; font-size: 12px; padding: 8px 14px; font-weight: 800;" title="Get a fresh new set of questions">
-                    🎲 New Daily Set
+
+                  <button
+                    type="button"
+                    id="engNextBtn"
+                    onclick="nextEnglishQuestion()"
+                    style="border: none; background: #4f46e5; color: #ffffff; font-size: 13px; font-weight: 800; padding: 8px 20px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.15s ease;"
+                    disabled
+                    title="Go to Next Question"
+                  >
+                    <span>Next</span>
+                    <span style="font-size: 14px; line-height: 1;">➔</span>
                   </button>
                 </div>
-                <button type="button" class="test-main-btn" id="engNextBtn" onclick="nextEnglishQuestion()" disabled>
-                  Next Question ➔
-                </button>
               </div>
             </div>
 
@@ -8788,6 +8825,9 @@
                     </button>
                     <button type="button" class="eng-vocab-tab" id="engVocabTab-learned" onclick="filterVocabList('learned')">
                       ✅ Learned (<span id="engVocabCountLearned">0</span>)
+                    </button>
+                    <button type="button" class="pdf-action-btn" id="toggleAllMeaningsBtn" onclick="toggleAllVocabMeanings()" style="font-size: 11px; padding: 4px 10px; background: #ffffff; color: #4338ca; border: 1.5px solid var(--ink); font-weight: 800;" title="Reveal or hide all meanings at once">
+                      👁️ Show All Meanings
                     </button>
                   </div>
                   <div style="flex: 1; max-width: 260px; min-width: 180px;">
@@ -13455,7 +13495,7 @@
 
           if (nextBtn) {
             nextBtn.disabled = false;
-            nextBtn.textContent = engCurrentIndex === engCurrentQuestions.length - 1 ? "Finish Test 🏁" : "Next Question ➔";
+            nextBtn.innerHTML = engCurrentIndex === engCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 15px;">🏁</span>' : '<span>Next</span> <span style="font-size: 15px;">➔</span>';
           }
         } else {
           engSelectedOption = null;
@@ -13464,7 +13504,7 @@
           if (feedbackBox) feedbackBox.style.display = "none";
           if (nextBtn) {
             nextBtn.disabled = true;
-            nextBtn.textContent = engCurrentIndex === engCurrentQuestions.length - 1 ? "Finish Test 🏁" : "Next Question ➔";
+            nextBtn.innerHTML = engCurrentIndex === engCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 15px;">🏁</span>' : '<span>Next</span> <span style="font-size: 15px;">➔</span>';
           }
 
           if (optionsGrid) {
@@ -14039,47 +14079,69 @@
           const safeExample = escapeHtml(item.example || "");
           const safePos = item.pos ? escapeHtml(item.pos) : "";
           const safePhonetic = item.phonetic ? escapeHtml(item.phonetic) : "";
+          const isDetailsOpen = allVocabMeaningsVisible;
 
           return `
-            <div class="eng-vocab-card ${isLearned ? 'is-learned' : ''}" id="vocabCard-${item.id}">
-              <div style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 240px;">
+            <div class="eng-vocab-card ${isLearned ? 'is-learned' : ''}" id="vocabCard-${item.id}" style="padding: 9px 12px; margin-bottom: 6px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; width: 100%;">
+                <!-- Left: Word & Audio -->
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                  <span style="font-size: 15px; font-weight: 900; color: #0f172a;">${safeWord}</span>
-                  ${safePhonetic ? `<span style="font-size: 11.5px; color: #64748b; font-family: monospace;">${safePhonetic}</span>` : ''}
-                  ${safePos ? `<span style="font-size: 10px; font-weight: 800; background: #f1f5f9; color: #475569; padding: 1px 6px; border-radius: 4px; text-transform: uppercase;">${safePos}</span>` : ''}
-                  <button type="button" class="pdf-action-btn" onclick="speakWord('${escapeHtml(item.word).replace(/'/g, "\\'")}')" style="font-size: 11px; padding: 2px 7px; background: #e0e7ff; color: #4338ca; border-color: #818cf8;" title="Listen to pronunciation">
-                    🔊 Listen
+                  <span style="font-size: 14.5px; font-weight: 900; color: #0f172a;">${safeWord}</span>
+                  ${safePhonetic ? `<span style="font-size: 11px; color: #64748b; font-family: monospace;">${safePhonetic}</span>` : ''}
+                  ${safePos ? `<span style="font-size: 9.5px; font-weight: 800; background: #f1f5f9; color: #475569; padding: 1px 5px; border-radius: 4px; text-transform: uppercase;">${safePos}</span>` : ''}
+                  <button type="button" class="pdf-action-btn" onclick="speakWord('${escapeHtml(item.word).replace(/'/g, "\\'")}')" style="font-size: 10.5px; padding: 2px 6px; background: #e0e7ff; color: #4338ca; border-color: #818cf8;" title="Listen to pronunciation">
+                    🔊
+                  </button>
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    id="vocabToggleBtn-${item.id}"
+                    onclick="toggleVocabCardDetails('${item.id}')"
+                    style="font-size: 11px; padding: 3px 9px; background: ${isDetailsOpen ? '#ede9fe' : '#f8fafc'}; color: ${isDetailsOpen ? '#6d28d9' : '#334155'}; border: 1.5px solid var(--ink); font-weight: 800;"
+                    title="Click to reveal or hide Urdu and English meanings"
+                  >
+                    ${isDetailsOpen ? '🙈 Hide Meaning ▲' : '👁️ Meaning ▼'}
                   </button>
                 </div>
-                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 2px;">
-                  <span class="urdu-vocab-pill">${safeUrdu}</span>
-                  ${safeMeaning ? `<span style="font-size: 12px; color: #334155; font-weight: 600;">${safeMeaning}</span>` : ''}
+
+                <!-- Right: Status & Delete Actions -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    onclick="toggleVocabLearned('${item.id}')"
+                    style="font-size: 11px; padding: 3px 9px; font-weight: 800; background: ${isLearned ? '#dcfce7' : '#ffffff'}; color: ${isLearned ? '#15803d' : '#334155'}; border: 1.5px solid ${isLearned ? '#86efac' : 'var(--ink)'};"
+                  >
+                    ${isLearned ? '✅ Learned' : '🎯 Practice'}
+                  </button>
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    onclick="deleteVocabWord('${item.id}')"
+                    style="font-size: 11px; padding: 3px 7px; background: #fff1f2; color: #be123c; border: 1.5px solid #fca5a5; font-weight: 700;"
+                    title="Delete from My Words"
+                  >
+                    🗑️
+                  </button>
                 </div>
+              </div>
+
+              <!-- Collapsible Meaning Details (Visible only when requested) -->
+              <div id="vocabDetails-${item.id}" style="display: ${isDetailsOpen ? 'flex' : 'none'}; flex-direction: column; gap: 5px; margin-top: 8px; padding-top: 8px; border-top: 1.5px dashed #cbd5e1; width: 100%;">
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span style="font-size: 11px; font-weight: 800; color: #86198f;">🇵🇰 اردو معنی:</span>
+                  <span class="urdu-vocab-pill" style="font-size: 13.5px; padding: 2px 8px;">${safeUrdu}</span>
+                </div>
+                ${safeMeaning ? `
+                  <div style="font-size: 12px; color: #1e293b; line-height: 1.4;">
+                    <strong>💡 English:</strong> ${safeMeaning}
+                  </div>
+                ` : ''}
                 ${safeExample ? `
-                  <div style="font-size: 11px; color: #64748b; font-style: italic; margin-top: 2px;">
+                  <div style="font-size: 11px; color: #64748b; font-style: italic; background: #f8fafc; padding: 4px 8px; border-radius: 6px; border-left: 2.5px solid #6366f1;">
                     📝 &ldquo;${safeExample}&rdquo;
                   </div>
                 ` : ''}
-              </div>
-
-              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                <button
-                  type="button"
-                  class="pdf-action-btn"
-                  onclick="toggleVocabLearned('${item.id}')"
-                  style="font-size: 11.5px; padding: 4px 10px; font-weight: 800; background: ${isLearned ? '#dcfce7' : '#ffffff'}; color: ${isLearned ? '#15803d' : '#334155'}; border: 1.5px solid ${isLearned ? '#86efac' : 'var(--ink)'};"
-                >
-                  ${isLearned ? '✅ Learned' : '🎯 Mark Learned'}
-                </button>
-                <button
-                  type="button"
-                  class="pdf-action-btn"
-                  onclick="deleteVocabWord('${item.id}')"
-                  style="font-size: 11px; padding: 4px 8px; background: #fff1f2; color: #be123c; border: 1.5px solid #fca5a5; font-weight: 700;"
-                  title="Delete from My Words"
-                >
-                  🗑️
-                </button>
               </div>
             </div>
           `;
@@ -14087,6 +14149,40 @@
 
         if (container) container.innerHTML = cardsHtml;
         if (listEl) listEl.innerHTML = cardsHtml;
+      }
+
+      let allVocabMeaningsVisible = false;
+
+      function toggleVocabCardDetails(id) {
+        const detailsEl = document.getElementById("vocabDetails-" + id);
+        const btnEl = document.getElementById("vocabToggleBtn-" + id);
+        if (!detailsEl) return;
+        const isHidden = detailsEl.style.display === "none" || !detailsEl.style.display;
+        detailsEl.style.display = isHidden ? "flex" : "none";
+        if (btnEl) {
+          btnEl.innerHTML = isHidden ? "🙈 Hide Meaning ▲" : "👁️ Meaning ▼";
+          btnEl.style.background = isHidden ? "#ede9fe" : "#f8fafc";
+          btnEl.style.color = isHidden ? "#6d28d9" : "#334155";
+        }
+      }
+
+      function toggleAllVocabMeanings() {
+        allVocabMeaningsVisible = !allVocabMeaningsVisible;
+        const detailsList = document.querySelectorAll("[id^='vocabDetails-']");
+        const btnsList = document.querySelectorAll("[id^='vocabToggleBtn-']");
+        const mainToggleBtn = document.getElementById("toggleAllMeaningsBtn");
+
+        detailsList.forEach(el => {
+          el.style.display = allVocabMeaningsVisible ? "flex" : "none";
+        });
+        btnsList.forEach(btn => {
+          btn.innerHTML = allVocabMeaningsVisible ? "🙈 Hide Meaning ▲" : "👁️ Meaning ▼";
+          btn.style.background = allVocabMeaningsVisible ? "#ede9fe" : "#f8fafc";
+          btn.style.color = allVocabMeaningsVisible ? "#6d28d9" : "#334155";
+        });
+        if (mainToggleBtn) {
+          mainToggleBtn.textContent = allVocabMeaningsVisible ? "🙈 Hide All Meanings" : "👁️ Show All Meanings";
+        }
       }
 
       function filterVocabList(mode) {
