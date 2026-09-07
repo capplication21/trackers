@@ -8555,11 +8555,24 @@
 
             <!-- 1. Daily Assessment Section Wrapper -->
             <div id="engAssessmentSectionWrapper">
-              <!-- Mode Tabs -->
-              <div class="test-mode-tabs">
-                <button type="button" class="test-mode-tab test-mode-tab-big active" id="engModeTab-all" onclick="setEnglishTestMode('all')">🎯 Full Daily Assessment (15 Qs)</button>
-                <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-grammar" onclick="setEnglishTestMode('grammar')">📖 Grammar &amp; Tenses</button>
-                <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-vocab" onclick="setEnglishTestMode('vocab')">💎 Vocabulary &amp; Collocations</button>
+              <!-- Mode Tabs & New Set Controller -->
+              <div class="test-mode-tabs" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                  <button type="button" class="test-mode-tab test-mode-tab-big active" id="engModeTab-all" onclick="setEnglishTestMode('all')">🎯 Full Daily Assessment (15 Qs)</button>
+                  <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-grammar" onclick="setEnglishTestMode('grammar')">📖 Grammar</button>
+                  <button type="button" class="test-mode-tab test-mode-tab-small" id="engModeTab-vocab" onclick="setEnglishTestMode('vocab')">💎 Vocab</button>
+                </div>
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  id="engModeNewSetBtn"
+                  onclick="generateNewDailyEnglishSet(event)"
+                  style="background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; font-size: 11.5px; padding: 6px 12px; font-weight: 800; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 1.5px 0 var(--ink); cursor: pointer; white-space: nowrap; flex-shrink: 0;"
+                  title="Generate a brand new set of questions"
+                >
+                  <span>🎲</span>
+                  <span>New Daily Set</span>
+                </button>
               </div>
 
               <!-- Test Engine Box -->
@@ -13377,7 +13390,29 @@
         { id: 57, category: "grammar", level: "B2", question: "We would have reached the summit before noon if the weather _______ so harsh.", options: ["was not", "had not been", "is not", "would not be"], correctIndex: 1, explanation: "Third conditional requires Past Perfect in the if-clause: 'if the weather had not been'." },
         { id: 58, category: "vocab", level: "B1", question: "Select the direct antonym for the adjective 'Vague':", options: ["Unclear", "Precise", "Hazy", "Ambiguous"], correctIndex: 1, explanation: "'Vague' means indefinite or indistinct. Its direct opposite is 'precise' or 'specific'." },
         { id: 59, category: "grammar", level: "B2", question: "The chairperson insisted that the financial audit _______ conducted impartially.", options: ["is", "be", "was", "being"], correctIndex: 1, explanation: "The present subjunctive mood (base form 'be') is used after verbs of demanding or insisting." },
-        { id: 60, category: "vocab", level: "B1", question: "The sudden flash flood caused _______ damage to road infrastructure.", options: ["trivial", "extensive", "negligible", "scanty"], correctIndex: 1, explanation: "'Extensive' means large in amount, wide-ranging, or comprehensive." }
+        { id: 60, category: "vocab", level: "B1", question: "The sudden flash flood caused _______ damage to road infrastructure.", options: ["trivial", "extensive", "negligible", "scanty"], correctIndex: 1, explanation: "'Extensive' means large in amount, wide-ranging, or comprehensive." },
+        
+        // 61 to 80 (20 New Challenging B1/B2 Daily Questions)
+        { id: 61, category: "grammar", level: "B1", question: "I haven't seen Sarah _______ we graduated from college four years ago.", options: ["for", "since", "from", "during"], correctIndex: 1, explanation: "'Since' refers to a specific starting point in time in the past ('we graduated'), whereas 'for' is used for a duration." },
+        { id: 62, category: "vocab", level: "B2", question: "The CEO's transparent announcement brought great _______ to the anxious employees.", options: ["reassurance", "trepidation", "dismay", "skepticism"], correctIndex: 0, explanation: "'Reassurance' means restoring confidence and removing doubts or anxiety." },
+        { id: 63, category: "grammar", level: "B2", question: "She speaks with so much confidence, as though she _______ every secret about the project.", options: ["knows", "knew", "has known", "will know"], correctIndex: 1, explanation: "'As though / as if' with unreal or hypothetical situations takes the subjunctive past ('knew')." },
+        { id: 64, category: "vocab", level: "B1", question: "It is essential to continually _______ your communication skills in the modern workplace.", options: ["hone", "stifle", "hamper", "dilute"], correctIndex: 0, explanation: "'To hone' means to refine, sharpen, or perfect a skill over time." },
+        { id: 65, category: "grammar", level: "B1", question: "All the heavy luggage _______ loaded into the cargo compartment.", options: ["were", "was", "are", "have been"], correctIndex: 1, explanation: "'Luggage' is an uncountable noun in English and always takes a singular verb ('was')." },
+        { id: 66, category: "vocab", level: "B2", question: "The company enforces _______ compliance guidelines to protect customer data.", options: ["stringent", "negligent", "fragile", "pliable"], correctIndex: 0, explanation: "'Stringent' means strictly controlled, rigorous, and binding." },
+        { id: 67, category: "grammar", level: "B2", question: "Had they known about the train cancellation, they _______ by commuter bus instead.", options: ["would travel", "would have traveled", "will travel", "had traveled"], correctIndex: 1, explanation: "Inverted 3rd Conditional: 'Had they known' = 'If they had known ..., would have traveled'." },
+        { id: 68, category: "vocab", level: "B1", question: "Choose the correct idiom: 'After making that careless mistake, he had to face the _______.'", options: ["curtain", "music", "mirror", "storm"], correctIndex: 1, explanation: "'Face the music' is an idiom meaning to accept the unpleasant consequences of one's actions." },
+        { id: 69, category: "grammar", level: "B1", question: "You _______ better lock the doors before leaving the office for the weekend.", options: ["would", "had", "should", "must"], correctIndex: 1, explanation: "The fixed English modal phrase for urgent advice is 'had better' (+ base verb), never 'would better'." },
+        { id: 70, category: "vocab", level: "B2", question: "The professor delivered a remarkably _______ and well-structured lecture on quantum physics.", options: ["lucid", "opaque", "hazy", "convoluted"], correctIndex: 0, explanation: "'Lucid' means expressed clearly and easy to comprehend." },
+        { id: 71, category: "grammar", level: "B2", question: "Only after reading the confidential report _______ the full scale of the crisis.", options: ["we understood", "did we understand", "we have understood", "we had understood"], correctIndex: 1, explanation: "'Only after' at the start of a sentence triggers subject-auxiliary inversion: 'did we understand'." },
+        { id: 72, category: "vocab", level: "B1", question: "She demonstrated a natural _______ for analyzing complex mathematical puzzles.", options: ["reluctance", "aptitude", "aversion", "indifference"], correctIndex: 1, explanation: "'Aptitude' is a natural ability, talent, or capacity to learn and perform well." },
+        { id: 73, category: "grammar", level: "B1", question: "Despite our polite objections, he insisted on _______ for everyone's lunch.", options: ["pay", "paying", "to pay", "paid"], correctIndex: 1, explanation: "Preposition 'on' after 'insist' must be followed by a gerund (-ing form): 'paying'." },
+        { id: 74, category: "vocab", level: "B2", question: "The committee rejected the claims because they were based on _______ evidence.", options: ["spurious", "authentic", "irrefutable", "valid"], correctIndex: 0, explanation: "'Spurious' means false, bogus, or not genuine." },
+        { id: 75, category: "grammar", level: "B2", question: "Were you _______ an opportunity to lead the international team, would you accept it?", options: ["offer", "offered", "to offering", "be offer"], correctIndex: 1, explanation: "Passive inverted conditional: 'Were you offered' = 'If you were offered'." },
+        { id: 76, category: "vocab", level: "B1", question: "Select the best phrasal verb: 'Please remember to _______ the lights when you exit the room.'", options: ["turn down", "turn off", "turn into", "turn over"], correctIndex: 1, explanation: "'Turn off' means to switch off the power or operation of a device." },
+        { id: 77, category: "grammar", level: "B1", question: "Neither the supervisor nor the newly hired assistant _______ able to solve the glitch.", options: ["were", "was", "are", "have been"], correctIndex: 1, explanation: "With 'Neither... nor...', the verb agrees with the closer subject ('assistant' is singular, so use 'was')." },
+        { id: 78, category: "vocab", level: "B2", question: "Over the last five years, the small startup underwent a remarkable _______ into a global enterprise.", options: ["metamorphosis", "deterioration", "stagnation", "recession"], correctIndex: 0, explanation: "'Metamorphosis' refers to a complete transformation or profound change in form/character." },
+        { id: 79, category: "grammar", level: "B2", question: "It is mandatory that each attendee _______ their official badge at the entrance.", options: ["shows", "show", "showed", "will show"], correctIndex: 1, explanation: "Mandative subjunctive mood takes the bare infinitive ('show') regardless of the subject." },
+        { id: 80, category: "vocab", level: "B1", question: "Mountain weather is notoriously _______, often shifting from sunshine to hail unexpectedly.", options: ["predictable", "unpredictable", "constant", "static"], correctIndex: 1, explanation: "'Unpredictable' describes something that cannot be anticipated or predicted with certainty." }
       ];
 
       let engTestMode = "all";
