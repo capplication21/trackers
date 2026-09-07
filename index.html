@@ -14187,11 +14187,18 @@
         const wordInput = document.getElementById("engCustomWordInput");
         const urduInput = document.getElementById("engCustomUrduInput");
         const engInput = document.getElementById("engCustomEnglishInput");
+        const searchInput = document.getElementById("engMeaningSearchInput");
 
         if (!wordInput) return;
-        const word = wordInput.value.trim();
+        let word = wordInput.value.trim();
+        if (!word && searchInput && searchInput.value.trim()) {
+          word = searchInput.value.trim();
+          wordInput.value = word;
+        }
+
         if (!word) {
-          if (showToastFeedback && typeof showToast === "function") showToast("Please enter an English word first.");
+          if (showToastFeedback && typeof showToast === "function") showToast("Please type an English word in the box first ✍️");
+          wordInput.focus();
           return;
         }
 
@@ -14203,7 +14210,7 @@
           if (urduInput) urduInput.value = match.urdu;
           if (engInput) engInput.value = match.meaning + (match.example ? ` (e.g. ${match.example})` : "");
           if (showToastFeedback && typeof showToast === "function") {
-            showToast(`⚡ Loaded instant Urdu & English meaning for "${word}"!`);
+            showToast(`⚡ Auto-filled Urdu & English meaning for "${word}"!`);
           }
           return;
         }
