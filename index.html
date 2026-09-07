@@ -8569,16 +8569,28 @@
                     <span class="test-q-badge" id="engQuestionBadge">Question 1 of 15</span>
                     <span class="test-score-badge" id="engScoreBadge">Score: 0</span>
                   </div>
-                  <button
-                    type="button"
-                    class="pdf-action-btn"
-                    onclick="openDeepGrammarGuideFromTest()"
-                    style="background: linear-gradient(135deg, #ede9fe 0%, #fdf4ff 100%); color: #6d28d9; border: 1.5px solid #8b5cf6; font-size: 11px; padding: 4px 10px; font-weight: 800; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 1.5px 0 var(--ink); cursor: pointer;"
-                    title="Understand the exact grammar rules, formula, and explanation related to this question"
-                  >
-                    <span>💡</span>
-                    <span>Understand Grammar Rule</span>
-                  </button>
+                  <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <button
+                      type="button"
+                      class="pdf-action-btn"
+                      onclick="openQuestionSpecificGrammar()"
+                      style="background: linear-gradient(135deg, #ede9fe 0%, #fdf4ff 100%); color: #6d28d9; border: 1.5px solid #8b5cf6; font-size: 11px; padding: 4px 10px; font-weight: 800; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 1.5px 0 var(--ink); cursor: pointer;"
+                      title="Understand the exact grammar rules, formula, and explanation related to this question"
+                    >
+                      <span>💡</span>
+                      <span>Understand Grammar Rule</span>
+                    </button>
+                    <button
+                      type="button"
+                      class="pdf-action-btn"
+                      onclick="askAIGrammarTutor()"
+                      style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; border: 1.5px solid var(--ink); font-size: 11px; padding: 4px 10px; font-weight: 800; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 1.5px 0 var(--ink); cursor: pointer;"
+                      title="Ask Gemini AI Grammar Tutor about this question"
+                    >
+                      <span>✨</span>
+                      <span>Ask AI About Rule</span>
+                    </button>
+                  </div>
                 </div>
 
                 <!-- Question Content -->
@@ -8593,12 +8605,17 @@
                 <div class="test-feedback-box" id="engFeedbackBox">
                   <div id="engFeedbackTitle" style="font-weight: 800; margin-bottom: 4px;"></div>
                   <div id="engFeedbackExplanation"></div>
-                  <button type="button" class="pdf-action-btn" id="engFeedbackDeepGrammarBtn" onclick="openDeepGrammarGuideFromTest()" style="margin-top: 10px; background: #ffffff; font-size: 12px; padding: 5px 12px; border-color: #6366f1; color: #4338ca; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
-                    📖 Read Deep Grammar Guide
-                  </button>
+                  <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
+                    <button type="button" class="pdf-action-btn" onclick="openQuestionSpecificGrammar()" style="background: #ffffff; font-size: 11.5px; padding: 5px 12px; border-color: #6366f1; color: #4338ca; font-weight: 800; display: inline-flex; align-items: center; gap: 5px;">
+                      💡 Understand Grammar Rule
+                    </button>
+                    <button type="button" class="pdf-action-btn" onclick="askAIGrammarTutor()" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; font-size: 11.5px; padding: 5px 12px; font-weight: 800; border: 1.5px solid var(--ink); display: inline-flex; align-items: center; gap: 5px;">
+                      ✨ Ask AI About Rule
+                    </button>
+                  </div>
                 </div>
 
-                <!-- Actions: Combined Previous/Next Navigation Control, Grammar Guide & New Set Button -->
+                <!-- Actions: Combined Previous/Next Navigation Control & Action Buttons -->
                 <div class="test-actions-bar eng-single-line-bar" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; flex-wrap: nowrap; width: 100%; overflow-x: auto;">
                   <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0; white-space: nowrap;">
                     <!-- New Set of Questions Button -->
@@ -8614,16 +8631,28 @@
                       <span>New Set</span>
                     </button>
 
-                    <!-- Understand Grammar Deeply Button -->
+                    <!-- Understand Grammar Rule Button -->
                     <button
                       type="button"
                       class="pdf-action-btn"
-                      onclick="openDeepGrammarGuideFromTest()"
+                      onclick="openQuestionSpecificGrammar()"
                       style="background: #ffffff; color: #4338ca; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-size: 11.5px; padding: 6px 11px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
-                      title="Open deep grammar explanation & rules for this question"
+                      title="Understand the exact grammar rules for this question"
                     >
                       <span style="font-size: 13px;">💡</span>
-                      <span>Deep Grammar Guide</span>
+                      <span>Understand Rule</span>
+                    </button>
+
+                    <!-- Ask AI About Rule Button -->
+                    <button
+                      type="button"
+                      class="pdf-action-btn"
+                      onclick="askAIGrammarTutor()"
+                      style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-size: 11.5px; padding: 6px 11px; font-weight: 800; border-radius: 9px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; flex-shrink: 0;"
+                      title="Ask Gemini AI Grammar Tutor about this question"
+                    >
+                      <span style="font-size: 13px;">✨</span>
+                      <span>Ask AI</span>
                     </button>
                   </div>
 
@@ -10102,6 +10131,46 @@
           <button type="button" class="test-main-btn" onclick="closeQuestionGrammarModal()" style="padding: 6px 18px; font-size: 12px; background: #4f46e5; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink);">
             Got It! Return to Test ✓
           </button>
+        </div>
+      </div>
+    <!-- AI Grammar Tutor Modal -->
+    <div class="modal-overlay" id="aiGrammarTutorModal" style="display: none; align-items: center; justify-content: center; z-index: 100000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); padding: 14px;">
+      <div class="modal-card" style="max-width: 680px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 8px 0 var(--ink); overflow: hidden; padding: 0;">
+        <!-- Header -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; border-bottom: 2px solid var(--ink); flex-shrink: 0;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #ffffff; color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink);">
+              ✨
+            </div>
+            <div>
+              <div style="font-size: 15px; font-weight: 900; color: #ffffff;" id="aiGrammarModalTitle">
+                Ask AI Grammar Tutor
+              </div>
+              <div style="font-size: 11px; color: #e0e7ff; font-weight: 700;">
+                Gemini AI In-Depth Explanation • Nuances • Urdu Breakdown
+              </div>
+            </div>
+          </div>
+          <button type="button" class="pdf-action-btn" onclick="closeAIGrammarModal()" style="width: 30px; height: 30px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 900; border-radius: 50%; border: 1.5px solid var(--ink); background: #ffffff; color: #0f172a; cursor: pointer;">
+            ✕
+          </button>
+        </div>
+
+        <!-- Scrollable Content Body -->
+        <div id="aiGrammarModalBody" style="padding: 16px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 12px;">
+          <!-- Dynamically filled by askAIGrammarTutor() -->
+        </div>
+
+        <!-- Footer -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #f8fafc; border-top: 1.5px solid #cbd5e1; flex-shrink: 0; flex-wrap: wrap; gap: 8px;">
+          <button type="button" class="pdf-action-btn" onclick="copyAIGrammarPrompt()" style="font-size: 11.5px; padding: 6px 12px; background: #ede9fe; color: #6d28d9; border: 1.5px solid #8b5cf6; font-weight: 800; display: inline-flex; align-items: center; gap: 5px;">
+            📋 Copy Prompt
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="test-main-btn" onclick="openGeminiTutorLive()" style="padding: 6px 16px; font-size: 12px; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+              <span>🤖 Open Gemini AI Live</span> ➔
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -14013,8 +14082,172 @@
         }
       }
 
-      function openDeepGrammarGuideFromTest() {
-        openQuestionSpecificGrammar(engCurrentIndex);
+      let currentAIPromptText = "";
+
+      function askAIGrammarTutor(qIndex) {
+        const idx = (typeof qIndex === "number") ? qIndex : engCurrentIndex;
+        const q = engCurrentQuestions[idx];
+        if (!q) return;
+
+        const modal = document.getElementById("aiGrammarTutorModal");
+        const body = document.getElementById("aiGrammarModalBody");
+        const titleEl = document.getElementById("aiGrammarModalTitle");
+        if (!modal || !body) return;
+
+        const correctOpt = q.options[q.correctIndex];
+        const categoryLabel = q.category === "vocab" ? "Vocabulary & Collocations" : "Grammar & Structure";
+        
+        if (titleEl) {
+          titleEl.textContent = `Ask AI: Question ${idx + 1} Grammar Tutor`;
+        }
+
+        const prompt = `As an expert English language tutor, explain this CEFR B1/B2 English test question in detail:
+
+Question: "${q.question}"
+Options:
+${q.options.map((opt, i) => `(${String.fromCharCode(65 + i)}) ${opt}`).join("\n")}
+
+Correct Answer: "${correctOpt}"
+Explanation Provided: "${q.explanation}"
+
+Please provide:
+1. Deep Grammar Analysis: Why is "${correctOpt}" the ONLY correct choice according to English grammar rules?
+2. Distractor Breakdown: Why are the other options grammatically wrong or unnatural?
+3. Grammar Formula / Rule Pattern.
+4. Urdu Explanation: Explain the concept simply in Urdu (اردو میں گرامر کی مکمل وضاحت).
+5. 3 Real-World Example Sentences using this exact same grammar rule.
+6. 2 Common Traps / Mistakes students make with this rule.`;
+
+        currentAIPromptText = prompt;
+
+        body.innerHTML = `
+          <!-- Question Context Card -->
+          <div style="padding: 12px 14px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1.5px solid #cbd5e1; border-radius: 12px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+              <span style="font-size: 11px; font-weight: 800; background: #e0e7ff; color: #4338ca; padding: 2px 8px; border-radius: 6px; text-transform: uppercase;">
+                Question ${idx + 1} • Level ${q.level}
+              </span>
+              <span style="font-size: 11px; font-weight: 800; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 6px;">
+                ✅ Answer: "${escapeHtml(correctOpt)}"
+              </span>
+            </div>
+            <div style="font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1.45;">
+              ${escapeHtml(q.question)}
+            </div>
+          </div>
+
+          <!-- Interactive AI Question Shortcuts -->
+          <div>
+            <div style="font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 6px;">
+              ⚡ Quick AI Grammar Prompts (Click to ask AI directly):
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px;">
+              <button
+                type="button"
+                class="pdf-action-btn"
+                onclick="runQuickAIPrompt('Deep Grammar Breakdown & Formula')"
+                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+              >
+                <span>💡</span>
+                <span>Explain Grammar Rule &amp; Formula</span>
+              </button>
+              <button
+                type="button"
+                class="pdf-action-btn"
+                onclick="runQuickAIPrompt('Why are the other options wrong?')"
+                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+              >
+                <span>❌</span>
+                <span>Why are other options wrong?</span>
+              </button>
+              <button
+                type="button"
+                class="pdf-action-btn"
+                onclick="runQuickAIPrompt('Explain this in Urdu in detail')"
+                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+              >
+                <span>🇵🇰</span>
+                <span>اردو میں مزید گہرائی سے سمجھائیں</span>
+              </button>
+              <button
+                type="button"
+                class="pdf-action-btn"
+                onclick="runQuickAIPrompt('Give 5 more example sentences using this rule')"
+                style="text-align: left; padding: 8px 12px; font-size: 12px; background: #ffffff; border: 1.5px solid #8b5cf6; border-radius: 8px; font-weight: 700; color: #5b21b6; display: flex; align-items: center; gap: 6px;"
+              >
+                <span>📝</span>
+                <span>5 More Example Sentences</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- AI Generated In-App Tutor Analysis Box -->
+          <div id="aiInAppTutorResponse" style="padding: 12px 14px; background: #fdf4ff; border: 1.5px solid #d946ef; border-radius: 12px; line-height: 1.5; font-size: 13px; color: #1e1b4b;">
+            <div style="font-weight: 900; color: #86198f; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>🤖 AI Grammar Tutor Analysis:</span>
+            </div>
+            <div style="color: #334155; margin-bottom: 8px;">
+              <strong>Key Rule:</strong> ${escapeHtml(q.explanation)}
+            </div>
+            <div style="background: #ffffff; padding: 8px 12px; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 12px; color: #475569; font-style: italic;">
+              💡 <em>Tip: You can click <strong>"Open Gemini AI Live"</strong> below to continue a dynamic, two-way conversation with Gemini AI regarding this exact question!</em>
+            </div>
+          </div>
+
+          <!-- Prompt Preview Box -->
+          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px 12px;">
+            <div style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-bottom: 4px;">
+              📋 Pre-Formatted AI Prompt:
+            </div>
+            <div style="font-size: 11.5px; color: #334155; font-family: monospace; max-height: 110px; overflow-y: auto; white-space: pre-wrap;">
+              ${escapeHtml(prompt)}
+            </div>
+          </div>
+        `;
+
+        modal.style.display = "flex";
+      }
+
+      function closeAIGrammarModal() {
+        const modal = document.getElementById("aiGrammarTutorModal");
+        if (modal) modal.style.display = "none";
+      }
+
+      function copyAIGrammarPrompt() {
+        if (!currentAIPromptText) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(currentAIPromptText).then(() => {
+            if (typeof showToast === "function") showToast("📋 AI Prompt copied to clipboard!");
+          }).catch(() => {
+            prompt("Copy this AI prompt:", currentAIPromptText);
+          });
+        } else {
+          prompt("Copy this AI prompt:", currentAIPromptText);
+        }
+      }
+
+      function openGeminiTutorLive() {
+        copyAIGrammarPrompt();
+        openGeminiAssessmentPopup();
+      }
+
+      function runQuickAIPrompt(customAsk) {
+        const respBox = document.getElementById("aiInAppTutorResponse");
+        const q = engCurrentQuestions[engCurrentIndex];
+        if (!respBox || !q) return;
+
+        respBox.innerHTML = `
+          <div style="font-weight: 900; color: #86198f; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <span>🤖 AI Tutor: "${escapeHtml(customAsk)}"</span>
+          </div>
+          <div style="font-size: 13px; color: #1e1b4b; line-height: 1.55;">
+            ${escapeHtml(q.explanation)}
+          </div>
+          <div style="margin-top: 8px; padding: 8px 10px; background: #ffffff; border: 1px solid #bbf7d0; border-radius: 8px; font-size: 12px; color: #065f46;">
+            ✅ <strong>Correct Formulation:</strong> "${escapeHtml(q.options[q.correctIndex])}"
+          </div>
+        `;
+        if (typeof showToast === "function") showToast(`✨ Generated AI Tutor explanation!`);
       }
 
       function showEnglishResults() {
