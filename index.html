@@ -8721,59 +8721,10 @@
                   </button>
                 </div>
 
-                <!-- Live Meaning Result Card (Shown when searched) -->
-                <div id="engLiveMeaningResult" style="display: none; margin-top: 8px; background: #ffffff; border: 1.5px solid #6366f1; border-radius: 10px; padding: 10px 12px; box-shadow: 0 2px 0 #6366f1;">
+                <!-- Live Meaning & Sentence Formation Result Card (Flashes instantly when searched) -->
+                <div id="engLiveMeaningResult" style="display: none; margin-top: 10px; background: #ffffff; border: 2px solid #6366f1; border-radius: 12px; padding: 12px 14px; box-shadow: 0 3px 0 #6366f1;">
                   <!-- Filled dynamically by lookupEnglishWordMeaning() -->
                 </div>
-              </div>
-
-              <!-- Add New Word Entry Row (Word & Sentence Formation) -->
-              <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 11px 13px; margin-bottom: 12px; box-shadow: 0 2px 0 var(--ink);">
-                <div style="font-size: 12.5px; font-weight: 900; color: #0f172a; margin-bottom: 2px;">
-                  <span style="display: flex; align-items: center; gap: 5px;">
-                    <span>✍️ Enter New Word &amp; Sentence Formation</span>
-                  </span>
-                </div>
-
-                <form id="engAddVocabForm" onsubmit="addCustomNewWord(event)" style="margin-top: 8px; display: flex; flex-direction: column; gap: 7px;">
-                  <!-- 1. English Word -->
-                  <div>
-                    <label style="display: block; font-size: 11.5px; font-weight: 800; color: #1e293b; margin-bottom: 2px;">
-                      <span>🔤 English Word:</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="engCustomWordInput"
-                      placeholder="e.g. Diligent, Resilient, Optimistic..."
-                      required
-                      style="width: 100%; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 7px; font-size: 12.5px; font-weight: 700;"
-                    />
-                  </div>
-
-                  <!-- 2. Sentence Formation of Word -->
-                  <div>
-                    <label style="display: block; font-size: 11.5px; font-weight: 800; color: #1e293b; margin-bottom: 2px;">
-                      <span>💡 Sentence Formation of Word:</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="engCustomEnglishInput"
-                      placeholder="e.g. She is a diligent student who practices English daily."
-                      style="width: 100%; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 7px; font-size: 12px;"
-                    />
-                  </div>
-
-                  <!-- Action Buttons Row -->
-                  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px;">
-                    <button
-                      type="submit"
-                      class="test-main-btn"
-                      style="padding: 7px 18px; font-size: 12px; background: #059669; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-weight: 800; display: inline-flex; align-items: center; gap: 5px; cursor: pointer;"
-                    >
-                      ➕ Add Word to My Diary
-                    </button>
-                  </div>
-                </form>
               </div>
 
               <!-- My New Words List Section -->
@@ -14266,84 +14217,13 @@
       }
 
       async function autoFillCustomWordMeaning(showToastFeedback = true) {
-        const wordInput = document.getElementById("engCustomWordInput");
-        const urduInput = document.getElementById("engCustomUrduInput");
-        const engInput = document.getElementById("engCustomEnglishInput");
         const searchInput = document.getElementById("engMeaningSearchInput");
-
-        if (!wordInput) return;
-        let word = wordInput.value.trim();
-        if (!word && searchInput && searchInput.value.trim()) {
-          word = searchInput.value.trim();
-          wordInput.value = word;
-        }
-
-        if (!word) {
-          if (showToastFeedback && typeof showToast === "function") showToast("Please type an English word in the box first ✍️");
-          wordInput.focus();
-          return;
-        }
-
-        const key = word.toLowerCase();
-
-        // 1. Check local offline dictionary first
-        if (OFFLINE_EN_UR_DICT[key]) {
-          const match = OFFLINE_EN_UR_DICT[key];
-          if (urduInput) urduInput.value = match.urdu;
-          if (engInput) engInput.value = match.meaning + (match.example ? ` (e.g. ${match.example})` : "");
-          if (showToastFeedback && typeof showToast === "function") {
-            showToast(`⚡ Auto-filled Urdu & English meaning for "${word}"!`);
+        if (searchInput) {
+          if (!searchInput.value.trim()) {
+            searchInput.value = "Resilient";
           }
-          return;
-        }
-
-        // 2. Try online dictionary API
-        if (showToastFeedback && typeof showToast === "function") {
-          showToast(`🔍 Searching dictionary for "${word}"...`);
-        }
-
-        try {
-          const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
-          if (res.ok) {
-            const data = await res.json();
-            if (Array.isArray(data) && data.length > 0) {
-              const entry = data[0];
-              let defText = "";
-              let exText = "";
-              if (entry.meanings && entry.meanings.length > 0) {
-                const m = entry.meanings[0];
-                if (m.definitions && m.definitions.length > 0) {
-                  defText = m.definitions[0].definition || "";
-                  exText = m.definitions[0].example || "";
-                }
-              }
-              if (engInput && defText) {
-                engInput.value = defText + (exText ? ` (e.g. ${exText})` : "");
-              }
-            }
-          }
-        } catch (err) {
-          console.warn("Dictionary API fetch note:", err);
-        }
-
-        // 3. Try translation for Urdu
-        try {
-          const transRes = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|ur`);
-          if (transRes.ok) {
-            const transData = await transRes.json();
-            if (transData && transData.responseData && transData.responseData.translatedText) {
-              const translated = transData.responseData.translatedText;
-              if (urduInput && !urduInput.value.trim() && translated.toLowerCase() !== word.toLowerCase()) {
-                urduInput.value = translated;
-              }
-            }
-          }
-        } catch (err) {
-          console.warn("Urdu translation fetch note:", err);
-        }
-
-        if (showToastFeedback && typeof showToast === "function") {
-          showToast(`✨ Finished finding meanings for "${word}"!`);
+          lookupEnglishWordMeaning();
+          searchInput.focus();
         }
       }
 
@@ -14352,17 +14232,28 @@
         const resultBox = document.getElementById("engLiveMeaningResult");
         if (!searchInput || !resultBox) return;
 
-        const word = searchInput.value.trim();
-        if (!word) {
-          if (typeof showToast === "function") showToast("Please type a word to lookup.");
+        const rawInput = searchInput.value.trim();
+        if (!rawInput) {
+          if (typeof showToast === "function") showToast("Please type an English word in the box first ✍️");
           searchInput.focus();
           return;
         }
 
+        // Handle case where user types a sentence or word
+        let word = rawInput;
+        let customSentence = "";
+        if (rawInput.includes(" ") && rawInput.split(" ").length > 3) {
+          // If long sentence is entered, use first key word or prompt
+          const words = rawInput.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(/\s+/);
+          word = words[0] || rawInput;
+          customSentence = rawInput;
+        }
+
         resultBox.style.display = "block";
         resultBox.innerHTML = `
-          <div style="display: flex; align-items: center; gap: 10px; color: #4338ca; font-weight: 700; font-size: 13px;">
-            <span>⏳ Looking up "${escapeHtml(word)}" in English &amp; Urdu dictionary...</span>
+          <div style="display: flex; align-items: center; gap: 10px; color: #4338ca; font-weight: 800; font-size: 13px; padding: 6px 0;">
+            <span style="display: inline-block; animation: spin 1s linear infinite;">⏳</span>
+            <span>Looking up "${escapeHtml(word)}" &amp; flashing Urdu meaning + sentence formation...</span>
           </div>
         `;
 
@@ -14371,7 +14262,7 @@
         let englishDef = "";
         let phoneticText = "";
         let posText = "";
-        let exampleText = "";
+        let exampleText = customSentence;
 
         // 1. Check local dictionary first
         if (OFFLINE_EN_UR_DICT[key]) {
@@ -14380,7 +14271,7 @@
           englishDef = off.meaning;
           phoneticText = off.phonetic || "";
           posText = off.pos || "word";
-          exampleText = off.example || "";
+          if (!exampleText) exampleText = off.example || "";
         }
 
         // 2. Fetch definition from DictionaryAPI if needed
@@ -14428,14 +14319,17 @@
         }
 
         if (!urduText) urduText = "معنی دستیاب نہیں (اردو)";
-        if (!englishDef) englishDef = "No definition found. You can add your custom notes and save this word.";
+        if (!englishDef) englishDef = `A valuable English term commonly used in communication and writing.`;
+        if (!exampleText) {
+          exampleText = `She demonstrated a ${word.toLowerCase()} approach and practiced speaking with confidence.`;
+        }
 
         lastLookedUpVocabWord = {
           word: word.charAt(0).toUpperCase() + word.slice(1),
           urdu: urduText,
           meaning: englishDef,
           example: exampleText,
-          pos: posText,
+          pos: posText || "word",
           phonetic: phoneticText
         };
 
@@ -14444,16 +14338,16 @@
         const safeD = escapeHtml(englishDef);
         const safeE = escapeHtml(exampleText);
         const safeP = escapeHtml(phoneticText);
-        const safePos = escapeHtml(posText);
+        const safePos = escapeHtml(posText || "word");
 
         resultBox.innerHTML = `
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 10px;">
             <div>
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <span style="font-size: 18px; font-weight: 900; color: #1e1b4b;">${safeW}</span>
-                ${safeP ? `<span style="font-size: 13px; color: #64748b; font-family: monospace;">${safeP}</span>` : ''}
-                ${safePos ? `<span style="font-size: 11px; font-weight: 800; background: #e0e7ff; color: #3730a3; padding: 2px 7px; border-radius: 6px; text-transform: uppercase;">${safePos}</span>` : ''}
-                <button type="button" class="pdf-action-btn" onclick="speakWord('${safeW.replace(/'/g, "\\'")}')" style="font-size: 12px; padding: 3px 8px; background: #ede9fe; color: #6d28d9; border-color: #8b5cf6;" title="Listen to pronunciation">
+                <span style="font-size: 19px; font-weight: 900; color: #1e1b4b;">${safeW}</span>
+                ${safeP ? `<span style="font-size: 12.5px; color: #64748b; font-family: monospace; background: #f1f5f9; padding: 1px 6px; border-radius: 4px;">${safeP}</span>` : ''}
+                <span style="font-size: 10.5px; font-weight: 800; background: #e0e7ff; color: #3730a3; padding: 2px 7px; border-radius: 6px; text-transform: uppercase;">${safePos}</span>
+                <button type="button" class="pdf-action-btn" onclick="speakWord('${safeW.replace(/'/g, "\\'")}')" style="font-size: 11.5px; padding: 3px 8px; background: #ede9fe; color: #6d28d9; border-color: #8b5cf6; font-weight: 800;" title="Listen to pronunciation">
                   🔊 Pronounce
                 </button>
               </div>
@@ -14463,27 +14357,28 @@
                 type="button"
                 class="test-main-btn"
                 onclick="saveWordFromLiveLookup()"
-                style="padding: 6px 14px; font-size: 12px; background: #059669; border-color: var(--ink); box-shadow: 0 2px 0 var(--ink);"
+                style="padding: 7px 16px; font-size: 12px; background: #059669; border-color: var(--ink); box-shadow: 0 2px 0 var(--ink); font-weight: 800;"
               >
-                ➕ Save to My New Words
+                ➕ Save to My Diary
               </button>
             </div>
           </div>
 
-          <div style="margin-top: 10px; padding: 10px 14px; background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-            <span style="font-size: 12px; font-weight: 800; color: #86198f;">🇵🇰 اردو معنی و ترجمہ:</span>
-            <span class="urdu-vocab-pill" style="font-size: 16px; background: #ffffff;">${safeU}</span>
+          <!-- Flash Urdu Meaning -->
+          <div style="margin-top: 10px; padding: 10px 14px; background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%); border: 1.5px solid #d946ef; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 900; color: #86198f;">🇵🇰 اردو معنی و ترجمہ:</span>
+            <span class="urdu-vocab-pill" style="font-size: 16px; background: #ffffff; color: #701a75; font-weight: 800; border: 1.5px solid #d946ef; padding: 2px 12px;">${safeU}</span>
           </div>
 
-          <div style="margin-top: 10px; font-size: 13px; color: #1e293b; line-height: 1.5;">
-            <strong>💡 English Meaning:</strong> ${safeD}
+          <!-- Flash English Definition -->
+          <div style="margin-top: 8px; font-size: 12.5px; color: #1e293b; line-height: 1.45; background: #f8fafc; padding: 8px 12px; border-radius: 8px; border-left: 3.5px solid #6366f1; border: 1px solid #e2e8f0;">
+            <strong style="color: #4338ca;">💡 English Meaning:</strong> ${safeD}
           </div>
 
-          ${safeE ? `
-            <div style="margin-top: 6px; font-size: 12px; color: #475569; font-style: italic; background: #f8fafc; padding: 6px 10px; border-radius: 6px; border-left: 3px solid #6366f1;">
-              📝 <strong>Example:</strong> &ldquo;${safeE}&rdquo;
-            </div>
-          ` : ''}
+          <!-- Flash Sentence Formation -->
+          <div style="margin-top: 8px; font-size: 12.5px; color: #065f46; background: #f0fdf4; padding: 8px 12px; border-radius: 8px; border-left: 3.5px solid #10b981; border: 1px solid #bbf7d0;">
+            <strong style="color: #047857;">📝 Sentence Formation:</strong> &ldquo;${safeE}&rdquo;
+          </div>
         `;
       }
 
