@@ -15908,15 +15908,20 @@ Please provide:
           }
 
           const deltas = [-30, -10, 10, 20, 40, -40].sort(() => Math.random() - 0.5);
-          const rawChoices = [correctVal];
+          let rawChoices = [correctVal];
           for (let d of deltas) {
             const fake = correctVal + d;
             if (fake > 0 && !rawChoices.includes(fake)) {
               rawChoices.push(fake);
-              if (rawChoices.length === 4) break;
             }
           }
-          rawChoices.sort(() => Math.random() - 0.5);
+          let step = 20;
+          while (rawChoices.length < 4) {
+            const fake = correctVal + step;
+            if (!rawChoices.includes(fake)) rawChoices.push(fake);
+            step += 25;
+          }
+          rawChoices = rawChoices.slice(0, 4).sort(() => Math.random() - 0.5);
 
           return {
             id: qId,
@@ -15942,15 +15947,20 @@ Please provide:
           const urduTip = `گنتی آگے بڑھانے کا طریقہ: Rs. ${bill} میں ${diffToHundred} ڈال کر ${nextHundred} بنائیں، پھر ${note} تک باقی رقم گنیں = Rs. ${correctVal}`;
 
           const deltas = [-50, -20, 10, 20, 50, -10].sort(() => Math.random() - 0.5);
-          const rawChoices = [correctVal];
+          let rawChoices = [correctVal];
           for (let d of deltas) {
             const fake = correctVal + d;
             if (fake > 0 && !rawChoices.includes(fake)) {
               rawChoices.push(fake);
-              if (rawChoices.length === 4) break;
             }
           }
-          rawChoices.sort(() => Math.random() - 0.5);
+          let step = 30;
+          while (rawChoices.length < 4) {
+            const fake = correctVal + step;
+            if (!rawChoices.includes(fake)) rawChoices.push(fake);
+            step += 30;
+          }
+          rawChoices = rawChoices.slice(0, 4).sort(() => Math.random() - 0.5);
 
           return {
             id: qId,
@@ -15990,15 +16000,20 @@ Please provide:
           }
 
           const deltas = [-100, -50, 50, 100, 200, -200].sort(() => Math.random() - 0.5);
-          const rawChoices = [correctVal];
+          let rawChoices = [correctVal];
           for (let d of deltas) {
             const fake = correctVal + d;
             if (fake > 0 && !rawChoices.includes(fake)) {
               rawChoices.push(fake);
-              if (rawChoices.length === 4) break;
             }
           }
-          rawChoices.sort(() => Math.random() - 0.5);
+          let step = 50;
+          while (rawChoices.length < 4) {
+            const fake = correctVal + step;
+            if (!rawChoices.includes(fake)) rawChoices.push(fake);
+            step += 50;
+          }
+          rawChoices = rawChoices.slice(0, 4).sort(() => Math.random() - 0.5);
 
           return {
             id: qId,
@@ -16027,7 +16042,11 @@ Please provide:
       }
 
       function initMathTest() {
-        setMathTestMode("mixed");
+        if (!mathCurrentQuestions || mathCurrentQuestions.length === 0) {
+          generateNewMath15Set();
+        } else {
+          renderMathQuestion();
+        }
         renderMathTestHistory();
       }
 
@@ -16126,11 +16145,11 @@ Please provide:
 
           if (choicesGrid) {
             choicesGrid.innerHTML = q.options.map((opt, i) => `
-              <button type="button" class="test-option-btn" id="mathOpt-${i}" onclick="selectMathOption(${i})" style="padding: 10px 12px; font-size: 13.5px;">
-                <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#dcfce7; font-size:12px; font-weight:800; color:#065f46;">
+              <button type="button" class="test-option-btn" id="mathOpt-${i}" onclick="selectMathOption(${i})" style="padding: 10px 12px; font-size: 13.5px; cursor: pointer;">
+                <span style="pointer-events: none; display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#dcfce7; font-size:12px; font-weight:800; color:#065f46;">
                   ${String.fromCharCode(65 + i)}
                 </span>
-                <span>${escapeHtml(opt)}</span>
+                <span style="pointer-events: none;">${escapeHtml(opt)}</span>
               </button>
             `).join("");
           }
@@ -16138,10 +16157,13 @@ Please provide:
       }
 
       function selectMathOption(index) {
+        index = parseInt(index, 10);
+        if (isNaN(index)) return;
         if (mathAnswered) return;
         mathAnswered = true;
 
         const q = mathCurrentQuestions[mathCurrentIndex];
+        if (!q) return;
         const isCorrect = index === q.correctIndex;
 
         mathUserAnswers[mathCurrentIndex] = {
@@ -16217,6 +16239,13 @@ Please provide:
           showMathResults();
         }
       }
+
+      window.selectMathOption = selectMathOption;
+      window.prevMathQuestion = prevMathQuestion;
+      window.nextMathQuestion = nextMathQuestion;
+      window.initMathTest = initMathTest;
+      window.setMathTestMode = setMathTestMode;
+      window.generateNewMath15Set = generateNewMath15Set;
 
       function showMathResults() {
         const cardBox = document.getElementById("mathTestCardBox");
