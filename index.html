@@ -14270,6 +14270,65 @@
           `;
         }
 
+        // Construct 3 tailored example sentences
+        let examplesList = [];
+        const combText = (qText + " " + explanation).toLowerCase();
+        if (isInversion) {
+          examplesList = [
+            "No sooner <strong>had the bell rung</strong> than the students rushed outside.",
+            "Hardly <strong>had she closed</strong> her eyes when the alarm started ringing.",
+            "Seldom <strong>have we witnessed</strong> such an outstanding performance."
+          ];
+        } else if (combText.includes("second conditional") || combText.includes("if i")) {
+          examplesList = [
+            "If I <strong>had</strong> more free time, I <strong>would learn</strong> another language.",
+            "If she <strong>were</strong> here, she <strong>would help</strong> us solve this.",
+            "They <strong>would travel</strong> more if they <strong>earned</strong> a higher salary."
+          ];
+        } else if (combText.includes("third conditional") || combText.includes("would have")) {
+          examplesList = [
+            "If we <strong>had taken</strong> the earlier train, we <strong>would have arrived</strong> on time.",
+            "She <strong>would have passed</strong> the test if she <strong>had revised</strong> properly.",
+            "If they <strong>had known</strong> about the storm, they <strong>would have stayed</strong> indoors."
+          ];
+        } else if (combText.includes("accustomed to") || combText.includes("look forward to")) {
+          examplesList = [
+            "I am really looking forward to <strong>meeting</strong> you next week.",
+            "He is accustomed to <strong>waking up</strong> early in the morning.",
+            "She objects to <strong>working</strong> late on weekends."
+          ];
+        } else if (combText.includes("neither") && combText.includes("nor")) {
+          examplesList = [
+            "Neither the teacher nor the students <strong>were</strong> in the classroom.",
+            "Neither the manager nor the assistant <strong>is</strong> available right now.",
+            "Neither pizza nor burgers <strong>are</strong> on the menu tonight."
+          ];
+        } else if (combText.includes("subjunctive") || combText.includes("suggested that") || combText.includes("insisted that")) {
+          examplesList = [
+            "The doctor recommended that he <strong>rest</strong> for two weeks.",
+            "She insisted that everyone <strong>be</strong> present at 9:00 AM.",
+            "The manager proposed that a new strategy <strong>be</strong> implemented."
+          ];
+        } else if (combText.includes("past perfect") || combText.includes("by the time")) {
+          examplesList = [
+            "By the time the plane landed, the weather <strong>had cleared</strong> up.",
+            "She <strong>had already finished</strong> dinner before we arrived.",
+            "The train <strong>had left</strong> by the time they reached the station."
+          ];
+        } else if (combText.includes("stiff") || combText.includes("resistance") || combText.includes("collocation")) {
+          examplesList = [
+            "The new government policy met with <strong>stiff resistance</strong> from the public.",
+            "The underdog team put up <strong>stiff resistance</strong> until the final minute.",
+            "He faced <strong>stiff competition</strong> in the championship match."
+          ];
+        } else {
+          examplesList = [
+            `Example 1: Demonstrating correct structure with "<strong>${escapeHtml(correctOpt)}</strong>".`,
+            `Example 2: Clear contextual usage matching the tense requirement.`,
+            `Example 3: Natural phrasing in standard English speech and writing.`
+          ];
+        }
+
         const html = `
           <!-- Main Direct Answer Card -->
           <div style="background: #ffffff; border: 1.5px solid #d946ef; border-radius: 10px; padding: 12px; margin-bottom: 12px; box-shadow: 0 1.5px 0 var(--ink);">
@@ -14279,24 +14338,23 @@
           <!-- Deep Multi-Section Breakdown -->
           <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
             
-            <!-- Rule Formula Card -->
-            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-              <div>
-                <div style="font-weight: 800; color: #15803d; font-size: 12px; margin-bottom: 2px;">
-                  📐 Standard Formula:
-                </div>
-                <div style="font-family: monospace; font-size: 11.5px; font-weight: 700; color: #166534;">
-                  ${isInversion ? 'No sooner + had + Subject + V3 ... than [Past Simple]' : `Subject + [${escapeHtml(correctOpt)}] + Complement`}
-                </div>
+            <!-- Rule Formula & 3 Examples Card -->
+            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 12px;">
+              <div style="font-weight: 800; color: #15803d; font-size: 12.5px; margin-bottom: 4px; display: flex; align-items: center; gap: 5px;">
+                <span>📐</span>
+                <span>Standard Formula &amp; Structure:</span>
               </div>
-              <button
-                type="button"
-                class="pdf-action-btn"
-                onclick="submitCustomGrammarDoubt('Show 3 more sentence examples')"
-                style="font-size: 11px; padding: 4px 10px; background: #dcfce7; color: #15803d; border: 1px solid #86efac; font-weight: 800; border-radius: 6px;"
-              >
-                + More Examples
-              </button>
+              <div style="font-family: monospace; font-size: 11.5px; font-weight: 700; color: #166534; background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #86efac; margin-bottom: 8px;">
+                ${isInversion ? 'No sooner + had + Subject + V3 ... than [Past Simple]' : `Subject + [${escapeHtml(correctOpt)}] + Complement`}
+              </div>
+              
+              <div style="font-weight: 800; color: #166534; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <span>💡</span>
+                <span>3 Sentence Examples for this Rule:</span>
+              </div>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px; color: #14532d; line-height: 1.6;">
+                ${examplesList.map(ex => `<li>${ex}</li>`).join("")}
+              </ul>
             </div>
 
             <!-- Ask Live Gemini Banner -->
