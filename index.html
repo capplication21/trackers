@@ -6981,6 +6981,31 @@
               <!-- Rendered dynamically -->
             </div>
           </div>
+
+          <div
+            class="week-section zad-card"
+            style="padding: 14px; margin-bottom: 14px"
+          >
+            <div class="week-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="zad-icon">📖</span>
+                <span class="week-header-title">Read &amp; Listen Quran Playlists</span>
+              </div>
+              <button
+                type="button"
+                class="grammar-add-topic-btn"
+                onclick="openQuranPlaylistModal()"
+                title="Add new Surah/Juz/Recitation playlist"
+                style="font-size: 11px; padding: 3px 8px;"
+              >
+                <span>➕</span> Add Quran Playlist
+              </button>
+            </div>
+
+            <div id="quranPlaylistsContainer">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
         </div>
 
         <!-- PERIOD TAB -->
@@ -7658,17 +7683,24 @@
                 </svg>
               </div>
               <div style="flex: 1">
-                <div class="task-text">
-                  Read and Listen Quran <span>📖</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                  <div class="task-text" style="margin-bottom: 0;">
+                    Read and Listen Quran <span>📖</span>
+                  </div>
+                  <button
+                    type="button"
+                    class="grammar-add-topic-btn"
+                    onclick="openQuranPlaylistModal(); event.stopPropagation();"
+                    title="Add new Quran playlist/surah"
+                    style="font-size: 10.5px; padding: 2px 7px;"
+                  >
+                    <span>➕</span> Add Playlist
+                  </button>
                 </div>
-                <a
-                  class="yt-link"
-                  href="https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3&si=jX-E1-T-8sC3qN5u"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                >
-                  <span>▶️</span> Surah Baqarah Playlist
-                </a>
+                <!-- Dynamic Quran Playlists List with Progress & Links -->
+                <div id="quranEveningPlaylistsContainer" onclick="event.stopPropagation()" style="margin-top: 8px;">
+                  <!-- Rendered dynamically -->
+                </div>
               </div>
             </div>
             <div class="task-card" id="task-e2-s" onclick="toggleTask('e2')">
@@ -10781,6 +10813,68 @@
             onclick="saveUqSubjectItem()"
           >
             Save Course
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Read & Listen Quran Playlist Modal -->
+    <div class="modal-overlay" id="quranPlaylistModal">
+      <div class="modal-card">
+        <input type="hidden" id="quranPlaylistEditId" value="" />
+        <div class="modal-title" id="quranPlaylistModalTitle">📖 Add Quran Playlist / Surah</div>
+        <div class="modal-subtitle">
+          Save Surah/Juz name, target count (parts/ayat/juz), and playlist link
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="quranPlaylistTitleInput">Playlist / Surah Title</label>
+          <input
+            type="text"
+            class="input-field"
+            id="quranPlaylistTitleInput"
+            placeholder="e.g. 📖 Surah Al-Baqarah, 📖 Surah Al-Kahf, 📖 30 Juz Recitations..."
+          />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="quranPlaylistTargetInput">Total Target (Parts / Juz / Ayat)</label>
+          <input
+            type="number"
+            class="input-field"
+            id="quranPlaylistTargetInput"
+            min="1"
+            max="604"
+            value="30"
+            placeholder="e.g. 30"
+          />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="quranPlaylistUrlInput">YouTube / Audio Playlist Link (optional)</label>
+          <input
+            type="url"
+            class="input-field"
+            id="quranPlaylistUrlInput"
+            placeholder="e.g. https://youtube.com/playlist?list=... or audio link"
+          />
+        </div>
+
+        <div class="modal-buttons">
+          <button
+            class="modal-btn modal-btn-cancel"
+            type="button"
+            onclick="closeQuranPlaylistModal()"
+          >
+            Cancel
+          </button>
+          <button
+            class="modal-btn modal-btn-save"
+            id="quranPlaylistSaveBtn"
+            type="button"
+            onclick="saveQuranPlaylistItem()"
+          >
+            Save Playlist
           </button>
         </div>
       </div>
@@ -16833,6 +16927,7 @@ Please provide:
         if (tabName === "week") {
           renderZadSubjects();
           renderUqSubjects();
+          renderQuranPlaylists();
         }
         if (tabName === "period") {
           updateNavBar();
@@ -18608,9 +18703,425 @@ Please provide:
           if (e.target === this) closeUqSubjectModal();
         });
 
-      function loadUqLectureLog() {
-        // Handled via loadUqLecture / uqSubjects
+      // ==================== READ & LISTEN QURAN MULTI-PLAYLIST SYSTEM ====================
+      let quranPlaylists = [];
+
+      function loadQuranPlaylists() {
+        try {
+          const stored = localStorage.getItem("quran_playlists_v2");
+          if (stored) {
+            try {
+              const parsed = JSON.parse(stored);
+              if (Array.isArray(parsed) && parsed.length > 0) {
+                quranPlaylists = parsed;
+              }
+            } catch (err) {}
+          }
+        } catch (e) {
+          quranPlaylists = [];
+        }
+
+        if (!quranPlaylists || quranPlaylists.length === 0) {
+          quranPlaylists = [
+            {
+              id: "qp_baqarah",
+              title: "📖 Surah Al-Baqarah",
+              target: 30,
+              current: 1,
+              url: "https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3&si=jX-E1-T-8sC3qN5u",
+              logs: []
+            }
+          ];
+          saveQuranPlaylists();
+        }
+
+        renderQuranPlaylists();
       }
+
+      function saveQuranPlaylists() {
+        try {
+          localStorage.setItem("quran_playlists_v2", JSON.stringify(quranPlaylists));
+        } catch (e) {}
+      }
+
+      function renderQuranPlaylists() {
+        renderWeekTabQuranPlaylists();
+        renderEveningQuranPlaylists();
+      }
+
+      function renderWeekTabQuranPlaylists() {
+        const container = document.getElementById("quranPlaylistsContainer");
+        if (!container) return;
+
+        if (!quranPlaylists || quranPlaylists.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 12px; color: var(--muted); font-size: 12px;">
+              No Quran playlists added yet. <a href="javascript:void(0)" onclick="openQuranPlaylistModal()" style="font-weight: 700; color: var(--ink); text-decoration: underline;">+ Add Quran Playlist</a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = quranPlaylists
+          .map((subj) => {
+            const target = subj.target || 30;
+            const current = subj.current || 1;
+            const pct = Math.min(100, Math.round((current / target) * 100));
+            const isComplete = current >= target;
+            const logs = subj.logs || [];
+            const normUrl = subj.url ? getNormalizedUrl(subj.url) : "";
+
+            return `
+              <div class="zad-subject-item" style="background: #ffffff; border: 2px solid var(--ink); border-radius: 12px; padding: 12px; margin-top: 10px; box-shadow: 0 1.5px 0 var(--ink);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <div class="subtopic-label" style="margin-bottom: 0; font-size: 13px; font-weight: 700; color: var(--ink);">
+                    ${escapeHtml(subj.title || "Quran Playlist")}
+                  </div>
+                  <div style="display: flex; gap: 4px;">
+                    <button type="button" class="grammar-item-action-btn" onclick="editQuranPlaylist('${subj.id}')" title="Edit Playlist" style="width: 26px; height: 26px; font-size: 11px;">✏️</button>
+                    ${
+                      quranPlaylists.length > 1
+                        ? `<button type="button" class="grammar-item-action-btn delete-btn" onclick="deleteQuranPlaylist('${subj.id}')" title="Delete Playlist" style="width: 26px; height: 26px; font-size: 11px;">🗑️</button>`
+                        : ""
+                    }
+                  </div>
+                </div>
+
+                <div class="zad-log-dropdown-row" onclick="event.stopPropagation()">
+                  <select class="lecture-date-inline zad-log-select" id="qpLogSelect_${subj.id}">
+                    <option value="">📜 No history yet</option>
+                    ${logs.map((l, idx) => `<option value="${idx}">📅 ${l.date} · 🎬 Part ${l.lecture}</option>`).join("")}
+                  </select>
+                  <button class="zad-log-delete-btn" onclick="deleteSelectedQuranPlaylistLogEntry('${subj.id}', 'qp')" title="Remove selected entry">🗑️</button>
+                </div>
+
+                <div class="lecture-tracker-row">
+                  <span class="lecture-tracker-label">🎬 Part/Ayah</span>
+                  <div class="lecture-stat-box">
+                    <input
+                      type="number"
+                      class="lecture-count-input"
+                      id="qpInput_${subj.id}"
+                      min="1"
+                      max="${target}"
+                      value="${current}"
+                      onchange="setQuranPlaylistLecture('${subj.id}', this.value)"
+                    />
+                    <span class="lecture-stat-sep">/</span>
+                    <span class="lecture-stat-target">${target}</span>
+                  </div>
+                  <div class="lecture-stat-box date-stat-box" onclick="openQuranPlaylistCalendar('${subj.id}', 'qp')">
+                    <span class="lecture-date-icon">📅</span>
+                    <span class="typing-date-display" id="qpDateDisplay_${subj.id}">Select date</span>
+                    <input
+                      type="date"
+                      class="typing-hidden-date-input"
+                      id="qpDateInput_${subj.id}"
+                      onchange="onQuranPlaylistDateChanged('${subj.id}', 'qp')"
+                    />
+                  </div>
+                </div>
+
+                <div class="lecture-progress-track">
+                  <div
+                    class="lecture-progress-fill ${isComplete ? "complete" : ""}"
+                    id="qpProgressFill_${subj.id}"
+                    style="width: ${pct}%"
+                  ></div>
+                </div>
+
+                ${
+                  normUrl
+                    ? `<a class="yt-link" href="${escapeHtml(normUrl)}" target="_blank" onclick="event.stopPropagation()">
+                        <span>▶️</span> Open ${escapeHtml(subj.title)} Playlist
+                      </a>`
+                    : ""
+                }
+
+                <button class="lecture-done-btn" onclick="addQuranPlaylistLogEntry('${subj.id}', 'qp')">
+                  ➕ Add to Log
+                </button>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      function renderEveningQuranPlaylists() {
+        const container = document.getElementById("quranEveningPlaylistsContainer");
+        if (!container) return;
+
+        if (!quranPlaylists || quranPlaylists.length === 0) {
+          container.innerHTML = `
+            <div style="font-size: 11.5px; color: var(--muted); padding: 4px 0;">
+              No Quran playlist added yet. <a href="javascript:void(0)" onclick="openQuranPlaylistModal()" style="font-weight: 700; color: #0284c7; text-decoration: underline;">+ Add Playlist</a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = quranPlaylists.map((subj) => {
+          const target = subj.target || 30;
+          const current = subj.current || 1;
+          const pct = Math.min(100, Math.round((current / target) * 100));
+          const isComplete = current >= target;
+          const normUrl = subj.url ? getNormalizedUrl(subj.url) : "";
+
+          return `
+            <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 10px; margin-top: 6px;" onclick="event.stopPropagation()">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
+                <div style="font-size: 12.5px; font-weight: 800; color: #1e293b;">
+                  ${escapeHtml(subj.title || "Quran Playlist")}
+                </div>
+                <div style="display: flex; align-items: center; gap: 4px;">
+                  <button type="button" class="grammar-item-action-btn" onclick="editQuranPlaylist('${subj.id}')" title="Edit Playlist" style="width: 22px; height: 22px; font-size: 10px;">✏️</button>
+                  ${quranPlaylists.length > 1 ? `<button type="button" class="grammar-item-action-btn delete-btn" onclick="deleteQuranPlaylist('${subj.id}')" title="Delete Playlist" style="width: 22px; height: 22px; font-size: 10px;">🗑️</button>` : ""}
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
+                <div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 11px; font-weight: 700; color: #475569;">Part:</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max="${target}"
+                    value="${current}"
+                    onchange="setQuranPlaylistLecture('${subj.id}', this.value)"
+                    style="width: 48px; padding: 2px 4px; font-size: 12px; font-weight: 800; text-align: center; border: 1.5px solid #cbd5e1; border-radius: 6px;"
+                  />
+                  <span style="font-size: 11px; color: #64748b; font-weight: 700;">/ ${target}</span>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 4px;">
+                  <div class="lecture-stat-box date-stat-box" onclick="openQuranPlaylistCalendar('${subj.id}', 'qpe')" style="padding: 2px 6px; font-size: 11px;">
+                    <span class="lecture-date-icon" style="font-size: 11px;">📅</span>
+                    <span class="typing-date-display" id="qpeDateDisplay_${subj.id}" style="font-size: 11px;">Today</span>
+                    <input
+                      type="date"
+                      class="typing-hidden-date-input"
+                      id="qpeDateInput_${subj.id}"
+                      onchange="onQuranPlaylistDateChanged('${subj.id}', 'qpe')"
+                    />
+                  </div>
+                  <button type="button" class="lecture-done-btn" onclick="addQuranPlaylistLogEntry('${subj.id}', 'qpe')" style="padding: 3px 8px; font-size: 10.5px; margin-top: 0;">
+                    ➕ Log
+                  </button>
+                </div>
+              </div>
+
+              <div class="lecture-progress-track" style="height: 6px; margin-bottom: 6px;">
+                <div
+                  class="lecture-progress-fill ${isComplete ? 'complete' : ''}"
+                  id="qpeProgressFill_${subj.id}"
+                  style="width: ${pct}%; height: 100%;"
+                ></div>
+              </div>
+
+              ${normUrl ? `
+                <a class="yt-link" href="${escapeHtml(normUrl)}" target="_blank" onclick="event.stopPropagation()" style="font-size: 11px; padding: 4px 8px;">
+                  <span>▶️</span> Open ${escapeHtml(subj.title)} Playlist
+                </a>
+              ` : ""}
+            </div>
+          `;
+        }).join("");
+      }
+
+      function setQuranPlaylistLecture(id, value) {
+        const subj = quranPlaylists.find((s) => s.id === id);
+        if (!subj) return;
+        const n = parseInt(value, 10);
+        subj.current = Number.isFinite(n)
+          ? Math.min(subj.target || 30, Math.max(1, n))
+          : 1;
+        saveQuranPlaylists();
+        renderQuranPlaylists();
+      }
+
+      function openQuranPlaylistCalendar(id, prefix = "qp") {
+        const input = document.getElementById(prefix + "DateInput_" + id);
+        if (input) {
+          if (typeof input.showPicker === "function") {
+            try {
+              input.showPicker();
+            } catch (err) {
+              input.focus();
+            }
+          } else {
+            input.focus();
+          }
+        }
+      }
+
+      function onQuranPlaylistDateChanged(id, prefix = "qp") {
+        const input = document.getElementById(prefix + "DateInput_" + id);
+        const display = document.getElementById(prefix + "DateDisplay_" + id);
+        if (input && display && input.value) {
+          display.textContent = isoToDDMMYY(input.value);
+        }
+      }
+
+      function addQuranPlaylistLogEntry(id, prefix = "qp") {
+        const subj = quranPlaylists.find((s) => s.id === id);
+        if (!subj) return;
+        const dateInput = document.getElementById(prefix + "DateInput_" + id);
+        const dateVal =
+          dateInput && dateInput.value ? dateInput.value : medicineTodayStr();
+        const formattedDate = isoToDDMMYY(dateVal);
+        if (!subj.logs) subj.logs = [];
+
+        subj.logs.unshift({
+          date: formattedDate,
+          lecture: subj.current,
+          timestamp: Date.now(),
+        });
+
+        if (subj.current < (subj.target || 30)) {
+          subj.current += 1;
+        }
+
+        saveQuranPlaylists();
+        renderQuranPlaylists();
+        showToast("Logged Quran progress! 📖");
+      }
+
+      function deleteSelectedQuranPlaylistLogEntry(id, prefix = "qp") {
+        const subj = quranPlaylists.find((s) => s.id === id);
+        if (!subj || !subj.logs) return;
+        const selectEl = document.getElementById(prefix + "LogSelect_" + id);
+        if (!selectEl) return;
+        const index = parseInt(selectEl.value, 10);
+        if (!Number.isFinite(index) || index < 0) return;
+        subj.logs.splice(index, 1);
+        saveQuranPlaylists();
+        renderQuranPlaylists();
+      }
+
+      // --- QURAN PLAYLIST MODAL HANDLERS ---
+      function openQuranPlaylistModal(editId = null) {
+        const modal = document.getElementById("quranPlaylistModal");
+        const modalTitle = document.getElementById("quranPlaylistModalTitle");
+        const editIdInput = document.getElementById("quranPlaylistEditId");
+        const titleInput = document.getElementById("quranPlaylistTitleInput");
+        const targetInput = document.getElementById("quranPlaylistTargetInput");
+        const urlInput = document.getElementById("quranPlaylistUrlInput");
+        const saveBtn = document.getElementById("quranPlaylistSaveBtn");
+
+        if (!modal) return;
+
+        if (editId) {
+          const subj = quranPlaylists.find((s) => s.id === editId);
+          if (subj) {
+            if (editIdInput) editIdInput.value = subj.id;
+            if (modalTitle) modalTitle.textContent = "✏️ Edit Quran Playlist";
+            if (titleInput) titleInput.value = subj.title || "";
+            if (targetInput) targetInput.value = subj.target || 30;
+            if (urlInput) urlInput.value = subj.url || "";
+            if (saveBtn) saveBtn.textContent = "Save Changes";
+          }
+        } else {
+          if (editIdInput) editIdInput.value = "";
+          if (modalTitle) modalTitle.textContent = "📖 Add Quran Playlist / Surah";
+          if (titleInput) titleInput.value = "";
+          if (targetInput) targetInput.value = 30;
+          if (urlInput) urlInput.value = "";
+          if (saveBtn) saveBtn.textContent = "Save Playlist";
+        }
+
+        modal.style.display = "flex";
+        modal.classList.add("show");
+        if (titleInput && typeof titleInput.focus === "function") titleInput.focus();
+      }
+
+      function closeQuranPlaylistModal() {
+        const modal = document.getElementById("quranPlaylistModal");
+        if (modal) {
+          modal.classList.remove("show");
+          modal.style.display = "";
+        }
+      }
+
+      function saveQuranPlaylistItem() {
+        const editIdInput = document.getElementById("quranPlaylistEditId");
+        const titleInput = document.getElementById("quranPlaylistTitleInput");
+        const targetInput = document.getElementById("quranPlaylistTargetInput");
+        const urlInput = document.getElementById("quranPlaylistUrlInput");
+
+        const editId = editIdInput ? editIdInput.value.trim() : "";
+        const title = titleInput ? titleInput.value.trim() : "";
+        const targetVal = targetInput ? parseInt(targetInput.value, 10) : 30;
+        const target = Number.isFinite(targetVal) && targetVal > 0 ? targetVal : 30;
+        const url = urlInput ? urlInput.value.trim() : "";
+
+        if (!title) {
+          showToast("Please enter a playlist / Surah title 📖");
+          if (titleInput && typeof titleInput.focus === "function") titleInput.focus();
+          return;
+        }
+
+        if (editId) {
+          const idx = quranPlaylists.findIndex((s) => s.id === editId);
+          if (idx !== -1) {
+            quranPlaylists[idx] = {
+              ...quranPlaylists[idx],
+              title: title,
+              target: target,
+              url: url,
+            };
+            showToast("Quran playlist updated! 📌");
+          }
+        } else {
+          quranPlaylists.push({
+            id:
+              "qp_" +
+              Date.now() +
+              "_" +
+              Math.random().toString(36).substr(2, 5),
+            title: title,
+            target: target,
+            current: 1,
+            url: url,
+            logs: [],
+          });
+          showToast("New Quran playlist added! ✨");
+        }
+
+        closeQuranPlaylistModal();
+        saveQuranPlaylists();
+        renderQuranPlaylists();
+      }
+
+      function editQuranPlaylist(id) {
+        openQuranPlaylistModal(id);
+      }
+
+      function deleteQuranPlaylist(id) {
+        if (!confirm("Are you sure you want to delete this Quran playlist?")) return;
+        quranPlaylists = quranPlaylists.filter((s) => s.id !== id);
+        saveQuranPlaylists();
+        renderQuranPlaylists();
+        showToast("Quran playlist deleted 🗑️");
+      }
+
+      document
+        .getElementById("quranPlaylistModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeQuranPlaylistModal();
+        });
+
+      window.openQuranPlaylistModal = openQuranPlaylistModal;
+      window.closeQuranPlaylistModal = closeQuranPlaylistModal;
+      window.saveQuranPlaylistItem = saveQuranPlaylistItem;
+      window.editQuranPlaylist = editQuranPlaylist;
+      window.deleteQuranPlaylist = deleteQuranPlaylist;
+      window.loadQuranPlaylists = loadQuranPlaylists;
+      window.renderQuranPlaylists = renderQuranPlaylists;
+      window.setQuranPlaylistLecture = setQuranPlaylistLecture;
+      window.openQuranPlaylistCalendar = openQuranPlaylistCalendar;
+      window.onQuranPlaylistDateChanged = onQuranPlaylistDateChanged;
+      window.addQuranPlaylistLogEntry = addQuranPlaylistLogEntry;
+      window.deleteSelectedQuranPlaylistLogEntry = deleteSelectedQuranPlaylistLogEntry;
 
       function showToast(msg) {
         const toast = document.getElementById("toast");
@@ -23009,6 +23520,7 @@ Please provide:
         try { loadMissingIngredients(); } catch (e) { console.error("Error loading missing ingredients:", e); }
         try { loadZadLecture(); } catch (e) { console.error("Error loading Zad subjects/playlists:", e); }
         try { loadUqLecture(); } catch (e) { console.error("Error loading UQ courses/playlists:", e); }
+        try { loadQuranPlaylists(); } catch (e) { console.error("Error loading Quran playlists:", e); }
         try { loadScheduleStatus(); } catch (e) { console.error("Error loading schedule status:", e); }
         try { loadScheduleHistory(); } catch (e) { console.error("Error loading schedule history:", e); }
         try { loadTrackerDaily(); } catch (e) { console.error("Error loading tracker daily:", e); }
