@@ -16389,17 +16389,201 @@ Please provide:
         await openPdfBufferInReader(buffer, fileName);
       }
 
-      function askAIMathTutor() {
+      function askAIMathTutor(qIndex) {
+        const idx = (typeof qIndex === "number") ? qIndex : mathCurrentIndex;
+        const q = mathCurrentQuestions[idx];
+        if (!q) return;
+
+        const modal = document.getElementById("aiGrammarTutorModal");
+        const body = document.getElementById("aiGrammarModalBody");
+        const titleEl = document.getElementById("aiGrammarModalTitle");
+        if (!modal || !body) return;
+
+        if (titleEl) {
+          titleEl.textContent = `Ask with Gemini: Math Challenge ${idx + 1}`;
+        }
+
+        const initialResult = generateDeepAIMathAnswer(q);
+
+        body.innerHTML = `
+          <!-- Question Display Banner -->
+          <div style="padding: 12px 14px; background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border: 1.5px solid #86efac; border-radius: 12px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 11px; font-weight: 800; color: #065f46; text-transform: uppercase; background: #dcfce7; padding: 2px 8px; border-radius: 6px;">
+                Question ${idx + 1} • ${q.category}
+              </span>
+              <span style="font-size: 11px; font-weight: 800; color: #047857; background: #d1fae5; padding: 2px 8px; border-radius: 6px;">
+                Correct: "${escapeHtml(q.correctAnswerText)}"
+              </span>
+            </div>
+            <div style="font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1.45; margin-top: 4px;">
+              ${escapeHtml(q.question)}
+            </div>
+          </div>
+
+          <!-- Answer From AI -->
+          <div id="aiInAppTutorResponse" style="padding: 14px; background: linear-gradient(135deg, #f0fdf4 0%, #faf5ff 100%); border: 2px solid #10b981; border-radius: 12px; line-height: 1.6; font-size: 13px; color: #1e1b4b; box-shadow: 0 2px 0 var(--ink);">
+            <div style="font-weight: 900; color: #047857; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span>🧮</span>
+                <span id="aiTutorResponseTitle">Gemini AI Answer &amp; Practical Math Breakdown:</span>
+              </div>
+            </div>
+            <div id="aiTutorResponseContent">
+              ${initialResult.html}
+            </div>
+          </div>
+        `;
+
+        modal.style.display = "flex";
+      }
+
+      function generateDeepAIMathAnswer(q) {
+        const cat = q.category || "";
+        let mistakeTrapInfo = "";
+        let examplesList = [];
+        let formulaText = "";
+
+        if (cat.includes("Weight") || cat.includes("Grams")) {
+          formulaText = "Price for X grams = (Price of 1 kg × grams) / 1000";
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Where Learners Make Mistakes (کہاں بار بار غلطی ہوتی ہے؟):</span>
+              </div>
+              <ul style="margin: 0; padding-left: 16px; font-size: 11.5px; color: #881337; line-height: 1.5;">
+                <li><strong>Trap 1 (Conversion Error):</strong> Forgetting that 1 kg = <strong>1000 grams</strong> (not 100g).</li>
+                <li><strong>Trap 2 (Quarter Confusion):</strong> For 250g, some people divide by 2 instead of 4. Remember <strong>250g = 1/4th kg (half of half)</strong>.</li>
+                <li><strong>Quick Tip:</strong> Calculate 100g first (remove one zero from 1 kg price), then multiply by number of hundreds!</li>
+              </ul>
+            </div>
+          `;
+          examplesList = [
+            "<strong>500 grams:</strong> 1 kg chicken Rs. 640 ➔ 500g is half = <strong>Rs. 320</strong>.",
+            "<strong>250 grams:</strong> 1 kg almonds Rs. 1600 ➔ Half (800) ➔ Half again = <strong>Rs. 400</strong>.",
+            "<strong>750 grams:</strong> 1 kg mutton Rs. 1800 ➔ 500g (900) + 250g (450) = <strong>Rs. 1350</strong>."
+          ];
+        } else if (cat.includes("Change") || cat.includes("Cash")) {
+          formulaText = "Change = Currency Note Given - Total Bill Amount";
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Where Learners Make Mistakes (کہاں بار بار غلطی ہوتی ہے؟):</span>
+              </div>
+              <ul style="margin: 0; padding-left: 16px; font-size: 11.5px; color: #881337; line-height: 1.5;">
+                <li><strong>Trap 1 (Borrowing Error in Head):</strong> Traditional subtraction (e.g. 1000 - 345) causes mistakes when borrowing zeros.</li>
+                <li><strong>Counting-Up Solution:</strong> Don't subtract! Count up: 345 ➔ +55 (400) ➔ +600 (1000) = <strong>Rs. 655</strong>.</li>
+              </ul>
+            </div>
+          `;
+          examplesList = [
+            "Bill Rs. 380, Note Rs. 500 ➔ Count up: 380 + 20 (400) + 100 (500) = <strong>Rs. 120 change</strong>.",
+            "Bill Rs. 730, Note Rs. 1000 ➔ Count up: 730 + 70 (800) + 200 (1000) = <strong>Rs. 270 change</strong>.",
+            "Bill Rs. 1450, Note Rs. 2000 ➔ Count up: 1450 + 50 (1500) + 500 (2000) = <strong>Rs. 550 change</strong>."
+          ];
+        } else {
+          formulaText = "Discount Amount = (Original Price × Discount %) / 100 | Final Price = Original - Discount";
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Where Learners Make Mistakes (کہاں بار بار غلطی ہوتی ہے؟):</span>
+              </div>
+              <ul style="margin: 0; padding-left: 16px; font-size: 11.5px; color: #881337; line-height: 1.5;">
+                <li><strong>Trap 1 (Discount vs Final Price):</strong> Answering with the discount amount itself rather than subtracting it to find the final price!</li>
+                <li><strong>Trap 2 (10% Method):</strong> Always find 10% first by dropping the last digit/zero, then double for 20% or halve for 5%!</li>
+              </ul>
+            </div>
+          `;
+          examplesList = [
+            "<strong>10% on Rs. 2400:</strong> 10% is Rs. 240. Final price = 2400 - 240 = <strong>Rs. 2160</strong>.",
+            "<strong>20% on Rs. 1500:</strong> 10% is 150 ➔ 20% is 300. Final price = 1500 - 300 = <strong>Rs. 1200</strong>.",
+            "<strong>25% on Rs. 2000:</strong> 25% is 1/4th (500). Final price = 2000 - 500 = <strong>Rs. 1500</strong>."
+          ];
+        }
+
+        const html = `
+          <!-- Main Direct Answer Card -->
+          <div style="background: #ffffff; border: 1.5px solid #10b981; border-radius: 10px; padding: 12px; margin-bottom: 12px; box-shadow: 0 1.5px 0 var(--ink);">
+            <div style="font-weight: 800; color: #065f46; font-size: 13.5px; margin-bottom: 4px;">
+              🎯 Step-by-Step Calculation:
+            </div>
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
+              ${escapeHtml(q.explanation)}
+            </div>
+          </div>
+
+          <!-- Deep Multi-Section Breakdown -->
+          <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+            
+            <!-- Rule Formula & 3 Examples Card -->
+            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 12px;">
+              <div style="font-weight: 800; color: #15803d; font-size: 12.5px; margin-bottom: 4px; display: flex; align-items: center; gap: 5px;">
+                <span>📐</span>
+                <span>Standard Formula:</span>
+              </div>
+              <div style="font-family: monospace; font-size: 11.5px; font-weight: 700; color: #166534; background: #ffffff; padding: 6px 10px; border-radius: 6px; border: 1px solid #86efac; margin-bottom: 8px;">
+                ${escapeHtml(formulaText)}
+              </div>
+              
+              <div style="font-weight: 800; color: #166534; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <span>💡</span>
+                <span>3 Practice Examples for this Shortcut:</span>
+              </div>
+              <ul style="margin: 0; padding-left: 18px; font-size: 12px; color: #14532d; line-height: 1.6;">
+                ${examplesList.map(ex => `<li>${ex}</li>`).join("")}
+              </ul>
+
+              ${mistakeTrapInfo}
+            </div>
+
+            <!-- Ask Live Gemini Banner -->
+            <div style="display: flex; flex-direction: column; gap: 6px; background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%); border: 1.5px solid #6ee7b7; border-radius: 10px; padding: 10px 12px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 12px; color: #065f46; font-weight: 800;">
+                  🇵🇰 Ask Gemini AI to explain this math calculation in Urdu live:
+                </span>
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  onclick="openGeminiMathTutorLive()"
+                  style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: #ffffff; font-size: 11.5px; padding: 6px 14px; font-weight: 800; border: 1px solid var(--ink); border-radius: 6px; cursor: pointer;"
+                >
+                  <span>Open Gemini (Explain in Urdu)</span> ➔
+                </button>
+              </div>
+              <div style="font-size: 11px; color: #047857; background: #ffffff; border: 1.5px dashed #86efac; border-radius: 8px; padding: 6px 10px; display: flex; flex-direction: column; gap: 3px;">
+                <div style="font-weight: 800; color: #064e3b; display: flex; align-items: center; gap: 4px;">
+                  <span>📋</span>
+                  <span>Prompt is Auto-Copied! How to paste in Gemini:</span>
+                </div>
+                <div style="font-size: 10.5px; color: #374151; line-height: 1.4;">
+                  📱 <strong>Mobile / Phone:</strong> In Gemini, <strong>Tap &amp; Hold (Long Press)</strong> the message box ➔ tap <strong>"Paste"</strong> ➔ tap <strong>Send (➔)</strong>.<br>
+                  💻 <strong>Computer / Laptop:</strong> Simply press <strong>Ctrl + V</strong> &amp; hit <strong>Enter</strong>.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        `;
+
+        return { html };
+      }
+
+      function openGeminiMathTutorLive() {
         const q = mathCurrentQuestions[mathCurrentIndex];
         if (!q) return;
 
-        const promptText = `Please explain the following Practical Math question, calculations, and shortcut tips in detail in Urdu (براہ کرم اس ریاضی کے سوال اور آسان حل کی اردو میں تفصیلی وضاحت فرمائیں):
+        const promptText = `Please explain the following Practical Math calculation, mental shortcuts, and tricks in detail in Urdu (براہ کرم اس ریاضی کے سوال اور آسان حل کی اردو میں تفصیلی وضاحت فرمائیں):
 
 Question: "${q.question}"
+Category: ${q.category}
 Options: ${q.options.map((opt, i) => `${String.fromCharCode(65 + i)}) ${opt}`).join(", ")}
 Correct Answer: "${q.correctAnswerText}"
 Step-by-Step Calculation: "${q.explanation}"
-Easy Shortcut & Trick: "${q.easyTrick}"
+Mental Math Shortcut: "${q.easyTrick}"
 
 Please provide:
 1. Complete Urdu Explanation of the calculation (اردو میں آسان مرحلہ وار وضاحت).
@@ -16429,6 +16613,7 @@ Please provide:
       window.openCurrentMathTestInPdfReader = openCurrentMathTestInPdfReader;
       window.toggleCurrentMathTestReview = toggleCurrentMathTestReview;
       window.askAIMathTutor = askAIMathTutor;
+      window.openGeminiMathTutorLive = openGeminiMathTutorLive;
 
       function goBackToNavigator() {
         switchTab("navigator");
