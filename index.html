@@ -14077,8 +14077,8 @@
         
         const chip1 = isInv ? "What is Subject-Auxiliary Inversion?" : "What is the core grammar rule here?";
         const chip2 = "Explain in Urdu with comparison (اردو میں موازنہ)";
-        const chip3 = "Why are the other options wrong?";
-        const chip4 = "Show Formula & 3 More Examples";
+        const chip3 = "Show Formula & Structure";
+        const chip4 = "Give 3 More Sentence Examples";
 
         body.innerHTML = `
           <!-- Question Display Banner -->
@@ -14105,11 +14105,11 @@
             <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip2.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-weight: 700; border-radius: 6px; cursor: pointer;">
               🇵🇰 ${escapeHtml(chip2)}
             </button>
-            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip3.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; font-weight: 700; border-radius: 6px; cursor: pointer;">
-              ❌ ${escapeHtml(chip3)}
+            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip3.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-weight: 700; border-radius: 6px; cursor: pointer;">
+              📐 ${escapeHtml(chip3)}
             </button>
-            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip4.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-weight: 700; border-radius: 6px; cursor: pointer;">
-              📐 ${escapeHtml(chip4)}
+            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip4.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #fdf4ff; color: #86198f; border: 1px solid #f0abfc; font-weight: 700; border-radius: 6px; cursor: pointer;">
+              💡 ${escapeHtml(chip4)}
             </button>
           </div>
 
@@ -14311,29 +14311,6 @@
           <!-- Deep Multi-Section Breakdown -->
           <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
             
-            <!-- Option-by-Option Breakdown -->
-            <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px;">
-              <div style="font-weight: 800; color: #334155; font-size: 12.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px;">
-                <span>📋</span>
-                <span>Complete Option-by-Option Analysis:</span>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 6px;">
-                ${q.options.map((opt, i) => {
-                  const isCorr = i === q.correctIndex;
-                  return `
-                    <div style="padding: 8px 10px; border-radius: 8px; border: 1.5px solid ${isCorr ? '#86efac' : '#fecdd3'}; background: ${isCorr ? '#f0fdf4' : '#fff1f2'}; font-size: 12px; line-height: 1.45;">
-                      <div style="font-weight: 800; color: ${isCorr ? '#15803d' : '#be123c'}; margin-bottom: 2px;">
-                        Option ${String.fromCharCode(65 + i)}: "${escapeHtml(opt)}" ${isCorr ? '✅ (Correct)' : '❌ (Wrong)'}
-                      </div>
-                      <div style="color: ${isCorr ? '#166534' : '#881337'}; font-size: 11.5px;">
-                        ${getOptionFeedback(opt, isCorr)}
-                      </div>
-                    </div>
-                  `;
-                }).join("")}
-              </div>
-            </div>
-
             <!-- Urdu Explanation Card -->
             <div style="background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 10px; padding: 12px;">
               <div style="font-weight: 800; color: #86198f; font-size: 12.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
