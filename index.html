@@ -14278,11 +14278,11 @@
           `;
         } else {
           directAnswerHtml = `
-            <div style="font-weight: 800; color: #86198f; font-size: 13.5px; margin-bottom: 4px;">
-              🇵🇰 اردو میں گرائمر کی وضاحت:
+            <div style="font-weight: 800; color: #4338ca; font-size: 13.5px; margin-bottom: 4px;">
+              🎯 Core Grammar Principle:
             </div>
-            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.7;">
-              ${defaultUrduBreakdown}
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
+              ${escapeHtml(explanation)}
             </div>
           `;
         }
@@ -14296,20 +14296,6 @@
           <!-- Deep Multi-Section Breakdown -->
           <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
             
-            <!-- Urdu Explanation Card -->
-            <div style="background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 10px; padding: 12px;">
-              <div style="font-weight: 800; color: #86198f; font-size: 12.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
-                <span>🇵🇰</span>
-                <span>اردو گرائمر میں تفصیلی وضاحت (Urdu Breakdown):</span>
-              </div>
-              <div style="font-size: 13px; color: #701a75; font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif; line-height: 1.8; direction: rtl; text-align: right;">
-                ${isInversion ? 
-                  `اس جملے میں صحیح جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ جب بھی انگریزی جملے کا آغاز <em>No sooner</em>، <em>Hardly</em>، یا <em>Scarcely</em> جیسے الفاظ سے ہو تو اس کے فوراً بعد <strong>Subject-Auxiliary Inversion</strong> لاگو ہوتی ہے، یعنی امدادی فعل (had / did) فاعل (she) سے پہلے آ جاتا ہے۔ اردو میں اس کا مفہوم ہے: <em>"وہ گھر پہنچی ہی تھی کہ طوفان شروع ہو گیا۔"</em>` : 
-                  `اس جملے میں درست جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ انگریزی اصول: ${escapeHtml(explanation)}`
-                }
-              </div>
-            </div>
-
             <!-- Rule Formula Card -->
             <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
               <div>
