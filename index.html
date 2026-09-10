@@ -13534,6 +13534,43 @@
         renderEnglishQuestion();
       }
 
+      function formatEnglishQuestionFeedback(q, userIndex, isCorrect) {
+        if (!q) return "";
+        const correctOpt = q.options[q.correctIndex];
+        const userOpt = (userIndex >= 0 && userIndex < q.options.length) ? q.options[userIndex] : "";
+        const qText = (q.question || "").toLowerCase();
+        const exp = q.explanation || "";
+
+        if (isCorrect) {
+          return `<div style="font-size: 13px; line-height: 1.5; color: #166534;">${escapeHtml(exp)}</div>`;
+        }
+
+        // Generate specific error reason for what the user clicked
+        let specificTrapExplanation = "";
+        if (qText.includes("no sooner") || exp.toLowerCase().includes("inversion")) {
+          if (userOpt.startsWith("she had") || userOpt.startsWith("he had") || userOpt.startsWith("they had") || userOpt.startsWith("she ") || userOpt.startsWith("he ")) {
+            specificTrapExplanation = `<strong>⚠️ Where you went wrong:</strong> You chose standard word order (<em>"${escapeHtml(userOpt)}"</em>). After <em>'No sooner'</em>, English strictly requires <strong>Subject-Auxiliary Inversion</strong> (helping verb <em>'had'</em> must come before <em>'she'</em> ➔ <code>had she arrived</code>).`;
+          } else if (userOpt.includes("did") && (userOpt.includes("arrived") || userOpt.includes("went") || userOpt.includes("seen"))) {
+            specificTrapExplanation = `<strong>⚠️ Where you went wrong (Double-Past):</strong> You chose <em>"${escapeHtml(userOpt)}"</em>. The auxiliary <em>'did'</em> already carries the past tense, so it must take the base form <code>arrive</code>, not <code>arrived</code>.`;
+          } else {
+            specificTrapExplanation = `<strong>⚠️ Where you went wrong:</strong> <em>'No sooner'</em> requires inversion: <code>had + Subject + V3</code> (<strong>"${escapeHtml(correctOpt)}"</strong>).`;
+          }
+        } else {
+          specificTrapExplanation = `<strong>⚠️ Where you went wrong:</strong> Choosing <em>"${escapeHtml(userOpt)}"</em> creates a grammatical mismatch. The correct answer is <strong>"${escapeHtml(correctOpt)}"</strong>.`;
+        }
+
+        return `
+          <div style="font-size: 12.5px; line-height: 1.55; color: #881337;">
+            <div style="margin-bottom: 5px; padding: 6px 10px; background: rgba(255,255,255,0.8); border-radius: 6px; border-left: 3px solid #be123c;">
+              ${specificTrapExplanation}
+            </div>
+            <div style="font-size: 12px; color: #334155; margin-top: 3px;">
+              <strong>Rule:</strong> ${escapeHtml(exp)}
+            </div>
+          </div>
+        `;
+      }
+
       function renderEnglishQuestion() {
         const q = engCurrentQuestions[engCurrentIndex];
         if (!q) {
@@ -13580,8 +13617,8 @@
 
           if (feedbackBox && feedbackTitle && feedbackExp) {
             feedbackBox.className = "test-feedback-box " + (previousAnswer.isCorrect ? "correct" : "wrong");
-            feedbackTitle.textContent = previousAnswer.isCorrect ? "🎉 Correct Answer!" : "❌ Incorrect!";
-            feedbackExp.textContent = q.explanation;
+            feedbackTitle.innerHTML = previousAnswer.isCorrect ? "🎉 Correct Answer!" : "❌ Incorrect! (کہاں غلطی ہوئی؟)";
+            feedbackExp.innerHTML = formatEnglishQuestionFeedback(q, previousAnswer.userIndex, previousAnswer.isCorrect);
             feedbackBox.style.display = "block";
           }
 
@@ -13654,8 +13691,8 @@
         const feedbackExp = document.getElementById("engFeedbackExplanation");
         if (feedbackBox && feedbackTitle && feedbackExp) {
           feedbackBox.className = "test-feedback-box " + (isCorrect ? "correct" : "wrong");
-          feedbackTitle.textContent = isCorrect ? "🎉 Correct Answer!" : "❌ Incorrect!";
-          feedbackExp.textContent = q.explanation;
+          feedbackTitle.innerHTML = isCorrect ? "🎉 Correct Answer!" : "❌ Incorrect! (کہاں غلطی ہوئی؟)";
+          feedbackExp.innerHTML = formatEnglishQuestionFeedback(q, index, isCorrect);
           feedbackBox.style.display = "block";
         }
 
