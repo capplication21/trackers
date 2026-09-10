@@ -8825,7 +8825,7 @@
 
             <!-- Mode Tabs -->
             <div class="test-mode-tabs">
-              <button type="button" class="test-mode-tab test-mode-tab-big active" id="mathModeTab-mixed" onclick="setMathTestMode('mixed')">⚡ Mixed Speed Test</button>
+              <button type="button" class="test-mode-tab test-mode-tab-big active" id="mathModeTab-mixed" onclick="setMathTestMode('mixed')">⚡ Mixed 15 Set</button>
               <button type="button" class="test-mode-tab test-mode-tab-small" id="mathModeTab-weight" onclick="setMathTestMode('weight')">⚖️ Grams &amp; Kg</button>
               <button type="button" class="test-mode-tab test-mode-tab-small" id="mathModeTab-change" onclick="setMathTestMode('change')">💵 Cash &amp; Change</button>
               <button type="button" class="test-mode-tab test-mode-tab-small" id="mathModeTab-discount" onclick="setMathTestMode('discount')">🏷️ Discounts %</button>
@@ -8833,44 +8833,118 @@
 
             <!-- Problem Card Box -->
             <div class="test-card-box" id="mathTestCardBox">
-              <div class="test-question-header">
-                <span class="test-q-badge" id="mathQuestionBadge" style="background: #dcfce7; color: #065f46; border-color: #059669;">Scenario Challenge</span>
-                <span class="test-score-badge" id="mathScoreBadge">Correct: 0 / 0</span>
+              <div class="test-question-header" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span class="test-q-badge" id="mathQuestionBadge" style="background: #dcfce7; color: #065f46; border-color: #059669;">Question 1 of 15</span>
+                  <span class="test-score-badge" id="mathScoreBadge" style="background: #ecfdf5; color: #047857; border-color: #10b981;">Score: 0</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                  <button
+                    type="button"
+                    class="pdf-action-btn"
+                    onclick="askAIMathTutor()"
+                    style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: #ffffff; border: 1.5px solid var(--ink); font-size: 11px; padding: 4px 10px; font-weight: 800; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 1.5px 0 var(--ink); cursor: pointer;"
+                    title="Ask Gemini AI Math Tutor about this calculation"
+                  >
+                    <span>✨</span>
+                    <span>Ask with Gemini</span>
+                  </button>
+                </div>
               </div>
 
-              <!-- Scenario Banner -->
-              <div class="math-scenario-banner">
-                <div class="math-scenario-heading" id="mathScenarioTag">Everyday Market Math</div>
-                <div class="math-scenario-story" id="mathScenarioStory">Loading math challenge...</div>
-              </div>
+              <!-- Question Scenario Content -->
+              <div class="test-question-text" id="mathQuestionText" style="margin-top: 10px; line-height: 1.5; font-size: 14.5px;">Loading practical math challenge...</div>
 
               <!-- Multiple Choice Options -->
-              <div class="test-options-grid" id="mathChoicesGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 10px;">
+              <div class="test-options-grid" id="mathChoicesGrid" style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px;">
                 <!-- Choice buttons dynamically rendered -->
               </div>
 
               <!-- Feedback / Explanation Box -->
-              <div class="test-feedback-box" id="mathFeedbackBox">
+              <div class="test-feedback-box" id="mathFeedbackBox" style="display: none; margin-top: 14px;">
                 <div id="mathFeedbackTitle" style="font-weight: 800; margin-bottom: 4px;"></div>
                 <div id="mathFeedbackExplanation"></div>
               </div>
 
-              <!-- Mental Math Shortcut Card -->
-              <div class="math-shortcut-card" id="mathShortcutCard">
-                <div style="font-weight: 800; display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                  <span>⚡</span> Mental Math Shortcut:
+              <!-- Easy Tips & Shortcuts Card -->
+              <div class="math-shortcut-card" id="mathShortcutCard" style="display: none; margin-top: 10px; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 10px 12px;">
+                <div style="font-weight: 800; color: #15803d; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                  <span>💡</span> Easy Solving Shortcuts &amp; Tips (آسان طریقہ اور ٹرکس):
                 </div>
-                <div id="mathShortcutText"></div>
+                <div id="mathShortcutText" style="font-size: 12px; color: #166534; line-height: 1.55;"></div>
               </div>
 
-              <!-- Actions Bar -->
-              <div class="test-actions-bar" style="margin-top: 16px;">
-                <button type="button" class="pdf-action-btn" onclick="generateNewMathProblem()" style="background: #f1f5f9; color: #475569; font-size: 12px; padding: 8px 14px;">
-                  🎲 New Random Problem
+              <!-- Actions Bar with Previous, Next & New 15 Set Buttons -->
+              <div class="test-actions-bar" style="display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 14px; width: 100%; flex-wrap: wrap;">
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  onclick="generateNewMath15Set()"
+                  style="font-size: 11.5px; padding: 6px 12px; background: #f8fafc; color: #475569; border: 1.5px solid #cbd5e1; font-weight: 800; margin-right: auto;"
+                  title="Generate a brand new set of 15 math questions"
+                >
+                  <span>🎲 New 15 Set</span>
                 </button>
-                <button type="button" class="test-main-btn" id="mathNextBtn" onclick="nextMathProblem()" style="background: #0f172a;" disabled>
-                  Next Problem ➔
+                <button
+                  type="button"
+                  class="pdf-action-btn"
+                  id="mathPrevBtn"
+                  onclick="prevMathQuestion()"
+                  style="font-size: 12px; padding: 6px 14px; background: #ffffff; color: var(--ink); border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); font-weight: 800;"
+                  disabled
+                >
+                  <span>◀</span> Previous
                 </button>
+                <button
+                  type="button"
+                  class="test-main-btn"
+                  id="mathNextBtn"
+                  onclick="nextMathQuestion()"
+                  style="background: #059669; border-color: var(--ink); color: #ffffff;"
+                  disabled
+                >
+                  <span>Next</span> <span>➔</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Math Results Summary Screen -->
+            <div class="test-card-box" id="mathResultBox" style="display: none;">
+              <div class="test-result-header" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                <div class="test-result-emoji" id="mathResultEmoji">🏆</div>
+                <div class="test-result-title" id="mathResultTitle">Math Test Complete!</div>
+                <div class="test-result-score" id="mathFinalScore">15 / 15 (100%)</div>
+                <div class="test-result-level" id="mathLevelEval">Practical Mental Math Mastery</div>
+              </div>
+
+              <!-- PDF Actions Toolbar -->
+              <div class="test-pdf-toolbar" style="border-color: #86efac; background: #f0fdf4;">
+                <div class="test-pdf-toolbar-title" style="color: #065f46;">
+                  <span>📥</span> Download &amp; Save Math Practice Materials:
+                </div>
+                <div class="test-pdf-toolbar-btns">
+                  <button type="button" class="pdf-action-btn" onclick="downloadMathTestPdf(false)" style="background: #059669; color: #ffffff; border-color: var(--ink);">
+                    <span>📥</span> Test Paper (PDF)
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="downloadMathTestPdf(true)" style="background: #dcfce7; color: #065f46; border-color: #86efac;">
+                    <span>📝</span> Solutions &amp; Shortcuts (PDF)
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="openCurrentMathTestInPdfReader()" style="background: #ecfdf5; color: #047857; border-color: #6ee7b7;">
+                    <span>📖</span> Open in PDF Reader
+                  </button>
+                  <button type="button" class="pdf-action-btn" onclick="generateNewMath15Set()" style="background: #f8fafc; color: #334155; border-color: #cbd5e1;">
+                    <span>🔄</span> Start New 15 Set
+                  </button>
+                </div>
+              </div>
+
+              <!-- Detailed Review Container -->
+              <div class="eng-current-review-wrap" style="margin-top: 14px;">
+                <button type="button" class="eng-review-toggle-btn" onclick="toggleCurrentMathTestReview()" style="background: #f0fdf4; border-color: #86efac; color: #065f46;">
+                  <span style="font-weight: 800;">📋 Review All 15 Math Questions &amp; Easy Shortcuts</span>
+                  <span id="mathReviewChevron" style="font-size: 13px;">▼</span>
+                </button>
+                <div id="mathCurrentReviewDetails" style="display: none; margin-top: 10px;"></div>
               </div>
             </div>
 
@@ -15786,13 +15860,171 @@ Please provide:
         await openEnglishMistakesInPdfReader(engLastCompletedTestRecord.id);
       }
 
-      // ==================== PRACTICAL MATH TEST ENGINE ====================
+      // ==================== PRACTICAL MATH TEST ENGINE (15-QUESTION SETS WITH SHORTCUTS & PDF) ====================
       let mathTestMode = "mixed";
-      let mathScoreTotal = 0;
-      let mathScoreCorrect = 0;
-      let mathStreak = 0;
-      let currentMathProblem = null;
-      let mathProblemAnswered = false;
+      let mathCurrentQuestions = [];
+      let mathCurrentIndex = 0;
+      let mathUserAnswers = [];
+      let mathScore = 0;
+      let mathAnswered = false;
+      let mathLastCompletedTestRecord = null;
+
+      const MATH_ITEMS_POOL = [
+        { name: "Apples", baseKg: 240 },
+        { name: "Bananas", baseKg: 120 },
+        { name: "Tomatoes", baseKg: 80 },
+        { name: "Chicken", baseKg: 640 },
+        { name: "Almonds", baseKg: 1600 },
+        { name: "Mutton", baseKg: 1800 },
+        { name: "Rice", baseKg: 320 },
+        { name: "Flour", baseKg: 160 },
+        { name: "Sugar", baseKg: 140 },
+        { name: "Grapes", baseKg: 400 },
+        { name: "Pistachios", baseKg: 2800 },
+        { name: "Mangoes", baseKg: 360 }
+      ];
+
+      function generateSingleMathQuestion(type, qId) {
+        if (type === "weight") {
+          const item = MATH_ITEMS_POOL[Math.floor(Math.random() * MATH_ITEMS_POOL.length)];
+          const gramsOptions = [250, 500, 750, 400, 300, 150, 600];
+          const grams = gramsOptions[Math.floor(Math.random() * gramsOptions.length)];
+          const correctVal = Math.round((item.baseKg * grams) / 1000);
+
+          let shortcut = "";
+          let urduTip = "";
+          if (grams === 500) {
+            shortcut = `500g is exactly HALF of 1 kg. Half of Rs. ${item.baseKg} = Rs. ${correctVal}.`;
+            urduTip = `500 گرام آدھا کلو ہوتا ہے، اس لیے 1 کلو کی قیمت (Rs. ${item.baseKg}) کو 2 پر تقسیم کریں: Rs. ${correctVal}`;
+          } else if (grams === 250) {
+            shortcut = `250g is a QUARTER (half of half). Half of Rs. ${item.baseKg} is Rs. ${item.baseKg/2}, and half of that is Rs. ${correctVal}.`;
+            urduTip = `250 گرام کے لیے قیمت کو دو بار آدھا کریں: Rs. ${item.baseKg} ➔ Rs. ${item.baseKg/2} ➔ Rs. ${correctVal}`;
+          } else if (grams === 750) {
+            shortcut = `750g = 500g (Rs. ${item.baseKg/2}) + 250g (Rs. ${item.baseKg/4}) = Rs. ${correctVal}.`;
+            urduTip = `750 گرام = آدھا کلو (Rs. ${item.baseKg/2}) + پاؤ (Rs. ${item.baseKg/4}) = Rs. ${correctVal}`;
+          } else {
+            shortcut = `100g costs Rs. ${item.baseKg/10}. Multiply by ${grams/100} = Rs. ${correctVal}.`;
+            urduTip = `پہلے 100 گرام کی قیمت نکالیں (Rs. ${item.baseKg/10})، پھر اسے ${grams/100} سے ضرب دیں = Rs. ${correctVal}`;
+          }
+
+          const deltas = [-30, -10, 10, 20, 40, -40].sort(() => Math.random() - 0.5);
+          const rawChoices = [correctVal];
+          for (let d of deltas) {
+            const fake = correctVal + d;
+            if (fake > 0 && !rawChoices.includes(fake)) {
+              rawChoices.push(fake);
+              if (rawChoices.length === 4) break;
+            }
+          }
+          rawChoices.sort(() => Math.random() - 0.5);
+
+          return {
+            id: qId,
+            category: "Grams & Weight",
+            question: `At the market, 1 kg of ${item.name} costs Rs. ${item.baseKg}. You buy exactly ${grams} grams. How much should you pay?`,
+            options: rawChoices.map(c => `Rs. ${c}`),
+            correctIndex: rawChoices.indexOf(correctVal),
+            correctAnswerText: `Rs. ${correctVal}`,
+            explanation: `1 kg (1000g) = Rs. ${item.baseKg}. For ${grams}g: (${item.baseKg} × ${grams}) / 1000 = Rs. ${correctVal}.`,
+            easyTrick: `${shortcut}\n🇵🇰 ${urduTip}`
+          };
+        } else if (type === "change") {
+          const notes = [500, 1000, 2000, 5000];
+          const note = notes[Math.floor(Math.random() * notes.length)];
+          const bill = Math.floor(Math.random() * (note - 60) / 10) * 10 + (Math.random() > 0.5 ? 5 : 0);
+          const correctVal = note - bill;
+
+          const roundTen = 10 - (bill % 10);
+          const nextHundred = Math.ceil(bill / 100) * 100;
+          const diffToHundred = nextHundred - bill;
+
+          const shortcut = `Counting-Up Hack: Start from Rs. ${bill} ➔ add Rs. ${diffToHundred} to reach Rs. ${nextHundred} ➔ then count up to Rs. ${note} (+Rs. ${note - nextHundred}). Total change = Rs. ${correctVal}.`;
+          const urduTip = `گنتی آگے بڑھانے کا طریقہ: Rs. ${bill} میں ${diffToHundred} ڈال کر ${nextHundred} بنائیں، پھر ${note} تک باقی رقم گنیں = Rs. ${correctVal}`;
+
+          const deltas = [-50, -20, 10, 20, 50, -10].sort(() => Math.random() - 0.5);
+          const rawChoices = [correctVal];
+          for (let d of deltas) {
+            const fake = correctVal + d;
+            if (fake > 0 && !rawChoices.includes(fake)) {
+              rawChoices.push(fake);
+              if (rawChoices.length === 4) break;
+            }
+          }
+          rawChoices.sort(() => Math.random() - 0.5);
+
+          return {
+            id: qId,
+            category: "Cash & Change",
+            question: `Your total shopping bill is Rs. ${bill}. You hand the cashier a Rs. ${note} currency note. Exactly how much change should you receive?`,
+            options: rawChoices.map(c => `Rs. ${c}`),
+            correctIndex: rawChoices.indexOf(correctVal),
+            correctAnswerText: `Rs. ${correctVal}`,
+            explanation: `Change = Note - Bill = Rs. ${note} - Rs. ${bill} = Rs. ${correctVal}.`,
+            easyTrick: `${shortcut}\n🇵🇰 ${urduTip}`
+          };
+        } else {
+          const discounts = [10, 15, 20, 25, 30, 50];
+          const prices = [600, 800, 1200, 1500, 1600, 2000, 2400, 3000, 4000];
+          const discount = discounts[Math.floor(Math.random() * discounts.length)];
+          const price = prices[Math.floor(Math.random() * prices.length)];
+          const discountAmt = Math.round((price * discount) / 100);
+          const correctVal = price - discountAmt;
+
+          let shortcut = "";
+          let urduTip = "";
+          if (discount === 10) {
+            shortcut = `10% Shortcut: Just drop the last zero from Rs. ${price} = Rs. ${discountAmt} discount. Net price = Rs. ${correctVal}.`;
+            urduTip = `10% معلوم کرنے کے لیے قیمت کے آخر سے ایک صفر ہٹا دیں (Rs. ${discountAmt})، پھر تفریق کریں = Rs. ${correctVal}`;
+          } else if (discount === 20) {
+            shortcut = `20% Shortcut: 10% is Rs. ${price/10}. Double it = Rs. ${discountAmt} discount. Net price = Rs. ${correctVal}.`;
+            urduTip = `10% نکال کر (Rs. ${price/10}) اسے ڈبل کریں (Rs. ${discountAmt}) = Rs. ${correctVal}`;
+          } else if (discount === 50) {
+            shortcut = `50% is simply HALF of Rs. ${price} = Rs. ${correctVal}.`;
+            urduTip = `50% کا مطلب آدھی قیمت ہے = Rs. ${correctVal}`;
+          } else if (discount === 25) {
+            shortcut = `25% is a QUARTER (half of half). Quarter of Rs. ${price} = Rs. ${discountAmt}. Net price = Rs. ${correctVal}.`;
+            urduTip = `25% نکالنے کے لیے قیمت کو 4 پر تقسیم کریں (Rs. ${discountAmt})، باقی رقم = Rs. ${correctVal}`;
+          } else {
+            shortcut = `10% is Rs. ${price/10}, 5% is Rs. ${price/20}. Total discount = Rs. ${discountAmt}. Net price = Rs. ${correctVal}.`;
+            urduTip = `10% اور 5% کو جمع کر کے کل رعایت نکالیں (Rs. ${discountAmt}) = Rs. ${correctVal}`;
+          }
+
+          const deltas = [-100, -50, 50, 100, 200, -200].sort(() => Math.random() - 0.5);
+          const rawChoices = [correctVal];
+          for (let d of deltas) {
+            const fake = correctVal + d;
+            if (fake > 0 && !rawChoices.includes(fake)) {
+              rawChoices.push(fake);
+              if (rawChoices.length === 4) break;
+            }
+          }
+          rawChoices.sort(() => Math.random() - 0.5);
+
+          return {
+            id: qId,
+            category: "Discounts %",
+            question: `A dress tagged at Rs. ${price} is on sale with a special ${discount}% store discount. What is the final price you will pay?`,
+            options: rawChoices.map(c => `Rs. ${c}`),
+            correctIndex: rawChoices.indexOf(correctVal),
+            correctAnswerText: `Rs. ${correctVal}`,
+            explanation: `Discount = ${discount}% of Rs. ${price} = Rs. ${discountAmt}. Final Price = Rs. ${price} - Rs. ${discountAmt} = Rs. ${correctVal}.`,
+            easyTrick: `${shortcut}\n🇵🇰 ${urduTip}`
+          };
+        }
+      }
+
+      function generateMathQuestionsSet(mode = "mixed", count = 15) {
+        const list = [];
+        for (let i = 0; i < count; i++) {
+          let type = mode;
+          if (type === "mixed") {
+            const types = ["weight", "change", "discount"];
+            type = types[i % types.length];
+          }
+          list.push(generateSingleMathQuestion(type, i + 1));
+        }
+        return list;
+      }
 
       function initMathTest() {
         setMathTestMode("mixed");
@@ -15804,364 +16036,399 @@ Please provide:
         document.querySelectorAll(".test-mode-tab[id^='mathModeTab']").forEach(t => t.classList.remove("active"));
         const tab = document.getElementById("mathModeTab-" + mathTestMode);
         if (tab) tab.classList.add("active");
-        generateNewMathProblem();
+        generateNewMath15Set();
       }
 
-      function generateNewMathProblem() {
-        mathProblemAnswered = false;
-        const input = document.getElementById("mathAnswerInput");
-        if (input) {
-          input.value = "";
-          input.disabled = false;
-          input.focus();
-        }
+      function generateNewMath15Set() {
+        mathCurrentQuestions = generateMathQuestionsSet(mathTestMode, 15);
+        mathCurrentIndex = 0;
+        mathUserAnswers = new Array(15).fill(null);
+        mathScore = 0;
+        mathAnswered = false;
 
-        const feedbackBox = document.getElementById("mathFeedbackBox");
-        if (feedbackBox) feedbackBox.style.display = "none";
-        const shortcutCard = document.getElementById("mathShortcutCard");
-        if (shortcutCard) shortcutCard.style.display = "none";
+        const cardBox = document.getElementById("mathTestCardBox");
+        const resultBox = document.getElementById("mathResultBox");
+        if (cardBox) cardBox.style.display = "block";
+        if (resultBox) resultBox.style.display = "none";
 
-        const submitBtn = document.getElementById("mathSubmitBtn");
-        if (submitBtn) submitBtn.disabled = false;
-        const nextBtn = document.getElementById("mathNextBtn");
-        if (nextBtn) nextBtn.disabled = true;
-
-        let type = mathTestMode;
-        if (type === "mixed") {
-          const types = ["weight", "change", "discount"];
-          type = types[Math.floor(Math.random() * types.length)];
-        }
-
-        if (type === "weight") {
-          const items = [
-            { name: "Apples", baseKg: 240 },
-            { name: "Bananas", baseKg: 120 },
-            { name: "Tomatoes", baseKg: 80 },
-            { name: "Chicken", baseKg: 640 },
-            { name: "Almonds", baseKg: 1200 },
-            { name: "Mutton", baseKg: 1600 }
-          ];
-          const gramsOptions = [250, 500, 750, 400, 300, 150];
-          const item = items[Math.floor(Math.random() * items.length)];
-          const grams = gramsOptions[Math.floor(Math.random() * gramsOptions.length)];
-          const correctVal = Math.round((item.baseKg * grams) / 1000);
-
-          currentMathProblem = {
-            tag: "⚖️ Grams to Kg Calculation",
-            story: `At the market, 1 kg of ${item.name} costs Rs. ${item.baseKg}. You buy exactly ${grams} grams. How much should you pay?`,
-            correctAnswer: correctVal,
-            shortcut: `Mental Trick: ${grams === 500 ? 'Half of Rs. ' + item.baseKg + ' = Rs. ' + correctVal : grams === 250 ? 'Quarter (half of half) of Rs. ' + item.baseKg + ' = Rs. ' + correctVal : grams === 750 ? '500g (half = ' + (item.baseKg/2) + ') + 250g (quarter = ' + (item.baseKg/4) + ') = Rs. ' + correctVal : '100g costs Rs. ' + (item.baseKg/10) + '. Multiply by ' + (grams/100) + ' = Rs. ' + correctVal}.`
-          };
-        } else if (type === "change") {
-          const notes = [500, 1000, 2000];
-          const note = notes[Math.floor(Math.random() * notes.length)];
-          const bill = Math.floor(Math.random() * (note - 50) / 10) * 10 + (Math.random() > 0.5 ? 5 : 0);
-          const correctVal = note - bill;
-
-          currentMathProblem = {
-            tag: "💵 Cash Counter Change",
-            story: `Your grocery bill is Rs. ${bill}. You hand the cashier a Rs. ${note} currency note. Exactly how much change should you receive?`,
-            correctAnswer: correctVal,
-            shortcut: `Counting-up Hack: From Rs. ${bill}, add ${100 - (bill % 100)} to reach Rs. ${Math.ceil(bill/100)*100}. Then count up to Rs. ${note}. Total change = Rs. ${correctVal}.`
-          };
-        } else {
-          const discounts = [10, 15, 20, 25, 30, 50];
-          const prices = [600, 800, 1200, 1500, 2000, 2400, 3000];
-          const discount = discounts[Math.floor(Math.random() * discounts.length)];
-          const price = prices[Math.floor(Math.random() * prices.length)];
-          const discountAmt = Math.round((price * discount) / 100);
-          const correctVal = price - discountAmt;
-
-          currentMathProblem = {
-            tag: "🏷️ Sales Discount Calculation",
-            story: `A garment with an original tag of Rs. ${price} has a special ${discount}% store discount. What is the final price after discount?`,
-            correctAnswer: correctVal,
-            shortcut: `Percentage Hack: 10% of Rs. ${price} is Rs. ${price / 10}. ${discount === 20 ? 'Double that for 20% = Rs. ' + discountAmt : discount === 15 ? 'Add half for 15% (Rs. ' + (price/10) + ' + ' + (price/20) + ' = Rs. ' + discountAmt + ')' : discount === 25 ? 'Quarter of Rs. ' + price + ' = Rs. ' + discountAmt : 'Discount = Rs. ' + discountAmt}. Subtract from Rs. ${price} = Rs. ${correctVal}.`
-          };
-        }
-
-        const tagEl = document.getElementById("mathScenarioTag");
-        const storyEl = document.getElementById("mathScenarioStory");
-        if (tagEl) tagEl.textContent = currentMathProblem.tag;
-        if (storyEl) storyEl.textContent = currentMathProblem.story;
-
-        const correct = currentMathProblem.correctAnswer;
-        const deltas = [-30, -10, 10, 20, 50, -50].sort(() => Math.random() - 0.5);
-        const choices = [correct];
-        for (let d of deltas) {
-          const fake = correct + d;
-          if (fake > 0 && !choices.includes(fake)) {
-            choices.push(fake);
-            if (choices.length === 4) break;
-          }
-        }
-        choices.sort(() => Math.random() - 0.5);
-
-        const choicesGrid = document.getElementById("mathChoicesGrid");
-        if (choicesGrid) {
-          choicesGrid.innerHTML = choices.map(c => `
-            <button type="button" class="test-option-btn" style="padding: 10px 12px; font-size: 13px;" onclick="submitMathAnswer(${c})">
-              <span>👉 Rs. <strong>${c}</strong></span>
-            </button>
-          `).join("");
-        }
+        renderMathQuestion();
       }
 
-      function submitMathAnswer(customVal) {
-        if (mathProblemAnswered || !currentMathProblem) return;
-
-        let userVal;
-        if (typeof customVal === "number") {
-          userVal = customVal;
-          const input = document.getElementById("mathAnswerInput");
-          if (input) input.value = customVal;
-        } else {
-          const input = document.getElementById("mathAnswerInput");
-          userVal = parseFloat(input ? input.value : "");
-        }
-
-        if (isNaN(userVal)) {
-          showToast("Please enter or tap an answer value");
+      function renderMathQuestion() {
+        const q = mathCurrentQuestions[mathCurrentIndex];
+        if (!q) {
+          showMathResults();
           return;
         }
 
-        mathProblemAnswered = true;
-        mathScoreTotal++;
+        const badge = document.getElementById("mathQuestionBadge");
+        const scoreBadge = document.getElementById("mathScoreBadge");
+        const qText = document.getElementById("mathQuestionText");
+        const choicesGrid = document.getElementById("mathChoicesGrid");
+        const feedbackBox = document.getElementById("mathFeedbackBox");
+        const feedbackTitle = document.getElementById("mathFeedbackTitle");
+        const feedbackExp = document.getElementById("mathFeedbackExplanation");
+        const shortcutCard = document.getElementById("mathShortcutCard");
+        const shortcutText = document.getElementById("mathShortcutText");
+        const nextBtn = document.getElementById("mathNextBtn");
+        const prevBtn = document.getElementById("mathPrevBtn");
 
-        const isCorrect = Math.abs(userVal - currentMathProblem.correctAnswer) < 1;
-        if (isCorrect) {
-          mathScoreCorrect++;
-          mathStreak++;
+        if (badge) badge.textContent = `Question ${mathCurrentIndex + 1} of ${mathCurrentQuestions.length} • ${q.category}`;
+        if (scoreBadge) scoreBadge.textContent = `Score: ${mathScore}`;
+        if (qText) qText.textContent = q.question;
+        if (prevBtn) prevBtn.disabled = mathCurrentIndex === 0;
+
+        const previousAnswer = mathUserAnswers[mathCurrentIndex];
+
+        if (previousAnswer) {
+          mathAnswered = true;
+          if (choicesGrid) {
+            choicesGrid.innerHTML = q.options.map((opt, i) => {
+              let optClass = "test-option-btn";
+              if (i === q.correctIndex) optClass += " correct";
+              else if (i === previousAnswer.userIndex) optClass += " wrong";
+              return `
+                <button type="button" class="${optClass}" id="mathOpt-${i}" disabled style="padding: 10px 12px; font-size: 13.5px;">
+                  <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#dcfce7; font-size:12px; font-weight:800; color:#065f46;">
+                    ${String.fromCharCode(65 + i)}
+                  </span>
+                  <span>${escapeHtml(opt)}</span>
+                </button>
+              `;
+            }).join("");
+          }
+
+          if (feedbackBox && feedbackTitle && feedbackExp) {
+            feedbackBox.className = "test-feedback-box " + (previousAnswer.isCorrect ? "correct" : "wrong");
+            feedbackTitle.innerHTML = previousAnswer.isCorrect ? "🎉 Correct Calculation!" : "❌ Incorrect Calculation!";
+            feedbackExp.innerHTML = `<strong>Answer:</strong> ${escapeHtml(q.correctAnswerText)}<br><span style="font-size: 12px; color: #475569;">${escapeHtml(q.explanation)}</span>`;
+            feedbackBox.style.display = "block";
+          }
+
+          if (shortcutCard && shortcutText) {
+            shortcutText.innerHTML = q.easyTrick.replace(/\n/g, "<br>");
+            shortcutCard.style.display = "block";
+          }
+
+          if (nextBtn) {
+            nextBtn.disabled = false;
+            nextBtn.innerHTML = mathCurrentIndex === mathCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 13px;">🏁</span>' : '<span>Next</span> <span style="font-size: 13px;">➔</span>';
+          }
         } else {
-          mathStreak = 0;
+          mathAnswered = false;
+          if (feedbackBox) feedbackBox.style.display = "none";
+          if (shortcutCard) shortcutCard.style.display = "none";
+
+          if (nextBtn) {
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = mathCurrentIndex === mathCurrentQuestions.length - 1 ? '<span>Finish Test</span> <span style="font-size: 13px;">🏁</span>' : '<span>Next</span> <span style="font-size: 13px;">➔</span>';
+          }
+
+          if (choicesGrid) {
+            choicesGrid.innerHTML = q.options.map((opt, i) => `
+              <button type="button" class="test-option-btn" id="mathOpt-${i}" onclick="selectMathOption(${i})" style="padding: 10px 12px; font-size: 13.5px;">
+                <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#dcfce7; font-size:12px; font-weight:800; color:#065f46;">
+                  ${String.fromCharCode(65 + i)}
+                </span>
+                <span>${escapeHtml(opt)}</span>
+              </button>
+            `).join("");
+          }
         }
+      }
+
+      function selectMathOption(index) {
+        if (mathAnswered) return;
+        mathAnswered = true;
+
+        const q = mathCurrentQuestions[mathCurrentIndex];
+        const isCorrect = index === q.correctIndex;
+
+        mathUserAnswers[mathCurrentIndex] = {
+          qIndex: mathCurrentIndex + 1,
+          category: q.category,
+          question: q.question,
+          options: q.options,
+          userIndex: index,
+          userText: q.options[index],
+          correctIndex: q.correctIndex,
+          correctText: q.options[q.correctIndex],
+          isCorrect: isCorrect,
+          explanation: q.explanation,
+          easyTrick: q.easyTrick
+        };
+
+        mathScore = mathUserAnswers.filter(a => a && a.isCorrect).length;
 
         const scoreBadge = document.getElementById("mathScoreBadge");
-        if (scoreBadge) scoreBadge.textContent = `Correct: ${mathScoreCorrect} / ${mathScoreTotal}`;
-        const streakBadge = document.getElementById("mathOverallStreak");
-        if (streakBadge) streakBadge.textContent = `🔥 Streak: ${mathStreak}`;
+        if (scoreBadge) scoreBadge.textContent = `Score: ${mathScore}`;
 
-        const input = document.getElementById("mathAnswerInput");
-        if (input) input.disabled = true;
-        const submitBtn = document.getElementById("mathSubmitBtn");
-        if (submitBtn) submitBtn.disabled = true;
-        const nextBtn = document.getElementById("mathNextBtn");
-        if (nextBtn) nextBtn.disabled = false;
+        q.options.forEach((_, i) => {
+          const btn = document.getElementById("mathOpt-" + i);
+          if (!btn) return;
+          btn.disabled = true;
+          if (i === q.correctIndex) {
+            btn.classList.add("correct");
+          } else if (i === index) {
+            btn.classList.add("wrong");
+          }
+        });
 
         const feedbackBox = document.getElementById("mathFeedbackBox");
         const feedbackTitle = document.getElementById("mathFeedbackTitle");
         const feedbackExp = document.getElementById("mathFeedbackExplanation");
         if (feedbackBox && feedbackTitle && feedbackExp) {
           feedbackBox.className = "test-feedback-box " + (isCorrect ? "correct" : "wrong");
-          feedbackTitle.textContent = isCorrect ? "🎉 Correct Calculation!" : "❌ Not Quite Right!";
-          feedbackExp.textContent = isCorrect
-            ? `Exact answer is Rs. ${currentMathProblem.correctAnswer}.`
-            : `Your answer was Rs. ${userVal}. The correct amount is Rs. ${currentMathProblem.correctAnswer}.`;
+          feedbackTitle.innerHTML = isCorrect ? "🎉 Correct Calculation!" : "❌ Incorrect Calculation! (کہاں غلطی ہوئی؟)";
+          feedbackExp.innerHTML = `
+            <div style="font-size: 13px; line-height: 1.5; color: ${isCorrect ? '#166534' : '#881337'};">
+              ${isCorrect ? `<strong>Exact amount:</strong> ${escapeHtml(q.correctAnswerText)}` : `<strong>Where you went wrong:</strong> You chose <em>${escapeHtml(q.options[index])}</em>. Correct answer is <strong>${escapeHtml(q.correctAnswerText)}</strong>.`}
+            </div>
+            <div style="font-size: 12px; color: #334155; margin-top: 3px;">
+              <strong>Calculation:</strong> ${escapeHtml(q.explanation)}
+            </div>
+          `;
           feedbackBox.style.display = "block";
         }
 
         const shortcutCard = document.getElementById("mathShortcutCard");
         const shortcutText = document.getElementById("mathShortcutText");
         if (shortcutCard && shortcutText) {
-          shortcutText.textContent = currentMathProblem.shortcut;
+          shortcutText.innerHTML = q.easyTrick.replace(/\n/g, "<br>");
           shortcutCard.style.display = "block";
         }
 
-        // Record problem into persistent Math History
-        const mathRecord = {
-          id: "math_" + Date.now(),
+        const nextBtn = document.getElementById("mathNextBtn");
+        if (nextBtn) nextBtn.disabled = false;
+      }
+
+      function prevMathQuestion() {
+        if (mathCurrentIndex > 0) {
+          mathCurrentIndex--;
+          renderMathQuestion();
+        }
+      }
+
+      function nextMathQuestion() {
+        if (mathCurrentIndex < mathCurrentQuestions.length - 1) {
+          mathCurrentIndex++;
+          renderMathQuestion();
+        } else {
+          showMathResults();
+        }
+      }
+
+      function showMathResults() {
+        const cardBox = document.getElementById("mathTestCardBox");
+        const resultBox = document.getElementById("mathResultBox");
+        if (cardBox) cardBox.style.display = "none";
+        if (resultBox) resultBox.style.display = "block";
+
+        const total = mathCurrentQuestions.length;
+        const pct = Math.round((mathScore / total) * 100);
+
+        const scoreEl = document.getElementById("mathFinalScore");
+        const emojiEl = document.getElementById("mathResultEmoji");
+        const titleEl = document.getElementById("mathResultTitle");
+        const evalEl = document.getElementById("mathLevelEval");
+
+        if (scoreEl) scoreEl.textContent = `${mathScore} / ${total} (${pct}%)`;
+
+        let evalText = "";
+        if (pct >= 85) {
+          if (emojiEl) emojiEl.textContent = "🏆";
+          if (titleEl) titleEl.textContent = "Outstanding Mental Math!";
+          evalText = "Level: Practical Math Genius! You can calculate discounts, change, and market weight instantly in your head!";
+        } else if (pct >= 65) {
+          if (emojiEl) emojiEl.textContent = "🎯";
+          if (titleEl) titleEl.textContent = "Great Calculation Speed!";
+          evalText = "Level: Solid Daily Math Competence. You handle routine percentages and cash change with high accuracy!";
+        } else {
+          if (emojiEl) emojiEl.textContent = "💪";
+          if (titleEl) titleEl.textContent = "Keep Practicing Shortcuts!";
+          evalText = "Level: Practice Shortcuts. Use the 'Half of Half' and 'Drop zero for 10%' tricks to calculate faster!";
+        }
+        if (evalEl) evalEl.textContent = evalText;
+
+        const testRecord = {
+          id: "math_test_" + Date.now(),
           timestamp: Date.now(),
-          dateStr: new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }),
+          dateStr: new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" }),
           timeStr: new Date().toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
-          tag: currentMathProblem.tag,
-          story: currentMathProblem.story,
-          userAnswer: "Rs. " + userVal,
-          correctAnswer: "Rs. " + currentMathProblem.correctAnswer,
-          isCorrect: isCorrect,
-          shortcut: currentMathProblem.shortcut
+          score: mathScore,
+          total: total,
+          percentage: pct,
+          levelEval: evalText,
+          mode: mathTestMode,
+          answers: [...mathUserAnswers]
         };
-        saveMathProblemToHistory(mathRecord);
+
+        mathLastCompletedTestRecord = testRecord;
+        saveMathProblemToHistory({
+          id: testRecord.id,
+          timestamp: testRecord.timestamp,
+          dateStr: testRecord.dateStr,
+          timeStr: testRecord.timeStr,
+          tag: `15-Set (${mathTestMode})`,
+          story: `Completed 15 Practical Math Challenges with ${pct}% score`,
+          userAnswer: `${mathScore}/${total}`,
+          correctAnswer: "15/15",
+          isCorrect: pct >= 70,
+          shortcut: evalText
+        });
         renderMathTestHistory();
+        prepareCurrentMathTestReview(testRecord);
       }
 
-      function nextMathProblem() {
-        generateNewMathProblem();
-      }
+      function prepareCurrentMathTestReview(record) {
+        const container = document.getElementById("mathCurrentReviewDetails");
+        if (!container || !record || !record.answers) return;
 
-      // ==================== MATH TEST HISTORY & PDF ENGINE ====================
-      function saveMathProblemToHistory(record) {
-        try {
-          const raw = localStorage.getItem("bushra_math_test_history");
-          let list = raw ? JSON.parse(raw) : [];
-          if (!Array.isArray(list)) list = [];
-          list.unshift(record);
-          if (list.length > 50) list = list.slice(0, 50);
-          localStorage.setItem("bushra_math_test_history", JSON.stringify(list));
-        } catch (e) {
-          console.error("Failed to save math history:", e);
-        }
-      }
-
-      function renderMathTestHistory() {
-        const badge = document.getElementById("mathHistoryCountBadge");
-        const container = document.getElementById("mathHistoryListContainer");
-        if (!container) return;
-
-        let list = [];
-        try {
-          const raw = localStorage.getItem("bushra_math_test_history");
-          if (raw) list = JSON.parse(raw);
-        } catch (e) {}
-
-        if (!Array.isArray(list)) list = [];
-
-        if (badge) {
-          badge.textContent = `${list.length} Challenge${list.length === 1 ? "" : "s"}`;
-        }
-
-        if (list.length === 0) {
-          container.innerHTML = `
-            <div style="text-align: center; padding: 20px 14px; color: #64748b; font-size: 12.5px; background: #f8fafc; border-radius: 12px; border: 1.5px dashed #cbd5e1;">
-              <div style="font-size: 24px; margin-bottom: 4px;">🧮</div>
-              <div style="font-weight: 700; color: #334155; margin-bottom: 2px;">No Math Practice History Yet</div>
-              <div>Solve calculations above to record your answers, mistakes &amp; mental shortcuts!</div>
-            </div>
-          `;
-          return;
-        }
-
-        container.innerHTML = list.map((item, idx) => {
-          const isCorrect = !!item.isCorrect;
-          return `
-            <div class="eng-history-item" id="mathHistoryCard-${item.id || idx}">
-              <div class="eng-history-header-row">
-                <div>
-                  <div class="eng-history-date">📅 ${item.dateStr || "Today"} • ${item.timeStr || ""}</div>
-                  <div style="font-size: 11.5px; font-weight: 800; color: #059669; margin-top: 2px;">
-                    ${escapeHtml(item.tag || "Math Challenge")}
-                  </div>
-                </div>
-                <div class="eng-history-pills">
-                  <span class="eng-score-tag ${isCorrect ? 'high' : 'low'}">
-                    ${isCorrect ? '✅ Correct' : '❌ Wrong'}
+        container.innerHTML = `
+          <div style="font-weight: 800; font-size: 13.5px; margin-bottom: 8px; color: #064e3b;">
+            Detailed Questions &amp; Easy Shortcuts Breakdown:
+          </div>
+          <div class="eng-review-list">
+            ${record.answers.map((a, idx) => `
+              <div class="eng-review-item ${a && a.isCorrect ? 'is-correct' : 'is-wrong'}">
+                <div class="eng-review-q-title">
+                  <span>Q${idx + 1}. ${escapeHtml(a ? a.question : "Question")}</span>
+                  <span class="eng-score-tag ${a && a.isCorrect ? 'high' : 'low'}" style="font-size:10.5px;">
+                    ${a && a.isCorrect ? '✅ Correct' : '❌ Wrong'}
                   </span>
-                  <button type="button" class="pdf-action-btn" onclick="openMathMistakesInPdfReader('${item.id || idx}')" style="font-size: 11px; padding: 4px 8px; background: #dcfce7; color: #065f46; border: 1.5px solid #86efac; font-weight: 800;" title="Open this math challenge in PDF Reader">
-                    📄 PDF
-                  </button>
-                  <button type="button" class="pdf-action-btn" onclick="toggleMathHistoryItem('${item.id || idx}')" style="font-size: 11px; padding: 4px 9px; background: #f8fafc; border: 1.5px solid var(--ink); font-weight: 800;">
-                    Review ▼
-                  </button>
                 </div>
-              </div>
-
-              <!-- Collapsible Details -->
-              <div id="mathHistoryReview-${item.id || idx}" class="eng-review-list" style="display: none;">
-                <div class="eng-review-item ${isCorrect ? 'is-correct' : 'is-wrong'}">
-                  <div style="font-weight: 800; color: #0f172a; margin-bottom: 6px;">
-                    Scenario: ${escapeHtml(item.story || "")}
-                  </div>
+                <div class="eng-review-ans-row">
+                  <span style="font-weight:700; color: ${a && a.isCorrect ? '#15803d' : '#b91c1c'};">Your Calculation:</span>
+                  <span>${escapeHtml(a ? (a.userText || "None") : "None")}</span>
+                </div>
+                ${a && !a.isCorrect ? `
                   <div class="eng-review-ans-row">
-                    <span style="font-weight: 700; color: ${isCorrect ? '#15803d' : '#b91c1c'};">Your Calculation:</span>
-                    <span>${escapeHtml(item.userAnswer || "")}</span>
+                    <span style="font-weight:700; color:#15803d;">Correct Amount:</span>
+                    <span style="font-weight:700; color:#15803d;">${escapeHtml(a.correctText)}</span>
                   </div>
-                  ${!isCorrect ? `
-                    <div class="eng-review-ans-row">
-                      <span style="font-weight: 700; color: #15803d;">Correct Amount:</span>
-                      <span style="font-weight: 700; color: #15803d;">${escapeHtml(item.correctAnswer || "")}</span>
-                    </div>
-                  ` : ''}
-                  <div class="eng-review-explanation">
-                    <strong>⚡ Mental Shortcut:</strong> ${escapeHtml(item.shortcut || "")}
-                  </div>
+                ` : ''}
+                <div class="eng-review-explanation" style="background:#f0fdf4; border-color:#86efac; color:#166534;">
+                  <strong>💡 Easy Solving Shortcut:</strong><br>
+                  ${escapeHtml(a ? a.easyTrick : "").replace(/\n/g, "<br>")}
                 </div>
               </div>
-            </div>
-          `;
-        }).join("");
+            `).join("")}
+          </div>
+        `;
       }
 
-      function toggleMathHistoryItem(id) {
-        const el = document.getElementById("mathHistoryReview-" + id);
-        if (!el) return;
-        el.style.display = el.style.display === "none" || !el.style.display ? "flex" : "none";
+      function toggleCurrentMathTestReview() {
+        const container = document.getElementById("mathCurrentReviewDetails");
+        const chevron = document.getElementById("mathReviewChevron");
+        if (!container) return;
+        const isHidden = container.style.display === "none" || !container.style.display;
+        container.style.display = isHidden ? "block" : "none";
+        if (chevron) chevron.textContent = isHidden ? "▲" : "▼";
       }
 
-      function clearMathTestHistory() {
-        if (!confirm("Are you sure you want to clear your Math Test history?")) return;
-        localStorage.removeItem("bushra_math_test_history");
-        renderMathTestHistory();
-      }
+      function downloadMathTestPdf(isSolutionsOnly = false) {
+        const questions = mathCurrentQuestions && mathCurrentQuestions.length > 0 ? mathCurrentQuestions : generateMathQuestionsSet("mixed", 15);
+        const record = mathLastCompletedTestRecord;
+        const userAnswers = (record && record.answers) ? record.answers : mathUserAnswers;
 
-      function getMathTestMistakesItems(mathId = null) {
-        let list = [];
-        try {
-          const raw = localStorage.getItem("bushra_math_test_history");
-          if (raw) list = JSON.parse(raw);
-        } catch (e) {}
+        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+        const title = isSolutionsOnly ? "Practical Daily Maths — Solutions & Easy Shortcuts" : "Practical Daily Life Maths — 15 Challenge Test Paper";
 
-        if (!Array.isArray(list)) list = [];
-        let targetList = list;
-        if (mathId) {
-          targetList = list.filter(m => (m.id || "") === mathId);
-        }
-
-        const items = targetList.map(m => ({
-          question: `${m.tag}: ${m.story}`,
-          isCorrect: m.isCorrect,
-          userAnswer: m.userAnswer,
-          correctAnswer: m.correctAnswer,
-          ruleLabel: "Mental Math Trick",
-          explanation: m.shortcut
-        }));
-        return { items, targetList };
-      }
-
-      async function openMathMistakesInPdfReader(mathId = null) {
-        const { items } = getMathTestMistakesItems(mathId);
-        if (items.length === 0) {
-          showToast("No math challenge records to generate PDF 🧮");
-          return;
-        }
-
-        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
-        const correct = items.filter(i => i.isCorrect).length;
-        const total = items.length;
-        const pct = Math.round((correct / total) * 100);
+        const items = questions.map((q, idx) => {
+          const userAns = userAnswers[idx];
+          return {
+            question: `Q${idx + 1} (${q.category}): ${q.question}`,
+            options: q.options,
+            correctAnswer: q.correctAnswerText,
+            userAnswer: userAns ? userAns.userText : null,
+            isCorrect: userAns ? userAns.isCorrect : false,
+            ruleLabel: "💡 Easy Solving Shortcut & Trick",
+            explanation: `${q.explanation}\n${q.easyTrick}`
+          };
+        });
 
         const buffer = buildStudyMistakesPdf({
-          docTitle: "Practical Daily Life Maths — Mistakes & Review",
-          subtitle: `Study Report • ${total} Market Calculations • Generated on ${dateStr}`,
-          scoreSummary: `Overall Accuracy: ${correct} / ${total} (${pct}%) • Recorded in History`,
+          docTitle: title,
+          subtitle: `Practice Paper • 15 Real-World Market Calculations • ${dateStr}`,
+          scoreSummary: record ? `Score Achieved: ${record.score} / ${record.total} (${record.percentage}%) • ${record.levelEval}` : "15 Real-World Everyday Calculations • Grams, Cash & Discounts",
           items: items
         });
 
-        const fileName = `Math_Mistakes_Review_${Date.now().toString().slice(-4)}.pdf`;
+        const fileName = `Math_Test_${isSolutionsOnly ? 'Solutions_Shortcuts' : 'Paper'}_${Date.now().toString().slice(-4)}.pdf`;
+        downloadPdfBuffer(buffer, fileName);
+        showToast("📥 Math Test PDF downloaded!");
+      }
+
+      async function openCurrentMathTestInPdfReader() {
+        const questions = mathCurrentQuestions && mathCurrentQuestions.length > 0 ? mathCurrentQuestions : generateMathQuestionsSet("mixed", 15);
+        const record = mathLastCompletedTestRecord;
+        const userAnswers = (record && record.answers) ? record.answers : mathUserAnswers;
+
+        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+        const items = questions.map((q, idx) => {
+          const userAns = userAnswers[idx];
+          return {
+            question: `Q${idx + 1} (${q.category}): ${q.question}`,
+            options: q.options,
+            correctAnswer: q.correctAnswerText,
+            userAnswer: userAns ? userAns.userText : null,
+            isCorrect: userAns ? userAns.isCorrect : false,
+            ruleLabel: "💡 Easy Shortcut Trick",
+            explanation: `${q.explanation}\n${q.easyTrick}`
+          };
+        });
+
+        const buffer = buildStudyMistakesPdf({
+          docTitle: "Practical Daily Life Maths — Test & Solutions",
+          subtitle: `Study Report • 15 Market Calculations • Generated on ${dateStr}`,
+          scoreSummary: record ? `Accuracy: ${record.score} / ${record.total} (${record.percentage}%) • ${record.levelEval}` : "15 Practical Real-World Challenges",
+          items: items
+        });
+
+        const fileName = `Math_Test_Report_${Date.now().toString().slice(-4)}.pdf`;
         await openPdfBufferInReader(buffer, fileName);
       }
 
-      function downloadMathMistakesPdf(mathId = null) {
-        const { items } = getMathTestMistakesItems(mathId);
-        if (items.length === 0) {
-          showToast("No math challenge records to generate PDF 🧮");
-          return;
+      function askAIMathTutor() {
+        const q = mathCurrentQuestions[mathCurrentIndex];
+        if (!q) return;
+
+        const promptText = `Please explain the following Practical Math question, calculations, and shortcut tips in detail in Urdu (براہ کرم اس ریاضی کے سوال اور آسان حل کی اردو میں تفصیلی وضاحت فرمائیں):
+
+Question: "${q.question}"
+Options: ${q.options.map((opt, i) => `${String.fromCharCode(65 + i)}) ${opt}`).join(", ")}
+Correct Answer: "${q.correctAnswerText}"
+Step-by-Step Calculation: "${q.explanation}"
+Easy Shortcut & Trick: "${q.easyTrick}"
+
+Please provide:
+1. Complete Urdu Explanation of the calculation (اردو میں آسان مرحلہ وار وضاحت).
+2. Mental Math Shortcut Hack (دماغ میں فوراً حل کرنے کا شارٹ کٹ طریقہ).
+3. 2 Practical Real-life Market Examples (روزمرہ زندگی کی مزید 2 مثالیں بمعہ حل).`;
+
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
+        const toastMsg = isTouch 
+          ? "📋 Math prompt copied! In Gemini, Tap & Hold ➔ Paste ➔ Send!" 
+          : "📋 Math prompt copied! In Gemini, press Ctrl + V ➔ Enter!";
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(promptText).then(() => {
+            if (typeof showToast === "function") showToast(toastMsg);
+          }).catch(() => {
+            if (typeof showToast === "function") showToast("Opening Gemini AI...");
+          });
         }
-
-        const dateStr = new Date().toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
-        const correct = items.filter(i => i.isCorrect).length;
-        const total = items.length;
-        const pct = Math.round((correct / total) * 100);
-
-        const buffer = buildStudyMistakesPdf({
-          docTitle: "Practical Daily Life Maths — Mistakes & Review",
-          subtitle: `Study Report • ${total} Market Calculations • Generated on ${dateStr}`,
-          scoreSummary: `Overall Accuracy: ${correct} / ${total} (${pct}%) • Recorded in History`,
-          items: items
-        });
-
-        const fileName = `Math_Mistakes_Review_${Date.now().toString().slice(-4)}.pdf`;
-        downloadPdfBuffer(buffer, fileName);
-        showToast("📥 Math PDF Study Guide downloaded!");
+        openGeminiAssessmentPopup();
       }
+
+      window.prevMathQuestion = prevMathQuestion;
+      window.nextMathQuestion = nextMathQuestion;
+      window.selectMathOption = selectMathOption;
+      window.generateNewMath15Set = generateNewMath15Set;
+      window.downloadMathTestPdf = downloadMathTestPdf;
+      window.openCurrentMathTestInPdfReader = openCurrentMathTestInPdfReader;
+      window.toggleCurrentMathTestReview = toggleCurrentMathTestReview;
+      window.askAIMathTutor = askAIMathTutor;
 
       function goBackToNavigator() {
         switchTab("navigator");
