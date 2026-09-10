@@ -7218,8 +7218,17 @@
           </div>
 
           <div id="morning-section" class="schedule-section">
-            <div class="section-title morning-title">
-              <span>🌅</span> MORNING ROUTINES
+            <div class="section-title morning-title" style="display: flex; align-items: center; justify-content: space-between;">
+              <span><span>🌅</span> MORNING ROUTINES</span>
+              <button
+                type="button"
+                class="section-med-btn"
+                onclick="openMedicineConfigModal('', event, 'morning')"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; border: 1.5px solid var(--ink); background: #ffffff; color: var(--ink); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 0 var(--ink);"
+                title="Add a custom medicine to Morning routine"
+              >
+                <span>💊</span> <span>+ Medicine</span>
+              </button>
             </div>
             <div
               class="task-card"
@@ -7347,14 +7356,25 @@
                 </svg>
               </div>
               <div style="flex: 1">
-                <div class="task-text">
-                  Folic Acid medicine? <span>💊</span>
+                <div class="task-text" id="task-title-m3">
+                  <span id="task-name-m3">Folic Acid medicine?</span> <span>💊</span>
                 </div>
                 <div class="task-sub sub-not-taken" id="sub-m3">
                   ❓ Not taken
                 </div>
               </div>
+              <button
+                type="button"
+                class="task-med-edit-btn"
+                onclick="openMedicineConfigModal('m3', event)"
+                title="Change name, keep default, or remove medicine"
+                style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+              >
+                <span>✏️</span> <span>Edit</span>
+              </button>
             </div>
+            <!-- Container for any custom user-added morning medicines -->
+            <div id="custom-medicines-morning"></div>
             <div class="task-card" id="task-m4-s" onclick="toggleTask('m4')">
               <div class="checkbox">
                 <svg
@@ -7424,8 +7444,17 @@
           </div>
 
           <div id="afternoon-section" class="schedule-section">
-            <div class="section-title afternoon-title">
-              <span>☀️</span> AFTERNOON ROUTINES
+            <div class="section-title afternoon-title" style="display: flex; align-items: center; justify-content: space-between;">
+              <span><span>☀️</span> AFTERNOON ROUTINES</span>
+              <button
+                type="button"
+                class="section-med-btn"
+                onclick="openMedicineConfigModal('', event, 'afternoon')"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; border: 1.5px solid var(--ink); background: #ffffff; color: var(--ink); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 0 var(--ink);"
+                title="Add a custom medicine to Afternoon routine"
+              >
+                <span>💊</span> <span>+ Medicine</span>
+              </button>
             </div>
             <div
               class="task-card"
@@ -7503,14 +7532,25 @@
                 </svg>
               </div>
               <div style="flex: 1">
-                <div class="task-text">
-                  Vitamin B Complex medicine? <span>💊</span>
+                <div class="task-text" id="task-title-a2">
+                  <span id="task-name-a2">Vitamin B Complex medicine?</span> <span>💊</span>
                 </div>
                 <div class="task-sub sub-not-taken" id="sub-a2">
                   ❓ Not taken
                 </div>
               </div>
+              <button
+                type="button"
+                class="task-med-edit-btn"
+                onclick="openMedicineConfigModal('a2', event)"
+                title="Change name, keep default, or remove medicine"
+                style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+              >
+                <span>✏️</span> <span>Edit</span>
+              </button>
             </div>
+            <!-- Container for any custom user-added afternoon medicines -->
+            <div id="custom-medicines-afternoon"></div>
             <div class="task-card" id="task-a3-s" onclick="toggleTask('a3')">
               <div class="checkbox">
                 <svg
@@ -7531,8 +7571,17 @@
           </div>
 
           <div id="evening-section" class="schedule-section">
-            <div class="section-title evening-title">
-              <span>🌇</span> EVENING ROUTINES
+            <div class="section-title evening-title" style="display: flex; align-items: center; justify-content: space-between;">
+              <span><span>🌇</span> EVENING ROUTINES</span>
+              <button
+                type="button"
+                class="section-med-btn"
+                onclick="openMedicineConfigModal('', event, 'evening')"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; border: 1.5px solid var(--ink); background: #ffffff; color: var(--ink); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 0 var(--ink);"
+                title="Add a custom medicine to Evening routine"
+              >
+                <span>💊</span> <span>+ Medicine</span>
+              </button>
             </div>
             <div
               class="task-card"
@@ -7591,6 +7640,8 @@
                 </div>
               </div>
             </div>
+            <!-- Container for any custom user-added evening medicines -->
+            <div id="custom-medicines-evening"></div>
             <div class="task-card" id="task-e3-s" onclick="toggleTask('e3')">
               <div class="checkbox">
                 <svg
@@ -7610,31 +7661,14 @@
                 <div class="task-text">
                   Read and Listen Quran <span>📖</span>
                 </div>
-                <!-- Quran Surahs & Recitations Card -->
-                <div
-                  class="grammar-revision-card"
+                <a
+                  class="yt-link"
+                  href="https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3&si=jX-E1-T-8sC3qN5u"
+                  target="_blank"
                   onclick="event.stopPropagation()"
                 >
-                  <div class="grammar-revision-header-row">
-                    <div class="grammar-revision-title-wrap">
-                      <span class="grammar-pulse-dot"></span>
-                      <span class="grammar-revision-title">Surah &amp; Ayat Recitations</span>
-                      <span class="grammar-revision-count-badge" id="quranRevisionCountBadge">0 saved</span>
-                    </div>
-                    <button
-                      type="button"
-                      class="grammar-add-topic-btn"
-                      onclick="openQuranRevisionModal()"
-                      title="Add Surah & Ayat link"
-                    >
-                      <span>➕</span> Add Surah
-                    </button>
-                  </div>
-
-                  <div class="grammar-topics-list" id="quranTopicsList">
-                    <!-- Populated dynamically -->
-                  </div>
-                </div>
+                  <span>▶️</span> Surah Baqarah Playlist
+                </a>
               </div>
             </div>
             <div class="task-card" id="task-e2-s" onclick="toggleTask('e2')">
@@ -7656,7 +7690,7 @@
                 <div class="task-text">Evening Adhkar <span>🤲</span></div>
                 <a
                   class="yt-link"
-                  href="https://drive.google.com/file/d/1s1of5xnyzPgy8cRO3RqycT-wbfr_m_9v/view?usp=drivesdk"
+                  href="https://drive.google.com/file/d/1s0Xf1YwKffbXm2y7qgY4p5vE_o2z6VvB/view?usp=drivesdk"
                   target="_blank"
                   onclick="event.stopPropagation()"
                 >
@@ -7720,8 +7754,17 @@
           </div>
 
           <div id="night-section" class="schedule-section">
-            <div class="section-title night-title">
-              <span>🌙</span> NIGHT ROUTINES
+            <div class="section-title night-title" style="display: flex; align-items: center; justify-content: space-between;">
+              <span><span>🌙</span> NIGHT ROUTINES</span>
+              <button
+                type="button"
+                class="section-med-btn"
+                onclick="openMedicineConfigModal('', event, 'night')"
+                style="font-size: 11px; padding: 3px 8px; border-radius: 6px; border: 1.5px solid var(--ink); background: #ffffff; color: var(--ink); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 0 var(--ink);"
+                title="Add a custom medicine to Night routine"
+              >
+                <span>💊</span> <span>+ Medicine</span>
+              </button>
             </div>
             <div
               class="task-card"
@@ -7824,14 +7867,25 @@
                 </svg>
               </div>
               <div style="flex: 1">
-                <div class="task-text">
-                  Freedase 30 medicine? <span>💊</span>
+                <div class="task-text" id="task-title-n4">
+                  <span id="task-name-n4">Freedase 30 medicine?</span> <span>💊</span>
                 </div>
                 <div class="task-sub sub-not-taken" id="sub-n4">
                   ❓ Not taken
                 </div>
               </div>
+              <button
+                type="button"
+                class="task-med-edit-btn"
+                onclick="openMedicineConfigModal('n4', event)"
+                title="Change name, keep default, or remove medicine"
+                style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+              >
+                <span>✏️</span> <span>Edit</span>
+              </button>
             </div>
+            <!-- Container for any custom user-added night medicines -->
+            <div id="custom-medicines-night"></div>
           </div>
         </div>
 
@@ -10834,6 +10888,103 @@
       </div>
     </div>
 
+    <!-- Medicine Customizer & Manager Modal -->
+    <div class="modal-overlay" id="medicineConfigModal" style="display: none; align-items: center; justify-content: center; z-index: 100000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); padding: 14px;">
+      <div class="modal-card" style="max-width: 480px; width: 100%; background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 8px 0 var(--ink); overflow: hidden; padding: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 24px;">💊</span>
+            <div>
+              <div class="modal-title" id="medModalTitle" style="font-size: 17px; font-weight: 900; color: #0f172a; margin: 0;">Medicine Settings</div>
+              <div class="modal-subtitle" id="medModalSubtitle" style="font-size: 12px; color: #64748b; margin: 0;">Change name, keep default, or remove from daily schedule</div>
+            </div>
+          </div>
+          <button type="button" onclick="closeMedicineConfigModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: #94a3b8; line-height: 1;">✕</button>
+        </div>
+
+        <input type="hidden" id="medConfigId" value="" />
+
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 14px;">
+          <div>
+            <label style="display: block; font-size: 12.5px; font-weight: 800; color: #334155; margin-bottom: 5px;">
+              Medicine Name (دوا کا نام):
+            </label>
+            <input
+              type="text"
+              id="medConfigNameInput"
+              placeholder="e.g., Vitamin B Complex medicine, Calcium, Iron tablet"
+              style="width: 100%; padding: 10px 12px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 14px; font-weight: 700; color: #0f172a; outline: none; box-sizing: border-box;"
+            />
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 12.5px; font-weight: 800; color: #334155; margin-bottom: 5px;">
+              Routine Time Slot (وقت):
+            </label>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+              <label style="display: flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 700;">
+                <input type="radio" name="medSlotRadio" value="morning" id="medSlot-morning" checked />
+                <span>🌅 Morning</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 700;">
+                <input type="radio" name="medSlotRadio" value="afternoon" id="medSlot-afternoon" />
+                <span>☀️ Afternoon</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 700;">
+                <input type="radio" name="medSlotRadio" value="evening" id="medSlot-evening" />
+                <span>🌇 Evening</span>
+              </label>
+              <label style="display: flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 700;">
+                <input type="radio" name="medSlotRadio" value="night" id="medSlot-night" />
+                <span>🌙 Night</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 20px; flex-wrap: wrap;">
+          <div style="display: flex; gap: 6px;">
+            <button
+              type="button"
+              id="medResetDefaultBtn"
+              onclick="resetMedicineToDefault()"
+              style="display: none; font-size: 11.5px; padding: 7px 11px; background: #f1f5f9; color: #475569; border: 1.5px solid #cbd5e1; border-radius: 8px; font-weight: 700; cursor: pointer;"
+              title="Reset back to original name"
+            >
+              🔄 Reset Name
+            </button>
+            <button
+              type="button"
+              id="medRemoveBtn"
+              onclick="removeMedicineFromRoutine()"
+              style="display: none; font-size: 11.5px; padding: 7px 11px; background: #fef2f2; color: #dc2626; border: 1.5px solid #fca5a5; border-radius: 8px; font-weight: 700; cursor: pointer;"
+              title="Remove medicine from routine"
+            >
+              🗑️ Remove
+            </button>
+          </div>
+          <div style="display: flex; gap: 8px; margin-left: auto;">
+            <button
+              type="button"
+              class="modal-btn modal-btn-cancel"
+              onclick="closeMedicineConfigModal()"
+              style="padding: 7px 14px; font-size: 13px;"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="modal-btn modal-btn-save"
+              onclick="saveMedicineConfig()"
+              style="padding: 7px 16px; font-size: 13px; background: #059669; color: #ffffff;"
+            >
+              Save Medicine 💾
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Interactive Duaa Book Reader Modal -->
     <div class="modal-overlay duaa-reader-overlay" id="duaaBookModal">
       <div class="duaa-book-container">
@@ -10947,7 +11098,7 @@
       };
       const GLASS_ML = 250;
       const WALK_WATER_PERIODS = ["morning", "afternoon", "evening", "night"];
-      const SCHEDULE_TASKS = [
+      let SCHEDULE_TASKS = [
         { id: "m2", label: "Morning Adhkar", icon: "🤲" },
         { id: "m3", label: "Folic Acid medicine", icon: "💊" },
         { id: "m4", label: "Exercise", icon: "🏋️" },
@@ -10964,7 +11115,7 @@
         label: p.charAt(0).toUpperCase() + p.slice(1) + " Walk & Water",
         icon: "🚶💧",
       }));
-      const ALL_SCHEDULE_TASKS = SCHEDULE_TASKS.concat(WALK_WATER_TASKS);
+      let ALL_SCHEDULE_TASKS = SCHEDULE_TASKS.concat(WALK_WATER_TASKS);
       const SCHEDULE_HISTORY_MAX_DAYS = 30;
 
       const HAIR_WASH_TARGET = 2;
@@ -16743,43 +16894,275 @@ Please provide:
         }, 150);
       }
 
+      // ==================== MEDICINE CUSTOMIZER & MANAGEMENT ENGINE ====================
+      const DEFAULT_MEDICINES = [
+        { id: "m3", defaultName: "Folic Acid medicine", name: "Folic Acid medicine", period: "morning", enabled: true, isDefault: true, icon: "💊" },
+        { id: "a2", defaultName: "Vitamin B Complex medicine", name: "Vitamin B Complex medicine", period: "afternoon", enabled: true, isDefault: true, icon: "💊" },
+        { id: "n4", defaultName: "Freedase 30 medicine", name: "Freedase 30 medicine", period: "night", enabled: true, isDefault: true, icon: "💊" }
+      ];
+      let routineMedicines = [];
+
+      function loadMedicinesConfig() {
+        try {
+          const stored = localStorage.getItem("routine_medicines_config_v2");
+          if (stored) {
+            routineMedicines = JSON.parse(stored);
+            // Ensure any default medicine not yet in storage is present
+            DEFAULT_MEDICINES.forEach(def => {
+              if (!routineMedicines.some(m => m.id === def.id)) {
+                routineMedicines.push(JSON.parse(JSON.stringify(def)));
+              }
+            });
+          } else {
+            routineMedicines = JSON.parse(JSON.stringify(DEFAULT_MEDICINES));
+          }
+        } catch (e) {
+          routineMedicines = JSON.parse(JSON.stringify(DEFAULT_MEDICINES));
+        }
+        applyMedicinesConfig();
+      }
+
+      function applyMedicinesConfig() {
+        // 1. Update default medicines (m3, a2, n4)
+        DEFAULT_MEDICINES.forEach(def => {
+          const med = routineMedicines.find(m => m.id === def.id);
+          const card = document.getElementById("task-" + def.id + "-s");
+          const nameEl = document.getElementById("task-name-" + def.id);
+          if (card) {
+            if (med && med.enabled) {
+              card.style.display = "";
+              if (nameEl) nameEl.textContent = med.name + "?";
+            } else {
+              card.style.display = "none";
+            }
+          }
+        });
+
+        // 2. Render any custom user-added medicines
+        const periods = ["morning", "afternoon", "evening", "night"];
+        periods.forEach(p => {
+          const container = document.getElementById("custom-medicines-" + p);
+          if (!container) return;
+          const customMeds = routineMedicines.filter(m => m.period === p && !m.isDefault && m.enabled);
+          container.innerHTML = customMeds.map(m => {
+            const isDone = completedTasks.has(m.id);
+            return `
+              <div class="task-card ${isDone ? 'completed' : ''}" id="task-${m.id}-s" onclick="toggleTask('${m.id}')">
+                <div class="checkbox">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <div style="flex: 1">
+                  <div class="task-text" id="task-title-${m.id}">
+                    <span id="task-name-${m.id}">${escapeHtml(m.name)}?</span> <span>💊</span>
+                  </div>
+                  <div class="task-sub ${isDone ? 'sub-taken' : 'sub-not-taken'}" id="sub-${m.id}">
+                    ${isDone ? '✅ Taken' : '❓ Not taken'}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="task-med-edit-btn"
+                  onclick="openMedicineConfigModal('${m.id}', event)"
+                  title="Change name, keep default, or remove medicine"
+                  style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+                >
+                  <span>✏️</span> <span>Edit</span>
+                </button>
+              </div>
+            `;
+          }).join("");
+        });
+
+        // 3. Update active SCHEDULE_TASKS and ALL_SCHEDULE_TASKS
+        const nonMedScheduleTasks = [
+          { id: "m2", label: "Morning Adhkar", icon: "🤲" },
+          { id: "m4", label: "Exercise", icon: "🏋️" },
+          { id: "a3", label: "Activity on Kimi", icon: "🤖" },
+          { id: "e3", label: "Read and Listen Quran", icon: "📖" },
+          { id: "e2", label: "Evening Adhkar", icon: "🤲" },
+          { id: "e4", label: "Lumosity", icon: "🧠" },
+          { id: "n5", label: "Surah Mulk", icon: "📖" }
+        ];
+        const activeMeds = routineMedicines.filter(m => m.enabled).map(m => ({
+          id: m.id,
+          label: m.name,
+          icon: m.icon || "💊"
+        }));
+        SCHEDULE_TASKS = nonMedScheduleTasks.concat(activeMeds);
+        ALL_SCHEDULE_TASKS = SCHEDULE_TASKS.concat(WALK_WATER_TASKS);
+
+        renderScheduleHistory();
+        renderSummary();
+      }
+
+      function openMedicineConfigModal(medId, event, defaultPeriod = "morning") {
+        if (event && event.stopPropagation) event.stopPropagation();
+
+        const modal = document.getElementById("medicineConfigModal");
+        if (!modal) return;
+
+        const titleEl = document.getElementById("medModalTitle");
+        const subTitleEl = document.getElementById("medModalSubtitle");
+        const idInput = document.getElementById("medConfigId");
+        const nameInput = document.getElementById("medConfigNameInput");
+        const resetBtn = document.getElementById("medResetDefaultBtn");
+        const removeBtn = document.getElementById("medRemoveBtn");
+
+        if (medId) {
+          const med = routineMedicines.find(m => m.id === medId);
+          if (med) {
+            if (titleEl) titleEl.textContent = `💊 Edit Medicine: ${med.name}`;
+            if (subTitleEl) subTitleEl.textContent = "Change name, keep default, or remove from daily schedule";
+            if (idInput) idInput.value = med.id;
+            if (nameInput) nameInput.value = med.name;
+
+            const radio = document.getElementById("medSlot-" + med.period);
+            if (radio) radio.checked = true;
+
+            if (resetBtn) resetBtn.style.display = med.isDefault ? "inline-block" : "none";
+            if (removeBtn) removeBtn.style.display = "inline-block";
+          }
+        } else {
+          if (titleEl) titleEl.textContent = "➕ Add Medicine to Routine";
+          if (subTitleEl) subTitleEl.textContent = "Enter medicine name and select daily routine time";
+          if (idInput) idInput.value = "";
+          if (nameInput) nameInput.value = "";
+
+          const radio = document.getElementById("medSlot-" + defaultPeriod);
+          if (radio) radio.checked = true;
+
+          if (resetBtn) resetBtn.style.display = "none";
+          if (removeBtn) removeBtn.style.display = "none";
+        }
+
+        modal.style.display = "flex";
+        setTimeout(() => {
+          if (nameInput) nameInput.focus();
+        }, 100);
+      }
+
+      function closeMedicineConfigModal() {
+        const modal = document.getElementById("medicineConfigModal");
+        if (modal) modal.style.display = "none";
+      }
+
+      function saveMedicineConfig() {
+        const idInput = document.getElementById("medConfigId");
+        const nameInput = document.getElementById("medConfigNameInput");
+        const selectedRadio = document.querySelector('input[name="medSlotRadio"]:checked');
+
+        const rawName = nameInput ? nameInput.value.trim() : "";
+        if (!rawName) {
+          showToast("⚠️ Please enter a medicine name");
+          return;
+        }
+
+        const period = selectedRadio ? selectedRadio.value : "morning";
+        const medId = idInput ? idInput.value : "";
+
+        if (medId) {
+          const med = routineMedicines.find(m => m.id === medId);
+          if (med) {
+            med.name = rawName;
+            med.period = period;
+            med.enabled = true;
+          }
+        } else {
+          const newMed = {
+            id: "med_" + Date.now(),
+            name: rawName,
+            defaultName: rawName,
+            period: period,
+            enabled: true,
+            isDefault: false,
+            icon: "💊"
+          };
+          routineMedicines.push(newMed);
+        }
+
+        try {
+          localStorage.setItem("routine_medicines_config_v2", JSON.stringify(routineMedicines));
+        } catch (e) {}
+
+        applyMedicinesConfig();
+        closeMedicineConfigModal();
+        showToast("💊 Medicine saved successfully!");
+      }
+
+      function resetMedicineToDefault() {
+        const idInput = document.getElementById("medConfigId");
+        const medId = idInput ? idInput.value : "";
+        if (!medId) return;
+
+        const med = routineMedicines.find(m => m.id === medId);
+        if (med && med.isDefault) {
+          med.name = med.defaultName;
+          const nameInput = document.getElementById("medConfigNameInput");
+          if (nameInput) nameInput.value = med.defaultName;
+
+          try {
+            localStorage.setItem("routine_medicines_config_v2", JSON.stringify(routineMedicines));
+          } catch (e) {}
+
+          applyMedicinesConfig();
+          closeMedicineConfigModal();
+          showToast(`🔄 Reset back to "${med.defaultName}"!`);
+        }
+      }
+
+      function removeMedicineFromRoutine() {
+        const idInput = document.getElementById("medConfigId");
+        const medId = idInput ? idInput.value : "";
+        if (!medId) return;
+
+        const med = routineMedicines.find(m => m.id === medId);
+        if (!med) return;
+
+        if (confirm(`Remove "${med.name}" from your daily routine schedule?`)) {
+          if (med.isDefault) {
+            med.enabled = false;
+          } else {
+            routineMedicines = routineMedicines.filter(m => m.id !== medId);
+          }
+          completedTasks.delete(medId);
+
+          try {
+            localStorage.setItem("routine_medicines_config_v2", JSON.stringify(routineMedicines));
+          } catch (e) {}
+
+          applyMedicinesConfig();
+          saveScheduleStatus();
+          closeMedicineConfigModal();
+          showToast(`🗑️ "${med.name}" removed from routine`);
+        }
+      }
+
+      window.openMedicineConfigModal = openMedicineConfigModal;
+      window.closeMedicineConfigModal = closeMedicineConfigModal;
+      window.saveMedicineConfig = saveMedicineConfig;
+      window.resetMedicineToDefault = resetMedicineToDefault;
+      window.removeMedicineFromRoutine = removeMedicineFromRoutine;
+
       function toggleTask(taskId) {
         const card = document.getElementById("task-" + taskId + "-s");
+        if (!card) return;
         const isCompleted = card.classList.contains("completed");
 
         if (isCompleted) {
           card.classList.remove("completed");
           completedTasks.delete(taskId);
-          if (taskId === "m3") {
-            const sub = document.getElementById("sub-m3");
-            sub.textContent = "❓ Not taken";
-            sub.className = "task-sub sub-not-taken";
-          }
-          if (taskId === "a2") {
-            const sub = document.getElementById("sub-a2");
-            sub.textContent = "❓ Not taken";
-            sub.className = "task-sub sub-not-taken";
-          }
-          if (taskId === "n4") {
-            const sub = document.getElementById("sub-n4");
+          const sub = document.getElementById("sub-" + taskId);
+          if (sub) {
             sub.textContent = "❓ Not taken";
             sub.className = "task-sub sub-not-taken";
           }
         } else {
           card.classList.add("completed");
           completedTasks.add(taskId);
-          if (taskId === "m3") {
-            const sub = document.getElementById("sub-m3");
-            sub.textContent = "✅ Taken";
-            sub.className = "task-sub sub-taken";
-          }
-          if (taskId === "a2") {
-            const sub = document.getElementById("sub-a2");
-            sub.textContent = "✅ Taken";
-            sub.className = "task-sub sub-taken";
-          }
-          if (taskId === "n4") {
-            const sub = document.getElementById("sub-n4");
+          const sub = document.getElementById("sub-" + taskId);
+          if (sub) {
             sub.textContent = "✅ Taken";
             sub.className = "task-sub sub-taken";
           }
@@ -16936,18 +17319,8 @@ Please provide:
                 completedTasks.add(id);
                 const card = document.getElementById("task-" + id + "-s");
                 if (card) card.classList.add("completed");
-                if (id === "m3") {
-                  const sub = document.getElementById("sub-m3");
-                  sub.textContent = "✅ Taken";
-                  sub.className = "task-sub sub-taken";
-                }
-                if (id === "a2") {
-                  const sub = document.getElementById("sub-a2");
-                  sub.textContent = "✅ Taken";
-                  sub.className = "task-sub sub-taken";
-                }
-                if (id === "n4") {
-                  const sub = document.getElementById("sub-n4");
+                const sub = document.getElementById("sub-" + id);
+                if (sub) {
                   sub.textContent = "✅ Taken";
                   sub.className = "task-sub sub-taken";
                 }
@@ -22630,6 +23003,7 @@ Please provide:
 
       // Comprehensive Master Application Bootstrapper
       function initAllAppModules() {
+        try { loadMedicinesConfig(); } catch (e) { console.error("Error loading medicines config:", e); }
         try { loadPeriodData(); } catch (e) { console.error("Error loading period data:", e); }
         try { loadRecipeData(); } catch (e) { console.error("Error loading recipe data:", e); }
         try { loadMissingIngredients(); } catch (e) { console.error("Error loading missing ingredients:", e); }
