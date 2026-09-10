@@ -8854,26 +8854,8 @@
                 <div class="math-scenario-story" id="mathScenarioStory">Loading math challenge...</div>
               </div>
 
-              <!-- Input Group -->
-              <div class="math-input-group">
-                <input
-                  type="number"
-                  class="math-answer-input"
-                  id="mathAnswerInput"
-                  placeholder="Enter your calculation (Rs.)"
-                  autocomplete="off"
-                  onkeydown="if(event.key==='Enter') submitMathAnswer()"
-                />
-                <button type="button" class="test-main-btn" id="mathSubmitBtn" onclick="submitMathAnswer()" style="background: #059669; border-color: var(--ink);">
-                  Check Answer
-                </button>
-              </div>
-
-              <!-- Quick Answer Choices -->
-              <div style="font-size: 11.5px; font-weight: 700; color: #64748b; margin-bottom: 6px;">
-                💡 Or tap multiple-choice estimate:
-              </div>
-              <div class="test-options-grid" id="mathChoicesGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+              <!-- Multiple Choice Options -->
+              <div class="test-options-grid" id="mathChoicesGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 10px;">
                 <!-- Choice buttons dynamically rendered -->
               </div>
 
@@ -16000,6 +15982,17 @@
         if (tabName === "navigator") {
           updateHubCardsDisplay();
         }
+        if (tabName === "week") {
+          renderZadSubjects();
+          renderUqSubjects();
+        }
+        if (tabName === "period") {
+          updateNavBar();
+          renderPeriodTab();
+        }
+        if (tabName === "recipe") {
+          renderRecipeList();
+        }
         if (tabName === "englishtest") {
           initEnglishTest();
         }
@@ -21450,81 +21443,6 @@
         if (btn) btn.textContent = "▶️ Start Timer";
       }
 
-      // Persistence & Routine Progress
-      function loadTechRoutineState() {
-        const today = getTodayDateStr();
-        try {
-          const raw = localStorage.getItem(B1_ROUTINE_STORAGE_KEY);
-          if (raw) {
-            techRoutineState = JSON.parse(raw);
-          }
-        } catch (e) {
-          console.warn("Failed to load routine state", e);
-        }
-
-        if (!techRoutineState || typeof techRoutineState !== "object") {
-          techRoutineState = { date: today, completedSteps: [], streak: 0, lastCompletedDate: "" };
-        }
-
-        if (techRoutineState.date !== today) {
-          const yesterday = new Date();
-          yesterday.setDate(yesterday.getDate() - 1);
-          const yStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, "0")}-${String(yesterday.getDate()).padStart(2, "0")}`;
-
-          if (techRoutineState.lastCompletedDate === yStr) {
-            // Streak preserved
-          } else if (techRoutineState.lastCompletedDate !== today) {
-            techRoutineState.streak = 0;
-          }
-
-          techRoutineState.date = today;
-          techRoutineState.completedSteps = [];
-          saveTechRoutineState();
-        }
-
-        renderTechRoutineProgress();
-      }
-
-      function saveTechRoutineState() {
-        try {
-          localStorage.setItem(B1_ROUTINE_STORAGE_KEY, JSON.stringify(techRoutineState));
-        } catch (e) {
-          console.warn("Failed to save routine state", e);
-        }
-      }
-
-      function renderTechRoutineProgress() {
-        if (!techRoutineState) return;
-        const completed = techRoutineState.completedSteps || [];
-        const count = completed.length;
-        const pct = Math.round((count / 4) * 100);
-
-        const fillEl = document.getElementById("techRoutineProgressBar");
-        if (fillEl) fillEl.style.width = `${pct}%`;
-
-        const textEl = document.getElementById("techRoutineProgressText");
-        if (textEl) textEl.textContent = `${count} / 4 completed (${pct}%)`;
-
-        const streakEl = document.getElementById("techRoutineStreakBadge");
-        if (streakEl) {
-          streakEl.textContent = `🔥 ${techRoutineState.streak || 0} Day Streak`;
-        }
-
-        for (let i = 1; i <= 4; i++) {
-          const statusBadge = document.getElementById(`techStepStatus-${i}`);
-          const completeBtn = document.getElementById(`techCompleteBtn-${i}`);
-          const isDone = completed.includes(i);
-
-          if (statusBadge) {
-            statusBadge.textContent = isDone ? "Completed" : "Pending";
-            statusBadge.classList.toggle("completed", isDone);
-          }
-          if (completeBtn) {
-            completeBtn.textContent = isDone ? `✅ Step ${i} Done (Undo)` : `✅ Mark Step ${i} Complete`;
-          }
-        }
-      }
-
       // ==================== DAILY LIFE PRACTICAL MATHS & GROCERY SUITE ====================
       var currentMathStep = 1;
       var currentMathGramsIdx = 0;
@@ -21991,10 +21909,48 @@
         updateStandupTimerDisplay();
       }
 
-      window.addEventListener("DOMContentLoaded", initB1EnglishRoutine);
-      window.addEventListener("load", initB1EnglishRoutine);
+      // Comprehensive Master Application Bootstrapper
+      function initAllAppModules() {
+        try { loadPeriodData(); } catch (e) { console.error("Error loading period data:", e); }
+        try { loadRecipeData(); } catch (e) { console.error("Error loading recipe data:", e); }
+        try { loadMissingIngredients(); } catch (e) { console.error("Error loading missing ingredients:", e); }
+        try { loadZadLecture(); } catch (e) { console.error("Error loading Zad subjects/playlists:", e); }
+        try { loadUqLecture(); } catch (e) { console.error("Error loading UQ courses/playlists:", e); }
+        try { loadScheduleStatus(); } catch (e) { console.error("Error loading schedule status:", e); }
+        try { loadScheduleHistory(); } catch (e) { console.error("Error loading schedule history:", e); }
+        try { loadTrackerDaily(); } catch (e) { console.error("Error loading tracker daily:", e); }
+        try { loadAllChoreLogs(); } catch (e) { console.error("Error loading chore logs:", e); }
+        try { loadTypingRange(); } catch (e) { console.error("Error loading typing range:", e); }
+        try { loadHairWashStatus(); } catch (e) { console.error("Error loading hair wash status:", e); }
+        try { loadNotesData(); } catch (e) { console.error("Error loading notes data:", e); }
+        try { loadGrammarRevisionData(); } catch (e) { console.error("Error loading grammar revision:", e); }
+        try { loadPhonicsRevisionData(); } catch (e) { console.error("Error loading phonics revision:", e); }
+        try { loadQuranRevisionData(); } catch (e) { console.error("Error loading Quran revision:", e); }
+        try { initEnglishVocab(); } catch (e) { console.error("Error initializing English vocab:", e); }
+        try { initEnglishTest(); } catch (e) { console.error("Error initializing English test:", e); }
+        try { initMathTest(); } catch (e) { console.error("Error initializing Math test:", e); }
+        try { initPdfDropEvents(); } catch (e) { console.error("Error initializing PDF drop events:", e); }
+        try { initDailyMathsSuite(); } catch (e) { console.error("Error initializing Daily Maths:", e); }
+        try { initB1EnglishRoutine(); } catch (e) { console.error("Error initializing B1 English routine:", e); }
+        try { updateHubCardsDisplay(); } catch (e) { console.error("Error updating hub cards:", e); }
+
+        // Restore active tab from location hash or default to navigator
+        try {
+          const hashTab = (window.location.hash || "").replace("#", "");
+          if (hashTab && document.getElementById("tab-" + hashTab)) {
+            switchTab(hashTab, false);
+          } else {
+            switchTab("navigator", false);
+          }
+        } catch (e) {
+          switchTab("navigator", false);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", initAllAppModules);
+      window.addEventListener("load", initAllAppModules);
       if (document.readyState === "complete" || document.readyState === "interactive") {
-        initB1EnglishRoutine();
+        initAllAppModules();
       }
     </script>
     <button type="button" class="floating-nav-pill" id="floatingNavBtn" onclick="switchTab('navigator')" title="Open Navigators">
