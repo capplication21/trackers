@@ -10679,62 +10679,28 @@
         </div>
 
         <div class="input-group">
-          <label class="input-label">Category / Shelf</label>
-          <select class="input-field" id="noteCategoryInput">
-            <option value="Quranic">📖 Quranic (رَبَّنَا)</option>
-            <option value="Sunnah">🕌 Sunnah / Hadith</option>
-            <option value="Morning">🌅 Morning &amp; Evening</option>
-            <option value="Personal">💖 Personal &amp; Family</option>
-            <option value="Protection">🛡️ Protection &amp; Healing</option>
-            <option value="Screenshot">📸 Screenshot / Photo</option>
-            <option value="General">🤲 General Duaa</option>
-          </select>
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Source / Reference (optional)</label>
+          <label class="input-label">Duaa Title / Name (Optional)</label>
           <input
             type="text"
             class="input-field"
-            id="noteSourceInput"
-            placeholder="e.g. Surah Al-Baqarah 2:201, Sahih Bukhari, Hisn al-Muslim"
+            id="noteTitleInput"
+            placeholder="e.g. Dua for Parents, Protection, Ease..."
           />
         </div>
 
-        <div class="input-group">
-          <label class="input-label">Arabic Text (optional)</label>
-          <textarea
-            class="input-field duaa-arabic-input"
-            id="noteArabicInput"
-            rows="3"
-            dir="rtl"
-            placeholder="رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً..."
-          ></textarea>
-        </div>
+        <!-- Hidden input elements for backward compatibility -->
+        <input type="hidden" id="noteCategoryInput" value="Quranic" />
+        <input type="hidden" id="noteSourceInput" value="" />
+        <textarea id="noteArabicInput" style="display:none;"></textarea>
+        <input type="hidden" id="noteTransliterationInput" value="" />
+        <textarea id="noteContentInput" style="display:none;"></textarea>
 
+        <!-- Screenshot & Paste Area -->
         <div class="input-group">
-          <label class="input-label">Transliteration / Pronunciation (optional)</label>
-          <input
-            type="text"
-            class="input-field"
-            id="noteTransliterationInput"
-            placeholder="e.g. Rabbana atina fid-dunya hasanatan..."
-          />
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Translation / Urdu / Personal Reflection</label>
-          <textarea
-            class="input-field"
-            id="noteContentInput"
-            rows="3"
-            placeholder="Write the English/Urdu meaning, reflection, or when to recite..."
-            style="resize: vertical; min-height: 75px; line-height: 1.4"
-          ></textarea>
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Attach Duaa Screenshot / Page Photo</label>
+          <label class="input-label" style="display: flex; align-items: center; justify-content: space-between;">
+            <span>📸 Duaa Screenshot / Page</span>
+            <span style="font-size: 11px; color: #6366f1; font-weight: 700;">Upload or Paste</span>
+          </label>
           <input
             type="file"
             id="noteFileInput"
@@ -10742,6 +10708,27 @@
             style="display: none"
             onchange="handleNoteFileSelect(this)"
           />
+
+          <!-- Direct Paste from Clipboard Button -->
+          <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+            <button
+              type="button"
+              class="pdf-action-btn"
+              onclick="document.getElementById('noteFileInput').click()"
+              style="flex: 1; padding: 10px; font-size: 12.5px; font-weight: 800; background: #e0e7ff; color: #4338ca; border: 1.5px solid #818cf8; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;"
+            >
+              <span>📁</span> Choose Screenshot / Photo
+            </button>
+            <button
+              type="button"
+              class="pdf-action-btn"
+              onclick="pasteScreenshotFromClipboard()"
+              style="flex: 1; padding: 10px; font-size: 12.5px; font-weight: 800; background: #fdf4ff; color: #86198f; border: 1.5px solid #f0abfc; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;"
+            >
+              <span>📋</span> Paste from Clipboard
+            </button>
+          </div>
+
           <div
             class="note-image-drop-area"
             id="noteDropArea"
@@ -10749,9 +10736,9 @@
           >
             <div class="note-drop-icon">📸</div>
             <div class="note-drop-text">
-              Click to choose Duaa screenshot / photo
+              Tap to choose photo or Drag &amp; Drop here
             </div>
-            <div class="note-drop-hint">Or paste directly with Ctrl+V</div>
+            <div class="note-drop-hint">Or press Ctrl+V to paste screenshot</div>
           </div>
           <div
             class="note-modal-preview-wrap"
@@ -10770,7 +10757,7 @@
               onclick="removeNoteImageAttachment()"
               title="Remove screenshot"
             >
-              ✕
+              ✕ Remove
             </button>
           </div>
         </div>
@@ -18365,17 +18352,40 @@ Please provide:
         document.getElementById("noteDropArea").style.display = "block";
       }
 
+      async function pasteScreenshotFromClipboard() {
+        try {
+          if (!navigator.clipboard || !navigator.clipboard.read) {
+            showToast("Press Ctrl+V on your keyboard to paste the screenshot 📸");
+            return;
+          }
+          const items = await navigator.clipboard.read();
+          for (const item of items) {
+            for (const type of item.types) {
+              if (type.startsWith("image/")) {
+                const blob = await item.getType(type);
+                processImageFile(blob);
+                showToast("Screenshot pasted from clipboard! 📸");
+                return;
+              }
+            }
+          }
+          showToast("No image found in clipboard. Please copy an image first!");
+        } catch (err) {
+          showToast("Press Ctrl+V on keyboard to paste screenshot 📋");
+        }
+      }
+
       function saveNoteData() {
         const editId = document.getElementById("noteEditId").value;
         const title = document.getElementById("noteTitleInput").value.trim();
-        const category = document.getElementById("noteCategoryInput").value;
+        const category = document.getElementById("noteCategoryInput")?.value || "Screenshot";
         const source = (document.getElementById("noteSourceInput")?.value || "").trim();
         const arabic = (document.getElementById("noteArabicInput")?.value || "").trim();
         const transliteration = (document.getElementById("noteTransliterationInput")?.value || "").trim();
-        const text = document.getElementById("noteContentInput").value.trim();
+        const text = (document.getElementById("noteContentInput")?.value || "").trim();
 
         if (!title && !text && !arabic && !pendingNoteImage) {
-          showToast("Please write Arabic, translation or attach a screenshot ✍️");
+          showToast("Please choose or paste a Duaa screenshot 📸");
           return;
         }
 
@@ -18386,7 +18396,7 @@ Please provide:
           year: "numeric",
         });
 
-        const fallbackTitle = title || (arabic ? arabic.slice(0, 25) + "..." : text ? text.slice(0, 25) + "..." : "Duaa Screenshot");
+        const fallbackTitle = title || (arabic ? arabic.slice(0, 25) + "..." : text ? text.slice(0, 25) + "..." : "Duaa Page " + ((notesData.notes || []).length + 1));
 
         if (editId) {
           const index = notesData.notes.findIndex((n) => n.id === editId);
