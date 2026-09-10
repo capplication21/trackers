@@ -14205,21 +14205,41 @@
           return `❌ <strong>Incorrect:</strong> Violates the grammatical agreement, mood, or tense sequence required for this clause.`;
         };
 
-        // Construct customized direct answer
-        let directAnswerHtml = "";
+        // Determine detailed Urdu grammar text for this question
+        let defaultUrduBreakdown = "";
+        const combinedText = (qText + " " + explanation).toLowerCase();
+        
+        if (isInversion) {
+          defaultUrduBreakdown = `جب بھی انگریزی جملے کا آغاز <strong>'No sooner'</strong>، <strong>'Hardly'</strong>، یا <strong>'Scarcely'</strong> جیسے منفی یا محدود کرنے والے الفاظ سے ہو، تو اس کے فوراً بعد <strong>Subject-Auxiliary Inversion</strong> لاگو ہوتی ہے، یعنی امدادی فعل (<strong>had</strong>) فاعل (<strong>she</strong>) سے پہلے آتا ہے۔<br>🔹 <strong>اردو مفہوم:</strong> <em>"وہ گھر پہنچی <strong>ہی تھی</strong> کہ غیر متوقع طوفان شروع ہو گیا۔"</em>`;
+        } else if (combinedText.includes("second conditional") || combinedText.includes("if i")) {
+          defaultUrduBreakdown = `یہ جملہ <strong>Second Conditional (خیالی یا غیر حقیقی شرط)</strong> کا ہے۔ 'If' والے حصے میں ہمیشہ Past Simple (جیسے 'had' / 'were') آتا ہے اور دوسرے حصے میں 'would + verb' آتا ہے۔`;
+        } else if (combinedText.includes("third conditional") || combinedText.includes("would have")) {
+          defaultUrduBreakdown = `یہ جملہ <strong>Third Conditional (ماضی کا پچھتاوا یا نا ممکنہ شرط)</strong> کا ہے۔ 'If' کے ساتھ 'had + 3rd form' اور اگلے حصے میں 'would have + 3rd form' آتا ہے۔`;
+        } else if (combinedText.includes("neither") && combinedText.includes("nor")) {
+          defaultUrduBreakdown = `جب جملے میں <strong>'Neither... nor...'</strong> آئے تو فعل (Verb) ہمیشہ دوسرے والے (قریب ترین) فاعل کے مطابق آتا ہے۔`;
+        } else if (combinedText.includes("accustomed to") || combinedText.includes("look forward to")) {
+          defaultUrduBreakdown = `ان مخصوص فقروں میں 'to' حرفِ ربط (Preposition) ہے، اس لیے اس کے فوراً بعد فعل کی <strong>'-ing' والی شکل (Gerund)</strong> آتی ہے۔`;
+        } else if (combinedText.includes("suggested that") || combinedText.includes("insisted that") || combinedText.includes("subjunctive")) {
+          defaultUrduBreakdown = `جب 'suggest that' یا 'insist that' آئیں تو اس کے بعد فاعل چاہے کوئی بھی ہو، فعل کی بنیادی اصل شکل (<strong>Base Verb</strong> جیسے 'be', 'see') آتی ہے۔`;
+        } else if (combinedText.includes("past perfect") || combinedText.includes("by the time")) {
+          defaultUrduBreakdown = `ماضی میں دو کاموں میں سے جو کام پہلے مکمل ہوا ہو اس کے لیے <strong>Past Perfect ('had + 3rd form')</strong> استعمال ہوتا ہے۔`;
+        } else {
+          defaultUrduBreakdown = `اس جملے میں درست انتخاب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ انگریزی اصول: ${escapeHtml(explanation)}`;
+        }
 
         if (isInversion && (qLower.includes("inversion") || !query || qLower.includes("what is") || qLower.includes("meaning"))) {
           directAnswerHtml = `
-            <div style="font-weight: 800; color: #4338ca; font-size: 14px; margin-bottom: 6px;">
-              🔄 What is Subject-Auxiliary Inversion?
+            <div style="font-weight: 900; color: #86198f; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>🇵🇰</span>
+              <span>اردو میں گرائمر کی خودکار تفصیلی تشریح:</span>
             </div>
-            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
-              <strong>Inversion (ترتیب کو الٹ دینا)</strong> means placing the <strong>auxiliary (helping) verb before the subject</strong> (just like forming a question):
-              <div style="margin: 8px 0; padding: 8px 12px; background: #e0e7ff; border-radius: 8px; border-left: 4px solid #4f46e5; font-size: 12.5px;">
-                🔹 <strong>Normal Order:</strong> <em>Subject + Auxiliary + Verb</em> &nbsp;➔&nbsp; <code>"She had arrived home."</code><br>
-                🔹 <strong>Inverted Order:</strong> <strong>Auxiliary + Subject + Verb</strong> &nbsp;➔&nbsp; <code>"Had she arrived home..."</code>
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.7; font-family: system-ui, -apple-system, sans-serif;">
+              ${defaultUrduBreakdown}
+              <div style="margin: 8px 0; padding: 8px 12px; background: #e0e7ff; border-radius: 8px; border-left: 4px solid #4f46e5; font-size: 12px; color: #1e1b4b;">
+                🔹 <strong>عام ترتیب:</strong> <code>She had arrived home</code> (فاعل + معاون فعل)<br>
+                🔹 <strong>الٹ ترتیب (Inversion):</strong> <code>Had she arrived home</code> (معاون فعل + فاعل)
               </div>
-              When negative or limiting adverbs (<strong>No sooner, Hardly, Scarcely, Seldom, Rarely, Never</strong>) begin a clause, English strictly requires <strong>Subject-Auxiliary Inversion</strong> for dramatic emphasis!
+              انگریزی میں جملے کے شروع میں <em>No sooner</em> آنے پر امدادی فعل فاعل سے پہلے لگانا لازمی ہوتا ہے۔
             </div>
           `;
         } else if (queriedOpt) {
@@ -14252,9 +14272,9 @@
             <div style="font-size: 13px; color: #1e1b4b; line-height: 1.7; font-family: system-ui, -apple-system, sans-serif;">
               <strong>1. اردو اور انگریزی کا بنیادی فرق:</strong><br>
               اردو زبان کی قدرتی ترتیب <strong>فاعل + مفعول + فعل</strong> (SOV) ہوتی ہے۔ جیسے: <em>"وہ (فاعل) گھر پہنچی (فعل) تھی (معاون فعل)۔"</em><br>
-              <strong>2. "No sooner ... than" کا اردو ترجمہ:</strong><br>
-              <em style="color: #701a75; font-size: 14px;">"وہ گھر پہنچی <strong>ہی تھی</strong> کہ طوفان شروع ہو گیا۔"</em> یا <em>"ابھی وہ بمشکل گھر پہنچی تھی کہ آندھی آ گئی۔"</em><br>
-              <strong>3. گرائمر اصول:</strong> اردو میں تاکید کے لیے حروفِ تاکید (جیسے <strong>"ہی"</strong>، <strong>"ابھی"</strong>، <strong>"بمشکل"</strong>) لگائے جاتے ہیں، جبکہ انگریزی میں جملے کے آغاز پر <em>No sooner</em> آنے پر امدادی فعل کو فاعل سے پہلے لا کر ترتیب بدل دی جاتی ہے (<strong>had she</strong>، نہ کہ <strong>she had</strong>)۔
+              <strong>2. اردو مفہوم و ترجمہ:</strong><br>
+              <em style="color: #701a75; font-size: 13.5px;">${defaultUrduBreakdown}</em><br>
+              <strong>3. گرائمر اصول:</strong> اردو میں تاکید کے لیے حروفِ تاکید (جیسے <strong>"ہی"</strong>، <strong>"ابھی"</strong>، <strong>"بمشکل"</strong>) لگائے جاتے ہیں، جبکہ انگریزی میں جملے کے آغاز پر منفی یا شرطیہ الفاظ آنے پر امدادی فعل کو فاعل سے پہلے لا کر ترتیب بدل دی جاتی ہے۔
             </div>
           `;
         } else if (qLower.includes("formula") || qLower.includes("example") || qLower.includes("structure") || qLower.includes("pattern")) {
@@ -14293,11 +14313,11 @@
           `;
         } else {
           directAnswerHtml = `
-            <div style="font-weight: 800; color: #4338ca; font-size: 13.5px; margin-bottom: 4px;">
-              🎯 Key Grammar Concept:
+            <div style="font-weight: 800; color: #86198f; font-size: 13.5px; margin-bottom: 4px;">
+              🇵🇰 اردو میں گرائمر کی وضاحت:
             </div>
-            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
-              ${escapeHtml(explanation)}
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.7;">
+              ${defaultUrduBreakdown}
             </div>
           `;
         }
