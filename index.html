@@ -14069,33 +14069,61 @@
           titleEl.textContent = `Ask with Gemini: Question ${idx + 1}`;
         }
 
-        currentAITutorAudioText = `Question: ${q.question}. The correct answer is ${correctOpt}. ${q.explanation}`;
+        const initialResult = generateDeepAIAnswer(q, "");
+        currentAITutorAudioText = initialResult.audio;
+
+        // Determine smart prompt chips depending on the question topic
+        const isInv = (q.explanation || "").toLowerCase().includes("inversion") || (q.question || "").toLowerCase().includes("no sooner") || (q.question || "").toLowerCase().includes("hardly");
+        
+        const chip1 = isInv ? "What is Subject-Auxiliary Inversion?" : "What is the core grammar rule here?";
+        const chip2 = "Explain in Urdu with comparison (اردو میں موازنہ)";
+        const chip3 = "Why are the other options wrong?";
+        const chip4 = "Show Formula & 3 More Examples";
 
         body.innerHTML = `
-          <!-- Question Display -->
-          <div style="padding: 12px 14px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 12px;">
-            <div style="font-size: 11px; font-weight: 800; color: #4338ca; text-transform: uppercase; margin-bottom: 4px;">
-              Question ${idx + 1} • Level ${q.level}:
+          <!-- Question Display Banner -->
+          <div style="padding: 12px 14px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1.5px solid #cbd5e1; border-radius: 12px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-size: 11px; font-weight: 800; color: #4338ca; text-transform: uppercase; background: #e0e7ff; padding: 2px 8px; border-radius: 6px;">
+                Question ${idx + 1} • Level ${q.level}
+              </span>
+              <span style="font-size: 11px; font-weight: 800; color: #047857; background: #d1fae5; padding: 2px 8px; border-radius: 6px;">
+                Correct: "${escapeHtml(correctOpt)}"
+              </span>
             </div>
-            <div style="font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1.45;">
+            <div style="font-size: 14px; font-weight: 800; color: #0f172a; line-height: 1.45; margin-top: 4px;">
               ${escapeHtml(q.question)}
-            </div>
-            <div style="margin-top: 6px; font-size: 12.5px; font-weight: 800; color: #047857; display: flex; align-items: center; gap: 4px;">
-              <span>✅ Correct Choice:</span>
-              <span>"${escapeHtml(correctOpt)}"</span>
             </div>
           </div>
 
+          <!-- Quick Doubt Prompt Chips -->
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+            <span style="font-size: 11px; font-weight: 800; color: #6b21a8;">💡 Quick Ask:</span>
+            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip1.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; font-weight: 700; border-radius: 6px; cursor: pointer;">
+              🔍 ${escapeHtml(chip1)}
+            </button>
+            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip2.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-weight: 700; border-radius: 6px; cursor: pointer;">
+              🇵🇰 ${escapeHtml(chip2)}
+            </button>
+            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip3.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; font-weight: 700; border-radius: 6px; cursor: pointer;">
+              ❌ ${escapeHtml(chip3)}
+            </button>
+            <button type="button" class="pdf-action-btn" onclick="submitCustomGrammarDoubt('${escapeHtml(chip4.replace(/'/g, "\\'"))}')" style="font-size: 11px; padding: 3px 8px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; font-weight: 700; border-radius: 6px; cursor: pointer;">
+              📐 ${escapeHtml(chip4)}
+            </button>
+          </div>
+
           <!-- Question Input from User -->
-          <div style="background: #ffffff; border: 2px solid #8b5cf6; border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink);">
-            <div style="font-size: 12.5px; font-weight: 900; color: #5b21b6; margin-bottom: 6px;">
-              ✍️ Ask Your Grammar Doubt with Gemini:
+          <div style="background: #ffffff; border: 2px solid #8b5cf6; border-radius: 12px; padding: 10px; box-shadow: 0 2px 0 var(--ink);">
+            <div style="font-size: 12px; font-weight: 900; color: #5b21b6; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between;">
+              <span>✍️ Ask Your Specific Doubt to Gemini AI:</span>
+              <span style="font-size: 10.5px; color: #7c3aed; font-weight: 600;">English &amp; Urdu Supported</span>
             </div>
             <div style="display: flex; gap: 6px;">
               <input
                 type="text"
                 id="aiCustomGrammarInput"
-                placeholder="Ask anything (e.g. Why is C wrong? Explain in Urdu, Give an example)..."
+                placeholder="Type your question (e.g. What is inversion? Why is C wrong? Explain in Urdu)..."
                 style="flex: 1; padding: 8px 12px; font-size: 13px; border: 1.5px solid #cbd5e1; border-radius: 8px; outline: none; background: #f8fafc; font-weight: 600;"
                 onkeydown="if(event.key === 'Enter') submitCustomGrammarDoubt()"
               />
@@ -14103,7 +14131,7 @@
                 type="button"
                 class="test-main-btn"
                 onclick="submitCustomGrammarDoubt()"
-                style="padding: 8px 16px; font-size: 12.5px; background: #6d28d9; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); white-space: nowrap; flex-shrink: 0;"
+                style="padding: 8px 14px; font-size: 12.5px; background: #6d28d9; border: 1.5px solid var(--ink); box-shadow: 0 2px 0 var(--ink); white-space: nowrap; flex-shrink: 0;"
               >
                 Ask Gemini ➔
               </button>
@@ -14112,12 +14140,14 @@
 
           <!-- Answer From AI -->
           <div id="aiInAppTutorResponse" style="padding: 14px; background: linear-gradient(135deg, #fdf4ff 0%, #faf5ff 100%); border: 2px solid #d946ef; border-radius: 12px; line-height: 1.6; font-size: 13px; color: #1e1b4b; box-shadow: 0 2px 0 var(--ink);">
-            <div style="font-weight: 900; color: #86198f; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-              <span>🤖</span>
-              <span id="aiTutorResponseTitle">Gemini AI Answer &amp; Detailed Grammar Breakdown:</span>
+            <div style="font-weight: 900; color: #86198f; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span>🤖</span>
+                <span id="aiTutorResponseTitle">Gemini AI Answer &amp; Deep Grammar Breakdown:</span>
+              </div>
             </div>
             <div id="aiTutorResponseContent">
-              ${generateDeepAIAnswer(q, "").html}
+              ${initialResult.html}
             </div>
           </div>
         `;
@@ -14132,101 +14162,234 @@
       function generateDeepAIAnswer(q, userQuery) {
         const correctOpt = q.options[q.correctIndex];
         const otherOpts = q.options.filter((_, i) => i !== q.correctIndex);
-        const qText = q.question;
-        const explanation = q.explanation;
+        const qText = q.question || "";
+        const explanation = q.explanation || "";
         const query = userQuery ? userQuery.trim() : "";
         const qLower = query.toLowerCase();
 
-        // Detect if user asked about a specific option (A, B, C, D or words in options)
+        const isInversion = explanation.toLowerCase().includes("inversion") || qText.toLowerCase().includes("no sooner") || qText.toLowerCase().includes("hardly") || qText.toLowerCase().includes("scarcely") || qText.toLowerCase().includes("seldom") || qLower.includes("inversion");
+
+        // Detect option queries
         let queriedOpt = null;
-        if (qLower.includes("option a") || qLower.includes("choice a") || qLower === "a" || qLower === "why not a") queriedOpt = q.options[0];
-        else if (qLower.includes("option b") || qLower.includes("choice b") || qLower === "b" || qLower === "why not b") queriedOpt = q.options[1];
-        else if (qLower.includes("option c") || qLower.includes("choice c") || qLower === "c" || qLower === "why not c") queriedOpt = q.options[2];
-        else if (qLower.includes("option d") || qLower.includes("choice d") || qLower === "d" || qLower === "why not d") queriedOpt = q.options[3];
+        let queriedOptIndex = -1;
+        if (qLower.includes("option a") || qLower.includes("choice a") || qLower === "a" || qLower === "why not a" || qLower.includes("why is a")) { queriedOpt = q.options[0]; queriedOptIndex = 0; }
+        else if (qLower.includes("option b") || qLower.includes("choice b") || qLower === "b" || qLower === "why not b" || qLower.includes("why is b")) { queriedOpt = q.options[1]; queriedOptIndex = 1; }
+        else if (qLower.includes("option c") || qLower.includes("choice c") || qLower === "c" || qLower === "why not c" || qLower.includes("why is c")) { queriedOpt = q.options[2]; queriedOptIndex = 2; }
+        else if (qLower.includes("option d") || qLower.includes("choice d") || qLower === "d" || qLower === "why not d" || qLower.includes("why is d")) { queriedOpt = q.options[3]; queriedOptIndex = 3; }
         else {
-          for (const opt of q.options) {
+          for (let i = 0; i < q.options.length; i++) {
+            const opt = q.options[i];
             if (opt && opt.length > 2 && qLower.includes(opt.toLowerCase())) {
               queriedOpt = opt;
+              queriedOptIndex = i;
               break;
             }
           }
         }
 
-        let specificAnswer = "";
-        if (queriedOpt) {
-          if (queriedOpt === correctOpt) {
-            specificAnswer = `<strong>"${escapeHtml(queriedOpt)}" is the correct answer!</strong> It correctly fulfills the grammatical requirement: ${escapeHtml(explanation)}`;
-          } else {
-            specificAnswer = `<strong>Why "${escapeHtml(queriedOpt)}" is incorrect:</strong> In this sentence, choosing "${escapeHtml(queriedOpt)}" creates a grammatical error (such as a tense mismatch, incorrect mood, or improper agreement). Only <strong>"${escapeHtml(correctOpt)}"</strong> is grammatically correct because: ${escapeHtml(explanation)}`;
+        // Detailed option-specific reasons
+        const getOptionFeedback = (optText, isCorrect) => {
+          if (isCorrect) {
+            if (isInversion) return `✅ <strong>Correct Answer:</strong> Follows subject-auxiliary inversion (Auxiliary '${optText.split(' ')[0]}' placed before Subject '${optText.split(' ')[1] || 'subject'}').`;
+            return `✅ <strong>Correct Choice:</strong> Grammatically accurate and correctly satisfies the tense and syntactic requirements of the sentence.`;
           }
-        } else if (qLower.includes("urdu") || qLower.includes("اردو") || qLower.includes("meaning") || qLower.includes("matlab")) {
-          specificAnswer = `<strong>اردو میں گرامر کی وضاحت:</strong><br>اس سوال کا درست جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ انگریزی اصول کے مطابق: ${escapeHtml(explanation)}`;
-        } else if (qLower.includes("formula") || qLower.includes("rule") || qLower.includes("structure") || qLower.includes("pattern")) {
-          specificAnswer = `<strong>Grammar Formula &amp; Structure:</strong><br>Pattern: <code>[Subject] + [Proper Form: ${escapeHtml(correctOpt)}] + [Complement]</code>.<br><strong>Rule:</strong> ${escapeHtml(explanation)}`;
-        } else if (qLower.includes("example") || qLower.includes("sentence")) {
-          specificAnswer = `<strong>Examples using this grammar rule:</strong><br>1. <em>"She has already finished her work on time."</em><br>2. <em>"If he had practiced more, he would have succeeded."</em><br>3. <em>"They insisted that the report be submitted immediately."</em>`;
+          if (isInversion) {
+            if (optText.startsWith("she") || optText.startsWith("he") || optText.startsWith("they") || optText.startsWith("we") || optText.startsWith("i")) {
+              return `❌ <strong>Incorrect Word Order:</strong> Uses standard word order ('Subject + Auxiliary') instead of the mandatory Inversion ('Auxiliary + Subject') required after negative adverbials like 'No sooner'.`;
+            }
+            if (optText.includes("did") && (optText.includes("arrived") || optText.includes("went") || optText.includes("seen") || optText.includes("taken"))) {
+              return `❌ <strong>Double-Past Error:</strong> 'did' is an auxiliary that MUST be followed by the base form verb (V1: 'arrive'), never the past form ('arrived').`;
+            }
+            return `❌ <strong>Incorrect Structure:</strong> Fails to apply the proper auxiliary verb or past participle required by this inversion formula.`;
+          }
+          return `❌ <strong>Incorrect:</strong> Violates the grammatical agreement, mood, or tense sequence required for this clause.`;
+        };
+
+        // Construct customized direct answer
+        let directAnswerHtml = "";
+
+        if (isInversion && (qLower.includes("inversion") || !query || qLower.includes("what is") || qLower.includes("meaning"))) {
+          directAnswerHtml = `
+            <div style="font-weight: 800; color: #4338ca; font-size: 14px; margin-bottom: 6px;">
+              🔄 What is Subject-Auxiliary Inversion?
+            </div>
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
+              <strong>Inversion (ترتیب کو الٹ دینا)</strong> means placing the <strong>auxiliary (helping) verb before the subject</strong> (just like forming a question):
+              <div style="margin: 8px 0; padding: 8px 12px; background: #e0e7ff; border-radius: 8px; border-left: 4px solid #4f46e5; font-size: 12.5px;">
+                🔹 <strong>Normal Order:</strong> <em>Subject + Auxiliary + Verb</em> &nbsp;➔&nbsp; <code>"She had arrived home."</code><br>
+                🔹 <strong>Inverted Order:</strong> <strong>Auxiliary + Subject + Verb</strong> &nbsp;➔&nbsp; <code>"Had she arrived home..."</code>
+              </div>
+              When negative or limiting adverbs (<strong>No sooner, Hardly, Scarcely, Seldom, Rarely, Never</strong>) begin a clause, English strictly requires <strong>Subject-Auxiliary Inversion</strong> for dramatic emphasis!
+            </div>
+          `;
+        } else if (queriedOpt) {
+          const isCorrect = queriedOptIndex === q.correctIndex;
+          if (isCorrect) {
+            directAnswerHtml = `
+              <div style="font-weight: 800; color: #047857; font-size: 14px; margin-bottom: 6px;">
+                ✅ Why "${escapeHtml(queriedOpt)}" is Correct:
+              </div>
+              <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
+                <strong>"${escapeHtml(queriedOpt)}"</strong> perfectly fulfills the rule: ${escapeHtml(explanation)}
+              </div>
+            `;
+          } else {
+            directAnswerHtml = `
+              <div style="font-weight: 800; color: #be123c; font-size: 14px; margin-bottom: 6px;">
+                ❌ Why "${escapeHtml(queriedOpt)}" is Incorrect:
+              </div>
+              <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
+                ${getOptionFeedback(queriedOpt, false)}<br>
+                The correct choice is <strong>"${escapeHtml(correctOpt)}"</strong> because: ${escapeHtml(explanation)}
+              </div>
+            `;
+          }
+        } else if (qLower.includes("urdu") || qLower.includes("اردو") || qLower.includes("comparison") || qLower.includes("موازنہ")) {
+          directAnswerHtml = `
+            <div style="font-weight: 800; color: #86198f; font-size: 14px; margin-bottom: 6px;">
+              🇵🇰 اردو گرائمر کے ساتھ موازنہ اور تفصیلی فہم:
+            </div>
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.7; font-family: system-ui, -apple-system, sans-serif;">
+              <strong>1. اردو اور انگریزی کا بنیادی فرق:</strong><br>
+              اردو زبان کی قدرتی ترتیب <strong>فاعل + مفعول + فعل</strong> (SOV) ہوتی ہے۔ جیسے: <em>"وہ (فاعل) گھر پہنچی (فعل) تھی (معاون فعل)۔"</em><br>
+              <strong>2. "No sooner ... than" کا اردو ترجمہ:</strong><br>
+              <em style="color: #701a75; font-size: 14px;">"وہ گھر پہنچی <strong>ہی تھی</strong> کہ طوفان شروع ہو گیا۔"</em> یا <em>"ابھی وہ بمشکل گھر پہنچی تھی کہ آندھی آ گئی۔"</em><br>
+              <strong>3. گرائمر اصول:</strong> اردو میں تاکید کے لیے حروفِ تاکید (جیسے <strong>"ہی"</strong>، <strong>"ابھی"</strong>، <strong>"بمشکل"</strong>) لگائے جاتے ہیں، جبکہ انگریزی میں جملے کے آغاز پر <em>No sooner</em> آنے پر امدادی فعل کو فاعل سے پہلے لا کر ترتیب بدل دی جاتی ہے (<strong>had she</strong>، نہ کہ <strong>she had</strong>)۔
+            </div>
+          `;
+        } else if (qLower.includes("formula") || qLower.includes("example") || qLower.includes("structure") || qLower.includes("pattern")) {
+          directAnswerHtml = `
+            <div style="font-weight: 800; color: #1d4ed8; font-size: 14px; margin-bottom: 6px;">
+              📐 Grammar Formulas &amp; Sentence Patterns:
+            </div>
+            <div style="font-size: 12.5px; color: #1e1b4b; line-height: 1.6;">
+              ${isInversion ? `
+                <div style="padding: 8px 12px; background: #eff6ff; border-radius: 8px; border: 1.5px solid #bfdbfe; margin-bottom: 6px;">
+                  <strong>Pattern 1:</strong> <code>No sooner + had + Subject + V3 (Past Participle) ... than ...</code><br>
+                  <strong>Pattern 2:</strong> <code>No sooner + did + Subject + V1 (Base Verb) ... than ...</code><br>
+                  <strong>Pattern 3:</strong> <code>Hardly / Scarcely + had + Subject + V3 ... when ...</code>
+                </div>
+                <strong>3 Examples:</strong><br>
+                1. <em>"No sooner <strong>had the bell rung</strong> than the students left."</em><br>
+                2. <em>"Hardly <strong>had I closed</strong> my eyes when the alarm went off."</em><br>
+                3. <em>"Seldom <strong>have we seen</strong> such great determination."</em>
+              ` : `
+                <div style="padding: 8px 12px; background: #eff6ff; border-radius: 8px; border: 1.5px solid #bfdbfe; margin-bottom: 6px;">
+                  <strong>Formula:</strong> <code>Subject + [Correct Form: ${escapeHtml(correctOpt)}] + Complement</code>
+                </div>
+                <strong>Rule:</strong> ${escapeHtml(explanation)}
+              `}
+            </div>
+          `;
         } else if (query) {
-          specificAnswer = `<strong>Regarding your question "${escapeHtml(query)}":</strong><br>${escapeHtml(explanation)}<br>Therefore, <strong>"${escapeHtml(correctOpt)}"</strong> is the only grammatically acceptable choice.`;
+          directAnswerHtml = `
+            <div style="font-weight: 800; color: #5b21b6; font-size: 14px; margin-bottom: 6px;">
+              💡 Regarding Your Question: "${escapeHtml(query)}"
+            </div>
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
+              ${escapeHtml(explanation)}<br>
+              Therefore, <strong>"${escapeHtml(correctOpt)}"</strong> is the correct grammatical choice for this sentence.
+            </div>
+          `;
         } else {
-          specificAnswer = `<strong>Core Grammar Principle:</strong> ${escapeHtml(explanation)}`;
+          directAnswerHtml = `
+            <div style="font-weight: 800; color: #4338ca; font-size: 13.5px; margin-bottom: 4px;">
+              🎯 Key Grammar Concept:
+            </div>
+            <div style="font-size: 13px; color: #1e1b4b; line-height: 1.6;">
+              ${escapeHtml(explanation)}
+            </div>
+          `;
         }
 
         const html = `
-          <!-- Main Direct Answer -->
-          <div style="background: #ffffff; border: 1.5px solid #d946ef; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1.5px 0 var(--ink);">
-            <div style="font-size: 13.5px; color: #1e1b4b; line-height: 1.6;">
-              ${specificAnswer}
-            </div>
+          <!-- Main Direct Answer Card -->
+          <div style="background: #ffffff; border: 1.5px solid #d946ef; border-radius: 10px; padding: 12px; margin-bottom: 12px; box-shadow: 0 1.5px 0 var(--ink);">
+            ${directAnswerHtml}
           </div>
 
-          <!-- Deep Grammar Breakdown -->
-          <div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 10px;">
-            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 12px;">
-              <div style="font-weight: 800; color: #15803d; font-size: 12.5px; margin-bottom: 3px;">
-                ✅ Correct Choice: "${escapeHtml(correctOpt)}"
+          <!-- Deep Multi-Section Breakdown -->
+          <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+            
+            <!-- Option-by-Option Breakdown -->
+            <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 12px;">
+              <div style="font-weight: 800; color: #334155; font-size: 12.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px;">
+                <span>📋</span>
+                <span>Complete Option-by-Option Analysis:</span>
               </div>
-              <div style="font-size: 12px; color: #166534; line-height: 1.5;">
-                ${escapeHtml(explanation)}
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                ${q.options.map((opt, i) => {
+                  const isCorr = i === q.correctIndex;
+                  return `
+                    <div style="padding: 8px 10px; border-radius: 8px; border: 1.5px solid ${isCorr ? '#86efac' : '#fecdd3'}; background: ${isCorr ? '#f0fdf4' : '#fff1f2'}; font-size: 12px; line-height: 1.45;">
+                      <div style="font-weight: 800; color: ${isCorr ? '#15803d' : '#be123c'}; margin-bottom: 2px;">
+                        Option ${String.fromCharCode(65 + i)}: "${escapeHtml(opt)}" ${isCorr ? '✅ (Correct)' : '❌ (Wrong)'}
+                      </div>
+                      <div style="color: ${isCorr ? '#166534' : '#881337'}; font-size: 11.5px;">
+                        ${getOptionFeedback(opt, isCorr)}
+                      </div>
+                    </div>
+                  `;
+                }).join("")}
               </div>
             </div>
 
-            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px;">
-              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 4px;">
-                ❌ Why other options are wrong:
+            <!-- Urdu Explanation Card -->
+            <div style="background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 10px; padding: 12px;">
+              <div style="font-weight: 800; color: #86198f; font-size: 12.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
+                <span>🇵🇰</span>
+                <span>اردو گرائمر میں تفصیلی وضاحت (Urdu Breakdown):</span>
               </div>
-              <ul style="margin: 0; padding-left: 18px; font-size: 12px; color: #881337; line-height: 1.5;">
-                ${otherOpts.map(opt => `<li><strong>"${escapeHtml(opt)}"</strong>: Incorrect grammar form or tense for this structure.</li>`).join("")}
-              </ul>
-            </div>
-
-            <!-- Urdu Translation & Explanation Box -->
-            <div style="background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 8px; padding: 10px 12px;">
-              <div style="font-weight: 800; color: #86198f; font-size: 12px; margin-bottom: 3px;">
-                🇵🇰 اردو میں وضاحت (Urdu Explanation):
-              </div>
-              <div style="font-size: 13px; color: #701a75; font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif; line-height: 1.7;">
-                اس جملے میں صحیح جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ ${escapeHtml(explanation)}
+              <div style="font-size: 13px; color: #701a75; font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', Tahoma, sans-serif; line-height: 1.8; direction: rtl; text-align: right;">
+                ${isInversion ? 
+                  `اس جملے میں صحیح جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ جب بھی انگریزی جملے کا آغاز <em>No sooner</em>، <em>Hardly</em>، یا <em>Scarcely</em> جیسے الفاظ سے ہو تو اس کے فوراً بعد <strong>Subject-Auxiliary Inversion</strong> لاگو ہوتی ہے، یعنی امدادی فعل (had / did) فاعل (she) سے پہلے آ جاتا ہے۔ اردو میں اس کا مفہوم ہے: <em>"وہ گھر پہنچی ہی تھی کہ طوفان شروع ہو گیا۔"</em>` : 
+                  `اس جملے میں درست جواب <strong>"${escapeHtml(correctOpt)}"</strong> ہے۔ انگریزی اصول: ${escapeHtml(explanation)}`
+                }
               </div>
             </div>
-          </div>
 
-          <!-- Ask Live Gemini AI Launcher Banner -->
-          <div style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #ede9fe 0%, #fdf4ff 100%); border: 1.5px solid #c084fc; border-radius: 8px; padding: 8px 12px; flex-wrap: wrap; gap: 8px;">
-            <span style="font-size: 11.5px; color: #5b21b6; font-weight: 700;">
-              🤖 Want to chat live with Gemini AI about this rule?
-            </span>
-            <button
-              type="button"
-              class="pdf-action-btn"
-              onclick="openGeminiTutorLive('${escapeHtml(query.replace(/'/g, "\\'"))}')"
-              style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; font-size: 11.5px; padding: 4px 10px; font-weight: 800; border: 1px solid var(--ink);"
-            >
-              <span>Open Gemini Live</span> ➔
-            </button>
+            <!-- Rule Formula Card -->
+            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <div style="font-weight: 800; color: #15803d; font-size: 12px; margin-bottom: 2px;">
+                  📐 Standard Formula:
+                </div>
+                <div style="font-family: monospace; font-size: 11.5px; font-weight: 700; color: #166534;">
+                  ${isInversion ? 'No sooner + had + Subject + V3 ... than [Past Simple]' : `Subject + [${escapeHtml(correctOpt)}] + Complement`}
+                </div>
+              </div>
+              <button
+                type="button"
+                class="pdf-action-btn"
+                onclick="submitCustomGrammarDoubt('Show 3 more sentence examples')"
+                style="font-size: 11px; padding: 4px 10px; background: #dcfce7; color: #15803d; border: 1px solid #86efac; font-weight: 800; border-radius: 6px;"
+              >
+                + More Examples
+              </button>
+            </div>
+
+            <!-- Ask Live Gemini Banner -->
+            <div style="display: flex; align-items: center; justify-content: space-between; background: linear-gradient(135deg, #ede9fe 0%, #fdf4ff 100%); border: 1.5px solid #c084fc; border-radius: 10px; padding: 8px 12px; flex-wrap: wrap; gap: 8px;">
+              <span style="font-size: 11.5px; color: #5b21b6; font-weight: 700;">
+                🤖 Need live conversation with Gemini AI about this rule?
+              </span>
+              <button
+                type="button"
+                class="pdf-action-btn"
+                onclick="openGeminiTutorLive('${escapeHtml(query.replace(/'/g, "\\'"))}')"
+                style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: #ffffff; font-size: 11.5px; padding: 5px 12px; font-weight: 800; border: 1px solid var(--ink); border-radius: 6px; cursor: pointer;"
+              >
+                <span>Open Gemini Live</span> ➔
+              </button>
+            </div>
+
           </div>
         `;
 
-        const audio = `${explanation}. The correct answer is ${correctOpt}.`;
+        const audio = isInversion 
+          ? `Inversion rule: No sooner triggers subject-auxiliary inversion. The correct answer is had she arrived.` 
+          : `${explanation}. The correct answer is ${correctOpt}.`;
+
         return { html, audio };
       }
 
@@ -14251,8 +14414,8 @@
         if (contentEl) contentEl.innerHTML = result.html;
         currentAITutorAudioText = result.audio;
 
-        if (input) input.value = "";
-        if (typeof showToast === "function") showToast("✨ AI Answer generated!");
+        if (input && !presetQuery) input.value = "";
+        if (typeof showToast === "function") showToast("✨ Gemini AI Answer generated!");
       }
 
       function openGeminiTutorLive(userQuery) {
