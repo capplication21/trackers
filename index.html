@@ -20250,43 +20250,13 @@
       // Gemini Clean Chat / Tutor Popup Launcher (Clean, blank chat without existing MCQs)
       function openGeminiQuizPopup() {
         const url = "https://gemini.google.com/app";
-        const width = Math.min(1080, Math.floor(window.screen.availWidth * 0.85));
-        const height = Math.min(880, Math.floor(window.screen.availHeight * 0.9));
-        const left = Math.max(0, Math.floor((window.screen.availWidth - width) / 2));
-        const top = Math.max(0, Math.floor((window.screen.availHeight - height) / 2));
-
-        const popup = window.open(
-          url,
-          "GeminiChatWindow",
-          `width=${width},height=${height},left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes`
-        );
-
-        if (!popup || popup.closed || typeof popup.closed === "undefined") {
-          window.open(url, "_blank");
-        } else {
-          popup.focus();
-        }
+        window.open(url, "_blank");
       }
 
-      // Gemini Clean Tutor / Doubt Clarification Popup Launcher
+      // Gemini Clean Tutor / Doubt Clarification Popup Launcher (Always fresh, blank chat)
       function openGeminiAssessmentPopup() {
         const url = "https://gemini.google.com/app";
-        const width = Math.min(1080, Math.floor(window.screen.availWidth * 0.85));
-        const height = Math.min(880, Math.floor(window.screen.availHeight * 0.9));
-        const left = Math.max(0, Math.floor((window.screen.availWidth - width) / 2));
-        const top = Math.max(0, Math.floor((window.screen.availHeight - height) / 2));
-
-        const popup = window.open(
-          url,
-          "GeminiChatWindow",
-          `width=${width},height=${height},left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes`
-        );
-
-        if (!popup || popup.closed || typeof popup.closed === "undefined") {
-          window.open(url, "_blank");
-        } else {
-          popup.focus();
-        }
+        window.open(url, "_blank");
       }
 
       // ==================== B1 PRACTICAL ENGLISH: 7-DAY ROTATING ENGINE ====================
