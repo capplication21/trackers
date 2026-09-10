@@ -10804,6 +10804,7 @@
             <span class="duaa-book-category-pill" id="duaaBookCategoryPill">Quranic</span>
           </div>
           <div class="duaa-book-top-actions">
+            <button class="duaa-reader-font-btn" onclick="openNoteModal()" title="Add another Duaa directly into book" style="background: #e0e7ff; color: #4338ca; border: 1.5px solid #818cf8; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 6px; cursor: pointer;">➕ Add Duaa</button>
             <button class="duaa-reader-font-btn" onclick="adjustDuaaReaderFontSize(-2)" title="Smaller font">A-</button>
             <button class="duaa-reader-font-btn" onclick="adjustDuaaReaderFontSize(2)" title="Larger font">A+</button>
             <button class="duaa-reader-bookmark-btn" id="duaaReaderBookmarkBtn" onclick="toggleCurrentDuaaBookmark()" title="Bookmark">⭐</button>
@@ -18420,12 +18421,15 @@ Please provide:
             createdAt: Date.now(),
           };
           notesData.notes.unshift(newNote);
-          showToast("Duaa added to Book 📖");
+          showToast("📖 Duaa added to Book! Turn pages to read.");
         }
 
         saveNotesDataToStorage();
         closeNoteModal();
         renderNotesList();
+
+        const targetIndex = editId ? Math.max(0, notesData.notes.findIndex((n) => n.id === editId)) : 0;
+        openDuaaBookReader(targetIndex);
       }
 
       function deleteNote(id, event) {
@@ -18760,6 +18764,32 @@ Please provide:
         const modal = document.getElementById("imageViewerModal");
         modal.classList.remove("show");
       }
+
+      // Touch swipe support for turning pages in Duaa Book
+      (function initDuaaBookSwipe() {
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const bookPage = document.getElementById("duaaBookPageContent");
+        if (!bookPage) return;
+
+        bookPage.addEventListener("touchstart", function (e) {
+          if (e.changedTouches && e.changedTouches.length > 0) {
+            touchStartX = e.changedTouches[0].screenX;
+          }
+        }, { passive: true });
+
+        bookPage.addEventListener("touchend", function (e) {
+          if (e.changedTouches && e.changedTouches.length > 0) {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchEndX - touchStartX;
+            if (diff < -50) {
+              navigateDuaaBook(1); // Swipe left ➔ Next Duaa page
+            } else if (diff > 50) {
+              navigateDuaaBook(-1); // Swipe right ➔ Previous Duaa page
+            }
+          }
+        }, { passive: true });
+      })();
 
       // Drag & Drop on Note Modal Drop Area
       (function () {
