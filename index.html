@@ -10663,32 +10663,11 @@
       <div class="modal-card duaa-modal-card">
         <div class="modal-title" id="noteModalTitle">🤲 Add to Duaa Book</div>
         <div class="modal-subtitle">
-          Type Arabic &amp; translation, or attach a Duaa screenshot
+          Attach or paste your Duaa screenshot — details will be auto-formatted!
         </div>
 
         <input type="hidden" id="noteEditId" value="" />
-
-        <div class="input-group">
-          <label class="input-label">Duaa Title / Purpose</label>
-          <input
-            type="text"
-            class="input-field"
-            id="noteTitleInput"
-            placeholder="e.g. For Parents, Forgiveness, Ease in Hardship, Protection..."
-          />
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">Duaa Title / Name (Optional)</label>
-          <input
-            type="text"
-            class="input-field"
-            id="noteTitleInput"
-            placeholder="e.g. Dua for Parents, Protection, Ease..."
-          />
-        </div>
-
-        <!-- Hidden input elements for backward compatibility -->
+        <input type="hidden" id="noteTitleInput" value="" />
         <input type="hidden" id="noteCategoryInput" value="Quranic" />
         <input type="hidden" id="noteSourceInput" value="" />
         <textarea id="noteArabicInput" style="display:none;"></textarea>
