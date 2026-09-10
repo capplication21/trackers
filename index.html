@@ -14272,6 +14272,7 @@
 
         // Construct 3 tailored example sentences
         let examplesList = [];
+        let mistakeTrapInfo = "";
         const combText = (qText + " " + explanation).toLowerCase();
         if (isInversion) {
           examplesList = [
@@ -14279,42 +14280,121 @@
             "Hardly <strong>had she closed</strong> her eyes when the alarm started ringing.",
             "Seldom <strong>have we witnessed</strong> such an outstanding performance."
           ];
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Where Learners Make Mistakes (کہاں بار بار غلطی ہوتی ہے؟):</span>
+              </div>
+              <ul style="margin: 0; padding-left: 16px; font-size: 11.5px; color: #881337; line-height: 1.5;">
+                <li><strong>Trap 1 (Normal Order):</strong> Choosing <code>"she had arrived"</code> ➔ After <em>'No sooner'</em>, you <strong>must flip</strong> the order like a question: <code>"had she arrived"</code>.</li>
+                <li><strong>Trap 2 (Double-Past):</strong> Choosing <code>"did she arrived"</code> ➔ <em>'did'</em> already carries the past, so the main verb must be in <strong>Base Form (V1: arrive)</strong>, never <em>'arrived'</em>.</li>
+                <li><strong>Quick Rule:</strong> <code>No sooner + had + Subject + V3</code> OR <code>No sooner + did + Subject + V1</code>.</li>
+              </ul>
+            </div>
+          `;
         } else if (combText.includes("second conditional") || combText.includes("if i")) {
           examplesList = [
             "If I <strong>had</strong> more free time, I <strong>would learn</strong> another language.",
             "If she <strong>were</strong> here, she <strong>would help</strong> us solve this.",
             "They <strong>would travel</strong> more if they <strong>earned</strong> a higher salary."
           ];
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Common Trap:</span>
+              </div>
+              <div style="font-size: 11.5px; color: #881337; line-height: 1.45;">
+                Never put <em>'would'</em> inside the <strong>If</strong> clause! The <em>If</em> clause takes <strong>Past Simple (had / were)</strong>, while the result clause takes <strong>would + base verb</strong>.
+              </div>
+            </div>
+          `;
         } else if (combText.includes("third conditional") || combText.includes("would have")) {
           examplesList = [
             "If we <strong>had taken</strong> the earlier train, we <strong>would have arrived</strong> on time.",
             "She <strong>would have passed</strong> the test if she <strong>had revised</strong> properly.",
             "If they <strong>had known</strong> about the storm, they <strong>would have stayed</strong> indoors."
           ];
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Common Trap:</span>
+              </div>
+              <div style="font-size: 11.5px; color: #881337; line-height: 1.45;">
+                Always use <strong>had + V3</strong> in the <em>If</em> part, and <strong>would have + V3</strong> in the second part for unreal past regrets.
+              </div>
+            </div>
+          `;
         } else if (combText.includes("accustomed to") || combText.includes("look forward to")) {
           examplesList = [
             "I am really looking forward to <strong>meeting</strong> you next week.",
             "He is accustomed to <strong>waking up</strong> early in the morning.",
             "She objects to <strong>working</strong> late on weekends."
           ];
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Common Trap:</span>
+              </div>
+              <div style="font-size: 11.5px; color: #881337; line-height: 1.45;">
+                In these phrases, <em>'to'</em> is a preposition, so it must be followed by a <strong>Gerund (-ing form: meeting / seeing)</strong>, not a base verb!
+              </div>
+            </div>
+          `;
         } else if (combText.includes("neither") && combText.includes("nor")) {
           examplesList = [
             "Neither the teacher nor the students <strong>were</strong> in the classroom.",
             "Neither the manager nor the assistant <strong>is</strong> available right now.",
             "Neither pizza nor burgers <strong>are</strong> on the menu tonight."
           ];
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Common Trap:</span>
+              </div>
+              <div style="font-size: 11.5px; color: #881337; line-height: 1.45;">
+                With <em>'Neither... nor...'</em>, the verb agrees with the <strong>closest subject</strong>, not the first subject.
+              </div>
+            </div>
+          `;
         } else if (combText.includes("subjunctive") || combText.includes("suggested that") || combText.includes("insisted that")) {
           examplesList = [
             "The doctor recommended that he <strong>rest</strong> for two weeks.",
             "She insisted that everyone <strong>be</strong> present at 9:00 AM.",
             "The manager proposed that a new strategy <strong>be</strong> implemented."
           ];
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Common Trap:</span>
+              </div>
+              <div style="font-size: 11.5px; color: #881337; line-height: 1.45;">
+                Subjunctive verbs never take <em>'-s'</em> or past tense (use bare <em>'be / go / rest'</em> for all subjects: he, she, they).
+              </div>
+            </div>
+          `;
         } else if (combText.includes("past perfect") || combText.includes("by the time")) {
           examplesList = [
             "By the time the plane landed, the weather <strong>had cleared</strong> up.",
             "She <strong>had already finished</strong> dinner before we arrived.",
             "The train <strong>had left</strong> by the time they reached the station."
           ];
+          mistakeTrapInfo = `
+            <div style="background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 8px; padding: 10px 12px; margin-top: 8px;">
+              <div style="font-weight: 800; color: #be123c; font-size: 12px; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+                <span>⚠️</span>
+                <span>Common Trap:</span>
+              </div>
+              <div style="font-size: 11.5px; color: #881337; line-height: 1.45;">
+                Use <strong>Past Perfect ('had + V3')</strong> for the earlier action, and <strong>Past Simple (V2)</strong> for the later action.
+              </div>
+            </div>
+          `;
         } else if (combText.includes("stiff") || combText.includes("resistance") || combText.includes("collocation")) {
           examplesList = [
             "The new government policy met with <strong>stiff resistance</strong> from the public.",
@@ -14355,6 +14435,8 @@
               <ul style="margin: 0; padding-left: 18px; font-size: 12px; color: #14532d; line-height: 1.6;">
                 ${examplesList.map(ex => `<li>${ex}</li>`).join("")}
               </ul>
+
+              ${mistakeTrapInfo}
             </div>
 
             <!-- Ask Live Gemini Banner -->
