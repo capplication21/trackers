@@ -22373,7 +22373,7 @@ Please provide:
 
         if (optionsEl) {
           optionsEl.innerHTML = item.options.map((opt, i) => `
-            <button type="button" class="tech-colloc-option" onclick="selectMathOption('grams', ${i})">
+            <button type="button" class="tech-colloc-option" onclick="selectToolkitMathOption('grams', ${i})">
               <span>⚪</span> <strong>${escapeHtml(opt.text)}</strong>
             </button>
           `).join("");
@@ -22396,7 +22396,7 @@ Please provide:
 
         if (optionsEl) {
           optionsEl.innerHTML = item.options.map((opt, i) => `
-            <button type="button" class="tech-colloc-option" onclick="selectMathOption('change', ${i})">
+            <button type="button" class="tech-colloc-option" onclick="selectToolkitMathOption('change', ${i})">
               <span>⚪</span> <strong>${escapeHtml(opt.text)}</strong>
             </button>
           `).join("");
@@ -22419,14 +22419,14 @@ Please provide:
 
         if (optionsEl) {
           optionsEl.innerHTML = item.options.map((opt, i) => `
-            <button type="button" class="tech-colloc-option" onclick="selectMathOption('discount', ${i})">
+            <button type="button" class="tech-colloc-option" onclick="selectToolkitMathOption('discount', ${i})">
               <span>⚪</span> <strong>${escapeHtml(opt.text)}</strong>
             </button>
           `).join("");
         }
       }
 
-      function selectMathOption(category, selectedIndex) {
+      function selectToolkitMathOption(category, selectedIndex) {
         let list, currentIdx, containerId, feedbackId;
         if (category === 'grams') {
           list = MATH_GRAMS_DATA;
