@@ -20247,9 +20247,9 @@
         }
       });
 
-      // Gemini Interactive Quiz Popup Launcher
+      // Gemini Clean Chat / Tutor Popup Launcher (Clean, blank chat without existing MCQs)
       function openGeminiQuizPopup() {
-        const url = "https://gemini.google.com/share/e219c8ef0eee?skid=10fd6e4e-9d56-4b96-b6dc-2fc5b45879d9";
+        const url = "https://gemini.google.com/app";
         const width = Math.min(1080, Math.floor(window.screen.availWidth * 0.85));
         const height = Math.min(880, Math.floor(window.screen.availHeight * 0.9));
         const left = Math.max(0, Math.floor((window.screen.availWidth - width) / 2));
@@ -20257,7 +20257,7 @@
 
         const popup = window.open(
           url,
-          "GeminiQuizWindow",
+          "GeminiChatWindow",
           `width=${width},height=${height},left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes`
         );
 
@@ -20268,9 +20268,9 @@
         }
       }
 
-      // Gemini English Level Assessment & Reading Popup Launcher
+      // Gemini Clean Tutor / Doubt Clarification Popup Launcher
       function openGeminiAssessmentPopup() {
-        const url = "https://share.gemini.google/up2W333Melwq";
+        const url = "https://gemini.google.com/app";
         const width = Math.min(1080, Math.floor(window.screen.availWidth * 0.85));
         const height = Math.min(880, Math.floor(window.screen.availHeight * 0.9));
         const left = Math.max(0, Math.floor((window.screen.availWidth - width) / 2));
@@ -20278,7 +20278,7 @@
 
         const popup = window.open(
           url,
-          "GeminiAssessmentWindow",
+          "GeminiChatWindow",
           `width=${width},height=${height},left=${left},top=${top},menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes`
         );
 
