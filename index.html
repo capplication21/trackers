@@ -14380,9 +14380,15 @@
                   <span>Open Gemini (Explain in Urdu)</span> ➔
                 </button>
               </div>
-              <div style="font-size: 11px; color: #6d28d9; background: #ffffff; border: 1px dashed #c084fc; border-radius: 6px; padding: 4px 8px; display: flex; align-items: center; gap: 4px;">
-                <span>💡</span>
-                <span><strong>Tip:</strong> Question prompt is auto-copied! When the empty Gemini page opens, simply press <strong>Ctrl + V (Paste)</strong> &amp; hit Enter!</span>
+              <div style="font-size: 11px; color: #6d28d9; background: #ffffff; border: 1.5px dashed #c084fc; border-radius: 8px; padding: 6px 10px; display: flex; flex-direction: column; gap: 3px;">
+                <div style="font-weight: 800; color: #4c1d95; display: flex; align-items: center; gap: 4px;">
+                  <span>📋</span>
+                  <span>Prompt is Auto-Copied! How to paste in Gemini:</span>
+                </div>
+                <div style="font-size: 10.5px; color: #374151; line-height: 1.4;">
+                  📱 <strong>Mobile / Phone:</strong> In Gemini, <strong>Tap &amp; Hold (Long Press)</strong> the message box ➔ tap <strong>"Paste"</strong> ➔ tap <strong>Send (➔)</strong>.<br>
+                  💻 <strong>Computer / Laptop:</strong> Simply press <strong>Ctrl + V</strong> &amp; hit <strong>Enter</strong>.
+                </div>
               </div>
             </div>
 
@@ -14439,9 +14445,14 @@ Please provide:
 3. Urdu Grammar Comparison (اردو زبان کی ساخت کے ساتھ موازنہ تاکہ بات بالکل واضح ہو).
 4. 2-3 Extra Practice Examples with Urdu translation (مزید مثالیں بمعہ اردو ترجمہ).`;
 
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
+        const toastMsg = isTouch 
+          ? "📋 Prompt copied! In Gemini, Tap & Hold the box ➔ Paste ➔ Send!" 
+          : "📋 Prompt copied! In Gemini, press Ctrl + V ➔ Enter!";
+
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(promptText).then(() => {
-            if (typeof showToast === "function") showToast("📋 Urdu Grammar prompt copied! Opening Gemini AI... Just Paste (Ctrl+V) in Gemini!");
+            if (typeof showToast === "function") showToast(toastMsg);
           }).catch(() => {
             if (typeof showToast === "function") showToast("Opening Gemini AI...");
           });
