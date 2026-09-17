@@ -19201,12 +19201,7 @@ Please provide:
           const s = QURAN_SURAHS_114.find((x) => x.num === surahNum) || QURAN_SURAHS_114[0];
           const startAyah = subj.ayahStart || 1;
           const endAyah = subj.ayahEnd || (subj.target && subj.target <= s.count ? subj.target : s.count);
-          const target = subj.target || (endAyah - startAyah + 1) || s.count;
-          const current = Math.min(target, Math.max(1, subj.current || 1));
-          const pct = Math.min(100, Math.round((current / target) * 100));
-          const isComplete = current >= target;
           const normUrl = subj.url ? getNormalizedUrl(subj.url) : "";
-          const logs = subj.logs || [];
 
           return `
             <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 10px; margin-top: 6px;" onclick="event.stopPropagation()">
@@ -19224,32 +19219,6 @@ Please provide:
                   <button type="button" class="grammar-item-action-btn" onclick="editQuranPlaylist('${subj.id}')" title="Edit Playlist" style="width: 22px; height: 22px; font-size: 10px;">✏️</button>
                   <button type="button" class="grammar-item-action-btn delete-btn" onclick="deleteQuranPlaylist('${subj.id}')" title="Delete Playlist" style="width: 22px; height: 22px; font-size: 10px;">🗑️</button>
                 </div>
-              </div>
-
-              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
-                <div style="display: flex; align-items: center; gap: 5px;">
-                  <span style="font-size: 11px; font-weight: 700; color: #475569;">Ayah:</span>
-                  <input
-                    type="number"
-                    min="1"
-                    max="${target}"
-                    value="${current}"
-                    onchange="setQuranPlaylistLecture('${subj.id}', this.value)"
-                    style="width: 52px; padding: 2px 5px; font-size: 12px; font-weight: 800; text-align: center; border: 1.5px solid #cbd5e1; border-radius: 6px;"
-                  />
-                  <span style="font-size: 11px; color: #64748b; font-weight: 700;">/ ${target}</span>
-                </div>
-                <div style="font-size: 11.5px; font-weight: 700; color: ${isComplete ? '#059669' : '#0284c7'};">
-                  ${pct}% ${isComplete ? '✓ Completed' : ''}
-                </div>
-              </div>
-
-              <div class="lecture-progress-track" style="height: 6px; margin-bottom: 6px;">
-                <div
-                  class="lecture-progress-fill ${isComplete ? 'complete' : ''}"
-                  id="qpeProgressFill_${subj.id}"
-                  style="width: ${pct}%; height: 100%;"
-                ></div>
               </div>
 
               <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px;">
