@@ -10844,6 +10844,15 @@
             Cancel
           </button>
           <button
+            class="modal-btn"
+            id="quranPlaylistDeleteModalBtn"
+            type="button"
+            style="display: none; background: #fee2e2; color: #dc2626; border: 1.5px solid #dc2626; font-weight: 700; border-radius: 8px; padding: 8px 14px; cursor: pointer;"
+            onclick="deleteQuranPlaylistFromModal()"
+          >
+            🗑️ Delete
+          </button>
+          <button
             class="modal-btn modal-btn-save"
             id="quranPlaylistSaveBtn"
             type="button"
@@ -18683,30 +18692,28 @@ Please provide:
       function loadQuranPlaylists() {
         try {
           const stored = localStorage.getItem("quran_playlists_v2");
-          if (stored) {
+          if (stored !== null) {
             try {
               const parsed = JSON.parse(stored);
-              if (Array.isArray(parsed) && parsed.length > 0) {
+              if (Array.isArray(parsed)) {
                 quranPlaylists = parsed;
               }
             } catch (err) {}
+          } else {
+            quranPlaylists = [
+              {
+                id: "qp_baqarah",
+                title: "📖 Surah Al-Baqarah",
+                target: 30,
+                current: 1,
+                url: "https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3&si=jX-E1-T-8sC3qN5u",
+                logs: []
+              }
+            ];
+            saveQuranPlaylists();
           }
         } catch (e) {
           quranPlaylists = [];
-        }
-
-        if (!quranPlaylists || quranPlaylists.length === 0) {
-          quranPlaylists = [
-            {
-              id: "qp_baqarah",
-              title: "📖 Surah Al-Baqarah",
-              target: 30,
-              current: 1,
-              url: "https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3&si=jX-E1-T-8sC3qN5u",
-              logs: []
-            }
-          ];
-          saveQuranPlaylists();
         }
 
         renderQuranPlaylists();
@@ -18849,7 +18856,7 @@ Please provide:
                 </div>
                 <div style="display: flex; align-items: center; gap: 4px;">
                   <button type="button" class="grammar-item-action-btn" onclick="editQuranPlaylist('${subj.id}')" title="Edit Playlist" style="width: 22px; height: 22px; font-size: 10px;">✏️</button>
-                  ${quranPlaylists.length > 1 ? `<button type="button" class="grammar-item-action-btn delete-btn" onclick="deleteQuranPlaylist('${subj.id}')" title="Delete Playlist" style="width: 22px; height: 22px; font-size: 10px;">🗑️</button>` : ""}
+                  <button type="button" class="grammar-item-action-btn delete-btn" onclick="deleteQuranPlaylist('${subj.id}')" title="Delete Playlist" style="width: 22px; height: 22px; font-size: 10px;">🗑️</button>
                 </div>
               </div>
 
@@ -18981,6 +18988,7 @@ Please provide:
         const targetInput = document.getElementById("quranPlaylistTargetInput");
         const urlInput = document.getElementById("quranPlaylistUrlInput");
         const saveBtn = document.getElementById("quranPlaylistSaveBtn");
+        const deleteModalBtn = document.getElementById("quranPlaylistDeleteModalBtn");
 
         if (!modal) return;
 
@@ -18993,6 +19001,7 @@ Please provide:
             if (targetInput) targetInput.value = subj.target || 30;
             if (urlInput) urlInput.value = subj.url || "";
             if (saveBtn) saveBtn.textContent = "Save Changes";
+            if (deleteModalBtn) deleteModalBtn.style.display = "inline-flex";
           }
         } else {
           if (editIdInput) editIdInput.value = "";
@@ -19001,6 +19010,7 @@ Please provide:
           if (targetInput) targetInput.value = 30;
           if (urlInput) urlInput.value = "";
           if (saveBtn) saveBtn.textContent = "Save Playlist";
+          if (deleteModalBtn) deleteModalBtn.style.display = "none";
         }
 
         modal.style.display = "flex";
@@ -19014,6 +19024,14 @@ Please provide:
           modal.classList.remove("show");
           modal.style.display = "";
         }
+      }
+
+      function deleteQuranPlaylistFromModal() {
+        const editIdInput = document.getElementById("quranPlaylistEditId");
+        const editId = editIdInput ? editIdInput.value.trim() : "";
+        if (!editId) return;
+        closeQuranPlaylistModal();
+        deleteQuranPlaylist(editId);
       }
 
       function saveQuranPlaylistItem() {
@@ -19086,6 +19104,7 @@ Please provide:
 
       window.openQuranPlaylistModal = openQuranPlaylistModal;
       window.closeQuranPlaylistModal = closeQuranPlaylistModal;
+      window.deleteQuranPlaylistFromModal = deleteQuranPlaylistFromModal;
       window.saveQuranPlaylistItem = saveQuranPlaylistItem;
       window.editQuranPlaylist = editQuranPlaylist;
       window.deleteQuranPlaylist = deleteQuranPlaylist;
