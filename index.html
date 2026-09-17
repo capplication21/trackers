@@ -7799,7 +7799,26 @@
                 </svg>
               </div>
               <div style="flex: 1">
-                <div class="task-text">Read and Listen Quran <span>📖</span></div>
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                  <div class="task-text" style="margin-bottom: 0;">
+                    Read and Listen Quran <span>📖</span>
+                  </div>
+                  <div style="display: flex; gap: 5px; align-items: center;">
+                    <button
+                      type="button"
+                      class="grammar-add-topic-btn"
+                      onclick="openQuranPlaylistModal(); event.stopPropagation();"
+                      title="Set Surah, Ayat range & YouTube recitation link"
+                      style="font-size: 11px; padding: 2.5px 8px;"
+                    >
+                      <span>➕</span> Set Surah &amp; Ayahs
+                    </button>
+                  </div>
+                </div>
+                <!-- Rendered Quran Surahs with Reading from Net & YouTube Listen Links -->
+                <div id="quranEveningPlaylistsContainer" onclick="event.stopPropagation()" style="margin-top: 8px;">
+                  <!-- Rendered dynamically -->
+                </div>
               </div>
             </div>
             <div class="task-card" id="task-e2-s" onclick="toggleTask('e2')">
@@ -10921,9 +10940,9 @@
     <div class="modal-overlay" id="quranPlaylistModal">
       <div class="modal-card">
         <input type="hidden" id="quranPlaylistEditId" value="" />
-        <div class="modal-title" id="quranPlaylistModalTitle">📖 Add Quran Playlist / Surah</div>
+        <div class="modal-title" id="quranPlaylistModalTitle">📖 Set Surah &amp; YouTube Link</div>
         <div class="modal-subtitle">
-          Select Surah number, Ayat start &amp; end, with Urdu meaning from net
+          Choose Surah, Ayah range to read from net, and YouTube link to listen recitation
         </div>
 
         <!-- Surah Selection (1-114) -->
@@ -10998,13 +11017,19 @@
         <input type="hidden" id="quranPlaylistTargetInput" value="7" />
 
         <div class="input-group">
-          <label class="input-label" for="quranPlaylistUrlInput">YouTube / Audio Link (optional)</label>
+          <label class="input-label" for="quranPlaylistUrlInput" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>YouTube Link to Listen From</span>
+            <span style="font-size: 11px; color: #dc2626; font-weight: 700;">▶️ Recitation</span>
+          </label>
           <input
             type="url"
             class="input-field"
             id="quranPlaylistUrlInput"
-            placeholder="e.g. https://youtube.com/... or leave empty"
+            placeholder="e.g. https://www.youtube.com/watch?v=... or https://youtu.be/..."
           />
+          <span style="font-size: 11px; color: var(--muted); display: block; margin-top: 3px;">
+            Provide any YouTube link from where you want to listen to these Ayahs while reading.
+          </span>
         </div>
 
         <div class="modal-buttons" style="flex-wrap: wrap; gap: 6px;">
@@ -11027,19 +11052,19 @@
           <button
             class="modal-btn"
             type="button"
-            style="background: #ecfdf5; color: #047857; border: 1.5px solid #059669; font-weight: 700; border-radius: 8px; padding: 8px 12px; cursor: pointer;"
-            onclick="previewCurrentQuranModalItem()"
-            title="Read Arabic &amp; Urdu Meaning right now"
+            style="background: #ecfdf5; color: #047857; border: 1.5px solid #059669; font-weight: 700; border-radius: 8px; padding: 8px 14px; cursor: pointer;"
+            onclick="saveQuranPlaylistItem(true)"
+            title="Save and read from net with YouTube recitation now"
           >
-            📖 Read &amp; Listen
+            📖 Save &amp; Read Now
           </button>
           <button
             class="modal-btn modal-btn-save"
             id="quranPlaylistSaveBtn"
             type="button"
-            onclick="saveQuranPlaylistItem()"
+            onclick="saveQuranPlaylistItem(false)"
           >
-            Save Playlist
+            Save
           </button>
         </div>
       </div>
@@ -11108,42 +11133,9 @@
           </button>
         </div>
 
-        <!-- Audio Player Bar -->
-        <div class="quran-reader-audio-bar">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <button
-              type="button"
-              id="quranAudioPlayAllBtn"
-              class="grammar-empty-add-btn"
-              onclick="toggleQuranPlayAll()"
-              style="font-size: 11.5px; padding: 4px 10px; margin: 0; background: #059669; color: #ffffff; border: none; cursor: pointer; border-radius: 6px;"
-            >
-              ▶️ Play Recitation
-            </button>
-            <span id="quranAudioStatusText" style="font-size: 11.5px; color: #065f46; font-weight: 600;">
-              Mishary Rashid Alafasy
-            </span>
-          </div>
-          <div style="display: flex; gap: 6px; align-items: center;">
-            <button
-              type="button"
-              class="grammar-item-action-btn"
-              onclick="playPrevQuranAyahAudio()"
-              title="Previous Ayah Audio"
-              style="width: 26px; height: 26px; font-size: 11px;"
-            >
-              ⏮️
-            </button>
-            <button
-              type="button"
-              class="grammar-item-action-btn"
-              onclick="playNextQuranAyahAudio()"
-              title="Next Ayah Audio"
-              style="width: 26px; height: 26px; font-size: 11px;"
-            >
-              ⏭️
-            </button>
-          </div>
+        <!-- YouTube Recitation Player Section (Listen to same Ayahs from YouTube) -->
+        <div id="quranReaderYouTubeSection" style="margin-bottom: 6px;">
+          <!-- Rendered dynamically -->
         </div>
 
         <!-- Verses Container with Arabic & Urdu Meaning -->
@@ -19361,7 +19353,7 @@ Please provide:
         deleteQuranPlaylist(editId);
       }
 
-      function saveQuranPlaylistItem() {
+      function saveQuranPlaylistItem(openReaderImmediately = false) {
         const editIdInput = document.getElementById("quranPlaylistEditId");
         const surahSelect = document.getElementById("quranPlaylistSurahSelect");
         const startInput = document.getElementById("quranPlaylistAyahStartInput");
@@ -19378,6 +19370,7 @@ Please provide:
         const title = titleInput && titleInput.value.trim() ? titleInput.value.trim() : `📖 Surah ${surahInfo.num}: ${surahInfo.name} (Ayat ${start} - ${end})`;
         const url = urlInput ? urlInput.value.trim() : "";
 
+        let targetId = editId;
         if (editId) {
           const idx = quranPlaylists.findIndex((s) => s.id === editId);
           if (idx !== -1) {
@@ -19392,11 +19385,12 @@ Please provide:
               target,
               url,
             };
-            showToast("Quran playlist updated! 📌");
+            showToast("Surah & YouTube recitation updated! 📌");
           }
         } else {
+          targetId = "qp_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5);
           quranPlaylists.push({
-            id: "qp_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5),
+            id: targetId,
             title,
             surahNumber: surahNum,
             surahName: surahInfo.name,
@@ -19408,14 +19402,17 @@ Please provide:
             url,
             logs: [],
           });
-          showToast("New Quran playlist added! ✨");
+          showToast("New Surah added! ✨");
         }
 
         closeQuranPlaylistModal();
         saveQuranPlaylists();
         renderQuranPlaylists();
-      }
 
+        if (openReaderImmediately) {
+          openQuranReaderModal(surahNum, start, end, targetId);
+        }
+      }
       function editQuranPlaylist(id) {
         openQuranPlaylistModal(id);
       }
@@ -19428,15 +19425,156 @@ Please provide:
         showToast("Quran playlist deleted 🗑️");
       }
 
-      // --- ONLINE QURAN READER MODAL HANDLERS ---
-      function openQuranReaderModal(surahNum = 1, startAyah = 1, endAyah = 7, playlistId = null) {
-        initQuranSurahDropdowns();
-        currentReaderSurah = parseInt(surahNum, 10) || 1;
-        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
-        currentReaderStart = Math.max(1, parseInt(startAyah, 10) || 1);
-        currentReaderEnd = Math.min(s.count, Math.max(currentReaderStart, parseInt(endAyah, 10) || s.count));
-        currentReaderPlaylistId = playlistId;
+      let currentReaderYouTubeUrl = "";
 
+      function getYouTubeEmbedInfo(url) {
+        if (!url) return null;
+        const str = String(url).trim();
+        const playlistMatch = str.match(/[?&]list=([a-zA-Z0-9_-]+)/);
+        const videoMatch = str.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([a-zA-Z0-9_-]{11})/);
+
+        const videoId = videoMatch ? videoMatch[1] : null;
+        const listId = playlistMatch ? playlistMatch[1] : null;
+
+        if (videoId && listId) {
+          return { embedUrl: "https://www.youtube-nocookie.com/embed/" + videoId + "?list=" + listId + "&enablejsapi=1&rel=0", videoId, listId };
+        } else if (videoId) {
+          return { embedUrl: "https://www.youtube-nocookie.com/embed/" + videoId + "?enablejsapi=1&rel=0", videoId, listId: null };
+        } else if (listId) {
+          return { embedUrl: "https://www.youtube-nocookie.com/embed/videoseries?list=" + listId + "&enablejsapi=1&rel=0", videoId: null, listId };
+        }
+        return null;
+      }
+
+      function renderQuranReaderYouTubeSection(url) {
+        const container = document.getElementById("quranReaderYouTubeSection");
+        if (!container) return;
+
+        const embedInfo = getYouTubeEmbedInfo(url);
+        if (embedInfo && embedInfo.embedUrl) {
+          container.innerHTML = `
+            <div style="background: #0f172a; border-radius: 12px; padding: 8px 10px; margin-bottom: 8px; border: 1.5px solid #334155;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; padding: 0 4px;">
+                <div style="font-size: 12px; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 6px;">
+                  <span>▶️</span> YouTube Recitation (Listen along while reading below)
+                </div>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <a href="${escapeHtml(url)}" target="_blank" style="font-size: 11px; color: #38bdf8; text-decoration: underline; font-weight: 600;">
+                    Open in YouTube ↗
+                  </a>
+                  <button type="button" onclick="editCurrentReaderYouTubeLink()" class="grammar-item-action-btn" title="Change YouTube Link" style="width: 22px; height: 22px; font-size: 10px; background: #1e293b; color: #cbd5e1; border-color: #475569;">✏️</button>
+                </div>
+              </div>
+              <div style="position: relative; width: 100%; padding-bottom: 45%; height: 0; overflow: hidden; border-radius: 8px; background: #000;">
+                <iframe
+                  src="${embedInfo.embedUrl}"
+                  title="YouTube Quran Recitation"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                ></iframe>
+              </div>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div style="background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 10px; padding: 8px 12px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: #475569; font-weight: 700;">
+                <span>▶️</span> YouTube Recitation:
+              </div>
+              <div style="display: flex; gap: 6px; flex: 1; min-width: 200px;">
+                <input
+                  type="url"
+                  id="quranReaderQuickYtInput"
+                  value="${escapeHtml(url || '')}"
+                  placeholder="Paste YouTube link to listen (https://...)"
+                  class="input-field"
+                  style="padding: 4px 8px; font-size: 11.5px; height: 30px; flex: 1;"
+                  onkeydown="if(event.key==='Enter') saveReaderQuickYouTubeLink()"
+                />
+                <button
+                  type="button"
+                  class="grammar-add-topic-btn"
+                  onclick="saveReaderQuickYouTubeLink()"
+                  style="font-size: 11px; padding: 4px 10px; height: 30px;"
+                >
+                  ▶️ Play
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function saveReaderQuickYouTubeLink() {
+        const input = document.getElementById("quranReaderQuickYtInput");
+        const val = input ? input.value.trim() : "";
+        if (!val) {
+          showToast("Please enter a YouTube link 🔗");
+          return;
+        }
+        currentReaderYouTubeUrl = val;
+        renderQuranReaderYouTubeSection(val);
+
+        if (currentReaderPlaylistId) {
+          const item = quranPlaylists.find((p) => p.id === currentReaderPlaylistId);
+          if (item) {
+            item.url = val;
+            saveQuranPlaylists();
+            renderQuranPlaylists();
+          }
+        } else {
+          const item = quranPlaylists.find((p) => p.surahNumber === currentReaderSurah);
+          if (item) {
+            item.url = val;
+            saveQuranPlaylists();
+            renderQuranPlaylists();
+          }
+        }
+        showToast("YouTube link connected! ▶️");
+      }
+
+      function editCurrentReaderYouTubeLink() {
+        renderQuranReaderYouTubeSection("");
+        setTimeout(() => {
+          const inp = document.getElementById("quranReaderQuickYtInput");
+          if (inp) {
+            inp.value = currentReaderYouTubeUrl;
+            inp.focus();
+          }
+        }, 50);
+      }
+
+      // --- ONLINE QURAN READER MODAL HANDLERS ---
+      function openQuranReaderModal(surahNum = null, startAyah = null, endAyah = null, playlistId = null) {
+        initQuranSurahDropdowns();
+
+        let targetSubj = null;
+        if (playlistId) {
+          targetSubj = quranPlaylists.find((p) => p.id === playlistId);
+        } else if (!surahNum && quranPlaylists.length > 0) {
+          targetSubj = quranPlaylists[0];
+        }
+
+        if (targetSubj) {
+          currentReaderPlaylistId = targetSubj.id;
+          currentReaderSurah = targetSubj.surahNumber || 1;
+          const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+          currentReaderStart = targetSubj.ayahStart || 1;
+          currentReaderEnd = targetSubj.ayahEnd || s.count;
+          currentReaderYouTubeUrl = targetSubj.url || "";
+        } else {
+          currentReaderPlaylistId = null;
+          currentReaderSurah = parseInt(surahNum, 10) || 1;
+          const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+          currentReaderStart = Math.max(1, parseInt(startAyah, 10) || 1);
+          currentReaderEnd = Math.min(s.count, Math.max(currentReaderStart, parseInt(endAyah, 10) || s.count));
+          const matching = quranPlaylists.find((p) => p.surahNumber === currentReaderSurah);
+          currentReaderYouTubeUrl = matching ? matching.url : "";
+        }
+
+        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
         const modal = document.getElementById("quranReaderModal");
         const surahSelect = document.getElementById("quranReaderSurahSelect");
         const startInput = document.getElementById("quranReaderStartInput");
@@ -19447,6 +19585,7 @@ Please provide:
         if (endInput) { endInput.value = currentReaderEnd; endInput.max = s.count; }
 
         updateQuranReaderHeader();
+        renderQuranReaderYouTubeSection(currentReaderYouTubeUrl);
 
         if (modal) {
           modal.style.display = "flex";
@@ -19455,7 +19594,6 @@ Please provide:
 
         loadQuranReaderVerses();
       }
-
       function closeQuranReaderModal() {
         pauseQuranAudio();
         const modal = document.getElementById("quranReaderModal");
@@ -19859,6 +19997,10 @@ Please provide:
       window.onQuranAyahRangeChanged = onQuranAyahRangeChanged;
       window.previewCurrentQuranModalItem = previewCurrentQuranModalItem;
       window.openQuranReaderModal = openQuranReaderModal;
+      window.getYouTubeEmbedInfo = getYouTubeEmbedInfo;
+      window.renderQuranReaderYouTubeSection = renderQuranReaderYouTubeSection;
+      window.saveReaderQuickYouTubeLink = saveReaderQuickYouTubeLink;
+      window.editCurrentReaderYouTubeLink = editCurrentReaderYouTubeLink;
       window.closeQuranReaderModal = closeQuranReaderModal;
       window.onQuranReaderSurahChanged = onQuranReaderSurahChanged;
       window.loadQuranReaderVersesFromInputs = loadQuranReaderVersesFromInputs;
