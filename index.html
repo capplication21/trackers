@@ -6981,31 +6981,6 @@
               <!-- Rendered dynamically -->
             </div>
           </div>
-
-          <div
-            class="week-section zad-card"
-            style="padding: 14px; margin-bottom: 14px"
-          >
-            <div class="week-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <div style="display: flex; align-items: center; gap: 6px;">
-                <span class="zad-icon">📖</span>
-                <span class="week-header-title">Read &amp; Listen Quran Playlists</span>
-              </div>
-              <button
-                type="button"
-                class="grammar-add-topic-btn"
-                onclick="openQuranPlaylistModal()"
-                title="Add new Surah/Juz/Recitation playlist"
-                style="font-size: 11px; padding: 3px 8px;"
-              >
-                <span>➕</span> Add Quran Playlist
-              </button>
-            </div>
-
-            <div id="quranPlaylistsContainer">
-              <!-- Rendered dynamically -->
-            </div>
-          </div>
         </div>
 
         <!-- PERIOD TAB -->
@@ -16927,7 +16902,6 @@ Please provide:
         if (tabName === "week") {
           renderZadSubjects();
           renderUqSubjects();
-          renderQuranPlaylists();
         }
         if (tabName === "period") {
           updateNavBar();
