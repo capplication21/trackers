@@ -11201,12 +11201,11 @@
           </div>
           <button
             type="button"
-            class="modal-btn modal-btn-save"
-            id="quranReaderLogBtn"
-            onclick="logCurrentQuranReaderProgress()"
+            class="modal-btn modal-btn-cancel"
+            onclick="closeQuranReaderModal()"
             style="padding: 6px 14px; font-size: 12px;"
           >
-            ✅ Log Reading Progress
+            Close
           </button>
         </div>
       </div>
@@ -19227,8 +19226,8 @@ Please provide:
                 </div>
               </div>
 
-              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
-                <div style="display: flex; align-items: center; gap: 4px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+                <div style="display: flex; align-items: center; gap: 5px;">
                   <span style="font-size: 11px; font-weight: 700; color: #475569;">Ayah:</span>
                   <input
                     type="number"
@@ -19236,25 +19235,12 @@ Please provide:
                     max="${target}"
                     value="${current}"
                     onchange="setQuranPlaylistLecture('${subj.id}', this.value)"
-                    style="width: 48px; padding: 2px 4px; font-size: 12px; font-weight: 800; text-align: center; border: 1.5px solid #cbd5e1; border-radius: 6px;"
+                    style="width: 52px; padding: 2px 5px; font-size: 12px; font-weight: 800; text-align: center; border: 1.5px solid #cbd5e1; border-radius: 6px;"
                   />
                   <span style="font-size: 11px; color: #64748b; font-weight: 700;">/ ${target}</span>
                 </div>
-
-                <div style="display: flex; align-items: center; gap: 4px;">
-                  <div class="lecture-stat-box date-stat-box" onclick="openQuranPlaylistCalendar('${subj.id}', 'qpe')" style="padding: 2px 6px; font-size: 11px;">
-                    <span class="lecture-date-icon" style="font-size: 11px;">📅</span>
-                    <span class="typing-date-display" id="qpeDateDisplay_${subj.id}" style="font-size: 11px;">Today</span>
-                    <input
-                      type="date"
-                      class="typing-hidden-date-input"
-                      id="qpeDateInput_${subj.id}"
-                      onchange="onQuranPlaylistDateChanged('${subj.id}', 'qpe')"
-                    />
-                  </div>
-                  <button type="button" class="lecture-done-btn" onclick="addQuranPlaylistLogEntry('${subj.id}', 'qpe')" style="padding: 3px 8px; font-size: 10.5px; margin-top: 0;">
-                    ➕ Log
-                  </button>
+                <div style="font-size: 11.5px; font-weight: 700; color: ${isComplete ? '#059669' : '#0284c7'};">
+                  ${pct}% ${isComplete ? '✓ Completed' : ''}
                 </div>
               </div>
 
@@ -19281,16 +19267,6 @@ Please provide:
                   </a>
                 ` : ""}
               </div>
-
-              ${logs.length > 0 ? `
-                <div class="zad-log-dropdown-row" onclick="event.stopPropagation()" style="margin-top: 6px; margin-bottom: 2px;">
-                  <select class="lecture-date-inline zad-log-select" id="qpeLogSelect_${subj.id}" style="font-size: 11px; padding: 2px 5px;">
-                    <option value="">📜 History (${logs.length})</option>
-                    ${logs.map((l, idx) => `<option value="${idx}">📅 ${l.date} · 🎬 Ayah ${l.lecture}</option>`).join("")}
-                  </select>
-                  <button type="button" class="zad-log-delete-btn" onclick="deleteSelectedQuranPlaylistLogEntry('${subj.id}', 'qpe')" title="Remove selected log" style="font-size: 10px; width: 22px; height: 22px;">🗑️</button>
-                </div>
-              ` : ""}
             </div>
           `;
         }).join("");
