@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -3564,6 +3564,147 @@
         flex-direction: column;
         gap: 6px;
         background: #faf8f5;
+      }
+      /* Quran Reader Modal & Typography */
+      .quran-reader-card {
+        max-width: 680px;
+        width: 95%;
+        max-height: 92vh;
+        background: #fdfbf7;
+        border: 2.5px solid var(--ink);
+        border-radius: 16px;
+        padding: 16px 18px;
+        box-shadow: 0 6px 0 var(--ink);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow: hidden;
+      }
+      .quran-reader-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--border);
+      }
+      .quran-reader-title {
+        font-size: 15.5px;
+        font-weight: 800;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .quran-reader-badge {
+        font-size: 11px;
+        font-weight: 700;
+        background: #e0e7ff;
+        color: #3730a3;
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid #c7d2fe;
+      }
+      .quran-reader-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        background: #ffffff;
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 8px 10px;
+      }
+      .quran-reader-audio-bar {
+        background: #ecfdf5;
+        border: 1.5px solid #a7f3d0;
+        border-radius: 10px;
+        padding: 7px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .quran-verses-container {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 220px;
+        max-height: 52vh;
+      }
+      .quran-verse-card {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 12px 14px;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      }
+      .quran-verse-card.active-playing {
+        border-color: #059669;
+        background: #f0fdf4;
+        box-shadow: 0 0 0 2.5px #34d399;
+      }
+      .quran-verse-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .quran-ayah-pill {
+        font-size: 11px;
+        font-weight: 800;
+        background: #f1f5f9;
+        color: #475569;
+        padding: 2px 8px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+      }
+      .quran-arabic-text {
+        font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+        font-size: 24px;
+        line-height: 2.3;
+        text-align: right;
+        direction: rtl;
+        color: #0f172a;
+        margin-bottom: 10px;
+        padding: 4px 0;
+        word-spacing: 2px;
+        font-weight: 500;
+      }
+      .quran-urdu-text {
+        font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', Tahoma, sans-serif;
+        font-size: 15px;
+        line-height: 2.1;
+        text-align: right;
+        direction: rtl;
+        color: #1e293b;
+        border-top: 1px dashed #cbd5e1;
+        padding-top: 10px;
+        font-weight: 400;
+      }
+      .quran-read-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 800;
+        color: #047857;
+        background: #ecfdf5;
+        border: 1.5px solid #059669;
+        border-radius: 7px;
+        padding: 3px 8px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.15s ease;
+      }
+      .quran-read-btn:hover {
+        background: #d1fae5;
+        transform: translateY(-1px);
       }
       .zad-log-dropdown-row {
         display: flex;
@@ -7662,15 +7803,26 @@
                   <div class="task-text" style="margin-bottom: 0;">
                     Read and Listen Quran <span>📖</span>
                   </div>
-                  <button
-                    type="button"
-                    class="grammar-add-topic-btn"
-                    onclick="openQuranPlaylistModal(); event.stopPropagation();"
-                    title="Add new Quran playlist/surah"
-                    style="font-size: 10.5px; padding: 2px 7px;"
-                  >
-                    <span>➕</span> Add Playlist
-                  </button>
+                  <div style="display: flex; gap: 4px; align-items: center;">
+                    <button
+                      type="button"
+                      class="grammar-add-topic-btn"
+                      onclick="openQuranReaderModal(); event.stopPropagation();"
+                      title="Open Quran Reader with Urdu Meaning & Audio"
+                      style="font-size: 10.5px; padding: 2px 7px; background: #ecfdf5; color: #047857; border-color: #059669;"
+                    >
+                      <span>📖</span> Read &amp; Listen
+                    </button>
+                    <button
+                      type="button"
+                      class="grammar-add-topic-btn"
+                      onclick="openQuranPlaylistModal(); event.stopPropagation();"
+                      title="Add new Surah &amp; Ayat playlist"
+                      style="font-size: 10.5px; padding: 2px 7px;"
+                    >
+                      <span>➕</span> Add Surah
+                    </button>
+                  </div>
                 </div>
                 <!-- Dynamic Quran Playlists List with Progress & Links -->
                 <div id="quranEveningPlaylistsContainer" onclick="event.stopPropagation()" style="margin-top: 8px;">
@@ -10799,7 +10951,66 @@
         <input type="hidden" id="quranPlaylistEditId" value="" />
         <div class="modal-title" id="quranPlaylistModalTitle">📖 Add Quran Playlist / Surah</div>
         <div class="modal-subtitle">
-          Save Surah/Juz name, target count (parts/ayat/juz), and playlist link
+          Select Surah number, Ayat start &amp; end, with Urdu meaning from net
+        </div>
+
+        <!-- Surah Selection (1-114) -->
+        <div class="input-group">
+          <label class="input-label" for="quranPlaylistSurahSelect">Surah Name &amp; Number</label>
+          <select
+            class="input-field"
+            id="quranPlaylistSurahSelect"
+            onchange="onQuranSurahSelectChanged(this.value)"
+          >
+            <!-- Dynamically populated 1 to 114 -->
+          </select>
+        </div>
+
+        <!-- Ayat Range: Start to End -->
+        <div class="input-group">
+          <label class="input-label" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Ayat Range (Start to End)</span>
+            <span id="quranPlaylistRangeBadge" style="font-size: 11px; color: #0284c7; font-weight: 700; background: #e0f2fe; padding: 2px 7px; border-radius: 999px;">
+              7 Ayahs
+            </span>
+          </label>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <div style="flex: 1;">
+              <span style="font-size: 10.5px; color: var(--muted); font-weight: 600; display: block; margin-bottom: 2px;">Start Ayah:</span>
+              <input
+                type="number"
+                class="input-field"
+                id="quranPlaylistAyahStartInput"
+                min="1"
+                value="1"
+                oninput="onQuranAyahRangeChanged()"
+                placeholder="1"
+                style="padding: 8px 10px; font-weight: 700; text-align: center;"
+              />
+            </div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--muted); padding-top: 14px;">-</div>
+            <div style="flex: 1;">
+              <span style="font-size: 10.5px; color: var(--muted); font-weight: 600; display: block; margin-bottom: 2px;">End Ayah:</span>
+              <input
+                type="number"
+                class="input-field"
+                id="quranPlaylistAyahEndInput"
+                min="1"
+                value="7"
+                oninput="onQuranAyahRangeChanged()"
+                placeholder="7"
+                style="padding: 8px 10px; font-weight: 700; text-align: center;"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Online Quran with Urdu Meaning Banner -->
+        <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 8px 10px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 18px;">🌐</span>
+          <div style="font-size: 11.5px; color: #166534; line-height: 1.4;">
+            <strong>Online Quran with Urdu Meaning:</strong> Fetches Arabic text, Urdu translation (Fateh Muhammad Jalandhry), and recitation directly from the net.
+          </div>
         </div>
 
         <div class="input-group">
@@ -10808,34 +11019,23 @@
             type="text"
             class="input-field"
             id="quranPlaylistTitleInput"
-            placeholder="e.g. 📖 Surah Al-Baqarah, 📖 Surah Al-Kahf, 📖 30 Juz Recitations..."
+            placeholder="e.g. 📖 Surah Al-Faatiha (Ayat 1 - 7)"
           />
         </div>
 
-        <div class="input-group">
-          <label class="input-label" for="quranPlaylistTargetInput">Total Target (Parts / Juz / Ayat)</label>
-          <input
-            type="number"
-            class="input-field"
-            id="quranPlaylistTargetInput"
-            min="1"
-            max="604"
-            value="30"
-            placeholder="e.g. 30"
-          />
-        </div>
+        <input type="hidden" id="quranPlaylistTargetInput" value="7" />
 
         <div class="input-group">
-          <label class="input-label" for="quranPlaylistUrlInput">YouTube / Audio Playlist Link (optional)</label>
+          <label class="input-label" for="quranPlaylistUrlInput">YouTube / Audio Link (optional)</label>
           <input
             type="url"
             class="input-field"
             id="quranPlaylistUrlInput"
-            placeholder="e.g. https://youtube.com/playlist?list=... or audio link"
+            placeholder="e.g. https://youtube.com/... or leave empty"
           />
         </div>
 
-        <div class="modal-buttons">
+        <div class="modal-buttons" style="flex-wrap: wrap; gap: 6px;">
           <button
             class="modal-btn modal-btn-cancel"
             type="button"
@@ -10847,10 +11047,19 @@
             class="modal-btn"
             id="quranPlaylistDeleteModalBtn"
             type="button"
-            style="display: none; background: #fee2e2; color: #dc2626; border: 1.5px solid #dc2626; font-weight: 700; border-radius: 8px; padding: 8px 14px; cursor: pointer;"
+            style="display: none; background: #fee2e2; color: #dc2626; border: 1.5px solid #dc2626; font-weight: 700; border-radius: 8px; padding: 8px 12px; cursor: pointer;"
             onclick="deleteQuranPlaylistFromModal()"
           >
             🗑️ Delete
+          </button>
+          <button
+            class="modal-btn"
+            type="button"
+            style="background: #ecfdf5; color: #047857; border: 1.5px solid #059669; font-weight: 700; border-radius: 8px; padding: 8px 12px; cursor: pointer;"
+            onclick="previewCurrentQuranModalItem()"
+            title="Read Arabic &amp; Urdu Meaning right now"
+          >
+            📖 Read &amp; Listen
           </button>
           <button
             class="modal-btn modal-btn-save"
@@ -10859,6 +11068,145 @@
             onclick="saveQuranPlaylistItem()"
           >
             Save Playlist
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Read & Listen Quran Reader Modal with Urdu Meaning -->
+    <div class="modal-overlay" id="quranReaderModal" style="z-index: 10000;">
+      <div class="modal-card quran-reader-card">
+        <div class="quran-reader-header">
+          <div class="quran-reader-title">
+            <span id="quranReaderSurahTitle">📖 Surah 1: Al-Faatiha</span>
+            <span class="quran-reader-badge" id="quranReaderRangeBadge">Ayat 1 - 7</span>
+          </div>
+          <button
+            type="button"
+            class="grammar-item-action-btn"
+            onclick="closeQuranReaderModal()"
+            title="Close"
+            style="width: 28px; height: 28px; font-size: 14px; font-weight: bold;"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Quick Select & Filter Bar -->
+        <div class="quran-reader-controls">
+          <div style="flex: 2; min-width: 140px;">
+            <select
+              class="input-field"
+              id="quranReaderSurahSelect"
+              onchange="onQuranReaderSurahChanged(this.value)"
+              style="padding: 6px 8px; font-size: 12px; height: 34px;"
+            >
+              <!-- 114 Surahs -->
+            </select>
+          </div>
+          <div style="display: flex; gap: 4px; align-items: center; flex: 1; min-width: 130px;">
+            <input
+              type="number"
+              class="input-field"
+              id="quranReaderStartInput"
+              min="1"
+              value="1"
+              title="Start Ayah"
+              style="padding: 4px 6px; font-size: 12px; height: 34px; text-align: center;"
+            />
+            <span style="font-weight: 700; color: var(--muted);">-</span>
+            <input
+              type="number"
+              class="input-field"
+              id="quranReaderEndInput"
+              min="1"
+              value="7"
+              title="End Ayah"
+              style="padding: 4px 6px; font-size: 12px; height: 34px; text-align: center;"
+            />
+          </div>
+          <button
+            type="button"
+            class="grammar-add-topic-btn"
+            onclick="loadQuranReaderVersesFromInputs()"
+            title="Fetch verses from internet"
+            style="font-size: 12px; padding: 6px 10px; height: 34px;"
+          >
+            🔄 Load from Net
+          </button>
+        </div>
+
+        <!-- Audio Player Bar -->
+        <div class="quran-reader-audio-bar">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button
+              type="button"
+              id="quranAudioPlayAllBtn"
+              class="grammar-empty-add-btn"
+              onclick="toggleQuranPlayAll()"
+              style="font-size: 11.5px; padding: 4px 10px; margin: 0; background: #059669; color: #ffffff; border: none; cursor: pointer; border-radius: 6px;"
+            >
+              ▶️ Play Recitation
+            </button>
+            <span id="quranAudioStatusText" style="font-size: 11.5px; color: #065f46; font-weight: 600;">
+              Mishary Rashid Alafasy
+            </span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <button
+              type="button"
+              class="grammar-item-action-btn"
+              onclick="playPrevQuranAyahAudio()"
+              title="Previous Ayah Audio"
+              style="width: 26px; height: 26px; font-size: 11px;"
+            >
+              ⏮️
+            </button>
+            <button
+              type="button"
+              class="grammar-item-action-btn"
+              onclick="playNextQuranAyahAudio()"
+              title="Next Ayah Audio"
+              style="width: 26px; height: 26px; font-size: 11px;"
+            >
+              ⏭️
+            </button>
+          </div>
+        </div>
+
+        <!-- Verses Container with Arabic & Urdu Meaning -->
+        <div class="quran-verses-container" id="quranVersesContainer">
+          <!-- Dynamically populated from internet -->
+        </div>
+
+        <!-- Reader Footer -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 8px; border-top: 1.5px solid var(--border);">
+          <div style="display: flex; gap: 6px;">
+            <button
+              type="button"
+              class="modal-btn"
+              onclick="shiftQuranAyahRange(-1)"
+              style="padding: 6px 10px; font-size: 11px; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer;"
+            >
+              ◀ Prev Ayahs
+            </button>
+            <button
+              type="button"
+              class="modal-btn"
+              onclick="shiftQuranAyahRange(1)"
+              style="padding: 6px 10px; font-size: 11px; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer;"
+            >
+              Next Ayahs ▶
+            </button>
+          </div>
+          <button
+            type="button"
+            class="modal-btn modal-btn-save"
+            id="quranReaderLogBtn"
+            onclick="logCurrentQuranReaderProgress()"
+            style="padding: 6px 14px; font-size: 12px;"
+          >
+            ✅ Log Reading Progress
           </button>
         </div>
       </div>
@@ -18686,8 +19034,98 @@ Please provide:
           if (e.target === this) closeUqSubjectModal();
         });
 
-      // ==================== READ & LISTEN QURAN MULTI-PLAYLIST SYSTEM ====================
+            // ==================== READ & LISTEN QURAN MULTI-PLAYLIST & ONLINE QURAN SYSTEM ====================
+      const QURAN_SURAHS_114 = [{"name":"Al-Faatiha","num":1,"count":7,"ar":"سُورَةُ ٱلْفَاتِحَةِ"},{"name":"Al-Baqara","num":2,"count":286,"ar":"سُورَةُ البَقَرَةِ"},{"name":"Aal-i-Imraan","num":3,"count":200,"ar":"سُورَةُ آلِ عِمۡرَانَ"},{"name":"An-Nisaa","num":4,"count":176,"ar":"سُورَةُ النِّسَاءِ"},{"name":"Al-Maaida","num":5,"count":120,"ar":"سُورَةُ المَائـِدَةِ"},{"name":"Al-An'aam","num":6,"count":165,"ar":"سُورَةُ الأَنۡعَامِ"},{"name":"Al-A'raaf","num":7,"count":206,"ar":"سُورَةُ الأَعۡرَافِ"},{"name":"Al-Anfaal","num":8,"count":75,"ar":"سُورَةُ الأَنفَالِ"},{"name":"At-Tawba","num":9,"count":129,"ar":"سُورَةُ التَّوۡبَةِ"},{"name":"Yunus","num":10,"count":109,"ar":"سُورَةُ يُونُسَ"},{"name":"Hud","num":11,"count":123,"ar":"سُورَةُ هُودٍ"},{"name":"Yusuf","num":12,"count":111,"ar":"سُورَةُ يُوسُفَ"},{"name":"Ar-Ra'd","num":13,"count":43,"ar":"سُورَةُ الرَّعۡدِ"},{"name":"Ibrahim","num":14,"count":52,"ar":"سُورَةُ إِبۡرَاهِيمَ"},{"name":"Al-Hijr","num":15,"count":99,"ar":"سُورَةُ الحِجۡرِ"},{"name":"An-Nahl","num":16,"count":128,"ar":"سُورَةُ النَّحۡلِ"},{"name":"Al-Israa","num":17,"count":111,"ar":"سُورَةُ الإِسۡرَاءِ"},{"name":"Al-Kahf","num":18,"count":110,"ar":"سُورَةُ الكَهۡفِ"},{"name":"Maryam","num":19,"count":98,"ar":"سُورَةُ مَرۡيَمَ"},{"name":"Taa-Haa","num":20,"count":135,"ar":"سُورَةُ طه"},{"name":"Al-Anbiyaa","num":21,"count":112,"ar":"سُورَةُ الأَنبِيَاءِ"},{"name":"Al-Hajj","num":22,"count":78,"ar":"سُورَةُ الحَجِّ"},{"name":"Al-Muminoon","num":23,"count":118,"ar":"سُورَةُ المُؤۡمِنُونَ"},{"name":"An-Noor","num":24,"count":64,"ar":"سُورَةُ النُّورِ"},{"name":"Al-Furqaan","num":25,"count":77,"ar":"سُورَةُ الفُرۡقَانِ"},{"name":"Ash-Shu'araa","num":26,"count":227,"ar":"سُورَةُ الشُّعَرَاءِ"},{"name":"An-Naml","num":27,"count":93,"ar":"سُورَةُ النَّمۡلِ"},{"name":"Al-Qasas","num":28,"count":88,"ar":"سُورَةُ القَصَصِ"},{"name":"Al-Ankaboot","num":29,"count":69,"ar":"سُورَةُ العَنكَبُوتِ"},{"name":"Ar-Room","num":30,"count":60,"ar":"سُورَةُ الرُّومِ"},{"name":"Luqman","num":31,"count":34,"ar":"سُورَةُ لُقۡمَانَ"},{"name":"As-Sajda","num":32,"count":30,"ar":"سُورَةُ السَّجۡدَةِ"},{"name":"Al-Ahzaab","num":33,"count":73,"ar":"سُورَةُ الأَحۡزَابِ"},{"name":"Saba","num":34,"count":54,"ar":"سُورَةُ سَبَإٍ"},{"name":"Faatir","num":35,"count":45,"ar":"سُورَةُ فَاطِرٍ"},{"name":"Yaseen","num":36,"count":83,"ar":"سُورَةُ يسٓ"},{"name":"As-Saaffaat","num":37,"count":182,"ar":"سُورَةُ الصَّافَّاتِ"},{"name":"Saad","num":38,"count":88,"ar":"سُورَةُ صٓ"},{"name":"Az-Zumar","num":39,"count":75,"ar":"سُورَةُ الزُّمَرِ"},{"name":"Ghafir","num":40,"count":85,"ar":"سُورَةُ غَافِرٍ"},{"name":"Fussilat","num":41,"count":54,"ar":"سُورَةُ فُصِّلَتۡ"},{"name":"Ash-Shura","num":42,"count":53,"ar":"سُورَةُ الشُّورَىٰ"},{"name":"Az-Zukhruf","num":43,"count":89,"ar":"سُورَةُ الزُّخۡرُفِ"},{"name":"Ad-Dukhaan","num":44,"count":59,"ar":"سُورَةُ الدُّخَانِ"},{"name":"Al-Jaathiya","num":45,"count":37,"ar":"سُورَةُ الجَاثِيَةِ"},{"name":"Al-Ahqaf","num":46,"count":35,"ar":"سُورَةُ الأَحۡقَافِ"},{"name":"Muhammad","num":47,"count":38,"ar":"سُورَةُ مُحَمَّدٍ"},{"name":"Al-Fath","num":48,"count":29,"ar":"سُورَةُ الفَتۡحِ"},{"name":"Al-Hujuraat","num":49,"count":18,"ar":"سُورَةُ الحُجُرَاتِ"},{"name":"Qaaf","num":50,"count":45,"ar":"سُورَةُ قٓ"},{"name":"Adh-Dhaariyat","num":51,"count":60,"ar":"سُورَةُ الذَّارِيَاتِ"},{"name":"At-Tur","num":52,"count":49,"ar":"سُورَةُ الطُّورِ"},{"name":"An-Najm","num":53,"count":62,"ar":"سُورَةُ النَّجۡمِ"},{"name":"Al-Qamar","num":54,"count":55,"ar":"سُورَةُ القَمَرِ"},{"name":"Ar-Rahmaan","num":55,"count":78,"ar":"سُورَةُ الرَّحۡمَٰن"},{"name":"Al-Waaqia","num":56,"count":96,"ar":"سُورَةُ الوَاقِعَةِ"},{"name":"Al-Hadid","num":57,"count":29,"ar":"سُورَةُ الحَدِيدِ"},{"name":"Al-Mujaadila","num":58,"count":22,"ar":"سُورَةُ المُجَادلَةِ"},{"name":"Al-Hashr","num":59,"count":24,"ar":"سُورَةُ الحَشۡرِ"},{"name":"Al-Mumtahana","num":60,"count":13,"ar":"سُورَةُ المُمۡتَحنَةِ"},{"name":"As-Saff","num":61,"count":14,"ar":"سُورَةُ الصَّفِّ"},{"name":"Al-Jumu'a","num":62,"count":11,"ar":"سُورَةُ الجُمُعَةِ"},{"name":"Al-Munaafiqoon","num":63,"count":11,"ar":"سُورَةُ المُنَافِقُونَ"},{"name":"At-Taghaabun","num":64,"count":18,"ar":"سُورَةُ التَّغَابُنِ"},{"name":"At-Talaaq","num":65,"count":12,"ar":"سُورَةُ الطَّلَاقِ"},{"name":"At-Tahrim","num":66,"count":12,"ar":"سُورَةُ التَّحۡرِيمِ"},{"name":"Al-Mulk","num":67,"count":30,"ar":"سُورَةُ المُلۡكِ"},{"name":"Al-Qalam","num":68,"count":52,"ar":"سُورَةُ القَلَمِ"},{"name":"Al-Haaqqa","num":69,"count":52,"ar":"سُورَةُ الحَاقَّةِ"},{"name":"Al-Ma'aarij","num":70,"count":44,"ar":"سُورَةُ المَعَارِجِ"},{"name":"Nooh","num":71,"count":28,"ar":"سُورَةُ نُوحٍ"},{"name":"Al-Jinn","num":72,"count":28,"ar":"سُورَةُ الجِنِّ"},{"name":"Al-Muzzammil","num":73,"count":20,"ar":"سُورَةُ المُزَّمِّلِ"},{"name":"Al-Muddaththir","num":74,"count":56,"ar":"سُورَةُ المُدَّثِّرِ"},{"name":"Al-Qiyaama","num":75,"count":40,"ar":"سُورَةُ القِيَامَةِ"},{"name":"Al-Insaan","num":76,"count":31,"ar":"سُورَةُ الإِنسَانِ"},{"name":"Al-Mursalaat","num":77,"count":50,"ar":"سُورَةُ المُرۡسَلَاتِ"},{"name":"An-Naba","num":78,"count":40,"ar":"سُورَةُ النَّبَإِ"},{"name":"An-Naazi'aat","num":79,"count":46,"ar":"سُورَةُ النَّازِعَاتِ"},{"name":"Abasa","num":80,"count":42,"ar":"سُورَةُ عَبَسَ"},{"name":"At-Takwir","num":81,"count":29,"ar":"سُورَةُ التَّكۡوِيرِ"},{"name":"Al-Infitaar","num":82,"count":19,"ar":"سُورَةُ الانفِطَارِ"},{"name":"Al-Mutaffifin","num":83,"count":36,"ar":"سُورَةُ المُطَفِّفِينَ"},{"name":"Al-Inshiqaaq","num":84,"count":25,"ar":"سُورَةُ الانشِقَاقِ"},{"name":"Al-Burooj","num":85,"count":22,"ar":"سُورَةُ البُرُوجِ"},{"name":"At-Taariq","num":86,"count":17,"ar":"سُورَةُ الطَّارِقِ"},{"name":"Al-A'laa","num":87,"count":19,"ar":"سُورَةُ الأَعۡلَىٰ"},{"name":"Al-Ghaashiya","num":88,"count":26,"ar":"سُورَةُ الغَاشِيَةِ"},{"name":"Al-Fajr","num":89,"count":30,"ar":"سُورَةُ الفَجۡرِ"},{"name":"Al-Balad","num":90,"count":20,"ar":"سُورَةُ البَلَدِ"},{"name":"Ash-Shams","num":91,"count":15,"ar":"سُورَةُ الشَّمۡسِ"},{"name":"Al-Lail","num":92,"count":21,"ar":"سُورَةُ اللَّيۡلِ"},{"name":"Ad-Dhuhaa","num":93,"count":11,"ar":"سُورَةُ الضُّحَىٰ"},{"name":"Ash-Sharh","num":94,"count":8,"ar":"سُورَةُ الشَّرۡحِ"},{"name":"At-Tin","num":95,"count":8,"ar":"سُورَةُ التِّينِ"},{"name":"Al-Alaq","num":96,"count":19,"ar":"سُورَةُ العَلَقِ"},{"name":"Al-Qadr","num":97,"count":5,"ar":"سُورَةُ القَدۡرِ"},{"name":"Al-Bayyina","num":98,"count":8,"ar":"سُورَةُ البَيِّنَةِ"},{"name":"Az-Zalzala","num":99,"count":8,"ar":"سُورَةُ الزَّلۡزَلَةِ"},{"name":"Al-Aadiyaat","num":100,"count":11,"ar":"سُورَةُ العَادِيَاتِ"},{"name":"Al-Qaari'a","num":101,"count":11,"ar":"سُورَةُ القَارِعَةِ"},{"name":"At-Takaathur","num":102,"count":8,"ar":"سُورَةُ التَّكَاثُرِ"},{"name":"Al-Asr","num":103,"count":3,"ar":"سُورَةُ العَصۡرِ"},{"name":"Al-Humaza","num":104,"count":9,"ar":"سُورَةُ الهُمَزَةِ"},{"name":"Al-Fil","num":105,"count":5,"ar":"سُورَةُ الفِيلِ"},{"name":"Quraish","num":106,"count":4,"ar":"سُورَةُ قُرَيۡشٍ"},{"name":"Al-Maa'un","num":107,"count":7,"ar":"سُورَةُ المَاعُونِ"},{"name":"Al-Kawthar","num":108,"count":3,"ar":"سُورَةُ الكَوۡثَرِ"},{"name":"Al-Kaafiroon","num":109,"count":6,"ar":"سُورَةُ الكَافِرُونَ"},{"name":"An-Nasr","num":110,"count":3,"ar":"سُورَةُ النَّصۡرِ"},{"name":"Al-Masad","num":111,"count":5,"ar":"سُورَةُ المَسَدِ"},{"name":"Al-Ikhlaas","num":112,"count":4,"ar":"سُورَةُ الإِخۡلَاصِ"},{"name":"Al-Falaq","num":113,"count":5,"ar":"سُورَةُ الفَلَقِ"},{"name":"An-Naas","num":114,"count":6,"ar":"سُورَةُ النَّاسِ"}];
+
       let quranPlaylists = [];
+      const quranApiCache = {};
+      let currentReaderSurah = 1;
+      let currentReaderStart = 1;
+      let currentReaderEnd = 7;
+      let currentReaderPlaylistId = null;
+      let currentAudioIndex = -1;
+      let isAudioPlayingAll = false;
+      let quranGlobalAudio = null;
+      let quranAudioAyahs = [];
+
+      function initQuranSurahDropdowns() {
+        const selects = [
+          document.getElementById("quranPlaylistSurahSelect"),
+          document.getElementById("quranReaderSurahSelect"),
+        ];
+        selects.forEach((sel) => {
+          if (!sel || sel.dataset.initialized === "true") return;
+          sel.innerHTML = QURAN_SURAHS_114.map(
+            (s) => `<option value="${s.num}">${s.num}. ${s.name} (${s.ar}) - ${s.count} Ayahs</option>`
+          ).join("");
+          sel.dataset.initialized = "true";
+        });
+      }
+
+      function onQuranSurahSelectChanged(val) {
+        const surahNum = parseInt(val, 10) || 1;
+        const s = QURAN_SURAHS_114.find((x) => x.num === surahNum) || QURAN_SURAHS_114[0];
+        const startInput = document.getElementById("quranPlaylistAyahStartInput");
+        const endInput = document.getElementById("quranPlaylistAyahEndInput");
+        const titleInput = document.getElementById("quranPlaylistTitleInput");
+        const targetInput = document.getElementById("quranPlaylistTargetInput");
+        const badge = document.getElementById("quranPlaylistRangeBadge");
+
+        if (startInput) {
+          startInput.value = 1;
+          startInput.max = s.count;
+        }
+        if (endInput) {
+          endInput.value = s.count;
+          endInput.max = s.count;
+        }
+        if (targetInput) targetInput.value = s.count;
+        if (badge) badge.textContent = `${s.count} Ayahs`;
+        if (titleInput) {
+          titleInput.value = `📖 Surah ${s.num}: ${s.name} (Ayat 1 - ${s.count})`;
+        }
+      }
+
+      function onQuranAyahRangeChanged() {
+        const surahSelect = document.getElementById("quranPlaylistSurahSelect");
+        const surahNum = parseInt(surahSelect ? surahSelect.value : 1, 10) || 1;
+        const s = QURAN_SURAHS_114.find((x) => x.num === surahNum) || QURAN_SURAHS_114[0];
+
+        const startInput = document.getElementById("quranPlaylistAyahStartInput");
+        const endInput = document.getElementById("quranPlaylistAyahEndInput");
+        const titleInput = document.getElementById("quranPlaylistTitleInput");
+        const targetInput = document.getElementById("quranPlaylistTargetInput");
+        const badge = document.getElementById("quranPlaylistRangeBadge");
+
+        let start = parseInt(startInput ? startInput.value : 1, 10) || 1;
+        let end = parseInt(endInput ? endInput.value : s.count, 10) || s.count;
+
+        if (start < 1) start = 1;
+        if (start > s.count) start = s.count;
+        if (end < start) end = start;
+        if (end > s.count) end = s.count;
+
+        const count = end - start + 1;
+        if (targetInput) targetInput.value = count;
+        if (badge) badge.textContent = `${count} Ayah${count === 1 ? "" : "s"}`;
+
+        if (titleInput && (!titleInput.value || titleInput.value.startsWith("📖 Surah"))) {
+          titleInput.value = `📖 Surah ${s.num}: ${s.name} (Ayat ${start} - ${end})`;
+        }
+      }
+
+      function previewCurrentQuranModalItem() {
+        const surahSelect = document.getElementById("quranPlaylistSurahSelect");
+        const surahNum = parseInt(surahSelect ? surahSelect.value : 1, 10) || 1;
+        const startInput = document.getElementById("quranPlaylistAyahStartInput");
+        const endInput = document.getElementById("quranPlaylistAyahEndInput");
+        const start = parseInt(startInput ? startInput.value : 1, 10) || 1;
+        const end = parseInt(endInput ? endInput.value : 7, 10) || 7;
+        const editIdInput = document.getElementById("quranPlaylistEditId");
+        const editId = editIdInput ? editIdInput.value : null;
+
+        openQuranReaderModal(surahNum, start, end, editId);
+      }
 
       function loadQuranPlaylists() {
         try {
@@ -18703,8 +19141,13 @@ Please provide:
             quranPlaylists = [
               {
                 id: "qp_baqarah",
-                title: "📖 Surah Al-Baqarah",
-                target: 30,
+                title: "📖 Surah 2: Al-Baqarah (Ayat 1 - 286)",
+                surahNumber: 2,
+                surahName: "Al-Baqarah",
+                surahArabic: "سُورَةُ البَقَرَةِ",
+                ayahStart: 1,
+                ayahEnd: 286,
+                target: 286,
                 current: 1,
                 url: "https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3&si=jX-E1-T-8sC3qN5u",
                 logs: []
@@ -18716,6 +19159,7 @@ Please provide:
           quranPlaylists = [];
         }
 
+        initQuranSurahDropdowns();
         renderQuranPlaylists();
       }
 
@@ -18733,99 +19177,7 @@ Please provide:
       function renderWeekTabQuranPlaylists() {
         const container = document.getElementById("quranPlaylistsContainer");
         if (!container) return;
-
-        if (!quranPlaylists || quranPlaylists.length === 0) {
-          container.innerHTML = `
-            <div style="text-align: center; padding: 12px; color: var(--muted); font-size: 12px;">
-              No Quran playlists added yet. <a href="javascript:void(0)" onclick="openQuranPlaylistModal()" style="font-weight: 700; color: var(--ink); text-decoration: underline;">+ Add Quran Playlist</a>
-            </div>
-          `;
-          return;
-        }
-
-        container.innerHTML = quranPlaylists
-          .map((subj) => {
-            const target = subj.target || 30;
-            const current = subj.current || 1;
-            const pct = Math.min(100, Math.round((current / target) * 100));
-            const isComplete = current >= target;
-            const logs = subj.logs || [];
-            const normUrl = subj.url ? getNormalizedUrl(subj.url) : "";
-
-            return `
-              <div class="zad-subject-item" style="background: #ffffff; border: 2px solid var(--ink); border-radius: 12px; padding: 12px; margin-top: 10px; box-shadow: 0 1.5px 0 var(--ink);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                  <div class="subtopic-label" style="margin-bottom: 0; font-size: 13px; font-weight: 700; color: var(--ink);">
-                    ${escapeHtml(subj.title || "Quran Playlist")}
-                  </div>
-                  <div style="display: flex; gap: 4px;">
-                    <button type="button" class="grammar-item-action-btn" onclick="editQuranPlaylist('${subj.id}')" title="Edit Playlist" style="width: 26px; height: 26px; font-size: 11px;">✏️</button>
-                    ${
-                      quranPlaylists.length > 1
-                        ? `<button type="button" class="grammar-item-action-btn delete-btn" onclick="deleteQuranPlaylist('${subj.id}')" title="Delete Playlist" style="width: 26px; height: 26px; font-size: 11px;">🗑️</button>`
-                        : ""
-                    }
-                  </div>
-                </div>
-
-                <div class="zad-log-dropdown-row" onclick="event.stopPropagation()">
-                  <select class="lecture-date-inline zad-log-select" id="qpLogSelect_${subj.id}">
-                    <option value="">📜 No history yet</option>
-                    ${logs.map((l, idx) => `<option value="${idx}">📅 ${l.date} · 🎬 Part ${l.lecture}</option>`).join("")}
-                  </select>
-                  <button class="zad-log-delete-btn" onclick="deleteSelectedQuranPlaylistLogEntry('${subj.id}', 'qp')" title="Remove selected entry">🗑️</button>
-                </div>
-
-                <div class="lecture-tracker-row">
-                  <span class="lecture-tracker-label">🎬 Part/Ayah</span>
-                  <div class="lecture-stat-box">
-                    <input
-                      type="number"
-                      class="lecture-count-input"
-                      id="qpInput_${subj.id}"
-                      min="1"
-                      max="${target}"
-                      value="${current}"
-                      onchange="setQuranPlaylistLecture('${subj.id}', this.value)"
-                    />
-                    <span class="lecture-stat-sep">/</span>
-                    <span class="lecture-stat-target">${target}</span>
-                  </div>
-                  <div class="lecture-stat-box date-stat-box" onclick="openQuranPlaylistCalendar('${subj.id}', 'qp')">
-                    <span class="lecture-date-icon">📅</span>
-                    <span class="typing-date-display" id="qpDateDisplay_${subj.id}">Select date</span>
-                    <input
-                      type="date"
-                      class="typing-hidden-date-input"
-                      id="qpDateInput_${subj.id}"
-                      onchange="onQuranPlaylistDateChanged('${subj.id}', 'qp')"
-                    />
-                  </div>
-                </div>
-
-                <div class="lecture-progress-track">
-                  <div
-                    class="lecture-progress-fill ${isComplete ? "complete" : ""}"
-                    id="qpProgressFill_${subj.id}"
-                    style="width: ${pct}%"
-                  ></div>
-                </div>
-
-                ${
-                  normUrl
-                    ? `<a class="yt-link" href="${escapeHtml(normUrl)}" target="_blank" onclick="event.stopPropagation()">
-                        <span>▶️</span> Open ${escapeHtml(subj.title)} Playlist
-                      </a>`
-                    : ""
-                }
-
-                <button class="lecture-done-btn" onclick="addQuranPlaylistLogEntry('${subj.id}', 'qp')">
-                  ➕ Add to Log
-                </button>
-              </div>
-            `;
-          })
-          .join("");
+        container.innerHTML = "";
       }
 
       function renderEveningQuranPlaylists() {
@@ -18835,26 +19187,41 @@ Please provide:
         if (!quranPlaylists || quranPlaylists.length === 0) {
           container.innerHTML = `
             <div style="font-size: 11.5px; color: var(--muted); padding: 4px 0;">
-              No Quran playlist added yet. <a href="javascript:void(0)" onclick="openQuranPlaylistModal()" style="font-weight: 700; color: #0284c7; text-decoration: underline;">+ Add Playlist</a>
+              No Quran playlist added yet. <a href="javascript:void(0)" onclick="openQuranPlaylistModal()" style="font-weight: 700; color: #0284c7; text-decoration: underline;">+ Add Surah</a>
             </div>
           `;
           return;
         }
 
         container.innerHTML = quranPlaylists.map((subj) => {
-          const target = subj.target || 30;
-          const current = subj.current || 1;
+          let surahNum = subj.surahNumber;
+          if (!surahNum) {
+            const m = (subj.title || "").match(/\b(11[0-4]|10\d|[1-9]\d?)\b/);
+            surahNum = m ? parseInt(m[1], 10) : 1;
+          }
+          const s = QURAN_SURAHS_114.find((x) => x.num === surahNum) || QURAN_SURAHS_114[0];
+          const startAyah = subj.ayahStart || 1;
+          const endAyah = subj.ayahEnd || (subj.target && subj.target <= s.count ? subj.target : s.count);
+          const target = subj.target || (endAyah - startAyah + 1) || s.count;
+          const current = Math.min(target, Math.max(1, subj.current || 1));
           const pct = Math.min(100, Math.round((current / target) * 100));
           const isComplete = current >= target;
           const normUrl = subj.url ? getNormalizedUrl(subj.url) : "";
+          const logs = subj.logs || [];
 
           return `
             <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 10px; margin-top: 6px;" onclick="event.stopPropagation()">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
-                <div style="font-size: 12.5px; font-weight: 800; color: #1e293b;">
-                  ${escapeHtml(subj.title || "Quran Playlist")}
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; gap: 6px;">
+                <div>
+                  <div style="font-size: 12.5px; font-weight: 800; color: #1e293b;">
+                    ${escapeHtml(subj.title || `${s.num}. ${s.name}`)}
+                  </div>
+                  <div style="font-size: 11px; color: #0284c7; font-weight: 700; margin-top: 1px;">
+                    Ayat ${startAyah} - ${endAyah} · Online Arabic &amp; Urdu Meaning
+                  </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 4px;">
+                  <button type="button" class="grammar-item-action-btn" onclick="openQuranReaderModal(${s.num}, ${startAyah}, ${endAyah}, '${subj.id}')" title="Read &amp; Listen (Arabic + Urdu)" style="width: 24px; height: 24px; font-size: 11px; background: #ecfdf5; border-color: #059669; color: #047857;">📖</button>
                   <button type="button" class="grammar-item-action-btn" onclick="editQuranPlaylist('${subj.id}')" title="Edit Playlist" style="width: 22px; height: 22px; font-size: 10px;">✏️</button>
                   <button type="button" class="grammar-item-action-btn delete-btn" onclick="deleteQuranPlaylist('${subj.id}')" title="Delete Playlist" style="width: 22px; height: 22px; font-size: 10px;">🗑️</button>
                 </div>
@@ -18862,7 +19229,7 @@ Please provide:
 
               <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 6px;">
                 <div style="display: flex; align-items: center; gap: 4px;">
-                  <span style="font-size: 11px; font-weight: 700; color: #475569;">Part:</span>
+                  <span style="font-size: 11px; font-weight: 700; color: #475569;">Ayah:</span>
                   <input
                     type="number"
                     min="1"
@@ -18899,10 +19266,30 @@ Please provide:
                 ></div>
               </div>
 
-              ${normUrl ? `
-                <a class="yt-link" href="${escapeHtml(normUrl)}" target="_blank" onclick="event.stopPropagation()" style="font-size: 11px; padding: 4px 8px;">
-                  <span>▶️</span> Open ${escapeHtml(subj.title)} Playlist
-                </a>
+              <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px;">
+                <button
+                  type="button"
+                  class="quran-read-btn"
+                  onclick="openQuranReaderModal(${s.num}, ${startAyah}, ${endAyah}, '${subj.id}')"
+                  title="Open Surah with Arabic text, Urdu meaning &amp; recitation"
+                >
+                  <span>📖</span> Read &amp; Listen with Urdu Meaning
+                </button>
+                ${normUrl ? `
+                  <a class="yt-link" href="${escapeHtml(normUrl)}" target="_blank" onclick="event.stopPropagation()" style="font-size: 10.5px; padding: 2px 7px; margin-top: 0;">
+                    <span>▶️</span> External Link
+                  </a>
+                ` : ""}
+              </div>
+
+              ${logs.length > 0 ? `
+                <div class="zad-log-dropdown-row" onclick="event.stopPropagation()" style="margin-top: 6px; margin-bottom: 2px;">
+                  <select class="lecture-date-inline zad-log-select" id="qpeLogSelect_${subj.id}" style="font-size: 11px; padding: 2px 5px;">
+                    <option value="">📜 History (${logs.length})</option>
+                    ${logs.map((l, idx) => `<option value="${idx}">📅 ${l.date} · 🎬 Ayah ${l.lecture}</option>`).join("")}
+                  </select>
+                  <button type="button" class="zad-log-delete-btn" onclick="deleteSelectedQuranPlaylistLogEntry('${subj.id}', 'qpe')" title="Remove selected log" style="font-size: 10px; width: 22px; height: 22px;">🗑️</button>
+                </div>
               ` : ""}
             </div>
           `;
@@ -18981,34 +19368,57 @@ Please provide:
 
       // --- QURAN PLAYLIST MODAL HANDLERS ---
       function openQuranPlaylistModal(editId = null) {
+        initQuranSurahDropdowns();
         const modal = document.getElementById("quranPlaylistModal");
         const modalTitle = document.getElementById("quranPlaylistModalTitle");
         const editIdInput = document.getElementById("quranPlaylistEditId");
+        const surahSelect = document.getElementById("quranPlaylistSurahSelect");
+        const startInput = document.getElementById("quranPlaylistAyahStartInput");
+        const endInput = document.getElementById("quranPlaylistAyahEndInput");
         const titleInput = document.getElementById("quranPlaylistTitleInput");
         const targetInput = document.getElementById("quranPlaylistTargetInput");
         const urlInput = document.getElementById("quranPlaylistUrlInput");
         const saveBtn = document.getElementById("quranPlaylistSaveBtn");
         const deleteModalBtn = document.getElementById("quranPlaylistDeleteModalBtn");
+        const badge = document.getElementById("quranPlaylistRangeBadge");
 
         if (!modal) return;
 
         if (editId) {
           const subj = quranPlaylists.find((s) => s.id === editId);
           if (subj) {
+            let surahNum = subj.surahNumber;
+            if (!surahNum) {
+              const m = (subj.title || "").match(/\b(11[0-4]|10\d|[1-9]\d?)\b/);
+              surahNum = m ? parseInt(m[1], 10) : 1;
+            }
+            const s = QURAN_SURAHS_114.find((x) => x.num === surahNum) || QURAN_SURAHS_114[0];
+            const start = subj.ayahStart || 1;
+            const end = subj.ayahEnd || subj.target || s.count;
+
             if (editIdInput) editIdInput.value = subj.id;
-            if (modalTitle) modalTitle.textContent = "✏️ Edit Quran Playlist";
-            if (titleInput) titleInput.value = subj.title || "";
-            if (targetInput) targetInput.value = subj.target || 30;
+            if (modalTitle) modalTitle.textContent = "✏️ Edit Quran Playlist / Surah";
+            if (surahSelect) surahSelect.value = s.num;
+            if (startInput) { startInput.value = start; startInput.max = s.count; }
+            if (endInput) { endInput.value = end; endInput.max = s.count; }
+            if (titleInput) titleInput.value = subj.title || `📖 Surah ${s.num}: ${s.name}`;
+            if (targetInput) targetInput.value = end - start + 1;
             if (urlInput) urlInput.value = subj.url || "";
+            if (badge) badge.textContent = `${end - start + 1} Ayahs`;
             if (saveBtn) saveBtn.textContent = "Save Changes";
             if (deleteModalBtn) deleteModalBtn.style.display = "inline-flex";
           }
         } else {
+          const defaultSurah = QURAN_SURAHS_114[0];
           if (editIdInput) editIdInput.value = "";
           if (modalTitle) modalTitle.textContent = "📖 Add Quran Playlist / Surah";
-          if (titleInput) titleInput.value = "";
-          if (targetInput) targetInput.value = 30;
+          if (surahSelect) surahSelect.value = defaultSurah.num;
+          if (startInput) { startInput.value = 1; startInput.max = defaultSurah.count; }
+          if (endInput) { endInput.value = defaultSurah.count; endInput.max = defaultSurah.count; }
+          if (titleInput) titleInput.value = `📖 Surah 1: ${defaultSurah.name} (Ayat 1 - ${defaultSurah.count})`;
+          if (targetInput) targetInput.value = defaultSurah.count;
           if (urlInput) urlInput.value = "";
+          if (badge) badge.textContent = `${defaultSurah.count} Ayahs`;
           if (saveBtn) saveBtn.textContent = "Save Playlist";
           if (deleteModalBtn) deleteModalBtn.style.display = "none";
         }
@@ -19036,44 +19446,49 @@ Please provide:
 
       function saveQuranPlaylistItem() {
         const editIdInput = document.getElementById("quranPlaylistEditId");
+        const surahSelect = document.getElementById("quranPlaylistSurahSelect");
+        const startInput = document.getElementById("quranPlaylistAyahStartInput");
+        const endInput = document.getElementById("quranPlaylistAyahEndInput");
         const titleInput = document.getElementById("quranPlaylistTitleInput");
-        const targetInput = document.getElementById("quranPlaylistTargetInput");
         const urlInput = document.getElementById("quranPlaylistUrlInput");
 
         const editId = editIdInput ? editIdInput.value.trim() : "";
-        const title = titleInput ? titleInput.value.trim() : "";
-        const targetVal = targetInput ? parseInt(targetInput.value, 10) : 30;
-        const target = Number.isFinite(targetVal) && targetVal > 0 ? targetVal : 30;
+        const surahNum = parseInt(surahSelect ? surahSelect.value : 1, 10) || 1;
+        const surahInfo = QURAN_SURAHS_114.find((s) => s.num === surahNum) || QURAN_SURAHS_114[0];
+        const start = Math.max(1, parseInt(startInput ? startInput.value : 1, 10) || 1);
+        const end = Math.min(surahInfo.count, Math.max(start, parseInt(endInput ? endInput.value : surahInfo.count, 10) || surahInfo.count));
+        const target = end - start + 1;
+        const title = titleInput && titleInput.value.trim() ? titleInput.value.trim() : `📖 Surah ${surahInfo.num}: ${surahInfo.name} (Ayat ${start} - ${end})`;
         const url = urlInput ? urlInput.value.trim() : "";
-
-        if (!title) {
-          showToast("Please enter a playlist / Surah title 📖");
-          if (titleInput && typeof titleInput.focus === "function") titleInput.focus();
-          return;
-        }
 
         if (editId) {
           const idx = quranPlaylists.findIndex((s) => s.id === editId);
           if (idx !== -1) {
             quranPlaylists[idx] = {
               ...quranPlaylists[idx],
-              title: title,
-              target: target,
-              url: url,
+              title,
+              surahNumber: surahNum,
+              surahName: surahInfo.name,
+              surahArabic: surahInfo.ar,
+              ayahStart: start,
+              ayahEnd: end,
+              target,
+              url,
             };
             showToast("Quran playlist updated! 📌");
           }
         } else {
           quranPlaylists.push({
-            id:
-              "qp_" +
-              Date.now() +
-              "_" +
-              Math.random().toString(36).substr(2, 5),
-            title: title,
-            target: target,
+            id: "qp_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5),
+            title,
+            surahNumber: surahNum,
+            surahName: surahInfo.name,
+            surahArabic: surahInfo.ar,
+            ayahStart: start,
+            ayahEnd: end,
+            target,
             current: 1,
-            url: url,
+            url,
             logs: [],
           });
           showToast("New Quran playlist added! ✨");
@@ -19096,10 +19511,418 @@ Please provide:
         showToast("Quran playlist deleted 🗑️");
       }
 
+      // --- ONLINE QURAN READER MODAL HANDLERS ---
+      function openQuranReaderModal(surahNum = 1, startAyah = 1, endAyah = 7, playlistId = null) {
+        initQuranSurahDropdowns();
+        currentReaderSurah = parseInt(surahNum, 10) || 1;
+        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+        currentReaderStart = Math.max(1, parseInt(startAyah, 10) || 1);
+        currentReaderEnd = Math.min(s.count, Math.max(currentReaderStart, parseInt(endAyah, 10) || s.count));
+        currentReaderPlaylistId = playlistId;
+
+        const modal = document.getElementById("quranReaderModal");
+        const surahSelect = document.getElementById("quranReaderSurahSelect");
+        const startInput = document.getElementById("quranReaderStartInput");
+        const endInput = document.getElementById("quranReaderEndInput");
+
+        if (surahSelect) surahSelect.value = currentReaderSurah;
+        if (startInput) { startInput.value = currentReaderStart; startInput.max = s.count; }
+        if (endInput) { endInput.value = currentReaderEnd; endInput.max = s.count; }
+
+        updateQuranReaderHeader();
+
+        if (modal) {
+          modal.style.display = "flex";
+          modal.classList.add("show");
+        }
+
+        loadQuranReaderVerses();
+      }
+
+      function closeQuranReaderModal() {
+        pauseQuranAudio();
+        const modal = document.getElementById("quranReaderModal");
+        if (modal) {
+          modal.classList.remove("show");
+          modal.style.display = "";
+        }
+      }
+
+      function updateQuranReaderHeader() {
+        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+        const titleEl = document.getElementById("quranReaderSurahTitle");
+        const rangeBadge = document.getElementById("quranReaderRangeBadge");
+        if (titleEl) {
+          titleEl.textContent = `📖 Surah ${s.num}: ${s.name} · ${s.ar}`;
+        }
+        if (rangeBadge) {
+          rangeBadge.textContent = `Ayat ${currentReaderStart} - ${currentReaderEnd} of ${s.count}`;
+        }
+      }
+
+      function onQuranReaderSurahChanged(val) {
+        currentReaderSurah = parseInt(val, 10) || 1;
+        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+        currentReaderStart = 1;
+        currentReaderEnd = s.count;
+
+        const startInput = document.getElementById("quranReaderStartInput");
+        const endInput = document.getElementById("quranReaderEndInput");
+        if (startInput) { startInput.value = 1; startInput.max = s.count; }
+        if (endInput) { endInput.value = s.count; endInput.max = s.count; }
+
+        updateQuranReaderHeader();
+        loadQuranReaderVerses();
+      }
+
+      function loadQuranReaderVersesFromInputs() {
+        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+        const startInput = document.getElementById("quranReaderStartInput");
+        const endInput = document.getElementById("quranReaderEndInput");
+        let start = parseInt(startInput ? startInput.value : 1, 10) || 1;
+        let end = parseInt(endInput ? endInput.value : s.count, 10) || s.count;
+
+        if (start < 1) start = 1;
+        if (start > s.count) start = s.count;
+        if (end < start) end = start;
+        if (end > s.count) end = s.count;
+
+        currentReaderStart = start;
+        currentReaderEnd = end;
+
+        updateQuranReaderHeader();
+        loadQuranReaderVerses();
+      }
+
+      function shiftQuranAyahRange(direction) {
+        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+        const span = Math.max(1, currentReaderEnd - currentReaderStart + 1);
+
+        if (direction > 0) {
+          if (currentReaderEnd >= s.count) {
+            showToast("End of Surah reached ✨");
+            return;
+          }
+          currentReaderStart = currentReaderEnd + 1;
+          currentReaderEnd = Math.min(s.count, currentReaderStart + span - 1);
+        } else {
+          if (currentReaderStart <= 1) {
+            showToast("Start of Surah reached 📖");
+            return;
+          }
+          currentReaderEnd = currentReaderStart - 1;
+          currentReaderStart = Math.max(1, currentReaderEnd - span + 1);
+        }
+
+        const startInput = document.getElementById("quranReaderStartInput");
+        const endInput = document.getElementById("quranReaderEndInput");
+        if (startInput) startInput.value = currentReaderStart;
+        if (endInput) endInput.value = currentReaderEnd;
+
+        updateQuranReaderHeader();
+        loadQuranReaderVerses();
+      }
+
+      function fetchQuranSurahData(surahNum) {
+        if (quranApiCache[surahNum]) {
+          return Promise.resolve(quranApiCache[surahNum]);
+        }
+        const url = `https://api.alquran.cloud/v1/surah/${surahNum}/editions/quran-uthmani,ur.jalandhry,ar.alafasy`;
+        return fetch(url)
+          .then((res) => {
+            if (!res.ok) throw new Error("Network request failed: " + res.status);
+            return res.json();
+          })
+          .then((json) => {
+            if (json && json.data && json.data.length >= 2) {
+              quranApiCache[surahNum] = json.data;
+              return json.data;
+            }
+            throw new Error("Invalid Quran data format");
+          });
+      }
+
+      function loadQuranReaderVerses() {
+        pauseQuranAudio();
+        const container = document.getElementById("quranVersesContainer");
+        if (!container) return;
+
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 14px; color: var(--muted);">
+            <div style="font-size: 32px; margin-bottom: 12px; animation: pulse 1s infinite;">📖</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+              Fetching Quran from Net...
+            </div>
+            <div style="font-size: 12px; color: var(--muted);">
+              Loading Arabic text, Urdu translation (Fateh Muhammad Jalandhry) &amp; recitation
+            </div>
+          </div>
+        `;
+
+        fetchQuranSurahData(currentReaderSurah)
+          .then((data) => {
+            renderQuranVersesDisplay(data);
+          })
+          .catch((err) => {
+            console.error("Error fetching Quran from net:", err);
+            container.innerHTML = `
+              <div style="text-align: center; padding: 30px 14px; color: #dc2626; background: #fef2f2; border: 1.5px solid #fecaca; border-radius: 12px;">
+                <div style="font-size: 26px; margin-bottom: 8px;">⚠️</div>
+                <div style="font-size: 13.5px; font-weight: 800; margin-bottom: 4px;">Unable to fetch Quran from net</div>
+                <div style="font-size: 11.5px; color: #7f1d1d; margin-bottom: 12px;">
+                  Please check your internet connection.
+                </div>
+                <button
+                  type="button"
+                  class="grammar-empty-add-btn"
+                  onclick="loadQuranReaderVerses()"
+                  style="font-size: 12px; padding: 6px 14px; background: #dc2626; color: #fff; border: none; border-radius: 6px; cursor: pointer;"
+                >
+                  🔄 Retry
+                </button>
+              </div>
+            `;
+          });
+      }
+
+      function renderQuranVersesDisplay(data) {
+        const container = document.getElementById("quranVersesContainer");
+        if (!container) return;
+
+        const arabicEdition = data[0];
+        const urduEdition = data[1];
+        const audioEdition = data[2];
+
+        const arabicAyahs = (arabicEdition && arabicEdition.ayahs) || [];
+        const urduAyahs = (urduEdition && urduEdition.ayahs) || [];
+        const audioAyahs = (audioEdition && audioEdition.ayahs) || [];
+
+        const startIdx = Math.max(0, currentReaderStart - 1);
+        const endIdx = Math.min(arabicAyahs.length, currentReaderEnd);
+
+        quranAudioAyahs = [];
+        let html = "";
+
+        for (let i = startIdx; i < endIdx; i++) {
+          const arItem = arabicAyahs[i];
+          const urItem = urduAyahs[i];
+          const auItem = audioAyahs[i];
+          const ayahNum = (arItem && arItem.numberInSurah) || (i + 1);
+          const arText = arItem ? arItem.text : "";
+          const urText = urItem ? urItem.text : "";
+          const audioUrl = auItem ? auItem.audio : "";
+
+          const listIndex = quranAudioAyahs.length;
+          if (audioUrl) {
+            quranAudioAyahs.push({
+              index: listIndex,
+              ayahNum: ayahNum,
+              audioUrl: audioUrl,
+              cardId: `quranVerseCard_${ayahNum}`,
+            });
+          }
+
+          html += `
+            <div class="quran-verse-card" id="quranVerseCard_${ayahNum}">
+              <div class="quran-verse-top">
+                <div class="quran-ayah-pill">
+                  Ayah ${ayahNum}
+                </div>
+                ${
+                  audioUrl
+                    ? `<button
+                        type="button"
+                        class="grammar-item-action-btn"
+                        id="quranAyahPlayBtn_${ayahNum}"
+                        onclick="playSingleQuranAyahAudio(${listIndex})"
+                        title="Listen to this Ayah"
+                        style="width: 26px; height: 26px; font-size: 11px; background: #ecfdf5; border-color: #059669; color: #047857;"
+                      >
+                        ▶️
+                      </button>`
+                    : ""
+                }
+              </div>
+              <div class="quran-arabic-text" dir="rtl">
+                ${escapeHtml(arText)}
+              </div>
+              <div class="quran-urdu-text" dir="rtl">
+                ${escapeHtml(urText)}
+              </div>
+            </div>
+          `;
+        }
+
+        container.innerHTML = html || '<div style="text-align:center; padding: 20px; color: var(--muted);">No verses to display in this range.</div>';
+      }
+
+      function getOrCreateQuranAudioPlayer() {
+        if (!quranGlobalAudio) {
+          quranGlobalAudio = new Audio();
+          quranGlobalAudio.addEventListener("ended", onQuranAudioEnded);
+          quranGlobalAudio.addEventListener("error", function (e) {
+            console.error("Audio playback error:", e);
+            updateQuranAudioStatus("Playback error");
+            pauseQuranAudio();
+          });
+        }
+        return quranGlobalAudio;
+      }
+
+      function updateQuranAudioStatus(msg) {
+        const el = document.getElementById("quranAudioStatusText");
+        if (el) el.textContent = msg;
+      }
+
+      function playSingleQuranAyahAudio(index) {
+        if (!quranAudioAyahs[index]) return;
+        isAudioPlayingAll = false;
+        playQuranAyahAtIndex(index);
+      }
+
+      function playQuranAyahAtIndex(index) {
+        if (index < 0 || index >= quranAudioAyahs.length) {
+          pauseQuranAudio();
+          updateQuranAudioStatus("Mishary Rashid Alafasy");
+          return;
+        }
+
+        currentAudioIndex = index;
+        const item = quranAudioAyahs[index];
+        const player = getOrCreateQuranAudioPlayer();
+
+        document.querySelectorAll(".quran-verse-card.active-playing").forEach((el) => {
+          el.classList.remove("active-playing");
+        });
+        const card = document.getElementById(item.cardId);
+        if (card) {
+          card.classList.add("active-playing");
+          card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+
+        updateQuranAudioStatus(`Reciting Ayah ${item.ayahNum}...`);
+        const playAllBtn = document.getElementById("quranAudioPlayAllBtn");
+        if (playAllBtn) playAllBtn.textContent = "⏸️ Pause";
+
+        player.src = item.audioUrl;
+        player.play().catch((err) => {
+          console.warn("Audio play prevented:", err);
+        });
+      }
+
+      function onQuranAudioEnded() {
+        if (isAudioPlayingAll && currentAudioIndex + 1 < quranAudioAyahs.length) {
+          playQuranAyahAtIndex(currentAudioIndex + 1);
+        } else {
+          pauseQuranAudio();
+          updateQuranAudioStatus("Finished recitation ✨");
+          setTimeout(() => {
+            updateQuranAudioStatus("Mishary Rashid Alafasy");
+          }, 3000);
+        }
+      }
+
+      function toggleQuranPlayAll() {
+        const player = getOrCreateQuranAudioPlayer();
+
+        if (!player.paused && (isAudioPlayingAll || currentAudioIndex !== -1)) {
+          pauseQuranAudio();
+        } else {
+          isAudioPlayingAll = true;
+          const nextIndex = currentAudioIndex >= 0 ? currentAudioIndex : 0;
+          playQuranAyahAtIndex(nextIndex);
+        }
+      }
+
+      function pauseQuranAudio() {
+        if (quranGlobalAudio && !quranGlobalAudio.paused) {
+          quranGlobalAudio.pause();
+        }
+        isAudioPlayingAll = false;
+        const playAllBtn = document.getElementById("quranAudioPlayAllBtn");
+        if (playAllBtn) playAllBtn.textContent = "▶️ Play Recitation";
+        document.querySelectorAll(".quran-verse-card.active-playing").forEach((el) => {
+          el.classList.remove("active-playing");
+        });
+      }
+
+      function playPrevQuranAyahAudio() {
+        if (currentAudioIndex > 0) {
+          playQuranAyahAtIndex(currentAudioIndex - 1);
+        }
+      }
+
+      function playNextQuranAyahAudio() {
+        if (currentAudioIndex + 1 < quranAudioAyahs.length) {
+          playQuranAyahAtIndex(currentAudioIndex + 1);
+        }
+      }
+
+      function logCurrentQuranReaderProgress() {
+        const s = QURAN_SURAHS_114.find((x) => x.num === currentReaderSurah) || QURAN_SURAHS_114[0];
+        const dateFormatted = isoToDDMMYY(medicineTodayStr());
+
+        if (currentReaderPlaylistId) {
+          const subj = quranPlaylists.find((p) => p.id === currentReaderPlaylistId);
+          if (subj) {
+            subj.current = currentReaderEnd;
+            if (!subj.logs) subj.logs = [];
+            subj.logs.unshift({
+              date: dateFormatted,
+              lecture: currentReaderEnd,
+              timestamp: Date.now(),
+            });
+            subj.logs = subj.logs.slice(0, 50);
+            saveQuranPlaylists();
+            renderQuranPlaylists();
+            showToast(`Logged Surah ${s.name} up to Ayah ${currentReaderEnd}! 📖`);
+            return;
+          }
+        }
+
+        let targetSubj = quranPlaylists.find((p) => p.surahNumber === currentReaderSurah);
+        if (!targetSubj) {
+          targetSubj = {
+            id: "qp_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5),
+            title: `📖 Surah ${s.num}: ${s.name}`,
+            surahNumber: s.num,
+            surahName: s.name,
+            surahArabic: s.ar,
+            ayahStart: currentReaderStart,
+            ayahEnd: currentReaderEnd,
+            target: s.count,
+            current: currentReaderEnd,
+            url: "",
+            logs: [],
+          };
+          quranPlaylists.push(targetSubj);
+        } else {
+          targetSubj.current = currentReaderEnd;
+        }
+
+        if (!targetSubj.logs) targetSubj.logs = [];
+        targetSubj.logs.unshift({
+          date: dateFormatted,
+          lecture: currentReaderEnd,
+          timestamp: Date.now(),
+        });
+        targetSubj.logs = targetSubj.logs.slice(0, 50);
+
+        saveQuranPlaylists();
+        renderQuranPlaylists();
+        showToast(`Logged Surah ${s.name} (Ayat ${currentReaderStart}-${currentReaderEnd})! 📖`);
+      }
+
       document
         .getElementById("quranPlaylistModal")
         .addEventListener("click", function (e) {
           if (e.target === this) closeQuranPlaylistModal();
+        });
+
+      document
+        .getElementById("quranReaderModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeQuranReaderModal();
         });
 
       window.openQuranPlaylistModal = openQuranPlaylistModal;
@@ -19115,6 +19938,20 @@ Please provide:
       window.onQuranPlaylistDateChanged = onQuranPlaylistDateChanged;
       window.addQuranPlaylistLogEntry = addQuranPlaylistLogEntry;
       window.deleteSelectedQuranPlaylistLogEntry = deleteSelectedQuranPlaylistLogEntry;
+      window.onQuranSurahSelectChanged = onQuranSurahSelectChanged;
+      window.onQuranAyahRangeChanged = onQuranAyahRangeChanged;
+      window.previewCurrentQuranModalItem = previewCurrentQuranModalItem;
+      window.openQuranReaderModal = openQuranReaderModal;
+      window.closeQuranReaderModal = closeQuranReaderModal;
+      window.onQuranReaderSurahChanged = onQuranReaderSurahChanged;
+      window.loadQuranReaderVersesFromInputs = loadQuranReaderVersesFromInputs;
+      window.shiftQuranAyahRange = shiftQuranAyahRange;
+      window.loadQuranReaderVerses = loadQuranReaderVerses;
+      window.playSingleQuranAyahAudio = playSingleQuranAyahAudio;
+      window.toggleQuranPlayAll = toggleQuranPlayAll;
+      window.playPrevQuranAyahAudio = playPrevQuranAyahAudio;
+      window.playNextQuranAyahAudio = playNextQuranAyahAudio;
+      window.logCurrentQuranReaderProgress = logCurrentQuranReaderProgress;
 
       function showToast(msg) {
         const toast = document.getElementById("toast");
