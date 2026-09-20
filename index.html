@@ -4084,12 +4084,23 @@
 
       /* Single page wrapper inside St.PageFlip - Hardware Accelerated for 60fps Mobile */
       .pdf-flipbook-host,
+      #templateFlipbookHost,
       #templateStBookElement,
-      .template-page-item {
+      .template-page-item,
+      .st-page-flip {
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
+        will-change: transform;
+        -webkit-font-smoothing: antialiased;
+      }
+      #templateFlipbookHost,
+      #templateStBookElement,
+      .template-page-item {
+        touch-action: none !important;
+        -webkit-user-select: none;
+        user-select: none;
       }
       .template-page-item {
         background: #ffffff;
@@ -4117,11 +4128,12 @@
         height: 155px;
         border-radius: 50%;
         object-fit: cover;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        border: 4px solid #ffffff;
-        outline: 1px solid #e7e0d5;
+        border: 3px solid #e7e0d5;
         display: block;
         margin: 0 auto;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        will-change: transform;
       }
 
       /* ==================== EDITORIAL MAGAZINE COOKBOOK TEMPLATE STYLES ==================== */
@@ -21335,7 +21347,7 @@ Please provide:
 
               ${t.image ? `
                 <div class="cb-plate-wrap" style="margin: 8px 0 14px;">
-                  <img src="${escapeHtml(t.image)}" alt="${safeTitle}" class="cb-plate-img" style="width: 160px; height: 160px;" onerror="this.style.display='none'" />
+                  <img src="${escapeHtml(t.image)}" alt="${safeTitle}" class="cb-plate-img" style="width: 160px; height: 160px;" decoding="async" loading="eager" onerror="this.style.display='none'" />
                 </div>
               ` : ''}
 
@@ -21465,13 +21477,12 @@ Please provide:
             maxWidth: 1400,
             minHeight: 360,
             maxHeight: 1400,
-            maxShadowOpacity: 0.45,
             showCover: false,
             mobileScrollSupport: false,
             usePortrait: isMobile || !templateFlipState.isSpreadMode,
-            flippingTime: isMobile ? 380 : 520,
-            maxShadowOpacity: isMobile ? 0.2 : 0.4,
-            drawShadow: true,
+            flippingTime: isMobile ? 280 : 450,
+            drawShadow: !isMobile,
+            maxShadowOpacity: isMobile ? 0 : 0.35,
             startPage: Math.max(0, templateFlipState.currentPage - 1)
           });
 
