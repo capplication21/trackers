@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -3567,17 +3567,18 @@
       }
       /* Quran Reader Modal & Typography */
       .quran-reader-card {
-        max-width: 680px;
-        width: 95%;
-        max-height: 92vh;
+        max-width: 720px;
+        width: 96%;
+        height: 92vh;
+        max-height: 94vh;
         background: #fdfbf7;
         border: 2.5px solid var(--ink);
         border-radius: 16px;
-        padding: 16px 18px;
+        padding: 14px 16px;
         box-shadow: 0 6px 0 var(--ink);
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 10px;
         overflow: hidden;
       }
       .quran-reader-header {
@@ -3627,14 +3628,78 @@
         flex-wrap: wrap;
       }
       .quran-verses-container {
-        flex: 1;
+        flex: 1 1 auto;
+        min-height: 0;
         overflow-y: auto;
         padding-right: 4px;
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        min-height: 220px;
-        max-height: 52vh;
+        gap: 10px;
+      }
+
+      /* Focus Reading Mode: Maximizes space for Ayahs */
+      .quran-focus-mode .quran-reader-controls,
+      .quran-focus-mode #quranReaderYouTubeSection {
+        display: none !important;
+      }
+
+      /* Mobile optimization for Quran Reader */
+      @media (max-width: 640px) {
+        #quranReaderModal {
+          padding: 6px 4px !important;
+          align-items: center !important;
+        }
+        #quranReaderModal .quran-reader-card {
+          width: 100% !important;
+          max-width: 100% !important;
+          height: calc(100dvh - 10px) !important;
+          max-height: calc(100dvh - 10px) !important;
+          border-radius: 14px !important;
+          padding: 8px 8px 6px !important;
+          gap: 6px !important;
+          border-width: 2px !important;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        }
+        .quran-reader-header {
+          padding-bottom: 5px !important;
+        }
+        .quran-reader-title {
+          font-size: 13px !important;
+          gap: 4px !important;
+        }
+        .quran-reader-badge {
+          font-size: 10px !important;
+          padding: 1.5px 5px !important;
+        }
+        .quran-reader-controls {
+          padding: 5px 6px !important;
+          gap: 5px !important;
+        }
+        .quran-reader-controls select,
+        .quran-reader-controls input,
+        .quran-reader-controls button {
+          height: 28px !important;
+          font-size: 11px !important;
+          padding: 2px 5px !important;
+        }
+        .quran-verses-container {
+          gap: 8px !important;
+          padding-right: 2px !important;
+        }
+        .quran-verse-card {
+          padding: 9px 10px !important;
+          border-radius: 10px !important;
+        }
+        .quran-arabic-text {
+          font-size: 20px !important;
+          line-height: 1.95 !important;
+          margin-bottom: 5px !important;
+        }
+        .quran-urdu-text {
+          font-size: 13px !important;
+          line-height: 1.8 !important;
+          padding-top: 5px !important;
+        }
       }
       .quran-verse-card {
         background: #ffffff;
@@ -3705,6 +3770,788 @@
       .quran-read-btn:hover {
         background: #d1fae5;
         transform: translateY(-1px);
+      }
+      /* Template Book Styles */
+      .template-filter-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+        align-items: center;
+      }
+      .template-filter-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 10px;
+        font-size: 11.5px;
+        font-weight: 700;
+        background: #f1f5f9;
+        color: #475569;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .template-filter-chip:hover {
+        background: #e2e8f0;
+      }
+      .template-filter-chip.active {
+        background: #fef3c7;
+        color: #92400e;
+        border-color: #f59e0b;
+        box-shadow: 0 2px 0 #b45309;
+      }
+      
+      
+      /* ==================== TURN.JS TEMPLATE FLIPBOOK STYLES ==================== */
+      .template-view-toggle-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 10px 0 16px;
+      }
+      .template-view-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 18px;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 999px;
+        border: 1.5px solid #dcd3c4;
+        background: #f8f6f0;
+        color: #574e40;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 0 #cfc4b2;
+      }
+      .template-view-btn:hover {
+        background: #ede6d8;
+        transform: translateY(-1px);
+      }
+      .template-view-btn.active {
+        background: #1e1b18;
+        color: #fefce8;
+        border-color: #1e1b18;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+      .template-flipbook-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 6px;
+        width: 100%;
+        position: relative;
+      }
+      .flipbook-outer-stage {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 8px;
+        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(243, 238, 228, 0.85) 100%);
+        border: 1px solid #e7dfd3;
+        border-radius: 20px;
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.03), 0 8px 24px rgba(60, 50, 40, 0.06);
+        min-height: 480px;
+        overflow: hidden;
+        position: relative;
+        box-sizing: border-box;
+      }
+      .template-flipbook {
+        margin: 0 auto;
+        box-shadow: 0 20px 45px rgba(25, 20, 15, 0.22), 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        transition: margin 0.2s ease;
+        background: #f7f3eb;
+      }
+      /* Flipbook Individual Pages */
+      .fb-page {
+        background-color: #ffffff;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, rgba(255, 255, 255, 0) 10%);
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.02);
+        padding: 20px 16px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        position: relative;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #2b2825;
+        border: 1px solid #ede8df;
+      }
+      .fb-page.hard {
+        background: #2a241e;
+        color: #f5eedc;
+        box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+      }
+      /* Book Cover Styling */
+      .fb-cover-page {
+        background: linear-gradient(135deg, #2c221a 0%, #181410 100%) !important;
+        color: #fbf7ee !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 2px solid #997843;
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.85);
+        padding: 24px 16px;
+        box-sizing: border-box;
+      }
+      .fb-cover-border {
+        border: 1px solid rgba(212, 175, 55, 0.45);
+        border-radius: 8px;
+        padding: 20px 12px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        position: relative;
+      }
+      .fb-cover-emblem {
+        font-size: 36px;
+        margin-bottom: 12px;
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+      }
+      .fb-cover-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #f7dfa5;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        line-height: 1.25;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+      }
+      .fb-cover-subtitle {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-size: 13px;
+        color: #d4c5b0;
+        margin-bottom: 20px;
+      }
+      .fb-cover-prompt {
+        margin-top: auto;
+        font-size: 10.5px;
+        color: #d4af37;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 5px 12px;
+        border: 1px solid rgba(212, 175, 55, 0.5);
+        border-radius: 999px;
+        background: rgba(212, 175, 55, 0.1);
+        cursor: pointer;
+      }
+      /* Flipbook Controls Bar */
+      .flipbook-controls-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+      }
+      .fb-ctrl-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 999px;
+        border: 1.5px solid #d1c7b7;
+        background: #ffffff;
+        color: #3b3429;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        box-shadow: 0 2px 0 #c2b5a1;
+      }
+      .fb-ctrl-btn:hover {
+        background: #f8f5ee;
+        transform: translateY(-1px);
+      }
+      .fb-ctrl-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .fb-page-indicator {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #635745;
+        padding: 4px 10px;
+        background: #faf7f0;
+        border: 1px solid #e3d9cb;
+        border-radius: 999px;
+      }
+      .flipbook-hint {
+        font-size: 11px;
+        color: #8c8272;
+        margin-top: 8px;
+        text-align: center;
+      }
+
+      
+      
+      /* Floating Fullscreen Icon for Template Flipbook */
+      .template-floating-fullscreen-btn {
+        position: absolute;
+        top: 16px;
+        right: 18px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.94);
+        border: 2px solid var(--ink);
+        box-shadow: 0 3px 0 var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: var(--ink);
+        cursor: pointer;
+        z-index: 9999999;
+        transition: all 0.15s ease;
+        backdrop-filter: blur(4px);
+      }
+      .template-floating-fullscreen-btn:hover {
+        background: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 0 var(--ink);
+      }
+      .template-floating-fullscreen-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+
+      /* Fullscreen viewer mode for Template Book */
+      #templateViewerCard.is-fullscreen {
+        position: fixed !important;
+        inset: 0 !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 999999 !important;
+        background: #141210 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+      }
+      #templateViewerCard.is-fullscreen #templateStageWrapper {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        min-height: 100vh !important;
+        background: radial-gradient(circle at center, #26211c 0%, #100e0d 100%) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+      }
+
+      /* Flipbook stage dimensions */
+      #templateStageWrapper {
+        position: relative;
+        min-height: 640px;
+        height: 80vh;
+        max-height: 860px;
+        background: radial-gradient(circle at center, #ede6d1 0%, #ded5bd 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden !important;
+        user-select: none;
+        padding: 16px 8px;
+        box-sizing: border-box;
+      }
+
+      /* Single page wrapper inside St.PageFlip - NO SCROLLBARS! */
+      .template-page-item {
+        background: #ffffff;
+        width: 100%;
+        height: 100%;
+        overflow: hidden !important;
+        box-sizing: border-box;
+        padding: 24px 20px 20px;
+        position: relative;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #2b2825;
+        box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.03);
+        display: flex;
+        flex-direction: column;
+      }
+      .template-page-item * {
+        scrollbar-width: none !important;
+      }
+      .template-page-item *::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      /* ==================== EDITORIAL MAGAZINE COOKBOOK TEMPLATE STYLES ==================== */
+      .cookbook-page {
+        background: #ffffff;
+        border: 1px solid #ebe5df;
+        border-radius: 16px;
+        box-shadow: 0 12px 35px rgba(30, 20, 10, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+        padding: 24px 20px 20px;
+        margin-bottom: 24px;
+        position: relative;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #2b2825;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .cookbook-page:hover {
+        box-shadow: 0 16px 45px rgba(30, 20, 10, 0.12), 0 4px 10px rgba(0, 0, 0, 0.04);
+      }
+      .cb-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .cb-icon-circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid #e8e2d9;
+        background: #faf8f5;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #4a453e;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      }
+      .cb-top-category {
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #8c8275;
+      }
+      .cb-header-block {
+        margin: 6px 0 12px;
+      }
+      .cb-title {
+        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+        font-size: 26px;
+        font-weight: 600;
+        color: #1e1b18;
+        line-height: 1.22;
+        margin: 0 0 3px 0;
+        letter-spacing: -0.3px;
+      }
+      .cb-subtitle {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-size: 14.5px;
+        color: #6e665d;
+        margin-bottom: 6px;
+      }
+      .cb-divider-line {
+        border: none;
+        border-bottom: 1px solid #1e1b18;
+        opacity: 0.22;
+        margin: 12px 0 16px;
+      }
+      /* Quick Info Metadata Bar */
+      .cb-meta-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px 6px;
+        padding: 12px 6px;
+        margin: 4px 0 18px;
+        border-top: 1px solid rgba(30, 27, 24, 0.12);
+        border-bottom: 1px solid rgba(30, 27, 24, 0.12);
+        background: #fdfcf9;
+        border-radius: 10px;
+      }
+      @media (min-width: 540px) {
+        .cb-meta-strip {
+          grid-template-columns: repeat(6, 1fr);
+        }
+      }
+      .cb-meta-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        min-width: 55px;
+      }
+      .cb-meta-icon {
+        font-size: 15px;
+        margin-bottom: 2px;
+        opacity: 0.9;
+      }
+      .cb-meta-label {
+        font-size: 9px;
+        color: #7d756a;
+        text-transform: lowercase;
+        letter-spacing: 0.3px;
+        font-weight: 500;
+      }
+      .cb-meta-val {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #1e1b18;
+        margin-top: 1px;
+      }
+      /* Hero Photo (Circular Plate matching reference image) */
+      .cb-plate-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 12px 0 20px;
+      }
+      .cb-plate-img {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.08);
+        border: 6px solid #ffffff;
+        outline: 1px solid #e7e0d5;
+        transition: transform 0.3s ease;
+      }
+      .cb-plate-img:hover {
+        transform: scale(1.02);
+      }
+      /* Two-Column Editorial Layout */
+      .cb-content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 8px;
+      }
+      @media (min-width: 600px) {
+        .cb-content-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+      }
+      .cb-section-heading {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 17px;
+        font-weight: 600;
+        font-style: italic;
+        color: #1e1b18;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #efeae3;
+        padding-bottom: 4px;
+      }
+      /* Ingredients List */
+      .cb-ingredients-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .cb-ing-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 12.5px;
+        line-height: 1.45;
+        border-bottom: 1px dotted #e9e3da;
+        padding-bottom: 4px;
+      }
+      .cb-ing-name {
+        color: #4a453e;
+        font-weight: 500;
+        flex: 1;
+      }
+      .cb-ing-qty {
+        font-weight: 700;
+        color: #2b2825;
+        text-align: right;
+        font-size: 12px;
+      }
+      /* Preparation Numbered Steps */
+      .cb-steps-list {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+      .cb-step-row {
+        display: flex;
+        gap: 8px;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #383430;
+      }
+      .cb-step-num {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        color: #1e1b18;
+        font-size: 13px;
+        min-width: 16px;
+      }
+      .cb-step-text {
+        flex: 1;
+      }
+      /* Editorial Page Footer */
+      .cb-page-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+        padding-top: 14px;
+        border-top: 1px solid #efeae3;
+      }
+      .cb-folio-num {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #8c8275;
+      }
+      .cb-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .cb-copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #1e1b18;
+        color: #ffffff;
+        border: 1px solid #1e1b18;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+      .cb-copy-btn:hover {
+        background: #3a3530;
+        transform: translateY(-1px);
+      }
+      .cb-video-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 12px;
+        border-radius: 999px;
+        background: #fdf2f2;
+        border: 1px solid #fecaca;
+        color: #dc2626;
+        font-size: 11.5px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.15s ease;
+      }
+      .cb-video-btn:hover {
+        background: #fee2e2;
+        transform: translateY(-1px);
+      }
+      .cb-icon-action-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.15s ease;
+      }
+      .cb-icon-action-btn:hover {
+        background: #f1f5f9;
+        transform: translateY(-1px);
+      }
+      .cb-icon-action-btn.delete:hover {
+        background: #fee2e2;
+        border-color: #fca5a5;
+      }
+
+      .template-card {
+        background: #ffffff;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        box-shadow: 0 4px 0 var(--ink);
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        transition: transform 0.15s ease;
+      }
+      .template-card:hover {
+        transform: translateY(-1px);
+      }
+      .template-card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .template-card-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--ink);
+        line-height: 1.3;
+      }
+      .template-cat-badge {
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: #f0fdf4;
+        color: #166534;
+        border: 1px solid #86efac;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        margin-top: 3px;
+      }
+      .template-card-content {
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 12.5px;
+        line-height: 1.6;
+        color: #1e293b;
+        white-space: pre-wrap;
+        font-family: inherit;
+        word-break: break-word;
+        max-height: 260px;
+        overflow-y: auto;
+      }
+      .template-card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px dashed #cbd5e1;
+      }
+      .template-copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        font-size: 11.5px;
+        font-weight: 700;
+        background: #ecfdf5;
+        color: #047857;
+        border: 1.5px solid #10b981;
+        box-shadow: 0 2px 0 #059669;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .template-copy-btn:hover {
+        background: #d1fae5;
+        transform: translateY(-1px);
+      }
+      .template-copy-btn:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+
+      /* Read and Listen Quran Modal Colorful Compact Buttons */
+      .quran-modal-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 14px;
+      }
+      .quran-modal-btn {
+        flex: 1 1 auto;
+        min-width: fit-content;
+        padding: 6.5px 13px;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        white-space: nowrap;
+        line-height: 1.3;
+        box-sizing: border-box;
+      }
+      .quran-modal-btn:hover {
+        transform: translateY(-1.5px);
+        filter: brightness(0.96);
+      }
+      .quran-modal-btn:active {
+        transform: translateY(2px);
+        box-shadow: none !important;
+      }
+      .quran-btn-cancel {
+        background: #f0f9ff;
+        color: #0369a1;
+        border: 1.8px solid #38bdf8;
+        box-shadow: 0 2.5px 0 #0284c7;
+      }
+      .quran-btn-cancel:hover {
+        background: #e0f2fe;
+        color: #075985;
+        border-color: #0284c7;
+      }
+      .quran-btn-delete {
+        background: #fef2f2;
+        color: #b91c1c;
+        border: 1.8px solid #f87171;
+        box-shadow: 0 2.5px 0 #dc2626;
+      }
+      .quran-btn-delete:hover {
+        background: #fee2e2;
+        color: #991b1b;
+        border-color: #b91c1c;
+      }
+      .quran-btn-readnow {
+        background: #ecfdf5;
+        color: #047857;
+        border: 1.8px solid #34d399;
+        box-shadow: 0 2.5px 0 #059669;
+      }
+      .quran-btn-readnow:hover {
+        background: #d1fae5;
+        color: #064e3b;
+        border-color: #047857;
+      }
+      .quran-btn-save {
+        background: #fef08a;
+        color: #854d0e;
+        border: 1.8px solid #facc15;
+        box-shadow: 0 2.5px 0 #ca8a04;
+      }
+      .quran-btn-save:hover {
+        background: #fde047;
+        color: #713f12;
+        border-color: #ca8a04;
       }
       .zad-log-dropdown-row {
         display: flex;
@@ -6952,7 +7799,7 @@
             <!-- Compact Light Header -->
             <div class="nav-hub-header">
               <span class="nav-hub-badge">🧭 NAVIGATOR</span>
-              <span class="nav-hub-sub">12 Apps</span>
+              <span class="nav-hub-sub">13 Apps</span>
             </div>
 
             <!-- Sleek Compact Light Cards Grid (Entire Card Clickable, No Description, No Open Button) -->
@@ -7002,13 +7849,13 @@
                 <div class="hub-card-title">Period</div>
               </div>
 
-              <!-- Card 6: Recipe -->
+              <!-- Card 6: Recipe Book -->
               <div class="hub-card" onclick="switchTab('recipe')">
                 <div class="hub-card-top">
                   <span class="hub-card-icon">🍳</span>
                   <span class="hub-card-badge">KITCHEN</span>
                 </div>
-                <div class="hub-card-title">Recipe</div>
+                <div class="hub-card-title">Recipe Book</div>
               </div>
 
               <!-- Card 7: Toolkit -->
@@ -7063,6 +7910,15 @@
                   <span class="hub-card-badge">STATS</span>
                 </div>
                 <div class="hub-card-title">Summary</div>
+              </div>
+
+              <!-- Card 13: Template Book -->
+              <div class="hub-card" onclick="switchTab('templates')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">📋</span>
+                  <span class="hub-card-badge">TEMPLATES</span>
+                </div>
+                <div class="hub-card-title">Template Book</div>
               </div>
             </div>
           </div>
@@ -8496,6 +9352,97 @@
                   <div class="history-empty">No recipes added yet.</div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TEMPLATE BOOK TAB -->
+        <div class="tab-content" id="tab-templates">
+          <div class="section-title" style="background: #fef3c7; color: #92400e; border-color: #f59e0b;">
+            <span>📖</span> TEMPLATE FLIPBOOK READER
+          </div>
+          <div style="font-size: 12px; color: var(--muted); margin-bottom: 12px; text-align: center;">
+            Experience your recipes &amp; templates with realistic 3D paper turns, corner peeling &amp; spreads
+          </div>
+
+          <!-- View Mode Switcher (Flipbook vs List) -->
+          <div class="template-view-toggle-bar">
+            <button type="button" class="template-view-btn active" id="btnViewFlipbook" onclick="switchTemplateView('flipbook')">
+              <span>📖</span> 3D Flipbook Reader
+            </button>
+            <button type="button" class="template-view-btn" id="btnViewList" onclick="switchTemplateView('list')">
+              <span>📋</span> Card List
+            </button>
+          </div>
+
+          <!-- FLIPBOOK CONTAINER (Modeled exactly after PDF Flipbook Reader) -->
+          <div id="templateFlipbookSection" class="template-flipbook-section" style="width: 100%;">
+            <div class="pdf-viewer-card" id="templateViewerCard" style="border-radius: 16px; position: relative;">
+              <!-- Flipbook Stage Area (No header or footer buttons, only floating fullscreen on top right) -->
+              <div class="pdf-stage-wrapper" id="templateStageWrapper" style="position: relative;">
+                <!-- Floating Fullscreen Icon on Top Right -->
+                <button
+                  type="button"
+                  class="template-floating-fullscreen-btn"
+                  id="templateFloatingFsBtn"
+                  onclick="toggleTemplateFullscreen()"
+                  title="Toggle Fullscreen"
+                >
+                  ⛶
+                </button>
+
+                <!-- Flipbook Host with St.PageFlip -->
+                <div class="pdf-flipbook-host" id="templateFlipbookHost">
+                  <div id="templateStBookElement">
+                    <!-- Pages dynamically mounted by JavaScript -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="templateListSection" class="template-list-section" style="display: none; width: 100%;">
+            <!-- Search Row -->
+            <div class="recipe-search-row">
+              <input
+                type="text"
+                class="input-field"
+                id="templateSearchInput"
+                placeholder="Search templates (e.g. cocoa, routine, oat)..."
+                oninput="renderTemplateBookList()"
+              />
+              <button class="recipe-search-btn" onclick="renderTemplateBookList()" title="Search templates">
+                🔍
+              </button>
+            </div>
+
+            <!-- Add New Template Button -->
+            <button class="add-period-btn" onclick="openTemplateModal()">
+              <span>➕</span> Add New Template
+            </button>
+
+            <!-- Category Filter Chips -->
+            <div class="template-filter-chips" id="templateFilterChips">
+              <button class="template-filter-chip active" data-cat="all" onclick="filterTemplateCategory('all', event)">
+                <span>🌟</span> All (<span id="templateCountAll">0</span>)
+              </button>
+              <button class="template-filter-chip" data-cat="recipe" onclick="filterTemplateCategory('recipe', event)">
+                <span>🍳</span> Recipes (<span id="templateCountRecipe">0</span>)
+              </button>
+              <button class="template-filter-chip" data-cat="routine" onclick="filterTemplateCategory('routine', event)">
+                <span>⚡</span> Routines (<span id="templateCountRoutine">0</span>)
+              </button>
+              <button class="template-filter-chip" data-cat="study" onclick="filterTemplateCategory('study', event)">
+                <span>📖</span> Study (<span id="templateCountStudy">0</span>)
+              </button>
+              <button class="template-filter-chip" data-cat="notes" onclick="filterTemplateCategory('notes', event)">
+                <span>📝</span> Notes (<span id="templateCountNotes">0</span>)
+              </button>
+            </div>
+
+            <!-- Template Cards Container -->
+            <div class="template-cards-list" id="templateCardsList" style="margin-top: 12px;">
+              <!-- Rendered dynamically -->
             </div>
           </div>
         </div>
@@ -10996,14 +11943,6 @@
           </div>
         </div>
 
-        <!-- Online Quran with Urdu Meaning Banner -->
-        <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 10px; padding: 8px 10px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 18px;">🌐</span>
-          <div style="font-size: 11.5px; color: #166534; line-height: 1.4;">
-            <strong>Online Quran with Urdu Meaning:</strong> Fetches Arabic text, Urdu translation (Fateh Muhammad Jalandhry), and recitation directly from the net.
-          </div>
-        </div>
-
         <div class="input-group">
           <label class="input-label" for="quranPlaylistTitleInput">Playlist / Surah Title</label>
           <input
@@ -11032,39 +11971,38 @@
           </span>
         </div>
 
-        <div class="modal-buttons" style="flex-wrap: wrap; gap: 6px;">
+        <div class="modal-buttons quran-modal-buttons">
           <button
-            class="modal-btn modal-btn-cancel"
+            class="quran-modal-btn quran-btn-cancel"
             type="button"
             onclick="closeQuranPlaylistModal()"
           >
-            Cancel
+            <span>✕</span> Cancel
           </button>
           <button
-            class="modal-btn"
+            class="quran-modal-btn quran-btn-delete"
             id="quranPlaylistDeleteModalBtn"
             type="button"
-            style="display: none; background: #fee2e2; color: #dc2626; border: 1.5px solid #dc2626; font-weight: 700; border-radius: 8px; padding: 8px 12px; cursor: pointer;"
+            style="display: none;"
             onclick="deleteQuranPlaylistFromModal()"
           >
-            🗑️ Delete
+            <span>🗑️</span> Delete
           </button>
           <button
-            class="modal-btn"
+            class="quran-modal-btn quran-btn-readnow"
             type="button"
-            style="background: #ecfdf5; color: #047857; border: 1.5px solid #059669; font-weight: 700; border-radius: 8px; padding: 8px 14px; cursor: pointer;"
             onclick="saveQuranPlaylistItem(true)"
             title="Save and read from net with YouTube recitation now"
           >
-            📖 Save &amp; Read Now
+            <span>📖</span> Save &amp; Read Now
           </button>
           <button
-            class="modal-btn modal-btn-save"
+            class="quran-modal-btn quran-btn-save"
             id="quranPlaylistSaveBtn"
             type="button"
             onclick="saveQuranPlaylistItem(false)"
           >
-            Save
+            <span>💾</span> Save Playlist
           </button>
         </div>
       </div>
@@ -11078,15 +12016,27 @@
             <span id="quranReaderSurahTitle">📖 Surah 1: Al-Faatiha</span>
             <span class="quran-reader-badge" id="quranReaderRangeBadge">Ayat 1 - 7</span>
           </div>
-          <button
-            type="button"
-            class="grammar-item-action-btn"
-            onclick="closeQuranReaderModal()"
-            title="Close"
-            style="width: 28px; height: 28px; font-size: 14px; font-weight: bold;"
-          >
-            ✕
-          </button>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <button
+              type="button"
+              id="quranReaderFocusBtn"
+              class="quran-modal-btn quran-btn-readnow"
+              onclick="toggleQuranReaderFocusMode()"
+              title="Focus Reading Mode (Hide controls &amp; video for maximum reading space)"
+              style="padding: 4px 10px; font-size: 11px; height: 28px;"
+            >
+              📖 Focus
+            </button>
+            <button
+              type="button"
+              class="grammar-item-action-btn"
+              onclick="closeQuranReaderModal()"
+              title="Close"
+              style="width: 28px; height: 28px; font-size: 14px; font-weight: bold;"
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
         <!-- Quick Select & Filter Bar -->
@@ -11144,32 +12094,84 @@
         </div>
 
         <!-- Reader Footer -->
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 8px; border-top: 1.5px solid var(--border);">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; padding-top: 6px; border-top: 1.5px solid var(--border);">
           <div style="display: flex; gap: 6px;">
             <button
               type="button"
-              class="modal-btn"
+              class="quran-modal-btn quran-btn-cancel"
               onclick="shiftQuranAyahRange(-1)"
-              style="padding: 6px 10px; font-size: 11px; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer;"
+              style="padding: 5px 11px; font-size: 11.5px;"
             >
               ◀ Prev Ayahs
             </button>
             <button
               type="button"
-              class="modal-btn"
+              class="quran-modal-btn quran-btn-save"
               onclick="shiftQuranAyahRange(1)"
-              style="padding: 6px 10px; font-size: 11px; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer;"
+              style="padding: 5px 11px; font-size: 11.5px;"
             >
               Next Ayahs ▶
             </button>
           </div>
           <button
             type="button"
-            class="modal-btn modal-btn-cancel"
+            class="quran-modal-btn quran-btn-delete"
             onclick="closeQuranReaderModal()"
-            style="padding: 6px 14px; font-size: 12px;"
+            style="padding: 5px 14px; font-size: 11.5px;"
           >
-            Close
+            ✕ Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add / Edit Template Modal -->
+    <div class="modal-overlay" id="templateModal">
+      <div class="modal-card">
+        <input type="hidden" id="templateEditId" value="" />
+        <div class="modal-title" id="templateModalTitle">📋 Add New Template</div>
+        <div class="modal-subtitle">Save a reusable template with links, steps, or measurements</div>
+
+        <div class="input-group">
+          <label class="input-label" for="templateTitleInput">Template Title</label>
+          <input type="text" class="input-field" id="templateTitleInput" placeholder="e.g. High Protein Cocoa Puffs (Air Fryer)" />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="templateCategorySelect">Category</label>
+          <select class="input-field" id="templateCategorySelect">
+            <option value="recipe">🍳 Recipe Template</option>
+            <option value="routine">⚡ Routine / Habit Template</option>
+            <option value="study">📖 Study / Notes Template</option>
+            <option value="notes">📝 General Notes Template</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="templateUrlInput">Video / Reference Link (Optional)</label>
+          <input type="url" class="input-field" id="templateUrlInput" placeholder="https://youtube.com/shorts/... or https://..." />
+        </div>
+
+        <div class="input-group">
+          <label class="input-label" for="templateContentInput">Template Content / Ingredients / Instructions</label>
+          <textarea
+            class="input-field"
+            id="templateContentInput"
+            rows="8"
+            placeholder="Paste or write your template here..."
+            style="font-family: inherit; font-size: 13px; line-height: 1.5; padding: 10px; resize: vertical;"
+          ></textarea>
+        </div>
+
+        <div class="modal-buttons quran-modal-buttons">
+          <button type="button" class="quran-modal-btn quran-btn-cancel" onclick="closeTemplateModal()">
+            <span>✕</span> Cancel
+          </button>
+          <button type="button" class="quran-modal-btn quran-btn-delete" id="templateDeleteModalBtn" style="display: none;" onclick="deleteTemplateFromModal()">
+            <span>🗑️</span> Delete
+          </button>
+          <button type="button" class="quran-modal-btn quran-btn-save" id="templateSaveBtn" onclick="saveTemplateFromModal()">
+            <span>💾</span> Save Template
           </button>
         </div>
       </div>
@@ -11455,6 +12457,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <!-- StPageFlip (Modern 3D interactive page turning flipbook engine) -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="turn.min.js"></script>
 
     <script>
       var b1RoutineReady = false;
@@ -12262,6 +13266,23 @@
             "Ginger (chopped)",
             "Sesame oil",
             "Oil",
+          ],
+        },
+        {
+          title: "High Protein Cocoa Puffs",
+          url: "https://youtube.com/shorts/9lQzND2xMHI?si=I4wVNhgw5gq5ng1o",
+          veg: true,
+          mustTry: true,
+          quick: true,
+          ingredients: [
+            "Oat flour (45–50g)",
+            "Cocoa powder (20–25g)",
+            "Protein powder (35–40g)",
+            "Brown sugar (20–25g / 2 tbsp)",
+            "Baking soda (5g / 1 tsp)",
+            "Instant coffee powder (2–4g / 1–2 tsp)",
+            "Milk (75–90g / 5–6 tbsp; add gradually)",
+            "Air fry at 170°C for 21 mins (or bake at 170°C for 21 mins)",
           ],
         },
       ];
@@ -13804,7 +14825,8 @@
         week: "📅 3x/Week",
         history: "📜 History Log",
         period: "🩸 Period Tracker",
-        recipe: "🍳 Recipe Studio",
+        recipe: "🍳 Recipe Book",
+        templates: "📋 Template Book",
         english: "🔤 Toolkit",
         englishtest: "📝 English Test",
         mathtest: "🧮 Math Test",
@@ -17230,6 +18252,13 @@ Please provide:
         if (tabName === "recipe") {
           renderRecipeList();
         }
+        if (tabName === "templates") {
+          if (typeof currentTemplateView !== "undefined" && currentTemplateView === "flipbook") {
+            setTimeout(initTemplateFlipbook, 100);
+          } else {
+            renderTemplateBookList();
+          }
+        }
         if (tabName === "englishtest") {
           initEnglishTest();
         }
@@ -19314,7 +20343,7 @@ Please provide:
             if (targetInput) targetInput.value = end - start + 1;
             if (urlInput) urlInput.value = subj.url || "";
             if (badge) badge.textContent = `${end - start + 1} Ayahs`;
-            if (saveBtn) saveBtn.textContent = "Save Changes";
+            if (saveBtn) saveBtn.innerHTML = "<span>💾</span> Save Changes";
             if (deleteModalBtn) deleteModalBtn.style.display = "inline-flex";
           }
         } else {
@@ -19328,7 +20357,7 @@ Please provide:
           if (targetInput) targetInput.value = defaultSurah.count;
           if (urlInput) urlInput.value = "";
           if (badge) badge.textContent = `${defaultSurah.count} Ayahs`;
-          if (saveBtn) saveBtn.textContent = "Save Playlist";
+          if (saveBtn) saveBtn.innerHTML = "<span>💾</span> Save Playlist";
           if (deleteModalBtn) deleteModalBtn.style.display = "none";
         }
 
@@ -19446,6 +20475,49 @@ Please provide:
         return null;
       }
 
+      let isReaderYouTubeCollapsed = false;
+
+      function toggleReaderYouTubeCollapse() {
+        isReaderYouTubeCollapsed = !isReaderYouTubeCollapsed;
+        const playerWrap = document.getElementById("quranReaderYouTubePlayerContainer");
+        const toggleBtn = document.getElementById("quranReaderYtToggleBtn");
+        const statusText = document.getElementById("quranReaderYtStatusText");
+        if (playerWrap) {
+          if (isReaderYouTubeCollapsed) {
+            playerWrap.style.height = "0px";
+            playerWrap.style.paddingBottom = "0px";
+            playerWrap.style.overflow = "hidden";
+            playerWrap.style.opacity = "0";
+            playerWrap.style.pointerEvents = "none";
+            if (toggleBtn) toggleBtn.innerHTML = "👁️ Show Video";
+            if (statusText) statusText.textContent = "Recitation Playing (Video Minimized)";
+          } else {
+            playerWrap.style.height = "0px";
+            playerWrap.style.paddingBottom = "40%";
+            playerWrap.style.overflow = "hidden";
+            playerWrap.style.opacity = "1";
+            playerWrap.style.pointerEvents = "auto";
+            if (toggleBtn) toggleBtn.innerHTML = "🔽 Minimize Video";
+            if (statusText) statusText.textContent = "YouTube Recitation";
+          }
+        }
+      }
+
+      let isQuranReaderFocusMode = false;
+      function toggleQuranReaderFocusMode() {
+        isQuranReaderFocusMode = !isQuranReaderFocusMode;
+        const modal = document.getElementById("quranReaderModal");
+        const btn = document.getElementById("quranReaderFocusBtn");
+        if (!modal) return;
+        if (isQuranReaderFocusMode) {
+          modal.classList.add("quran-focus-mode");
+          if (btn) btn.innerHTML = "✕ Normal";
+        } else {
+          modal.classList.remove("quran-focus-mode");
+          if (btn) btn.innerHTML = "📖 Focus";
+        }
+      }
+
       function renderQuranReaderYouTubeSection(url) {
         const container = document.getElementById("quranReaderYouTubeSection");
         if (!container) return;
@@ -19453,19 +20525,22 @@ Please provide:
         const embedInfo = getYouTubeEmbedInfo(url);
         if (embedInfo && embedInfo.embedUrl) {
           container.innerHTML = `
-            <div style="background: #0f172a; border-radius: 12px; padding: 8px 10px; margin-bottom: 8px; border: 1.5px solid #334155;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; padding: 0 4px;">
-                <div style="font-size: 12px; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 6px;">
-                  <span>▶️</span> YouTube Recitation (Listen along while reading below)
+            <div style="background: #0f172a; border-radius: 12px; padding: 6px 10px; margin-bottom: 6px; border: 1.5px solid #334155;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: ${isReaderYouTubeCollapsed ? '0px' : '5px'}; padding: 0 4px; flex-wrap: wrap; gap: 4px;">
+                <div style="font-size: 11.5px; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 6px;">
+                  <span>▶️</span> <span id="quranReaderYtStatusText">${isReaderYouTubeCollapsed ? 'Recitation Playing (Video Minimized)' : 'YouTube Recitation'}</span>
                 </div>
                 <div style="display: flex; gap: 6px; align-items: center;">
-                  <a href="${escapeHtml(url)}" target="_blank" style="font-size: 11px; color: #38bdf8; text-decoration: underline; font-weight: 600;">
-                    Open in YouTube ↗
+                  <button type="button" id="quranReaderYtToggleBtn" onclick="toggleReaderYouTubeCollapse()" style="background: #1e293b; color: #38bdf8; border: 1px solid #475569; border-radius: 6px; padding: 2.5px 8px; font-size: 11px; font-weight: 700; cursor: pointer;">
+                    ${isReaderYouTubeCollapsed ? '👁️ Show Video' : '🔽 Minimize Video'}
+                  </button>
+                  <a href="${escapeHtml(url)}" target="_blank" style="font-size: 11px; color: #94a3b8; text-decoration: underline; font-weight: 600;">
+                    Open ↗
                   </a>
-                  <button type="button" onclick="editCurrentReaderYouTubeLink()" class="grammar-item-action-btn" title="Change YouTube Link" style="width: 22px; height: 22px; font-size: 10px; background: #1e293b; color: #cbd5e1; border-color: #475569;">✏️</button>
+                  <button type="button" onclick="editCurrentReaderYouTubeLink()" class="grammar-item-action-btn" title="Change YouTube Link" style="width: 20px; height: 20px; font-size: 10px; background: #1e293b; color: #cbd5e1; border-color: #475569;">✏️</button>
                 </div>
               </div>
-              <div style="position: relative; width: 100%; padding-bottom: 45%; height: 0; overflow: hidden; border-radius: 8px; background: #000;">
+              <div id="quranReaderYouTubePlayerContainer" style="transition: all 0.2s ease; ${isReaderYouTubeCollapsed ? 'height: 0; padding-bottom: 0; overflow: hidden; opacity: 0; pointer-events: none;' : 'position: relative; width: 100%; padding-bottom: 40%; height: 0; overflow: hidden; border-radius: 8px; background: #000;'}">
                 <iframe
                   src="${embedInfo.embedUrl}"
                   title="YouTube Quran Recitation"
@@ -19996,9 +21071,844 @@ Please provide:
       window.onQuranSurahSelectChanged = onQuranSurahSelectChanged;
       window.onQuranAyahRangeChanged = onQuranAyahRangeChanged;
       window.previewCurrentQuranModalItem = previewCurrentQuranModalItem;
-      window.openQuranReaderModal = openQuranReaderModal;
+            // ==================== TEMPLATE BOOK SYSTEM ====================
+      const DEFAULT_TEMPLATES = [
+        {
+          id: "tmpl_cocoa_puffs",
+          title: "High Protein Cocoa Puffs",
+          subtitle: "with chocolate & oats (Air Fryer)",
+          category: "recipe",
+          categoryBadge: "BREAKFAST · AIR FRYER",
+          image: "cocoa_puffs_dish.jpg",
+          prepTime: "5 minutes",
+          cookTime: "21 minutes",
+          totalTime: "26 minutes",
+          temperature: "170°C",
+          servings: "2",
+          difficulty: "easy",
+          url: "https://youtube.com/shorts/9lQzND2xMHI?si=I4wVNhgw5gq5ng1o",
+          ingredients: [
+            { name: "Oat flour", qty: "45–50 g" },
+            { name: "Cocoa powder", qty: "20–25 g" },
+            { name: "Protein powder", qty: "35–40 g" },
+            { name: "Brown sugar", qty: "20–25 g (2 tbsp)" },
+            { name: "Baking soda", qty: "5 g (1 tsp)" },
+            { name: "Instant coffee powder", qty: "2–4 g (1 to 2 tsp)" },
+            { name: "Milk", qty: "75–90 g (5 to 6 tbsp)" }
+          ],
+          preparation: [
+            "In a mixing bowl, combine oat flour, cocoa powder, protein powder, brown sugar, baking soda, and instant coffee powder. Whisk thoroughly.",
+            "Gradually add milk (5 to 6 tbsp), stirring until a soft, pliable chocolate dough forms.",
+            "Pinch small pieces of dough and roll them into miniature balls (puffs) with your palms.",
+            "Arrange puffs in the air fryer basket in a single layer. Air fry at 170°C for 21 minutes until crispy and crunchy. Let cool, serve with fresh milk or yogurt!"
+          ],
+          content: "Oat flour: 45–50 g\nCocoa powder: 20–25 g\nProtein powder: 35–40 g\nBrown sugar: 20–25 g (2 tbsp)\nBaking soda: 5 g (1 tsp)\nInstant coffee powder: 2–4 g (1 to 2 tsp)\nMilk: 75–90 g (5 to 6 tbsp; add gradually)\n\n170 degree 21mint",
+          createdAt: Date.now()
+        }
+      ];
+
+      let templateBookData = [];
+      let currentTemplateCategory = "all";
+      let currentTemplateView = "flipbook"; // "flipbook" or "list"
+
+      // St.PageFlip State (Modeled after PDF Flipbook Reader)
+      const templateFlipState = {
+        pageFlipInstance: null,
+        currentPage: 1,
+        totalPages: 4,
+        isSpreadMode: true,
+        isSoundEnabled: true,
+        isFullscreen: false
+      };
+
+      function loadTemplateBookData() {
+        try {
+          const stored = localStorage.getItem("template_book_data_v1");
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed)) {
+              templateBookData = parsed.filter(t => 
+                t.id !== "tmpl_clean_meal_prep" && 
+                t.id !== "tmpl_morning_routine" && 
+                t.id !== "tmpl_quran_study"
+              );
+            }
+          }
+        } catch (e) {
+          console.error("Error loading template book:", e);
+        }
+        if (!templateBookData || !Array.isArray(templateBookData) || templateBookData.length === 0) {
+          templateBookData = JSON.parse(JSON.stringify(DEFAULT_TEMPLATES));
+        } else {
+          const cocoaIdx = templateBookData.findIndex(t => t.id === "tmpl_cocoa_puffs" || (t.title && t.title.includes("Cocoa Puffs")));
+          if (cocoaIdx !== -1) {
+            templateBookData[cocoaIdx] = {
+              ...DEFAULT_TEMPLATES[0],
+              ...templateBookData[cocoaIdx],
+              image: "cocoa_puffs_dish.jpg",
+              ingredients: DEFAULT_TEMPLATES[0].ingredients,
+              preparation: DEFAULT_TEMPLATES[0].preparation,
+              prepTime: "5 minutes",
+              cookTime: "21 minutes",
+              totalTime: "26 minutes",
+              temperature: "170°C",
+              servings: "2",
+              difficulty: "easy",
+              subtitle: "with chocolate & oats (Air Fryer)",
+              categoryBadge: "BREAKFAST · AIR FRYER"
+            };
+          } else {
+            templateBookData.unshift(JSON.parse(JSON.stringify(DEFAULT_TEMPLATES[0])));
+          }
+        }
+        saveTemplateBookData();
+        renderTemplateBookList();
+        setTimeout(initTemplateFlipbook, 60);
+      }
+
+      function saveTemplateBookData() {
+        try {
+          localStorage.setItem("template_book_data_v1", JSON.stringify(templateBookData));
+        } catch (e) {
+          console.error("Error saving template book:", e);
+        }
+      }
+
+      function switchTemplateView(view) {
+        currentTemplateView = view;
+        const btnFlip = document.getElementById("btnViewFlipbook");
+        const btnList = document.getElementById("btnViewList");
+        const secFlip = document.getElementById("templateFlipbookSection");
+        const secList = document.getElementById("templateListSection");
+
+        if (btnFlip) btnFlip.classList.toggle("active", view === "flipbook");
+        if (btnList) btnList.classList.toggle("active", view === "list");
+
+        if (view === "flipbook") {
+          if (secFlip) secFlip.style.display = "block";
+          if (secList) secList.style.display = "none";
+          setTimeout(initTemplateFlipbook, 80);
+        } else {
+          if (secFlip) secFlip.style.display = "none";
+          if (secList) secList.style.display = "block";
+          renderTemplateBookList();
+        }
+      }
+
+      function filterTemplateCategory(cat, event) {
+        if (event) event.preventDefault();
+        currentTemplateCategory = cat;
+        document.querySelectorAll(".template-filter-chip").forEach(chip => {
+          chip.classList.toggle("active", chip.getAttribute("data-cat") === cat);
+        });
+        renderTemplateBookList();
+      }
+
+      function parseTemplateForCookbook(t) {
+        if (t.ingredients && Array.isArray(t.ingredients) && t.ingredients.length > 0) {
+          return t;
+        }
+        const content = t.content || "";
+        const lines = content.split("\n").map(l => l.trim()).filter(Boolean);
+        const ingredients = [];
+        const preparation = [];
+        let temp = t.temperature || "";
+        let cookTime = t.cookTime || "";
+
+        lines.forEach(line => {
+          if (line.toLowerCase().includes("degree") || line.toLowerCase().includes("mint")) {
+            if (line.includes("170")) temp = "170°C";
+            if (line.includes("21") || line.toLowerCase().includes("mint")) cookTime = "21 minutes";
+          } else if (line.includes(":") || line.includes("–") || line.includes("-") || line.includes(" g") || line.includes("tbsp") || line.includes("cup")) {
+            const parts = line.split(":");
+            if (parts.length === 2) {
+              ingredients.push({ name: parts[0].trim(), qty: parts[1].trim() });
+            } else {
+              ingredients.push({ name: line, qty: "•" });
+            }
+          } else if (/^\d+[\.\)]/.test(line)) {
+            preparation.push(line.replace(/^\d+[\.\)]\s*/, ""));
+          } else {
+            preparation.push(line);
+          }
+        });
+
+        return {
+          ...t,
+          ingredients: ingredients.length > 0 ? ingredients : null,
+          preparation: preparation.length > 0 ? preparation : null,
+          prepTime: t.prepTime || "5 minutes",
+          cookTime: cookTime || t.cookTime || "21 minutes",
+          totalTime: t.totalTime || "26 minutes",
+          temperature: temp || t.temperature || "170°C",
+          servings: t.servings || "2",
+          difficulty: t.difficulty || "easy",
+          subtitle: t.subtitle || "",
+          categoryBadge: t.categoryBadge || (t.category === "recipe" ? "BREAKFAST · RECIPE" : t.category.toUpperCase())
+        };
+      }
+
+      // ==================== ST.PAGEFLIP ENGINE FOR TEMPLATE BOOK (MATCHING PDF READER) ====================
+      function buildTemplatePagesHTML() {
+        const bookContainer = document.getElementById("templateStBookElement");
+        if (!bookContainer) return;
+
+        let pagesHtml = [];
+
+        // Build pages for each recipe template
+        templateBookData.forEach((rawItem, idx) => {
+          const t = parseTemplateForCookbook(rawItem);
+          const safeTitle = escapeHtml(t.title || "Untitled Template");
+          const safeSubtitle = t.subtitle ? escapeHtml(t.subtitle) : "";
+          const safeBadge = escapeHtml(t.categoryBadge || "BREAKFAST · AIR FRYER");
+          const safeUrl = t.url ? getNormalizedUrl(t.url) : "";
+
+          // SPREAD LEFT PAGE: Title, Meta stats & Dish Photo
+          pagesHtml.push(`
+            <div class="template-page-item">
+              <div class="cb-top-bar" style="margin-bottom: 6px;">
+                <div class="cb-icon-circle">
+                  <span>🍳</span>
+                </div>
+                <div class="cb-top-category">${safeBadge}</div>
+              </div>
+
+              <div class="cb-header-block" style="margin: 4px 0 8px;">
+                <h2 class="cb-title" style="font-size: 20px;">${safeTitle}</h2>
+                ${safeSubtitle ? `<div class="cb-subtitle" style="font-size: 13px;">${safeSubtitle}</div>` : ''}
+              </div>
+
+              <div class="cb-divider-line" style="margin: 8px 0 10px;"></div>
+
+              <div class="cb-meta-strip" style="margin: 4px 0 12px; padding: 8px 4px;">
+                <div class="cb-meta-cell">
+                  <div class="cb-meta-icon">🥄</div>
+                  <div class="cb-meta-label">prep</div>
+                  <div class="cb-meta-val">${escapeHtml(t.prepTime || "5m")}</div>
+                </div>
+                <div class="cb-meta-cell">
+                  <div class="cb-meta-icon">♨️</div>
+                  <div class="cb-meta-label">cook</div>
+                  <div class="cb-meta-val">${escapeHtml(t.cookTime || "21m")}</div>
+                </div>
+                <div class="cb-meta-cell">
+                  <div class="cb-meta-icon">⏱️</div>
+                  <div class="cb-meta-label">total</div>
+                  <div class="cb-meta-val">${escapeHtml(t.totalTime || "26m")}</div>
+                </div>
+                <div class="cb-meta-cell">
+                  <div class="cb-meta-icon">🌡️</div>
+                  <div class="cb-meta-label">temp</div>
+                  <div class="cb-meta-val">${escapeHtml(t.temperature || "170°C")}</div>
+                </div>
+                <div class="cb-meta-cell">
+                  <div class="cb-meta-icon">👥</div>
+                  <div class="cb-meta-label">serves</div>
+                  <div class="cb-meta-val">${escapeHtml(t.servings || "2")}</div>
+                </div>
+                <div class="cb-meta-cell">
+                  <div class="cb-meta-icon">⚡</div>
+                  <div class="cb-meta-label">level</div>
+                  <div class="cb-meta-val">${escapeHtml(t.difficulty || "easy")}</div>
+                </div>
+              </div>
+
+              ${t.image ? `
+                <div class="cb-plate-wrap" style="margin: 8px 0 14px;">
+                  <img src="${escapeHtml(t.image)}" alt="${safeTitle}" class="cb-plate-img" style="width: 160px; height: 160px;" onerror="this.style.display='none'" />
+                </div>
+              ` : ''}
+
+              <div style="display: flex; gap: 6px; align-items: center; justify-content: center; margin-top: 8px;">
+                <button type="button" class="cb-copy-btn" onclick="copyTemplateContent('${t.id}')" style="padding: 5px 12px; font-size: 11px;">
+                  <span>📋</span> Copy Template
+                </button>
+                ${safeUrl ? `
+                  <a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="cb-video-btn" style="padding: 4px 10px; font-size: 11px;">
+                    <span>▶️</span> Video ↗
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+          `);
+
+          // SPREAD RIGHT PAGE: Ingredients & Preparation
+          const ingredientsHtml = (t.ingredients && t.ingredients.length > 0)
+            ? t.ingredients.map(ing => `
+                <div class="cb-ing-row" style="font-size: 12px; padding-bottom: 4px;">
+                  <span class="cb-ing-name">${escapeHtml(ing.name)}</span>
+                  <span class="cb-ing-qty">${escapeHtml(ing.qty)}</span>
+                </div>
+              `).join("")
+            : `<div style="font-size: 12px; color: #78716c;">${escapeHtml(t.content || "")}</div>`;
+
+          const stepsHtml = (t.preparation && t.preparation.length > 0)
+            ? t.preparation.map((step, sIdx) => `
+                <div class="cb-step-row" style="font-size: 11.5px; line-height: 1.48; gap: 6px;">
+                  <span class="cb-step-num" style="font-size: 12px;">${sIdx + 1}.</span>
+                  <span class="cb-step-text">${escapeHtml(step)}</span>
+                </div>
+              `).join("")
+            : `<div style="font-size: 12px; color: #78716c;">Air fry at 170°C for 21 minutes until crispy.</div>`;
+
+          pagesHtml.push(`
+            <div class="template-page-item">
+              <div class="cb-section-heading" style="font-size: 16px; margin-bottom: 8px;">Ingredients</div>
+              <div class="cb-ingredients-list" style="margin-bottom: 14px; gap: 5px;">
+                ${ingredientsHtml}
+              </div>
+
+              <div class="cb-section-heading" style="font-size: 16px; margin-bottom: 8px;">Preparation</div>
+              <div class="cb-steps-list" style="gap: 7px;">
+                ${stepsHtml}
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 6px; margin-top: 16px; padding-top: 10px; border-top: 1px dashed #e2d8c9;">
+                <button type="button" class="cb-icon-action-btn" onclick="editTemplate('${t.id}')" title="Edit Template" style="width: 28px; height: 28px; font-size: 12px;">✏️</button>
+                <button type="button" class="cb-icon-action-btn delete" onclick="deleteTemplate('${t.id}')" title="Delete Template" style="width: 28px; height: 28px; font-size: 12px;">🗑️</button>
+              </div>
+            </div>
+          `);
+        });
+
+        templateFlipState.totalPages = pagesHtml.length;
+        bookContainer.innerHTML = pagesHtml.join("");
+
+        const totalDisplay = document.getElementById("templateTotalPagesDisplay");
+        if (totalDisplay) totalDisplay.textContent = templateFlipState.totalPages;
+        const slider = document.getElementById("templatePageSlider");
+        if (slider) slider.max = templateFlipState.totalPages;
+      }
+
+      function initTemplateFlipbook() {
+        const sec = document.getElementById("templateFlipbookSection");
+        if (!sec || sec.style.display === "none") return;
+
+        if (!window.St || !window.St.PageFlip) {
+          console.warn("St.PageFlip not available yet, waiting...");
+          setTimeout(initTemplateFlipbook, 100);
+          return;
+        }
+
+        // 1. Destroy previous instance if any
+        if (templateFlipState.pageFlipInstance) {
+          try {
+            templateFlipState.pageFlipInstance.destroy();
+          } catch(e) {}
+          templateFlipState.pageFlipInstance = null;
+        }
+
+        // 2. Re-create clean book container in host
+        const host = document.getElementById("templateFlipbookHost");
+        if (!host) return;
+        host.innerHTML = '<div id="templateStBookElement"></div>';
+        const bookContainer = document.getElementById("templateStBookElement");
+
+        buildTemplatePagesHTML();
+
+        const isMobile = window.innerWidth <= 680;
+        const isFullscreen = templateFlipState.isFullscreen;
+        const stageWrapper = document.getElementById("templateStageWrapper");
+        const stageWidth = (stageWrapper ? stageWrapper.clientWidth : 0) || window.innerWidth;
+        const stageHeight = (stageWrapper ? stageWrapper.clientHeight : 0) || (isFullscreen ? window.innerHeight : 660);
+
+        let pageWidth, pageHeight;
+        if (isMobile) {
+          pageWidth = Math.min(stageWidth - 20, 440);
+          pageHeight = Math.min(stageHeight - 24, 680);
+          if (pageHeight < 560) pageHeight = 580;
+        } else {
+          const availWidth = stageWidth - (isFullscreen ? 80 : 36);
+          const availHeight = stageHeight - (isFullscreen ? 60 : 36);
+          
+          let targetTotalWidth = Math.min(availWidth, isFullscreen ? 1120 : 960);
+          let calcHeight = Math.round((targetTotalWidth / 2) * 1.34);
+          
+          if (calcHeight > availHeight) {
+            calcHeight = availHeight;
+            targetTotalWidth = Math.round((calcHeight / 1.34) * 2);
+          }
+          
+          pageWidth = Math.round(targetTotalWidth / 2);
+          pageHeight = calcHeight;
+          
+          if (pageWidth < 340) pageWidth = 340;
+          if (pageHeight < 540) pageHeight = 540;
+        }
+
+        try {
+          const pageFlip = new window.St.PageFlip(bookContainer, {
+            width: pageWidth,
+            height: pageHeight,
+            size: "fixed",
+            minWidth: 260,
+            maxWidth: 1400,
+            minHeight: 360,
+            maxHeight: 1400,
+            maxShadowOpacity: 0.45,
+            showCover: false,
+            mobileScrollSupport: false,
+            usePortrait: isMobile || !templateFlipState.isSpreadMode,
+            flippingTime: 600,
+            startPage: Math.max(0, templateFlipState.currentPage - 1)
+          });
+
+          pageFlip.loadFromHTML(bookContainer.querySelectorAll(".template-page-item"));
+
+          pageFlip.on("flip", (e) => {
+            const pageIndex = e.data;
+            const humanPage = pageIndex + 1;
+            templateFlipState.currentPage = humanPage;
+
+            if (templateFlipState.isSoundEnabled && typeof playPageFlipSound === "function") {
+              playPageFlipSound();
+            }
+          });
+
+          templateFlipState.pageFlipInstance = pageFlip;
+        } catch (err) {
+          console.error("Error initializing St.PageFlip for template book:", err); window._stLastErr = (err && err.stack) ? err.stack : String(err);
+        }
+      }
+
+      function updateTemplateControls(humanPage) {
+        const input = document.getElementById("templatePageNumberInput");
+        if (input) input.value = humanPage;
+        const slider = document.getElementById("templatePageSlider");
+        if (slider) slider.value = humanPage;
+        const total = document.getElementById("templateTotalPagesDisplay");
+        if (total) total.textContent = templateFlipState.totalPages;
+      }
+
+      function templateFlipPrev() {
+        if (templateFlipState.pageFlipInstance) {
+          templateFlipState.pageFlipInstance.flipPrev();
+        }
+      }
+
+      function templateFlipNext() {
+        if (templateFlipState.pageFlipInstance) {
+          templateFlipState.pageFlipInstance.flipNext();
+        }
+      }
+
+      function templateFlipFirst() {
+        if (templateFlipState.pageFlipInstance) {
+          templateFlipState.pageFlipInstance.turnToPage(0);
+        }
+      }
+
+      function templateFlipLast() {
+        if (templateFlipState.pageFlipInstance) {
+          templateFlipState.pageFlipInstance.turnToPage(templateFlipState.totalPages - 1);
+        }
+      }
+
+      function templateFlipGoTo(humanPage) {
+        if (isNaN(humanPage) || humanPage < 1) humanPage = 1;
+        if (humanPage > templateFlipState.totalPages) humanPage = templateFlipState.totalPages;
+        if (templateFlipState.pageFlipInstance) {
+          templateFlipState.pageFlipInstance.turnToPage(humanPage - 1);
+        }
+      }
+
+      function toggleTemplateSpreadMode() {
+        templateFlipState.isSpreadMode = !templateFlipState.isSpreadMode;
+        const btn = document.getElementById("templateSpreadModeBtn");
+        if (btn) {
+          btn.innerHTML = templateFlipState.isSpreadMode ? "📖 Book View" : "📱 Single Page";
+        }
+        initTemplateFlipbook();
+      }
+
+      function toggleTemplateSound() {
+        templateFlipState.isSoundEnabled = !templateFlipState.isSoundEnabled;
+        const btn = document.getElementById("templateSoundBtn");
+        if (btn) {
+          btn.innerHTML = templateFlipState.isSoundEnabled ? "🔊 Sound On" : "🔇 Sound Off";
+        }
+      }
+
+      function toggleTemplateFullscreen() {
+        const card = document.getElementById("templateViewerCard");
+        const btn = document.getElementById("templateFloatingFsBtn");
+        if (!card) return;
+        card.classList.toggle("is-fullscreen");
+        templateFlipState.isFullscreen = card.classList.contains("is-fullscreen");
+        if (btn) {
+          btn.innerHTML = templateFlipState.isFullscreen ? "✕" : "⛶";
+          btn.title = templateFlipState.isFullscreen ? "Exit Fullscreen" : "Toggle Fullscreen";
+        }
+        setTimeout(initTemplateFlipbook, 150);
+      }
+
+      window.addEventListener("resize", function() {
+        if (currentTemplateView === "flipbook" && document.getElementById("tab-templates") && document.getElementById("tab-templates").classList.contains("active")) {
+          clearTimeout(window._templateResizeTimer);
+          window._templateResizeTimer = setTimeout(initTemplateFlipbook, 250);
+        }
+      });
+
+      function renderTemplateBookList() {
+        const listEl = document.getElementById("templateCardsList");
+        const searchInput = document.getElementById("templateSearchInput");
+        const query = (searchInput ? searchInput.value : "").trim().toLowerCase();
+
+        const countAll = document.getElementById("templateCountAll");
+        const countRecipe = document.getElementById("templateCountRecipe");
+        const countRoutine = document.getElementById("templateCountRoutine");
+        const countStudy = document.getElementById("templateCountStudy");
+        const countNotes = document.getElementById("templateCountNotes");
+
+        if (countAll) countAll.textContent = templateBookData.length;
+        if (countRecipe) countRecipe.textContent = templateBookData.filter(t => t.category === "recipe").length;
+        if (countRoutine) countRoutine.textContent = templateBookData.filter(t => t.category === "routine").length;
+        if (countStudy) countStudy.textContent = templateBookData.filter(t => t.category === "study").length;
+        if (countNotes) countNotes.textContent = templateBookData.filter(t => t.category === "notes").length;
+
+        if (!listEl) return;
+
+        let filtered = templateBookData;
+        if (currentTemplateCategory !== "all") {
+          filtered = filtered.filter(t => t.category === currentTemplateCategory);
+        }
+        if (query) {
+          filtered = filtered.filter(t => 
+            (t.title && t.title.toLowerCase().includes(query)) ||
+            (t.content && t.content.toLowerCase().includes(query))
+          );
+        }
+
+        if (filtered.length === 0) {
+          listEl.innerHTML = `
+            <div class="history-empty" style="padding: 28px 12px; text-align: center; color: #78716c; font-size: 13px;">
+              No templates found${query ? ' matching "' + escapeHtml(query) + '"' : ''}. Tap "➕ Add New Template" to create one!
+            </div>
+          `;
+          return;
+        }
+
+        listEl.innerHTML = filtered.map((rawItem, idx) => {
+          const t = parseTemplateForCookbook(rawItem);
+          const safeTitle = escapeHtml(t.title || "Untitled Template");
+          const safeSubtitle = t.subtitle ? escapeHtml(t.subtitle) : "";
+          const safeBadge = escapeHtml(t.categoryBadge || (t.category === "recipe" ? "BREAKFAST · AIR FRYER" : "TEMPLATE"));
+          const safeUrl = t.url ? getNormalizedUrl(t.url) : "";
+
+          const isRecipe = t.category === "recipe" || (t.ingredients && t.ingredients.length > 0);
+
+          if (isRecipe) {
+            const ingredientsHtml = (t.ingredients && t.ingredients.length > 0)
+              ? t.ingredients.map(ing => `
+                  <div class="cb-ing-row">
+                    <span class="cb-ing-name">${escapeHtml(ing.name)}</span>
+                    <span class="cb-ing-qty">${escapeHtml(ing.qty)}</span>
+                  </div>
+                `).join("")
+              : `<div style="font-size: 12px; color: #78716c;">${escapeHtml(t.content || "")}</div>`;
+
+            const stepsHtml = (t.preparation && t.preparation.length > 0)
+              ? t.preparation.map((step, sIdx) => `
+                  <div class="cb-step-row">
+                    <span class="cb-step-num">${sIdx + 1}.</span>
+                    <span class="cb-step-text">${escapeHtml(step)}</span>
+                  </div>
+                `).join("")
+              : `<div style="font-size: 12px; color: #78716c;">Air fry at 170°C for 21 minutes until crispy.</div>`;
+
+            return `
+              <div class="cookbook-page" id="templateCard_${t.id}">
+                <div class="cb-top-bar">
+                  <div class="cb-icon-circle" title="Breakfast / Recipe">
+                    <span>🍳</span>
+                  </div>
+                  <div class="cb-top-category">${safeBadge}</div>
+                </div>
+
+                <div class="cb-header-block">
+                  <h2 class="cb-title">${safeTitle}</h2>
+                  ${safeSubtitle ? `<div class="cb-subtitle">${safeSubtitle}</div>` : ''}
+                </div>
+
+                <div class="cb-divider-line"></div>
+
+                <div class="cb-meta-strip">
+                  <div class="cb-meta-cell">
+                    <div class="cb-meta-icon">🥄</div>
+                    <div class="cb-meta-label">preparation time</div>
+                    <div class="cb-meta-val">${escapeHtml(t.prepTime || "5 minutes")}</div>
+                  </div>
+                  <div class="cb-meta-cell">
+                    <div class="cb-meta-icon">♨️</div>
+                    <div class="cb-meta-label">cooking time</div>
+                    <div class="cb-meta-val">${escapeHtml(t.cookTime || "21 minutes")}</div>
+                  </div>
+                  <div class="cb-meta-cell">
+                    <div class="cb-meta-icon">⏱️</div>
+                    <div class="cb-meta-label">total time</div>
+                    <div class="cb-meta-val">${escapeHtml(t.totalTime || "26 minutes")}</div>
+                  </div>
+                  <div class="cb-meta-cell">
+                    <div class="cb-meta-icon">🌡️</div>
+                    <div class="cb-meta-label">temperature</div>
+                    <div class="cb-meta-val">${escapeHtml(t.temperature || "170°C")}</div>
+                  </div>
+                  <div class="cb-meta-cell">
+                    <div class="cb-meta-icon">👥</div>
+                    <div class="cb-meta-label">servings</div>
+                    <div class="cb-meta-val">${escapeHtml(t.servings || "2")}</div>
+                  </div>
+                  <div class="cb-meta-cell">
+                    <div class="cb-meta-icon">⚡</div>
+                    <div class="cb-meta-label">difficulty</div>
+                    <div class="cb-meta-val">${escapeHtml(t.difficulty || "easy")}</div>
+                  </div>
+                </div>
+
+                ${t.image ? `
+                  <div class="cb-plate-wrap">
+                    <img src="${escapeHtml(t.image)}" alt="${safeTitle}" class="cb-plate-img" onerror="this.style.display='none'" />
+                  </div>
+                ` : ''}
+
+                <div class="cb-content-grid">
+                  <div class="cb-ingredients-col">
+                    <div class="cb-section-heading">Ingredients</div>
+                    <div class="cb-ingredients-list">
+                      ${ingredientsHtml}
+                    </div>
+                  </div>
+
+                  <div class="cb-prep-col">
+                    <div class="cb-section-heading">Preparation</div>
+                    <div class="cb-steps-list">
+                      ${stepsHtml}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cb-page-footer">
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="cb-copy-btn" onclick="copyTemplateContent('${t.id}')" title="Copy template to clipboard">
+                      <span>📋</span> Copy Template
+                    </button>
+                    ${safeUrl ? `
+                      <a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="cb-video-btn" title="Watch Recipe Video">
+                        <span>▶️</span> Watch Video ↗
+                      </a>
+                    ` : ''}
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <button type="button" class="cb-icon-action-btn" onclick="editTemplate('${t.id}')" title="Edit Template">✏️</button>
+                    <button type="button" class="cb-icon-action-btn delete" onclick="deleteTemplate('${t.id}')" title="Delete Template">🗑️</button>
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            const safeContent = escapeHtml(t.content || "");
+            return `
+              <div class="cookbook-page" id="templateCard_${t.id}">
+                <div class="cb-top-bar">
+                  <div class="cb-icon-circle">
+                    <span>${t.category === 'routine' ? '⚡' : t.category === 'study' ? '📖' : '📝'}</span>
+                  </div>
+                  <div class="cb-top-category">${safeBadge}</div>
+                </div>
+
+                <div class="cb-header-block">
+                  <h2 class="cb-title">${safeTitle}</h2>
+                </div>
+
+                <div class="cb-divider-line"></div>
+
+                <div style="font-size: 13px; line-height: 1.65; color: #374151; white-space: pre-wrap; font-family: inherit; background: #faf8f5; border: 1px solid #ede8e1; border-radius: 10px; padding: 12px 14px; margin: 10px 0;">${safeContent}</div>
+
+                <div class="cb-page-footer">
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <button type="button" class="cb-copy-btn" onclick="copyTemplateContent('${t.id}')">
+                      <span>📋</span> Copy Template
+                    </button>
+                    ${safeUrl ? `
+                      <a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="cb-video-btn">
+                        <span>🔗</span> Open Link ↗
+                      </a>
+                    ` : ''}
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <button type="button" class="cb-icon-action-btn" onclick="editTemplate('${t.id}')" title="Edit Template">✏️</button>
+                    <button type="button" class="cb-icon-action-btn delete" onclick="deleteTemplate('${t.id}')" title="Delete Template">🗑️</button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+        }).join("");
+      }
+
+      function copyTemplateContent(id) {
+        const t = templateBookData.find(item => item.id === id);
+        if (!t) return;
+        let textToCopy = "";
+        if (t.ingredients && Array.isArray(t.ingredients) && t.ingredients.length > 0) {
+          textToCopy = `${t.title || "Recipe"}${t.subtitle ? " - " + t.subtitle : ""}\n\n`;
+          textToCopy += `⏱️ Prep Time: ${t.prepTime || "5 minutes"} | Cook Time: ${t.cookTime || "21 minutes"} | Temp: ${t.temperature || "170°C"} | Servings: ${t.servings || "2"}\n\n`;
+          textToCopy += `Ingredients:\n` + t.ingredients.map(ing => `• ${ing.name}: ${ing.qty}`).join("\n") + "\n\n";
+          if (t.preparation && Array.isArray(t.preparation) && t.preparation.length > 0) {
+            textToCopy += `Preparation:\n` + t.preparation.map((step, idx) => `${idx + 1}. ${step}`).join("\n") + "\n\n";
+          }
+          if (t.url) textToCopy += `Video: ${t.url}\n`;
+        } else {
+          textToCopy = `${t.title ? t.title + "\n\n" : ""}${t.content || ""}${t.url ? "\n\nLink: " + t.url : ""}`;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            showToast("Template copied to clipboard! 📋✨");
+          }).catch(() => {
+            fallbackCopyText(textToCopy);
+          });
+        } else {
+          fallbackCopyText(textToCopy);
+        }
+      }
+
+      function fallbackCopyText(text) {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast("Template copied to clipboard! 📋✨");
+        } catch (e) {
+          showToast("Failed to copy template.");
+        }
+        document.body.removeChild(ta);
+      }
+
+      function openTemplateModal(editId = null) {
+        const modal = document.getElementById("templateModal");
+        const titleEl = document.getElementById("templateTitleInput");
+        const catEl = document.getElementById("templateCategorySelect");
+        const urlEl = document.getElementById("templateUrlInput");
+        const contentEl = document.getElementById("templateContentInput");
+        const editIdEl = document.getElementById("templateEditId");
+        const modalTitle = document.getElementById("templateModalTitle");
+        const deleteBtn = document.getElementById("templateDeleteModalBtn");
+
+        if (!modal) return;
+
+        if (editId) {
+          const item = templateBookData.find(t => t.id === editId);
+          if (item) {
+            if (editIdEl) editIdEl.value = item.id;
+            if (modalTitle) modalTitle.textContent = "✏️ Edit Template";
+            if (titleEl) titleEl.value = item.title || "";
+            if (catEl) catEl.value = item.category || "recipe";
+            if (urlEl) urlEl.value = item.url || "";
+            if (contentEl) contentEl.value = item.content || "";
+            if (deleteBtn) deleteBtn.style.display = "inline-flex";
+          }
+        } else {
+          if (editIdEl) editIdEl.value = "";
+          if (modalTitle) modalTitle.textContent = "📋 Add New Template";
+          if (titleEl) titleEl.value = "";
+          if (catEl) catEl.value = currentTemplateCategory !== "all" ? currentTemplateCategory : "recipe";
+          if (urlEl) urlEl.value = "";
+          if (contentEl) contentEl.value = "";
+          if (deleteBtn) deleteBtn.style.display = "none";
+        }
+
+        modal.style.display = "flex";
+        modal.classList.add("show");
+        if (titleEl) titleEl.focus();
+      }
+
+      function closeTemplateModal() {
+        const modal = document.getElementById("templateModal");
+        if (modal) {
+          modal.classList.remove("show");
+          modal.style.display = "";
+        }
+      }
+
+      function saveTemplateFromModal() {
+        const editIdEl = document.getElementById("templateEditId");
+        const titleEl = document.getElementById("templateTitleInput");
+        const catEl = document.getElementById("templateCategorySelect");
+        const urlEl = document.getElementById("templateUrlInput");
+        const contentEl = document.getElementById("templateContentInput");
+
+        const editId = editIdEl ? editIdEl.value.trim() : "";
+        const title = titleEl ? titleEl.value.trim() : "";
+        const category = catEl ? catEl.value : "recipe";
+        const url = urlEl ? urlEl.value.trim() : "";
+        const content = contentEl ? contentEl.value.trim() : "";
+
+        if (!title && !content) {
+          showToast("Please enter a title or content! ⚠️");
+          return;
+        }
+
+        if (editId) {
+          const idx = templateBookData.findIndex(t => t.id === editId);
+          if (idx !== -1) {
+            templateBookData[idx] = {
+              ...templateBookData[idx],
+              title: title || "Untitled Template",
+              category,
+              url,
+              content
+            };
+            showToast("Template updated! ✨");
+          }
+        } else {
+          const newTemplate = {
+            id: "tmpl_" + Date.now() + "_" + Math.random().toString(36).substr(2, 4),
+            title: title || "Untitled Template",
+            category,
+            url,
+            content,
+            createdAt: Date.now()
+          };
+          templateBookData.unshift(newTemplate);
+          showToast("New template added! 📋🎉");
+        }
+
+        saveTemplateBookData();
+        closeTemplateModal();
+        renderTemplateBookList();
+      }
+
+      function editTemplate(id) {
+        openTemplateModal(id);
+      }
+
+      function deleteTemplate(id) {
+        const item = templateBookData.find(t => t.id === id);
+        const name = item ? `"${item.title}"` : "this template";
+        if (!confirm(`Are you sure you want to delete ${name}?`)) return;
+        templateBookData = templateBookData.filter(t => t.id !== id);
+        saveTemplateBookData();
+        renderTemplateBookList();
+        showToast("Template deleted! 🗑️");
+      }
+
+      function deleteTemplateFromModal() {
+        const editIdEl = document.getElementById("templateEditId");
+        const editId = editIdEl ? editIdEl.value.trim() : "";
+        if (!editId) return;
+        closeTemplateModal();
+        deleteTemplate(editId);
+      }
+
+window.openQuranReaderModal = openQuranReaderModal;
       window.getYouTubeEmbedInfo = getYouTubeEmbedInfo;
       window.renderQuranReaderYouTubeSection = renderQuranReaderYouTubeSection;
+      window.toggleReaderYouTubeCollapse = toggleReaderYouTubeCollapse;
+      window.toggleQuranReaderFocusMode = toggleQuranReaderFocusMode;
       window.saveReaderQuickYouTubeLink = saveReaderQuickYouTubeLink;
       window.editCurrentReaderYouTubeLink = editCurrentReaderYouTubeLink;
       window.closeQuranReaderModal = closeQuranReaderModal;
@@ -24405,7 +26315,8 @@ Please provide:
       function initAllAppModules() {
         try { loadMedicinesConfig(); } catch (e) { console.error("Error loading medicines config:", e); }
         try { loadPeriodData(); } catch (e) { console.error("Error loading period data:", e); }
-        try { loadRecipeData(); } catch (e) { console.error("Error loading recipe data:", e); }
+        try { loadRecipeData();
+        loadTemplateBookData(); } catch (e) { console.error("Error loading recipe data:", e); }
         try { loadMissingIngredients(); } catch (e) { console.error("Error loading missing ingredients:", e); }
         try { loadZadLecture(); } catch (e) { console.error("Error loading Zad subjects/playlists:", e); }
         try { loadUqLecture(); } catch (e) { console.error("Error loading UQ courses/playlists:", e); }
