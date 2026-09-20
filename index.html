@@ -4082,26 +4082,46 @@
         box-sizing: border-box;
       }
 
-      /* Single page wrapper inside St.PageFlip - NO SCROLLBARS! */
+      /* Single page wrapper inside St.PageFlip - Hardware Accelerated for 60fps Mobile */
+      .pdf-flipbook-host,
+      #templateStBookElement,
+      .template-page-item {
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
       .template-page-item {
         background: #ffffff;
         width: 100%;
         height: 100%;
         overflow: hidden !important;
         box-sizing: border-box;
-        padding: 24px 20px 20px;
+        padding: 20px 18px;
         position: relative;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         color: #2b2825;
-        box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.03);
+        border: 1px solid #ebe5df;
         display: flex;
         flex-direction: column;
+        contain: paint layout; /* GPU paint containment */
       }
       .template-page-item * {
         scrollbar-width: none !important;
       }
       .template-page-item *::-webkit-scrollbar {
         display: none !important;
+      }
+      .cb-plate-img {
+        width: 155px;
+        height: 155px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        border: 4px solid #ffffff;
+        outline: 1px solid #e7e0d5;
+        display: block;
+        margin: 0 auto;
       }
 
       /* ==================== EDITORIAL MAGAZINE COOKBOOK TEMPLATE STYLES ==================== */
@@ -21449,7 +21469,9 @@ Please provide:
             showCover: false,
             mobileScrollSupport: false,
             usePortrait: isMobile || !templateFlipState.isSpreadMode,
-            flippingTime: 600,
+            flippingTime: isMobile ? 380 : 520,
+            maxShadowOpacity: isMobile ? 0.2 : 0.4,
+            drawShadow: true,
             startPage: Math.max(0, templateFlipState.currentPage - 1)
           });
 
@@ -23881,12 +23903,21 @@ window.openQuranReaderModal = openQuranReaderModal;
       }
 
       // Realistic Web Audio Page Turning Sound Synthesizer
+      let sharedPageFlipAudioCtx = null;
       function playPageFlipSound() {
-        if (!pdfFlipState.isSoundEnabled) return;
+        const soundActive = (typeof pdfFlipState !== "undefined" && pdfFlipState.isSoundEnabled) ||
+                            (typeof templateFlipState !== "undefined" && templateFlipState.isSoundEnabled);
+        if (!soundActive) return;
         try {
           const AudioContextClass = window.AudioContext || window.webkitAudioContext;
           if (!AudioContextClass) return;
-          const ctx = new AudioContextClass();
+          if (!sharedPageFlipAudioCtx) {
+            sharedPageFlipAudioCtx = new AudioContextClass();
+          }
+          if (sharedPageFlipAudioCtx.state === "suspended") {
+            sharedPageFlipAudioCtx.resume();
+          }
+          const ctx = sharedPageFlipAudioCtx;
           if (ctx.state === "suspended") {
             ctx.resume();
           }
