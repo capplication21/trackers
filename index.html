@@ -21137,7 +21137,7 @@ Please provide:
         currentPage: 1,
         totalPages: 4,
         isSpreadMode: true,
-        isSoundEnabled: true,
+        isSoundEnabled: false,
         isFullscreen: false
       };
 
@@ -21482,9 +21482,7 @@ Please provide:
             const humanPage = pageIndex + 1;
             templateFlipState.currentPage = humanPage;
 
-            if (templateFlipState.isSoundEnabled && typeof playPageFlipSound === "function") {
-              playPageFlipSound();
-            }
+
           });
 
           templateFlipState.pageFlipInstance = pageFlip;
