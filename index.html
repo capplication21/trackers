@@ -4072,7 +4072,7 @@
         min-height: 640px;
         height: 80vh;
         max-height: 860px;
-        background: radial-gradient(circle at center, #ede6d1 0%, #ded5bd 100%);
+        background: radial-gradient(circle at center, #f5eedf 0%, #ded2bc 100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -4103,7 +4103,7 @@
         user-select: none;
       }
       .template-page-item {
-        background: #ffffff;
+        background: linear-gradient(175deg, #ffffff 0%, #fdfbf7 55%, #f9f4ea 100%);
         width: 100%;
         height: 100%;
         overflow: hidden !important;
@@ -4123,17 +4123,53 @@
       .template-page-item *::-webkit-scrollbar {
         display: none !important;
       }
+      /* Hero Photo (Circular Gourmet Plate in Template Flipbook & Cards) */
+      .cb-plate-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0 14px;
+      }
+      .template-page-item .cb-plate-wrap {
+        margin: 8px 0 12px;
+      }
       .cb-plate-img {
-        width: 155px;
-        height: 155px;
+        width: 260px;
+        height: 260px;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid #e7e0d5;
+        box-shadow: 0 12px 30px rgba(30, 20, 10, 0.14), 0 3px 8px rgba(0, 0, 0, 0.06);
+        border: 5px solid #ffffff;
+        outline: 1.5px solid #e7e0d5;
         display: block;
         margin: 0 auto;
         transform: translateZ(0);
         -webkit-transform: translateZ(0);
         will-change: transform;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .template-page-item .cb-plate-img {
+        width: 260px;
+        height: 260px;
+        max-width: 82%;
+      }
+      .cb-plate-img:hover,
+      .template-page-item .cb-plate-img:hover {
+        transform: scale(1.03) translateZ(0);
+        box-shadow: 0 16px 36px rgba(30, 20, 10, 0.18), 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+      @media (max-width: 680px) {
+        .cb-plate-img,
+        .template-page-item .cb-plate-img {
+          width: 200px;
+          height: 200px;
+          border-width: 4px;
+        }
+      }
+      #templateViewerCard.is-fullscreen .template-page-item .cb-plate-img {
+        width: 290px;
+        height: 290px;
+        border-width: 6px;
       }
 
       /* ==================== EDITORIAL MAGAZINE COOKBOOK TEMPLATE STYLES ==================== */
@@ -4245,16 +4281,16 @@
         color: #1e1b18;
         margin-top: 1px;
       }
-      /* Hero Photo (Circular Plate matching reference image) */
-      .cb-plate-wrap {
+      /* Hero Photo (Circular Plate matching reference image in Card List) */
+      .cookbook-page .cb-plate-wrap {
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 12px 0 20px;
       }
-      .cb-plate-img {
-        width: 220px;
-        height: 220px;
+      .cookbook-page .cb-plate-img {
+        width: 240px;
+        height: 240px;
         border-radius: 50%;
         object-fit: cover;
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 3px 8px rgba(0, 0, 0, 0.08);
@@ -4262,7 +4298,7 @@
         outline: 1px solid #e7e0d5;
         transition: transform 0.3s ease;
       }
-      .cb-plate-img:hover {
+      .cookbook-page .cb-plate-img:hover {
         transform: scale(1.02);
       }
       /* Two-Column Editorial Layout */
@@ -21111,6 +21147,7 @@ Please provide:
           subtitle: "with chocolate & oats (Air Fryer)",
           category: "recipe",
           categoryBadge: "BREAKFAST · AIR FRYER",
+          icon: "🥣",
           image: "cocoa_puffs_dish.jpg",
           prepTime: "5 minutes",
           cookTime: "21 minutes",
@@ -21135,7 +21172,42 @@ Please provide:
             "Arrange puffs in the air fryer basket in a single layer. Air fry at 170°C for 21 minutes until crispy and crunchy. Let cool, serve with fresh milk or yogurt!"
           ],
           content: "Oat flour: 45–50 g\nCocoa powder: 20–25 g\nProtein powder: 35–40 g\nBrown sugar: 20–25 g (2 tbsp)\nBaking soda: 5 g (1 tsp)\nInstant coffee powder: 2–4 g (1 to 2 tsp)\nMilk: 75–90 g (5 to 6 tbsp; add gradually)\n\n170 degree 21mint",
-          createdAt: Date.now()
+          createdAt: 1726857600000
+        },
+        {
+          id: "tmpl_vanilla_egg_cake",
+          title: "Vanilla Egg Sponge Cake",
+          subtitle: "Air Fryer & Stovepot Method",
+          category: "recipe",
+          categoryBadge: "BAKING · AIR FRYER / STOVE",
+          icon: "🍰",
+          image: "vanilla_egg_cake.jpg",
+          prepTime: "10 minutes",
+          cookTime: "25–35 min",
+          totalTime: "35–45 min",
+          temperature: "150°C–160°C",
+          servings: "4",
+          difficulty: "easy",
+          url: "https://youtu.be/rxc8d4dWics?si=yoFZiTJZJfWTM",
+          ingredients: [
+            { name: "All-purpose flour", qty: "60–65 g" },
+            { name: "Sugar", qty: "50 g" },
+            { name: "Neutral oil or butter", qty: "40 g" },
+            { name: "Eggs (2 eggs)", qty: "100 g (whisked)" },
+            { name: "Eno (unflavored)", qty: "2 g (½ tsp)" },
+            { name: "Salt", qty: "1 g" },
+            { name: "Vanilla extract", qty: "3–5 g" },
+            { name: "Milk", qty: "10 ml" }
+          ],
+          preparation: [
+            "Whisk eggs, sugar, oil/butter & vanilla until light and frothy. Sift in flour, salt, milk & Eno (½ tsp replaces baking powder); fold gently into a smooth batter.",
+            "Air Fryer: Preheat at 160°C (3–5 min). Bake at 150°C–160°C for 20–25 min (up to 30–35 min depending on model).",
+            "Stove Method: Preheat heavy pot on low 10 min. Place batter inside, seal tight with lid so no steam escapes. Bake on lowest flame 35–45 min (keep lid closed first 30 min).",
+            "Toothpick Test: Check cake quickly at 20–25 min. Clean toothpick = done (remove immediately)! Wet batter = add 2–3 min. Check fast so air fryer retains heat.",
+            "Pro-Tip: If top browns too fast before center sets, tent a small sheet of foil over cake to protect top while center finishes baking."
+          ],
+          content: "All-purpose flour: 60g – 65g\nSugar: 50g\nNeutral oil: 40g (or butter 40g)\nEggs: 100g (2 eggs, whisked)\nEno (unflavored): 2g (1/2 tsp)\nSalt: 1g\nVanilla extract: 3g – 5g\nMilk: 10ml\n\n• Air Fryer: Preheat 160°C (3–5 min). Bake 150°C–160°C for 20–25 min (up to 35 min).\n• Stove: Preheat pot on low 10 min. Seal tight; bake on lowest flame 35–45 min.\n• Toothpick test at 20–25 min. Check quickly to keep heat! Tent foil if top browns early.",
+          createdAt: 1726857600001
         }
       ];
 
@@ -21187,10 +21259,35 @@ Please provide:
               servings: "2",
               difficulty: "easy",
               subtitle: "with chocolate & oats (Air Fryer)",
-              categoryBadge: "BREAKFAST · AIR FRYER"
+              categoryBadge: "BREAKFAST · AIR FRYER",
+              icon: "🥣",
+              url: DEFAULT_TEMPLATES[0].url
             };
           } else {
             templateBookData.unshift(JSON.parse(JSON.stringify(DEFAULT_TEMPLATES[0])));
+          }
+
+          const vanillaIdx = templateBookData.findIndex(t => t.id === "tmpl_vanilla_egg_cake" || (t.title && t.title.toLowerCase().includes("vanilla egg")));
+          if (vanillaIdx !== -1) {
+            templateBookData[vanillaIdx] = {
+              ...DEFAULT_TEMPLATES[1],
+              ...templateBookData[vanillaIdx],
+              image: "vanilla_egg_cake.jpg",
+              ingredients: DEFAULT_TEMPLATES[1].ingredients,
+              preparation: DEFAULT_TEMPLATES[1].preparation,
+              prepTime: DEFAULT_TEMPLATES[1].prepTime,
+              cookTime: DEFAULT_TEMPLATES[1].cookTime,
+              totalTime: DEFAULT_TEMPLATES[1].totalTime,
+              temperature: DEFAULT_TEMPLATES[1].temperature,
+              servings: DEFAULT_TEMPLATES[1].servings,
+              difficulty: DEFAULT_TEMPLATES[1].difficulty,
+              subtitle: DEFAULT_TEMPLATES[1].subtitle,
+              categoryBadge: DEFAULT_TEMPLATES[1].categoryBadge,
+              icon: "🍰",
+              url: DEFAULT_TEMPLATES[1].url
+            };
+          } else {
+            templateBookData.push(JSON.parse(JSON.stringify(DEFAULT_TEMPLATES[1])));
           }
         }
         saveTemplateBookData();
@@ -21300,7 +21397,7 @@ Please provide:
             <div class="template-page-item">
               <div class="cb-top-bar" style="margin-bottom: 6px;">
                 <div class="cb-icon-circle">
-                  <span>🍳</span>
+                  <span>${t.icon || (t.title && t.title.toLowerCase().includes("cake") ? "🍰" : "🍳")}</span>
                 </div>
                 <div class="cb-top-category">${safeBadge}</div>
               </div>
@@ -21346,21 +21443,10 @@ Please provide:
               </div>
 
               ${t.image ? `
-                <div class="cb-plate-wrap" style="margin: 8px 0 14px;">
-                  <img src="${escapeHtml(t.image)}" alt="${safeTitle}" class="cb-plate-img" style="width: 160px; height: 160px;" decoding="async" loading="eager" onerror="this.style.display='none'" />
+                <div class="cb-plate-wrap">
+                  <img src="${escapeHtml(t.image)}" alt="${safeTitle}" class="cb-plate-img" decoding="async" loading="eager" onerror="this.style.display='none'" />
                 </div>
               ` : ''}
-
-              <div style="display: flex; gap: 6px; align-items: center; justify-content: center; margin-top: 8px;">
-                <button type="button" class="cb-copy-btn" onclick="copyTemplateContent('${t.id}')" style="padding: 5px 12px; font-size: 11px;">
-                  <span>📋</span> Copy Template
-                </button>
-                ${safeUrl ? `
-                  <a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="cb-video-btn" style="padding: 4px 10px; font-size: 11px;">
-                    <span>▶️</span> Video ↗
-                  </a>
-                ` : ''}
-              </div>
             </div>
           `);
 
@@ -21395,9 +21481,21 @@ Please provide:
                 ${stepsHtml}
               </div>
 
-              <div style="display: flex; justify-content: flex-end; gap: 6px; margin-top: 16px; padding-top: 10px; border-top: 1px dashed #e2d8c9;">
-                <button type="button" class="cb-icon-action-btn" onclick="editTemplate('${t.id}')" title="Edit Template" style="width: 28px; height: 28px; font-size: 12px;">✏️</button>
-                <button type="button" class="cb-icon-action-btn delete" onclick="deleteTemplate('${t.id}')" title="Delete Template" style="width: 28px; height: 28px; font-size: 12px;">🗑️</button>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-top: auto; padding-top: 10px; border-top: 1px dashed #e2d8c9;">
+                <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                  <button type="button" class="cb-copy-btn" onclick="copyTemplateContent('${t.id}')" style="padding: 5px 11px; font-size: 11px;" title="Copy template">
+                    <span>📋</span> Copy Template
+                  </button>
+                  ${safeUrl ? `
+                    <a href="${escapeHtml(safeUrl)}" target="_blank" rel="noopener noreferrer" class="cb-video-btn" style="padding: 4px 10px; font-size: 11px;" title="Watch Video">
+                      <span>▶️</span> Video ↗
+                    </a>
+                  ` : ''}
+                </div>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <button type="button" class="cb-icon-action-btn" onclick="editTemplate('${t.id}')" title="Edit Template" style="width: 28px; height: 28px; font-size: 12px;">✏️</button>
+                  <button type="button" class="cb-icon-action-btn delete" onclick="deleteTemplate('${t.id}')" title="Delete Template" style="width: 28px; height: 28px; font-size: 12px;">🗑️</button>
+                </div>
               </div>
             </div>
           `);
@@ -21650,8 +21748,8 @@ Please provide:
             return `
               <div class="cookbook-page" id="templateCard_${t.id}">
                 <div class="cb-top-bar">
-                  <div class="cb-icon-circle" title="Breakfast / Recipe">
-                    <span>🍳</span>
+                  <div class="cb-icon-circle" title="Recipe">
+                    <span>${t.icon || (t.title && t.title.toLowerCase().includes("cake") ? "🍰" : "🍳")}</span>
                   </div>
                   <div class="cb-top-category">${safeBadge}</div>
                 </div>
