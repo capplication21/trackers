@@ -4091,9 +4091,9 @@
       /* Flipbook stage dimensions */
       #templateStageWrapper {
         position: relative;
-        min-height: 640px;
-        height: 80vh;
-        max-height: 860px;
+        min-height: 520px;
+        height: 75vh;
+        max-height: 840px;
         background: radial-gradient(circle at center, #f5eedf 0%, #ded2bc 100%);
         display: flex;
         align-items: center;
@@ -4103,41 +4103,32 @@
         padding: 16px 8px;
         box-sizing: border-box;
       }
+      @media (max-width: 680px) {
+        #templateStageWrapper {
+          min-height: 460px;
+          height: 72vh;
+          max-height: 680px;
+          padding: 8px 4px;
+        }
+      }
 
-      /* Single page wrapper inside St.PageFlip - Hardware Accelerated for 60fps Mobile */
-      .pdf-flipbook-host,
-      #templateFlipbookHost,
-      #templateStBookElement,
-      .template-page-item,
-      .st-page-flip {
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        will-change: transform;
-        -webkit-font-smoothing: antialiased;
-      }
-      #templateFlipbookHost,
-      #templateStBookElement,
-      .template-page-item {
-        touch-action: none !important;
-        -webkit-user-select: none;
-        user-select: none;
-      }
+      /* Single page wrapper inside St.PageFlip */
       .template-page-item {
         background: linear-gradient(175deg, #ffffff 0%, #fdfbf7 55%, #f9f4ea 100%);
         width: 100%;
         height: 100%;
-        overflow: hidden !important;
         box-sizing: border-box;
-        padding: 20px 18px;
+        padding: 16px 14px;
         position: relative;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         color: #2b2825;
         border: 1px solid #ebe5df;
         display: flex;
         flex-direction: column;
-        contain: paint layout; /* GPU paint containment */
+        justify-content: flex-start;
+        box-shadow: 0 8px 24px rgba(30, 20, 10, 0.1);
+        overflow: hidden;
+        touch-action: none;
       }
       .template-page-item * {
         scrollbar-width: none !important;
@@ -4153,11 +4144,12 @@
         margin: 10px 0 14px;
       }
       .template-page-item .cb-plate-wrap {
-        margin: 8px 0 12px;
+        margin: 6px 0 8px;
+        flex-shrink: 1;
       }
       .cb-plate-img {
-        width: 260px;
-        height: 260px;
+        width: 240px;
+        height: 240px;
         border-radius: 50%;
         object-fit: cover;
         box-shadow: 0 12px 30px rgba(30, 20, 10, 0.14), 0 3px 8px rgba(0, 0, 0, 0.06);
@@ -4165,32 +4157,35 @@
         outline: 1.5px solid #e7e0d5;
         display: block;
         margin: 0 auto;
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        will-change: transform;
         transition: transform 0.25s ease, box-shadow 0.25s ease;
       }
       .template-page-item .cb-plate-img {
-        width: 260px;
-        height: 260px;
-        max-width: 82%;
+        width: 220px;
+        height: 220px;
+        max-width: 80%;
+        max-height: 220px;
       }
       .cb-plate-img:hover,
       .template-page-item .cb-plate-img:hover {
-        transform: scale(1.03) translateZ(0);
+        transform: scale(1.03);
         box-shadow: 0 16px 36px rgba(30, 20, 10, 0.18), 0 4px 10px rgba(0, 0, 0, 0.08);
       }
       @media (max-width: 680px) {
+        .template-page-item {
+          padding: 12px 10px;
+        }
         .cb-plate-img,
         .template-page-item .cb-plate-img {
-          width: 200px;
-          height: 200px;
-          border-width: 4px;
+          width: 160px;
+          height: 160px;
+          max-height: 160px;
+          border-width: 3.5px;
         }
       }
       #templateViewerCard.is-fullscreen .template-page-item .cb-plate-img {
-        width: 290px;
-        height: 290px;
+        width: 280px;
+        height: 280px;
+        max-height: 280px;
         border-width: 6px;
       }
 
@@ -21634,13 +21629,12 @@ Please provide:
         const isFullscreen = templateFlipState.isFullscreen;
         const stageWrapper = document.getElementById("templateStageWrapper");
         const stageWidth = (stageWrapper ? stageWrapper.clientWidth : 0) || window.innerWidth;
-        const stageHeight = (stageWrapper ? stageWrapper.clientHeight : 0) || (isFullscreen ? window.innerHeight : 660);
+        const stageHeight = (stageWrapper ? stageWrapper.clientHeight : 0) || (isFullscreen ? window.innerHeight : 600);
 
         let pageWidth, pageHeight;
         if (isMobile) {
-          pageWidth = Math.min(stageWidth - 20, 440);
-          pageHeight = Math.min(stageHeight - 24, 680);
-          if (pageHeight < 560) pageHeight = 580;
+          pageWidth = Math.max(260, Math.min(stageWidth - 20, 420));
+          pageHeight = Math.max(380, Math.min(stageHeight - 20, 620));
         } else {
           const availWidth = stageWidth - (isFullscreen ? 80 : 36);
           const availHeight = stageHeight - (isFullscreen ? 60 : 36);
@@ -21656,23 +21650,23 @@ Please provide:
           pageWidth = Math.round(targetTotalWidth / 2);
           pageHeight = calcHeight;
           
-          if (pageWidth < 340) pageWidth = 340;
-          if (pageHeight < 540) pageHeight = 540;
+          if (pageWidth < 300) pageWidth = 300;
+          if (pageHeight < 460) pageHeight = 460;
         }
 
         try {
           const pageFlip = new window.St.PageFlip(bookContainer, {
-            width: pageWidth,
-            height: pageHeight,
-            size: "fixed",
+            width: Math.max(260, Math.min(540, pageWidth)),
+            height: Math.max(380, Math.min(740, pageHeight)),
+            size: "stretch",
             minWidth: 260,
-            maxWidth: 1400,
+            maxWidth: 1200,
             minHeight: 360,
-            maxHeight: 1400,
+            maxHeight: 1200,
             showCover: false,
             mobileScrollSupport: false,
             usePortrait: isMobile || !templateFlipState.isSpreadMode,
-            flippingTime: isMobile ? 280 : 450,
+            flippingTime: isMobile ? 320 : 450,
             drawShadow: !isMobile,
             maxShadowOpacity: isMobile ? 0 : 0.35,
             startPage: Math.max(0, templateFlipState.currentPage - 1)
