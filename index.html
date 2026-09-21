@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -3729,17 +3729,39 @@
         border-radius: 6px;
         border: 1px solid #cbd5e1;
       }
-      .quran-arabic-text {
-        font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif;
+      .quran-bismillah-banner {
+        text-align: center;
+        font-family: 'Scheherazade New', 'Amiri', 'Noto Naskh Arabic', serif;
         font-size: 24px;
+        color: #047857;
+        padding: 10px 8px;
+        margin-bottom: 12px;
+        background: #f0fdf4;
+        border: 1.5px solid #bbf7d0;
+        border-radius: 10px;
+        font-weight: 700;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        direction: rtl;
+      }
+      .quran-arabic-text {
+        font-family: 'Scheherazade New', 'Amiri', 'Noto Naskh Arabic', 'Al Qalam Quran', 'PDMS Saleem Quran', 'Traditional Arabic', serif;
+        font-size: 25px;
         line-height: 2.3;
         text-align: right;
         direction: rtl;
         color: #0f172a;
         margin-bottom: 10px;
         padding: 4px 0;
-        word-spacing: 2px;
+        word-spacing: 2.5px;
         font-weight: 500;
+      }
+      .quran-arabic-text.indopak-script {
+        font-family: 'Scheherazade New', 'Amiri', 'Noto Naskh Arabic', 'Al Qalam Quran', 'PDMS Saleem Quran', serif;
+        font-size: 26px;
+        line-height: 2.4;
+        word-spacing: 3px;
+        font-weight: 600;
+        color: #091e42;
       }
       .quran-urdu-text {
         font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', Tahoma, sans-serif;
@@ -9429,19 +9451,6 @@
           <div class="section-title" style="background: #fef3c7; color: #92400e; border-color: #f59e0b;">
             <span>📖</span> TEMPLATE FLIPBOOK READER
           </div>
-          <div style="font-size: 12px; color: var(--muted); margin-bottom: 12px; text-align: center;">
-            Experience your recipes &amp; templates with realistic 3D paper turns, corner peeling &amp; spreads
-          </div>
-
-          <!-- View Mode Switcher (Flipbook vs List) -->
-          <div class="template-view-toggle-bar">
-            <button type="button" class="template-view-btn active" id="btnViewFlipbook" onclick="switchTemplateView('flipbook')">
-              <span>📖</span> 3D Flipbook Reader
-            </button>
-            <button type="button" class="template-view-btn" id="btnViewList" onclick="switchTemplateView('list')">
-              <span>📋</span> Card List
-            </button>
-          </div>
 
           <!-- FLIPBOOK CONTAINER (Modeled exactly after PDF Flipbook Reader) -->
           <div id="templateFlipbookSection" class="template-flipbook-section" style="width: 100%;">
@@ -12085,6 +12094,16 @@
             <span class="quran-reader-badge" id="quranReaderRangeBadge">Ayat 1 - 7</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
+            <button
+              type="button"
+              id="quranReaderScriptBtn"
+              class="quran-modal-btn"
+              onclick="toggleQuranScript()"
+              title="Toggle Script: Indo-Pak (Asian) vs Uthmani (Madani)"
+              style="padding: 4px 10px; font-size: 11px; height: 28px; background: #f0fdf4; border: 1.5px solid #10b981; color: #047857; font-weight: 700;"
+            >
+              🇵🇰 Indo-Pak
+            </button>
             <button
               type="button"
               id="quranReaderFocusBtn"
@@ -20099,6 +20118,7 @@ Please provide:
 
       let quranPlaylists = [];
       const quranApiCache = {};
+      let currentQuranScript = localStorage.getItem("quran_reader_script_pref") || "indopak";
       let currentReaderSurah = 1;
       let currentReaderStart = 1;
       let currentReaderEnd = 7;
@@ -20821,38 +20841,87 @@ Please provide:
         loadQuranReaderVerses();
       }
 
+      function toggleQuranScript() {
+        currentQuranScript = currentQuranScript === "indopak" ? "uthmani" : "indopak";
+        try {
+          localStorage.setItem("quran_reader_script_pref", currentQuranScript);
+        } catch (e) {}
+        updateQuranScriptBtn();
+        if (quranApiCache[currentReaderSurah]) {
+          renderQuranVersesDisplay(quranApiCache[currentReaderSurah]);
+        } else {
+          loadQuranReaderVerses();
+        }
+        showToast(`Script switched to ${currentQuranScript === "indopak" ? "Indo-Pak (Asian) 🇵🇰" : "Uthmani (Madani) 🇸🇦"}`);
+      }
+
+      function updateQuranScriptBtn() {
+        const btn = document.getElementById("quranReaderScriptBtn");
+        if (btn) {
+          if (currentQuranScript === "indopak") {
+            btn.innerHTML = "🇵🇰 Indo-Pak";
+            btn.title = "Current: Indo-Pak script (click to switch to Uthmani)";
+            btn.style.background = "#f0fdf4";
+            btn.style.borderColor = "#10b981";
+            btn.style.color = "#047857";
+          } else {
+            btn.innerHTML = "🇸🇦 Uthmani";
+            btn.title = "Current: Uthmani script (click to switch to Indo-Pak)";
+            btn.style.background = "#eff6ff";
+            btn.style.borderColor = "#3b82f6";
+            btn.style.color = "#1d4ed8";
+          }
+        }
+      }
+
       function fetchQuranSurahData(surahNum) {
-        if (quranApiCache[surahNum]) {
+        if (quranApiCache[surahNum] && quranApiCache[surahNum]._indopakVerses) {
           return Promise.resolve(quranApiCache[surahNum]);
         }
-        const url = `https://api.alquran.cloud/v1/surah/${surahNum}/editions/quran-uthmani,ur.jalandhry,ar.alafasy`;
-        return fetch(url)
-          .then((res) => {
-            if (!res.ok) throw new Error("Network request failed: " + res.status);
+        const alQuranUrl = `https://api.alquran.cloud/v1/surah/${surahNum}/editions/quran-uthmani,ur.jalandhry,ar.alafasy`;
+        const indopakUrl = `https://api.quran.com/api/v4/quran/verses/indopak?chapter_number=${surahNum}`;
+
+        return Promise.all([
+          fetch(alQuranUrl).then((res) => {
+            if (!res.ok) throw new Error("AlQuran API failed: " + res.status);
             return res.json();
+          }),
+          fetch(indopakUrl).then((res) => {
+            if (!res.ok) return null;
+            return res.json();
+          }).catch((err) => {
+            console.warn("Quran.com IndoPak fetch warning:", err);
+            return null;
           })
-          .then((json) => {
-            if (json && json.data && json.data.length >= 2) {
-              quranApiCache[surahNum] = json.data;
-              return json.data;
+        ]).then(([alQuranJson, indopakJson]) => {
+          if (alQuranJson && alQuranJson.data && alQuranJson.data.length >= 2) {
+            const data = alQuranJson.data;
+            if (indopakJson && indopakJson.verses && indopakJson.verses.length > 0) {
+              data._indopakVerses = indopakJson.verses;
             }
-            throw new Error("Invalid Quran data format");
-          });
+            quranApiCache[surahNum] = data;
+            return data;
+          }
+          throw new Error("Invalid Quran data format");
+        });
       }
 
       function loadQuranReaderVerses() {
         pauseQuranAudio();
         const container = document.getElementById("quranVersesContainer");
         if (!container) return;
+        updateQuranScriptBtn();
+
+        const scriptLabel = currentQuranScript === "indopak" ? "Indo-Pak Script 🇵🇰" : "Uthmani Script 🇸🇦";
 
         container.innerHTML = `
           <div style="text-align: center; padding: 40px 14px; color: var(--muted);">
             <div style="font-size: 32px; margin-bottom: 12px; animation: pulse 1s infinite;">📖</div>
             <div style="font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
-              Fetching Quran from Net...
+              Fetching Quran from Net (${scriptLabel})...
             </div>
             <div style="font-size: 12px; color: var(--muted);">
-              Loading Arabic text, Urdu translation (Fateh Muhammad Jalandhry) &amp; recitation
+              Loading ${scriptLabel}, Urdu translation (Fateh Muhammad Jalandhry) &amp; recitation
             </div>
           </div>
         `;
@@ -20886,10 +20955,12 @@ Please provide:
       function renderQuranVersesDisplay(data) {
         const container = document.getElementById("quranVersesContainer");
         if (!container) return;
+        updateQuranScriptBtn();
 
         const arabicEdition = data[0];
         const urduEdition = data[1];
         const audioEdition = data[2];
+        const indopakVerses = data._indopakVerses || [];
 
         const arabicAyahs = (arabicEdition && arabicEdition.ayahs) || [];
         const urduAyahs = (urduEdition && urduEdition.ayahs) || [];
@@ -20901,12 +20972,32 @@ Please provide:
         quranAudioAyahs = [];
         let html = "";
 
+        // If reading from Ayah 1 and not Surah 1 or 9, display Bismillah Header banner
+        if (currentReaderStart === 1 && currentReaderSurah !== 1 && currentReaderSurah !== 9) {
+          const bismillahText = currentQuranScript === "indopak"
+            ? "بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ"
+            : "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
+          html += `
+            <div class="quran-bismillah-banner" dir="rtl">
+              ${bismillahText}
+            </div>
+          `;
+        }
+
         for (let i = startIdx; i < endIdx; i++) {
           const arItem = arabicAyahs[i];
           const urItem = urduAyahs[i];
           const auItem = audioAyahs[i];
+          const indoItem = indopakVerses[i];
           const ayahNum = (arItem && arItem.numberInSurah) || (i + 1);
-          const arText = arItem ? arItem.text : "";
+
+          let arText = "";
+          if (currentQuranScript === "indopak" && indoItem && indoItem.text_indopak) {
+            arText = indoItem.text_indopak;
+          } else {
+            arText = arItem ? arItem.text : "";
+          }
+
           const urText = urItem ? urItem.text : "";
           const audioUrl = auItem ? auItem.audio : "";
 
@@ -20919,6 +21010,8 @@ Please provide:
               cardId: `quranVerseCard_${ayahNum}`,
             });
           }
+
+          const scriptClass = currentQuranScript === "indopak" ? "indopak-script" : "";
 
           html += `
             <div class="quran-verse-card" id="quranVerseCard_${ayahNum}">
@@ -20941,7 +21034,7 @@ Please provide:
                     : ""
                 }
               </div>
-              <div class="quran-arabic-text" dir="rtl">
+              <div class="quran-arabic-text ${scriptClass}" dir="rtl">
                 ${escapeHtml(arText)}
               </div>
               <div class="quran-urdu-text" dir="rtl">
@@ -21139,6 +21232,7 @@ Please provide:
       window.onQuranSurahSelectChanged = onQuranSurahSelectChanged;
       window.onQuranAyahRangeChanged = onQuranAyahRangeChanged;
       window.previewCurrentQuranModalItem = previewCurrentQuranModalItem;
+      window.toggleQuranScript = toggleQuranScript;
             // ==================== TEMPLATE BOOK SYSTEM ====================
       const DEFAULT_TEMPLATES = [
         {
