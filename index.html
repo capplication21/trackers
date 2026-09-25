@@ -436,16 +436,13 @@
       }
 
       .header {
+        display: none !important;
         text-align: center;
-        padding: 4px 0 12px;
+        padding: 0;
+        margin: 0;
       }
       .live-clock {
-        color: var(--ink-soft);
-        font-size: 15px;
-        font-weight: 500;
-        font-variant-numeric: tabular-nums;
-        letter-spacing: 0.5px;
-        margin-bottom: 12px;
+        display: none !important;
       }
 
 
@@ -8020,9 +8017,7 @@
   </head>
   <body>
     <div class="app-container">
-      <div class="header">
-        <div class="live-clock" id="liveClock">Loading...</div>
-      </div>
+
 
       <div id="content-area">
         <!-- MASTER NAVIGATOR HUB TAB (FULL SCREEN LIGHT THEME COMPACT) -->
@@ -12764,6 +12759,8 @@
       }
 
       function updateClock() {
+        const clockEl = document.getElementById("liveClock");
+        if (!clockEl) return;
         const now = new Date();
         const options = {
           weekday: "long",
@@ -12774,11 +12771,13 @@
           minute: "2-digit",
           second: "2-digit",
         };
-        document.getElementById("liveClock").textContent =
-          now.toLocaleDateString("en-US", options);
+        clockEl.textContent = now.toLocaleDateString("en-US", options);
       }
-      setInterval(updateClock, 1000);
-      updateClock();
+      const _liveClockTarget = document.getElementById("liveClock");
+      if (_liveClockTarget) {
+        setInterval(updateClock, 1000);
+        updateClock();
+      }
 
       // ==================== PERIOD TRACKER FUNCTIONS ====================
 
