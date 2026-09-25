@@ -292,6 +292,69 @@
         letter-spacing: 0.5px;
       }
 
+      .cycle-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 6px;
+        border: 1px solid transparent;
+      }
+      .cycle-badge-length {
+        background: #fef3c7;
+        color: #92400e;
+        border-color: #fde68a;
+      }
+      .cycle-badge-next {
+        background: #fee2e2;
+        color: #991b1b;
+        border-color: #fecaca;
+      }
+      .cycle-badge-fertility {
+        background: #fdf2f8;
+        color: #9d174d;
+        border-color: #fbcfe8;
+      }
+      .cycle-badge-duration {
+        background: #f1f5f9;
+        color: #475569;
+        border-color: #e2e8f0;
+      }
+      .cycle-quick-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .cycle-chip-btn {
+        background: #f8fafc;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: #334155;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .cycle-chip-btn:hover,
+      .cycle-chip-btn.active {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #991b1b;
+      }
+      .period-live-preview {
+        background: #fff8f8;
+        border: 1.5px dashed #fca5a5;
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin: 12px 0 6px;
+        font-size: 12px;
+        color: #451a03;
+      }
+
       /* Period Summary in Period Tab */
       .period-summary {
         background: #fff6dc;
@@ -8216,7 +8279,7 @@
           <!-- Period Bar -->
           <div class="nav-bar">
             <div class="nav-title-section">
-              <span class="nav-title-label">Last Period</span>
+              <span class="nav-title-label">First Date (Last)</span>
               <span class="nav-title-value" id="periodBarLast">--</span>
             </div>
             <div class="nav-countdown-box">
@@ -8228,12 +8291,42 @@
               class="nav-title-section"
               style="align-items: flex-end; text-align: right"
             >
-              <span class="nav-title-label">Next Period</span>
+              <span class="nav-title-label">Next Date</span>
               <span class="nav-title-value" id="navNextPeriodTitle">--</span>
             </div>
             <button class="nav-edit-btn" onclick="openPeriodModal()">
-              <span>✏️</span> Edit
+              <span>➕</span> Add / Edit
             </button>
+          </div>
+
+          <!-- Current Cycle & Fertility Status Card -->
+          <div class="period-fertility-card" id="periodFertilityCard" style="background: linear-gradient(135deg, #fff7ed 0%, #fdf2f8 100%); border: 2px solid #fbcfe8; border-radius: 14px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(244, 114, 182, 0.12);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+              <span style="font-weight: 800; font-size: 13.5px; color: #9d174d; display: flex; align-items: center; gap: 5px;">
+                <span>🌸</span> Fertility &amp; Cycle Overview
+              </span>
+              <span class="cycle-badge cycle-badge-length" id="currentCycleLengthBadge" style="font-size: 11.5px; padding: 3px 8px;">
+                ⚡ 23 days cycle
+              </span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+              <div style="background: #ffffff; border: 1px solid #fce7f3; border-radius: 10px; padding: 8px 10px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #be185d; text-transform: uppercase;">🌸 Fertile Window</div>
+                <div id="fertilityWindowDates" style="font-size: 13px; font-weight: 800; color: #831843; margin-top: 2px;">--</div>
+                <div style="font-size: 10px; color: #9d174d;">High conception chance</div>
+              </div>
+              <div style="background: #ffffff; border: 1px solid #fce7f3; border-radius: 10px; padding: 8px 10px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #be185d; text-transform: uppercase;">🥚 Ovulation Date</div>
+                <div id="fertilityOvulationDate" style="font-size: 13px; font-weight: 800; color: #831843; margin-top: 2px;">--</div>
+                <div style="font-size: 10px; color: #9d174d;">Peak fertility day</div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #ffffff; border: 1px solid #fed7aa; border-radius: 10px; padding: 7px 12px; font-size: 11.5px; flex-wrap: wrap; gap: 4px;">
+              <span style="color: #9a3412; font-weight: 700;">📅 Current Cycle:</span>
+              <span id="cycleDatesSpan" style="color: #431407; font-weight: 800;">First: -- ➔ Next: --</span>
+            </div>
           </div>
 
           <!-- Period History -->
@@ -8245,20 +8338,24 @@
             <div class="history-stats">
               <div class="stat-box">
                 <div class="stat-value" id="statAvgCycle">--</div>
-                <div class="stat-label">Avg Cycle</div>
+                <div class="stat-label">Cycle Length</div>
               </div>
               <div class="stat-box">
-                <div class="stat-value" id="statTotal">--</div>
-                <div class="stat-label">Total</div>
+                <div class="stat-value" id="statNextPeriodDate" style="font-size: 13.5px; font-weight: 800;">--</div>
+                <div class="stat-label">Next Date</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value" id="statFertilityDate" style="font-size: 13.5px; font-weight: 800;">--</div>
+                <div class="stat-label">Fertility Date</div>
               </div>
               <div class="stat-box">
                 <div class="stat-value" id="statCurrentDay">--</div>
-                <div class="stat-label">Day</div>
+                <div class="stat-label">Current Day</div>
               </div>
             </div>
             <div class="history-list" id="historyList">
               <div class="history-empty">
-                No period history yet. Tap "Add New Period" to get started.
+                No period history yet. Tap "Add / Edit" to get started.
               </div>
             </div>
           </div>
@@ -11009,43 +11106,64 @@
     <!-- Period Input Modal -->
     <div class="modal-overlay" id="periodModal">
       <div class="modal-card">
-        <div class="modal-title">🩸 Add Period</div>
+        <div class="modal-title">🩸 Add / Edit Period Cycle</div>
         <div class="modal-subtitle">
-          Record a new period to track your cycle
+          Record your cycle date, duration &amp; calculate fertility
         </div>
 
         <div class="input-group">
-          <label class="input-label">Period Start Date</label>
-          <input type="date" class="input-field" id="periodDateInput" />
+          <label class="input-label">Period First Date (Cycle Start)</label>
+          <input type="date" class="input-field" id="periodDateInput" onchange="updatePeriodModalPreview()" />
         </div>
 
         <div class="input-group">
-          <label class="input-label">Period Duration (days)</label>
+          <label class="input-label">Bleeding Duration (days)</label>
           <input
             type="number"
             class="input-field"
             id="periodDurationInput"
             value="5"
             min="1"
-            max="10"
+            max="14"
+            onchange="updatePeriodModalPreview()"
           />
         </div>
 
         <div class="input-group">
-          <label class="input-label">Cycle Length Override (optional)</label>
+          <label class="input-label">Cycle Duration (e.g. 21 or 23 days cycle)</label>
           <input
             type="number"
             class="input-field"
             id="cycleLengthInput"
-            placeholder="Auto-calculated"
+            placeholder="e.g. 21 or 23"
+            min="15"
+            max="60"
+            oninput="updatePeriodModalPreview()"
           />
+          <div class="cycle-quick-chips">
+            <button type="button" class="cycle-chip-btn" onclick="selectCycleChip(21)">21 Days</button>
+            <button type="button" class="cycle-chip-btn" onclick="selectCycleChip(23)">23 Days</button>
+            <button type="button" class="cycle-chip-btn" onclick="selectCycleChip(26)">26 Days</button>
+            <button type="button" class="cycle-chip-btn" onclick="selectCycleChip(28)">28 Days</button>
+            <button type="button" class="cycle-chip-btn" onclick="selectCycleChip(30)">30 Days</button>
+          </div>
         </div>
 
-        <div class="cycle-length-display">
-          Current average cycle: <span id="avgCycleDisplay">--</span> days
+        <!-- Live Calculation Preview -->
+        <div class="period-live-preview" id="periodModalPreview">
+          <div style="font-weight: 800; color: #9f1239; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+            <span>✨</span> Cycle &amp; Fertility Preview:
+          </div>
+          <div>📅 First Date: <strong id="previewFirstDate">--</strong></div>
+          <div style="margin-top: 3px;">🩸 Next Date: <strong id="previewNextDate">--</strong> (<span id="previewCycleText" style="color: #b45309; font-weight: 800;">28 days cycle</span>)</div>
+          <div style="margin-top: 3px;">🌸 Fertility: <strong id="previewFertilityText" style="color: #9d174d;">--</strong></div>
         </div>
 
-        <div class="modal-buttons">
+        <div class="cycle-length-display" style="font-size: 11px; color: #78716c; margin-top: 6px;">
+          Current average cycle: <span id="avgCycleDisplay" style="font-weight: 700;">--</span> days
+        </div>
+
+        <div class="modal-buttons" style="margin-top: 14px;">
           <button
             class="modal-btn modal-btn-cancel"
             onclick="closePeriodModal()"
@@ -11053,7 +11171,7 @@
             Cancel
           </button>
           <button class="modal-btn modal-btn-save" onclick="savePeriodData()">
-            Add Period
+            Save Cycle
           </button>
         </div>
       </div>
@@ -12833,7 +12951,12 @@
       }
 
       function getAverageCycleLength() {
-        if (periodData.periods.length < 2) return periodData.defaultCycleLength;
+        if (periodData.periods.length === 0) return periodData.defaultCycleLength || 28;
+        if (periodData.periods.length < 2) {
+          const last = getLastPeriod();
+          if (last && last.cycleLength) return last.cycleLength;
+          return periodData.defaultCycleLength || 28;
+        }
 
         const sorted = [...periodData.periods].sort(
           (a, b) => new Date(a.date) - new Date(b.date),
@@ -12843,15 +12966,16 @@
 
         for (let i = 1; i < sorted.length; i++) {
           const diff = getDaysBetween(sorted[i - 1].date, sorted[i].date);
-          if (diff > 14 && diff < 60) {
+          if (diff >= 15 && diff <= 55) {
             totalDiff += diff;
             count++;
           }
         }
 
-        return count > 0
-          ? Math.round(totalDiff / count)
-          : periodData.defaultCycleLength;
+        if (count > 0) return Math.round(totalDiff / count);
+        const last = getLastPeriod();
+        if (last && last.cycleLength) return last.cycleLength;
+        return periodData.defaultCycleLength || 28;
       }
 
       function getLastPeriod() {
@@ -12868,35 +12992,74 @@
         const daysEl = document.getElementById("navDaysLeft");
         const lastEl = document.getElementById("periodBarLast");
 
+        const fertilityCard = document.getElementById("periodFertilityCard");
+        const cycleBadge = document.getElementById("currentCycleLengthBadge");
+        const windowDatesEl = document.getElementById("fertilityWindowDates");
+        const ovulationDateEl = document.getElementById("fertilityOvulationDate");
+        const cycleDatesSpan = document.getElementById("cycleDatesSpan");
+        const statNextPeriodDate = document.getElementById("statNextPeriodDate");
+        const statFertilityDate = document.getElementById("statFertilityDate");
+
         if (!lastPeriod) {
-          titleEl.textContent = "Not set";
-          daysEl.textContent = "--";
-          lastEl.textContent = "--";
+          if (titleEl) titleEl.textContent = "Not set";
+          if (daysEl) daysEl.textContent = "--";
+          if (lastEl) lastEl.textContent = "--";
+          if (fertilityCard) fertilityCard.style.display = "none";
+          if (statNextPeriodDate) statNextPeriodDate.textContent = "--";
+          if (statFertilityDate) statFertilityDate.textContent = "--";
           return;
         }
 
-        lastEl.textContent = formatDate(lastPeriod.date);
+        if (fertilityCard) fertilityCard.style.display = "block";
+        if (lastEl) lastEl.textContent = formatDate(lastPeriod.date);
 
         const today = new Date().toISOString().split("T")[0];
-        const avgCycle = getAverageCycleLength();
-        const nextPeriodDate = addDays(lastPeriod.date, avgCycle);
+        const cycleLen = lastPeriod.cycleLength || getAverageCycleLength() || periodData.defaultCycleLength || 28;
+        const nextPeriodDate = addDays(lastPeriod.date, cycleLen);
         const daysToNext = getDaysBetween(today, nextPeriodDate);
         const daysSinceNext = getDaysBetween(nextPeriodDate, today);
 
-        titleEl.textContent = formatDate(nextPeriodDate);
+        if (titleEl) titleEl.textContent = formatDate(nextPeriodDate);
 
-        if (daysToNext > 0) {
-          daysEl.textContent = daysToNext;
-          daysEl.style.fontSize = "28px";
-          daysEl.style.color = "#1a1a1a";
-        } else if (daysToNext === 0) {
-          daysEl.textContent = "0";
-          daysEl.style.fontSize = "28px";
-          daysEl.style.color = "#c2431f";
-        } else {
-          daysEl.textContent = "+" + daysSinceNext;
-          daysEl.style.fontSize = "28px";
-          daysEl.style.color = "#c2431f";
+        if (daysEl) {
+          if (daysToNext > 0) {
+            daysEl.textContent = daysToNext;
+            daysEl.style.fontSize = "28px";
+            daysEl.style.color = "#1a1a1a";
+          } else if (daysToNext === 0) {
+            daysEl.textContent = "0";
+            daysEl.style.fontSize = "28px";
+            daysEl.style.color = "#c2431f";
+          } else {
+            daysEl.textContent = "+" + daysSinceNext;
+            daysEl.style.fontSize = "28px";
+            daysEl.style.color = "#c2431f";
+          }
+        }
+
+        // Calculate fertility window & ovulation date
+        const ovOffset = Math.max(1, cycleLen - 14);
+        const ovulationDate = addDays(lastPeriod.date, ovOffset);
+        const fertileStart = addDays(lastPeriod.date, Math.max(1, ovOffset - 5));
+        const fertileEnd = ovulationDate;
+
+        if (cycleBadge) {
+          cycleBadge.textContent = `⚡ ${cycleLen} days cycle`;
+        }
+        if (windowDatesEl) {
+          windowDatesEl.textContent = `${formatDate(fertileStart)} – ${formatDate(fertileEnd)}`;
+        }
+        if (ovulationDateEl) {
+          ovulationDateEl.textContent = formatDate(ovulationDate);
+        }
+        if (cycleDatesSpan) {
+          cycleDatesSpan.textContent = `First: ${formatDateFull(lastPeriod.date)} ➔ Next: ${formatDateFull(nextPeriodDate)} (${cycleLen}d cycle)`;
+        }
+        if (statNextPeriodDate) {
+          statNextPeriodDate.textContent = formatDate(nextPeriodDate);
+        }
+        if (statFertilityDate) {
+          statFertilityDate.textContent = formatDate(ovulationDate);
         }
       }
 
@@ -12909,16 +13072,16 @@
         const listEl = document.getElementById("historyList");
         const countEl = document.getElementById("historyCount");
         const avgEl = document.getElementById("statAvgCycle");
-        const totalEl = document.getElementById("statTotal");
         const dayEl = document.getElementById("statCurrentDay");
 
         if (periodData.periods.length === 0) {
-          listEl.innerHTML =
-            '<div class="history-empty">No period history yet. Tap "Add New Period" to get started.</div>';
-          countEl.textContent = "0";
-          avgEl.textContent = "--";
-          totalEl.textContent = "--";
-          dayEl.textContent = "--";
+          if (listEl) {
+            listEl.innerHTML =
+              '<div class="history-empty">No period history yet. Tap "Add / Edit" to record a cycle.</div>';
+          }
+          if (countEl) countEl.textContent = "0";
+          if (avgEl) avgEl.textContent = "--";
+          if (dayEl) dayEl.textContent = "--";
           return;
         }
 
@@ -12929,10 +13092,9 @@
           ? getDaysBetween(lastPeriod.date, today) + 1
           : "--";
 
-        countEl.textContent = sorted.length;
-        avgEl.textContent = avgCycle;
-        totalEl.textContent = sorted.length;
-        dayEl.textContent = currentDay;
+        if (countEl) countEl.textContent = sorted.length;
+        if (avgEl) avgEl.textContent = avgCycle + "d";
+        if (dayEl) dayEl.textContent = currentDay;
 
         let html = "";
         sorted.forEach((period, index) => {
@@ -12940,23 +13102,74 @@
           const daysAgo = getDaysBetween(period.date, today);
           const daysAgoText =
             daysAgo === 0
-              ? "Today"
+              ? "Started Today"
               : daysAgo === 1
-                ? "Yesterday"
-                : daysAgo + " days ago";
+                ? "Started Yesterday"
+                : daysAgo > 0
+                  ? daysAgo + " days ago"
+                  : "Starts in " + Math.abs(daysAgo) + " days";
+
+          // Calculate cycle length:
+          let cycleLen = period.cycleLength;
+          let nextPeriodDate = "";
+          if (index > 0) {
+            const newerPeriod = sorted[index - 1];
+            const actualDiff = getDaysBetween(period.date, newerPeriod.date);
+            if (actualDiff >= 15 && actualDiff <= 60) {
+              cycleLen = actualDiff;
+              nextPeriodDate = newerPeriod.date;
+            }
+          }
+          if (!cycleLen) {
+            cycleLen = periodData.defaultCycleLength || 28;
+          }
+          if (!nextPeriodDate) {
+            nextPeriodDate = addDays(period.date, cycleLen);
+          }
+
+          // Fertility calculation:
+          const ovOffset = Math.max(1, cycleLen - 14);
+          const ovulationDate = addDays(period.date, ovOffset);
+          const fertileStart = addDays(period.date, Math.max(1, ovOffset - 5));
+          const fertileEnd = ovulationDate;
 
           html += `
-        <div class="history-item ${isLatest ? "latest" : ""}">
-          <div>
-            <div class="history-date">${formatDateFull(period.date)} ${isLatest ? "⭐" : ""}</div>
-            <div class="history-days">${daysAgoText} · ${period.duration} days duration</div>
-          </div>
-          <button class="history-delete" onclick="deletePeriod('${period.date}', event)">🗑️</button>
-        </div>
-      `;
+            <div class="history-item ${isLatest ? "latest" : ""}">
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px; margin-bottom: 4px;">
+                  <div class="history-date">
+                    <span>📅 First Date: <strong>${formatDateFull(period.date)}</strong></span>
+                  </div>
+                  ${isLatest ? '<span style="background: #fef08a; color: #854d0e; font-size: 10.5px; font-weight: 800; padding: 2px 7px; border-radius: 6px; border: 1px solid #fde047;">⭐ Current Cycle</span>' : ''}
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 6px;">
+                  <span class="cycle-badge cycle-badge-next" title="Next cycle start date">
+                    🩸 Next Date: <strong>${formatDateFull(nextPeriodDate)}</strong>
+                  </span>
+                  <span class="cycle-badge cycle-badge-length" title="Cycle duration in days">
+                    ⚡ <strong>${cycleLen} days cycle</strong>
+                  </span>
+                  <span class="cycle-badge cycle-badge-duration" title="Bleeding duration">
+                    ⏳ <strong>${period.duration || 5} days duration</strong>
+                  </span>
+                </div>
+
+                <div style="background: #fff1f2; border: 1px solid #ffe4e6; border-radius: 8px; padding: 5px 8px; margin: 4px 0; font-size: 11.5px; color: #9f1239; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
+                  <span>🌸 <strong>Fertility:</strong> ${formatDate(fertileStart)} – ${formatDate(fertileEnd)}</span>
+                  <span style="font-weight: 800; background: #ffffff; padding: 2px 7px; border-radius: 4px; border: 1px solid #fecdd3; font-size: 11px;">🥚 Ovulation: ${formatDate(ovulationDate)}</span>
+                </div>
+
+                <div class="history-days" style="font-size: 11px; color: #78716c; margin-top: 2px;">
+                  ${daysAgoText}
+                </div>
+              </div>
+              <button class="history-delete" onclick="deletePeriod('${period.date}', event)" title="Delete period record">🗑️</button>
+            </div>
+          `;
         });
 
-        listEl.innerHTML = html;
+        if (listEl) listEl.innerHTML = html;
       }
 
       function deletePeriod(dateStr, event) {
@@ -12972,6 +13185,48 @@
         showToast("Period record deleted 🗑️");
       }
 
+      function selectCycleChip(days) {
+        const input = document.getElementById("cycleLengthInput");
+        if (input) {
+          input.value = days;
+          document.querySelectorAll(".cycle-chip-btn").forEach((btn) => {
+            btn.classList.toggle("active", btn.textContent.trim().startsWith(days + ""));
+          });
+          updatePeriodModalPreview();
+        }
+      }
+
+      function updatePeriodModalPreview() {
+        const dateInput = document.getElementById("periodDateInput");
+        const cycleInput = document.getElementById("cycleLengthInput");
+        const previewFirst = document.getElementById("previewFirstDate");
+        const previewNext = document.getElementById("previewNextDate");
+        const previewCycle = document.getElementById("previewCycleText");
+        const previewFert = document.getElementById("previewFertilityText");
+
+        const dateVal = dateInput ? dateInput.value : "";
+        const cycleVal = parseInt(cycleInput ? cycleInput.value : 0) || getAverageCycleLength() || periodData.defaultCycleLength || 28;
+
+        if (previewCycle) previewCycle.textContent = cycleVal + " days cycle";
+
+        if (!dateVal) {
+          if (previewFirst) previewFirst.textContent = "Select date";
+          if (previewNext) previewNext.textContent = "--";
+          if (previewFert) previewFert.textContent = "--";
+          return;
+        }
+
+        const nextDate = addDays(dateVal, cycleVal);
+        const ovOffset = Math.max(1, cycleVal - 14);
+        const ovulationDate = addDays(dateVal, ovOffset);
+        const fertileStart = addDays(dateVal, Math.max(1, ovOffset - 5));
+        const fertileEnd = ovulationDate;
+
+        if (previewFirst) previewFirst.textContent = formatDateFull(dateVal);
+        if (previewNext) previewNext.textContent = formatDateFull(nextDate);
+        if (previewFert) previewFert.textContent = `${formatDate(fertileStart)} – ${formatDate(fertileEnd)} (Peak: ${formatDate(ovulationDate)})`;
+      }
+
       function openPeriodModal() {
         const modal = document.getElementById("periodModal");
         const dateInput = document.getElementById("periodDateInput");
@@ -12979,13 +13234,19 @@
         const cycleInput = document.getElementById("cycleLengthInput");
         const avgDisplay = document.getElementById("avgCycleDisplay");
 
+        const last = getLastPeriod();
         dateInput.value = new Date().toISOString().split("T")[0];
-        durationInput.value = "5";
-        cycleInput.value = "";
+        durationInput.value = (last && last.duration) ? last.duration : "5";
 
-        const avgCycle = getAverageCycleLength();
-        avgDisplay.textContent = avgCycle;
+        const currentCycle = (last && last.cycleLength) || getAverageCycleLength() || periodData.defaultCycleLength || 28;
+        cycleInput.value = currentCycle;
+        if (avgDisplay) avgDisplay.textContent = currentCycle;
 
+        document.querySelectorAll(".cycle-chip-btn").forEach((btn) => {
+          btn.classList.toggle("active", btn.textContent.trim().startsWith(currentCycle + ""));
+        });
+
+        updatePeriodModalPreview();
         modal.classList.add("show");
       }
 
@@ -12998,7 +13259,7 @@
         const durationInput =
           parseInt(document.getElementById("periodDurationInput").value) || 5;
         const cycleInput =
-          parseInt(document.getElementById("cycleLengthInput").value) || 0;
+          parseInt(document.getElementById("cycleLengthInput").value) || getAverageCycleLength() || periodData.defaultCycleLength || 28;
 
         if (!dateInput) {
           showToast("Please enter a valid date 📅");
@@ -13018,16 +13279,18 @@
         );
         if (existingIndex >= 0) {
           periodData.periods[existingIndex].duration = durationInput;
-          showToast("Period updated! 🩸");
+          periodData.periods[existingIndex].cycleLength = cycleInput;
+          showToast("Period cycle updated! 🩸");
         } else {
           periodData.periods.push({
             date: dateInput,
             duration: durationInput,
+            cycleLength: cycleInput,
           });
-          showToast("Period added to history! 🩸");
+          showToast("Period cycle added! 🩸");
         }
 
-        if (cycleInput && cycleInput >= 21 && cycleInput <= 45) {
+        if (cycleInput && cycleInput >= 18 && cycleInput <= 50) {
           periodData.defaultCycleLength = cycleInput;
         }
 
