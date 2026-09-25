@@ -318,9 +318,9 @@
         border-color: #e9d5ff;
       }
       .cycle-badge-duration {
-        background: #f1f5f9;
-        color: #475569;
-        border-color: #e2e8f0;
+        background: #f5f3ff;
+        color: #6d28d9;
+        border-color: #ddd6fe;
       }
       .cycle-quick-chips {
         display: flex;
@@ -13152,16 +13152,18 @@
                   </span>
                 </div>
 
-                <div style="background: #faf5ff; border: 1.5px solid #e9d5ff; border-radius: 8px; padding: 5px 8px; margin: 4px 0; font-size: 11.5px; color: #581c87; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
-                  <span>🌸 <strong>Fertility:</strong> ${formatDate(fertileStart)} – ${formatDate(fertileEnd)}</span>
-                  <span style="font-weight: 800; background: #ffffff; color: #6d28d9; padding: 2px 7px; border-radius: 4px; border: 1px solid #ddd6fe; font-size: 11px;">🥚 Ovulation: ${formatDate(ovulationDate)}</span>
+                <div style="background: #faf5ff; border: 1.5px solid #e9d5ff; border-radius: 8px; padding: 5px 8px; margin: 4px 0; font-size: 11px; color: #581c87; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 6px;">
+                  <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">🌸 <strong>Fertility:</strong> ${formatDate(fertileStart)} – ${formatDate(fertileEnd)}</span>
+                  <span style="font-weight: 800; background: #ffffff; color: #6d28d9; padding: 2px 6px; border-radius: 4px; border: 1px solid #ddd6fe; font-size: 10.5px; white-space: nowrap; flex-shrink: 0;">🥚 Ovulation: ${formatDate(ovulationDate)}</span>
                 </div>
 
                 <div class="history-days" style="font-size: 11px; color: #78716c; margin-top: 2px;">
                   ${daysAgoText}
                 </div>
               </div>
-              <button class="history-delete" onclick="deletePeriod('${period.date}', event)" title="Delete period record">🗑️</button>
+              <button class="history-delete" onclick="deletePeriod('${period.date}', event)" title="Delete period record" style="color: #8b5cf6; display: flex; align-items: center; justify-content: center; padding: 4px; border: none; background: transparent; cursor: pointer;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
             </div>
           `;
         });
