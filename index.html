@@ -308,14 +308,14 @@
         border-color: #fde68a;
       }
       .cycle-badge-next {
-        background: #fee2e2;
-        color: #991b1b;
-        border-color: #fecaca;
+        background: #ede9fe;
+        color: #5b21b6;
+        border-color: #ddd6fe;
       }
       .cycle-badge-fertility {
-        background: #fdf2f8;
-        color: #9d174d;
-        border-color: #fbcfe8;
+        background: #faf5ff;
+        color: #6b21a8;
+        border-color: #e9d5ff;
       }
       .cycle-badge-duration {
         background: #f1f5f9;
@@ -341,18 +341,18 @@
       }
       .cycle-chip-btn:hover,
       .cycle-chip-btn.active {
-        background: #fee2e2;
-        border-color: #ef4444;
-        color: #991b1b;
+        background: #ede9fe;
+        border-color: #8b5cf6;
+        color: #5b21b6;
       }
       .period-live-preview {
-        background: #fff8f8;
-        border: 1.5px dashed #fca5a5;
+        background: #faf5ff;
+        border: 1.5px dashed #c4b5fd;
         border-radius: 10px;
         padding: 10px 12px;
         margin: 12px 0 6px;
         font-size: 12px;
-        color: #451a03;
+        color: #3b0764;
       }
 
       /* Period Summary in Period Tab */
@@ -8273,7 +8273,7 @@
         <!-- PERIOD TAB -->
         <div class="tab-content" id="tab-period">
           <div class="section-title period-title">
-            <span>🩸</span> PERIOD TRACKER
+            <span>🌸</span> PERIOD TRACKER
           </div>
 
           <!-- Period Bar -->
@@ -8291,8 +8291,8 @@
               class="nav-title-section"
               style="align-items: flex-end; text-align: right"
             >
-              <span class="nav-title-label">🩸 Next Date</span>
-              <span class="nav-title-value" id="navNextPeriodTitle" style="color: #b91c1c; font-weight: 800;">--</span>
+              <span class="nav-title-label">✨ Next Date</span>
+              <span class="nav-title-value" id="navNextPeriodTitle" style="color: #6d28d9; font-weight: 800;">--</span>
             </div>
             <button class="nav-edit-btn" onclick="openPeriodModal()">
               <span>➕</span> Add / Edit
@@ -8300,9 +8300,9 @@
           </div>
 
           <!-- Current Cycle & Fertility Status Card (Head) -->
-          <div class="period-fertility-card" id="periodFertilityCard" style="background: linear-gradient(135deg, #fff7ed 0%, #fdf2f8 100%); border: 2px solid #fbcfe8; border-radius: 14px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(244, 114, 182, 0.12);">
+          <div class="period-fertility-card" id="periodFertilityCard" style="background: linear-gradient(135deg, #fffbeb 0%, #faf5ff 100%); border: 2px solid #ddd6fe; border-radius: 14px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
-              <span style="font-weight: 800; font-size: 13.5px; color: #9d174d; display: flex; align-items: center; gap: 5px;">
+              <span style="font-weight: 800; font-size: 13.5px; color: #581c87; display: flex; align-items: center; gap: 5px;">
                 <span>🌸</span> Fertility &amp; Cycle Overview
               </span>
               <span class="cycle-badge cycle-badge-length" id="currentCycleLengthBadge" style="font-size: 11.5px; padding: 3px 8px;">
@@ -8311,21 +8311,21 @@
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
-              <div style="background: #ffffff; border: 1px solid #fce7f3; border-radius: 10px; padding: 8px 10px;">
-                <div style="font-size: 10.5px; font-weight: 700; color: #be185d; text-transform: uppercase;">🌸 Fertile Window</div>
-                <div id="fertilityWindowDates" style="font-size: 13px; font-weight: 800; color: #831843; margin-top: 2px;">--</div>
-                <div style="font-size: 10px; color: #9d174d;">High conception chance</div>
+              <div style="background: #ffffff; border: 1.5px solid #ede9fe; border-radius: 10px; padding: 8px 10px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #7c3aed; text-transform: uppercase;">🌸 Fertile Window</div>
+                <div id="fertilityWindowDates" style="font-size: 13px; font-weight: 800; color: #4c1d95; margin-top: 2px;">--</div>
+                <div style="font-size: 10px; color: #6b7280;">High conception chance</div>
               </div>
-              <div style="background: #ffffff; border: 1px solid #fce7f3; border-radius: 10px; padding: 8px 10px;">
-                <div style="font-size: 10.5px; font-weight: 700; color: #be185d; text-transform: uppercase;">🥚 Ovulation Date</div>
-                <div id="fertilityOvulationDate" style="font-size: 13px; font-weight: 800; color: #831843; margin-top: 2px;">--</div>
-                <div style="font-size: 10px; color: #9d174d;">Peak fertility day</div>
+              <div style="background: #ffffff; border: 1.5px solid #ede9fe; border-radius: 10px; padding: 8px 10px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #7c3aed; text-transform: uppercase;">🥚 Ovulation Date</div>
+                <div id="fertilityOvulationDate" style="font-size: 13px; font-weight: 800; color: #4c1d95; margin-top: 2px;">--</div>
+                <div style="font-size: 10px; color: #6b7280;">Peak fertility day</div>
               </div>
             </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 10px; padding: 8px 12px; font-size: 12px; flex-wrap: wrap; gap: 6px;">
-              <span style="color: #9f1239; font-weight: 800; font-size: 12.5px;">🩸 Next Period Date: <strong id="headNextDateSpan" style="color: #e11d48;">--</strong></span>
-              <span id="cycleDatesSpan" style="color: #881337; font-weight: 700;">First: --</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #f5f3ff; border: 1.5px solid #ddd6fe; border-radius: 10px; padding: 8px 12px; font-size: 12px; flex-wrap: wrap; gap: 6px;">
+              <span style="color: #5b21b6; font-weight: 800; font-size: 12.5px;">✨ Next Period Date: <strong id="headNextDateSpan" style="color: #7c3aed;">--</strong></span>
+              <span id="cycleDatesSpan" style="color: #6d28d9; font-weight: 700;">First: --</span>
             </div>
           </div>
 
@@ -11147,12 +11147,12 @@
 
         <!-- Live Calculation Preview -->
         <div class="period-live-preview" id="periodModalPreview">
-          <div style="font-weight: 800; color: #9f1239; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+          <div style="font-weight: 800; color: #581c87; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
             <span>✨</span> Cycle &amp; Fertility Preview:
           </div>
           <div>📅 First Date: <strong id="previewFirstDate">--</strong></div>
-          <div style="margin-top: 3px;">🩸 Next Date: <strong id="previewNextDate">--</strong> (<span id="previewCycleText" style="color: #b45309; font-weight: 800;">28 days cycle</span>)</div>
-          <div style="margin-top: 3px;">🌸 Fertility: <strong id="previewFertilityText" style="color: #9d174d;">--</strong></div>
+          <div style="margin-top: 3px;">✨ Next Date: <strong id="previewNextDate" style="color: #7c3aed;">--</strong> (<span id="previewCycleText" style="color: #b45309; font-weight: 800;">28 days cycle</span>)</div>
+          <div style="margin-top: 3px;">🌸 Fertility: <strong id="previewFertilityText" style="color: #6b21a8;">--</strong></div>
         </div>
 
         <div class="cycle-length-display" style="font-size: 11px; color: #78716c; margin-top: 6px;">
@@ -13025,11 +13025,11 @@
           } else if (daysToNext === 0) {
             daysEl.textContent = "0";
             daysEl.style.fontSize = "28px";
-            daysEl.style.color = "#c2431f";
+            daysEl.style.color = "#7c3aed";
           } else {
             daysEl.textContent = "+" + daysSinceNext;
             daysEl.style.fontSize = "28px";
-            daysEl.style.color = "#c2431f";
+            daysEl.style.color = "#7c3aed";
           }
         }
 
@@ -13152,9 +13152,9 @@
                   </span>
                 </div>
 
-                <div style="background: #fff1f2; border: 1px solid #ffe4e6; border-radius: 8px; padding: 5px 8px; margin: 4px 0; font-size: 11.5px; color: #9f1239; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
+                <div style="background: #faf5ff; border: 1.5px solid #e9d5ff; border-radius: 8px; padding: 5px 8px; margin: 4px 0; font-size: 11.5px; color: #581c87; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px;">
                   <span>🌸 <strong>Fertility:</strong> ${formatDate(fertileStart)} – ${formatDate(fertileEnd)}</span>
-                  <span style="font-weight: 800; background: #ffffff; padding: 2px 7px; border-radius: 4px; border: 1px solid #fecdd3; font-size: 11px;">🥚 Ovulation: ${formatDate(ovulationDate)}</span>
+                  <span style="font-weight: 800; background: #ffffff; color: #6d28d9; padding: 2px 7px; border-radius: 4px; border: 1px solid #ddd6fe; font-size: 11px;">🥚 Ovulation: ${formatDate(ovulationDate)}</span>
                 </div>
 
                 <div class="history-days" style="font-size: 11px; color: #78716c; margin-top: 2px;">
