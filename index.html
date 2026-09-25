@@ -8291,15 +8291,15 @@
               class="nav-title-section"
               style="align-items: flex-end; text-align: right"
             >
-              <span class="nav-title-label">Next Date</span>
-              <span class="nav-title-value" id="navNextPeriodTitle">--</span>
+              <span class="nav-title-label">🩸 Next Date</span>
+              <span class="nav-title-value" id="navNextPeriodTitle" style="color: #b91c1c; font-weight: 800;">--</span>
             </div>
             <button class="nav-edit-btn" onclick="openPeriodModal()">
               <span>➕</span> Add / Edit
             </button>
           </div>
 
-          <!-- Current Cycle & Fertility Status Card -->
+          <!-- Current Cycle & Fertility Status Card (Head) -->
           <div class="period-fertility-card" id="periodFertilityCard" style="background: linear-gradient(135deg, #fff7ed 0%, #fdf2f8 100%); border: 2px solid #fbcfe8; border-radius: 14px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(244, 114, 182, 0.12);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
               <span style="font-weight: 800; font-size: 13.5px; color: #9d174d; display: flex; align-items: center; gap: 5px;">
@@ -8323,9 +8323,9 @@
               </div>
             </div>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #ffffff; border: 1px solid #fed7aa; border-radius: 10px; padding: 7px 12px; font-size: 11.5px; flex-wrap: wrap; gap: 4px;">
-              <span style="color: #9a3412; font-weight: 700;">📅 Current Cycle:</span>
-              <span id="cycleDatesSpan" style="color: #431407; font-weight: 800;">First: -- ➔ Next: --</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #fff1f2; border: 1.5px solid #fecdd3; border-radius: 10px; padding: 8px 12px; font-size: 12px; flex-wrap: wrap; gap: 6px;">
+              <span style="color: #9f1239; font-weight: 800; font-size: 12.5px;">🩸 Next Period Date: <strong id="headNextDateSpan" style="color: #e11d48;">--</strong></span>
+              <span id="cycleDatesSpan" style="color: #881337; font-weight: 700;">First: --</span>
             </div>
           </div>
 
@@ -13052,8 +13052,12 @@
         if (ovulationDateEl) {
           ovulationDateEl.textContent = formatDate(ovulationDate);
         }
+        const headNextDateSpan = document.getElementById("headNextDateSpan");
+        if (headNextDateSpan) {
+          headNextDateSpan.textContent = formatDateFull(nextPeriodDate);
+        }
         if (cycleDatesSpan) {
-          cycleDatesSpan.textContent = `First: ${formatDateFull(lastPeriod.date)} ➔ Next: ${formatDateFull(nextPeriodDate)} (${cycleLen}d cycle)`;
+          cycleDatesSpan.textContent = `First Date: ${formatDate(lastPeriod.date)} (${cycleLen}d cycle)`;
         }
         if (statNextPeriodDate) {
           statNextPeriodDate.textContent = formatDate(nextPeriodDate);
@@ -13144,9 +13148,6 @@
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 6px;">
-                  <span class="cycle-badge cycle-badge-next" title="Next cycle start date">
-                    🩸 Next Date: <strong>${formatDateFull(nextPeriodDate)}</strong>
-                  </span>
                   <span class="cycle-badge cycle-badge-length" title="Cycle duration in days">
                     ⚡ <strong>${cycleLen} days cycle</strong>
                   </span>
