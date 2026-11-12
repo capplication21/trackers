@@ -2438,6 +2438,194 @@
         background: #ede7d2;
       }
 
+      /* ==================== ADKAR PAGE STYLES ==================== */
+      .adkar-title {
+        color: #0f766e;
+        background: #f0fdfa;
+      }
+      .adkar-section-wrap {
+        background: linear-gradient(135deg, #0f766e 0%, #0d9488 55%, #115e59 100%);
+        border: 2.5px solid var(--ink);
+        border-radius: var(--radius);
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: var(--shadow-flat);
+        color: #ffffff;
+        position: relative;
+        overflow: hidden;
+      }
+      .adkar-section-wrap::after {
+        content: "سُبْحَانَ اللَّهِ";
+        position: absolute;
+        right: 12px;
+        top: 6px;
+        font-family: 'Amiri', 'Traditional Arabic', serif;
+        font-size: 24px;
+        opacity: 0.14;
+        pointer-events: none;
+      }
+      .adkar-section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+        position: relative;
+        z-index: 1;
+      }
+      .adkar-section-arabic {
+        font-family: 'Amiri', 'Traditional Arabic', serif;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.25;
+      }
+      .adkar-section-sub {
+        font-size: 12px;
+        opacity: 0.92;
+        margin-top: 2px;
+      }
+      .adkar-pdf-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+        color: #ffffff;
+        font-size: 11.5px;
+        font-weight: 700;
+        text-decoration: none;
+        flex-shrink: 0;
+        transition: all 0.15s ease;
+      }
+      .adkar-pdf-link:hover {
+        background: rgba(255, 255, 255, 0.28);
+      }
+      .adkar-counter-panel {
+        background: #ffffff;
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        padding: 16px 14px;
+        box-shadow: 0 3px 0 var(--ink);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .adkar-phrases {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      .adkar-phrase-chip {
+        border: 1.5px solid var(--ink);
+        background: #faf5e8;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 11.5px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .adkar-phrase-chip.active {
+        background: #0f766e;
+        color: #ffffff;
+      }
+      .adkar-phrase-arabic {
+        font-family: 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+        font-size: 28px;
+        color: #0f766e;
+        margin-bottom: 3px;
+      }
+      .adkar-phrase-sub {
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 12px;
+      }
+      .adkar-targets {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+      .adkar-target-chip {
+        border: 1.5px solid var(--ink);
+        background: #ffffff;
+        color: var(--ink);
+        border-radius: 8px;
+        padding: 4px 10px;
+        font-size: 11.5px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .adkar-target-chip.active {
+        background: #f5b729;
+      }
+      .adkar-big-circle {
+        width: 156px;
+        height: 156px;
+        margin: 0 auto 14px;
+        border-radius: 50%;
+        border: 3px solid var(--ink);
+        background: linear-gradient(145deg, #ccfbf1 0%, #99f6e4 100%);
+        box-shadow: 0 5px 0 var(--ink);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        user-select: none;
+        font-family: inherit;
+        transition: transform 0.08s ease;
+      }
+      .adkar-big-circle:active {
+        transform: translateY(3px) scale(0.97);
+        box-shadow: 0 1px 0 var(--ink);
+      }
+      .adkar-big-circle.done {
+        background: linear-gradient(145deg, #bbf7d0 0%, #86efac 100%);
+      }
+      .adkar-big-count {
+        font-size: 40px;
+        font-weight: 800;
+        color: var(--ink);
+        line-height: 1.1;
+      }
+      .adkar-big-goal {
+        font-size: 12px;
+        color: #0f766e;
+      }
+      .adkar-counter-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #475569;
+        margin-top: 8px;
+        padding-top: 10px;
+        border-top: 1.5px dashed #cbd5e1;
+      }
+      .adkar-reset-btn {
+        border: 1.5px solid var(--ink);
+        background: #f8fafc;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 5px 11px;
+        font-size: 11px;
+        cursor: pointer;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .adkar-reset-btn:hover {
+        background: #ffffff;
+        box-shadow: 0 1.5px 0 var(--ink);
+      }
+
       .timer-wrap {
         display: flex;
         align-items: center;
@@ -8089,7 +8277,7 @@
             <!-- Compact Light Header -->
             <div class="nav-hub-header">
               <span class="nav-hub-badge">🧭 NAVIGATOR</span>
-              <span class="nav-hub-sub">13 Apps</span>
+              <span class="nav-hub-sub">14 Apps</span>
             </div>
 
             <!-- Sleek Compact Light Cards Grid (Entire Card Clickable, No Description, No Open Button) -->
@@ -8209,6 +8397,15 @@
                   <span class="hub-card-badge">TEMPLATES</span>
                 </div>
                 <div class="hub-card-title">Template Book</div>
+              </div>
+
+              <!-- Card 14: Adkar -->
+              <div class="hub-card" onclick="switchTab('adkar')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">📿</span>
+                  <span class="hub-card-badge">ADKAR</span>
+                </div>
+                <div class="hub-card-title">Adkar</div>
               </div>
             </div>
           </div>
@@ -10807,6 +11004,14 @@
               No Duaas in your book yet. Tap ➕ Add Duaa or paste a screenshot!
             </div>
           </div>
+        </div>
+
+        <!-- ADKAR TAB -->
+        <div class="tab-content" id="tab-adkar">
+          <div class="section-title adkar-title">
+            <span>📿</span> ADKAR
+          </div>
+          <div id="adkarSectionsContainer"></div>
         </div>
 
         <!-- SUMMARY TAB -->
@@ -15321,6 +15526,7 @@
         englishtest: "📝 English Test",
         mathtest: "🧮 Math Test",
         notes: "🤲 Duaa Book",
+        adkar: "📿 Adkar",
         pdf: "📖 PDF Reader",
         summary: "📊 Day Summary",
         navigator: "🧭 All Navigators",
@@ -18757,6 +18963,7 @@ Please provide:
         }
         if (tabName === "summary") renderSummary();
         if (tabName === "notes") renderNotesList();
+        if (tabName === "adkar") renderAdkarSections();
         if (tabName === "pdf") renderPdfTab();
         if (tabName === "english") {
           renderGrammarRevisionDisplay();
@@ -26967,6 +27174,178 @@ window.openQuranReaderModal = openQuranReaderModal;
         updateStandupTimerDisplay();
       }
 
+      // ==================== ADKAR MORNING & EVENING SECTIONS ====================
+      const ADKAR_PDF_URL = "https://drive.google.com/file/d/1s1of5xnyzPgy8cRO3RqycT-wbfr_m_9v/view?usp=drivesdk";
+      const ADKAR_SECTION_KEYS = {
+        morning: "adkar_section_morning_v1",
+        evening: "adkar_section_evening_v1"
+      };
+      const ADKAR_PHRASES = [
+        { id: "subhanallah", arabic: "سُبْحَانَ اللَّهِ", label: "SubhanAllah", meaning: "Glory be to Allah" },
+        { id: "alhamdulillah", arabic: "الْحَمْدُ لِلَّهِ", label: "Alhamdulillah", meaning: "Praise be to Allah" },
+        { id: "allahuakbar", arabic: "اللَّهُ أَكْبَرُ", label: "Allahu Akbar", meaning: "Allah is the Greatest" },
+        { id: "astaghfirullah", arabic: "أَسْتَغْفِرُ اللَّهَ", label: "Astaghfirullah", meaning: "I seek Allah's forgiveness" },
+        { id: "tahlil", arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ", label: "La ilaha illallah", meaning: "There is no god worthy of worship except Allah" },
+        { id: "salawat", arabic: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ", label: "Salawat ﷺ", meaning: "O Allah, send prayers upon Muhammad ﷺ" }
+      ];
+      const ADKAR_SECTION_META = [
+        { key: "morning", icon: "🌅", title: "Morning Adkar", arabicTitle: "أَذْكَارُ الصَّبَاحِ", pdfLabel: "Morning Adkar PDF" },
+        { key: "evening", icon: "🌇", title: "Evening Adkar", arabicTitle: "أَذْكَارُ الْمَسَاءِ", pdfLabel: "Evening Adkar PDF" }
+      ];
+
+      const adkarSectionState = {
+        morning: { count: 0, target: 33, phraseId: "subhanallah", total: 0 },
+        evening: { count: 0, target: 33, phraseId: "subhanallah", total: 0 }
+      };
+
+      function loadAdkarSectionState() {
+        ["morning", "evening"].forEach((sec) => {
+          try {
+            const raw = localStorage.getItem(ADKAR_SECTION_KEYS[sec]);
+            if (raw) {
+              const parsed = JSON.parse(raw);
+              if (parsed && typeof parsed === "object") {
+                adkarSectionState[sec] = {
+                  count: Number(parsed.count) || 0,
+                  target: parsed.target === null ? null : (Number(parsed.target) || 33),
+                  phraseId: parsed.phraseId || "subhanallah",
+                  total: Number(parsed.total) || 0
+                };
+              }
+            }
+          } catch (e) {}
+        });
+      }
+
+      function saveAdkarSectionState(sec) {
+        try {
+          localStorage.setItem(ADKAR_SECTION_KEYS[sec], JSON.stringify(adkarSectionState[sec]));
+        } catch (e) {}
+      }
+
+      function setAdkarSectionPhrase(sec, phraseId) {
+        adkarSectionState[sec].phraseId = phraseId;
+        saveAdkarSectionState(sec);
+        renderAdkarSections();
+      }
+
+      function setAdkarSectionTarget(sec, target) {
+        adkarSectionState[sec].target = target;
+        saveAdkarSectionState(sec);
+        renderAdkarSections();
+      }
+
+      function tapAdkarSectionCounter(sec) {
+        const st = adkarSectionState[sec];
+        st.count = (Number(st.count) || 0) + 1;
+        st.total = (Number(st.total) || 0) + 1;
+        saveAdkarSectionState(sec);
+        if (navigator.vibrate) {
+          try {
+            const hitTarget = st.target && st.count === st.target;
+            navigator.vibrate(hitTarget ? [25, 35, 25] : 10);
+          } catch (e) {}
+        }
+        if (st.target && st.count === st.target) {
+          showToast(`Target ${st.target} reached! ✨`);
+        }
+        renderAdkarSections();
+      }
+
+      function resetAdkarSectionCounter(sec) {
+        if (adkarSectionState[sec].count > 0 && !confirm("Are you sure you want to reset this counter?")) {
+          return;
+        }
+        adkarSectionState[sec].count = 0;
+        saveAdkarSectionState(sec);
+        renderAdkarSections();
+        showToast("Counter reset 🔄");
+      }
+
+      function renderAdkarSections() {
+        const container = document.getElementById("adkarSectionsContainer");
+        if (!container) return;
+
+        container.innerHTML = ADKAR_SECTION_META.map((meta) => {
+          const st = adkarSectionState[meta.key];
+          const phrase = ADKAR_PHRASES.find((p) => p.id === st.phraseId) || ADKAR_PHRASES[0];
+          const isDone = st.target !== null && st.count >= st.target;
+
+          return `
+            <div class="adkar-section-wrap">
+              <div class="adkar-section-head">
+                <div>
+                  <div class="adkar-section-arabic" dir="rtl">${meta.arabicTitle}</div>
+                  <div class="adkar-section-sub">${meta.icon} ${meta.title}</div>
+                </div>
+                <a
+                  class="adkar-pdf-link"
+                  href="${ADKAR_PDF_URL}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span>📄</span> ${meta.pdfLabel}
+                </a>
+              </div>
+
+              <div class="adkar-counter-panel">
+                <div class="adkar-phrases">
+                  ${ADKAR_PHRASES.map((p) => `
+                    <button
+                      type="button"
+                      class="adkar-phrase-chip ${p.id === phrase.id ? "active" : ""}"
+                      onclick="setAdkarSectionPhrase('${meta.key}', '${p.id}')"
+                    >
+                      ${escapeHtml(p.label)}
+                    </button>
+                  `).join("")}
+                </div>
+
+                <div class="adkar-phrase-arabic" dir="rtl">${escapeHtml(phrase.arabic)}</div>
+                <div class="adkar-phrase-sub">${escapeHtml(phrase.label)} — ${escapeHtml(phrase.meaning)}</div>
+
+                <div class="adkar-targets">
+                  ${[33, 99, 100, 1000, null].map((t) => `
+                    <button
+                      type="button"
+                      class="adkar-target-chip ${st.target === t ? "active" : ""}"
+                      onclick="setAdkarSectionTarget('${meta.key}', ${t === null ? "null" : t})"
+                    >
+                      ${t === null ? "∞" : t}
+                    </button>
+                  `).join("")}
+                </div>
+
+                <button
+                  type="button"
+                  class="adkar-big-circle ${isDone ? "done" : ""}"
+                  onclick="tapAdkarSectionCounter('${meta.key}')"
+                >
+                  <span class="adkar-big-count">${st.count}</span>
+                  <span class="adkar-big-goal">${st.target === null ? "Tap to count" : `/ ${st.target}`}</span>
+                </button>
+
+                <div class="adkar-counter-footer">
+                  <span>Total ${meta.title}: <strong>${st.total}</strong></span>
+                  <button
+                    type="button"
+                    class="adkar-reset-btn"
+                    onclick="resetAdkarSectionCounter('${meta.key}')"
+                  >
+                    ↺ Reset Count
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      function initAdkarSections() {
+        loadAdkarSectionState();
+        renderAdkarSections();
+      }
+
       // Comprehensive Master Application Bootstrapper
       function initAllAppModules() {
         try { loadMedicinesConfig(); } catch (e) { console.error("Error loading medicines config:", e); }
@@ -26984,6 +27363,7 @@ window.openQuranReaderModal = openQuranReaderModal;
         try { loadTypingRange(); } catch (e) { console.error("Error loading typing range:", e); }
         try { loadHairWashStatus(); } catch (e) { console.error("Error loading hair wash status:", e); }
         try { loadNotesData(); } catch (e) { console.error("Error loading notes data:", e); }
+        try { initAdkarSections(); } catch (e) { console.error("Error initializing Adkar sections:", e); }
         try { loadGrammarRevisionData(); } catch (e) { console.error("Error loading grammar revision:", e); }
         try { loadPhonicsRevisionData(); } catch (e) { console.error("Error loading phonics revision:", e); }
         try { loadQuranRevisionData(); } catch (e) { console.error("Error loading Quran revision:", e); }
