@@ -2574,6 +2574,153 @@
         background: #ffffff;
         box-shadow: 0 1.5px 0 var(--ink);
       }
+      .adkar-booklet-wrap {
+        margin-top: 12px;
+        background: #ffffff;
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        padding: 14px;
+        box-shadow: 0 3px 0 var(--ink);
+        position: relative;
+        z-index: 1;
+      }
+      .adkar-booklet-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .adkar-booklet-heading {
+        font-size: 13px;
+        font-weight: 800;
+        color: #0f766e;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .adkar-booklet-controls {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .adkar-booklet-btn {
+        border: 1.5px solid var(--ink);
+        background: #f8fafc;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .adkar-booklet-btn:hover:not(:disabled) {
+        background: #ccfbf1;
+      }
+      .adkar-booklet-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .adkar-booklet-btn.active {
+        background: #0f766e;
+        color: #ffffff;
+      }
+      .adkar-booklet-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      .adkar-booklet-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        border: 1.5px solid var(--ink);
+        background: #faf5e8;
+        color: var(--ink);
+        font-size: 11px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .adkar-booklet-dot.active {
+        background: #f5b729;
+      }
+      .adkar-pdf-banner {
+        background: #f8f5e8;
+        border: 1.5px solid #e5dbb8;
+        border-radius: 12px;
+        padding: 8px 12px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: #b48216;
+        margin-bottom: 10px;
+      }
+      .adkar-pdf-block {
+        background: #faf7ec;
+        border: 1.5px solid #ebe3c9;
+        border-radius: 14px;
+        padding: 14px 12px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      .adkar-pdf-block:last-of-type {
+        margin-bottom: 8px;
+      }
+      .adkar-pdf-arabic {
+        font-family: 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+        direction: rtl;
+        font-size: 21px;
+        line-height: 1.95;
+        color: #111827;
+        margin-bottom: 10px;
+      }
+      .adkar-pdf-translit {
+        font-size: 12.5px;
+        font-style: italic;
+        font-weight: 700;
+        color: #b48216;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+      .adkar-pdf-trans {
+        font-size: 12.5px;
+        color: #1f2937;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+      .adkar-pdf-repeat {
+        font-size: 11.5px;
+        font-style: italic;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+      .adkar-pdf-ref {
+        font-size: 11.5px;
+        color: #4b5563;
+        margin-bottom: 6px;
+      }
+      .adkar-pdf-note {
+        font-size: 11.5px;
+        font-style: italic;
+        color: #374151;
+        line-height: 1.48;
+        padding-top: 6px;
+        border-top: 1px dashed #dfd4b2;
+      }
+      .adkar-pdf-page-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 10.5px;
+        color: #64748b;
+        padding-top: 6px;
+      }
 
       .timer-wrap {
         display: flex;
@@ -27058,6 +27205,252 @@ window.openQuranReaderModal = openQuranReaderModal;
         showToast("Counter reset 🔄");
       }
 
+      const MORNING_ADHKAR_BOOKLET_PAGES = [
+        {
+          pageNum: 1,
+          bookletPage: 3,
+          banner: "The Morning Adhkar – Ideally recited between Fajr and Sunrise",
+          items: [
+            {
+              arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+              translit: "Allaahuma anta rabbee laailaaha illa ant, khalaqtanee wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika mastata'tu, a'oodhu bika min sharri maa sana'tu, aboo-u laka bini'matika 'alayya wa aboo-u bidhanbee, faghfir lee fa-innahu laa yaghfirudh-dhunooba illaa ant",
+              meaning: "Sayyidul Istighfaar (Master Supplication for Forgiveness): Affirming Allah's Lordship, acknowledging His blessings, confessing sins, and seeking forgiveness.",
+              repeat: "(Recited 1 time)",
+              ref: "[Sahih al-Bukhari 6306]"
+            }
+          ]
+        },
+        {
+          pageNum: 2,
+          bookletPage: 4,
+          items: [
+            {
+              arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+              translit: "Laa ilaaha illal-laahu wahdahu laa shareeka lahu, lahul-mulku wa lahul-hamdu wa huwa 'alaa kulli shay'in qadeer",
+              meaning: "Affirmation of Allah's oneness, absolute sovereignty, praise, and power over all things.",
+              repeat: "(Recited 10 times in the morning/evening or 100 times daily)",
+              ref: "[Sahih al-Bukhari 3293 & Sahih Muslim 2691]"
+            },
+            {
+              arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+              translit: "Subhaanallaahi wa bi hamdihi",
+              meaning: "Glory and praise belong to Allah.",
+              repeat: "(Recited 100 times)",
+              ref: "[Sahih al-Bukhari 6405 & Sahih Muslim 2691]"
+            }
+          ]
+        },
+        {
+          pageNum: 3,
+          bookletPage: 5,
+          items: [
+            {
+              arabic: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+              translit: "Bismillaahil-ladhee laa yadurru ma'as-mihi shay'un fil-ardi wa laa fis-samaa'i wa huwas-samee'ul-'aleem",
+              meaning: "Seeking protection in Allah's Name from any harm on earth or in the heavens.",
+              repeat: "(Recited in the morning and evening)",
+              ref: "[Musnad Imam Ahmad 446 & Sunan al-Tirmidhi 3388]"
+            },
+            {
+              arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ، وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",
+              translit: "Allaahumma innee as'alukal-'aafiyata fid-dunyaa wal-aakhirah, Allaahumma innee as'alukal-'afwa wal-'aafiyata fee deenee wa dunyaaya wa ahlee wa maalee...",
+              meaning: "Asking Allah for pardon, well-being in faith, worldly life, family, and wealth, concealing faults, calming fears, and guarding from all directions.",
+              repeat: "(Recited 1 time)",
+              ref: "[Sunan Abu Dawud 5074]"
+            }
+          ]
+        },
+        {
+          pageNum: 4,
+          bookletPage: 6,
+          items: [
+            {
+              arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+              translit: "Bismillaahir-rahmaanir-raheem. Qul huwal-laahu ahad. Allaahus-samad. Lam yalid wa lam yoolad. Wa lam yakun lahu kufuwan ahad",
+              meaning: "Surah Al-Ikhlas: Declaring the absolute oneness and uniqueness of Allah.",
+              repeat: "(Recited 3 times)"
+            },
+            {
+              arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+              translit: "Bismillaahir-rahmaanir-raheem. Qul a'oodhu birabbil-falaq. Min sharri maa khalaq. Wa min sharri ghaasiqin idhaa waqab. Wa min sharrin-naffaathaati fil-'uqad. Wa min sharri haasidin idhaa hasad",
+              meaning: "Surah Al-Falaq: Seeking refuge in the Lord of dawn from created harm, darkness, sorcery, and envy.",
+              repeat: "(Recited 3 times)"
+            }
+          ]
+        },
+        {
+          pageNum: 5,
+          bookletPage: 7,
+          items: [
+            {
+              arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",
+              translit: "Bismillaahir-rahmaanir-raheem. Qul a'oodhu birabbin-naas. Malikin-naas. Ilaahin-naas. Min sharril-waswaasil-khannaas. Alladhee yuwaswisu fee sudoorin-naas. Minal-jinnati wan-naas",
+              meaning: "Surah An-Nas: Seeking refuge in the Lord, Sovereign, and God of mankind from whispering evil.",
+              repeat: "(Recited 3 times)"
+            },
+            {
+              arabic: "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",
+              translit: "Radeetu billaahi rabban, wa bil-islaami deenan, wa bi-muhammadin sallallaahu 'alayhi wa sallama nabiyyaa",
+              meaning: "Expressing contentment with Allah as Lord, Islam as religion, and Muhammad ﷺ as Prophet.",
+              repeat: "(Recited 3 times)",
+              ref: "[Musnad Imam Ahmad 18968]"
+            }
+          ]
+        },
+        {
+          pageNum: 6,
+          bookletPage: 8,
+          items: [
+            {
+              arabic: "اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَىٰ نَفْسِي سُوءًا، أَوْ أَجُرَّهُ إِلَىٰ مُسْلِمٍ",
+              translit: "Allaahumma faatiras-samaawaati wal-ard, 'aalimal-ghaybi wash-shahaadah, rabba kulli shay'in wa maleekah, ash-hadu an laa ilaaha illaa ant...",
+              meaning: "Seeking refuge in the Creator of heaven and earth from the evil of oneself, Satan, committing sin, or harming any Muslim.",
+              repeat: "(Recited 1 time)",
+              ref: "[Sunan Abu Dawud 5067 & Sunan at-Tirmidhi 3529]"
+            },
+            {
+              arabic: "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ وَلَا تَكِلْنِي إِلَىٰ نَفْسِي طَرْفَةَ عَيْنٍ",
+              translit: "Yaa hayyu yaa qayyoom, bi-rahmatika astagheeth, aslih lee sha'nee kullahu wa laa takilnee ilaa nafsee tarfata 'ayn",
+              meaning: "Calling upon the Ever-Living, Self-Sustaining Lord to rectify all affairs and never leave us to ourselves.",
+              repeat: "(Recited 1 time)",
+              ref: "[Sunan an-Nasa'i (al-Kubra) 10405]"
+            }
+          ]
+        },
+        {
+          pageNum: 7,
+          bookletPage: 9,
+          items: [
+            {
+              arabic: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَٰذَا الْيَوْمِ، وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَٰذَا الْيَوْمِ، وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ، وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
+              translit: "Asbahnaa wa asbahal-mulku lillaah, wal-hamdu lillaah, laa ilaaha illallaahu wahdahu laa shareeka lah...",
+              meaning: "Morning supplication asking Allah for the good of this day and what follows, and seeking refuge from laziness, bad old age, and punishment in the Fire or grave.",
+              repeat: "(Recited 1 time)",
+              ref: "[Sahih Muslim 2723]"
+            },
+            {
+              arabic: "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+              translit: "Allaahumma bika asbahnaa, wa bika amsaynaa, wa bika nahyaa, wa bika namootu wa ilaykan-nushoor",
+              meaning: "Affirming that by Allah we enter morning and evening, live and die, and to Him is our return.",
+              repeat: "(Recited 1 time)",
+              ref: "[Sunan Abu Dawud 5068]"
+            }
+          ]
+        },
+        {
+          pageNum: 8,
+          bookletPage: 10,
+          items: [
+            {
+              arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",
+              translit: "Subhaanallaahi wa bi-hamdihi, 'adada khalqihi, wa ridaa nafsihi, wa zinata 'arshihi, wa midaada kalimaatih",
+              meaning: "Glorifying and praising Allah to the extent of His creation, His pleasure, the weight of His Throne, and the ink of His words.",
+              repeat: "(Recited 3 times)",
+              ref: "[Sahih Muslim 2726]"
+            },
+            {
+              arabic: "أَصْبَحْنَا عَلَىٰ فِطْرَةِ الْإِسْلَامِ وَعَلَىٰ كَلِمَةِ الْإِخْلَاصِ وَعَلَىٰ دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ وَعَلَىٰ مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ",
+              translit: "Asbahnaa 'alaa fitratil-islaami wa 'alaa kalimatil-ikhlaas, wa 'alaa deeni nabiyyinaa Muhammadin ﷺ, wa 'alaa millati abeenaa Ibraaheema haneefan musliman wa maa kaana minal-mushrikeen",
+              meaning: "Entering the morning upon the natural way of Islam, the word of sincerity, the religion of Prophet Muhammad ﷺ, and the upright faith of Ibrahim.",
+              repeat: "(Recited 1 time)",
+              ref: "[Musnad Imam Ahmad 15360]"
+            },
+            {
+              arabic: "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+              translit: "Hasbiyallaahu laa ilaaha illaa huwa 'alayhi tawakkaltu wa huwa rabbul-'arshil-'adheem",
+              meaning: "Allah is sufficient for me; there is no deity worthy of worship except Him. In Him I place my trust, and He is the Lord of the Mighty Throne.",
+              repeat: "(Recited 7 times)",
+              ref: "[Sunan Abu Dawud 5081]"
+            }
+          ]
+        }
+      ];
+
+      const adkarBookletState = {
+        morning: { page: 1, showAll: false, open: true },
+        evening: { page: 1, showAll: false, open: true },
+      };
+
+      function setAdkarBookletPage(sec, p) {
+        if (!adkarBookletState[sec]) return;
+        adkarBookletState[sec].page = Math.max(1, Math.min(MORNING_ADHKAR_BOOKLET_PAGES.length, p));
+        adkarBookletState[sec].showAll = false;
+        renderAdkarSections();
+      }
+
+      function toggleAdkarBookletViewAll(sec) {
+        if (!adkarBookletState[sec]) return;
+        adkarBookletState[sec].showAll = !adkarBookletState[sec].showAll;
+        renderAdkarSections();
+      }
+
+      function toggleAdkarBookletOpen(sec) {
+        if (!adkarBookletState[sec]) return;
+        adkarBookletState[sec].open = !adkarBookletState[sec].open;
+        renderAdkarSections();
+      }
+
+      function renderAdkarBookletPageHtml(pageObj, sectionLabel) {
+        return `
+          ${pageObj.banner ? `<div class="adkar-pdf-banner">${escapeHtml(pageObj.banner)}</div>` : ""}
+          ${pageObj.items.map((item) => `
+            <div class="adkar-pdf-block">
+              <div class="adkar-pdf-arabic" dir="rtl">${escapeHtml(item.arabic)}</div>
+              <div class="adkar-pdf-translit">${escapeHtml(item.translit)}</div>
+              <div class="adkar-pdf-trans">${escapeHtml(item.meaning)}</div>
+              ${item.repeat ? `<div class="adkar-pdf-repeat">${escapeHtml(item.repeat)}</div>` : ""}
+              ${item.ref ? `<div class="adkar-pdf-ref">${escapeHtml(item.ref)}</div>` : ""}
+            </div>
+          `).join("")}
+          <div class="adkar-pdf-page-footer">
+            <span>${escapeHtml(sectionLabel)} PDF • Page ${pageObj.pageNum} of ${MORNING_ADHKAR_BOOKLET_PAGES.length}</span>
+            <span>Booklet p. ${pageObj.bookletPage}</span>
+          </div>
+        `;
+      }
+
+      function renderAdkarBookletHtml(meta) {
+        const sec = meta.key;
+        const bState = adkarBookletState[sec] || { page: 1, showAll: false, open: true };
+        const totalPages = MORNING_ADHKAR_BOOKLET_PAGES.length;
+        const activePageObj = MORNING_ADHKAR_BOOKLET_PAGES[bState.page - 1] || MORNING_ADHKAR_BOOKLET_PAGES[0];
+
+        return `
+          <div class="adkar-booklet-wrap">
+            <div class="adkar-booklet-topbar">
+              <div class="adkar-booklet-heading">
+                <span>📖</span> ${escapeHtml(meta.title)} PDF (${totalPages} Pages)
+              </div>
+              <div class="adkar-booklet-controls">
+                ${bState.open ? `
+                  <button type="button" class="adkar-booklet-btn ${bState.showAll ? "active" : ""}" onclick="toggleAdkarBookletViewAll('${sec}')">
+                    ${bState.showAll ? "📄 Page View" : "📚 View All"}
+                  </button>
+                ` : ""}
+                <button type="button" class="adkar-booklet-btn" onclick="toggleAdkarBookletOpen('${sec}')">
+                  ${bState.open ? "▲ Hide" : "▼ Open"}
+                </button>
+              </div>
+            </div>
+
+            ${bState.open ? `
+              ${!bState.showAll ? `
+                <div class="adkar-booklet-dots">
+                  <button type="button" class="adkar-booklet-btn" onclick="setAdkarBookletPage('${sec}', ${bState.page - 1})" ${bState.page <= 1 ? "disabled" : ""}>◀</button>
+                  ${MORNING_ADHKAR_BOOKLET_PAGES.map((pg) => `
+                    <button type="button" class="adkar-booklet-dot ${pg.pageNum === bState.page ? "active" : ""}" onclick="setAdkarBookletPage('${sec}', ${pg.pageNum})">${pg.pageNum}</button>
+                  `).join("")}
+                  <button type="button" class="adkar-booklet-btn" onclick="setAdkarBookletPage('${sec}', ${bState.page + 1})" ${bState.page >= totalPages ? "disabled" : ""}>▶</button>
+                </div>
+                ${renderAdkarBookletPageHtml(activePageObj, meta.title)}
+              ` : `
+                ${MORNING_ADHKAR_BOOKLET_PAGES.map((pg) => renderAdkarBookletPageHtml(pg, meta.title)).join('<hr style="border:none;border-top:2px dashed #e2e8f0;margin:12px 0;">')}
+              `}
+            ` : ""}
+          </div>
+        `;
+      }
+
       function renderAdkarSections() {
         const container = document.getElementById("adkarSectionsContainer");
         if (!container) return;
@@ -27104,6 +27497,8 @@ window.openQuranReaderModal = openQuranReaderModal;
                   </button>
                 </div>
               </div>
+
+              ${renderAdkarBookletHtml(meta)}
             </div>
           `;
         }).join("");
