@@ -8767,40 +8767,6 @@
               </div>
               <div style="flex: 1">
                 <div class="task-text">Morning Adhkar <span>🤲</span></div>
-                <a
-                  class="yt-link"
-                  href="https://drive.google.com/file/d/1s1of5xnyzPgy8cRO3RqycT-wbfr_m_9v/view?usp=drivesdk"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                >
-                  <span>📄</span> Open Morning Adhkar PDF
-                </a>
-                <div class="adhkar-wrap" onclick="event.stopPropagation()">
-                  <div class="adhkar-ring-wrap">
-                    <svg class="adhkar-ring-svg" viewBox="0 0 64 64">
-                      <circle class="track" cx="32" cy="32" r="26" />
-                      <circle
-                        class="fill"
-                        id="fill-morning"
-                        cx="32"
-                        cy="32"
-                        r="26"
-                        stroke-dasharray="163.36"
-                        stroke-dashoffset="163.36"
-                      />
-                    </svg>
-                    <button class="adhkar-btn" id="btn-morning">
-                      <span class="num" id="num-morning">0</span>
-                      <span class="sub">/1000</span>
-                    </button>
-                  </div>
-                  <div class="adhkar-info">
-                    <div class="adhkar-label">📿 Morning Dhikr</div>
-                    <button class="adhkar-reset" id="reset-morning">
-                      ↺ Reset counter
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="task-card" id="task-m3-s" onclick="toggleTask('m3')">
@@ -9160,40 +9126,6 @@
               </div>
               <div style="flex: 1">
                 <div class="task-text">Evening Adhkar <span>🤲</span></div>
-                <a
-                  class="yt-link"
-                  href="https://drive.google.com/file/d/1s1of5xnyzPgy8cRO3RqycT-wbfr_m_9v/view?usp=drivesdk"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                >
-                  <span>📄</span> Open Evening Adhkar PDF
-                </a>
-                <div class="adhkar-wrap" onclick="event.stopPropagation()">
-                  <div class="adhkar-ring-wrap">
-                    <svg class="adhkar-ring-svg" viewBox="0 0 64 64">
-                      <circle class="track" cx="32" cy="32" r="26" />
-                      <circle
-                        class="fill"
-                        id="fill-evening"
-                        cx="32"
-                        cy="32"
-                        r="26"
-                        stroke-dasharray="163.36"
-                        stroke-dashoffset="163.36"
-                      />
-                    </svg>
-                    <button class="adhkar-btn" id="btn-evening">
-                      <span class="num" id="num-evening">0</span>
-                      <span class="sub">/1000</span>
-                    </button>
-                  </div>
-                  <div class="adhkar-info">
-                    <div class="adhkar-label">📿 Evening Dhikr</div>
-                    <button class="adhkar-reset" id="reset-evening">
-                      ↺ Reset counter
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="task-card" id="task-e4-s" onclick="toggleTask('e4')">
@@ -22771,77 +22703,6 @@ window.openQuranReaderModal = openQuranReaderModal;
         showToast("Saved! " + count + "/" + TOTAL_TASKS + " completed 💾");
       }
 
-      // Adhkar Counters
-      (function () {
-        const MAX = 1000;
-        const RADIUS = 26;
-        const CIRC = 2 * Math.PI * RADIUS;
-
-        function initCounter(suffix) {
-          let count = 0;
-          const lsKey = "ac_" + suffix;
-          const numEl = document.getElementById("num-" + suffix);
-          const fillEl = document.getElementById("fill-" + suffix);
-          const btnEl = document.getElementById("btn-" + suffix);
-          const resetEl = document.getElementById("reset-" + suffix);
-
-          function getStored() {
-            try {
-              return parseInt(localStorage.getItem(lsKey)) || 0;
-            } catch (e) {
-              return 0;
-            }
-          }
-          function setStored(v) {
-            try {
-              localStorage.setItem(lsKey, v);
-            } catch (e) {}
-          }
-
-          function updateDisplay() {
-            numEl.textContent = count;
-            fillEl.style.strokeDashoffset = CIRC - (count / MAX) * CIRC;
-            btnEl.classList.toggle("done", count >= MAX);
-          }
-
-          function tap(e) {
-            if (e) e.stopPropagation();
-            if (count >= MAX) return;
-            count++;
-            setStored(count);
-            updateDisplay();
-          }
-
-          function resetFn(e) {
-            if (e) e.stopPropagation();
-            if (
-              count > 0 &&
-              !confirm("Are you sure you want to reset this counter?")
-            ) {
-              return;
-            }
-            count = 0;
-            setStored(0);
-            updateDisplay();
-            showToast("Counter reset 🔄");
-          }
-
-          count = Math.min(getStored(), MAX);
-          updateDisplay();
-
-          btnEl.addEventListener("click", tap);
-          btnEl.addEventListener("touchstart", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            tap();
-          });
-          resetEl.addEventListener("click", resetFn);
-        }
-
-        initCounter("morning");
-        initCounter("evening");
-      })();
-
       // Countdown Timers (user-adjustable duration, multi-instance synchronized)
       function initCountdownTimer(suffix, defaultMinutes, doneMessage) {
         const MIN_MINUTES = 1;
@@ -27152,6 +27013,12 @@ window.openQuranReaderModal = openQuranReaderModal;
                   total: Number(parsed.total) || 0
                 };
               }
+            } else {
+              const legacy = parseInt(localStorage.getItem("ac_" + sec), 10) || 0;
+              if (legacy > 0) {
+                adkarSectionState[sec].count = Math.min(legacy, ADKAR_MAX_COUNT);
+                adkarSectionState[sec].total = legacy;
+              }
             }
           } catch (e) {}
         });
@@ -27160,6 +27027,7 @@ window.openQuranReaderModal = openQuranReaderModal;
       function saveAdkarSectionState(sec) {
         try {
           localStorage.setItem(ADKAR_SECTION_KEYS[sec], JSON.stringify(adkarSectionState[sec]));
+          localStorage.setItem("ac_" + sec, adkarSectionState[sec].count);
         } catch (e) {}
       }
 
