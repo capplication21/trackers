@@ -2507,62 +2507,11 @@
         color: var(--ink);
         border: 2px solid var(--ink);
         border-radius: 18px;
-        padding: 16px 14px;
+        padding: 18px 14px 14px;
         box-shadow: 0 3px 0 var(--ink);
         text-align: center;
         position: relative;
         z-index: 1;
-      }
-      .adkar-phrases {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 6px;
-        margin-bottom: 12px;
-      }
-      .adkar-phrase-chip {
-        border: 1.5px solid var(--ink);
-        background: #faf5e8;
-        color: var(--ink);
-        border-radius: 999px;
-        padding: 5px 10px;
-        font-size: 11.5px;
-        cursor: pointer;
-        font-family: inherit;
-      }
-      .adkar-phrase-chip.active {
-        background: #0f766e;
-        color: #ffffff;
-      }
-      .adkar-phrase-arabic {
-        font-family: 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
-        font-size: 28px;
-        color: #0f766e;
-        margin-bottom: 3px;
-      }
-      .adkar-phrase-sub {
-        font-size: 12px;
-        color: #64748b;
-        margin-bottom: 12px;
-      }
-      .adkar-targets {
-        display: flex;
-        justify-content: center;
-        gap: 6px;
-        margin-bottom: 16px;
-      }
-      .adkar-target-chip {
-        border: 1.5px solid var(--ink);
-        background: #ffffff;
-        color: var(--ink);
-        border-radius: 8px;
-        padding: 4px 10px;
-        font-size: 11.5px;
-        cursor: pointer;
-        font-family: inherit;
-      }
-      .adkar-target-chip.active {
-        background: #f5b729;
       }
       .adkar-big-circle {
         width: 156px;
@@ -27176,26 +27125,19 @@ window.openQuranReaderModal = openQuranReaderModal;
 
       // ==================== ADKAR MORNING & EVENING SECTIONS ====================
       const ADKAR_PDF_URL = "https://drive.google.com/file/d/1s1of5xnyzPgy8cRO3RqycT-wbfr_m_9v/view?usp=drivesdk";
+      const ADKAR_MAX_COUNT = 1000;
       const ADKAR_SECTION_KEYS = {
         morning: "adkar_section_morning_v1",
         evening: "adkar_section_evening_v1"
       };
-      const ADKAR_PHRASES = [
-        { id: "subhanallah", arabic: "سُبْحَانَ اللَّهِ", label: "SubhanAllah", meaning: "Glory be to Allah" },
-        { id: "alhamdulillah", arabic: "الْحَمْدُ لِلَّهِ", label: "Alhamdulillah", meaning: "Praise be to Allah" },
-        { id: "allahuakbar", arabic: "اللَّهُ أَكْبَرُ", label: "Allahu Akbar", meaning: "Allah is the Greatest" },
-        { id: "astaghfirullah", arabic: "أَسْتَغْفِرُ اللَّهَ", label: "Astaghfirullah", meaning: "I seek Allah's forgiveness" },
-        { id: "tahlil", arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ", label: "La ilaha illallah", meaning: "There is no god worthy of worship except Allah" },
-        { id: "salawat", arabic: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ", label: "Salawat ﷺ", meaning: "O Allah, send prayers upon Muhammad ﷺ" }
-      ];
       const ADKAR_SECTION_META = [
         { key: "morning", icon: "🌅", title: "Morning Adkar", arabicTitle: "أَذْكَارُ الصَّبَاحِ", pdfLabel: "Morning Adkar PDF" },
         { key: "evening", icon: "🌇", title: "Evening Adkar", arabicTitle: "أَذْكَارُ الْمَسَاءِ", pdfLabel: "Evening Adkar PDF" }
       ];
 
       const adkarSectionState = {
-        morning: { count: 0, target: 33, phraseId: "subhanallah", total: 0 },
-        evening: { count: 0, target: 33, phraseId: "subhanallah", total: 0 }
+        morning: { count: 0, total: 0 },
+        evening: { count: 0, total: 0 }
       };
 
       function loadAdkarSectionState() {
@@ -27206,9 +27148,7 @@ window.openQuranReaderModal = openQuranReaderModal;
               const parsed = JSON.parse(raw);
               if (parsed && typeof parsed === "object") {
                 adkarSectionState[sec] = {
-                  count: Number(parsed.count) || 0,
-                  target: parsed.target === null ? null : (Number(parsed.target) || 33),
-                  phraseId: parsed.phraseId || "subhanallah",
+                  count: Math.min(Number(parsed.count) || 0, ADKAR_MAX_COUNT),
                   total: Number(parsed.total) || 0
                 };
               }
@@ -27223,31 +27163,19 @@ window.openQuranReaderModal = openQuranReaderModal;
         } catch (e) {}
       }
 
-      function setAdkarSectionPhrase(sec, phraseId) {
-        adkarSectionState[sec].phraseId = phraseId;
-        saveAdkarSectionState(sec);
-        renderAdkarSections();
-      }
-
-      function setAdkarSectionTarget(sec, target) {
-        adkarSectionState[sec].target = target;
-        saveAdkarSectionState(sec);
-        renderAdkarSections();
-      }
-
       function tapAdkarSectionCounter(sec) {
         const st = adkarSectionState[sec];
+        if (st.count >= ADKAR_MAX_COUNT) return;
         st.count = (Number(st.count) || 0) + 1;
         st.total = (Number(st.total) || 0) + 1;
         saveAdkarSectionState(sec);
         if (navigator.vibrate) {
           try {
-            const hitTarget = st.target && st.count === st.target;
-            navigator.vibrate(hitTarget ? [25, 35, 25] : 10);
+            navigator.vibrate(st.count === ADKAR_MAX_COUNT ? [25, 35, 25] : 10);
           } catch (e) {}
         }
-        if (st.target && st.count === st.target) {
-          showToast(`Target ${st.target} reached! ✨`);
+        if (st.count === ADKAR_MAX_COUNT) {
+          showToast(`Completed ${ADKAR_MAX_COUNT}! ✨`);
         }
         renderAdkarSections();
       }
@@ -27268,8 +27196,7 @@ window.openQuranReaderModal = openQuranReaderModal;
 
         container.innerHTML = ADKAR_SECTION_META.map((meta) => {
           const st = adkarSectionState[meta.key];
-          const phrase = ADKAR_PHRASES.find((p) => p.id === st.phraseId) || ADKAR_PHRASES[0];
-          const isDone = st.target !== null && st.count >= st.target;
+          const isDone = st.count >= ADKAR_MAX_COUNT;
 
           return `
             <div class="adkar-section-wrap">
@@ -27289,40 +27216,13 @@ window.openQuranReaderModal = openQuranReaderModal;
               </div>
 
               <div class="adkar-counter-panel">
-                <div class="adkar-phrases">
-                  ${ADKAR_PHRASES.map((p) => `
-                    <button
-                      type="button"
-                      class="adkar-phrase-chip ${p.id === phrase.id ? "active" : ""}"
-                      onclick="setAdkarSectionPhrase('${meta.key}', '${p.id}')"
-                    >
-                      ${escapeHtml(p.label)}
-                    </button>
-                  `).join("")}
-                </div>
-
-                <div class="adkar-phrase-arabic" dir="rtl">${escapeHtml(phrase.arabic)}</div>
-                <div class="adkar-phrase-sub">${escapeHtml(phrase.label)} — ${escapeHtml(phrase.meaning)}</div>
-
-                <div class="adkar-targets">
-                  ${[33, 99, 100, 1000, null].map((t) => `
-                    <button
-                      type="button"
-                      class="adkar-target-chip ${st.target === t ? "active" : ""}"
-                      onclick="setAdkarSectionTarget('${meta.key}', ${t === null ? "null" : t})"
-                    >
-                      ${t === null ? "∞" : t}
-                    </button>
-                  `).join("")}
-                </div>
-
                 <button
                   type="button"
                   class="adkar-big-circle ${isDone ? "done" : ""}"
                   onclick="tapAdkarSectionCounter('${meta.key}')"
                 >
                   <span class="adkar-big-count">${st.count}</span>
-                  <span class="adkar-big-goal">${st.target === null ? "Tap to count" : `/ ${st.target}`}</span>
+                  <span class="adkar-big-goal">/ ${ADKAR_MAX_COUNT}</span>
                 </button>
 
                 <div class="adkar-counter-footer">
