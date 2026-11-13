@@ -11391,15 +11391,9 @@
         <div class="tab-content" id="tab-reading">
           <div class="section-title reading-title" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
             <span><span>📚</span> READING BOOK</span>
-            <a
-              href="https://youtube.com/@english2flow?si=9tiQmQ-q9gWuknXy"
-              target="_blank"
-              rel="noopener"
-              class="reading-channel-btn"
-              title="Visit @english2flow channel on YouTube"
-            >
-              <span>📺</span> @english2flow on YouTube
-            </a>
+            <div class="reading-badge-indicator" style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1e40af;border:1.5px solid #bfdbfe;font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:999px;">
+              <span>🎬</span> Story Video (Plays on this Page)
+            </div>
           </div>
           <div id="readingBookContainer"></div>
         </div>
@@ -28306,7 +28300,7 @@ window.openQuranReaderModal = openQuranReaderModal;
         const customUrl = customMap[pageKey];
         const rawUrl = customUrl || pageObj.videoUrl || (story ? story.videoUrl : "") || "https://www.youtube.com/watch?v=3L_Oh4p-Ufg";
         const videoId = extractYouTubeId(rawUrl) || "3L_Oh4p-Ufg";
-        const embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "?rel=0";
+        const embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1&rel=0&playsinline=1&modestbranding=1";
 
         return {
           url: rawUrl,
@@ -28422,6 +28416,18 @@ window.openQuranReaderModal = openQuranReaderModal;
         } catch (e) {}
       }
 
+      function controlReadingVideo(func, args) {
+        const iframe = document.getElementById("readingPageVideoIframe");
+        if (iframe && iframe.contentWindow) {
+          const payload = JSON.stringify({
+            event: "command",
+            func: func,
+            args: args !== undefined ? [args] : ""
+          });
+          iframe.contentWindow.postMessage(payload, "*");
+        }
+      }
+
       function renderReadingBook() {
         const container = document.getElementById("readingBookContainer");
         if (!container) return;
@@ -28482,15 +28488,7 @@ window.openQuranReaderModal = openQuranReaderModal;
                 >
                   <span>🔗</span> ${videoInfo.isCustom ? "Custom Video Link" : "Put Video Link"}
                 </button>
-                <a
-                  href="${READING_CHANNEL_URL}"
-                  target="_blank"
-                  rel="noopener"
-                  class="reading-action-btn"
-                  title="Visit English2Flow channel"
-                >
-                  <span>📺</span> Channel
-                </a>
+                
                 <button
                   type="button"
                   class="reading-font-btn"
@@ -28637,6 +28635,24 @@ window.openQuranReaderModal = openQuranReaderModal;
                     <span class="reading-video-badge ${videoInfo.isCustom ? "custom" : ""}">${videoInfo.isCustom ? "Custom Video" : "Plays on page"}</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    <button
+                      type="button"
+                      class="reading-action-btn"
+                      onclick="controlReadingVideo('playVideo')"
+                      style="background:#16a34a;color:#ffffff;border-color:#15803d;font-weight:800;"
+                      title="Play video right here on this page"
+                    >
+                      <span>▶</span> Play Video
+                    </button>
+                    <button
+                      type="button"
+                      class="reading-action-btn"
+                      onclick="controlReadingVideo('pauseVideo')"
+                      style="background:#334155;color:#ffffff;border-color:#475569;"
+                      title="Pause video"
+                    >
+                      <span>⏸</span> Pause
+                    </button>
                     <button
                       type="button"
                       class="reading-action-btn"
