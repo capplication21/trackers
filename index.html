@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
@@ -21625,6 +21626,7 @@ Please provide:
                   src="${embedInfo.embedUrl}"
                   title="YouTube Quran Recitation"
                   frameborder="0"
+                  referrerpolicy="strict-origin-when-cross-origin"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowfullscreen
                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
@@ -28300,7 +28302,10 @@ window.openQuranReaderModal = openQuranReaderModal;
         const customUrl = customMap[pageKey];
         const rawUrl = customUrl || pageObj.videoUrl || (story ? story.videoUrl : "") || "https://www.youtube.com/watch?v=3L_Oh4p-Ufg";
         const videoId = extractYouTubeId(rawUrl) || "3L_Oh4p-Ufg";
-        const embedUrl = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1&rel=0&playsinline=1&modestbranding=1";
+        const origin = (window.location.protocol === "file:" || !window.location.origin || window.location.origin === "null")
+          ? "https://www.youtube.com"
+          : window.location.origin;
+        const embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "?enablejsapi=1&rel=0&playsinline=1&modestbranding=1&origin=" + encodeURIComponent(origin);
 
         return {
           url: rawUrl,
@@ -28727,6 +28732,7 @@ window.openQuranReaderModal = openQuranReaderModal;
                     src="${videoInfo.embedUrl}"
                     title="${escapeHtml(pageObj.title || currentStory.title)}"
                     frameborder="0"
+                    referrerpolicy="strict-origin-when-cross-origin"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen
                   ></iframe>
