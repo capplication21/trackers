@@ -3028,6 +3028,73 @@
         font-weight: 800;
         color: #475569;
       }
+      .reading-video-box {
+        background: #0f172a;
+        color: #f8fafc;
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 0 var(--ink);
+      }
+      .reading-video-topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .reading-video-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .reading-video-badge {
+        font-size: 10px;
+        font-weight: 800;
+        background: #22c55e;
+        color: #052e16;
+        padding: 2px 8px;
+        border-radius: 999px;
+        letter-spacing: 0.3px;
+      }
+      .reading-video-badge.custom {
+        background: #f59e0b;
+        color: #451a03;
+      }
+      .reading-video-iframe-wrap {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 ratio */
+        background: #000000;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.18);
+        transition: padding-top 0.2s ease;
+      }
+      .reading-video-iframe-wrap.compact {
+        padding-top: 38%;
+      }
+      .reading-video-iframe-wrap iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      .reading-video-link-editor {
+        margin-bottom: 10px;
+        padding: 10px 12px;
+        background: #1e293b;
+        border: 1.5px dashed #475569;
+        border-radius: 10px;
+      }
 
       .timer-wrap {
         display: flex;
@@ -28206,15 +28273,116 @@ window.openQuranReaderModal = openQuranReaderModal;
         }
       ];
 
+      function extractYouTubeId(urlOrId) {
+        if (!urlOrId) return "";
+        const str = String(urlOrId).trim();
+        if (/^[a-zA-Z0-9_-]{11}$/.test(str)) return str;
+        const match = str.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([a-zA-Z0-9_-]{11})/);
+        if (match) return match[1];
+        try {
+          const parsed = new URL(str);
+          const v = parsed.searchParams.get("v");
+          if (v && /^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
+        } catch (e) {}
+        return "";
+      }
+
       let readingBookState = {
         storyId: "story_linda",
         page: 1,
         fontSize: 16,
+        showLinkEditor: false,
+        videoCompact: false,
       };
+
+      function getPageVideoInfo(story, pageIdx) {
+        const pageObj = (story && story.pages && story.pages[pageIdx - 1]) || {};
+        const pageKey = (story ? story.id : "story_linda") + "_" + pageIdx;
+        let customMap = {};
+        try {
+          customMap = JSON.parse(localStorage.getItem("reading_custom_page_videos_v1") || "{}");
+        } catch (e) {}
+
+        const customUrl = customMap[pageKey];
+        const rawUrl = customUrl || pageObj.videoUrl || (story ? story.videoUrl : "") || "https://www.youtube.com/watch?v=3L_Oh4p-Ufg";
+        const videoId = extractYouTubeId(rawUrl) || "3L_Oh4p-Ufg";
+        const embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "?rel=0";
+
+        return {
+          url: rawUrl,
+          videoId: videoId,
+          embedUrl: embedUrl,
+          isCustom: Boolean(customUrl),
+          pageKey: pageKey,
+        };
+      }
+
+      function toggleReadingVideoEditor() {
+        readingBookState.showLinkEditor = !readingBookState.showLinkEditor;
+        renderReadingBook();
+      }
+
+      function toggleReadingVideoCompact() {
+        readingBookState.videoCompact = !readingBookState.videoCompact;
+        saveReadingBookState();
+        renderReadingBook();
+      }
+
+      function saveCurrentPageVideoLink() {
+        const currentStory = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
+        const pageIdx = Math.max(1, Math.min(currentStory.pages.length, readingBookState.page || 1));
+        const inputEl = document.getElementById("readingVideoUrlInput");
+        const val = inputEl ? inputEl.value.trim() : "";
+        if (!val) {
+          alert("Please enter a YouTube video URL or ID.");
+          return;
+        }
+        const extractedId = extractYouTubeId(val);
+        if (!extractedId) {
+          alert("Could not detect a valid YouTube video ID from that link. Please check the URL format.");
+          return;
+        }
+
+        let customMap = {};
+        try {
+          customMap = JSON.parse(localStorage.getItem("reading_custom_page_videos_v1") || "{}");
+        } catch (e) {}
+
+        const pageKey = currentStory.id + "_" + pageIdx;
+        customMap[pageKey] = val;
+
+        try {
+          localStorage.setItem("reading_custom_page_videos_v1", JSON.stringify(customMap));
+        } catch (e) {}
+
+        readingBookState.showLinkEditor = false;
+        renderReadingBook();
+      }
+
+      function resetCurrentPageVideoLink() {
+        const currentStory = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
+        const pageIdx = Math.max(1, Math.min(currentStory.pages.length, readingBookState.page || 1));
+        const pageKey = currentStory.id + "_" + pageIdx;
+
+        let customMap = {};
+        try {
+          customMap = JSON.parse(localStorage.getItem("reading_custom_page_videos_v1") || "{}");
+        } catch (e) {}
+
+        delete customMap[pageKey];
+
+        try {
+          localStorage.setItem("reading_custom_page_videos_v1", JSON.stringify(customMap));
+        } catch (e) {}
+
+        readingBookState.showLinkEditor = false;
+        renderReadingBook();
+      }
 
       function setReadingStory(storyId) {
         readingBookState.storyId = storyId;
         readingBookState.page = 1;
+        readingBookState.showLinkEditor = false;
         saveReadingBookState();
         renderReadingBook();
       }
@@ -28222,6 +28390,7 @@ window.openQuranReaderModal = openQuranReaderModal;
       function setReadingPage(p) {
         const story = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
         readingBookState.page = Math.max(1, Math.min(story.pages.length, p));
+        readingBookState.showLinkEditor = false;
         saveReadingBookState();
         renderReadingBook();
       }
@@ -28248,6 +28417,7 @@ window.openQuranReaderModal = openQuranReaderModal;
             }
             if (typeof parsed.page === "number") readingBookState.page = parsed.page;
             if (typeof parsed.fontSize === "number") readingBookState.fontSize = parsed.fontSize;
+            if (typeof parsed.videoCompact === "boolean") readingBookState.videoCompact = parsed.videoCompact;
           }
         } catch (e) {}
       }
@@ -28262,6 +28432,19 @@ window.openQuranReaderModal = openQuranReaderModal;
         const pageObj = currentStory.pages[pageIdx - 1];
         const progressPct = Math.round((pageIdx / totalPages) * 100);
         const fontSize = readingBookState.fontSize || 16;
+        const videoInfo = getPageVideoInfo(currentStory, pageIdx);
+
+        // Check if existing video box has the same video ID so we can preserve active playback
+        const existingVideoBox = document.getElementById("readingVideoBox");
+        const existingIframe = document.getElementById("readingPageVideoIframe");
+        let canPreserveVideoBox = false;
+
+        if (existingVideoBox && existingIframe && existingIframe.dataset.videoId === videoInfo.videoId) {
+          canPreserveVideoBox = true;
+          if (existingVideoBox.parentNode) {
+            existingVideoBox.parentNode.removeChild(existingVideoBox);
+          }
+        }
 
         container.innerHTML = `
           <!-- Story Selector Pills / Tabs -->
@@ -28291,15 +28474,14 @@ window.openQuranReaderModal = openQuranReaderModal;
               </div>
 
               <div class="reading-topbar-actions">
-                <a
-                  href="${escapeHtml(currentStory.videoUrl)}"
-                  target="_blank"
-                  rel="noopener"
+                <button
+                  type="button"
                   class="reading-action-btn reading-yt-watch-btn"
-                  title="Watch this story on YouTube"
+                  onclick="toggleReadingVideoEditor()"
+                  title="Put or change video link for this page"
                 >
-                  <span>▶</span> Watch Video
-                </a>
+                  <span>🔗</span> ${videoInfo.isCustom ? "Custom Video Link" : "Put Video Link"}
+                </button>
                 <a
                   href="${READING_CHANNEL_URL}"
                   target="_blank"
@@ -28362,6 +28544,9 @@ window.openQuranReaderModal = openQuranReaderModal;
               </button>
             </div>
 
+            <!-- Embedded Video Player Section (Plays directly here on this page) -->
+            <div id="readingVideoSlot"></div>
+
             <!-- The Book Page Sheet -->
             <div class="reading-page-sheet">
               <div class="reading-sheet-chapter">${escapeHtml(pageObj.chapter)}</div>
@@ -28414,6 +28599,126 @@ window.openQuranReaderModal = openQuranReaderModal;
             </div>
           </div>
         `;
+
+        const slot = document.getElementById("readingVideoSlot");
+        if (slot) {
+          if (canPreserveVideoBox && existingVideoBox) {
+            // Update labels without recreating the iframe
+            const titleText = existingVideoBox.querySelector(".reading-video-title-text");
+            if (titleText) {
+              titleText.textContent = `${pageObj.chapter}: ${pageObj.title || currentStory.title}`;
+            }
+            const badgeEl = existingVideoBox.querySelector(".reading-video-badge");
+            if (badgeEl) {
+              badgeEl.className = `reading-video-badge ${videoInfo.isCustom ? "custom" : ""}`;
+              badgeEl.textContent = videoInfo.isCustom ? "Custom Video" : "Plays on page";
+            }
+            const editorDiv = existingVideoBox.querySelector("#readingVideoLinkEditor");
+            if (editorDiv) {
+              editorDiv.style.display = readingBookState.showLinkEditor ? "block" : "none";
+            }
+            const inputEl = existingVideoBox.querySelector("#readingVideoUrlInput");
+            if (inputEl) {
+              inputEl.value = videoInfo.url;
+            }
+            const wrapEl = existingVideoBox.querySelector(".reading-video-iframe-wrap");
+            if (wrapEl) {
+              if (readingBookState.videoCompact) wrapEl.classList.add("compact");
+              else wrapEl.classList.remove("compact");
+            }
+            slot.appendChild(existingVideoBox);
+          } else {
+            slot.innerHTML = `
+              <div class="reading-video-box" id="readingVideoBox">
+                <div class="reading-video-topline">
+                  <div class="reading-video-title">
+                    <span>🎬</span>
+                    <span class="reading-video-title-text">${escapeHtml(pageObj.chapter)}: ${escapeHtml(pageObj.title || currentStory.title)}</span>
+                    <span class="reading-video-badge ${videoInfo.isCustom ? "custom" : ""}">${videoInfo.isCustom ? "Custom Video" : "Plays on page"}</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+                    <button
+                      type="button"
+                      class="reading-action-btn"
+                      onclick="toggleReadingVideoEditor()"
+                      style="background:#334155;color:#ffffff;border-color:#475569;"
+                      title="Put or edit video link for this page"
+                    >
+                      <span>🔗</span> ${videoInfo.isCustom ? "Edit Link" : "Put Video Link"}
+                    </button>
+                    <button
+                      type="button"
+                      class="reading-action-btn"
+                      onclick="toggleReadingVideoCompact()"
+                      style="background:#1e293b;color:#ffffff;border-color:#475569;"
+                      title="Toggle compact video size"
+                    >
+                      <span>⛶</span> Size
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Inline Link Editor -->
+                <div id="readingVideoLinkEditor" class="reading-video-link-editor" style="display: ${readingBookState.showLinkEditor ? "block" : "none"};">
+                  <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:#cbd5e1;">
+                    Put YouTube video link for <strong>${escapeHtml(pageObj.chapter)}</strong> (Page ${pageIdx}):
+                  </div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <input
+                      type="text"
+                      id="readingVideoUrlInput"
+                      value="${escapeHtml(videoInfo.url)}"
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      style="flex:1;min-width:200px;padding:6px 10px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#f8fafc;font-size:12px;font-family:inherit;"
+                    />
+                    <button
+                      type="button"
+                      class="reading-action-btn"
+                      onclick="saveCurrentPageVideoLink()"
+                      style="background:#16a34a;color:#ffffff;border-color:#15803d;"
+                    >
+                      Save Link
+                    </button>
+                    ${videoInfo.isCustom ? `
+                      <button
+                        type="button"
+                        class="reading-action-btn"
+                        onclick="resetCurrentPageVideoLink()"
+                        style="background:#dc2626;color:#ffffff;border-color:#b91c1c;"
+                      >
+                        Reset
+                      </button>
+                    ` : ""}
+                    <button
+                      type="button"
+                      class="reading-action-btn"
+                      onclick="toggleReadingVideoEditor()"
+                      style="background:#475569;color:#ffffff;border-color:#64748b;"
+                    >
+                      Close
+                    </button>
+                  </div>
+                  <div style="font-size:11px;color:#94a3b8;margin-top:4px;">
+                    Enter any YouTube video link (e.g. <code>https://youtube.com/watch?v=...</code>). The video plays right here on this page without opening YouTube.
+                  </div>
+                </div>
+
+                <!-- Embedded Iframe Video Player -->
+                <div class="reading-video-iframe-wrap ${readingBookState.videoCompact ? "compact" : ""}">
+                  <iframe
+                    id="readingPageVideoIframe"
+                    data-video-id="${videoInfo.videoId}"
+                    src="${videoInfo.embedUrl}"
+                    title="${escapeHtml(pageObj.title || currentStory.title)}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            `;
+          }
+        }
       }
 
       function initReadingBook() {
