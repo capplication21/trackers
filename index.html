@@ -2793,6 +2793,242 @@
         box-shadow: none;
       }
 
+      /* ==================== READING BOOK COMPONENT ==================== */
+      .reading-title {
+        color: #1e3a8a;
+      }
+      .reading-channel-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #ef4444;
+        color: #ffffff !important;
+        text-decoration: none;
+        font-size: 11.5px;
+        font-weight: 800;
+        padding: 5px 12px;
+        border-radius: 999px;
+        border: 1.5px solid var(--ink);
+        box-shadow: 0 2px 0 var(--ink);
+        transition: transform 0.08s ease, background-color 0.1s ease;
+      }
+      .reading-channel-btn:hover {
+        background: #dc2626;
+        transform: translateY(-1px);
+      }
+      .reading-channel-btn:active {
+        transform: translateY(1px);
+        box-shadow: none;
+      }
+      .reading-book-card {
+        background: linear-gradient(135deg, #fdfbf7 0%, #fefcf9 100%);
+        border: 2px solid var(--ink);
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: 0 4px 0 var(--ink);
+        margin-bottom: 20px;
+        position: relative;
+      }
+      .reading-book-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+        border-bottom: 2px dashed #e2e8f0;
+      }
+      .reading-story-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .reading-story-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        color: #1d4ed8;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 2px 8px;
+        border-radius: 999px;
+        width: fit-content;
+      }
+      .reading-story-heading {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--ink);
+      }
+      .reading-topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .reading-font-btn, .reading-action-btn {
+        border: 1.5px solid var(--ink);
+        background: #ffffff;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        box-shadow: 0 1.5px 0 var(--ink);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .reading-font-btn:hover, .reading-action-btn:hover {
+        background: #f1f5f9;
+      }
+      .reading-yt-watch-btn {
+        background: #fee2e2;
+        color: #991b1b;
+        border-color: #f87171;
+      }
+      .reading-yt-watch-btn:hover {
+        background: #fecaca;
+      }
+      .reading-page-stepper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+      }
+      .reading-page-pill {
+        min-width: 28px;
+        height: 28px;
+        padding: 0 8px;
+        border-radius: 999px;
+        border: 1.5px solid var(--ink);
+        background: #f8fafc;
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 800;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.1s ease;
+      }
+      .reading-page-pill:hover {
+        background: #e2e8f0;
+      }
+      .reading-page-pill.active {
+        background: #3b82f6;
+        color: #ffffff;
+        box-shadow: 0 2px 0 var(--ink);
+        transform: translateY(-1px);
+      }
+      .reading-page-sheet {
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 20px 22px;
+        box-shadow: inset 0 0 12px rgba(0,0,0,0.02), 0 2px 8px rgba(0,0,0,0.04);
+        position: relative;
+        min-height: 260px;
+      }
+      .reading-sheet-chapter {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #2563eb;
+        margin-bottom: 6px;
+      }
+      .reading-sheet-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 14px;
+        line-height: 1.3;
+      }
+      .reading-sheet-prose {
+        color: #1e293b;
+        line-height: 1.85;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+        margin-bottom: 16px;
+      }
+      .reading-sheet-prose p {
+        margin: 0 0 12px 0;
+      }
+      .reading-sheet-prose p:last-child {
+        margin-bottom: 0;
+      }
+      .reading-vocab-box {
+        background: #f0fdf4;
+        border: 1.5px solid #bbf7d0;
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-top: 14px;
+      }
+      .reading-vocab-title {
+        font-size: 11.5px;
+        font-weight: 800;
+        color: #166534;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 6px;
+      }
+      .reading-vocab-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+        color: #14532d;
+      }
+      .reading-page-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1.5px dashed #cbd5e1;
+      }
+      .reading-turn-btn {
+        border: 1.5px solid var(--ink);
+        background: #ffffff;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 7px 18px;
+        font-size: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 2px 0 var(--ink);
+        transition: transform 0.08s ease, background 0.1s ease;
+      }
+      .reading-turn-btn:hover:not(:disabled) {
+        background: #dbeafe;
+      }
+      .reading-turn-btn:active:not(:disabled) {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      .reading-turn-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+      .reading-progress-pill {
+        font-size: 12px;
+        font-weight: 800;
+        color: #475569;
+      }
+
       .timer-wrap {
         display: flex;
         align-items: center;
@@ -8444,7 +8680,7 @@
             <!-- Compact Light Header -->
             <div class="nav-hub-header">
               <span class="nav-hub-badge">🧭 NAVIGATOR</span>
-              <span class="nav-hub-sub">14 Apps</span>
+              <span class="nav-hub-sub">15 Apps</span>
             </div>
 
             <!-- Sleek Compact Light Cards Grid (Entire Card Clickable, No Description, No Open Button) -->
@@ -8573,6 +8809,15 @@
                   <span class="hub-card-badge">ADKAR</span>
                 </div>
                 <div class="hub-card-title">Adkar</div>
+              </div>
+
+              <!-- Card 15: Reading -->
+              <div class="hub-card" onclick="switchTab('reading')">
+                <div class="hub-card-top">
+                  <span class="hub-card-icon">📚</span>
+                  <span class="hub-card-badge">READING</span>
+                </div>
+                <div class="hub-card-title">Reading</div>
               </div>
             </div>
           </div>
@@ -11073,6 +11318,23 @@
             <span>📿</span> ADKAR
           </div>
           <div id="adkarSectionsContainer"></div>
+        </div>
+
+        <!-- READING TAB -->
+        <div class="tab-content" id="tab-reading">
+          <div class="section-title reading-title" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <span><span>📚</span> READING BOOK</span>
+            <a
+              href="https://youtube.com/@english2flow?si=9tiQmQ-q9gWuknXy"
+              target="_blank"
+              rel="noopener"
+              class="reading-channel-btn"
+              title="Visit @english2flow channel on YouTube"
+            >
+              <span>📺</span> @english2flow on YouTube
+            </a>
+          </div>
+          <div id="readingBookContainer"></div>
         </div>
 
         <!-- SUMMARY TAB -->
@@ -15586,6 +15848,7 @@
         mathtest: "🧮 Math Test",
         notes: "🤲 Duaa Book",
         adkar: "📿 Adkar",
+        reading: "📚 Reading",
         pdf: "📖 PDF Reader",
         summary: "📊 Day Summary",
         navigator: "🧭 All Navigators",
@@ -19023,6 +19286,7 @@ Please provide:
         if (tabName === "summary") renderSummary();
         if (tabName === "notes") renderNotesList();
         if (tabName === "adkar") renderAdkarSections();
+        if (tabName === "reading") renderReadingBook();
         if (tabName === "pdf") renderPdfTab();
         if (tabName === "english") {
           renderGrammarRevisionDisplay();
@@ -27634,6 +27898,529 @@ window.openQuranReaderModal = openQuranReaderModal;
         renderAdkarSections();
       }
 
+      // ==================== READING BOOK MODULE (@english2flow) ====================
+      const READING_CHANNEL_URL = "https://youtube.com/@english2flow?si=9tiQmQ-q9gWuknXy";
+
+      const READING_STORIES = [
+        {
+          id: "story_linda",
+          title: "A Mother's Secret: Love & Sacrifice",
+          subtitle: "Learn English with Simple Stories • Level 2 for Beginners",
+          videoUrl: "https://www.youtube.com/watch?v=3L_Oh4p-Ufg",
+          views: "71K views",
+          level: "Level 2 (Beginner-Intermediate)",
+          pages: [
+            {
+              chapter: "Chapter 1",
+              title: "A Grandmother's Quiet House",
+              prose: [
+                "My name is Linda Parker. I am 64 years old. I live alone in a small house in Ohio, USA. My husband died 10 years ago. I have only one son. His name is Daniel. He is 35 years old. He is married and has a little daughter named Emma. Emma is my only granddaughter. She is 7 years old. She has the same blue eyes as her father.",
+                "Every Sunday, I used to cook her favorite food. She loved my apple pie. Whenever she visited me, she would run into my arms and say, 'Grandma, I missed you.' Those were the happiest moments of my life.",
+                "But things changed after Daniel got married. At first, he called me everyday. Sometimes he visited me after work. He always asked if I needed anything. But slowly, his visits became less common. First he stopped coming every weekend. Then he started calling only once a week. And after some time, even those calls became very short. I tried not to complain. I knew he had his own family and many responsibilities."
+              ],
+              vocab: [
+                { word: "responsibilities", meaning: "Duties and tasks you are expected to take care of." },
+                { word: "less common", meaning: "Happening rarely or not frequently." },
+                { word: "granddaughter", meaning: "The daughter of one's son or daughter." }
+              ]
+            },
+            {
+              chapter: "Chapter 2",
+              title: "The Unexpected Announcement",
+              prose: [
+                "One evening, Daniel came to my house with his wife, Sarah. They sat in the living room. I made coffee for them and brought some cookies. But Daniel looked different that day. He was not smiling.",
+                "'Mom, we need to talk,' he said. I sat beside him. 'Of course, dear. What happened?' He looked at Sarah before speaking. 'Mom, we are moving to another city. I got a new job and it pays much better.'",
+                "I smiled. 'That's wonderful, Daniel. I am so happy for you.' But then he said something I was not ready to hear: 'We are leaving next week.' I looked at him. 'Next week? So soon?' 'Yes, Mom. We have already found a house.' I looked at little Emma who was playing with her doll on the floor. 'What about Emma? Will I still get to see her?' Daniel looked down. 'Of course, Mom. We'll visit whenever we get time.'",
+                "I wanted to ask him to stay. I wanted to tell him that this house would feel empty without them, but I did not want to hold him back. 'Of course, sweetheart, I understand.' Before leaving, Emma hugged my legs: 'Grandma, will you come to my new house?' I kissed her forehead: 'Of course, sweetheart, I promise.' I did not know that it would become a very difficult promise to keep."
+              ],
+              vocab: [
+                { word: "hold back", meaning: "To restrain or prevent someone from progressing." },
+                { word: "pays much better", meaning: "Provides a significantly higher income/salary." },
+                { word: "promise", meaning: "A sincere assurance that one will do something." }
+              ]
+            },
+            {
+              chapter: "Chapter 3",
+              title: "The Distance & The Growing Silence",
+              prose: [
+                "The next week, Daniel and his family left. I stood outside my house and watched their car disappear down the street. I kept waving until I could no longer see them. Then I went inside. The house was silent. No little girl running through the hallway. No Daniel asking what was for dinner. No voices. Just me and the ticking clock on the wall. That night, I cooked dinner for one person for the first time in many years. I made Daniel's favorite chicken soup, but I could not eat it. I sat at the kitchen table and cried.",
+                "Daniel had promised to call, and he did. For the first few weeks, he called every Sunday. He told me about his new job, his new house, and Emma's school. I loved hearing about their lives, but slowly the calls became shorter. Sometimes he said he was busy, sometimes he said Emma was sleeping, and sometimes he did not answer at all. I started calling less because I did not want to disturb him.",
+                "One Sunday, I waited near the phone from morning until evening. He never called. When I finally called him at 9 PM, he answered: 'Mom, I'm really busy. Can we talk tomorrow?' I became quiet. 'Of course, dear. Take care.' He ended the call. I looked at the family photograph beside my bed. 'I miss you, sweetheart,' I whispered."
+              ],
+              vocab: [
+                { word: "disappear", meaning: "To cease to be visible; vanish." },
+                { word: "disturb", meaning: "To interrupt or bother someone while they are busy." },
+                { word: "whispered", meaning: "Spoke in a very soft, quiet voice." }
+              ]
+            },
+            {
+              chapter: "Chapter 4",
+              title: "The Secret Wooden Box",
+              prose: [
+                "Three months passed. Winter arrived in Ohio. The streets were covered with snow and the cold wind came through the small gaps in my windows. Sometimes my neighbor, Mrs. Wilson, came to visit me. 'Linda, why don't you visit your son?' she asked. I smiled: 'He's busy with work. I don't want to trouble him.' She looked at me sadly: 'Linda, you are his mother. You are not a trouble.' I did not answer.",
+                "A few days later, while cleaning my bedroom, I found an old birthday card Daniel had given me when he was only 10 years old. Inside he had written: 'Dear Mom, when I grow up, I will buy you a big house. You will never have to work again. I will take care of you just like you take care of me. Love, Daniel.'",
+                "As I closed the drawer, I noticed something behind it: a small wooden box. It was old and covered with dust. Inside that box was the one thing I had never told Daniel about: several envelopes, a notebook, and a bank book. On the first envelope was written: 'For Emma on her 18th birthday.'",
+                "When Emma was born, I made a promise to save for her future. Every month, I put money aside—$20, $50, or whatever I earned from my sewing work. I never bought expensive clothes or went to restaurants. I even sold old jewelry. I had opened a savings account in Emma's name and written letters for each milestone birthday so she would know how much her grandmother loved her."
+              ],
+              vocab: [
+                { word: "trouble", meaning: "An inconvenience or burden to others." },
+                { word: "milestone", meaning: "A significant stage or event in the development of something." },
+                { word: "sewing", meaning: "Joining or mending clothes using a needle and thread." }
+              ]
+            },
+            {
+              chapter: "Chapter 5",
+              title: "A Silent Birthday & The Bank Call",
+              prose: [
+                "A week later, my birthday arrived. I turned 65. I woke up early and made myself a cup of tea. I waited until noon. Nothing. At 3:00 in the afternoon, I finally received a text message from Daniel: 'Happy birthday, Mom. Sorry, I am busy today. We will talk soon.' I read it twice. Then I typed, 'Thank you, son. I love you.' I waited for a reply, but nothing came. Mrs. Wilson brought a small cake and sang with me, but after she left, I sat alone in the living room wondering if my son would ever return.",
+                "Two more months passed. One morning, an unknown number rang. 'Hello, Mrs. Parker. My name is James from the bank. I am calling about a savings account you opened for your granddaughter Emma. We just need to confirm a few details. Would you like us to send the account information to your son as well?'",
+                "I thought for a moment: 'No, please. I want to speak to him myself.' After ending the call, I looked at the wooden box under my bed. I knew it was time. I picked up my phone and called Daniel: 'Daniel, I need you to come home.' He sounded worried: 'Mom, what happened? Can it wait? We are very busy this week.' I closed my eyes: 'No, Daniel, please. I don't know how much longer I can wait.' There was silence. Finally, he said, 'Okay, Mom. I will come this Saturday.'"
+              ],
+              vocab: [
+                { word: "confirm", meaning: "To establish the truth or correctness of something." },
+                { word: "silence", meaning: "Complete absence of sound or speech." },
+                { word: "hopeful", meaning: "Feeling or inspiring optimism about future events." }
+              ]
+            },
+            {
+              chapter: "Chapter 6",
+              title: "Opening the Letters",
+              prose: [
+                "Saturday arrived. I cleaned the house, made Daniel's favorite chicken soup, and baked an apple pie for Emma. At 2:00 PM, a car pulled into the driveway. It was Daniel, Sarah, and Emma. Emma ran inside: 'Grandma! I missed you so much!'",
+                "I brought the wooden box and placed it on the kitchen table in front of Daniel. 'Open it, son.' He lifted the lid and found the envelopes, the notebook, and the bank book. Daniel opened an envelope and read: 'Dear Emma, if you are reading this, you are now 18 years old. I hope you are happy and brave. I saved something for your future so you could follow your dreams. Love, Grandma Linda.'",
+                "Daniel's eyes welled with tears. He opened the bank book and saw more than $18,000 saved. 'Mom, how did you save all this money? Why didn't you tell me?' I held his hand: 'Because I didn't want you to feel bad. I knew you had your own family to care for. I wanted to help Emma without making you worry.'"
+              ],
+              vocab: [
+                { word: "welled", meaning: "Filled up and began to spill over (with tears)." },
+                { word: "brave", meaning: "Ready to face danger or pain; courageous." },
+                { word: "savings account", meaning: "A bank account that earns interest on deposited funds." }
+              ]
+            },
+            {
+              chapter: "Chapter 7",
+              title: "The Letter to Daniel",
+              prose: [
+                "At the bottom of the box was one last envelope: 'For my son Daniel. Open this when you are ready.' Daniel opened it with trembling fingers:",
+                "'Dear Daniel, do you remember the small house where you grew up? Do you remember the winter when your father lost his job? You were only 8 years old. You woke up and asked why I wasn't sleeping. The truth was that I had skipped dinner so there would be enough food for you. I never wanted you to feel poor; I wanted you to feel loved.",
+                "When you moved away, I missed you every day. But I never wanted you to give up your happiness just to take care of me. One day, Emma will grow up with her own dreams and family, and perhaps one day she will also be too busy to visit. When that day comes, do not be angry with her. Just love her. That is all a parent can do. Love, Mom.'",
+                "A tear fell onto the paper. Daniel covered his face and wept: 'Mom, I am so sorry. When I was young, you were always there for me. But when you needed me, I was not there for you.' I touched his cheek gently: 'You are here now, son.'"
+              ],
+              vocab: [
+                { word: "trembling", meaning: "Shaking involuntarily with emotion." },
+                { word: "skipped", meaning: "Passed over or omitted doing something (like a meal)." },
+                { word: "wept", meaning: "Cried deeply with tears." }
+              ]
+            },
+            {
+              chapter: "Chapter 8",
+              title: "The Greatest Wealth & Coming Home",
+              prose: [
+                "Then little Emma reached into her backpack: 'Grandma, I have something for you too.' She handed me a drawing of a small house with a woman, a little girl, and a man holding hands, titled 'My Family.' 'Daddy said we might move back near you one day,' she smiled.",
+                "Daniel looked at his daughter, then looked at me: 'Mom, I don't want you to spend another winter alone. We can find a house closer to yours. I want Emma to grow up with her grandmother.'",
+                "He shook his head: 'Mom, you were never a problem. I just forgot how important you are.' That evening, we ate dinner together, and the house was filled with warmth and laughter once again.",
+                "After they left, I looked at the oak box. The greatest thing I had saved was never the money—it was the love I had never stopped giving. A mother never asks for luxury or expensive gifts; all she wants is a little time, a phone call, and knowing she is remembered. If your parents are still with you, don't wait for a special day to call them."
+              ],
+              vocab: [
+                { word: "luxury", meaning: "A state of great comfort and extravagant living." },
+                { word: "wealth", meaning: "An abundance of valuable possessions, money, or love." },
+                { word: "precious", meaning: "Of great value; not to be wasted or treated carelessly." }
+              ]
+            }
+          ]
+        },
+        {
+          id: "story_emily",
+          title: "The Secret Promise: Two Sisters",
+          subtitle: "Learn English with Simple Stories • Level 2 for Beginners",
+          videoUrl: "https://www.youtube.com/watch?v=afX5F1bqZMM",
+          views: "18.2K views",
+          level: "Level 2 (Beginner-Intermediate)",
+          pages: [
+            {
+              chapter: "Chapter 1",
+              title: "A Mother's Legacy",
+              prose: [
+                "My name is Emily Carter. I am 28 years old and I live in a small town in Oregon, USA. I live alone in a small rented apartment and work at a grocery store. My life is simple and quiet. But there is one person I miss every single day: my mother. She passed away four years ago after a long illness.",
+                "My father left us when I was just six years old. After that, my mother raised me alone, working long hours cleaning houses and working in a restaurant. Despite being exhausted, she always smiled and told me: 'Emily, life may not give us everything we want, but we should never stop being kind.'",
+                "She often helped neighbors and bought clothes for children whose families struggled. When I asked why she helped so much, she smiled: 'Because sometimes people need love more than money.'"
+              ],
+              vocab: [
+                { word: "legacy", meaning: "Something handed down or inherited from a predecessor." },
+                { word: "exhausted", meaning: "Extremely tired, physically or mentally." },
+                { word: "afford", meaning: "Have enough money to pay for something." }
+              ]
+            },
+            {
+              chapter: "Chapter 2",
+              title: "The Mysterious Envelope",
+              prose: [
+                "One cold winter evening, I found an envelope near my apartment door with my name on it. Inside was an old photograph of my mother holding the hand of a little girl I had never seen before. On the back, it read: 'Your mother kept a promise for 18 years. Now it's time you knew the truth.'",
+                "Two days later, my phone rang. A woman named Susan said: 'I knew your mother very well. There is something she wanted me to show you.' We agreed to meet at a coffee shop the next afternoon.",
+                "At the cafe, Susan placed an old wooden box on the table with a silver key: 'Your mother gave this to me years ago to give to you when the time was right.'"
+              ],
+              vocab: [
+                { word: "mysterious", meaning: "Difficult or impossible to understand, explain, or identify." },
+                { word: "promise", meaning: "A declaration that something will or will not happen." },
+                { word: "courage", meaning: "Strength in the face of pain, fear, or grief." }
+              ]
+            },
+            {
+              chapter: "Chapter 3",
+              title: "The Story of Lily",
+              prose: [
+                "Inside the box were letters, an old key, and a red notebook. The first letter began: 'My dearest Emily, there is something I kept hidden for many years. I hope you will understand.'",
+                "Susan explained: 'Her name was Lily. Lily's mother was your mother's closest friend who died in a car accident when Lily was only four. Your mother promised to always look after her.'",
+                "Even while struggling to raise me as a single mother, my mother visited Lily regularly, bringing her books, clothes, and birthday gifts. In one letter, Lily wrote: 'Dear Mrs. Carter, thank you for reading stories to me. I wish you could be my mother.' Tears streamed down my face as I realized my mother's boundless compassion."
+              ],
+              vocab: [
+                { word: "compassion", meaning: "Sympathetic pity and concern for the sufferings of others." },
+                { word: "regularly", meaning: "At uniform intervals; with predictable recurrence." },
+                { word: "boundless", meaning: "Having no bounds; infinite or vast." }
+              ]
+            },
+            {
+              chapter: "Chapter 4",
+              title: "Two Daughters in a Mother's Heart",
+              prose: [
+                "Susan pointed to the red notebook. On the final page, my mother's weak handwriting read: 'Today Lily turned 22. She wants to become a nurse to help those who suffer. When Emily was little, I used to bring Lily home and watch the two girls play together. For a few hours, I felt like I had two daughters. I hope one day they will find each other.'",
+                "Susan handed me an envelope with an address two hours away: 'Lily knows about you, but didn't know how to reach you.'",
+                "The next Saturday morning, I gathered my courage, got into my car, and drove down the highway toward the address."
+              ],
+              vocab: [
+                { word: "gathered courage", meaning: "Summoned inner strength to face a challenge." },
+                { word: "highway", meaning: "A main road connecting towns and cities." },
+                { word: "nurse", meaning: "A person trained to care for the sick or infirm." }
+              ]
+            },
+            {
+              chapter: "Chapter 5",
+              title: "Meeting My Sister",
+              prose: [
+                "I arrived at a small white house with flower beds and knocked. A young woman with gentle brown eyes opened the door. 'Are you Emily?' she asked quietly. When I nodded, she embraced me tightly in tears: 'I have waited so many years to meet you.'",
+                "Lily showed me photo albums of my mother visiting her through school events, birthdays, and holidays. Then she brought out a small gift box: 'Your mother asked me to give this to you when we met.'",
+                "Inside was a silver necklace with two intertwined hearts—one engraved with 'Emily' and the other with 'Lily.' A note read: 'My two girls, I loved you both with the same heart. Please don't let my absence make you strangers. Look after each other. Love, Mom.'"
+              ],
+              vocab: [
+                { word: "intertwined", meaning: "Twisted or linked closely together." },
+                { word: "engraved", meaning: "Carved or cut letters into a hard surface." },
+                { word: "absence", meaning: "The state of being away from a place or person." }
+              ]
+            },
+            {
+              chapter: "Chapter 6",
+              title: "Love That Outlives Time",
+              prose: [
+                "We cooked dinner together that evening. Lily prepared the same vegetable soup my mother used to make whenever I caught a cold. With the first spoonful, childhood memories came flooding back.",
+                "For four years after my mother's passing, I believed I was entirely alone in this world. But my mother had left me something infinitely more precious than money or property—she left me a sister.",
+                "Today, Lily and I speak almost daily. On Mother's Day, we visit our mother's resting place together, place two flowers side by side, and whisper: 'Thank you, Mom. You kept your promise.'",
+                "The greatest gift a parent gives is not something bought with money; it is the love they leave behind in the hearts of others."
+              ],
+              vocab: [
+                { word: "infinitely", meaning: "To a limitless or immense degree." },
+                { word: "flooding back", meaning: "Returning suddenly in large numbers (memories)." },
+                { word: "precious", meaning: "Having immense value and cherished deeply." }
+              ]
+            }
+          ]
+        },
+        {
+          id: "story_margaret",
+          title: "The Brown Lunchbox: 30 Years of Kindness",
+          subtitle: "Learn English Through Story • Level 1 Graded Reader",
+          videoUrl: "https://www.youtube.com/watch?v=1v0xdQd87wI",
+          views: "4.2K views",
+          level: "Level 1 (Beginner)",
+          pages: [
+            {
+              chapter: "Chapter 1",
+              title: "The School Kitchen Worker",
+              prose: [
+                "My name is Margaret Wilson. I am 74 years old and live in a quiet town in Maine, USA. For nearly thirty years, I worked in the cafeteria of an elementary school. I was not a principal or a teacher; I prepared lunches and served warm food to hundreds of children every day.",
+                "I knew who loved extra milk, who disliked greens, and who needed an extra slice of bread. One quiet boy named Ben caught my attention. He was eight years old, with worn-out shoes and a quiet demeanor. While other children opened colorful lunchboxes, Ben often sat at the end of the long bench with nothing at all.",
+                "One day, I slid an apple and a turkey sandwich in front of him: 'Everyone deserves a good lunch, Ben.' He smiled warmly for the very first time."
+              ],
+              vocab: [
+                { word: "cafeteria", meaning: "A dining hall where people choose food from a counter." },
+                { word: "demeanor", meaning: "Outward behavior or bearing." },
+                { word: "worn-out", meaning: "Damaged or shabby from extensive use." }
+              ]
+            },
+            {
+              chapter: "Chapter 2",
+              title: "The Extra Sandwich",
+              prose: [
+                "A few days later, I noticed Ben carefully wrapping half of his sandwich in a napkin and placing it into his backpack. 'Ben, aren't you hungry?' I asked gently. He looked down shyly: 'My little sister is hungry at home, too.'",
+                "Those words broke my heart. Starting the very next morning, I packed two sandwiches and two apples every day into a sturdy little brown tin lunchbox. 'Take this home for your sister, Ben. Just bring the box back tomorrow.'",
+                "For months, Ben brought the lunchbox back every morning, clean and ready. Then one Monday, Ben didn't come to school. His family had moved away in the night. The little brown lunchbox remained on my kitchen shelf as years passed."
+              ],
+              vocab: [
+                { word: "napkin", meaning: "A piece of cloth or paper used to wipe lips or fingers." },
+                { word: "sturdy", meaning: "Strongly built and solid." },
+                { word: "remained", meaning: "Stayed in the same place without moving." }
+              ]
+            },
+            {
+              chapter: "Chapter 3",
+              title: "A Phone Call from the Past",
+              prose: [
+                "Decades passed. I retired from the school. My husband passed away, and my children moved to other states for work. My house grew very quiet, and some days I wondered if my simple life had made any real difference.",
+                "One December morning, an unfamiliar number called: 'Is this Mrs. Margaret Wilson from the elementary school kitchen?' When I answered yes, the man's voice trembled: 'Mrs. Wilson, this is Ben. The little boy you used to feed.'",
+                "He told me he was now thirty-eight, married, and working as a senior hospital nurse. Then he asked: 'Mrs. Wilson, do you still have that little brown lunchbox?' I gasped: 'Ben, after thirty years, you remember that?'"
+              ],
+              vocab: [
+                { word: "decades", meaning: "Periods of ten years." },
+                { word: "unfamiliar", meaning: "Not known or recognized." },
+                { word: "gasped", meaning: "Inhaled sharply in shock or surprise." }
+              ]
+            },
+            {
+              chapter: "Chapter 4",
+              title: "The Folded Note",
+              prose: [
+                "Three days later, a tall gentleman holding a bouquet of flowers knocked on my front door. It was Ben. We sat in my living room with cups of coffee, reminiscing about the old school days.",
+                "Ben reached into his coat pocket and placed a faded, yellowed piece of paper on the table. Inside was a note in my old handwriting from thirty years ago: 'Remember to share with your sister. You both matter, and you both deserve a wonderful life.'",
+                "Tears filled Ben's eyes: 'Mrs. Wilson, whenever I felt hopeless or ashamed as a child, I read this note. You didn't just give me lunch; you made me believe that someone cared.' He shared that his sister had grown up to become an elementary teacher helping underprivileged kids."
+              ],
+              vocab: [
+                { word: "reminiscing", meaning: "Indulging in enjoyable recollection of past events." },
+                { word: "underprivileged", meaning: "Lacking the standard of living enjoyed by the majority." },
+                { word: "ashamed", meaning: "Embarrassed or guilty because of one's actions or situation." }
+              ]
+            },
+            {
+              chapter: "Chapter 5",
+              title: "A Namesake & A Living Legacy",
+              prose: [
+                "Then Ben smiled and showed me a photo on his phone of a cheerful six-year-old girl holding a brown lunchbox. 'This is my daughter. Her name is Margaret.' I covered my mouth in astonishment.",
+                "'When my daughter was born, I named her after the woman who made sure two hungry children never felt forgotten,' Ben said as he hugged me tightly.",
+                "The next day, Ben brought little Margaret to visit. She hugged my knees and gave me a crayon drawing: 'Thank you for feeding my daddy when he was little.'",
+                "I held the drawing against my heart. You never need fame or wealth to change the world. One sandwich, one encouraging word, and one act of sincere kindness can ripple through generations."
+              ],
+              vocab: [
+                { word: "namesake", meaning: "A person or thing named after another." },
+                { word: "astonishment", meaning: "Great surprise or amazement." },
+                { word: "ripple", meaning: "Spread outward from an initial point like waves on water." }
+              ]
+            }
+          ]
+        }
+      ];
+
+      let readingBookState = {
+        storyId: "story_linda",
+        page: 1,
+        fontSize: 16,
+      };
+
+      function setReadingStory(storyId) {
+        readingBookState.storyId = storyId;
+        readingBookState.page = 1;
+        saveReadingBookState();
+        renderReadingBook();
+      }
+
+      function setReadingPage(p) {
+        const story = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
+        readingBookState.page = Math.max(1, Math.min(story.pages.length, p));
+        saveReadingBookState();
+        renderReadingBook();
+      }
+
+      function adjustReadingFontSize(delta) {
+        readingBookState.fontSize = Math.max(13, Math.min(24, (readingBookState.fontSize || 16) + delta));
+        saveReadingBookState();
+        renderReadingBook();
+      }
+
+      function saveReadingBookState() {
+        try {
+          localStorage.setItem("reading_book_state_v1", JSON.stringify(readingBookState));
+        } catch (e) {}
+      }
+
+      function loadReadingBookState() {
+        try {
+          const raw = localStorage.getItem("reading_book_state_v1");
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed.storyId && READING_STORIES.some((s) => s.id === parsed.storyId)) {
+              readingBookState.storyId = parsed.storyId;
+            }
+            if (typeof parsed.page === "number") readingBookState.page = parsed.page;
+            if (typeof parsed.fontSize === "number") readingBookState.fontSize = parsed.fontSize;
+          }
+        } catch (e) {}
+      }
+
+      function renderReadingBook() {
+        const container = document.getElementById("readingBookContainer");
+        if (!container) return;
+
+        const currentStory = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
+        const totalPages = currentStory.pages.length;
+        const pageIdx = Math.max(1, Math.min(totalPages, readingBookState.page || 1));
+        const pageObj = currentStory.pages[pageIdx - 1];
+        const progressPct = Math.round((pageIdx / totalPages) * 100);
+        const fontSize = readingBookState.fontSize || 16;
+
+        container.innerHTML = `
+          <!-- Story Selector Pills / Tabs -->
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">
+            ${READING_STORIES.map((st) => `
+              <button
+                type="button"
+                class="reading-action-btn ${st.id === currentStory.id ? "active" : ""}"
+                onclick="setReadingStory('${st.id}')"
+                style="${st.id === currentStory.id ? "background:#1e3a8a;color:#ffffff;border-color:#1e3a8a;" : ""}"
+              >
+                <span>📖</span> ${escapeHtml(st.title.split(":")[0])}
+              </button>
+            `).join("")}
+          </div>
+
+          <div class="reading-book-card">
+            <!-- Book Topbar -->
+            <div class="reading-book-topbar">
+              <div class="reading-story-meta">
+                <div class="reading-story-tag">
+                  <span>✨</span> ${escapeHtml(currentStory.level)} • ${escapeHtml(currentStory.views)}
+                </div>
+                <div class="reading-story-heading">
+                  ${escapeHtml(currentStory.title)}
+                </div>
+              </div>
+
+              <div class="reading-topbar-actions">
+                <a
+                  href="${escapeHtml(currentStory.videoUrl)}"
+                  target="_blank"
+                  rel="noopener"
+                  class="reading-action-btn reading-yt-watch-btn"
+                  title="Watch this story on YouTube"
+                >
+                  <span>▶</span> Watch Video
+                </a>
+                <a
+                  href="${READING_CHANNEL_URL}"
+                  target="_blank"
+                  rel="noopener"
+                  class="reading-action-btn"
+                  title="Visit English2Flow channel"
+                >
+                  <span>📺</span> Channel
+                </a>
+                <button
+                  type="button"
+                  class="reading-font-btn"
+                  onclick="adjustReadingFontSize(-1)"
+                  title="Decrease font size"
+                >
+                  A-
+                </button>
+                <button
+                  type="button"
+                  class="reading-font-btn"
+                  onclick="adjustReadingFontSize(1)"
+                  title="Increase font size"
+                >
+                  A+
+                </button>
+              </div>
+            </div>
+
+            <!-- Page Number Stepper Pills -->
+            <div class="reading-page-stepper">
+              <button
+                type="button"
+                class="reading-page-pill"
+                onclick="setReadingPage(${pageIdx - 1})"
+                ${pageIdx <= 1 ? "disabled" : ""}
+                style="${pageIdx <= 1 ? "opacity:0.4;cursor:not-allowed;" : ""}"
+                title="Previous Page"
+              >
+                ◀
+              </button>
+              ${currentStory.pages.map((_, i) => `
+                <button
+                  type="button"
+                  class="reading-page-pill ${i + 1 === pageIdx ? "active" : ""}"
+                  onclick="setReadingPage(${i + 1})"
+                  title="Go to Page ${i + 1}"
+                >
+                  ${i + 1}
+                </button>
+              `).join("")}
+              <button
+                type="button"
+                class="reading-page-pill"
+                onclick="setReadingPage(${pageIdx + 1})"
+                ${pageIdx >= totalPages ? "disabled" : ""}
+                style="${pageIdx >= totalPages ? "opacity:0.4;cursor:not-allowed;" : ""}"
+                title="Next Page"
+              >
+                ▶
+              </button>
+            </div>
+
+            <!-- The Book Page Sheet -->
+            <div class="reading-page-sheet">
+              <div class="reading-sheet-chapter">${escapeHtml(pageObj.chapter)}</div>
+              <div class="reading-sheet-title">${escapeHtml(pageObj.title)}</div>
+
+              <div class="reading-sheet-prose" style="font-size: ${fontSize}px;">
+                ${pageObj.prose.map((p) => `<p>${escapeHtml(p)}</p>`).join("")}
+              </div>
+
+              ${pageObj.vocab && pageObj.vocab.length ? `
+                <div class="reading-vocab-box">
+                  <div class="reading-vocab-title">
+                    <span>💡</span> Key Words &amp; Expressions in this chapter
+                  </div>
+                  <div class="reading-vocab-list">
+                    ${pageObj.vocab.map((v) => `
+                      <div>
+                        <strong>${escapeHtml(v.word)}:</strong> ${escapeHtml(v.meaning)}
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              ` : ""}
+            </div>
+
+            <!-- Page Turn Footer -->
+            <div class="reading-page-nav">
+              <button
+                type="button"
+                class="reading-turn-btn"
+                onclick="setReadingPage(${pageIdx - 1})"
+                ${pageIdx <= 1 ? "disabled" : ""}
+              >
+                ◀ Turn Page
+              </button>
+
+              <div style="text-align:center;">
+                <div class="reading-progress-pill">Page ${pageIdx} of ${totalPages}</div>
+                <div style="font-size:11px;color:#64748b;">${progressPct}% completed</div>
+              </div>
+
+              <button
+                type="button"
+                class="reading-turn-btn"
+                onclick="setReadingPage(${pageIdx + 1})"
+                ${pageIdx >= totalPages ? "disabled" : ""}
+              >
+                Turn Page ▶
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      function initReadingBook() {
+        loadReadingBookState();
+        renderReadingBook();
+      }
+
       // Comprehensive Master Application Bootstrapper
       function initAllAppModules() {
         try { loadMedicinesConfig(); } catch (e) { console.error("Error loading medicines config:", e); }
@@ -27652,6 +28439,7 @@ window.openQuranReaderModal = openQuranReaderModal;
         try { loadHairWashStatus(); } catch (e) { console.error("Error loading hair wash status:", e); }
         try { loadNotesData(); } catch (e) { console.error("Error loading notes data:", e); }
         try { initAdkarSections(); } catch (e) { console.error("Error initializing Adkar sections:", e); }
+        try { initReadingBook(); } catch (e) { console.error("Error initializing Reading book:", e); }
         try { loadGrammarRevisionData(); } catch (e) { console.error("Error loading grammar revision:", e); }
         try { loadPhonicsRevisionData(); } catch (e) { console.error("Error loading phonics revision:", e); }
         try { loadQuranRevisionData(); } catch (e) { console.error("Error loading Quran revision:", e); }
