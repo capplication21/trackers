@@ -17,84 +17,108 @@
 </script>
 
 <div class="tab-content active" id="tab-mathtest" style="display: block;">
-  <div class="section-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-    <span><span>🧮</span> DAILY MATHS &amp; EXAM SUITE</span>
+  <!-- Top Header Card -->
+  <div
+    style="background: #fffbeb; border: 2px solid var(--ink); border-radius: 16px; padding: 10px 16px; margin-bottom: 14px; box-shadow: 0 3px 0 var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;"
+  >
+    <div style="font-size: 15px; font-weight: 900; color: #1e293b; display: flex; align-items: center; gap: 8px;">
+      <span>🧮</span>
+      <span>DAILY MATHS &amp; EXAM SUITE</span>
+    </div>
     <button
       type="button"
-      class="reading-tool-btn"
       onclick={() => mathState.startQuiz(10)}
-      style="font-size: 11.5px; padding: 4px 10px;"
+      style="background: #fdfbf7; border: 1.5px solid #fed7aa; border-radius: 999px; padding: 5px 14px; font-size: 12px; font-weight: 800; color: #c2410c; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);"
     >
       ↺ New 10-Question Quiz
     </button>
   </div>
 
-  <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+  <!-- Sub Navigation Mode Filter Pills -->
+  <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
     <button
       type="button"
-      class="reading-filter-pill {activeMode === 'test' ? 'active' : ''}"
       onclick={() => (activeMode = 'test')}
+      style="padding: 7px 18px; border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s ease; {activeMode === 'test' ? 'background: #f59e0b; color: #18181b; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink);' : 'background: #fef3c7; color: #92400e; border: 1.5px solid #fde68a; opacity: 0.8;'}"
     >
-      📝 Math Exam
+      <span>📝</span> Math Exam
     </button>
     <button
       type="button"
-      class="reading-filter-pill {activeMode === 'grams' ? 'active' : ''}"
       onclick={() => (activeMode = 'grams')}
+      style="padding: 7px 18px; border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s ease; {activeMode === 'grams' ? 'background: #f59e0b; color: #18181b; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink);' : 'background: #fef3c7; color: #92400e; border: 1.5px solid #fde68a; opacity: 0.8;'}"
     >
-      ⚖️ Grams &amp; Kilograms
+      <span>⚖️</span> Grams &amp; Kilograms
     </button>
     <button
       type="button"
-      class="reading-filter-pill {activeMode === 'change' ? 'active' : ''}"
       onclick={() => (activeMode = 'change')}
+      style="padding: 7px 18px; border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s ease; {activeMode === 'change' ? 'background: #f59e0b; color: #18181b; border: 2px solid var(--ink); box-shadow: 0 2px 0 var(--ink);' : 'background: #fef3c7; color: #92400e; border: 1.5px solid #fde68a; opacity: 0.8;'}"
     >
-      💰 Change &amp; Discounts
+      <span>💰</span> Change &amp; Discounts
     </button>
   </div>
 
   {#if activeMode === 'test'}
     {#if !mathState.isSubmitted}
-      <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: 16px; box-shadow: 0 3px 0 var(--ink);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <span style="font-size: 12px; font-weight: 800; color: #64748b;">
-            QUESTION {mathState.currentIndex + 1} OF {mathState.quizQuestions.length}
-          </span>
-          <span style="font-size: 11px; font-weight: 800; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 999px;">
-            {mathState.quizQuestions[mathState.currentIndex]?.type || 'Math Problem'}
-          </span>
-        </div>
-
-        {#if mathState.quizQuestions[mathState.currentIndex]}
+      <!-- Question Card Box -->
+      <div
+        style="background: #ffffff; border: 2px solid var(--ink); border-radius: 20px; padding: clamp(16px, 3vw, 24px); box-shadow: 0 4px 0 var(--ink); margin-bottom: 16px;"
+      >
+        {#if mathState.quizQuestions.length > 0 && mathState.quizQuestions[mathState.currentIndex]}
           {@const curQ = mathState.quizQuestions[mathState.currentIndex]}
-          <div style="font-size: 16px; font-weight: 800; color: var(--ink); line-height: 1.4; margin-bottom: 16px;">
+          <!-- Header: Question X of Y + Math Problem Pill -->
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;"
+          >
+            <span
+              style="font-size: 13px; font-weight: 800; color: #334155; text-transform: uppercase; letter-spacing: 0.5px;"
+            >
+              QUESTION {mathState.currentIndex + 1} OF {mathState.quizQuestions.length}
+            </span>
+            <span
+              style="font-size: 11.5px; font-weight: 800; background: #fef3c7; color: #b45309; border-radius: 999px; padding: 4px 14px; border: 1px solid #fde68a;"
+            >
+              {curQ.type || 'Math Problem'}
+            </span>
+          </div>
+
+          <!-- Question Prompt Text -->
+          <div
+            style="font-size: 16.5px; font-weight: 800; color: var(--ink); line-height: 1.45; margin-bottom: 20px;"
+          >
             {curQ.question || curQ.prompt}
           </div>
 
+          <!-- Options List -->
           {#if curQ.options && curQ.options.length}
-            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
               {#each curQ.options as opt, optIdx}
                 {@const isSelected = mathState.userAnswers[mathState.currentIndex] === optIdx}
                 <button
                   type="button"
                   onclick={() => mathState.selectAnswer(mathState.currentIndex, optIdx)}
-                  style="text-align: left; padding: 12px 14px; border-radius: 10px; border: 2px solid {isSelected ? '#d97706' : '#e2e8f0'}; background: {isSelected ? '#fffbeb' : '#f8fafc'}; font-size: 13.5px; font-weight: 700; color: {isSelected ? '#92400e' : 'var(--ink)'}; cursor: pointer; display: flex; align-items: center; gap: 10px;"
+                  style="text-align: left; padding: 14px 18px; border-radius: 12px; border: 1.5px solid {isSelected ? '#0284c7' : '#cbd5e1'}; background: {isSelected ? '#f0f9ff' : '#ffffff'}; font-size: 15px; font-weight: 700; color: #1e293b; cursor: pointer; display: flex; align-items: center; gap: 14px; box-shadow: {isSelected ? '0 2px 0 #0284c7' : '0 1px 2px rgba(0,0,0,0.03)'}; transition: all 0.15s ease;"
                 >
-                  <span style="width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid {isSelected ? '#d97706' : '#94a3b8'}; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; background: {isSelected ? '#d97706' : '#ffffff'}; color: {isSelected ? '#ffffff' : '#64748b'};">
+                  <span
+                    style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid {isSelected ? '#0284c7' : '#94a3b8'}; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; background: {isSelected ? '#0284c7' : '#f8fafc'}; color: {isSelected ? '#ffffff' : '#64748b'}; flex-shrink: 0;"
+                  >
                     {String.fromCharCode(65 + optIdx)}
                   </span>
-                  <span>{getOptionLabel(opt, optIdx)}</span>
+                  <span style="flex: 1;">{getOptionLabel(opt, optIdx)}</span>
                 </button>
               {/each}
             </div>
           {/if}
 
+          <!-- Bottom Actions -->
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <button
               type="button"
               class="reading-tool-btn"
               disabled={mathState.currentIndex <= 0}
               onclick={() => (mathState.currentIndex = Math.max(0, mathState.currentIndex - 1))}
+              style="padding: 9px 18px; font-size: 13px; font-weight: 700;"
             >
               ◀ Previous
             </button>
@@ -102,19 +126,22 @@
             {#if mathState.currentIndex < mathState.quizQuestions.length - 1}
               <button
                 type="button"
-                class="reading-tool-btn active"
-                onclick={() => (mathState.currentIndex = Math.min(mathState.quizQuestions.length - 1, mathState.currentIndex + 1))}
+                style="background: #16a34a; color: #ffffff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13.5px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 0 #15803d; transition: all 0.15s ease;"
+                onclick={() =>
+                  (mathState.currentIndex = Math.min(
+                    mathState.quizQuestions.length - 1,
+                    mathState.currentIndex + 1
+                  ))}
               >
                 Next ▶
               </button>
             {:else}
               <button
                 type="button"
-                class="reading-tool-btn active"
-                style="background: var(--green); border-color: var(--ink);"
+                style="background: #16a34a; color: #ffffff; border: none; border-radius: 8px; padding: 10px 22px; font-size: 13.5px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 0 #15803d; transition: all 0.15s ease;"
                 onclick={() => mathState.submitQuiz()}
               >
-                Finish &amp; Score Math Test ✓
+                Finish Test ✓
               </button>
             {/if}
           </div>
@@ -122,8 +149,10 @@
       </div>
     {:else}
       <!-- Results Screen -->
-      <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: 20px; box-shadow: 0 3px 0 var(--ink); text-align: center; margin-bottom: 16px;">
-        <div style="font-size: 40px; margin-bottom: 6px;">
+      <div
+        style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: 24px; box-shadow: 0 3px 0 var(--ink); text-align: center; margin-bottom: 16px;"
+      >
+        <div style="font-size: 42px; margin-bottom: 6px;">
           {mathState.score >= 8 ? '🎯' : '🧮'}
         </div>
         <div style="font-size: 24px; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
@@ -136,30 +165,54 @@
           type="button"
           class="reading-tool-btn active"
           onclick={() => mathState.startQuiz(10)}
-          style="padding: 8px 18px; font-size: 13px;"
+          style="padding: 9px 20px; font-size: 13px;"
         >
           ↺ New Quiz
         </button>
       </div>
     {/if}
   {:else if activeMode === 'grams'}
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
+    <!-- Grams & Kilograms Reference Cards -->
+    <div
+      style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(8px, 1.5vw, 12px);"
+    >
       {#each mathState.gramsData as item}
-        <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-          <div style="font-weight: 700; font-size: 14px; color: var(--ink);">{item.question || item.prompt}</div>
-          <div style="font-weight: 800; font-size: 13px; color: var(--teal); background: #f0fdfa; padding: 4px 10px; border-radius: 8px; border: 1px solid #99f6e4;">
-            {item.answer || (item.options && item.options[item.correct]) || '--'}
+        <div
+          style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 14px; box-shadow: 0 2px 0 var(--ink); display: flex; flex-direction: column; gap: 6px;"
+        >
+          <div style="font-weight: 800; font-size: 14px; color: var(--ink);">
+            {item.question || item.prompt}
+          </div>
+          <div style="font-size: 13px; color: #475569;">
+            {item.explanation || item.note || ''}
+          </div>
+          <div
+            style="font-weight: 800; font-size: 13px; color: #047857; background: #f0fdf4; padding: 6px 10px; border-radius: 8px; border: 1px solid #bbf7d0; margin-top: auto;"
+          >
+            {item.options ? item.options[item.correct] : item.answer}
           </div>
         </div>
       {/each}
     </div>
   {:else if activeMode === 'change'}
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
-      {#each mathState.changeData as item}
-        <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-          <div style="font-weight: 700; font-size: 14px; color: var(--ink);">{item.question || item.prompt}</div>
-          <div style="font-weight: 800; font-size: 13px; color: var(--orange); background: #fff7ed; padding: 4px 10px; border-radius: 8px; border: 1px solid #fed7aa;">
-            {item.answer || (item.options && item.options[item.correct]) || '--'}
+    <!-- Change & Discounts Reference Cards -->
+    <div
+      style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(8px, 1.5vw, 12px);"
+    >
+      {#each [...mathState.changeData, ...mathState.discountData] as item}
+        <div
+          style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 14px; box-shadow: 0 2px 0 var(--ink); display: flex; flex-direction: column; gap: 6px;"
+        >
+          <div style="font-weight: 800; font-size: 14px; color: var(--ink);">
+            {item.question || item.prompt}
+          </div>
+          <div style="font-size: 13px; color: #475569;">
+            {item.explanation || item.note || ''}
+          </div>
+          <div
+            style="font-weight: 800; font-size: 13px; color: #b45309; background: #fffbeb; padding: 6px 10px; border-radius: 8px; border: 1px solid #fde68a; margin-top: auto;"
+          >
+            {item.options ? item.options[item.correct] : item.answer}
           </div>
         </div>
       {/each}

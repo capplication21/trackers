@@ -13,8 +13,7 @@
     { id: 'mathtest', icon: '🧮', badge: 'MATHS', title: 'Math Test' },
     { id: 'notes', icon: '🤲', badge: 'DUAAS', title: 'Duaa Book' },
     { id: 'pdf', icon: '📖', badge: 'BOOKS', title: 'PDF Reader' },
-    { id: 'summary', icon: '📊', badge: 'STATS', title: 'Summary' },
-    { id: 'templates', icon: '📋', badge: 'TEMPLATES', title: 'Template Book' },
+    { id: 'templates', icon: '📖', badge: 'STORIES', title: 'English Stories Book' },
     { id: 'adkar', icon: '📿', badge: 'ADKAR', title: 'Adkar' },
     { id: 'reading', icon: '📚', badge: 'READING', title: 'Reading Book' }
   ];

@@ -9,7 +9,6 @@
   import WeekSection from '$lib/components/tracker/WeekSection.svelte';
   import HistorySection from '$lib/components/tracker/HistorySection.svelte';
   import PeriodSection from '$lib/components/tracker/PeriodSection.svelte';
-  import SummarySection from '$lib/components/tracker/SummarySection.svelte';
   import RecipeBookSection from '$lib/components/routines/RecipeBookSection.svelte';
   import AdkarDuaSection from '$lib/components/routines/AdkarDuaSection.svelte';
   import B1EnglishRoutine from '$lib/components/routines/B1EnglishRoutine.svelte';
@@ -36,8 +35,6 @@
       <HistorySection />
     {:else if navigationState.activeTab === 'period'}
       <PeriodSection />
-    {:else if navigationState.activeTab === 'summary'}
-      <SummarySection />
     {:else if navigationState.activeTab === 'recipe'}
       <RecipeBookSection />
     {:else if navigationState.activeTab === 'adkar'}
