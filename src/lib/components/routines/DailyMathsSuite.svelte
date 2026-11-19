@@ -143,9 +143,9 @@
       </div>
     {/if}
   {:else if activeMode === 'grams'}
-    <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
       {#each mathState.gramsData as item}
-        <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink); display: flex; justify-content: space-between; align-items: center;">
+        <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
           <div style="font-weight: 700; font-size: 14px; color: var(--ink);">{item.question || item.prompt}</div>
           <div style="font-weight: 800; font-size: 13px; color: var(--teal); background: #f0fdfa; padding: 4px 10px; border-radius: 8px; border: 1px solid #99f6e4;">
             {item.answer || (item.options && item.options[item.correct]) || '--'}
@@ -154,9 +154,9 @@
       {/each}
     </div>
   {:else if activeMode === 'change'}
-    <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
       {#each mathState.changeData as item}
-        <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink); display: flex; justify-content: space-between; align-items: center;">
+        <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
           <div style="font-weight: 700; font-size: 14px; color: var(--ink);">{item.question || item.prompt}</div>
           <div style="font-weight: 800; font-size: 13px; color: var(--orange); background: #fff7ed; padding: 4px 10px; border-radius: 8px; border: 1px solid #fed7aa;">
             {item.answer || (item.options && item.options[item.correct]) || '--'}

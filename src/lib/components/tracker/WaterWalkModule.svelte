@@ -13,7 +13,7 @@
   <!-- Water & Walk Daily Summary Card -->
   <div class="history-card chore-card" style="margin-bottom:14px;">
     <div class="chore-question">💧 Daily Hydration &amp; Movement</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 170px), 1fr));gap:12px;margin:12px 0;">
       <div style="background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:12px;padding:12px;text-align:center;">
         <div style="font-size:11px;font-weight:800;color:#0d9488;">TOTAL WATER</div>
         <div style="font-size:24px;font-weight:800;color:#0f766e;margin:4px 0;">{trackerState.totalWaterGlasses} glasses</div>
@@ -28,13 +28,13 @@
   </div>
 
   <!-- Hair Wash Card -->
-  <div class="history-card chore-card">
+  <div class="history-card chore-card" style="margin-bottom:14px;">
     <div class="chore-question">🧴 Washed hair this week?</div>
-    <div class="hair-wash-row">
+    <div class="hair-wash-row" style="flex-wrap: wrap; gap: 10px;">
       <div class="hair-wash-count" id="hairWashCount">
         {trackerState.hairWashCount} / 2 this week
       </div>
-      <div class="hair-wash-buttons">
+      <div class="hair-wash-buttons" style="flex-wrap: wrap;">
         <button
           type="button"
           class="hair-wash-btn hair-wash-minus"
@@ -59,8 +59,8 @@
         style="width:{Math.min(100, (trackerState.hairWashCount / 2) * 100)}%;"
       ></div>
     </div>
-    <div class="medicine-reminder-row">
-      <div>
+    <div class="medicine-reminder-row" style="flex-wrap: wrap; gap: 10px;">
+      <div style="min-width: 180px; flex: 1;">
         <div class="medicine-reminder-text">🔔 Hair wash reminders</div>
         <div class="medicine-reminder-sub" id="hairWashReminderSub">
           {trackerState.hairWashReminders ? 'Reminders active for this week.' : "Get a nudge if you're behind on 2x this week."}
@@ -89,7 +89,7 @@
     >
       <span>⌨️</span> Open Typing.com Lessons
     </a>
-    <div class="typing-range-row">
+    <div class="typing-range-row" style="flex-wrap: wrap; gap: 8px;">
       <div class="typing-date-picker-box">
         <span class="lecture-date-icon">📅</span>
         <span class="typing-date-display" id="typingStartDateDisplay">

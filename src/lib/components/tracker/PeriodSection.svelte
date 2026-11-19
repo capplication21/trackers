@@ -41,7 +41,7 @@
   </div>
 
   <!-- Period Bar -->
-  <div class="nav-bar">
+  <div class="nav-bar" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: clamp(8px, 2vw, 14px);">
     <div class="nav-title-section">
       <span class="nav-title-label">First Date (Last)</span>
       <span class="nav-title-value">{latestPeriod?.start || '--'}</span>
@@ -61,8 +61,8 @@
   </div>
 
   <!-- Fertility Overview Card -->
-  <div class="period-fertility-card" style="background: linear-gradient(135deg, #fffbeb 0%, #faf5ff 100%); border: 2px solid #ddd6fe; border-radius: 14px; padding: 14px 16px; margin-bottom: 14px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+  <div class="period-fertility-card" style="background: linear-gradient(135deg, #fffbeb 0%, #faf5ff 100%); border: 2px solid #ddd6fe; border-radius: 14px; padding: clamp(12px, 2vw, 16px); margin-bottom: 14px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
       <span style="font-weight: 800; font-size: 13.5px; color: #581c87; display: flex; align-items: center; gap: 5px;">
         <span>🌸</span> Fertility &amp; Cycle Overview
       </span>
@@ -70,7 +70,7 @@
         ⚡ {trackerState.periodData.defaultCycleLength || 28} days cycle
       </span>
     </div>
-    <div style="display: flex; justify-content: space-between; align-items: center; background: #f5f3ff; border: 1.5px solid #ddd6fe; border-radius: 10px; padding: 8px 12px; font-size: 12px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; background: #f5f3ff; border: 1.5px solid #ddd6fe; border-radius: 10px; padding: 8px 12px; font-size: 12px; flex-wrap: wrap; gap: 6px;">
       <span style="color: #5b21b6; font-weight: 800;">✨ Next Period Date: <strong style="color: #7c3aed;">{nextPeriodEstimate.dateStr}</strong></span>
       <span style="color: #6d28d9; font-weight: 700;">Last Logged: {latestPeriod?.start || '--'}</span>
     </div>
@@ -88,12 +88,14 @@
           No period history yet. Tap "Add / Edit" to get started.
         </div>
       {:else}
-        {#each trackerState.periodData.periods as p (p.id || p.start)}
-          <div style="display:flex;justify-content:space-between;padding:10px 12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;">
-            <div style="font-weight:800;color:var(--ink);">{p.start} {#if p.end && p.end !== p.start}➔ {p.end}{/if}</div>
-            <span style="color:#7c3aed;font-weight:700;font-size:12px;">Logged</span>
-          </div>
-        {/each}
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 8px;">
+          {#each trackerState.periodData.periods as p (p.id || p.start)}
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+              <div style="font-weight: 800; color: var(--ink); font-size: 13px;">{p.start} {#if p.end && p.end !== p.start}➔ {p.end}{/if}</div>
+              <span style="color: #7c3aed; font-weight: 700; font-size: 11.5px;">Logged</span>
+            </div>
+          {/each}
+        </div>
       {/if}
     </div>
   </div>
@@ -102,21 +104,21 @@
 {#if showModal}
   <div class="reading-modal-overlay">
     <div class="reading-modal-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <div style="font-size:15px;font-weight:800;color:#fef08a;">🌸 Log Period</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div style="font-size: 15px; font-weight: 800; color: #fef08a;">🌸 Log Period</div>
         <button type="button" class="reading-tool-btn" onclick={() => (showModal = false)}>✕</button>
       </div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
         <div>
-          <label for="periodStartDate" style="font-size:11px;font-weight:800;color:#cbd5e1;display:block;margin-bottom:4px;">First Day of Period *</label>
-          <input id="periodStartDate" type="date" bind:value={newStart} style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#ffffff;box-sizing:border-box;" />
+          <label for="periodStartDate" style="font-size: 11px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 4px;">First Day of Period *</label>
+          <input id="periodStartDate" type="date" bind:value={newStart} style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #ffffff; box-sizing: border-box;" />
         </div>
         <div>
-          <label for="periodEndDate" style="font-size:11px;font-weight:800;color:#cbd5e1;display:block;margin-bottom:4px;">End Date (Optional)</label>
-          <input id="periodEndDate" type="date" bind:value={newEnd} style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#ffffff;box-sizing:border-box;" />
+          <label for="periodEndDate" style="font-size: 11px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 4px;">End Date (Optional)</label>
+          <input id="periodEndDate" type="date" bind:value={newEnd} style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #ffffff; box-sizing: border-box;" />
         </div>
       </div>
-      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
+      <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px;">
         <button type="button" class="reading-tool-btn" onclick={() => (showModal = false)}>Cancel</button>
         <button type="button" class="reading-tool-btn active" onclick={handleAddPeriod}>Save Entry</button>
       </div>

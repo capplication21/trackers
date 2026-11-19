@@ -73,7 +73,7 @@
         <div class="dropdown-header">
           <div class="dropdown-title">
             <span class="title-icon">🧭</span>
-            <span>All Apps & Tools</span>
+            <span>All Apps &amp; Tools</span>
             <span class="app-count">{navItems.length}</span>
           </div>
           <button
@@ -110,7 +110,7 @@
 <style>
   .app-top-nav-bar {
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: clamp(10px, 2vw, 16px);
     position: sticky;
     top: 0;
     z-index: 9999;
@@ -121,11 +121,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: clamp(6px, 1.5vw, 12px);
     background: #ffffff;
     border: 2.5px solid var(--ink, #141413);
-    border-radius: 14px;
-    padding: 8px 12px;
+    border-radius: clamp(12px, 2vw, 16px);
+    padding: clamp(6px, 1.2vw, 10px) clamp(8px, 1.5vw, 14px);
     box-shadow: 0 3px 0 var(--ink, #141413);
   }
 
@@ -136,8 +136,8 @@
     background: #fef08a;
     border: 2px solid var(--ink, #141413);
     border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 11.5px;
+    padding: 4px clamp(6px, 1vw, 10px);
+    font-size: clamp(10.5px, 1.3vw, 12px);
     font-weight: 900;
     letter-spacing: 0.5px;
     color: #141413;
@@ -151,18 +151,26 @@
   .current-section-badge {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
-    font-size: 14px;
+    font-size: clamp(12.5px, 1.6vw, 14.5px);
     font-weight: 800;
     color: #1e1b4b;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    flex: 1;
+    min-width: 0;
   }
 
   .section-icon {
-    font-size: 15px;
+    font-size: clamp(14px, 1.8vw, 16px);
+  }
+
+  .section-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .nav-menu-toggle-btn {
@@ -173,8 +181,8 @@
     color: #ffffff;
     border: 2px solid var(--ink, #141413);
     border-radius: 999px;
-    padding: 6px 14px;
-    font-size: 13px;
+    padding: clamp(4px, 1vw, 6px) clamp(8px, 1.5vw, 14px);
+    font-size: clamp(11.5px, 1.4vw, 13px);
     font-weight: 800;
     cursor: pointer;
     box-shadow: 0 2px 0 var(--ink, #141413);
@@ -205,18 +213,17 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: max(16px, env(safe-area-inset-top, 0px)) 12px 20px;
+    padding: max(16px, env(safe-area-inset-top, 0px)) clamp(10px, 2.5vw, 20px) 20px;
   }
 
   .nav-menu-dropdown {
     background: #ffffff;
     border: 2.5px solid var(--ink, #141413);
-    border-radius: 20px;
-    width: 100%;
-    max-width: 440px;
-    max-height: calc(100vh - 50px);
+    border-radius: clamp(16px, 2.5vw, 24px);
+    width: min(100%, 540px);
+    max-height: calc(100vh - 40px);
     overflow-y: auto;
-    padding: 16px;
+    padding: clamp(12px, 2vw, 20px);
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25), 0 5px 0 var(--ink, #141413);
     animation: menuSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -245,7 +252,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 15px;
+    font-size: clamp(13.5px, 2vw, 16px);
     font-weight: 900;
     color: #1e1b4b;
   }
@@ -263,8 +270,8 @@
     background: #f1f5f9;
     border: 2px solid var(--ink, #141413);
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     font-size: 14px;
     font-weight: 800;
     display: flex;
@@ -280,8 +287,8 @@
 
   .dropdown-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr));
+    gap: clamp(6px, 1.2vw, 10px);
   }
 
   .dropdown-item {
@@ -291,7 +298,7 @@
     background: #f8fafc;
     border: 2px solid var(--ink, #141413);
     border-radius: 12px;
-    padding: 10px 12px;
+    padding: clamp(8px, 1.5vw, 12px);
     cursor: pointer;
     text-align: left;
     box-shadow: 0 2px 0 var(--ink, #141413);
@@ -329,7 +336,7 @@
   }
 
   .item-name {
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 800;
     color: #1e1b4b;
     white-space: nowrap;
@@ -338,7 +345,7 @@
   }
 
   .item-badge {
-    font-size: 9.5px;
+    font-size: 9px;
     font-weight: 800;
     color: #64748b;
     letter-spacing: 0.3px;

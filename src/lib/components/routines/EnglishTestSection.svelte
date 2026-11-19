@@ -119,7 +119,7 @@
     </div>
 
     <!-- Question by Question Review -->
-    <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
       {#each englishState.testQuestions as q, qIdx}
         {@const userAns = englishState.userAnswers[qIdx]}
         {@const isCorrect = userAns === q.correct}

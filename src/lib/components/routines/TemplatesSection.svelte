@@ -13,26 +13,28 @@
     <span>📋</span> TEMPLATE BOOK &amp; PROMPTS
   </div>
 
-  <div style="display: flex; flex-direction: column; gap: 14px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: clamp(10px, 2vw, 16px);">
     {#each notesState.templates as tmpl}
-      <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: 16px; box-shadow: 0 3px 0 var(--ink);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <div style="font-size: 15px; font-weight: 800; color: var(--ink);">
-            {tmpl.title || 'Journal Template'}
+      <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: clamp(12px, 2vw, 18px); box-shadow: 0 3px 0 var(--ink); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+            <div style="font-size: 15px; font-weight: 800; color: var(--ink);">
+              {tmpl.title || 'Journal Template'}
+            </div>
+            <button
+              type="button"
+              class="reading-tool-btn active"
+              onclick={() => useTemplate(tmpl)}
+              style="font-size: 11px; padding: 4px 10px;"
+            >
+              Use in Journal ➔
+            </button>
           </div>
-          <button
-            type="button"
-            class="reading-tool-btn active"
-            onclick={() => useTemplate(tmpl)}
-            style="font-size: 11px; padding: 4px 10px;"
-          >
-            Use in Journal ➔
-          </button>
+          <p style="font-size: 12px; color: #64748b; margin-bottom: 10px; line-height: 1.4;">
+            {tmpl.description || 'Pre-formatted reflection template.'}
+          </p>
         </div>
-        <p style="font-size: 12px; color: #64748b; margin-bottom: 10px; line-height: 1.4;">
-          {tmpl.description || 'Pre-formatted reflection template.'}
-        </p>
-        <pre style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 12px; line-height: 1.5; color: #334155; white-space: pre-wrap; font-family: inherit;">{tmpl.content || tmpl.text}</pre>
+        <pre style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; font-size: 12px; line-height: 1.5; color: #334155; white-space: pre-wrap; font-family: inherit; margin-top: auto;">{tmpl.content || tmpl.text}</pre>
       </div>
     {/each}
   </div>

@@ -56,8 +56,8 @@
   </div>
 
   <!-- Overall Progress Bar -->
-  <div style="background:#ffffff;border:2px solid var(--ink);border-radius:14px;padding:12px 16px;margin-bottom:14px;box-shadow:0 3px 0 var(--ink);">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+  <div style="background:#ffffff;border:2px solid var(--ink);border-radius:14px;padding:clamp(10px, 1.5vw, 14px) clamp(12px, 2vw, 18px);margin-bottom:14px;box-shadow:0 3px 0 var(--ink);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px;">
       <span style="font-size:12px;font-weight:800;color:var(--ink);">TODAY'S PROGRESS</span>
       <span style="font-size:12px;font-weight:800;color:var(--teal);">{trackerState.completedCount} / {trackerState.tasks.length} ({trackerState.completionPercentage}%)</span>
     </div>
@@ -73,7 +73,7 @@
         <span>🎯</span> DAILY ACTIVITIES &amp; STUDY HUBS
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(10px, 1.5vw, 14px); margin-bottom: 16px;">
         <!-- 1. 3 DAYS A WEEK -->
         <div
           class="activity-link-card"
@@ -81,13 +81,13 @@
           onkeydown={(e) => { if (e.key === 'Enter') navigationState.setTab('week'); }}
           tabindex="0"
           role="button"
-          style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink);"
+          style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: transform 0.15s ease;"
         >
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
             <div class="hub-card-icon" style="font-size:22px; width: 40px; height: 40px; background: #ffffff; border: 2px solid #f59e0b; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               📅
             </div>
-            <div>
+            <div style="min-width: 0;">
               <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
                 <span style="font-size: 14px; font-weight: 800; color: #78350f;">3 DAYS A WEEK</span>
                 <span class="hub-card-badge" style="background: #fde68a; color: #92400e; border-color: #f59e0b;">COURSES</span>
@@ -109,23 +109,23 @@
           onkeydown={(e) => { if (e.key === 'Enter') navigationState.setTab('reading'); }}
           tabindex="0"
           role="button"
-          style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink);"
+          style="background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: transform 0.15s ease;"
         >
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
             <div class="hub-card-icon" style="font-size:22px; width: 40px; height: 40px; background: #ffffff; border: 2px solid #db2777; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               📚
             </div>
-            <div>
+            <div style="min-width: 0;">
               <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
                 <span style="font-size: 14px; font-weight: 800; color: #831843;">ENGLISH2FLOW READING</span>
-                <span class="hub-card-badge" style="background: #fbcfe8; color: #9d174d; border-color: #ec4899;">3D BOOK</span>
+                <span class="hub-card-badge" style="background: #fbcfe8; color: #9d174d; border-color: #db2777;">STORIES</span>
               </div>
               <div style="font-size: 11.5px; color: #9d174d; opacity: 0.85; margin-top: 2px;">
-                Graded readers, synchronized video/audio bar &amp; 3D flipbook
+                Graded reader books with companion audio sync &amp; vocab pills
               </div>
             </div>
           </div>
-          <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #db2777; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+          <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #be185d; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
             Read ↗
           </button>
         </div>
@@ -137,46 +137,102 @@
           onkeydown={(e) => { if (e.key === 'Enter') navigationState.setTab('english'); }}
           tabindex="0"
           role="button"
-          style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink);"
+          style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: transform 0.15s ease;"
         >
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="hub-card-icon" style="font-size:22px; width: 40px; height: 40px; background: #ffffff; border: 2px solid #2563eb; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <div class="hub-card-icon" style="font-size:22px; width: 40px; height: 40px; background: #ffffff; border: 2px solid #16a34a; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               🔤
             </div>
-            <div>
+            <div style="min-width: 0;">
               <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                <span style="font-size: 14px; font-weight: 800; color: #1e3a8a;">ENGLISH B1 TOOLKIT</span>
-                <span class="hub-card-badge" style="background: #bfdbfe; color: #1d4ed8; border-color: #3b82f6;">STUDY</span>
+                <span style="font-size: 14px; font-weight: 800; color: #14532d;">B1 ENGLISH ROUTINE</span>
+                <span class="hub-card-badge" style="background: #bbf7d0; color: #166534; border-color: #16a34a;">FLUENCY</span>
               </div>
-              <div style="font-size: 11.5px; color: #1e40af; opacity: 0.85; margin-top: 2px;">
-                Vocabulary, Grammar, Phonics, Daily Routine &amp; Practice
+              <div style="font-size: 11.5px; color: #166534; opacity: 0.85; margin-top: 2px;">
+                4 Pillars daily fluency studio &amp; searchable dictionary
               </div>
             </div>
           </div>
-          <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #2563eb; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
-            Study ↗
+          <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #15803d; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+            Practice ↗
           </button>
         </div>
 
-        <!-- 4. MORNING & EVENING ADKAR -->
+        <!-- 4. ENGLISH EXAM TEST -->
+        <div
+          class="activity-link-card"
+          onclick={() => navigationState.setTab('englishtest')}
+          onkeydown={(e) => { if (e.key === 'Enter') navigationState.setTab('englishtest'); }}
+          tabindex="0"
+          role="button"
+          style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: transform 0.15s ease;"
+        >
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <div class="hub-card-icon" style="font-size:22px; width: 40px; height: 40px; background: #ffffff; border: 2px solid #2563eb; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              📝
+            </div>
+            <div style="min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span style="font-size: 14px; font-weight: 800; color: #1e3a8a;">B1 ENGLISH MOCK EXAM</span>
+                <span class="hub-card-badge" style="background: #bfdbfe; color: #1e40af; border-color: #2563eb;">TEST</span>
+              </div>
+              <div style="font-size: 11.5px; color: #1e40af; opacity: 0.85; margin-top: 2px;">
+                10-question randomized mock test engine with instant score tally
+              </div>
+            </div>
+          </div>
+          <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #1d4ed8; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+            Test ↗
+          </button>
+        </div>
+
+        <!-- 5. DAILY MATHS SUITE -->
+        <div
+          class="activity-link-card"
+          onclick={() => navigationState.setTab('mathtest')}
+          onkeydown={(e) => { if (e.key === 'Enter') navigationState.setTab('mathtest'); }}
+          tabindex="0"
+          role="button"
+          style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: transform 0.15s ease;"
+        >
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+            <div class="hub-card-icon" style="font-size:22px; width: 40px; height: 40px; background: #ffffff; border: 2px solid #d97706; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              🧮
+            </div>
+            <div style="min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                <span style="font-size: 14px; font-weight: 800; color: #78350f;">DAILY MATHS SUITE</span>
+                <span class="hub-card-badge" style="background: #fde68a; color: #92400e; border-color: #d97706;">MATHS</span>
+              </div>
+              <div style="font-size: 11.5px; color: #92400e; opacity: 0.85; margin-top: 2px;">
+                Gram conversions, change calculations &amp; discount quizzes
+              </div>
+            </div>
+          </div>
+          <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #b45309; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800;">
+            Solve ↗
+          </button>
+        </div>
+
+        <!-- 6. ADKAR & DUAS -->
         <div
           class="activity-link-card"
           onclick={() => navigationState.setTab('adkar')}
           onkeydown={(e) => { if (e.key === 'Enter') navigationState.setTab('adkar'); }}
           tabindex="0"
           role="button"
-          style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink);"
+          style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 2px solid var(--ink); border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); transition: transform 0.15s ease;"
         >
-          <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
             <div class="hub-card-icon" style="font-size:22px; width: 40px; height: 40px; background: #ffffff; border: 2px solid #059669; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               📿
             </div>
-            <div>
+            <div style="min-width: 0;">
               <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                <span style="font-size: 14px; font-weight: 800; color: #064e3b;">ADKAR &amp; DUAS</span>
-                <span class="hub-card-badge" style="background: #a7f3d0; color: #065f46; border-color: #10b981;">DHIKR</span>
+                <span style="font-size: 14px; font-weight: 800; color: #064e3b;">ADKAR &amp; SUPPLICATIONS</span>
+                <span class="hub-card-badge" style="background: #a7f3d0; color: #065f46; border-color: #059669;">DHIKR</span>
               </div>
-              <div style="font-size: 11.5px; color: #047857; opacity: 0.85; margin-top: 2px;">
+              <div style="font-size: 11.5px; color: #065f46; opacity: 0.85; margin-top: 2px;">
                 Morning &amp; Evening Supplications with interactive counters
               </div>
             </div>
@@ -196,7 +252,7 @@
       </div>
 
       <!-- Water & Walk Quick Counter for this period -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 150px), 1fr));gap:clamp(10px, 1.5vw, 14px);margin-bottom:14px;">
         <div style="background:#ffffff;border:2px solid var(--ink);border-radius:14px;padding:12px;box-shadow:0 3px 0 var(--ink);text-align:center;">
           <div style="font-size:12px;font-weight:800;color:var(--teal);margin-bottom:6px;">💧 WATER ({activePeriod})</div>
           <div style="font-size:22px;font-weight:800;color:var(--ink);margin-bottom:8px;">{trackerState.water[activePeriod] || 0} glasses</div>
@@ -217,7 +273,7 @@
       </div>
 
       <!-- Task Checklist for this Period -->
-      <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr));gap:clamp(8px, 1.2vw, 12px);">
         {#each periodTasks as task (task.id || task.text)}
           {@const isDone = trackerState.completedTasks[task.id || task.text]}
           <div

@@ -85,7 +85,7 @@
   </div>
 
   <!-- Recipe Grid -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: clamp(10px, 1.5vw, 16px);">
     {#each recipeState.filteredRecipes as recipe (recipe.id || recipe.title)}
       <div
         class="recipe-card-item"

@@ -57,7 +57,7 @@
         <div style="font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 12px;">
           🌟 Daily 4 Pillars to Fluency
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
           <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 12px;">
             <div style="font-weight: 800; font-size: 13px; color: #1e40af; margin-bottom: 4px;">🎧 1. Listening (15 mins)</div>
             <div style="font-size: 11.5px; color: #1e3a8a; line-height: 1.4;">Listen to English2Flow story videos or BBC 6 Minute English. Focus on accent &amp; rhythm.</div>
@@ -87,7 +87,7 @@
         style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 12px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 0 var(--ink); box-sizing: border-box;"
       />
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
         {#each filteredVocab as v}
           <div style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 12px; padding: 12px; box-shadow: 0 2px 0 var(--ink);">
             <div style="font-size: 14px; font-weight: 800; color: #1e3a8a; margin-bottom: 4px;">

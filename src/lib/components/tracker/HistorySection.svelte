@@ -19,13 +19,13 @@
       <p style="font-size: 12px; margin-top: 4px;">Complete daily habits and tasks to see your historical performance here.</p>
     </div>
   {:else}
-    <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: clamp(8px, 1.5vw, 12px);">
       {#each trackerState.history as entry (entry.date)}
         {@const pct = entry.total ? Math.round((entry.completed / entry.total) * 100) : 0}
-        <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px; box-shadow: 0 3px 0 var(--ink); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: clamp(10px, 1.5vw, 14px); box-shadow: 0 3px 0 var(--ink); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
           <div>
             <div style="font-size: 14px; font-weight: 800; color: var(--ink);">{entry.date}</div>
-            <div style="font-size: 11.5px; color: #64748b; font-weight: 700; display: flex; gap: 10px; margin-top: 4px;">
+            <div style="font-size: 11.5px; color: #64748b; font-weight: 700; display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap;">
               <span>💧 {entry.waterGlasses || 0} glasses</span>
               <span>🚶 {entry.walkSteps || 0} steps</span>
             </div>

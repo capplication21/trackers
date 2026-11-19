@@ -52,7 +52,7 @@
         min-height: 100dvh;
         display: flex;
         justify-content: center;
-        padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) calc(78px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+        padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
         overflow-x: hidden;
         touch-action: pan-y;
       }
@@ -97,7 +97,9 @@
       }
       .app-container {
         width: 100%;
-        max-width: 420px;
+        max-width: min(100%, 1160px);
+        margin: 0 auto;
+        box-sizing: border-box;
       }
 
       /* Navigation Bar - Only shows Next Period countdown */
@@ -1414,22 +1416,11 @@
       /* Compact Grid: 3 columns on mobile, 4 on tablet, 6 on desktop */
       .hub-cards-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 115px), 1fr));
+        gap: clamp(8px, 1.5vw, 14px);
         width: 100%;
       }
-      @media (min-width: 600px) {
-        .hub-cards-grid {
-          grid-template-columns: repeat(4, 1fr);
-          gap: 10px;
-        }
-      }
-      @media (min-width: 880px) {
-        .hub-cards-grid {
-          grid-template-columns: repeat(6, 1fr);
-          gap: 10px;
-        }
-      }
+      
 
       /* Small Light Theme Card (Entire Card Clickable, No Description, No Open Button) */
       .hub-card {
@@ -2867,8 +2858,8 @@
       /* --- Bookshelf Book Cards Grid --- */
       .reading-bookshelf-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+        gap: clamp(10px, 1.5vw, 16px);
         padding: 4px 2px;
       }
 
@@ -3417,13 +3408,8 @@
         color: #f8fafc;
       }
 
-      @media (max-width: 768px) {
-        .reading-flip-arrow-prev { left: 4px; }
-        .reading-flip-arrow-next { right: 4px; }
-        .reading-bookshelf-grid {
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        }
-      }
+      .reading-flip-arrow-prev { left: clamp(4px, 1.5vw, 16px) !important; }
+      .reading-flip-arrow-next { right: clamp(4px, 1.5vw, 16px) !important; }
 
       .timer-wrap {
         display: flex;
@@ -5462,11 +5448,7 @@
         background: #fdfcf9;
         border-radius: 10px;
       }
-      @media (min-width: 540px) {
-        .cb-meta-strip {
-          grid-template-columns: repeat(6, 1fr);
-        }
-      }
+      
       .cb-meta-cell {
         display: flex;
         flex-direction: column;
@@ -5515,15 +5497,9 @@
       /* Two-Column Editorial Layout */
       .cb-content-grid {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: clamp(16px, 2.5vw, 24px);
         margin-top: 8px;
-      }
-      @media (min-width: 600px) {
-        .cb-content-grid {
-          grid-template-columns: 1fr 1fr;
-          gap: 24px;
-        }
       }
       .cb-section-heading {
         font-family: 'Playfair Display', Georgia, serif;
@@ -8328,175 +8304,187 @@
       }
 
       /* ==========================================================================
-         iPad Air 5th Gen (820px x 1180px / 1180px x 820px) & Tablet Responsiveness
+         Unified Responsive Layout System (Fluid CSS Grid & Modern Flexbox)
          ========================================================================== */
-      @media (min-width: 768px) {
-        body {
-          padding: max(20px, env(safe-area-inset-top, 0px)) 24px max(30px, env(safe-area-inset-bottom, 0px)) 24px;
-        }
-
-        .app-container {
-          max-width: 780px;
-          width: 100%;
-        }
-
-        /* iPad Modals */
-        .modal-overlay {
-          align-items: center;
-          padding: 24px;
-        }
-
-        .modal-card {
-          max-width: 540px;
-          border-radius: 24px;
-          padding: 28px;
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 6px 0 var(--ink);
-        }
-
-        /* Duaa Grid on iPad */
-        #notesListContainer {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-        }
-
-        #notesListContainer .duaa-card {
-          margin-bottom: 0;
-          display: flex;
-          flex-direction: column;
-        }
-
-        #notesListContainer .duaa-card-footer {
-          margin-top: auto;
-        }
-
-        #notesListContainer .history-empty {
-          grid-column: 1 / -1;
-        }
-
-        .duaa-book-container {
-          max-width: 680px;
-          border-radius: 24px;
-        }
-
-        .duaa-reader-arabic {
-          font-size: 28px;
-          line-height: 2.2;
-          padding: 24px 20px;
-        }
-
-        .duaa-reader-trans {
-          font-size: 16px;
-        }
-
-        /* Recipe Grid on iPad */
-        #recipeList,
-        #recipeFavoritesList,
-        #recipeMustTryList,
-        #recipeQuickList,
-        #recipeOkayList {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-        }
-
-        #recipeList .recipe-card,
-        #recipeFavoritesList .recipe-card,
-        #recipeMustTryList .recipe-card,
-        #recipeQuickList .recipe-card,
-        #recipeOkayList .recipe-card {
-          margin-bottom: 0;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .recipe-card .recipe-card-footer {
-          margin-top: auto;
-        }
-
-        /* English Vocab Grid on iPad */
-        #englishVocabList {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-        }
-
-        .english-vocab-item {
-          margin-top: 0;
-        }
-
-        /* Period History & Stats */
-        .history-stats {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 14px;
-        }
-
-        .stat-box {
-          padding: 14px 10px;
-        }
-
-        .stat-value {
-          font-size: 24px;
-        }
-
-        /* Summary Tab Cards Grid */
-        #tab-summary.active {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-        }
-
-        #tab-summary .section-title {
-          grid-column: 1 / -1;
-          margin-bottom: 0;
-        }
-
-        #tab-summary .summary-card {
-          margin-bottom: 0;
-        }
+      .app-container {
+        width: 100%;
+        max-width: min(100%, 1160px);
+        margin: 0 auto;
+        box-sizing: border-box;
       }
 
-      /* iPad Air Landscape (1180px) & Desktop Viewports */
-      @media (min-width: 1024px) {
-        .app-container {
-          max-width: 980px;
-        }
+      /* Unified Responsive Modals */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        background: rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(10px, 3vw, 24px);
+        box-sizing: border-box;
+      }
 
-        .tabs {
-          max-width: 860px;
-          gap: 8px;
-        }
+      .modal-card {
+        width: min(100%, 560px);
+        max-height: calc(100dvh - 30px);
+        overflow-y: auto;
+        border-radius: clamp(16px, 2.5vw, 24px);
+        padding: clamp(16px, 2.5vw, 28px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 6px 0 var(--ink);
+        box-sizing: border-box;
+      }
 
-        .tab-btn {
-          flex: 0 1 84px;
-          max-width: 88px;
-        }
+      /* Fluid Dynamic Grid for Duaa Notes */
+      #notesListContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+        gap: clamp(12px, 2vw, 18px);
+      }
 
-        #notesListContainer {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-        }
+      #notesListContainer .duaa-card {
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+      }
 
-        #recipeList,
-        #recipeFavoritesList,
-        #recipeMustTryList,
-        #recipeQuickList,
-        #recipeOkayList {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
-        }
+      #notesListContainer .duaa-card-footer {
+        margin-top: auto;
+      }
 
-        .duaa-book-container {
-          max-width: 760px;
-        }
+      #notesListContainer .history-empty {
+        grid-column: 1 / -1;
+      }
+
+      .duaa-book-container {
+        max-width: min(100%, 760px);
+        margin: 0 auto;
+        border-radius: clamp(16px, 3vw, 24px);
+      }
+
+      .duaa-reader-arabic {
+        font-size: clamp(22px, 4vw, 28px);
+        line-height: 2.2;
+        padding: clamp(14px, 2.5vw, 24px) clamp(12px, 2vw, 20px);
+      }
+
+      .duaa-reader-trans {
+        font-size: clamp(13px, 2vw, 16px);
+      }
+
+      /* Fluid Dynamic Grid for Recipes */
+      #recipeList,
+      #recipeFavoritesList,
+      #recipeMustTryList,
+      #recipeQuickList,
+      #recipeOkayList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+        gap: clamp(12px, 2vw, 18px);
+      }
+
+      #recipeList .recipe-card,
+      #recipeFavoritesList .recipe-card,
+      #recipeMustTryList .recipe-card,
+      #recipeQuickList .recipe-card,
+      #recipeOkayList .recipe-card {
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .recipe-card .recipe-card-footer {
+        margin-top: auto;
+      }
+
+      /* Fluid Grid for English Vocab */
+      #englishVocabList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+        gap: clamp(8px, 1.5vw, 14px);
+      }
+
+      .english-vocab-item {
+        margin-top: 0;
+      }
+
+      /* Fluid Stats Grid */
+      .history-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 85px), 1fr));
+        gap: clamp(8px, 1.5vw, 14px);
+      }
+
+      .stat-box {
+        padding: clamp(8px, 1.5vw, 14px) clamp(6px, 1vw, 10px);
+      }
+
+      .stat-value {
+        font-size: clamp(16px, 2.5vw, 24px);
+      }
+
+      /* Fluid Summary Grid */
+      #tab-summary.active {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+        gap: clamp(12px, 2vw, 18px);
+      }
+
+      #tab-summary .section-title {
+        grid-column: 1 / -1;
+        margin-bottom: 0;
+      }
+
+      #tab-summary .summary-card {
+        margin-bottom: 0;
+      }
+
+      /* Fluid Period & Task Cards */
+      .nav-bar {
+        padding: clamp(10px, 2vw, 14px) clamp(12px, 2vw, 18px);
+        gap: clamp(8px, 1.5vw, 14px);
+        flex-wrap: wrap;
+      }
+
+      .nav-title-value {
+        font-size: clamp(15px, 2vw, 20px);
+      }
+
+      .nav-countdown-box {
+        padding: 6px clamp(8px, 1.5vw, 16px);
+        min-width: clamp(65px, 10vw, 85px);
+      }
+
+      .nav-countdown-box .days {
+        font-size: clamp(20px, 3.5vw, 28px);
+      }
+
+      .task-card {
+        padding: clamp(11px, 1.5vw, 16px) clamp(12px, 1.8vw, 16px);
+        gap: clamp(8px, 1.5vw, 14px);
+      }
+
+      .timer-wrap {
+        padding: clamp(10px, 1.5vw, 16px);
+        flex-wrap: wrap;
+        gap: clamp(10px, 2vw, 24px);
+      }
+
+      .timer-controls {
+        flex-wrap: wrap;
+      }
+
+      .history-card {
+        padding: clamp(12px, 2vw, 18px);
       }
 
       /* Mobile input zoom prevention & touch response */
       input,
       select,
       textarea {
-        font-size: 16px !important; /* Prevents auto-zoom on iOS */
+        font-size: 16px !important;
         touch-action: manipulation;
       }
       
@@ -8513,97 +8501,6 @@
       .adhkar-btn {
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
-      }
-
-      /* Mobile Screen Optimizations (<= 480px) */
-      @media (max-width: 480px) {
-        body {
-          padding-left: 10px;
-          padding-right: 10px;
-          padding-top: max(8px, env(safe-area-inset-top, 0px));
-        }
-
-        .app-container {
-          max-width: 100%;
-        }
-
-        .modal-overlay {
-          padding: 12px;
-          align-items: flex-end; /* Bottom-sheet feel on mobile */
-        }
-
-        .modal-card {
-          max-width: 100%;
-          border-radius: 20px 20px 14px 14px;
-          padding: 20px 16px;
-          max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px));
-        }
-
-        .nav-bar {
-          padding: 12px 14px;
-          gap: 8px;
-        }
-
-        .nav-title-value {
-          font-size: 17px;
-        }
-
-        .nav-countdown-box {
-          padding: 6px 12px;
-          min-width: 70px;
-        }
-
-        .nav-countdown-box .days {
-          font-size: 24px;
-        }
-
-        .task-card {
-          padding: 13px 14px;
-          gap: 10px;
-        }
-
-        .timer-wrap {
-          padding: 12px;
-        }
-
-        .timer-controls {
-          flex-wrap: wrap;
-        }
-
-        .history-stats {
-          gap: 6px;
-        }
-
-        .stat-box {
-          padding: 8px 4px;
-        }
-
-        .stat-value {
-          font-size: 16px;
-        }
-
-        .history-card {
-          padding: 14px 12px;
-        }
-      }
-
-      /* Extra small screens (<= 360px) */
-      @media (max-width: 360px) {
-        .tab-btn {
-          min-width: 52px;
-          padding: 4px 2px;
-        }
-        .tab-btn .tab-icon {
-          width: 28px;
-          height: 28px;
-          font-size: 14px;
-        }
-        .tab-label {
-          font-size: 8.5px;
-        }
-        .nav-title-value {
-          font-size: 15px;
-        }
       }
 
       /* ==================== PDF READER & FLIPBOOK STYLES ==================== */
