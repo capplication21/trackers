@@ -2,12 +2,254 @@
   import { onMount } from 'svelte';
   import { trackerState } from '$lib/stores/trackerState.svelte.js';
   import { navigationState } from '$lib/stores/navigationState.svelte.js';
+  import { storageBridge } from '$lib/stores/storageBridge.js';
 
   let activePeriod = $state('activities'); // 'activities' | 'morning' | 'afternoon' | 'evening' | 'night'
 
-  onMount(() => {
-    trackerState.init();
+  // Exercise Timer State (Morning)
+  let exerciseMinutes = $state(30);
+  let exerciseRemaining = $state(30 * 60);
+  let isExerciseRunning = $state(false);
+  let timerInterval = null;
+
+  // Medicine Modal State
+  let showMedModal = $state(false);
+  let medModalId = $state('');
+  let medModalName = $state('');
+  let medModalPeriod = $state('morning');
+  let medModalIsDefault = $state(false);
+
+  // Quran Playlist State (Evening)
+  const defaultEveningSurahs = [
+    {
+      id: 'surah_5',
+      title: '📖 Surah 5: Al-Maaida (Ayat 82 - 108)',
+      surahNumber: 5,
+      ayahStart: 82,
+      ayahEnd: 108,
+      url: 'https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3'
+    },
+    {
+      id: 'surah_18',
+      title: '📖 Surah 18: Al-Kahf (Ayat 1 - 110)',
+      surahNumber: 18,
+      ayahStart: 1,
+      ayahEnd: 110,
+      url: 'https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3'
+    },
+    {
+      id: 'surah_7',
+      title: '📖 Surah 7: Al-A\'raaf (Ayat 1 - 206)',
+      surahNumber: 7,
+      ayahStart: 1,
+      ayahEnd: 206,
+      url: 'https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3'
+    }
+  ];
+  let quranSurahs = $state(defaultEveningSurahs);
+  let showSurahModal = $state(false);
+  let surahFormTitle = $state('');
+  let surahFormStart = $state(1);
+  let surahFormEnd = $state(10);
+  let surahFormUrl = $state('');
+  let editingSurahId = $state(null);
+
+  onMount(async () => {
+    await trackerState.init();
+
+    // Load saved Quran surahs
+    const savedSurahs = await storageBridge.getItem('quran_evening_surahs');
+    if (Array.isArray(savedSurahs) && savedSurahs.length > 0) {
+      quranSurahs = savedSurahs;
+    }
+
+    // Load timer minutes preference
+    const savedMin = await storageBridge.getItem('tm_exercise_minutes');
+    if (typeof savedMin === 'number' && savedMin >= 1 && savedMin <= 60) {
+      exerciseMinutes = savedMin;
+      exerciseRemaining = savedMin * 60;
+    }
   });
+
+  // Timer helpers
+  function formatTimer(sec) {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${m}:${String(s).padStart(2, '0')}`;
+  }
+
+  function toggleExerciseTimer() {
+    if (isExerciseRunning) {
+      clearInterval(timerInterval);
+      isExerciseRunning = false;
+    } else {
+      if (exerciseRemaining === 0) exerciseRemaining = exerciseMinutes * 60;
+      isExerciseRunning = true;
+      timerInterval = setInterval(() => {
+        if (exerciseRemaining > 0) {
+          exerciseRemaining--;
+        } else {
+          clearInterval(timerInterval);
+          isExerciseRunning = false;
+        }
+      }, 1000);
+    }
+  }
+
+  function resetExerciseTimer() {
+    clearInterval(timerInterval);
+    isExerciseRunning = false;
+    exerciseRemaining = exerciseMinutes * 60;
+  }
+
+  async function adjustExerciseMinutes(delta) {
+    if (isExerciseRunning) return;
+    const next = Math.max(1, Math.min(60, exerciseMinutes + delta));
+    exerciseMinutes = next;
+    exerciseRemaining = next * 60;
+    await storageBridge.setItem('tm_exercise_minutes', next);
+  }
+
+  // Water & Walk helpers
+  function isWalkWaterDone(period) {
+    return Boolean(trackerState.completedTasks[`trackerWalk-${period}`]);
+  }
+
+  function toggleWalkWater(period) {
+    trackerState.toggleTask(`trackerWalk-${period}`);
+  }
+
+  function updateWalk(period, val) {
+    const num = Math.max(0, parseInt(val, 10) || 0);
+    trackerState.walk = { ...trackerState.walk, [period]: num };
+    trackerState.saveToday();
+  }
+
+  function updateWater(period, val) {
+    const num = Math.max(0, parseInt(val, 10) || 0);
+    trackerState.water = { ...trackerState.water, [period]: num };
+    trackerState.saveToday();
+  }
+
+  // Medicine helpers
+  function periodMedicines(period) {
+    return trackerState.medicines.filter((m) => m.period === period && m.enabled !== false);
+  }
+
+  function openMedModal(id = '', defaultPeriod = 'morning') {
+    medModalId = id;
+    medModalPeriod = defaultPeriod;
+    if (id) {
+      const med = trackerState.medicines.find((m) => m.id === id);
+      if (med) {
+        medModalName = med.name || med.defaultName;
+        medModalPeriod = med.period;
+        medModalIsDefault = Boolean(med.isDefault);
+      }
+    } else {
+      medModalName = '';
+      medModalIsDefault = false;
+    }
+    showMedModal = true;
+  }
+
+  async function saveMedicine() {
+    if (!medModalName.trim()) return;
+    if (medModalId) {
+      // Edit existing
+      trackerState.medicines = trackerState.medicines.map((m) => {
+        if (m.id === medModalId) {
+          return { ...m, name: medModalName.trim(), period: medModalPeriod };
+        }
+        return m;
+      });
+    } else {
+      // Add custom medicine
+      const newMed = {
+        id: 'med_' + Date.now(),
+        name: medModalName.trim(),
+        period: medModalPeriod,
+        enabled: true,
+        isDefault: false,
+        icon: '💊'
+      };
+      trackerState.medicines = [...trackerState.medicines, newMed];
+    }
+    await storageBridge.setItem('medicines_config', trackerState.medicines);
+    showMedModal = false;
+  }
+
+  async function resetMedToDefault() {
+    if (!medModalId) return;
+    trackerState.medicines = trackerState.medicines.map((m) => {
+      if (m.id === medModalId && m.defaultName) {
+        return { ...m, name: m.defaultName };
+      }
+      return m;
+    });
+    await storageBridge.setItem('medicines_config', trackerState.medicines);
+    showMedModal = false;
+  }
+
+  async function removeMedicine() {
+    if (!medModalId) return;
+    trackerState.medicines = trackerState.medicines.filter((m) => m.id !== medModalId);
+    await storageBridge.setItem('medicines_config', trackerState.medicines);
+    showMedModal = false;
+  }
+
+  // Surah helpers
+  function openAddSurahModal() {
+    editingSurahId = null;
+    surahFormTitle = '';
+    surahFormStart = 1;
+    surahFormEnd = 10;
+    surahFormUrl = '';
+    showSurahModal = true;
+  }
+
+  function editSurah(s) {
+    editingSurahId = s.id;
+    surahFormTitle = s.title;
+    surahFormStart = s.ayahStart || 1;
+    surahFormEnd = s.ayahEnd || 10;
+    surahFormUrl = s.url || '';
+    showSurahModal = true;
+  }
+
+  async function saveSurah() {
+    if (!surahFormTitle.trim()) return;
+    if (editingSurahId) {
+      quranSurahs = quranSurahs.map((s) => {
+        if (s.id === editingSurahId) {
+          return {
+            ...s,
+            title: surahFormTitle.trim(),
+            ayahStart: surahFormStart,
+            ayahEnd: surahFormEnd,
+            url: surahFormUrl.trim()
+          };
+        }
+        return s;
+      });
+    } else {
+      const newSurah = {
+        id: 'surah_' + Date.now(),
+        title: surahFormTitle.trim(),
+        ayahStart: surahFormStart,
+        ayahEnd: surahFormEnd,
+        url: surahFormUrl.trim()
+      };
+      quranSurahs = [...quranSurahs, newSurah];
+    }
+    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
+    showSurahModal = false;
+  }
+
+  async function deleteSurah(id) {
+    quranSurahs = quranSurahs.filter((s) => s.id !== id);
+    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
+  }
 </script>
 
 <div class="tab-content active" id="tab-schedule" style="display: block;">
@@ -228,83 +470,687 @@
       </div>
     </div>
   {:else}
-    <!-- Overall Progress Bar (shown for routines) -->
-    <div style="background:#ffffff;border:2px solid var(--ink);border-radius:14px;padding:clamp(10px, 1.5vw, 14px) clamp(12px, 2vw, 18px);margin-bottom:14px;box-shadow:0 3px 0 var(--ink);">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px;">
-        <span style="font-size:12px;font-weight:800;color:var(--ink);">TODAY'S PROGRESS</span>
-        <span style="font-size:12px;font-weight:800;color:var(--teal);">{trackerState.completedCount} / {trackerState.tasks.length} ({trackerState.completionPercentage}%)</span>
+    <!-- TIME PERIOD ROUTINES: MORNING, AFTERNOON, EVENING, NIGHT -->
+    <div id="{activePeriod}-section" class="schedule-section active">
+      <!-- Section Header -->
+      <div
+        class="section-title {activePeriod}-title"
+        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; width: 100%; box-sizing: border-box;"
+      >
+        <span>
+          <span>{activePeriod === 'morning' ? '🌅' : activePeriod === 'afternoon' ? '☀️' : activePeriod === 'evening' ? '🌇' : '🌙'}</span>
+          {activePeriod.toUpperCase()} ROUTINES
+        </span>
+        <button
+          type="button"
+          class="section-med-btn"
+          onclick={() => openMedModal('', activePeriod)}
+          style="font-size: 11px; padding: 3px 8px; border-radius: 6px; border: 1.5px solid var(--ink); background: #ffffff; color: var(--ink); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 0 var(--ink);"
+          title="Add a custom medicine to {activePeriod} routine"
+        >
+          <span>💊</span> <span>+ Medicine</span>
+        </button>
       </div>
-      <div style="width:100%;height:10px;background:#f1f5f9;border-radius:999px;border:1px solid #cbd5e1;overflow:hidden;">
-        <div style="width:{trackerState.completionPercentage}%;height:100%;background:linear-gradient(90deg, #10b981, #06b6d4);transition:width 0.3s ease;"></div>
-      </div>
-    </div>
 
-    <!-- TIME PERIOD TIMELINE (MORNING, AFTERNOON, EVENING, NIGHT) -->
-    {@const periodTasks = trackerState.tasks.filter((t) => (t.period || 'morning') === activePeriod)}
-    <div class="schedule-section active">
-      <div class="section-title {activePeriod}-title" style="margin-bottom:14px;text-transform:uppercase;">
-        <span>{activePeriod === 'morning' ? '🌅' : activePeriod === 'afternoon' ? '☀️' : activePeriod === 'evening' ? '🌇' : '🌙'}</span> {activePeriod} ROUTINE
-      </div>
-
-      <!-- Water & Walk Quick Counter for this period -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 150px), 1fr));gap:clamp(10px, 1.5vw, 14px);margin-bottom:14px;">
-        <div style="background:#ffffff;border:2px solid var(--ink);border-radius:14px;padding:12px;box-shadow:0 3px 0 var(--ink);text-align:center;">
-          <div style="font-size:12px;font-weight:800;color:var(--teal);margin-bottom:6px;">💧 WATER ({activePeriod})</div>
-          <div style="font-size:22px;font-weight:800;color:var(--ink);margin-bottom:8px;">{trackerState.water[activePeriod] || 0} glasses</div>
-          <div style="display:flex;justify-content:center;gap:8px;">
-            <button type="button" class="hair-wash-btn" onclick={() => trackerState.adjustWater(activePeriod, -1)}>−1</button>
-            <button type="button" class="hair-wash-btn hair-wash-plus" onclick={() => trackerState.adjustWater(activePeriod, 1)}>+1 Glass</button>
-          </div>
+      <!-- CARD 1: Walk & Water (Present in all periods) -->
+      <div
+        class="task-card"
+        id="task-trackerWalk-{activePeriod}-s"
+        class:completed={isWalkWaterDone(activePeriod)}
+        onclick={() => toggleWalkWater(activePeriod)}
+        role="button"
+        tabindex="0"
+        onkeydown={(e) => { if (e.key === 'Enter') toggleWalkWater(activePeriod); }}
+      >
+        <div class="checkbox">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
         </div>
-
-        <div style="background:#ffffff;border:2px solid var(--ink);border-radius:14px;padding:12px;box-shadow:0 3px 0 var(--ink);text-align:center;">
-          <div style="font-size:12px;font-weight:800;color:var(--orange);margin-bottom:6px;">🚶 WALK ({activePeriod})</div>
-          <div style="font-size:22px;font-weight:800;color:var(--ink);margin-bottom:8px;">{trackerState.walk[activePeriod] || 0} steps</div>
-          <div style="display:flex;justify-content:center;gap:8px;">
-            <button type="button" class="hair-wash-btn" onclick={() => trackerState.adjustWalk(activePeriod, -500)}>−500</button>
-            <button type="button" class="hair-wash-btn hair-wash-plus" onclick={() => trackerState.adjustWalk(activePeriod, 500)}>+500</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Task Checklist for this Period -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr));gap:clamp(8px, 1.2vw, 12px);">
-        {#each periodTasks as task (task.id || task.text)}
-          {@const isDone = trackerState.completedTasks[task.id || task.text]}
-          <div
-            class="schedule-task-item {isDone ? 'done' : ''}"
-            onclick={() => trackerState.toggleTask(task.id || task.text)}
-            onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask(task.id || task.text); }}
-            tabindex="0"
-            role="button"
-            style="background:#ffffff;border:2px solid var(--ink);border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;box-shadow:0 3px 0 var(--ink);transition:all 0.12s ease;opacity:{isDone ? 0.65 : 1};"
-          >
-            <div style="display:flex;align-items:center;gap:12px;">
+        <div style="flex: 1; min-width: 0;">
+          <div class="task-text">Walk &amp; Water <span>🚶💧</span></div>
+          <div class="tracker-row" onclick={(e) => e.stopPropagation()} role="presentation">
+            <div class="tracker-group steps-group">
+              <span class="tracker-group-icon">🚶</span>
               <input
-                type="checkbox"
-                checked={isDone}
-                style="width:20px;height:20px;cursor:pointer;accent-color:var(--green);"
-                onclick={(e) => e.stopPropagation()}
-                onchange={() => trackerState.toggleTask(task.id || task.text)}
+                type="number"
+                class="tracker-input"
+                id="trackerWalkInput-{activePeriod}"
+                min="0"
+                inputmode="numeric"
+                placeholder="0"
+                value={trackerState.walk[activePeriod] || 0}
+                oninput={(e) => updateWalk(activePeriod, e.currentTarget.value)}
               />
-              <div>
-                <div style="font-size:14px;font-weight:700;color:var(--ink);text-decoration:{isDone ? 'line-through' : 'none'};">
-                  {task.icon || '📌'} {task.label || task.title || task.text}
+              <span class="tracker-group-label">steps</span>
+            </div>
+            <div class="tracker-group water-group">
+              <span class="tracker-group-icon">💧</span>
+              <input
+                type="number"
+                class="tracker-input"
+                id="trackerWaterInput-{activePeriod}"
+                min="0"
+                inputmode="numeric"
+                placeholder="0"
+                value={trackerState.water[activePeriod] || 0}
+                oninput={(e) => updateWater(activePeriod, e.currentTarget.value)}
+              />
+              <span class="tracker-group-label">glasses</span>
+            </div>
+          </div>
+          <div class="water-litre-preview">
+            {trackerState.water[activePeriod] || 0} glasses = {((trackerState.water[activePeriod] || 0) * 0.25).toFixed(2)} L
+          </div>
+        </div>
+      </div>
+
+      <!-- MORNING SPECIFIC TASKS -->
+      {#if activePeriod === 'morning'}
+        <!-- Folic Acid & Morning Medicines -->
+        {#each periodMedicines('morning') as med (med.id)}
+          {@const isDone = Boolean(trackerState.completedTasks[med.id])}
+          <div
+            class="task-card"
+            class:completed={isDone}
+            onclick={() => trackerState.toggleTask(med.id)}
+            role="button"
+            tabindex="0"
+            onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask(med.id); }}
+          >
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div class="task-text">
+                <span>{med.name || med.defaultName}</span> <span>{med.icon || '💊'}</span>
+              </div>
+              <div class="task-sub" class:sub-taken={isDone} class:sub-not-taken={!isDone}>
+                {isDone ? '✓ Taken' : '❓ Not taken'}
+              </div>
+            </div>
+            <button
+              type="button"
+              class="task-med-edit-btn"
+              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'morning'); }}
+              title="Change name, keep default, or remove medicine"
+              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+            >
+              <span>✏️</span> <span>Edit</span>
+            </button>
+          </div>
+        {/each}
+
+        <!-- Exercise Card with Video & Countdown Timer -->
+        {@const isExerciseDone = Boolean(trackerState.completedTasks['m4'])}
+        <div
+          class="task-card"
+          id="task-m4-s"
+          class:completed={isExerciseDone}
+          onclick={() => trackerState.toggleTask('m4')}
+          role="button"
+          tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('m4'); }}
+        >
+          <div class="checkbox">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div class="task-text">Exercise <span>🏋️</span></div>
+            <a
+              class="yt-link"
+              href="https://youtu.be/IT94xC35u6k?si=CXCFkwumv4jICfbE"
+              target="_blank"
+              rel="noopener noreferrer"
+              onclick={(e) => e.stopPropagation()}
+            >
+              <span>▶️</span> Watch Exercise Video
+            </a>
+            <div class="timer-wrap" onclick={(e) => e.stopPropagation()} role="presentation">
+              <div class="timer-display" id="timer-display-exercise" class:done={exerciseRemaining === 0}>
+                {formatTimer(exerciseRemaining)}
+              </div>
+              <div class="timer-info">
+                <div class="adhkar-label" style="margin-bottom: 2px">
+                  ⏱️ Exercise Timer
                 </div>
-                {#if task.time}
-                  <div style="font-size:11px;font-weight:700;color:#64748b;margin-top:2px;">
-                    ⏰ {task.time}
+                <div class="timer-controls">
+                  <button type="button" class="timer-btn" onclick={toggleExerciseTimer}>
+                    {isExerciseRunning ? 'Pause' : 'Start'}
+                  </button>
+                  <button
+                    type="button"
+                    class="timer-reset-btn"
+                    onclick={resetExerciseTimer}
+                    title="Reset"
+                  >
+                    ↺
+                  </button>
+                  <div class="timer-adjust">
+                    <button
+                      type="button"
+                      class="timer-adjust-btn"
+                      onclick={() => adjustExerciseMinutes(-1)}
+                      disabled={isExerciseRunning || exerciseMinutes <= 1}
+                    >
+                      −
+                    </button>
+                    <span class="timer-minutes">{exerciseMinutes}m</span>
+                    <button
+                      type="button"
+                      class="timer-adjust-btn"
+                      onclick={() => adjustExerciseMinutes(1)}
+                      disabled={isExerciseRunning || exerciseMinutes >= 60}
+                    >
+                      +
+                    </button>
                   </div>
-                {/if}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- AFTERNOON SPECIFIC TASKS -->
+      {:else if activePeriod === 'afternoon'}
+        <!-- Vitamin B Complex & Afternoon Medicines -->
+        {#each periodMedicines('afternoon') as med (med.id)}
+          {@const isDone = Boolean(trackerState.completedTasks[med.id])}
+          <div
+            class="task-card"
+            class:completed={isDone}
+            onclick={() => trackerState.toggleTask(med.id)}
+            role="button"
+            tabindex="0"
+            onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask(med.id); }}
+          >
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div class="task-text">
+                <span>{med.name || med.defaultName}</span> <span>{med.icon || '💊'}</span>
+              </div>
+              <div class="task-sub" class:sub-taken={isDone} class:sub-not-taken={!isDone}>
+                {isDone ? '✓ Taken' : '❓ Not taken'}
+              </div>
+            </div>
+            <button
+              type="button"
+              class="task-med-edit-btn"
+              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'afternoon'); }}
+              title="Change name, keep default, or remove medicine"
+              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+            >
+              <span>✏️</span> <span>Edit</span>
+            </button>
+          </div>
+        {/each}
+
+        <!-- Do activity on Kimi -->
+        {@const isKimiDone = Boolean(trackerState.completedTasks['a3'])}
+        <div
+          class="task-card"
+          id="task-a3-s"
+          class:completed={isKimiDone}
+          onclick={() => trackerState.toggleTask('a3')}
+          role="button"
+          tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('a3'); }}
+        >
+          <div class="checkbox">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div class="task-text">Do activity on Kimi <span>🤖</span></div>
+        </div>
+
+      <!-- EVENING SPECIFIC TASKS -->
+      {:else if activePeriod === 'evening'}
+        <!-- Custom Evening Medicines (if any) -->
+        {#each periodMedicines('evening') as med (med.id)}
+          {@const isDone = Boolean(trackerState.completedTasks[med.id])}
+          <div
+            class="task-card"
+            class:completed={isDone}
+            onclick={() => trackerState.toggleTask(med.id)}
+            role="button"
+            tabindex="0"
+            onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask(med.id); }}
+          >
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div class="task-text">
+                <span>{med.name || med.defaultName}</span> <span>{med.icon || '💊'}</span>
+              </div>
+              <div class="task-sub" class:sub-taken={isDone} class:sub-not-taken={!isDone}>
+                {isDone ? '✓ Taken' : '❓ Not taken'}
+              </div>
+            </div>
+            <button
+              type="button"
+              class="task-med-edit-btn"
+              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'evening'); }}
+              title="Change name, keep default, or remove medicine"
+              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+            >
+              <span>✏️</span> <span>Edit</span>
+            </button>
+          </div>
+        {/each}
+
+        <!-- Read and Listen Quran -->
+        {@const isQuranDone = Boolean(trackerState.completedTasks['e3'])}
+        <div
+          class="task-card"
+          id="task-e3-s"
+          class:completed={isQuranDone}
+          onclick={() => trackerState.toggleTask('e3')}
+          role="button"
+          tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('e3'); }}
+        >
+          <div class="checkbox">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+              <div class="task-text" style="margin-bottom: 0;">
+                Read and Listen Quran <span>📖</span>
+              </div>
+              <div style="display: flex; gap: 5px; align-items: center;">
+                <button
+                  type="button"
+                  class="grammar-add-topic-btn"
+                  onclick={(e) => { e.stopPropagation(); openAddSurahModal(); }}
+                  title="Set Surah, Ayat range & YouTube recitation link"
+                  style="font-size: 11px; padding: 3px 8px; background: #f59e0b; color: #000000; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
+                >
+                  <span>➕</span> Set Surah &amp; Ayahs
+                </button>
               </div>
             </div>
 
-            <span style="font-size:11px;font-weight:800;color:{isDone ? 'var(--green)' : '#94a3b8'};">
-              {isDone ? 'Done ✓' : 'Pending'}
-            </span>
+            <!-- Surah Cards List -->
+            <div style="margin-top: 8px;" onclick={(e) => e.stopPropagation()} role="presentation">
+              {#each quranSurahs as s (s.id)}
+                <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 10px; margin-top: 6px;">
+                  <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; gap: 6px;">
+                    <div>
+                      <div style="font-size: 12.5px; font-weight: 800; color: #1e293b;">
+                        {s.title}
+                      </div>
+                      <div style="font-size: 11px; color: #0284c7; font-weight: 700; margin-top: 1px;">
+                        Ayat {s.ayahStart || 1} - {s.ayahEnd || 10} · Online Arabic &amp; Urdu Meaning
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 4px;">
+                      <button
+                        type="button"
+                        class="grammar-item-action-btn"
+                        onclick={() => navigationState.setTab('pdf')}
+                        title="Read &amp; Listen"
+                        style="width: 24px; height: 24px; font-size: 11px; background: #ecfdf5; border: 1.5px solid #059669; border-radius: 6px; color: #047857; cursor: pointer;"
+                      >
+                        📖
+                      </button>
+                      <button
+                        type="button"
+                        class="grammar-item-action-btn"
+                        onclick={() => editSurah(s)}
+                        title="Edit Playlist"
+                        style="width: 22px; height: 22px; font-size: 10px; border: 1.5px solid #cbd5e1; border-radius: 6px; background: white; cursor: pointer;"
+                      >
+                        ✏️
+                      </button>
+                      <button
+                        type="button"
+                        class="grammar-item-action-btn delete-btn"
+                        onclick={() => deleteSurah(s.id)}
+                        title="Delete Playlist"
+                        style="width: 22px; height: 22px; font-size: 10px; border: 1.5px solid #f87171; border-radius: 6px; background: white; cursor: pointer;"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px;">
+                    <button
+                      type="button"
+                      class="quran-read-btn"
+                      onclick={() => navigationState.setTab('pdf')}
+                      title="Open Surah with Arabic text, Urdu meaning &amp; recitation"
+                    >
+                      <span>📖</span> Read &amp; Listen with Urdu Meaning
+                    </button>
+                    {#if s.url}
+                      <a
+                        class="yt-link"
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick={(e) => e.stopPropagation()}
+                        style="font-size: 10.5px; padding: 2px 7px; margin-top: 0;"
+                      >
+                        <span>▶️</span> External Link
+                      </a>
+                    {/if}
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </div>
+        </div>
+
+        <!-- Lumosity -->
+        {@const isLumosityDone = Boolean(trackerState.completedTasks['e4'])}
+        <div
+          class="task-card"
+          id="task-e4-s"
+          class:completed={isLumosityDone}
+          onclick={() => trackerState.toggleTask('e4')}
+          role="button"
+          tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('e4'); }}
+        >
+          <div class="checkbox">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div class="task-text">Lumosity <span>🧠</span></div>
+            <a
+              class="yt-link"
+              href="https://www.lumosity.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              onclick={(e) => e.stopPropagation()}
+            >
+              <span>🧠</span> Open Lumosity
+            </a>
+          </div>
+        </div>
+
+      <!-- NIGHT SPECIFIC TASKS -->
+      {:else if activePeriod === 'night'}
+        <!-- Surah Mulk -->
+        {@const isMulkDone = Boolean(trackerState.completedTasks['n5'])}
+        <div
+          class="task-card"
+          id="task-n5-s"
+          class:completed={isMulkDone}
+          onclick={() => trackerState.toggleTask('n5')}
+          role="button"
+          tabindex="0"
+          onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('n5'); }}
+        >
+          <div class="checkbox">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <div class="task-text">Surah Mulk <span>📖</span></div>
+            <a
+              class="yt-link"
+              href="https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF"
+              target="_blank"
+              rel="noopener noreferrer"
+              onclick={(e) => e.stopPropagation()}
+            >
+              <span>▶️</span> Listen Surah Mulk
+            </a>
+          </div>
+        </div>
+
+        <!-- Freedase 30 & Night Medicines -->
+        {#each periodMedicines('night') as med (med.id)}
+          {@const isDone = Boolean(trackerState.completedTasks[med.id])}
+          <div
+            class="task-card"
+            class:completed={isDone}
+            onclick={() => trackerState.toggleTask(med.id)}
+            role="button"
+            tabindex="0"
+            onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask(med.id); }}
+          >
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div class="task-text">
+                <span>{med.name || med.defaultName}</span> <span>{med.icon || '💊'}</span>
+              </div>
+              <div class="task-sub" class:sub-taken={isDone} class:sub-not-taken={!isDone}>
+                {isDone ? '✓ Taken' : '❓ Not taken'}
+              </div>
+            </div>
+            <button
+              type="button"
+              class="task-med-edit-btn"
+              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'night'); }}
+              title="Change name, keep default, or remove medicine"
+              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+            >
+              <span>✏️</span> <span>Edit</span>
+            </button>
           </div>
         {/each}
-      </div>
+      {/if}
     </div>
   {/if}
 </div>
+
+<!-- MEDICINE CONFIG MODAL -->
+{#if showMedModal}
+  <div
+    class="nav-menu-overlay"
+    onclick={() => (showMedModal = false)}
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    onkeydown={(e) => { if (e.key === 'Escape') showMedModal = false; }}
+  >
+    <div
+      class="nav-menu-dropdown"
+      style="max-width: 420px; padding: 20px;"
+      onclick={(e) => e.stopPropagation()}
+      role="document"
+    >
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="margin: 0; font-size: 16px; font-weight: 800; color: var(--ink);">
+          {medModalId ? '✏️ Edit Medicine' : '💊 Add Medicine'}
+        </h3>
+        <button
+          type="button"
+          class="dropdown-close-btn"
+          onclick={() => (showMedModal = false)}
+        >
+          ✕
+        </button>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label for="medNameInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+          Medicine Name:
+        </label>
+        <input
+          id="medNameInput"
+          type="text"
+          class="input-field"
+          style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 14px;"
+          placeholder="e.g. Folic Acid medicine"
+          bind:value={medModalName}
+        />
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label for="medPeriodSelect" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+          Routine Period:
+        </label>
+        <select
+          id="medPeriodSelect"
+          bind:value={medModalPeriod}
+          style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 14px; background: white;"
+        >
+          <option value="morning">🌅 Morning</option>
+          <option value="afternoon">☀️ Afternoon</option>
+          <option value="evening">🌇 Evening</option>
+          <option value="night">🌙 Night</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;">
+        {#if medModalId}
+          {#if medModalIsDefault}
+            <button
+              type="button"
+              onclick={resetMedToDefault}
+              style="padding: 7px 12px; font-size: 12px; background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 700; cursor: pointer;"
+            >
+              Reset to Default
+            </button>
+          {:else}
+            <button
+              type="button"
+              onclick={removeMedicine}
+              style="padding: 7px 12px; font-size: 12px; background: #fee2e2; color: #b91c1c; border: 1.5px solid #ef4444; border-radius: 8px; font-weight: 700; cursor: pointer;"
+            >
+              Delete
+            </button>
+          {/if}
+        {/if}
+        <button
+          type="button"
+          onclick={saveMedicine}
+          style="padding: 7px 16px; font-size: 12px; background: #10b981; color: white; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+{/if}
+
+<!-- SET SURAH & AYAHS MODAL -->
+{#if showSurahModal}
+  <div
+    class="nav-menu-overlay"
+    onclick={() => (showSurahModal = false)}
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    onkeydown={(e) => { if (e.key === 'Escape') showSurahModal = false; }}
+  >
+    <div
+      class="nav-menu-dropdown"
+      style="max-width: 440px; padding: 20px;"
+      onclick={(e) => e.stopPropagation()}
+      role="document"
+    >
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="margin: 0; font-size: 16px; font-weight: 800; color: var(--ink);">
+          {editingSurahId ? '✏️ Edit Surah' : '➕ Set Surah & Ayahs'}
+        </h3>
+        <button
+          type="button"
+          class="dropdown-close-btn"
+          onclick={() => (showSurahModal = false)}
+        >
+          ✕
+        </button>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <label for="surahTitleInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+          Title (e.g. 📖 Surah 18: Al-Kahf):
+        </label>
+        <input
+          id="surahTitleInput"
+          type="text"
+          class="input-field"
+          style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+          placeholder="📖 Surah 18: Al-Kahf (Ayat 1 - 110)"
+          bind:value={surahFormTitle}
+        />
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+        <div style="flex: 1;">
+          <label for="surahStartInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+            Start Ayah:
+          </label>
+          <input
+            id="surahStartInput"
+            type="number"
+            min="1"
+            class="input-field"
+            style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+            bind:value={surahFormStart}
+          />
+        </div>
+        <div style="flex: 1;">
+          <label for="surahEndInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+            End Ayah:
+          </label>
+          <input
+            id="surahEndInput"
+            type="number"
+            min="1"
+            class="input-field"
+            style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+            bind:value={surahFormEnd}
+          />
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label for="surahUrlInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+          Recitation Link (YouTube / Audio URL):
+        </label>
+        <input
+          id="surahUrlInput"
+          type="url"
+          class="input-field"
+          style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+          placeholder="https://youtu.be/..."
+          bind:value={surahFormUrl}
+        />
+      </div>
+
+      <div style="display: flex; gap: 8px; justify-content: flex-end;">
+        <button
+          type="button"
+          onclick={() => (showSurahModal = false)}
+          style="padding: 7px 12px; font-size: 12px; background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 700; cursor: pointer;"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onclick={saveSurah}
+          style="padding: 7px 16px; font-size: 12px; background: #f59e0b; color: black; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
+        >
+          Save Surah
+        </button>
+      </div>
+    </div>
+  </div>
+{/if}
