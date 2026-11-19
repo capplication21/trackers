@@ -10,23 +10,6 @@
 <div class="tab-content active" id="tab-water" style="display: block;">
   <div class="section-title water-title"><span>✅</span> DAILY HABITS &amp; HEALTH</div>
 
-  <!-- Water & Walk Daily Summary Card -->
-  <div class="history-card chore-card" style="margin-bottom:14px;">
-    <div class="chore-question">💧 Daily Hydration &amp; Movement</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 170px), 1fr));gap:12px;margin:12px 0;">
-      <div style="background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:12px;padding:12px;text-align:center;">
-        <div style="font-size:11px;font-weight:800;color:#0d9488;">TOTAL WATER</div>
-        <div style="font-size:24px;font-weight:800;color:#0f766e;margin:4px 0;">{trackerState.totalWaterGlasses} glasses</div>
-        <div style="font-size:12px;color:#115e59;font-weight:700;">{trackerState.totalWaterMl} ml / 2000 ml</div>
-      </div>
-      <div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:12px;text-align:center;">
-        <div style="font-size:11px;font-weight:800;color:#ea580c;">TOTAL STEPS</div>
-        <div style="font-size:24px;font-weight:800;color:#c2410c;margin:4px 0;">{trackerState.totalWalkSteps} steps</div>
-        <div style="font-size:12px;color:#9a3412;font-weight:700;">Goal: 6,000 steps</div>
-      </div>
-    </div>
-  </div>
-
   <!-- Hair Wash Card -->
   <div class="history-card chore-card" style="margin-bottom:14px;">
     <div class="chore-question">🧴 Washed hair this week?</div>
@@ -104,7 +87,7 @@
       </div>
       <span class="typing-range-sep">to</span>
       <div class="typing-date-picker-box">
-        <span class="lecture-date-icon">🏁</span>
+        <span class="lecture-date-icon">📅</span>
         <span class="typing-date-display" id="typingEndDateDisplay">
           {trackerState.typingRange.end || 'End date'}
         </span>
