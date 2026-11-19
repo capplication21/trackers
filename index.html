@@ -2794,10 +2794,19 @@
         box-shadow: none;
       }
 
-      /* ==================== READING BOOK COMPONENT ==================== */
+      /* ==================== READING BOOK COMPONENT (3D FLIPBOOK & BOOKSHELF) ==================== */
+      :root {
+        --book-leather: #2b0a1a;
+        --book-gold: #d4af37;
+        --book-gold-light: #fef3c7;
+        --book-page-bg: #fdfbf7;
+        --book-spine-shadow: rgba(0, 0, 0, 0.15);
+      }
+
       .reading-title {
         color: #1e3a8a;
       }
+
       .reading-channel-btn {
         display: inline-flex;
         align-items: center;
@@ -2807,7 +2816,7 @@
         text-decoration: none;
         font-size: 11.5px;
         font-weight: 800;
-        padding: 5px 12px;
+        padding: 5px 14px;
         border-radius: 999px;
         border: 1.5px solid var(--ink);
         box-shadow: 0 2px 0 var(--ink);
@@ -2817,284 +2826,626 @@
         background: #dc2626;
         transform: translateY(-1px);
       }
-      .reading-channel-btn:active {
-        transform: translateY(1px);
-        box-shadow: none;
-      }
-      .reading-book-card {
-        background: linear-gradient(135deg, #fdfbf7 0%, #fefcf9 100%);
+
+      /* --- Bookshelf Wrapper & Filter Bar --- */
+      .reading-bookshelf-wrapper {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         border: 2px solid var(--ink);
-        border-radius: 20px;
-        padding: 18px;
-        box-shadow: 0 4px 0 var(--ink);
+        border-radius: 18px;
+        padding: 16px;
         margin-bottom: 20px;
+        box-shadow: 0 4px 0 var(--ink);
+        color: #f8fafc;
+      }
+
+      .reading-bookshelf-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .reading-bookshelf-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+      }
+
+      .reading-filter-pill-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+
+      .reading-filter-pill {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #e2e8f0;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .reading-filter-pill:hover {
+        background: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
+      }
+      .reading-filter-pill.active {
+        background: #f59e0b;
+        color: #0f172a;
+        border-color: #d97706;
+        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+      }
+
+      /* --- Bookshelf Book Cards Grid --- */
+      .reading-bookshelf-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 14px;
+        padding: 4px 2px;
+      }
+
+      .reading-book-card-item {
+        background: #182234;
+        border: 1.5px solid rgba(255, 255, 255, 0.15);
+        border-radius: 14px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .reading-book-card-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+        border-color: rgba(245, 158, 11, 0.6);
+      }
+      .reading-book-card-item.active {
+        border: 2px solid #f59e0b;
+        box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3), 0 8px 20px rgba(0, 0, 0, 0.5);
+        background: #1e2c44;
+      }
+
+      .reading-book-card-cover-preview {
+        height: 115px;
+        border-radius: 8px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4), 2px 2px 6px rgba(0, 0, 0, 0.3);
+        border-left: 5px solid rgba(0, 0, 0, 0.35);
+        margin-bottom: 10px;
         position: relative;
       }
-      .reading-book-topbar {
+
+      .reading-card-icon {
+        font-size: 26px;
+        line-height: 1;
+      }
+
+      .reading-card-level-badge {
+        font-size: 9.5px;
+        font-weight: 800;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
+        color: #ffffff;
+        backdrop-filter: blur(4px);
+        align-self: flex-start;
+      }
+
+      .reading-card-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: #f8fafc;
+        line-height: 1.35;
+        margin-bottom: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .reading-card-meta {
+        font-size: 11px;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 6px;
+      }
+
+      /* --- Persistent Audio / Video Companion Box --- */
+      .reading-companion-box {
+        background: linear-gradient(135deg, #090d16 0%, #151d2e 100%);
+        border: 2px solid var(--ink);
+        border-radius: 16px;
+        padding: 12px 16px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 0 var(--ink);
+        color: #ffffff;
+      }
+
+      .reading-companion-topbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 10px;
         flex-wrap: wrap;
-        padding-bottom: 12px;
-        margin-bottom: 14px;
-        border-bottom: 2px dashed #e2e8f0;
       }
-      .reading-story-meta {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-      .reading-story-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        background: #eff6ff;
-        border: 1px solid #bfdbfe;
-        color: #1d4ed8;
-        font-size: 11px;
-        font-weight: 800;
-        padding: 2px 8px;
-        border-radius: 999px;
-        width: fit-content;
-      }
-      .reading-story-heading {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--ink);
-      }
-      .reading-topbar-actions {
+
+      .reading-companion-info {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 10px;
+        flex: 1;
+        min-width: 240px;
+      }
+
+      .reading-pulse-dot {
+        width: 10px;
+        height: 10px;
+        background: #22c55e;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #22c55e;
+        animation: pulseAnimation 1.6s infinite ease-in-out;
+      }
+      @keyframes pulseAnimation {
+        0% { transform: scale(0.9); opacity: 0.8; }
+        50% { transform: scale(1.25); opacity: 1; }
+        100% { transform: scale(0.9); opacity: 0.8; }
+      }
+
+      .reading-companion-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: #f1f5f9;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .reading-companion-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
         flex-wrap: wrap;
       }
-      .reading-font-btn, .reading-action-btn {
-        border: 1.5px solid var(--ink);
-        background: #ffffff;
-        color: var(--ink);
-        border-radius: 999px;
-        padding: 4px 10px;
+
+      .reading-media-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #ffffff;
         font-size: 11px;
         font-weight: 700;
+        padding: 5px 10px;
+        border-radius: 8px;
         cursor: pointer;
-        font-family: inherit;
-        box-shadow: 0 1.5px 0 var(--ink);
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
+        transition: all 0.12s ease;
       }
-      .reading-font-btn:hover, .reading-action-btn:hover {
-        background: #f1f5f9;
+      .reading-media-btn:hover {
+        background: rgba(255, 255, 255, 0.22);
       }
-      .reading-yt-watch-btn {
-        background: #fee2e2;
-        color: #991b1b;
-        border-color: #f87171;
-      }
-      .reading-yt-watch-btn:hover {
-        background: #fecaca;
-      }
-      .reading-page-stepper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        margin-bottom: 14px;
-        flex-wrap: wrap;
-      }
-      .reading-page-pill {
-        min-width: 28px;
-        height: 28px;
-        padding: 0 8px;
-        border-radius: 999px;
-        border: 1.5px solid var(--ink);
-        background: #f8fafc;
-        color: var(--ink);
-        font-size: 11px;
-        font-weight: 800;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.1s ease;
-      }
-      .reading-page-pill:hover {
-        background: #e2e8f0;
-      }
-      .reading-page-pill.active {
+      .reading-media-btn.active {
         background: #3b82f6;
-        color: #ffffff;
-        box-shadow: 0 2px 0 var(--ink);
-        transform: translateY(-1px);
+        border-color: #2563eb;
       }
-      .reading-page-sheet {
-        background: #ffffff;
-        border: 1.5px solid #e2e8f0;
-        border-radius: 14px;
-        padding: 20px 22px;
-        box-shadow: inset 0 0 12px rgba(0,0,0,0.02), 0 2px 8px rgba(0,0,0,0.04);
-        position: relative;
-        min-height: 260px;
-      }
-      .reading-sheet-chapter {
-        font-size: 13px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: #2563eb;
-        margin-bottom: 6px;
-      }
-      .reading-sheet-title {
-        font-size: 18px;
-        font-weight: 800;
-        color: #0f172a;
-        margin-bottom: 14px;
-        line-height: 1.3;
-      }
-      .reading-sheet-prose {
-        color: #1e293b;
-        line-height: 1.85;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
-        margin-bottom: 16px;
-      }
-      .reading-sheet-prose p {
-        margin: 0 0 12px 0;
-      }
-      .reading-sheet-prose p:last-child {
-        margin-bottom: 0;
-      }
-      .reading-vocab-box {
-        background: #f0fdf4;
-        border: 1.5px solid #bbf7d0;
-        border-radius: 12px;
-        padding: 12px 14px;
-        margin-top: 14px;
-      }
-      .reading-vocab-title {
-        font-size: 11.5px;
-        font-weight: 800;
-        color: #166534;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin-bottom: 6px;
-      }
-      .reading-vocab-list {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        font-size: 12px;
-        color: #14532d;
-      }
-      .reading-page-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        margin-top: 16px;
-        padding-top: 12px;
-        border-top: 1.5px dashed #cbd5e1;
-      }
-      .reading-turn-btn {
-        border: 1.5px solid var(--ink);
-        background: #ffffff;
-        color: var(--ink);
-        border-radius: 999px;
-        padding: 7px 18px;
-        font-size: 12px;
-        font-weight: 800;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        box-shadow: 0 2px 0 var(--ink);
-        transition: transform 0.08s ease, background 0.1s ease;
-      }
-      .reading-turn-btn:hover:not(:disabled) {
-        background: #dbeafe;
-      }
-      .reading-turn-btn:active:not(:disabled) {
-        transform: translateY(2px);
-        box-shadow: none;
-      }
-      .reading-turn-btn:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-        box-shadow: none;
-      }
-      .reading-progress-pill {
-        font-size: 12px;
-        font-weight: 800;
-        color: #475569;
-      }
-      .reading-video-box {
-        background: #0f172a;
-        color: #f8fafc;
-        border: 2px solid var(--ink);
-        border-radius: 16px;
-        padding: 12px 14px;
-        margin-bottom: 16px;
-        box-shadow: 0 4px 0 var(--ink);
-      }
-      .reading-video-topline {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-      }
-      .reading-video-title {
-        font-size: 13px;
-        font-weight: 800;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-      .reading-video-badge {
-        font-size: 10px;
-        font-weight: 800;
-        background: #22c55e;
-        color: #052e16;
-        padding: 2px 8px;
-        border-radius: 999px;
-        letter-spacing: 0.3px;
-      }
-      .reading-video-badge.custom {
-        background: #f59e0b;
-        color: #451a03;
-      }
-      .reading-video-iframe-wrap {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%; /* 16:9 ratio */
-        background: #000000;
+
+      .reading-video-stage-container {
+        margin-top: 10px;
         border-radius: 10px;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.18);
-        transition: padding-top 0.2s ease;
+        background: #000000;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        transition: max-height 0.25s ease, opacity 0.25s ease;
       }
-      .reading-video-iframe-wrap.compact {
-        padding-top: 38%;
+      .reading-video-stage-container.compact {
+        height: 80px;
+        max-height: 80px;
       }
-      .reading-video-iframe-wrap iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
+      .reading-video-stage-container.expanded {
+        height: 310px;
+        max-height: 400px;
+      }
+      .reading-video-stage-container.hidden {
+        display: none;
+      }
+
+      .reading-video-stage-container iframe {
         width: 100%;
         height: 100%;
         border: none;
+        display: block;
       }
-      .reading-video-link-editor {
+
+      /* --- 3D Storybook Stage --- */
+      .reading-stage-wrapper {
+        background: radial-gradient(circle at center, #232b38 0%, #111827 100%);
+        border: 2px solid var(--ink);
+        border-radius: 20px;
+        padding: 20px 14px;
+        box-shadow: 0 4px 0 var(--ink), inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        position: relative;
+        min-height: 520px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .reading-stage-top-controls {
+        width: 100%;
+        max-width: 960px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+        padding: 6px 12px;
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        color: #e2e8f0;
+      }
+
+      .reading-stage-page-info {
+        font-size: 12px;
+        font-weight: 800;
+        color: #fef08a;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .reading-top-tool-group {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .reading-tool-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.12s ease;
+      }
+      .reading-tool-btn:hover {
+        background: rgba(255, 255, 255, 0.22);
+      }
+      .reading-tool-btn.active {
+        background: #22c55e;
+        color: #052e16;
+        border-color: #16a34a;
+      }
+
+      /* Flipbook Book Shell & Container */
+      .reading-flipbook-container {
+        width: 100%;
+        max-width: 960px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 10px auto;
+        perspective: 2000px;
+      }
+
+      #readingStBookElement {
+        margin: 0 auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 0, 0, 0.35);
+        border-radius: 8px;
+        transition: transform 0.2s ease;
+      }
+
+      /* Individual Flipbook Page Design */
+      .reading-flip-page {
+        background-color: var(--book-page-bg);
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+        box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.05);
+        user-select: text;
+        font-family: 'Georgia', 'Merriweather', 'Cambria', serif;
+        color: #27272a;
+      }
+
+      /* Realistic spine shading */
+      .reading-flip-page:nth-child(even) {
+        box-shadow: inset 24px 0 30px -14px rgba(0, 0, 0, 0.16), inset 0 0 15px rgba(0, 0, 0, 0.03);
+      }
+      .reading-flip-page:nth-child(odd) {
+        box-shadow: inset -24px 0 30px -14px rgba(0, 0, 0, 0.16), inset 0 0 15px rgba(0, 0, 0, 0.03);
+      }
+
+      /* Cover Pages (Hardcover Style) */
+      .reading-page-cover-front {
+        background-color: #2b0a1a !important;
+        color: #ffffff !important;
+        box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.75), inset 3px 0 6px rgba(255, 255, 255, 0.15) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 24px 20px !important;
+        border: 2px solid rgba(212, 175, 55, 0.4) !important;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .reading-page-cover-front::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        border: 1.5px solid rgba(212, 175, 55, 0.5);
+        border-radius: 6px;
+        pointer-events: none;
+      }
+
+      .reading-page-cover-back {
+        background-color: #2b0a1a !important;
+        color: #ffffff !important;
+        box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.75) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding: 24px 20px !important;
+        border: 2px solid rgba(212, 175, 55, 0.4) !important;
+        text-align: center;
+      }
+
+      .reading-cover-emboss-title {
+        font-size: 22px;
+        font-weight: 800;
+        font-family: 'Georgia', serif;
+        color: #fef08a;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(254, 240, 138, 0.3);
+        line-height: 1.25;
+        margin-top: 8px;
+        margin-bottom: 6px;
+      }
+
+      .reading-cover-sub {
+        font-size: 11.5px;
+        color: #fef3c7;
+        opacity: 0.9;
+        font-style: italic;
+      }
+
+      .reading-cover-badge-pill {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 10.5px;
+        font-weight: 800;
+        background: rgba(212, 175, 55, 0.25);
+        border: 1px solid rgba(212, 175, 55, 0.7);
+        color: #fef9c3;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+      }
+
+      /* Story Inside Chapter Page Layout */
+      .reading-page-inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px 22px 18px 22px;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+
+      .reading-page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #e4d7c5;
+        padding-bottom: 6px;
+        margin-bottom: 12px;
+        font-size: 10px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        color: #78716c;
+        text-transform: uppercase;
+      }
+
+      .reading-chapter-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: #451a03;
         margin-bottom: 10px;
+        line-height: 1.3;
+        font-family: 'Georgia', serif;
+      }
+
+      .reading-prose-container {
+        flex: 1;
+        line-height: 1.85;
+        color: #1f2937;
+      }
+
+      .reading-drop-cap {
+        float: left;
+        font-size: 3.2em;
+        line-height: 0.8;
+        padding-top: 4px;
+        padding-right: 8px;
+        padding-bottom: 2px;
+        font-family: 'Georgia', serif;
+        font-weight: 800;
+        color: #854d0e;
+      }
+
+      .reading-vocab-box {
+        margin-top: 14px;
         padding: 10px 12px;
+        background: #fefce8;
+        border: 1px solid #fef08a;
+        border-left: 4px solid #ca8a04;
+        border-radius: 6px;
+        font-size: 11px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      .reading-vocab-item {
+        margin-bottom: 4px;
+        line-height: 1.4;
+      }
+      .reading-vocab-word {
+        font-weight: 800;
+        color: #854d0e;
+      }
+      .reading-vocab-def {
+        color: #4b5563;
+      }
+
+      .reading-page-footer {
+        border-top: 1px solid #e4d7c5;
+        padding-top: 6px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 10px;
+        color: #a8a29e;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      /* Floating Page Turn Arrows */
+      .reading-flip-arrow-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(15, 23, 42, 0.85);
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 50;
+        transition: all 0.15s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
+      .reading-flip-arrow-btn:hover {
+        background: #f59e0b;
+        color: #0f172a;
+        border-color: #d97706;
+        transform: translateY(-50%) scale(1.1);
+      }
+      .reading-flip-arrow-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        transform: translateY(-50%) scale(1);
+      }
+      .reading-flip-arrow-prev {
+        left: -20px;
+      }
+      .reading-flip-arrow-next {
+        right: -20px;
+      }
+
+      /* Bottom Chapter Stepper Bar */
+      .reading-bottom-chapter-bar {
+        width: 100%;
+        max-width: 960px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        overflow-x: auto;
+        padding: 8px 4px;
+        margin-top: 12px;
+      }
+
+      .reading-chapter-jump-pill {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #cbd5e1;
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.12s ease;
+      }
+      .reading-chapter-jump-pill:hover {
+        background: rgba(255, 255, 255, 0.18);
+        color: #ffffff;
+      }
+      .reading-chapter-jump-pill.active {
+        background: #f59e0b;
+        color: #0f172a;
+        border-color: #d97706;
+        font-weight: 800;
+      }
+
+      /* Modal for Adding Custom Story / Editing Video Link */
+      .reading-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 16px;
+      }
+      .reading-modal-card {
         background: #1e293b;
-        border: 1.5px dashed #475569;
-        border-radius: 10px;
+        border: 2px solid var(--ink);
+        border-radius: 18px;
+        padding: 20px;
+        max-width: 520px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        color: #f8fafc;
+      }
+
+      @media (max-width: 768px) {
+        .reading-flip-arrow-prev { left: 4px; }
+        .reading-flip-arrow-next { right: 4px; }
+        .reading-bookshelf-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        }
       }
 
       .timer-wrap {
@@ -27964,539 +28315,1374 @@ window.openQuranReaderModal = openQuranReaderModal;
       // ==================== READING BOOK MODULE (@english2flow) ====================
       const READING_CHANNEL_URL = "https://youtube.com/@english2flow?si=9tiQmQ-q9gWuknXy";
 
-      const READING_STORIES = [
-        {
-          id: "story_linda",
-          title: "A Mother's Secret: Love & Sacrifice",
-          subtitle: "Learn English with Simple Stories • Level 2 for Beginners",
-          videoUrl: "https://www.youtube.com/watch?v=3L_Oh4p-Ufg",
-          views: "71K views",
-          level: "Level 2 (Beginner-Intermediate)",
-          pages: [
-            {
-              chapter: "Chapter 1",
-              title: "A Grandmother's Quiet House",
-              prose: [
-                "My name is Linda Parker. I am 64 years old. I live alone in a small house in Ohio, USA. My husband died 10 years ago. I have only one son. His name is Daniel. He is 35 years old. He is married and has a little daughter named Emma. Emma is my only granddaughter. She is 7 years old. She has the same blue eyes as her father.",
-                "Every Sunday, I used to cook her favorite food. She loved my apple pie. Whenever she visited me, she would run into my arms and say, 'Grandma, I missed you.' Those were the happiest moments of my life.",
-                "But things changed after Daniel got married. At first, he called me everyday. Sometimes he visited me after work. He always asked if I needed anything. But slowly, his visits became less common. First he stopped coming every weekend. Then he started calling only once a week. And after some time, even those calls became very short. I tried not to complain. I knew he had his own family and many responsibilities."
-              ],
-              vocab: [
-                { word: "responsibilities", meaning: "Duties and tasks you are expected to take care of." },
-                { word: "less common", meaning: "Happening rarely or not frequently." },
-                { word: "granddaughter", meaning: "The daughter of one's son or daughter." }
-              ]
-            },
-            {
-              chapter: "Chapter 2",
-              title: "The Unexpected Announcement",
-              prose: [
-                "One evening, Daniel came to my house with his wife, Sarah. They sat in the living room. I made coffee for them and brought some cookies. But Daniel looked different that day. He was not smiling.",
-                "'Mom, we need to talk,' he said. I sat beside him. 'Of course, dear. What happened?' He looked at Sarah before speaking. 'Mom, we are moving to another city. I got a new job and it pays much better.'",
-                "I smiled. 'That's wonderful, Daniel. I am so happy for you.' But then he said something I was not ready to hear: 'We are leaving next week.' I looked at him. 'Next week? So soon?' 'Yes, Mom. We have already found a house.' I looked at little Emma who was playing with her doll on the floor. 'What about Emma? Will I still get to see her?' Daniel looked down. 'Of course, Mom. We'll visit whenever we get time.'",
-                "I wanted to ask him to stay. I wanted to tell him that this house would feel empty without them, but I did not want to hold him back. 'Of course, sweetheart, I understand.' Before leaving, Emma hugged my legs: 'Grandma, will you come to my new house?' I kissed her forehead: 'Of course, sweetheart, I promise.' I did not know that it would become a very difficult promise to keep."
-              ],
-              vocab: [
-                { word: "hold back", meaning: "To restrain or prevent someone from progressing." },
-                { word: "pays much better", meaning: "Provides a significantly higher income/salary." },
-                { word: "promise", meaning: "A sincere assurance that one will do something." }
-              ]
-            },
-            {
-              chapter: "Chapter 3",
-              title: "The Distance & The Growing Silence",
-              prose: [
-                "The next week, Daniel and his family left. I stood outside my house and watched their car disappear down the street. I kept waving until I could no longer see them. Then I went inside. The house was silent. No little girl running through the hallway. No Daniel asking what was for dinner. No voices. Just me and the ticking clock on the wall. That night, I cooked dinner for one person for the first time in many years. I made Daniel's favorite chicken soup, but I could not eat it. I sat at the kitchen table and cried.",
-                "Daniel had promised to call, and he did. For the first few weeks, he called every Sunday. He told me about his new job, his new house, and Emma's school. I loved hearing about their lives, but slowly the calls became shorter. Sometimes he said he was busy, sometimes he said Emma was sleeping, and sometimes he did not answer at all. I started calling less because I did not want to disturb him.",
-                "One Sunday, I waited near the phone from morning until evening. He never called. When I finally called him at 9 PM, he answered: 'Mom, I'm really busy. Can we talk tomorrow?' I became quiet. 'Of course, dear. Take care.' He ended the call. I looked at the family photograph beside my bed. 'I miss you, sweetheart,' I whispered."
-              ],
-              vocab: [
-                { word: "disappear", meaning: "To cease to be visible; vanish." },
-                { word: "disturb", meaning: "To interrupt or bother someone while they are busy." },
-                { word: "whispered", meaning: "Spoke in a very soft, quiet voice." }
-              ]
-            },
-            {
-              chapter: "Chapter 4",
-              title: "The Secret Wooden Box",
-              prose: [
-                "Three months passed. Winter arrived in Ohio. The streets were covered with snow and the cold wind came through the small gaps in my windows. Sometimes my neighbor, Mrs. Wilson, came to visit me. 'Linda, why don't you visit your son?' she asked. I smiled: 'He's busy with work. I don't want to trouble him.' She looked at me sadly: 'Linda, you are his mother. You are not a trouble.' I did not answer.",
-                "A few days later, while cleaning my bedroom, I found an old birthday card Daniel had given me when he was only 10 years old. Inside he had written: 'Dear Mom, when I grow up, I will buy you a big house. You will never have to work again. I will take care of you just like you take care of me. Love, Daniel.'",
-                "As I closed the drawer, I noticed something behind it: a small wooden box. It was old and covered with dust. Inside that box was the one thing I had never told Daniel about: several envelopes, a notebook, and a bank book. On the first envelope was written: 'For Emma on her 18th birthday.'",
-                "When Emma was born, I made a promise to save for her future. Every month, I put money aside—$20, $50, or whatever I earned from my sewing work. I never bought expensive clothes or went to restaurants. I even sold old jewelry. I had opened a savings account in Emma's name and written letters for each milestone birthday so she would know how much her grandmother loved her."
-              ],
-              vocab: [
-                { word: "trouble", meaning: "An inconvenience or burden to others." },
-                { word: "milestone", meaning: "A significant stage or event in the development of something." },
-                { word: "sewing", meaning: "Joining or mending clothes using a needle and thread." }
-              ]
-            },
-            {
-              chapter: "Chapter 5",
-              title: "A Silent Birthday & The Bank Call",
-              prose: [
-                "A week later, my birthday arrived. I turned 65. I woke up early and made myself a cup of tea. I waited until noon. Nothing. At 3:00 in the afternoon, I finally received a text message from Daniel: 'Happy birthday, Mom. Sorry, I am busy today. We will talk soon.' I read it twice. Then I typed, 'Thank you, son. I love you.' I waited for a reply, but nothing came. Mrs. Wilson brought a small cake and sang with me, but after she left, I sat alone in the living room wondering if my son would ever return.",
-                "Two more months passed. One morning, an unknown number rang. 'Hello, Mrs. Parker. My name is James from the bank. I am calling about a savings account you opened for your granddaughter Emma. We just need to confirm a few details. Would you like us to send the account information to your son as well?'",
-                "I thought for a moment: 'No, please. I want to speak to him myself.' After ending the call, I looked at the wooden box under my bed. I knew it was time. I picked up my phone and called Daniel: 'Daniel, I need you to come home.' He sounded worried: 'Mom, what happened? Can it wait? We are very busy this week.' I closed my eyes: 'No, Daniel, please. I don't know how much longer I can wait.' There was silence. Finally, he said, 'Okay, Mom. I will come this Saturday.'"
-              ],
-              vocab: [
-                { word: "confirm", meaning: "To establish the truth or correctness of something." },
-                { word: "silence", meaning: "Complete absence of sound or speech." },
-                { word: "hopeful", meaning: "Feeling or inspiring optimism about future events." }
-              ]
-            },
-            {
-              chapter: "Chapter 6",
-              title: "Opening the Letters",
-              prose: [
-                "Saturday arrived. I cleaned the house, made Daniel's favorite chicken soup, and baked an apple pie for Emma. At 2:00 PM, a car pulled into the driveway. It was Daniel, Sarah, and Emma. Emma ran inside: 'Grandma! I missed you so much!'",
-                "I brought the wooden box and placed it on the kitchen table in front of Daniel. 'Open it, son.' He lifted the lid and found the envelopes, the notebook, and the bank book. Daniel opened an envelope and read: 'Dear Emma, if you are reading this, you are now 18 years old. I hope you are happy and brave. I saved something for your future so you could follow your dreams. Love, Grandma Linda.'",
-                "Daniel's eyes welled with tears. He opened the bank book and saw more than $18,000 saved. 'Mom, how did you save all this money? Why didn't you tell me?' I held his hand: 'Because I didn't want you to feel bad. I knew you had your own family to care for. I wanted to help Emma without making you worry.'"
-              ],
-              vocab: [
-                { word: "welled", meaning: "Filled up and began to spill over (with tears)." },
-                { word: "brave", meaning: "Ready to face danger or pain; courageous." },
-                { word: "savings account", meaning: "A bank account that earns interest on deposited funds." }
-              ]
-            },
-            {
-              chapter: "Chapter 7",
-              title: "The Letter to Daniel",
-              prose: [
-                "At the bottom of the box was one last envelope: 'For my son Daniel. Open this when you are ready.' Daniel opened it with trembling fingers:",
-                "'Dear Daniel, do you remember the small house where you grew up? Do you remember the winter when your father lost his job? You were only 8 years old. You woke up and asked why I wasn't sleeping. The truth was that I had skipped dinner so there would be enough food for you. I never wanted you to feel poor; I wanted you to feel loved.",
-                "When you moved away, I missed you every day. But I never wanted you to give up your happiness just to take care of me. One day, Emma will grow up with her own dreams and family, and perhaps one day she will also be too busy to visit. When that day comes, do not be angry with her. Just love her. That is all a parent can do. Love, Mom.'",
-                "A tear fell onto the paper. Daniel covered his face and wept: 'Mom, I am so sorry. When I was young, you were always there for me. But when you needed me, I was not there for you.' I touched his cheek gently: 'You are here now, son.'"
-              ],
-              vocab: [
-                { word: "trembling", meaning: "Shaking involuntarily with emotion." },
-                { word: "skipped", meaning: "Passed over or omitted doing something (like a meal)." },
-                { word: "wept", meaning: "Cried deeply with tears." }
-              ]
-            },
-            {
-              chapter: "Chapter 8",
-              title: "The Greatest Wealth & Coming Home",
-              prose: [
-                "Then little Emma reached into her backpack: 'Grandma, I have something for you too.' She handed me a drawing of a small house with a woman, a little girl, and a man holding hands, titled 'My Family.' 'Daddy said we might move back near you one day,' she smiled.",
-                "Daniel looked at his daughter, then looked at me: 'Mom, I don't want you to spend another winter alone. We can find a house closer to yours. I want Emma to grow up with her grandmother.'",
-                "He shook his head: 'Mom, you were never a problem. I just forgot how important you are.' That evening, we ate dinner together, and the house was filled with warmth and laughter once again.",
-                "After they left, I looked at the oak box. The greatest thing I had saved was never the money—it was the love I had never stopped giving. A mother never asks for luxury or expensive gifts; all she wants is a little time, a phone call, and knowing she is remembered. If your parents are still with you, don't wait for a special day to call them."
-              ],
-              vocab: [
-                { word: "luxury", meaning: "A state of great comfort and extravagant living." },
-                { word: "wealth", meaning: "An abundance of valuable possessions, money, or love." },
-                { word: "precious", meaning: "Of great value; not to be wasted or treated carelessly." }
-              ]
-            }
-          ]
-        },
-        {
-          id: "story_emily",
-          title: "The Secret Promise: Two Sisters",
-          subtitle: "Learn English with Simple Stories • Level 2 for Beginners",
-          videoUrl: "https://www.youtube.com/watch?v=afX5F1bqZMM",
-          views: "18.2K views",
-          level: "Level 2 (Beginner-Intermediate)",
-          pages: [
-            {
-              chapter: "Chapter 1",
-              title: "A Mother's Legacy",
-              prose: [
-                "My name is Emily Carter. I am 28 years old and I live in a small town in Oregon, USA. I live alone in a small rented apartment and work at a grocery store. My life is simple and quiet. But there is one person I miss every single day: my mother. She passed away four years ago after a long illness.",
-                "My father left us when I was just six years old. After that, my mother raised me alone, working long hours cleaning houses and working in a restaurant. Despite being exhausted, she always smiled and told me: 'Emily, life may not give us everything we want, but we should never stop being kind.'",
-                "She often helped neighbors and bought clothes for children whose families struggled. When I asked why she helped so much, she smiled: 'Because sometimes people need love more than money.'"
-              ],
-              vocab: [
-                { word: "legacy", meaning: "Something handed down or inherited from a predecessor." },
-                { word: "exhausted", meaning: "Extremely tired, physically or mentally." },
-                { word: "afford", meaning: "Have enough money to pay for something." }
-              ]
-            },
-            {
-              chapter: "Chapter 2",
-              title: "The Mysterious Envelope",
-              prose: [
-                "One cold winter evening, I found an envelope near my apartment door with my name on it. Inside was an old photograph of my mother holding the hand of a little girl I had never seen before. On the back, it read: 'Your mother kept a promise for 18 years. Now it's time you knew the truth.'",
-                "Two days later, my phone rang. A woman named Susan said: 'I knew your mother very well. There is something she wanted me to show you.' We agreed to meet at a coffee shop the next afternoon.",
-                "At the cafe, Susan placed an old wooden box on the table with a silver key: 'Your mother gave this to me years ago to give to you when the time was right.'"
-              ],
-              vocab: [
-                { word: "mysterious", meaning: "Difficult or impossible to understand, explain, or identify." },
-                { word: "promise", meaning: "A declaration that something will or will not happen." },
-                { word: "courage", meaning: "Strength in the face of pain, fear, or grief." }
-              ]
-            },
-            {
-              chapter: "Chapter 3",
-              title: "The Story of Lily",
-              prose: [
-                "Inside the box were letters, an old key, and a red notebook. The first letter began: 'My dearest Emily, there is something I kept hidden for many years. I hope you will understand.'",
-                "Susan explained: 'Her name was Lily. Lily's mother was your mother's closest friend who died in a car accident when Lily was only four. Your mother promised to always look after her.'",
-                "Even while struggling to raise me as a single mother, my mother visited Lily regularly, bringing her books, clothes, and birthday gifts. In one letter, Lily wrote: 'Dear Mrs. Carter, thank you for reading stories to me. I wish you could be my mother.' Tears streamed down my face as I realized my mother's boundless compassion."
-              ],
-              vocab: [
-                { word: "compassion", meaning: "Sympathetic pity and concern for the sufferings of others." },
-                { word: "regularly", meaning: "At uniform intervals; with predictable recurrence." },
-                { word: "boundless", meaning: "Having no bounds; infinite or vast." }
-              ]
-            },
-            {
-              chapter: "Chapter 4",
-              title: "Two Daughters in a Mother's Heart",
-              prose: [
-                "Susan pointed to the red notebook. On the final page, my mother's weak handwriting read: 'Today Lily turned 22. She wants to become a nurse to help those who suffer. When Emily was little, I used to bring Lily home and watch the two girls play together. For a few hours, I felt like I had two daughters. I hope one day they will find each other.'",
-                "Susan handed me an envelope with an address two hours away: 'Lily knows about you, but didn't know how to reach you.'",
-                "The next Saturday morning, I gathered my courage, got into my car, and drove down the highway toward the address."
-              ],
-              vocab: [
-                { word: "gathered courage", meaning: "Summoned inner strength to face a challenge." },
-                { word: "highway", meaning: "A main road connecting towns and cities." },
-                { word: "nurse", meaning: "A person trained to care for the sick or infirm." }
-              ]
-            },
-            {
-              chapter: "Chapter 5",
-              title: "Meeting My Sister",
-              prose: [
-                "I arrived at a small white house with flower beds and knocked. A young woman with gentle brown eyes opened the door. 'Are you Emily?' she asked quietly. When I nodded, she embraced me tightly in tears: 'I have waited so many years to meet you.'",
-                "Lily showed me photo albums of my mother visiting her through school events, birthdays, and holidays. Then she brought out a small gift box: 'Your mother asked me to give this to you when we met.'",
-                "Inside was a silver necklace with two intertwined hearts—one engraved with 'Emily' and the other with 'Lily.' A note read: 'My two girls, I loved you both with the same heart. Please don't let my absence make you strangers. Look after each other. Love, Mom.'"
-              ],
-              vocab: [
-                { word: "intertwined", meaning: "Twisted or linked closely together." },
-                { word: "engraved", meaning: "Carved or cut letters into a hard surface." },
-                { word: "absence", meaning: "The state of being away from a place or person." }
-              ]
-            },
-            {
-              chapter: "Chapter 6",
-              title: "Love That Outlives Time",
-              prose: [
-                "We cooked dinner together that evening. Lily prepared the same vegetable soup my mother used to make whenever I caught a cold. With the first spoonful, childhood memories came flooding back.",
-                "For four years after my mother's passing, I believed I was entirely alone in this world. But my mother had left me something infinitely more precious than money or property—she left me a sister.",
-                "Today, Lily and I speak almost daily. On Mother's Day, we visit our mother's resting place together, place two flowers side by side, and whisper: 'Thank you, Mom. You kept your promise.'",
-                "The greatest gift a parent gives is not something bought with money; it is the love they leave behind in the hearts of others."
-              ],
-              vocab: [
-                { word: "infinitely", meaning: "To a limitless or immense degree." },
-                { word: "flooding back", meaning: "Returning suddenly in large numbers (memories)." },
-                { word: "precious", meaning: "Having immense value and cherished deeply." }
-              ]
-            }
-          ]
-        },
-        {
-          id: "story_margaret",
-          title: "The Brown Lunchbox: 30 Years of Kindness",
-          subtitle: "Learn English Through Story • Level 1 Graded Reader",
-          videoUrl: "https://www.youtube.com/watch?v=1v0xdQd87wI",
-          views: "4.2K views",
-          level: "Level 1 (Beginner)",
-          pages: [
-            {
-              chapter: "Chapter 1",
-              title: "The School Kitchen Worker",
-              prose: [
-                "My name is Margaret Wilson. I am 74 years old and live in a quiet town in Maine, USA. For nearly thirty years, I worked in the cafeteria of an elementary school. I was not a principal or a teacher; I prepared lunches and served warm food to hundreds of children every day.",
-                "I knew who loved extra milk, who disliked greens, and who needed an extra slice of bread. One quiet boy named Ben caught my attention. He was eight years old, with worn-out shoes and a quiet demeanor. While other children opened colorful lunchboxes, Ben often sat at the end of the long bench with nothing at all.",
-                "One day, I slid an apple and a turkey sandwich in front of him: 'Everyone deserves a good lunch, Ben.' He smiled warmly for the very first time."
-              ],
-              vocab: [
-                { word: "cafeteria", meaning: "A dining hall where people choose food from a counter." },
-                { word: "demeanor", meaning: "Outward behavior or bearing." },
-                { word: "worn-out", meaning: "Damaged or shabby from extensive use." }
-              ]
-            },
-            {
-              chapter: "Chapter 2",
-              title: "The Extra Sandwich",
-              prose: [
-                "A few days later, I noticed Ben carefully wrapping half of his sandwich in a napkin and placing it into his backpack. 'Ben, aren't you hungry?' I asked gently. He looked down shyly: 'My little sister is hungry at home, too.'",
-                "Those words broke my heart. Starting the very next morning, I packed two sandwiches and two apples every day into a sturdy little brown tin lunchbox. 'Take this home for your sister, Ben. Just bring the box back tomorrow.'",
-                "For months, Ben brought the lunchbox back every morning, clean and ready. Then one Monday, Ben didn't come to school. His family had moved away in the night. The little brown lunchbox remained on my kitchen shelf as years passed."
-              ],
-              vocab: [
-                { word: "napkin", meaning: "A piece of cloth or paper used to wipe lips or fingers." },
-                { word: "sturdy", meaning: "Strongly built and solid." },
-                { word: "remained", meaning: "Stayed in the same place without moving." }
-              ]
-            },
-            {
-              chapter: "Chapter 3",
-              title: "A Phone Call from the Past",
-              prose: [
-                "Decades passed. I retired from the school. My husband passed away, and my children moved to other states for work. My house grew very quiet, and some days I wondered if my simple life had made any real difference.",
-                "One December morning, an unfamiliar number called: 'Is this Mrs. Margaret Wilson from the elementary school kitchen?' When I answered yes, the man's voice trembled: 'Mrs. Wilson, this is Ben. The little boy you used to feed.'",
-                "He told me he was now thirty-eight, married, and working as a senior hospital nurse. Then he asked: 'Mrs. Wilson, do you still have that little brown lunchbox?' I gasped: 'Ben, after thirty years, you remember that?'"
-              ],
-              vocab: [
-                { word: "decades", meaning: "Periods of ten years." },
-                { word: "unfamiliar", meaning: "Not known or recognized." },
-                { word: "gasped", meaning: "Inhaled sharply in shock or surprise." }
-              ]
-            },
-            {
-              chapter: "Chapter 4",
-              title: "The Folded Note",
-              prose: [
-                "Three days later, a tall gentleman holding a bouquet of flowers knocked on my front door. It was Ben. We sat in my living room with cups of coffee, reminiscing about the old school days.",
-                "Ben reached into his coat pocket and placed a faded, yellowed piece of paper on the table. Inside was a note in my old handwriting from thirty years ago: 'Remember to share with your sister. You both matter, and you both deserve a wonderful life.'",
-                "Tears filled Ben's eyes: 'Mrs. Wilson, whenever I felt hopeless or ashamed as a child, I read this note. You didn't just give me lunch; you made me believe that someone cared.' He shared that his sister had grown up to become an elementary teacher helping underprivileged kids."
-              ],
-              vocab: [
-                { word: "reminiscing", meaning: "Indulging in enjoyable recollection of past events." },
-                { word: "underprivileged", meaning: "Lacking the standard of living enjoyed by the majority." },
-                { word: "ashamed", meaning: "Embarrassed or guilty because of one's actions or situation." }
-              ]
-            },
-            {
-              chapter: "Chapter 5",
-              title: "A Namesake & A Living Legacy",
-              prose: [
-                "Then Ben smiled and showed me a photo on his phone of a cheerful six-year-old girl holding a brown lunchbox. 'This is my daughter. Her name is Margaret.' I covered my mouth in astonishment.",
-                "'When my daughter was born, I named her after the woman who made sure two hungry children never felt forgotten,' Ben said as he hugged me tightly.",
-                "The next day, Ben brought little Margaret to visit. She hugged my knees and gave me a crayon drawing: 'Thank you for feeding my daddy when he was little.'",
-                "I held the drawing against my heart. You never need fame or wealth to change the world. One sandwich, one encouraging word, and one act of sincere kindness can ripple through generations."
-              ],
-              vocab: [
-                { word: "namesake", meaning: "A person or thing named after another." },
-                { word: "astonishment", meaning: "Great surprise or amazement." },
-                { word: "ripple", meaning: "Spread outward from an initial point like waves on water." }
-              ]
-            }
-          ]
-        }
-      ];
+      // 7 Graded English2Flow Graded Storybooks
+      const BUILTIN_READING_STORIES = [
+  {
+    id: "story_linda",
+    title: "A Mother's Secret: Love & Sacrifice",
+    subtitle: "Learn English Through Stories • Level 2 Graded Reader",
+    videoUrl: "https://www.youtube.com/watch?v=3L_Oh4p-Ufg",
+    views: "71K views",
+    level: "Level 2 (Beginner-Intermediate)",
+    featuredBadge: "⭐ Featured 8-Page Story",
+    coverColor: "#2b0a1a",
+    coverAccent: "#f59e0b",
+    icon: "👵",
+    description: "Linda lived alone in a quiet house in Ohio. Her son moved far away and grew busy, but in a small oak box beneath her bed lay a treasure that money could never buy.",
+    dedication: "Dedicated to every mother whose silent sacrifices paved the way, and to every child who remembers to call.",
+    pages: [
+      {
+        chapter: "Chapter 1",
+        title: "A Grandmother's Quiet House",
+        prose: [
+          "My name is Linda Parker. I am 64 years old. I live alone in a small house in Ohio, USA. My husband died 10 years ago. I have only one son. His name is Daniel. He is 35 years old. He is married and has a little daughter named Emma. Emma is my only granddaughter. She is 7 years old. She has the same blue eyes as her father.",
+          "Every Sunday, I used to cook her favorite food. She loved my apple pie. Whenever she visited me, she would run into my arms and say, 'Grandma, I missed you.' Those were the happiest moments of my life.",
+          "But things changed after Daniel got married. At first, he called me everyday. Sometimes he visited me after work. He always asked if I needed anything. But slowly, his visits became less common. First he stopped coming every weekend. Then he started calling only once a week. And after some time, even those calls became very short. I tried not to complain. I knew he had his own family and many responsibilities."
+        ],
+        vocab: [
+          { word: "responsibilities", meaning: "Duties and tasks you are expected to take care of." },
+          { word: "less common", meaning: "Happening rarely or not frequently." },
+          { word: "granddaughter", meaning: "The daughter of one's son or daughter." }
+        ]
+      },
+      {
+        chapter: "Chapter 2",
+        title: "The Unexpected Announcement",
+        prose: [
+          "One evening, Daniel came to my house with his wife, Sarah. They sat in the living room. I made coffee for them and brought some cookies. But Daniel looked different that day. He was not smiling.",
+          "'Mom, we need to talk,' he said. I sat beside him. 'Of course, dear. What happened?' He looked at Sarah before speaking. 'Mom, we are moving to another city. I got a new job and it pays much better.'",
+          "I smiled. 'That's wonderful, Daniel. I am so happy for you.' But then he said something I was not ready to hear: 'We are leaving next week.' I looked at him. 'Next week? So soon?' 'Yes, Mom. We have already found a house.' I looked at little Emma who was playing with her doll on the floor. 'What about Emma? Will I still get to see her?' Daniel looked down. 'Of course, Mom. We'll visit whenever we get time.'",
+          "I wanted to ask him to stay. I wanted to tell him that this house would feel empty without them, but I did not want to hold him back. 'Of course, sweetheart, I understand.' Before leaving, Emma hugged my legs: 'Grandma, will you come to my new house?' I kissed her forehead: 'Of course, sweetheart, I promise.' I did not know that it would become a very difficult promise to keep."
+        ],
+        vocab: [
+          { word: "hold back", meaning: "To restrain or prevent someone from progressing." },
+          { word: "pays much better", meaning: "Provides a significantly higher income/salary." },
+          { word: "promise", meaning: "A sincere assurance that one will do something." }
+        ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "The Distance & The Growing Silence",
+        prose: [
+          "The next week, Daniel and his family left. I stood outside my house and watched their car disappear down the street. I kept waving until I could no longer see them. Then I went inside. The house was silent. No little girl running through the hallway. No Daniel asking what was for dinner. No voices. Just me and the ticking clock on the wall. That night, I cooked dinner for one person for the first time in many years. I made Daniel's favorite chicken soup, but I could not eat it. I sat at the kitchen table and cried.",
+          "Daniel had promised to call, and he did. For the first few weeks, he called every Sunday. He told me about his new job, his new house, and Emma's school. I loved hearing about their lives, but slowly the calls became shorter. Sometimes he said he was busy, sometimes he said Emma was sleeping, and sometimes he did not answer at all. I started calling less because I did not want to disturb him.",
+          "One Sunday, I waited near the phone from morning until evening. He never called. When I finally called him at 9 PM, he answered: 'Mom, I'm really busy. Can we talk tomorrow?' I became quiet. 'Of course, dear. Take care.' He ended the call. I looked at the family photograph beside my bed. 'I miss you, sweetheart,' I whispered."
+        ],
+        vocab: [
+          { word: "disappear", meaning: "To cease to be visible; vanish." },
+          { word: "disturb", meaning: "To interrupt or bother someone while they are busy." },
+          { word: "whispered", meaning: "Spoke in a very soft, quiet voice." }
+        ]
+      },
+      {
+        chapter: "Chapter 4",
+        title: "The Secret Wooden Box",
+        prose: [
+          "Three months passed. Winter arrived in Ohio. The streets were covered with snow and the cold wind came through the small gaps in my windows. Sometimes my neighbor, Mrs. Wilson, came to visit me. 'Linda, why don't you visit your son?' she asked. I smiled: 'He's busy with work. I don't want to trouble him.' She looked at me sadly: 'Linda, you are his mother. You are not a trouble.' I did not answer.",
+          "A few days later, while cleaning my bedroom, I found an old birthday card Daniel had given me when he was only 10 years old. Inside he had written: 'Dear Mom, when I grow up, I will buy you a big house. You will never have to work again. I will take care of you just like you take care of me. Love, Daniel.'",
+          "As I closed the drawer, I noticed something behind it: a small wooden box. It was old and covered with dust. Inside that box was the one thing I had never told Daniel about: several envelopes, a notebook, and a bank book. On the first envelope was written: 'For Emma on her 18th birthday.'",
+          "When Emma was born, I made a promise to save for her future. Every month, I put money aside—$20, $50, or whatever I earned from my sewing work. I never bought expensive clothes or went to restaurants. I even sold old jewelry. I had opened a savings account in Emma's name and written letters for each milestone birthday so she would know how much her grandmother loved her."
+        ],
+        vocab: [
+          { word: "trouble", meaning: "An inconvenience or burden to others." },
+          { word: "milestone", meaning: "A significant stage or event in the development of something." },
+          { word: "sewing", meaning: "Joining or mending clothes using a needle and thread." }
+        ]
+      },
+      {
+        chapter: "Chapter 5",
+        title: "A Silent Birthday & The Bank Call",
+        prose: [
+          "A week later, my birthday arrived. I turned 65. I woke up early and made myself a cup of tea. I waited until noon. Nothing. At 3:00 in the afternoon, I finally received a text message from Daniel: 'Happy birthday, Mom. Sorry, I am busy today. We will talk soon.' I read it twice. Then I typed, 'Thank you, son. I love you.' I waited for a reply, but nothing came. Mrs. Wilson brought a small cake and sang with me, but after she left, I sat alone in the living room wondering if my son would ever return.",
+          "Two more months passed. One morning, an unknown number rang. 'Hello, Mrs. Parker. My name is James from the bank. I am calling about a savings account you opened for your granddaughter Emma. We just need to confirm a few details. Would you like us to send the account information to your son as well?'",
+          "I thought for a moment: 'No, please. I want to speak to him myself.' After ending the call, I looked at the wooden box under my bed. I knew it was time. I picked up my phone and called Daniel: 'Daniel, I need you to come home.' He sounded worried: 'Mom, what happened? Can it wait? We are very busy this week.' I closed my eyes: 'No, Daniel, please. I don't know how much longer I can wait.' There was silence. Finally, he said, 'Okay, Mom. I will come this Saturday.'"
+        ],
+        vocab: [
+          { word: "confirm", meaning: "To establish the truth or correctness of something." },
+          { word: "silence", meaning: "Complete absence of sound or speech." },
+          { word: "hopeful", meaning: "Feeling or inspiring optimism about future events." }
+        ]
+      },
+      {
+        chapter: "Chapter 6",
+        title: "Opening the Letters",
+        prose: [
+          "Saturday arrived. I cleaned the house, made Daniel's favorite chicken soup, and baked an apple pie for Emma. At 2:00 PM, a car pulled into the driveway. It was Daniel, Sarah, and Emma. Emma ran inside: 'Grandma! I missed you so much!'",
+          "I brought the wooden box and placed it on the kitchen table in front of Daniel. 'Open it, son.' He lifted the lid and found the envelopes, the notebook, and the bank book. Daniel opened an envelope and read: 'Dear Emma, if you are reading this, you are now 18 years old. I hope you are happy and brave. I saved something for your future so you could follow your dreams. Love, Grandma Linda.'",
+          "Daniel's eyes welled with tears. He opened the bank book and saw more than $18,000 saved. 'Mom, how did you save all this money? Why didn't you tell me?' I held his hand: 'Because I didn't want you to feel bad. I knew you had your own family to care for. I wanted to help Emma without making you worry.'"
+        ],
+        vocab: [
+          { word: "welled", meaning: "Filled up and began to spill over (with tears)." },
+          { word: "brave", meaning: "Ready to face danger or pain; courageous." },
+          { word: "savings account", meaning: "A bank account that earns interest on deposited funds." }
+        ]
+      },
+      {
+        chapter: "Chapter 7",
+        title: "The Letter to Daniel",
+        prose: [
+          "At the bottom of the box was one last envelope: 'For my son Daniel. Open this when you are ready.' Daniel opened it with trembling fingers:",
+          "'Dear Daniel, do you remember the small house where you grew up? Do you remember the winter when your father lost his job? You were only 8 years old. You woke up and asked why I wasn't sleeping. The truth was that I had skipped dinner so there would be enough food for you. I never wanted you to feel poor; I wanted you to feel loved.",
+          "When you moved away, I missed you every day. But I never wanted you to give up your happiness just to take care of me. One day, Emma will grow up with her own dreams and family, and perhaps one day she will also be too busy to visit. When that day comes, do not be angry with her. Just love her. That is all a parent can do. Love, Mom.'",
+          "A tear fell onto the paper. Daniel covered his face and wept: 'Mom, I am so sorry. When I was young, you were always there for me. But when you needed me, I was not there for you.' I touched his cheek gently: 'You are here now, son.'"
+        ],
+        vocab: [
+          { word: "trembling", meaning: "Shaking involuntarily with emotion." },
+          { word: "skipped", meaning: "Passed over or omitted doing something (like a meal)." },
+          { word: "wept", meaning: "Cried deeply with tears." }
+        ]
+      },
+      {
+        chapter: "Chapter 8",
+        title: "The Greatest Wealth & Coming Home",
+        prose: [
+          "Then little Emma reached into her backpack: 'Grandma, I have something for you too.' She handed me a drawing of a small house with a woman, a little girl, and a man holding hands, titled 'My Family.' 'Daddy said we might move back near you one day,' she smiled.",
+          "Daniel looked at his daughter, then looked at me: 'Mom, I don't want you to spend another winter alone. We can find a house closer to yours. I want Emma to grow up with her grandmother.'",
+          "He shook his head: 'Mom, you were never a problem. I just forgot how important you are.' That evening, we ate dinner together, and the house was filled with warmth and laughter once again.",
+          "After they left, I looked at the oak box. The greatest thing I had saved was never the money—it was the love I had never stopped giving. A mother never asks for luxury or expensive gifts; all she wants is a little time, a phone call, and knowing she is remembered. If your parents are still with you, don't wait for a special day to call them."
+        ],
+        vocab: [
+          { word: "luxury", meaning: "A state of great comfort and extravagant living." },
+          { word: "wealth", meaning: "An abundance of valuable possessions, money, or love." },
+          { word: "precious", meaning: "Of great value; not to be wasted or treated carelessly." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "story_emily",
+    title: "The Secret Promise: Two Sisters",
+    subtitle: "Learn English with Simple Stories • Level 2 for Beginners",
+    videoUrl: "https://www.youtube.com/watch?v=afX5F1bqZMM",
+    views: "18.2K views",
+    level: "Level 2 (Beginner-Intermediate)",
+    featuredBadge: "6 Chapters",
+    coverColor: "#1e293b",
+    coverAccent: "#38bdf8",
+    icon: "👭",
+    description: "Emily discovers an envelope and an antique key left behind by her late mother, revealing a lifelong promise made to a childhood friend.",
+    dedication: "For anyone who believes in the quiet kindness that outlives time.",
+    pages: [
+      {
+        chapter: "Chapter 1",
+        title: "A Mother's Legacy",
+        prose: [
+          "My name is Emily Carter. I am 28 years old and I live in a small town in Oregon, USA. I live alone in a small rented apartment and work at a grocery store. My life is simple and quiet. But there is one person I miss every single day: my mother. She passed away four years ago after a long illness.",
+          "My father left us when I was just six years old. After that, my mother raised me alone, working long hours cleaning houses and working in a restaurant. Despite being exhausted, she always smiled and told me: 'Emily, life may not give us everything we want, but we should never stop being kind.'",
+          "She often helped neighbors and bought clothes for children whose families struggled. When I asked why she helped so much, she smiled: 'Because sometimes people need love more than money.'"
+        ],
+        vocab: [
+          { word: "legacy", meaning: "Something handed down or inherited from a predecessor." },
+          { word: "exhausted", meaning: "Extremely tired, physically or mentally." },
+          { word: "afford", meaning: "Have enough money to pay for something." }
+        ]
+      },
+      {
+        chapter: "Chapter 2",
+        title: "The Mysterious Envelope",
+        prose: [
+          "One cold winter evening, I found an envelope near my apartment door with my name on it. Inside was an old photograph of my mother holding the hand of a little girl I had never seen before. On the back, it read: 'Your mother kept a promise for 18 years. Now it's time you knew the truth.'",
+          "Two days later, my phone rang. A woman named Susan said: 'I knew your mother very well. There is something she wanted me to show you.' We agreed to meet at a coffee shop the next afternoon.",
+          "At the cafe, Susan placed an old wooden box on the table with a silver key: 'Your mother gave this to me years ago to give to you when the time was right.'"
+        ],
+        vocab: [
+          { word: "mysterious", meaning: "Difficult or impossible to understand, explain, or identify." },
+          { word: "promise", meaning: "A declaration that something will or will not happen." },
+          { word: "courage", meaning: "Strength in the face of pain, fear, or grief." }
+        ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "The Story of Lily",
+        prose: [
+          "Inside the box were letters, an old key, and a red notebook. The first letter began: 'My dearest Emily, there is something I kept hidden for many years. I hope you will understand.'",
+          "Susan explained: 'Her name was Lily. Lily's mother was your mother's closest friend who died in a car accident when Lily was only four. Your mother promised to always look after her.'",
+          "Even while struggling to raise me as a single mother, my mother visited Lily regularly, bringing her books, clothes, and birthday gifts. In one letter, Lily wrote: 'Dear Mrs. Carter, thank you for reading stories to me. I wish you could be my mother.' Tears streamed down my face as I realized my mother's boundless compassion."
+        ],
+        vocab: [
+          { word: "compassion", meaning: "Sympathetic pity and concern for the sufferings of others." },
+          { word: "regularly", meaning: "At uniform intervals; with predictable recurrence." },
+          { word: "boundless", meaning: "Having no bounds; infinite or vast." }
+        ]
+      },
+      {
+        chapter: "Chapter 4",
+        title: "Two Daughters in a Mother's Heart",
+        prose: [
+          "Susan pointed to the red notebook. On the final page, my mother's weak handwriting read: 'Today Lily turned 22. She wants to become a nurse to help those who suffer. When Emily was little, I used to bring Lily home and watch the two girls play together. For a few hours, I felt like I had two daughters. I hope one day they will find each other.'",
+          "Susan handed me an envelope with an address two hours away: 'Lily knows about you, but didn't know how to reach you.'",
+          "The next Saturday morning, I gathered my courage, got into my car, and drove down the highway toward the address."
+        ],
+        vocab: [
+          { word: "gathered courage", meaning: "Summoned inner strength to face a challenge." },
+          { word: "highway", meaning: "A main road connecting towns and cities." },
+          { word: "nurse", meaning: "A person trained to care for the sick or infirm." }
+        ]
+      },
+      {
+        chapter: "Chapter 5",
+        title: "Meeting My Sister",
+        prose: [
+          "I arrived at a small white house with flower beds and knocked. A young woman with gentle brown eyes opened the door. 'Are you Emily?' she asked quietly. When I nodded, she embraced me tightly in tears: 'I have waited so many years to meet you.'",
+          "Lily showed me photo albums of my mother visiting her through school events, birthdays, and holidays. Then she brought out a small gift box: 'Your mother asked me to give this to you when we met.'",
+          "Inside was a silver necklace with two intertwined hearts—one engraved with 'Emily' and the other with 'Lily.' A note read: 'My two girls, I loved you both with the same heart. Please don't let my absence make you strangers. Look after each other. Love, Mom.'"
+        ],
+        vocab: [
+          { word: "intertwined", meaning: "Twisted or linked closely together." },
+          { word: "engraved", meaning: "Carved or cut letters into a hard surface." },
+          { word: "absence", meaning: "The state of being away from a place or person." }
+        ]
+      },
+      {
+        chapter: "Chapter 6",
+        title: "Love That Outlives Time",
+        prose: [
+          "We cooked dinner together that evening. Lily prepared the same vegetable soup my mother used to make whenever I caught a cold. With the first spoonful, childhood memories came flooding back.",
+          "For four years after my mother's passing, I believed I was entirely alone in this world. But my mother had left me something infinitely more precious than money or property—she left me a sister.",
+          "Today, Lily and I speak almost daily. On Mother's Day, we visit our mother's resting place together, place two flowers side by side, and whisper: 'Thank you, Mom. You kept your promise.'",
+          "The greatest gift a parent gives is not something bought with money; it is the love they leave behind in the hearts of others."
+        ],
+        vocab: [
+          { word: "infinitely", meaning: "To a limitless or immense degree." },
+          { word: "flooding back", meaning: "Returning suddenly in large numbers (memories)." },
+          { word: "precious", meaning: "Having immense value and cherished deeply." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "story_margaret",
+    title: "The Brown Lunchbox: 30 Years of Kindness",
+    subtitle: "Learn English Through Story • Level 1 Graded Reader",
+    videoUrl: "https://www.youtube.com/watch?v=1v0xdQd87wI",
+    views: "4.2K views",
+    level: "Level 1 (Beginner)",
+    featuredBadge: "5 Chapters",
+    coverColor: "#143324",
+    coverAccent: "#4ade80",
+    icon: "🍱",
+    description: "Margaret Wilson prepared elementary school lunches for 30 years. Three decades later, a gentle knock at her door proved that simple kindness never fades.",
+    dedication: "To the unsung heroes of schools and cafeterias everywhere.",
+    pages: [
+      {
+        chapter: "Chapter 1",
+        title: "The School Kitchen Worker",
+        prose: [
+          "My name is Margaret Wilson. I am 74 years old and live in a quiet town in Maine, USA. For nearly thirty years, I worked in the cafeteria of an elementary school. I was not a principal or a teacher; I prepared lunches and served warm food to hundreds of children every day.",
+          "I knew who loved extra milk, who disliked greens, and who needed an extra slice of bread. One quiet boy named Ben caught my attention. He was eight years old, with worn-out shoes and a quiet demeanor. While other children opened colorful lunchboxes, Ben often sat at the end of the long bench with nothing at all.",
+          "One day, I slid an apple and a turkey sandwich in front of him: 'Everyone deserves a good lunch, Ben.' He smiled warmly for the very first time."
+        ],
+        vocab: [
+          { word: "cafeteria", meaning: "A dining hall where people choose food from a counter." },
+          { word: "demeanor", meaning: "Outward behavior or bearing." },
+          { word: "worn-out", meaning: "Damaged or shabby from extensive use." }
+        ]
+      },
+      {
+        chapter: "Chapter 2",
+        title: "The Extra Sandwich",
+        prose: [
+          "A few days later, I noticed Ben carefully wrapping half of his sandwich in a napkin and placing it into his backpack. 'Ben, aren't you hungry?' I asked gently. He looked down shyly: 'My little sister is hungry at home, too.'",
+          "Those words broke my heart. Starting the very next morning, I packed two sandwiches and two apples every day into a sturdy little brown tin lunchbox. 'Take this home for your sister, Ben. Just bring the box back tomorrow.'",
+          "For months, Ben brought the lunchbox back every morning, clean and ready. Then one Monday, Ben didn't come to school. His family had moved away in the night. The little brown lunchbox remained on my kitchen shelf as years passed."
+        ],
+        vocab: [
+          { word: "napkin", meaning: "A piece of cloth or paper used to wipe lips or fingers." },
+          { word: "sturdy", meaning: "Strongly built and solid." },
+          { word: "remained", meaning: "Stayed in the same place without moving." }
+        ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "A Phone Call from the Past",
+        prose: [
+          "Decades passed. I retired from the school. My husband passed away, and my children moved to other states for work. My house grew very quiet, and some days I wondered if my simple life had made any real difference.",
+          "One December morning, an unfamiliar number called: 'Is this Mrs. Margaret Wilson from the elementary school kitchen?' When I answered yes, the man's voice trembled: 'Mrs. Wilson, this is Ben. The little boy you used to feed.'",
+          "He told me he was now thirty-eight, married, and working as a senior hospital nurse. Then he asked: 'Mrs. Wilson, do you still have that little brown lunchbox?' I gasped: 'Ben, after thirty years, you remember that?'"
+        ],
+        vocab: [
+          { word: "decades", meaning: "Periods of ten years." },
+          { word: "unfamiliar", meaning: "Not known or recognized." },
+          { word: "gasped", meaning: "Inhaled sharply in shock or surprise." }
+        ]
+      },
+      {
+        chapter: "Chapter 4",
+        title: "The Folded Note",
+        prose: [
+          "Three days later, a tall gentleman holding a bouquet of flowers knocked on my front door. It was Ben. We sat in my living room with cups of coffee, reminiscing about the old school days.",
+          "Ben reached into his coat pocket and placed a faded, yellowed piece of paper on the table. Inside was a note in my old handwriting from thirty years ago: 'Remember to share with your sister. You both matter, and you both deserve a wonderful life.'",
+          "Tears filled Ben's eyes: 'Mrs. Wilson, whenever I felt hopeless or ashamed as a child, I read this note. You didn't just give me lunch; you made me believe that someone cared.' He shared that his sister had grown up to become an elementary teacher helping underprivileged kids."
+        ],
+        vocab: [
+          { word: "reminiscing", meaning: "Indulging in enjoyable recollection of past events." },
+          { word: "underprivileged", meaning: "Lacking the standard of living enjoyed by the majority." },
+          { word: "ashamed", meaning: "Embarrassed or guilty because of one's actions or situation." }
+        ]
+      },
+      {
+        chapter: "Chapter 5",
+        title: "A Namesake & A Living Legacy",
+        prose: [
+          "Then Ben smiled and showed me a photo on his phone of a cheerful six-year-old girl holding a brown lunchbox. 'This is my daughter. Her name is Margaret.' I covered my mouth in astonishment.",
+          "'When my daughter was born, I named her after the woman who made sure two hungry children never felt forgotten,' Ben said as he hugged me tightly.",
+          "The next day, Ben brought little Margaret to visit. She hugged my knees and gave me a crayon drawing: 'Thank you for feeding my daddy when he was little.'",
+          "I held the drawing against my heart. You never need fame or wealth to change the world. One sandwich, one encouraging word, and one act of sincere kindness can ripple through generations."
+        ],
+        vocab: [
+          { word: "namesake", meaning: "A person or thing named after another." },
+          { word: "astonishment", meaning: "Great surprise or amazement." },
+          { word: "ripple", meaning: "Spread outward from an initial point like waves on water." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "story_taxi",
+    title: "The Forgotten Envelope: The Honest Taxi Driver",
+    subtitle: "Learn English Through Stories • Level 2 Real Life Lesson",
+    videoUrl: "https://www.youtube.com/watch?v=3L_Oh4p-Ufg",
+    views: "34K views",
+    level: "Level 2 (Beginner-Intermediate)",
+    featuredBadge: "6 Chapters",
+    coverColor: "#1e1b4b",
+    coverAccent: "#a855f7",
+    icon: "🚕",
+    description: "An elderly taxi driver in Chicago discovers a thick envelope stuffed with cash left behind by a frail grandmother in his back seat.",
+    dedication: "Dedicated to the everyday heroes whose honesty illuminates the world.",
+    pages: [
+      {
+        chapter: "Chapter 1",
+        title: "The Rainy Shift in Chicago",
+        prose: [
+          "My name is George Miller. I have driven a yellow taxi cab in the bustling streets of Chicago for over thirty-five years. People often ask me if driving in traffic every day makes me tired. I always tell them: 'A taxi is not just a car; it is a moving window into human life.'",
+          "It was a cold, rainy November evening. The rain tapped rhythmically against my windshield as neon store lights reflected on the wet asphalt. Near the central train station, a frail elderly woman in a worn grey coat raised her trembling hand for a ride.",
+          "She carried a frayed cloth handbag and looked anxious. 'Sir, can you please take me to St. Luke's Memorial Hospital?' she asked in a soft, worried voice. 'Of course, ma'am,' I said gently, opening the door for her."
+        ],
+        vocab: [
+          { word: "bustling", meaning: "Full of energetic and noisy activity." },
+          { word: "frail", meaning: "Physically weak and delicate." },
+          { word: "rhythmically", meaning: "With a regular, repeating pattern of movement or sound." }
+        ]
+      },
+      {
+        chapter: "Chapter 2",
+        title: "A Conversation in the Rain",
+        prose: [
+          "During the drive, the woman sat quietly with her hands folded tightly in her lap. I noticed tears welling in the corners of her eyes. 'Is everything alright, ma'am?' I asked through the rear-view mirror.",
+          "She took a deep breath. 'My grandson is having an emergency heart surgery tonight. His parents passed away years ago, and I am the only family he has left. I spent the last three days visiting relatives and borrowing every penny I could find to help pay for the operation.'",
+          "Her words reminded me of my own mother, who had worked endless night shifts to afford my sister's medical treatments when we were kids. When we pulled up outside the hospital entrance, she handed me a ten-dollar bill and thanked me profusely before rushing through the revolving doors."
+        ],
+        vocab: [
+          { word: "emergency", meaning: "A serious, unexpected, and often dangerous situation." },
+          { word: "relatives", meaning: "Members of one's family." },
+          { word: "profusely", meaning: "In large amounts, abundantly, with deep feeling." }
+        ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "The Discovery in the Back Seat",
+        prose: [
+          "After she left, I stopped at a nearby gas station to clean the taxi floor mats and wipe the wet seats. As I reached under the passenger seat to adjust the seatbelt, my hand brushed against something thick and heavy.",
+          "It was a large brown manila envelope, sealed with red tape. I turned it over and read the handwritten words on the front: 'For Michael's Surgery — $14,500.'",
+          "My heart skipped a beat. Fourteen thousand five hundred dollars in cash. For a moment, the world around me seemed to freeze. That amount of money was more than six months of my total taxi income. It could pay off my overdue apartment rent and fix my car's failing transmission.",
+          "But right then, the grandmother's tearful face flashed in my mind: 'I spent the last three days borrowing every penny... he is the only family I have left.' That money was not paper; it was a boy's life."
+        ],
+        vocab: [
+          { word: "manila envelope", meaning: "A sturdy paper envelope designed for carrying documents." },
+          { word: "transmission", meaning: "The mechanism in a car that transmits power from the engine." },
+          { word: "overdue", meaning: "Not having arrived or occurred by the scheduled time." }
+        ]
+      },
+      {
+        chapter: "Chapter 4",
+        title: "The Search Through St. Luke's",
+        prose: [
+          "Without hesitating for another second, I jumped back into the cab, turned around, and drove straight back to the hospital. I parked in the emergency ambulance bay, gripped the envelope firmly under my coat, and dashed inside.",
+          "The hospital lobby was crowded with doctors, nurses, and anxious families. I ran to the reception desk: 'Excuse me! An elderly lady in a grey coat arrived here twenty minutes ago. Her grandson is having surgery tonight!'",
+          "The nurse looked startled: 'Sir, we have over three hundred patients on this floor.' I felt panic rising. What if she had already walked into an operating theater? What if she had collapsed in grief after realizing the envelope was missing?'"
+        ],
+        vocab: [
+          { word: "hesitating", meaning: "Pausing before saying or doing something due to uncertainty." },
+          { word: "startled", meaning: "Feeling sudden shock or surprise." },
+          { word: "operating theater", meaning: "A specialized room in a hospital where surgical procedures take place." }
+        ]
+      },
+      {
+        chapter: "Chapter 5",
+        title: "Tears in the Waiting Room",
+        prose: [
+          "I ran up the stairs to the third-floor pediatric cardiology wing. There, sitting alone in the corner of a dimly lit waiting room, head buried in her hands, was the woman. She was sobbing uncontrollably, clutching an empty handbag.",
+          "I walked over and knelt down beside her chair. 'Ma'am?' I whispered gently.",
+          "She looked up, her face pale and streaked with tears. 'Driver... I lost everything. I don't know where it went. My grandson... I failed him.'",
+          "I pulled the heavy brown envelope from my coat and placed it squarely into her trembling hands: 'You didn't lose it, ma'am. You left it on my back seat.'"
+        ],
+        vocab: [
+          { word: "pediatric", meaning: "Relating to the branch of medicine dealing with children." },
+          { word: "sobbing", meaning: "Crying noisily, making loud, convulsive gasps." },
+          { word: "streaked", meaning: "Marked with lines or streaks of moisture or color." }
+        ]
+      },
+      {
+        chapter: "Chapter 6",
+        title: "The Greatest Reward",
+        prose: [
+          "The grandmother stared at the envelope in utter disbelief. She pressed it against her chest and began weeping with joy, hugging me so tightly that I could feel her heartbeat. 'God bless you! God bless your honest heart!' she cried aloud.",
+          "She insisted on giving me a bundle of bills as a reward, but I gently pushed her hand away. 'Save every dollar for your grandson's recovery, ma'am. Seeing your smile is the richest reward I could ever ask for.'",
+          "Two months later, I received a package at the taxi depot. Inside was a framed photo of a smiling ten-year-old boy sitting upright in a hospital bed, holding a crayon drawing of a bright yellow cab with a driver wearing a heart badge. Written at the bottom were four words: 'Thank you for my life.'",
+          "Honesty is never about what you stand to lose; it is about the peace in your soul when you look in the mirror every night."
+        ],
+        vocab: [
+          { word: "disbelief", meaning: "Inability or refusal to accept that something is true or real." },
+          { word: "insisted", meaning: "Demanded something forcefully, not accepting refusal." },
+          { word: "depot", meaning: "A central station or headquarters for transport vehicles." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "story_clock",
+    title: "The Clockmaker's Gift: A Second Chance",
+    subtitle: "Learn English Through Emotional Stories • Level 2",
+    videoUrl: "https://www.youtube.com/watch?v=afX5F1bqZMM",
+    views: "22K views",
+    level: "Level 2 (Beginner-Intermediate)",
+    featuredBadge: "6 Chapters",
+    coverColor: "#451a03",
+    coverAccent: "#fbbf24",
+    icon: "🕰️",
+    description: "In a quiet corner of Vermont, an elderly clockmaker who fixed thousands of antique watches discovers that the only time that cannot be wound back is the time lost with family.",
+    dedication: "For anyone who wishes to turn back the hands of time and say 'I love you'.",
+    pages: [
+      {
+        chapter: "Chapter 1",
+        title: "The Tick-Tock Workshop",
+        prose: [
+          "For fifty years, my hands have been stained with fine mechanical oil and brass dust. My name is Thomas Wright, and I own a tiny antique watch repair shop on Elm Street in Vermont.",
+          "People brought me grandfather clocks that had stopped ticking in 1940, pocket watches carried through wars, and delicate Swiss music boxes. I loved my clocks because they were predictable. If a gear was broken, I could replace it. If a spring was loose, I could tighten it.",
+          "Clocks obeyed precise mathematical laws. But people did not. And in my obsession with fixing clocks, I had let the most important relationship in my life tick away into complete silence."
+        ],
+        vocab: [
+          { word: "predictable", meaning: "Behaving or occurring in an expected way." },
+          { word: "obsession", meaning: "An idea or thought that continually occupies a person's mind." },
+          { word: "mechanical", meaning: "Working or produced by machines or machinery." }
+        ]
+      },
+      {
+        chapter: "Chapter 2",
+        title: "The Estranged Son",
+        prose: [
+          "My son, Lucas, was twenty-two when he told me he wanted to become an artist instead of taking over the family clock shop. I was furious. I called his dreams foolish and warned him that painting canvases would leave him penniless.",
+          "We argued bitterly on a snowy December afternoon. Lucas packed his bags, walked out the front door, and never returned. That was fifteen years ago.",
+          "Over those fifteen years, I told myself that I was the parent and he should be the one to apologize. Pride is a quiet poison; it makes you believe you are winning an argument while your heart is dying of loneliness."
+        ],
+        vocab: [
+          { word: "estranged", meaning: "No longer close or affectionate to someone; alienated." },
+          { word: "bitterly", meaning: "In a way that shows deep anger, hurt, or resentment." },
+          { word: "pride", meaning: "A feeling of deep pleasure in one's own achievements or stubborn self-importance." }
+        ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "A Package from New York",
+        prose: [
+          "One Tuesday morning, the mail courier placed a heavy wooden crate on my counter. The return address read: 'Lucas Wright — Brooklyn, New York.'",
+          "My hands trembled so violently that I dropped my magnifying loupe onto the wooden floor. I grabbed a crowbar and carefully pried open the crate's wooden slats.",
+          "Inside, nestled in layers of bubble wrap, was not a painting. It was an antique brass wall clock—the very first clock Lucas and I had built together when he was only ten years old. But the glass face was shattered, the wooden frame scratched, and the pendulum broken in half."
+        ],
+        vocab: [
+          { word: "magnifying loupe", meaning: "A small optical lens used by jewellers and watchmakers to see tiny gears." },
+          { word: "pried open", meaning: "Forced open with a lever or tool." },
+          { word: "pendulum", meaning: "A weight hung from a pivot that swings freely, regulating a clock's mechanism." }
+        ]
+      },
+      {
+        chapter: "Chapter 4",
+        title: "The Letter Behind the Dial",
+        prose: [
+          "Tucked behind the clock's brass dial was a handwritten letter from my son: 'Dad, I found our old clock in my storage closet. Like our relationship, it is battered and broken. But you always taught me that no timepiece is beyond repair as long as someone cares enough to mend it.'",
+          "'If you can fix it before Christmas Eve, I will come home for dinner. If not, I will understand that some things are meant to stay broken.'",
+          "Tears splashed onto the brass clockface. Christmas Eve was only six days away. The clock required rare vintage parts that had not been manufactured in forty years. But for the first time in fifteen years, I felt alive."
+        ],
+        vocab: [
+          { word: "battered", meaning: "Damaged by repeated blows or long, hard use." },
+          { word: "beyond repair", meaning: "Damaged so badly that it cannot be fixed." },
+          { word: "manufactured", meaning: "Made or produced on a large scale by machinery." }
+        ]
+      },
+      {
+        chapter: "Chapter 5",
+        title: "Six Nights of Work",
+        prose: [
+          "I barely slept for five days. I scoured old supply catalogs, called antique collectors across New England, and hand-carved a new wooden casing from solid walnut wood.",
+          "I carefully shaped a replacement brass pendulum rod and polished every tiny gear until it gleamed like pure gold. On December 23rd at 11:30 PM, I placed the final escapement wheel into position, wound the spring, and let go of the pendulum.",
+          "Tick. Tock. Tick. Tock. A chime echoed through the quiet shop—deep, resonant, and clear as a church bell. The clock was alive once more."
+        ],
+        vocab: [
+          { word: "scoured", meaning: "Searched thoroughly and energetically." },
+          { word: "resonant", meaning: "Deep, clear, and continuing to sound or ring." },
+          { word: "escapement wheel", meaning: "A mechanism in a mechanical watch or clock that regulates its motion." }
+        ]
+      },
+      {
+        chapter: "Chapter 6",
+        title: "The Sound of Reconciliation",
+        prose: [
+          "Christmas Eve arrived. Snow fell softly against the shop windows. I hung the clock right above the front counter and waited. Five o'clock passed. Six o'clock passed. Seven o'clock.",
+          "My heart sank. Perhaps fifteen years was too long. Perhaps words spoken in anger could never be undone. But at precisely 7:15 PM, the small brass bell above the front door jingled.",
+          "A tall man with a beard and snow on his coat collar stepped inside. He stood silently, looking up at the wall. The antique clock chimed four melodic notes.",
+          "Lucas turned to me, eyes shining with tears. 'You fixed it, Dad.' I walked out from behind the counter, wrapped my arms around my son, and wept: 'I fixed the clock, Lucas. But you fixed my life.'",
+          "You can repair a thousand watches, but the only time that matters is the time you share with those who love you."
+        ],
+        vocab: [
+          { word: "reconciliation", meaning: "The restoration of friendly relations after a dispute." },
+          { word: "precisely", meaning: "Exactly; at that exact moment or detail." },
+          { word: "jingled", meaning: "Made a light ringing sound." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "story_coffee",
+    title: "The Coffee Shop Stranger: A Warm Cup of Hope",
+    subtitle: "Simple English Graded Reader • Level 1 Beginner",
+    videoUrl: "https://www.youtube.com/watch?v=1v0xdQd87wI",
+    views: "29K views",
+    level: "Level 1 (Beginner)",
+    featuredBadge: "5 Chapters",
+    coverColor: "#3b1e08",
+    coverAccent: "#ea580c",
+    icon: "☕",
+    description: "An exhausted university student working double shifts at a cafe discovers that an encouraging handwritten note on a napkin can change someone's entire future.",
+    dedication: "For anyone who needs a warm cup of kindness on a cold day.",
+    pages: [
+      {
+        chapter: "Chapter 1",
+        title: "The 6:00 AM Shift",
+        prose: [
+          "My name is Sarah Miller. I am twenty years old and study nursing at a city college. To pay for my tuition books and rent, I work early mornings as a barista at 'The Daily Cup,' a small corner cafe near the subway.",
+          "Every morning at 5:30 AM, while the city is still asleep, I unlock the cafe doors, turn on the espresso machines, and bake fresh croissants. I am often tired, with dark circles under my eyes.",
+          "Working with the public is not always easy. Some customers are in a hurry; they order loudly, check their phones, and leave without saying thank you. But there was one customer who was completely different."
+        ],
+        vocab: [
+          { word: "tuition", meaning: "Money paid for teaching or instruction at a school or college." },
+          { word: "barista", meaning: "A person whose job involves preparing and serving coffee." },
+          { word: "croissants", meaning: "Flaky, buttery French pastries in the shape of a crescent." }
+        ]
+      },
+      {
+        chapter: "Chapter 2",
+        title: "Mr. Arthur's Morning Visit",
+        prose: [
+          "Every day at 7:15 AM, an elderly gentleman named Mr. Arthur walked into the cafe. He always wore a neat brown tweed coat, carried a wooden walking cane, and wore a kind smile.",
+          "He never used an iPad or looked at a phone. He simply ordered a black drip coffee and a blueberry muffin: 'Good morning, young lady. How are your studies going today?'",
+          "No matter how busy the cafe was, Mr. Arthur always spoke with patience and warmth. He looked me in the eye when he said thank you. In a fast-moving world, his kindness felt like a calm island."
+        ],
+        vocab: [
+          { word: "tweed", meaning: "A rough, woolen fabric often woven in subtle colors." },
+          { word: "patience", meaning: "The capacity to accept or tolerate delay or trouble without becoming annoyed." },
+          { word: "island", meaning: "A piece of land surrounded by water, or a quiet place of refuge." }
+        ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "The Napkin on Table Four",
+        prose: [
+          "One Friday morning, I had just failed a major anatomy exam. I was exhausted, crying quietly behind the coffee counter, wondering if I should give up my dream of becoming a nurse.",
+          "Mr. Arthur sat at his usual corner table, reading his morning paper. When he finished his coffee, he walked to the door, waved gently, and stepped out into the rain.",
+          "I walked over to clear table four. Next to his empty white coffee mug was a folded paper napkin with coins for a tip. On the napkin, in elegant cursive handwriting, was written: 'Difficult roads often lead to beautiful destinations. You have the heart of a healer, Sarah. Do not give up.'"
+        ],
+        vocab: [
+          { word: "anatomy", meaning: "The branch of science concerned with the bodily structure of humans." },
+          { word: "napkin", meaning: "A piece of paper used at a meal for wiping fingers or lips." },
+          { word: "healer", meaning: "A person who cures sickness or relieves pain." }
+        ]
+      },
+      {
+        chapter: "Chapter 4",
+        title: "An Empty Table",
+        prose: [
+          "I pressed that napkin into my pocket. Whenever I felt like quitting my studies, I pulled it out and read Mr. Arthur's words. Those two sentences gave me the strength to study late into the night.",
+          "Two years passed. I passed all my exams and completed my hospital clinical rotations. But six months before graduation, Mr. Arthur stopped coming to the cafe. Table four remained empty every morning at 7:15 AM.",
+          "I asked the other regulars, but no one knew where he lived. I carried the faded napkin in my nurse's badge holder, wishing I could show him that his words had kept my dream alive."
+        ],
+        vocab: [
+          { word: "rotations", meaning: "Periods of practical training in different hospital departments." },
+          { word: "graduation", meaning: "The receiving or conferring of an academic degree or diploma." },
+          { word: "faded", meaning: "Having lost freshness or brightness of color over time." }
+        ]
+      },
+      {
+        chapter: "Chapter 5",
+        title: "The First Day on the Ward",
+        prose: [
+          "On my first official day as a registered nurse in the hospital's rehabilitation ward, I checked my patient list. In Room 304 was an elderly patient recovering from pneumonia.",
+          "I knocked and pushed the door open: 'Good morning, sir. I will be your nurse today.' The elderly man turned in his bed—it was Mr. Arthur.",
+          "He was thin and frail, but his eyes lit up with recognition: 'Sarah? The young barista?' I pulled the folded napkin from my badge and held it up with tears in my eyes: 'You told me not to give up, Mr. Arthur. And today, I am here to take care of you.'",
+          "Never underestimate a kind word. The seed of encouragement you plant in someone's heart today may blossom into the hands that help you tomorrow."
+        ],
+        vocab: [
+          { word: "pneumonia", meaning: "A serious lung infection that causes inflammation and coughing." },
+          { word: "rehabilitation", meaning: "The action of restoring someone to health through therapy." },
+          { word: "underestimate", meaning: "To estimate something to be smaller or less important than it really is." }
+        ]
+      }
+    ]
+  },
+  {
+    id: "story_garden",
+    title: "The Old Gardener's Will: Seeds of Wisdom",
+    subtitle: "Learn English Through Stories • Level 2 Life Lessons",
+    videoUrl: "https://www.youtube.com/watch?v=3L_Oh4p-Ufg",
+    views: "19K views",
+    level: "Level 2 (Beginner-Intermediate)",
+    featuredBadge: "6 Chapters",
+    coverColor: "#064e3b",
+    coverAccent: "#34d399",
+    icon: "🌱",
+    description: "When a wealthy grandfather passes away, he leaves his vast fortune to charity, but leaves an overgrown acre of garden to his three competing grandchildren.",
+    dedication: "For everyone cultivating patience, kindness, and genuine family connection.",
+    pages: [
+      {
+        chapter: "Chapter 1",
+        title: "The Lawyer's Office",
+        prose: [
+          "My grandfather, William Sterling, was known across England as a successful textile businessman. But to us, he was simply Grandfather William—a quiet man with dirt under his fingernails who loved his greenhouse more than boardrooms.",
+          "When he passed away at eighty-eight, my cousins Edward, Julian, and I gathered in a prestigious London law office. Edward was an ambitious banker who talked only of stock returns. Julian was a socialite obsessed with expensive sports cars. I was a school librarian.",
+          "We all expected Grandfather's will to divide millions of pounds among us. Instead, the lawyer cleared his throat and read: 'To my three grandchildren, I leave my five-acre walled garden in the countryside of Surrey. You shall inherit nothing else until you restore the garden together.'"
+        ],
+        vocab: [
+          { word: "textile", meaning: "A type of cloth or woven fabric." },
+          { word: "prestigious", meaning: "Inspiring respect and admiration; having high status." },
+          { word: "inherit", meaning: "Receive money, property, or a title from someone after they die." }
+        ]
+      },
+      {
+        chapter: "Chapter 2",
+        title: "The Overgrown Acre",
+        prose: [
+          "Edward was furious. 'A field of weeds? He left us worthless dirt!' Julian groaned, looking down at his designer Italian leather shoes. But the will was legally binding: if we did not work together for one full season, the land would be sold at auction.",
+          "The following Saturday, we arrived at the Surrey estate. The garden was completely overgrown. Brambles choked the pathways, the glass greenhouse had fallen into disrepair, and weeds stood five feet high.",
+          "In the center of the garden stood a stone sundial. Inscribed on its base were the words: 'A garden does not yield fruit to anger; it yields to patience and unity.'"
+        ],
+        vocab: [
+          { word: "brambles", meaning: "Prickly, scrambling shrubs, especially blackberry bushes." },
+          { word: "sundial", meaning: "An instrument showing the time by the shadow of a pointer in sunlight." },
+          { word: "unity", meaning: "The state of being joined together as a whole." }
+        ]
+      },
+      {
+        chapter: "Chapter 3",
+        title: "Blisters & Sullen Silence",
+        prose: [
+          "For the first two weeks, we worked in hostile silence. Edward complained about back pain while clearing thorny vines with heavy gloves. Julian spent half his time sitting on an overturned wheelbarrow complaining about phone reception.",
+          "I focused on raking the soil and planting heirloom seeds we found in Grandfather's potting shed. But as days turned into weeks under the warm spring sun, something miraculous began to happen.",
+          "One afternoon, when Julian's wheelbarrow tipped over in the mud, Edward actually laughed—a real, booming laugh we had not heard since childhood. Julian tossed a handful of dirt at him, and for twenty minutes, three grown adults giggled like schoolboys."
+        ],
+        vocab: [
+          { word: "blisters", meaning: "Small bubbles on the skin filled with serum caused by friction." },
+          { word: "hostile", meaning: "Unfriendly, antagonistic, or showing opposition." },
+          { word: "heirloom", meaning: "A valuable object passed down in a family for generations; or traditional seeds." }
+        ]
+      },
+      {
+        chapter: "Chapter 4",
+        title: "The First Blossom",
+        prose: [
+          "By July, our hands were calloused and our faces sun-bronzed. Edward brought a toolbox and repaired the broken greenhouse glass panes, carefully whistling old tunes Grandfather used to hum.",
+          "Julian turned out to have a natural talent for pruning apple trees and constructing wooden trellises for climbing roses. I managed the vegetable beds, nurturing tomatoes, sweet peas, and fragrant herbs.",
+          "One Sunday morning, we stood together at the garden entrance. The thorny wilderness was gone. In its place were rows of vibrant scarlet roses, fragrant lavender borders, and fruit trees heavy with developing peaches.",
+          "For the first time in fifteen years, we sat together on the stone bench without talking about money or status. We felt proud."
+        ],
+        vocab: [
+          { word: "calloused", meaning: "Having skin made tough and thick from repeated friction or work." },
+          { word: "trellises", meaning: "Frameworks of light wooden or metal bars used as supports for climbing plants." },
+          { word: "vibrant", meaning: "Full of energy, brightness, and vivid color." }
+        ]
+      },
+      {
+        chapter: "Chapter 5",
+        title: "The Stone Beneath the Roots",
+        prose: [
+          "In late September, while digging up the soil around the central sundial to prepare for winter bulbs, Edward's shovel struck something metallic.",
+          "We knelt in the damp soil and unearthed an airtight brass cylinder. Inside was a final letter in Grandfather's familiar cursive handwriting:",
+          "'My dear children, if you are reading this, you have learned the lesson that money could never teach you. Wealth in a bank account only feeds ego and division. But working the soil together has restored the bond between you.'",
+          "'The lawyer holds deeds to my properties and funds, which are now yours to share equally. But remember: the greatest flower in this garden is your brotherhood. Do not let weeds of greed choke it ever again.'"
+        ],
+        vocab: [
+          { word: "unearthed", meaning: "Dug up or discovered something buried in the ground." },
+          { word: "cylinder", meaning: "A solid geometric figure with straight parallel sides and circular cross section." },
+          { word: "deeds", meaning: "Legal documents that prove ownership of property or land." }
+        ]
+      },
+      {
+        chapter: "Chapter 6",
+        title: "The Garden of Brotherhood",
+        prose: [
+          "We read the letter in silence. None of us cheered about the inheritance money. Instead, Edward wiped a tear from his eye and placed his arm around Julian's shoulder.",
+          "We decided not to sell the garden. Instead, we turned it into a community botanical park where elderly neighbors and schoolchildren could come to plant flowers, learn gardening, and find peace.",
+          "Every spring, the three of us return with our own children to plant new seeds in Grandfather's memory.",
+          "The true legacy of a family is not the money passed from wallet to wallet; it is the love nurtured from generation to generation."
+        ],
+        vocab: [
+          { word: "botanical", meaning: "Relating to plants or the study of plant life." },
+          { word: "brotherhood", meaning: "An association, feeling of kinship, or fellowship between people." },
+          { word: "nurtured", meaning: "Cared for and protected someone or something while they grow." }
+        ]
+      }
+    ]
+  }
+];
+
+      // Persistent Reading Module State
+      let readingBookState = {
+        storyId: "story_linda",
+        currentPage: 0,
+        fontSize: 16,
+        isSoundEnabled: true,
+        mediaMode: "compact", // "compact" (audio-style bar) or "expanded" (full video screen)
+        isMediaVisible: true,
+        activeFilter: "all",
+        customVideoUrls: {},
+        pageFlipInstance: null
+      };
+
+      function loadReadingBookState() {
+        try {
+          const raw = localStorage.getItem("english2flow_reading_state");
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            if (parsed.storyId) readingBookState.storyId = parsed.storyId;
+            if (typeof parsed.currentPage === "number") readingBookState.currentPage = parsed.currentPage;
+            if (typeof parsed.fontSize === "number") readingBookState.fontSize = parsed.fontSize;
+            if (typeof parsed.isSoundEnabled === "boolean") readingBookState.isSoundEnabled = parsed.isSoundEnabled;
+            if (parsed.mediaMode) readingBookState.mediaMode = parsed.mediaMode;
+            if (typeof parsed.isMediaVisible === "boolean") readingBookState.isMediaVisible = parsed.isMediaVisible;
+            if (parsed.activeFilter) readingBookState.activeFilter = parsed.activeFilter;
+            if (parsed.customVideoUrls) readingBookState.customVideoUrls = parsed.customVideoUrls;
+          }
+        } catch (e) {}
+      }
+
+      function saveReadingBookState() {
+        try {
+          localStorage.setItem("english2flow_reading_state", JSON.stringify({
+            storyId: readingBookState.storyId,
+            currentPage: readingBookState.currentPage,
+            fontSize: readingBookState.fontSize,
+            isSoundEnabled: readingBookState.isSoundEnabled,
+            mediaMode: readingBookState.mediaMode,
+            isMediaVisible: readingBookState.isMediaVisible,
+            activeFilter: readingBookState.activeFilter,
+            customVideoUrls: readingBookState.customVideoUrls
+          }));
+        } catch (e) {}
+      }
+
+      function getAllReadingStories() {
+        let userStories = [];
+        try {
+          const raw = localStorage.getItem("english2flow_user_stories");
+          if (raw) userStories = JSON.parse(raw);
+        } catch (e) {}
+        return [...BUILTIN_READING_STORIES, ...userStories];
+      }
+
+      function getCurrentReadingStory() {
+        const stories = getAllReadingStories();
+        return stories.find((s) => s.id === readingBookState.storyId) || stories[0];
+      }
 
       function extractYouTubeId(urlOrId) {
         if (!urlOrId) return "";
         const str = String(urlOrId).trim();
         if (/^[a-zA-Z0-9_-]{11}$/.test(str)) return str;
-        const match = str.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([a-zA-Z0-9_-]{11})/);
-        if (match) return match[1];
-        try {
-          const parsed = new URL(str);
-          const v = parsed.searchParams.get("v");
-          if (v && /^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
-        } catch (e) {}
-        return "";
+        const regExp = new RegExp("(?:youtu\\.be/|youtube\\.com/(?:embed/|v/|watch\\?v=|watch\\?.+&v=))([\\w-]{11})");
+        const match = str.match(regExp);
+        return match && match[1] ? match[1] : "";
       }
 
-      let readingBookState = {
-        storyId: "story_linda",
-        page: 1,
-        fontSize: 16,
-        showLinkEditor: false,
-        videoCompact: false,
-      };
-
-      function getPageVideoInfo(story, pageIdx) {
-        const pageObj = (story && story.pages && story.pages[pageIdx - 1]) || {};
-        const pageKey = (story ? story.id : "story_linda") + "_" + pageIdx;
-        let customMap = {};
-        try {
-          customMap = JSON.parse(localStorage.getItem("reading_custom_page_videos_v1") || "{}");
-        } catch (e) {}
-
-        const customUrl = customMap[pageKey];
-        const rawUrl = customUrl || pageObj.videoUrl || (story ? story.videoUrl : "") || "https://www.youtube.com/watch?v=3L_Oh4p-Ufg";
-        const videoId = extractYouTubeId(rawUrl) || "3L_Oh4p-Ufg";
-        const origin = (window.location.protocol === "file:" || !window.location.origin || window.location.origin === "null")
-          ? "https://www.youtube.com"
-          : window.location.origin;
-        const embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId + "?enablejsapi=1&rel=0&playsinline=1&modestbranding=1&origin=" + encodeURIComponent(origin);
-
-        return {
-          url: rawUrl,
-          videoId: videoId,
-          embedUrl: embedUrl,
-          isCustom: Boolean(customUrl),
-          pageKey: pageKey,
-        };
-      }
-
-      function toggleReadingVideoEditor() {
-        readingBookState.showLinkEditor = !readingBookState.showLinkEditor;
-        renderReadingBook();
-      }
-
-      function toggleReadingVideoCompact() {
-        readingBookState.videoCompact = !readingBookState.videoCompact;
-        saveReadingBookState();
-        renderReadingBook();
-      }
-
-      function saveCurrentPageVideoLink() {
-        const currentStory = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
-        const pageIdx = Math.max(1, Math.min(currentStory.pages.length, readingBookState.page || 1));
-        const inputEl = document.getElementById("readingVideoUrlInput");
-        const val = inputEl ? inputEl.value.trim() : "";
-        if (!val) {
-          alert("Please enter a YouTube video URL or ID.");
-          return;
+      function getStoryVideoId(story) {
+        if (readingBookState.customVideoUrls && readingBookState.customVideoUrls[story.id]) {
+          const customId = extractYouTubeId(readingBookState.customVideoUrls[story.id]);
+          if (customId) return customId;
         }
-        const extractedId = extractYouTubeId(val);
-        if (!extractedId) {
-          alert("Could not detect a valid YouTube video ID from that link. Please check the URL format.");
-          return;
+        return extractYouTubeId(story.videoUrl) || "3L_Oh4p-Ufg";
+      }
+
+      // --- Flipbook Mounting & Rendering Engine ---
+      function mountReadingFlipbook(initialPage) {
+        const bookElement = document.getElementById("readingStBookElement");
+        if (!bookElement) return;
+
+        // Destroy prior instance if present
+        if (readingBookState.pageFlipInstance) {
+          try {
+            readingBookState.pageFlipInstance.destroy();
+          } catch (e) {}
+          readingBookState.pageFlipInstance = null;
         }
 
-        let customMap = {};
-        try {
-          customMap = JSON.parse(localStorage.getItem("reading_custom_page_videos_v1") || "{}");
-        } catch (e) {}
+        const isMobile = window.innerWidth <= 768;
+        const stage = document.querySelector(".reading-flipbook-container");
+        const availWidth = stage ? stage.clientWidth : window.innerWidth - 32;
 
-        const pageKey = currentStory.id + "_" + pageIdx;
-        customMap[pageKey] = val;
+        let pageWidth = 440;
+        let pageHeight = 600;
 
-        try {
-          localStorage.setItem("reading_custom_page_videos_v1", JSON.stringify(customMap));
-        } catch (e) {}
+        if (isMobile) {
+          pageWidth = Math.max(280, Math.min(availWidth - 20, 420));
+          pageHeight = Math.round(pageWidth * 1.38);
+        } else {
+          const spreadWidth = Math.min(availWidth - 30, 920);
+          pageWidth = Math.round(spreadWidth / 2);
+          pageHeight = Math.min(640, Math.round(pageWidth * 1.36));
+        }
 
-        readingBookState.showLinkEditor = false;
-        renderReadingBook();
+        if (window.St && window.St.PageFlip) {
+          try {
+            const pageFlip = new window.St.PageFlip(bookElement, {
+              width: pageWidth,
+              height: pageHeight,
+              size: isMobile ? "fixed" : "stretch",
+              minWidth: 260,
+              maxWidth: 960,
+              minHeight: 380,
+              maxHeight: 1200,
+              maxShadowOpacity: 0.45,
+              showCover: true,
+              mobileScrollSupport: false,
+              usePortrait: isMobile,
+              flippingTime: 500,
+              startPage: Math.max(0, initialPage || 0)
+            });
+
+            pageFlip.loadFromHTML(bookElement.querySelectorAll(".reading-flip-page"));
+
+            pageFlip.on("flip", (e) => {
+              readingBookState.currentPage = e.data;
+              saveReadingBookState();
+              updateReadingPageUI(e.data);
+              try { playPageFlipSound(); } catch (err) {}
+            });
+
+            readingBookState.pageFlipInstance = pageFlip;
+            updateReadingPageUI(initialPage || 0);
+            return;
+          } catch (err) {
+            console.error("Error initializing St.PageFlip for reading book:", err);
+          }
+        }
+
+        // Fallback viewer if St.PageFlip is unavailable
+        renderReadingFallbackViewer(bookElement, initialPage || 0);
       }
 
-      function resetCurrentPageVideoLink() {
-        const currentStory = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
-        const pageIdx = Math.max(1, Math.min(currentStory.pages.length, readingBookState.page || 1));
-        const pageKey = currentStory.id + "_" + pageIdx;
+      function renderReadingFallbackViewer(container, pageIndex) {
+        const pages = container.querySelectorAll(".reading-flip-page");
+        pages.forEach((p, idx) => {
+          p.style.display = idx === pageIndex ? "block" : "none";
+          p.style.width = "100%";
+          p.style.maxWidth = "520px";
+          p.style.minHeight = "520px";
+          p.style.margin = "0 auto";
+          p.style.borderRadius = "8px";
+        });
+        updateReadingPageUI(pageIndex);
+      }
 
-        let customMap = {};
-        try {
-          customMap = JSON.parse(localStorage.getItem("reading_custom_page_videos_v1") || "{}");
-        } catch (e) {}
+      function updateReadingPageUI(pageIndex) {
+        const story = getCurrentReadingStory();
+        const totalPages = document.querySelectorAll("#readingStBookElement .reading-flip-page").length;
 
-        delete customMap[pageKey];
+        // Update top info
+        const info = document.getElementById("readingStagePageIndicator");
+        if (info) {
+          if (pageIndex === 0) {
+            info.innerHTML = "<span>📖</span> Front Cover";
+          } else if (pageIndex === 1) {
+            info.innerHTML = "<span>📜</span> Dedication & Title";
+          } else if (pageIndex === 2) {
+            info.innerHTML = "<span>📑</span> Table of Contents";
+          } else if (pageIndex >= totalPages - 2) {
+            info.innerHTML = "<span>✨</span> Epilogue & Reflection";
+          } else {
+            const chNum = pageIndex - 2;
+            info.innerHTML = "<span>📖</span> Chapter " + chNum + " of " + (story.pages.length);
+          }
+        }
 
-        try {
-          localStorage.setItem("reading_custom_page_videos_v1", JSON.stringify(customMap));
-        } catch (e) {}
+        // Update stepper pills
+        const pills = document.querySelectorAll(".reading-chapter-jump-pill");
+        pills.forEach((pill) => {
+          const target = parseInt(pill.dataset.pageIndex, 10);
+          if (target === pageIndex) {
+            pill.classList.add("active");
+          } else {
+            pill.classList.remove("active");
+          }
+        });
 
-        readingBookState.showLinkEditor = false;
-        renderReadingBook();
+        // Update Prev / Next buttons
+        const prevBtn = document.getElementById("readingFlipArrowPrev");
+        const nextBtn = document.getElementById("readingFlipArrowNext");
+        if (prevBtn) prevBtn.disabled = pageIndex <= 0;
+        if (nextBtn) nextBtn.disabled = pageIndex >= totalPages - 1;
+      }
+
+      function readingFlipPrev() {
+        if (readingBookState.pageFlipInstance) {
+          readingBookState.pageFlipInstance.flipPrev();
+        } else {
+          const totalPages = document.querySelectorAll("#readingStBookElement .reading-flip-page").length;
+          const newPage = Math.max(0, readingBookState.currentPage - 1);
+          readingBookState.currentPage = newPage;
+          renderReadingFallbackViewer(document.getElementById("readingStBookElement"), newPage);
+        }
+      }
+
+      function readingFlipNext() {
+        if (readingBookState.pageFlipInstance) {
+          readingBookState.pageFlipInstance.flipNext();
+        } else {
+          const totalPages = document.querySelectorAll("#readingStBookElement .reading-flip-page").length;
+          const newPage = Math.min(totalPages - 1, readingBookState.currentPage + 1);
+          readingBookState.currentPage = newPage;
+          renderReadingFallbackViewer(document.getElementById("readingStBookElement"), newPage);
+        }
+      }
+
+      function readingFlipTo(pageIndex) {
+        if (readingBookState.pageFlipInstance) {
+          readingBookState.pageFlipInstance.flip(pageIndex);
+        } else {
+          readingBookState.currentPage = pageIndex;
+          renderReadingFallbackViewer(document.getElementById("readingStBookElement"), pageIndex);
+        }
       }
 
       function setReadingStory(storyId) {
         readingBookState.storyId = storyId;
-        readingBookState.page = 1;
-        readingBookState.showLinkEditor = false;
+        readingBookState.currentPage = 0;
         saveReadingBookState();
         renderReadingBook();
       }
 
-      function setReadingPage(p) {
-        const story = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
-        readingBookState.page = Math.max(1, Math.min(story.pages.length, p));
-        readingBookState.showLinkEditor = false;
+      function setReadingFilter(filter) {
+        readingBookState.activeFilter = filter;
         saveReadingBookState();
         renderReadingBook();
       }
 
-      function adjustReadingFontSize(delta) {
-        readingBookState.fontSize = Math.max(13, Math.min(24, (readingBookState.fontSize || 16) + delta));
+      function toggleReadingMediaMode() {
+        readingBookState.mediaMode = readingBookState.mediaMode === "compact" ? "expanded" : "compact";
         saveReadingBookState();
-        renderReadingBook();
-      }
-
-      function saveReadingBookState() {
-        try {
-          localStorage.setItem("reading_book_state_v1", JSON.stringify(readingBookState));
-        } catch (e) {}
-      }
-
-      function loadReadingBookState() {
-        try {
-          const raw = localStorage.getItem("reading_book_state_v1");
-          if (raw) {
-            const parsed = JSON.parse(raw);
-            if (parsed.storyId && READING_STORIES.some((s) => s.id === parsed.storyId)) {
-              readingBookState.storyId = parsed.storyId;
-            }
-            if (typeof parsed.page === "number") readingBookState.page = parsed.page;
-            if (typeof parsed.fontSize === "number") readingBookState.fontSize = parsed.fontSize;
-            if (typeof parsed.videoCompact === "boolean") readingBookState.videoCompact = parsed.videoCompact;
-          }
-        } catch (e) {}
-      }
-
-      function controlReadingVideo(func, args) {
-        const iframe = document.getElementById("readingPageVideoIframe");
-        if (iframe && iframe.contentWindow) {
-          const payload = JSON.stringify({
-            event: "command",
-            func: func,
-            args: args !== undefined ? [args] : ""
-          });
-          iframe.contentWindow.postMessage(payload, "*");
+        const stage = document.getElementById("readingCompanionMediaStage");
+        if (stage) {
+          stage.className = "reading-video-stage-container " + readingBookState.mediaMode;
+        }
+        const btn = document.getElementById("readingMediaModeBtn");
+        if (btn) {
+          btn.innerHTML = readingBookState.mediaMode === "compact" ? "<span>🎬</span> Watch Video" : "<span>🎵</span> Audio Bar";
         }
       }
 
+      function toggleReadingMediaVisibility() {
+        readingBookState.isMediaVisible = !readingBookState.isMediaVisible;
+        saveReadingBookState();
+        const stage = document.getElementById("readingCompanionMediaStage");
+        if (stage) {
+          if (readingBookState.isMediaVisible) {
+            stage.classList.remove("hidden");
+          } else {
+            stage.classList.add("hidden");
+          }
+        }
+      }
+
+      function toggleReadingSound() {
+        readingBookState.isSoundEnabled = !readingBookState.isSoundEnabled;
+        saveReadingBookState();
+        const btn = document.getElementById("readingSoundToggleBtn");
+        if (btn) {
+          btn.innerHTML = readingBookState.isSoundEnabled ? "<span>🔊</span> Sound On" : "<span>🔇</span> Sound Off";
+          btn.classList.toggle("active", readingBookState.isSoundEnabled);
+        }
+        showToast(readingBookState.isSoundEnabled ? "Page turn sound enabled 📖" : "Page turn sound muted 🔇");
+      }
+
+      function adjustReadingFontSize(delta) {
+        const cur = readingBookState.fontSize || 16;
+        const next = Math.max(13, Math.min(23, cur + delta));
+        readingBookState.fontSize = next;
+        saveReadingBookState();
+        const prose = document.querySelectorAll(".reading-prose-container");
+        prose.forEach((p) => (p.style.fontSize = next + "px"));
+      }
+
+      function toggleReadingFullscreen() {
+        const stage = document.getElementById("readingStageWrapper");
+        if (!stage) return;
+        if (!document.fullscreenElement) {
+          if (stage.requestFullscreen) stage.requestFullscreen();
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+        }
+      }
+
+      // --- Modals: Custom Video URL & Add New Story ---
+      function openReadingVideoModal() {
+        const story = getCurrentReadingStory();
+        const currentUrl = (readingBookState.customVideoUrls && readingBookState.customVideoUrls[story.id]) || story.videoUrl;
+        const modal = document.createElement("div");
+        modal.className = "reading-modal-overlay";
+        modal.id = "readingVideoModal";
+        modal.innerHTML = `
+          <div class="reading-modal-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div style="font-size:15px;font-weight:800;color:#fef08a;">🔗 Custom YouTube Video Link</div>
+              <button type="button" class="reading-tool-btn" onclick="closeReadingModal('readingVideoModal')">✕</button>
+            </div>
+            <p style="font-size:12px;color:#94a3b8;margin-bottom:14px;line-height:1.4;">
+              Paste any YouTube video or audio link for <strong>${escapeHtml(story.title)}</strong>. It will play directly on this page while you read.
+            </p>
+            <input type="text" id="readingCustomUrlInput" value="${escapeHtml(currentUrl)}" placeholder="https://www.youtube.com/watch?v=..." style="width:100%;padding:10px;border-radius:8px;border:1.5px solid #475569;background:#0f172a;color:#ffffff;font-size:13px;margin-bottom:14px;box-sizing:border-box;" />
+            <div style="display:flex;justify-content:flex-end;gap:8px;">
+              <button type="button" class="reading-tool-btn" onclick="resetReadingVideoLink('${story.id}')" style="color:#f87171;">Reset to Channel Default</button>
+              <button type="button" class="reading-tool-btn active" onclick="saveReadingCustomVideo('${story.id}')">Save &amp; Play</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+
+      function saveReadingCustomVideo(storyId) {
+        const input = document.getElementById("readingCustomUrlInput");
+        if (input && input.value.trim()) {
+          if (!readingBookState.customVideoUrls) readingBookState.customVideoUrls = {};
+          readingBookState.customVideoUrls[storyId] = input.value.trim();
+          saveReadingBookState();
+          closeReadingModal("readingVideoModal");
+          updateCompanionIframeVideo();
+          showToast("Custom video link updated!");
+        }
+      }
+
+      function resetReadingVideoLink(storyId) {
+        if (readingBookState.customVideoUrls && readingBookState.customVideoUrls[storyId]) {
+          delete readingBookState.customVideoUrls[storyId];
+          saveReadingBookState();
+          closeReadingModal("readingVideoModal");
+          updateCompanionIframeVideo();
+          showToast("Video reset to official English2Flow video!");
+        }
+      }
+
+      function openAddStoryModal() {
+        const modal = document.createElement("div");
+        modal.className = "reading-modal-overlay";
+        modal.id = "readingAddStoryModal";
+        modal.innerHTML = `
+          <div class="reading-modal-card" style="max-width:580px;max-height:90vh;overflow-y:auto;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <div style="font-size:15px;font-weight:800;color:#fef08a;">➕ Add English2Flow Storybook</div>
+              <button type="button" class="reading-tool-btn" onclick="closeReadingModal('readingAddStoryModal')">✕</button>
+            </div>
+            <p style="font-size:12px;color:#94a3b8;margin-bottom:14px;">
+              Add any new story from <strong>English2Flow</strong>. Paste the YouTube link and chapters.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div>
+                <label style="font-size:11px;font-weight:800;color:#cbd5e1;display:block;margin-bottom:4px;">Story Title *</label>
+                <input type="text" id="addStoryTitle" placeholder="e.g. The Brave Little Tailor" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#ffffff;box-sizing:border-box;" />
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div>
+                  <label style="font-size:11px;font-weight:800;color:#cbd5e1;display:block;margin-bottom:4px;">Level</label>
+                  <select id="addStoryLevel" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#ffffff;box-sizing:border-box;">
+                    <option value="Level 1 (Beginner)">Level 1 (Beginner)</option>
+                    <option value="Level 2 (Beginner-Intermediate)" selected>Level 2 (Intermediate)</option>
+                    <option value="Level 3 (Advanced)">Level 3 (Advanced)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size:11px;font-weight:800;color:#cbd5e1;display:block;margin-bottom:4px;">Cover Color</label>
+                  <select id="addStoryColor" style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#ffffff;box-sizing:border-box;">
+                    <option value="#2b0a1a">Wine Red</option>
+                    <option value="#0f291e">Emerald Forest</option>
+                    <option value="#1e1b4b">Midnight Blue</option>
+                    <option value="#2d1810">Dark Chocolate</option>
+                    <option value="#0c2340">Deep Sapphire</option>
+                    <option value="#381e05">Warm Copper</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:800;color:#cbd5e1;display:block;margin-bottom:4px;">YouTube Video Link *</label>
+                <input type="text" id="addStoryVideoUrl" placeholder="https://www.youtube.com/watch?v=..." style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#ffffff;box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:800;color:#cbd5e1;display:block;margin-bottom:4px;">Story Prose / Chapters (Separate chapters by "---" or double newlines) *</label>
+                <textarea id="addStoryText" rows="6" placeholder="Chapter 1: ...&#10;Prose paragraphs...&#10;---&#10;Chapter 2: ..." style="width:100%;padding:8px 10px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#ffffff;font-family:inherit;font-size:12px;box-sizing:border-box;"></textarea>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px;">
+              <button type="button" class="reading-tool-btn" onclick="closeReadingModal('readingAddStoryModal')">Cancel</button>
+              <button type="button" class="reading-tool-btn active" onclick="saveNewCustomStory()">Create Book 📚</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+
+      function saveNewCustomStory() {
+        const title = (document.getElementById("addStoryTitle").value || "").trim();
+        const videoUrl = (document.getElementById("addStoryVideoUrl").value || "").trim();
+        const level = document.getElementById("addStoryLevel").value;
+        const color = document.getElementById("addStoryColor").value;
+        const rawText = (document.getElementById("addStoryText").value || "").trim();
+
+        if (!title || !rawText) {
+          alert("Please provide both a Title and Story content.");
+          return;
+        }
+
+        const rawChapters = rawText.split(/\n\s*---\s*\n/).map(c => c.trim()).filter(Boolean);
+        const pages = (rawChapters.length ? rawChapters : [rawText]).map((chunk, idx) => {
+          const lines = chunk.split("\n").map(l => l.trim()).filter(Boolean);
+          const chTitle = lines[0].startsWith("Chapter") ? lines[0] : "Chapter " + (idx + 1);
+          const prose = lines.slice(1).length ? lines.slice(1) : [chunk];
+          return {
+            chapter: "Chapter " + (idx + 1),
+            title: chTitle,
+            prose: prose,
+            vocab: []
+          };
+        });
+
+        const newStory = {
+          id: "story_custom_" + Date.now(),
+          title: title,
+          subtitle: "Added by Reader • " + level,
+          videoUrl: videoUrl || "https://www.youtube.com/watch?v=3L_Oh4p-Ufg",
+          views: "Personal Library",
+          level: level,
+          featuredBadge: "Custom Story",
+          coverColor: color,
+          coverAccent: "#f59e0b",
+          icon: "📖",
+          description: "Custom story added to your English2Flow bookshelf.",
+          dedication: "For the love of learning English through reading and listening.",
+          pages: pages
+        };
+
+        let userStories = [];
+        try {
+          const raw = localStorage.getItem("english2flow_user_stories");
+          if (raw) userStories = JSON.parse(raw);
+        } catch (e) {}
+        userStories.push(newStory);
+        localStorage.setItem("english2flow_user_stories", JSON.stringify(userStories));
+
+        closeReadingModal("readingAddStoryModal");
+        readingBookState.storyId = newStory.id;
+        readingBookState.currentPage = 0;
+        saveReadingBookState();
+        renderReadingBook();
+        showToast("New Storybook added to your shelf! 📚");
+      }
+
+      function closeReadingModal(id) {
+        const m = document.getElementById(id);
+        if (m && m.parentNode) m.parentNode.removeChild(m);
+      }
+
+      function updateCompanionIframeVideo() {
+        const story = getCurrentReadingStory();
+        const videoId = getStoryVideoId(story);
+        const iframe = document.getElementById("readingCompanionIframe");
+        if (iframe && iframe.dataset.activeVideoId !== videoId) {
+          iframe.src = "https://www.youtube.com/embed/" + videoId + "?enablejsapi=1&rel=0";
+          iframe.dataset.activeVideoId = videoId;
+        }
+      }
+
+      // --- Main Render Function for Reading Tab ---
       function renderReadingBook() {
         const container = document.getElementById("readingBookContainer");
         if (!container) return;
 
-        const currentStory = READING_STORIES.find((s) => s.id === readingBookState.storyId) || READING_STORIES[0];
-        const totalPages = currentStory.pages.length;
-        const pageIdx = Math.max(1, Math.min(totalPages, readingBookState.page || 1));
-        const pageObj = currentStory.pages[pageIdx - 1];
-        const progressPct = Math.round((pageIdx / totalPages) * 100);
+        const stories = getAllReadingStories();
+        const currentStory = getCurrentReadingStory();
+        const videoId = getStoryVideoId(currentStory);
         const fontSize = readingBookState.fontSize || 16;
-        const videoInfo = getPageVideoInfo(currentStory, pageIdx);
 
-        // Check if existing video box has the same video ID so we can preserve active playback
-        const existingVideoBox = document.getElementById("readingVideoBox");
-        const existingIframe = document.getElementById("readingPageVideoIframe");
-        let canPreserveVideoBox = false;
+        // Filter stories for Bookshelf
+        const filteredStories = stories.filter((s) => {
+          if (readingBookState.activeFilter === "level1") return s.level.toLowerCase().includes("level 1");
+          if (readingBookState.activeFilter === "level2") return s.level.toLowerCase().includes("level 2");
+          return true;
+        });
 
-        if (existingVideoBox && existingIframe && existingIframe.dataset.videoId === videoInfo.videoId) {
-          canPreserveVideoBox = true;
-          if (existingVideoBox.parentNode) {
-            existingVideoBox.parentNode.removeChild(existingVideoBox);
-          }
-        }
+        // Ensure total pages inside book is even for pristine dual-spread formatting
+        const rawPagesCount = 1 /* Front Cover */ + 1 /* Dedication */ + 1 /* TOC */ + currentStory.pages.length + 1 /* Epilogue */ + 1 /* Back Cover */;
+        const needsBlankPage = rawPagesCount % 2 !== 0;
 
         container.innerHTML = `
-          <!-- Story Selector Pills / Tabs -->
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;">
-            ${READING_STORIES.map((st) => `
-              <button
-                type="button"
-                class="reading-action-btn ${st.id === currentStory.id ? "active" : ""}"
-                onclick="setReadingStory('${st.id}')"
-                style="${st.id === currentStory.id ? "background:#1e3a8a;color:#ffffff;border-color:#1e3a8a;" : ""}"
-              >
-                <span>📖</span> ${escapeHtml(st.title.split(":")[0])}
-              </button>
-            `).join("")}
+          <!-- Bookshelf & English2Flow Showcase Header -->
+          <div class="reading-bookshelf-wrapper">
+            <div class="reading-bookshelf-header">
+              <div class="reading-bookshelf-title">
+                <span>📚</span> English2Flow Graded Storybooks
+                <span style="font-size:11px;font-weight:700;background:rgba(255,255,255,0.12);padding:2px 8px;border-radius:999px;">
+                  ${stories.length} Books
+                </span>
+              </div>
+
+              <!-- Filter Pills & Add Button -->
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <div class="reading-filter-pill-group">
+                  <button type="button" class="reading-filter-pill ${readingBookState.activeFilter === "all" ? "active" : ""}" onclick="setReadingFilter('all')">
+                    All (${stories.length})
+                  </button>
+                  <button type="button" class="reading-filter-pill ${readingBookState.activeFilter === "level1" ? "active" : ""}" onclick="setReadingFilter('level1')">
+                    Level 1
+                  </button>
+                  <button type="button" class="reading-filter-pill ${readingBookState.activeFilter === "level2" ? "active" : ""}" onclick="setReadingFilter('level2')">
+                    Level 2
+                  </button>
+                </div>
+
+                <button type="button" class="reading-tool-btn" onclick="openAddStoryModal()" title="Add your own story or English2Flow episode">
+                  ➕ Add Story
+                </button>
+
+                <a href="${READING_CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="reading-channel-btn" title="Open English2Flow YouTube channel">
+                  <span>▶</span> English2Flow
+                </a>
+              </div>
+            </div>
+
+            <!-- Bookshelf Grid -->
+            <div class="reading-bookshelf-grid">
+              ${filteredStories.map((st) => {
+                const isSelected = st.id === currentStory.id;
+                const coverBg = st.coverColor || "#2b0a1a";
+                return `
+                  <div
+                    class="reading-book-card-item ${isSelected ? "active" : ""}"
+                    onclick="setReadingStory('${st.id}')"
+                    title="Read ${escapeHtml(st.title)}"
+                  >
+                    <div class="reading-book-card-cover-preview" style="background:${coverBg};border-color:${st.coverAccent || "#f59e0b"};">
+                      <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="reading-card-icon">${st.icon || "📖"}</span>
+                        <span class="reading-card-level-badge">${escapeHtml(st.level.split("(")[0].trim())}</span>
+                      </div>
+                      <div style="font-size:11px;font-weight:800;color:#fef08a;text-shadow:0 1px 3px rgba(0,0,0,0.8);line-height:1.2;">
+                        ${escapeHtml(st.title)}
+                      </div>
+                    </div>
+
+                    <div class="reading-card-title">
+                      ${escapeHtml(st.title)}
+                    </div>
+
+                    <div class="reading-card-meta">
+                      <span>📑 ${st.pages.length} Chapters</span>
+                      <span style="font-weight:700;color:${isSelected ? "#f59e0b" : "#94a3b8"};">
+                        ${isSelected ? "Reading Now ★" : "Open 📖"}
+                      </span>
+                    </div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
           </div>
 
-          <div class="reading-book-card">
-            <!-- Book Topbar -->
-            <div class="reading-book-topbar">
-              <div class="reading-story-meta">
-                <div class="reading-story-tag">
-                  <span>✨</span> ${escapeHtml(currentStory.level)} • ${escapeHtml(currentStory.views)}
-                </div>
-                <div class="reading-story-heading">
-                  ${escapeHtml(currentStory.title)}
+          <!-- Persistent Audio / Video Companion Box (Listen & Read Together) -->
+          <div class="reading-companion-box" id="readingCompanionMediaBox">
+            <div class="reading-companion-topbar">
+              <div class="reading-companion-info">
+                <div class="reading-pulse-dot" title="Audio narration synced"></div>
+                <div style="min-width:0;">
+                  <div class="reading-companion-title">
+                    🎧 Narration: ${escapeHtml(currentStory.title)}
+                  </div>
+                  <div style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:6px;">
+                    <span>${escapeHtml(currentStory.level)}</span> •
+                    <span>${currentStory.pages.length} Chapters</span> •
+                    <span style="color:#22c55e;">Synced Audio Player</span>
+                  </div>
                 </div>
               </div>
 
-              <div class="reading-topbar-actions">
+              <div class="reading-companion-actions">
                 <button
                   type="button"
-                  class="reading-action-btn reading-yt-watch-btn"
-                  onclick="toggleReadingVideoEditor()"
-                  title="Put or change video link for this page"
+                  class="reading-media-btn"
+                  id="readingMediaModeBtn"
+                  onclick="toggleReadingMediaMode()"
+                  title="Toggle between audio mode and video screen"
                 >
-                  <span>🔗</span> ${videoInfo.isCustom ? "Custom Video Link" : "Put Video Link"}
+                  ${readingBookState.mediaMode === "compact" ? "<span>🎬</span> Watch Video" : "<span>🎵</span> Audio Bar"}
                 </button>
-                
+
                 <button
                   type="button"
-                  class="reading-font-btn"
+                  class="reading-media-btn"
+                  onclick="openReadingVideoModal()"
+                  title="Put or edit video URL for this story"
+                >
+                  <span>🔗</span> Video Link
+                </button>
+
+                <button
+                  type="button"
+                  class="reading-media-btn"
+                  onclick="toggleReadingMediaVisibility()"
+                  title="Hide or show companion player"
+                >
+                  <span>👁️</span> Media
+                </button>
+              </div>
+            </div>
+
+            <!-- Embedded Video / Audio Player (Preserved during page flips) -->
+            <div class="reading-video-stage-container ${readingBookState.mediaMode} ${readingBookState.isMediaVisible ? "" : "hidden"}" id="readingCompanionMediaStage">
+              <iframe
+                id="readingCompanionIframe"
+                data-active-video-id="${videoId}"
+                src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&rel=0"
+                title="English2Flow Story Narration"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- 3D Storybook Flipping Stage -->
+          <div class="reading-stage-wrapper" id="readingStageWrapper">
+            <!-- Stage Top Toolbar -->
+            <div class="reading-stage-top-controls">
+              <div class="reading-stage-page-info" id="readingStagePageIndicator">
+                <span>📖</span> Cover Page
+              </div>
+
+              <div class="reading-top-tool-group">
+                <button
+                  type="button"
+                  class="reading-tool-btn ${readingBookState.isSoundEnabled ? "active" : ""}"
+                  id="readingSoundToggleBtn"
+                  onclick="toggleReadingSound()"
+                  title="Toggle realistic page-flip sound effect"
+                >
+                  ${readingBookState.isSoundEnabled ? "<span>🔊</span> Sound On" : "<span>🔇</span> Sound Off"}
+                </button>
+
+                <button
+                  type="button"
+                  class="reading-tool-btn"
                   onclick="adjustReadingFontSize(-1)"
                   title="Decrease font size"
                 >
@@ -28504,251 +29690,327 @@ window.openQuranReaderModal = openQuranReaderModal;
                 </button>
                 <button
                   type="button"
-                  class="reading-font-btn"
+                  class="reading-tool-btn"
                   onclick="adjustReadingFontSize(1)"
                   title="Increase font size"
                 >
                   A+
                 </button>
+
+                <button
+                  type="button"
+                  class="reading-tool-btn"
+                  onclick="toggleReadingFullscreen()"
+                  title="Fullscreen Reading Mood"
+                >
+                  ⛶ Fullscreen
+                </button>
               </div>
             </div>
 
-            <!-- Page Number Stepper Pills -->
-            <div class="reading-page-stepper">
+            <!-- Flipbook Stage with Floating Arrows -->
+            <div class="reading-flipbook-container">
               <button
                 type="button"
-                class="reading-page-pill"
-                onclick="setReadingPage(${pageIdx - 1})"
-                ${pageIdx <= 1 ? "disabled" : ""}
-                style="${pageIdx <= 1 ? "opacity:0.4;cursor:not-allowed;" : ""}"
-                title="Previous Page"
+                class="reading-flip-arrow-btn reading-flip-arrow-prev"
+                id="readingFlipArrowPrev"
+                onclick="readingFlipPrev()"
+                title="Flip to Previous Page"
               >
                 ◀
               </button>
-              ${currentStory.pages.map((_, i) => `
-                <button
-                  type="button"
-                  class="reading-page-pill ${i + 1 === pageIdx ? "active" : ""}"
-                  onclick="setReadingPage(${i + 1})"
-                  title="Go to Page ${i + 1}"
-                >
-                  ${i + 1}
-                </button>
-              `).join("")}
+
+              <div id="readingStBookElement">
+                <!-- Page 0: Front Hardcover -->
+                <div class="reading-flip-page reading-page-cover-front" style="--story-theme-color:${currentStory.coverColor || "#2b0a1a"};">
+                  <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span class="reading-cover-badge-pill">ENGLISH2FLOW GRADED READER</span>
+                    <span style="font-size:18px;">${currentStory.icon || "📖"}</span>
+                  </div>
+
+                  <div style="text-align:center;margin:auto 0;padding:20px 0;">
+                    <div style="font-size:36px;margin-bottom:10px;">${currentStory.icon || "📖"}</div>
+                    <div class="reading-cover-emboss-title">${escapeHtml(currentStory.title)}</div>
+                    <div class="reading-cover-sub">${escapeHtml(currentStory.subtitle)}</div>
+                    <div style="margin-top:16px;">
+                      <span style="display:inline-block;padding:4px 12px;border-radius:999px;background:rgba(212,175,55,0.25);border:1px solid #d4af37;color:#fef08a;font-size:11px;font-weight:800;">
+                        ★ ${escapeHtml(currentStory.level)} • ${currentStory.pages.length} Chapters ★
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style="border-top:1px solid rgba(212,175,55,0.3);padding-top:10px;text-align:center;font-size:10.5px;color:#fef3c7;opacity:0.85;">
+                    Click right edge or "Next ▶" to flip open • English2Flow
+                  </div>
+                </div>
+
+                <!-- Page 1: Inside Front & Dedication -->
+                <div class="reading-flip-page">
+                  <div class="reading-page-inner">
+                    <div class="reading-page-header">
+                      <span>Frontispiece</span>
+                      <span>English2Flow</span>
+                    </div>
+
+                    <div style="text-align:center;margin:auto 0;padding:14px 8px;">
+                      <div style="font-size:20px;font-weight:800;color:#1e293b;font-family:'Georgia',serif;margin-bottom:6px;">
+                        ${escapeHtml(currentStory.title)}
+                      </div>
+                      <div style="font-size:12px;color:#64748b;font-style:italic;margin-bottom:16px;">
+                        Adapted for English Learners
+                      </div>
+
+                      <div style="width:40px;height:2px;background:#ca8a04;margin:16px auto;"></div>
+
+                      <div style="font-size:13px;line-height:1.75;color:#475569;font-style:italic;padding:0 12px;">
+                        "${escapeHtml(currentStory.dedication || "Dedicated to every student striving toward fluency.")}"
+                      </div>
+
+                      <div style="width:40px;height:2px;background:#ca8a04;margin:16px auto;"></div>
+
+                      <div style="font-size:11px;color:#854d0e;background:#fefce8;padding:8px 12px;border-radius:8px;border:1px dashed #ca8a04;margin-top:14px;">
+                        🎧 <strong>Reading Tip:</strong> Hit <em>Watch Video</em> or <em>Audio Bar</em> above to listen to native pronunciation while following the words.
+                      </div>
+                    </div>
+
+                    <div class="reading-page-footer">
+                      <span>Inside Title</span>
+                      <span>Page i</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Page 2: Table of Contents -->
+                <div class="reading-flip-page">
+                  <div class="reading-page-inner">
+                    <div class="reading-page-header">
+                      <span>Contents</span>
+                      <span>Table of Chapters</span>
+                    </div>
+
+                    <div style="flex:1;overflow-y:auto;padding-right:4px;">
+                      <div class="reading-chapter-title" style="margin-bottom:14px;border-bottom:2px solid #ca8a04;padding-bottom:4px;">
+                        Table of Contents
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:8px;">
+                        ${currentStory.pages.map((p, pIdx) => {
+                          const targetFlipIndex = pIdx + 3; // Front(0), Dedication(1), TOC(2), then chapters start at 3
+                          return `
+                            <div
+                              onclick="readingFlipTo(${targetFlipIndex})"
+                              style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;transition:background 0.12s ease;"
+                              onmouseover="this.style.background='#fef08a'"
+                              onmouseout="this.style.background='#f8fafc'"
+                              title="Jump to ${escapeHtml(p.chapter)}"
+                            >
+                              <div style="font-size:12px;font-weight:700;color:#1e293b;">
+                                ${escapeHtml(p.chapter)}: <span style="font-weight:600;color:#475569;">${escapeHtml(p.title)}</span>
+                              </div>
+                              <span style="font-size:11px;font-weight:800;color:#ca8a04;">p. ${pIdx + 1} ➔</span>
+                            </div>
+                          `;
+                        }).join("")}
+                      </div>
+                    </div>
+
+                    <div class="reading-page-footer">
+                      <span>Table of Contents</span>
+                      <span>Page ii</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pages 3..N+2: Story Chapter Pages -->
+                ${currentStory.pages.map((p, pIdx) => {
+                  const humanPageNum = pIdx + 1;
+                  return `
+                    <div class="reading-flip-page">
+                      <div class="reading-page-inner">
+                        <div class="reading-page-header">
+                          <span>${escapeHtml(currentStory.title.split(":")[0])}</span>
+                          <span>Chapter ${humanPageNum} of ${currentStory.pages.length}</span>
+                        </div>
+
+                        <div class="reading-chapter-title">
+                          ${escapeHtml(p.chapter)}: ${escapeHtml(p.title)}
+                        </div>
+
+                        <div class="reading-prose-container" style="font-size:${fontSize}px;">
+                          ${p.prose.map((paragraph, paraIdx) => {
+                            if (paraIdx === 0 && paragraph.length > 0) {
+                              const firstChar = paragraph.charAt(0);
+                              const rest = paragraph.slice(1);
+                              return `
+                                <p style="margin-bottom:12px;">
+                                  <span class="reading-drop-cap">${firstChar}</span>${escapeHtml(rest)}
+                                </p>
+                              `;
+                            }
+                            return `<p style="margin-bottom:12px;">${escapeHtml(paragraph)}</p>`;
+                          }).join("")}
+                        </div>
+
+                        <!-- Key Vocabulary Box -->
+                        ${p.vocab && p.vocab.length ? `
+                          <div class="reading-vocab-box">
+                            <div style="font-weight:800;color:#854d0e;margin-bottom:4px;display:flex;align-items:center;gap:4px;">
+                              <span>💡</span> Key Vocabulary &amp; Expressions:
+                            </div>
+                            ${p.vocab.map(v => `
+                              <div class="reading-vocab-item">
+                                <span class="reading-vocab-word">• ${escapeHtml(v.word)}</span>:
+                                <span class="reading-vocab-def">${escapeHtml(v.meaning)}</span>
+                              </div>
+                            `).join("")}
+                          </div>
+                        ` : ""}
+
+                        <div class="reading-page-footer">
+                          <span>English2Flow</span>
+                          <span>Page ${humanPageNum}</span>
+                        </div>
+                      </div>
+                    </div>
+                  `;
+                }).join("")}
+
+                <!-- Epilogue, Moral & Discussion Page -->
+                <div class="reading-flip-page">
+                  <div class="reading-page-inner">
+                    <div class="reading-page-header">
+                      <span>Epilogue</span>
+                      <span>Reflection &amp; Moral</span>
+                    </div>
+
+                    <div style="flex:1;overflow-y:auto;padding-right:4px;">
+                      <div class="reading-chapter-title" style="color:#854d0e;">
+                        ✨ Moral of the Story
+                      </div>
+
+                      <div style="background:#fefce8;border:1.5px solid #fef08a;border-left:4px solid #ca8a04;padding:12px;border-radius:8px;font-size:12.5px;line-height:1.6;color:#713f12;margin-bottom:16px;">
+                        <strong>Life Lesson:</strong> ${escapeHtml(currentStory.description)}
+                      </div>
+
+                      <div style="font-size:12px;font-weight:800;color:#1e293b;margin-bottom:8px;">
+                        🗣️ Discussion &amp; Reflection Questions:
+                      </div>
+                      <ol style="font-size:11.5px;line-height:1.6;color:#334155;padding-left:18px;margin-bottom:14px;">
+                        <li style="margin-bottom:6px;">How would you describe the main sacrifice made in this story?</li>
+                        <li style="margin-bottom:6px;">Which new vocabulary words or phrases were most useful for you?</li>
+                        <li style="margin-bottom:6px;">Can you summarize what happened in 3 sentences using your own English words?</li>
+                      </ol>
+
+                      <div style="background:#f1f5f9;border-radius:8px;padding:10px;font-size:11px;color:#475569;text-align:center;">
+                        🎉 <strong>Congratulations!</strong> You finished reading <em>${escapeHtml(currentStory.title)}</em>!
+                      </div>
+                    </div>
+
+                    <div class="reading-page-footer">
+                      <span>Epilogue</span>
+                      <span>End of Story</span>
+                    </div>
+                  </div>
+                </div>
+
+                ${needsBlankPage ? `
+                  <!-- Blank Parchment Endpaper to ensure even spreads -->
+                  <div class="reading-flip-page">
+                    <div class="reading-page-inner" style="justify-content:center;text-align:center;">
+                      <div style="font-size:24px;color:#ca8a04;margin-bottom:8px;">❦</div>
+                      <div style="font-size:12px;color:#94a3b8;font-style:italic;">Notes &amp; Reflections</div>
+                      <div style="font-size:24px;color:#ca8a04;margin-top:8px;">❦</div>
+                    </div>
+                  </div>
+                ` : ""}
+
+                <!-- Back Hardcover -->
+                <div class="reading-flip-page reading-page-cover-back" style="--story-theme-color:${currentStory.coverColor || "#2b0a1a"};">
+                  <div style="font-size:18px;">${currentStory.icon || "📖"}</div>
+
+                  <div style="padding:14px 10px;">
+                    <div style="font-size:15px;font-weight:800;color:#fef08a;margin-bottom:8px;">
+                      ${escapeHtml(currentStory.title)}
+                    </div>
+                    <p style="font-size:11.5px;line-height:1.6;color:#fef3c7;margin-bottom:16px;">
+                      ${escapeHtml(currentStory.description)}
+                    </p>
+
+                    <button
+                      type="button"
+                      class="reading-tool-btn active"
+                      onclick="readingFlipTo(0)"
+                      style="padding:8px 16px;font-size:12px;"
+                    >
+                      ↺ Re-read from Cover
+                    </button>
+                  </div>
+
+                  <div style="border-top:1px solid rgba(212,175,55,0.3);padding-top:10px;font-size:10.5px;color:#fef3c7;opacity:0.85;">
+                    English2Flow • YouTube Channel Graded Library
+                  </div>
+                </div>
+              </div>
+
               <button
                 type="button"
-                class="reading-page-pill"
-                onclick="setReadingPage(${pageIdx + 1})"
-                ${pageIdx >= totalPages ? "disabled" : ""}
-                style="${pageIdx >= totalPages ? "opacity:0.4;cursor:not-allowed;" : ""}"
-                title="Next Page"
+                class="reading-flip-arrow-btn reading-flip-arrow-next"
+                id="readingFlipArrowNext"
+                onclick="readingFlipNext()"
+                title="Flip to Next Page"
               >
                 ▶
               </button>
             </div>
 
-            <!-- Embedded Video Player Section (Plays directly here on this page) -->
-            <div id="readingVideoSlot"></div>
-
-            <!-- The Book Page Sheet -->
-            <div class="reading-page-sheet">
-              <div class="reading-sheet-chapter">${escapeHtml(pageObj.chapter)}</div>
-              <div class="reading-sheet-title">${escapeHtml(pageObj.title)}</div>
-
-              <div class="reading-sheet-prose" style="font-size: ${fontSize}px;">
-                ${pageObj.prose.map((p) => `<p>${escapeHtml(p)}</p>`).join("")}
-              </div>
-
-              ${pageObj.vocab && pageObj.vocab.length ? `
-                <div class="reading-vocab-box">
-                  <div class="reading-vocab-title">
-                    <span>💡</span> Key Words &amp; Expressions in this chapter
-                  </div>
-                  <div class="reading-vocab-list">
-                    ${pageObj.vocab.map((v) => `
-                      <div>
-                        <strong>${escapeHtml(v.word)}:</strong> ${escapeHtml(v.meaning)}
-                      </div>
-                    `).join("")}
-                  </div>
-                </div>
-              ` : ""}
-            </div>
-
-            <!-- Page Turn Footer -->
-            <div class="reading-page-nav">
-              <button
-                type="button"
-                class="reading-turn-btn"
-                onclick="setReadingPage(${pageIdx - 1})"
-                ${pageIdx <= 1 ? "disabled" : ""}
-              >
-                ◀ Turn Page
+            <!-- Bottom Chapter Quick Jump Bar -->
+            <div class="reading-bottom-chapter-bar">
+              <button type="button" class="reading-chapter-jump-pill" data-page-index="0" onclick="readingFlipTo(0)">
+                Cover 📕
               </button>
-
-              <div style="text-align:center;">
-                <div class="reading-progress-pill">Page ${pageIdx} of ${totalPages}</div>
-                <div style="font-size:11px;color:#64748b;">${progressPct}% completed</div>
-              </div>
-
-              <button
-                type="button"
-                class="reading-turn-btn"
-                onclick="setReadingPage(${pageIdx + 1})"
-                ${pageIdx >= totalPages ? "disabled" : ""}
-              >
-                Turn Page ▶
+              <button type="button" class="reading-chapter-jump-pill" data-page-index="1" onclick="readingFlipTo(1)">
+                Title 📜
+              </button>
+              <button type="button" class="reading-chapter-jump-pill" data-page-index="2" onclick="readingFlipTo(2)">
+                TOC 📑
+              </button>
+              ${currentStory.pages.map((p, idx) => {
+                const targetIdx = idx + 3;
+                return `
+                  <button type="button" class="reading-chapter-jump-pill" data-page-index="${targetIdx}" onclick="readingFlipTo(${targetIdx})">
+                    Ch ${idx + 1}
+                  </button>
+                `;
+              }).join("")}
+              <button type="button" class="reading-chapter-jump-pill" data-page-index="${currentStory.pages.length + 3}" onclick="readingFlipTo(${currentStory.pages.length + 3})">
+                Moral ✨
               </button>
             </div>
           </div>
         `;
 
-        const slot = document.getElementById("readingVideoSlot");
-        if (slot) {
-          if (canPreserveVideoBox && existingVideoBox) {
-            // Update labels without recreating the iframe
-            const titleText = existingVideoBox.querySelector(".reading-video-title-text");
-            if (titleText) {
-              titleText.textContent = `${pageObj.chapter}: ${pageObj.title || currentStory.title}`;
-            }
-            const badgeEl = existingVideoBox.querySelector(".reading-video-badge");
-            if (badgeEl) {
-              badgeEl.className = `reading-video-badge ${videoInfo.isCustom ? "custom" : ""}`;
-              badgeEl.textContent = videoInfo.isCustom ? "Custom Video" : "Plays on page";
-            }
-            const editorDiv = existingVideoBox.querySelector("#readingVideoLinkEditor");
-            if (editorDiv) {
-              editorDiv.style.display = readingBookState.showLinkEditor ? "block" : "none";
-            }
-            const inputEl = existingVideoBox.querySelector("#readingVideoUrlInput");
-            if (inputEl) {
-              inputEl.value = videoInfo.url;
-            }
-            const wrapEl = existingVideoBox.querySelector(".reading-video-iframe-wrap");
-            if (wrapEl) {
-              if (readingBookState.videoCompact) wrapEl.classList.add("compact");
-              else wrapEl.classList.remove("compact");
-            }
-            slot.appendChild(existingVideoBox);
-          } else {
-            slot.innerHTML = `
-              <div class="reading-video-box" id="readingVideoBox">
-                <div class="reading-video-topline">
-                  <div class="reading-video-title">
-                    <span>🎬</span>
-                    <span class="reading-video-title-text">${escapeHtml(pageObj.chapter)}: ${escapeHtml(pageObj.title || currentStory.title)}</span>
-                    <span class="reading-video-badge ${videoInfo.isCustom ? "custom" : ""}">${videoInfo.isCustom ? "Custom Video" : "Plays on page"}</span>
-                  </div>
-                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                    <button
-                      type="button"
-                      class="reading-action-btn"
-                      onclick="controlReadingVideo('playVideo')"
-                      style="background:#16a34a;color:#ffffff;border-color:#15803d;font-weight:800;"
-                      title="Play video right here on this page"
-                    >
-                      <span>▶</span> Play Video
-                    </button>
-                    <button
-                      type="button"
-                      class="reading-action-btn"
-                      onclick="controlReadingVideo('pauseVideo')"
-                      style="background:#334155;color:#ffffff;border-color:#475569;"
-                      title="Pause video"
-                    >
-                      <span>⏸</span> Pause
-                    </button>
-                    <button
-                      type="button"
-                      class="reading-action-btn"
-                      onclick="toggleReadingVideoEditor()"
-                      style="background:#334155;color:#ffffff;border-color:#475569;"
-                      title="Put or edit video link for this page"
-                    >
-                      <span>🔗</span> ${videoInfo.isCustom ? "Edit Link" : "Put Video Link"}
-                    </button>
-                    <button
-                      type="button"
-                      class="reading-action-btn"
-                      onclick="toggleReadingVideoCompact()"
-                      style="background:#1e293b;color:#ffffff;border-color:#475569;"
-                      title="Toggle compact video size"
-                    >
-                      <span>⛶</span> Size
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Inline Link Editor -->
-                <div id="readingVideoLinkEditor" class="reading-video-link-editor" style="display: ${readingBookState.showLinkEditor ? "block" : "none"};">
-                  <div style="font-size:12px;font-weight:700;margin-bottom:6px;color:#cbd5e1;">
-                    Put YouTube video link for <strong>${escapeHtml(pageObj.chapter)}</strong> (Page ${pageIdx}):
-                  </div>
-                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                    <input
-                      type="text"
-                      id="readingVideoUrlInput"
-                      value="${escapeHtml(videoInfo.url)}"
-                      placeholder="https://www.youtube.com/watch?v=..."
-                      style="flex:1;min-width:200px;padding:6px 10px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#f8fafc;font-size:12px;font-family:inherit;"
-                    />
-                    <button
-                      type="button"
-                      class="reading-action-btn"
-                      onclick="saveCurrentPageVideoLink()"
-                      style="background:#16a34a;color:#ffffff;border-color:#15803d;"
-                    >
-                      Save Link
-                    </button>
-                    ${videoInfo.isCustom ? `
-                      <button
-                        type="button"
-                        class="reading-action-btn"
-                        onclick="resetCurrentPageVideoLink()"
-                        style="background:#dc2626;color:#ffffff;border-color:#b91c1c;"
-                      >
-                        Reset
-                      </button>
-                    ` : ""}
-                    <button
-                      type="button"
-                      class="reading-action-btn"
-                      onclick="toggleReadingVideoEditor()"
-                      style="background:#475569;color:#ffffff;border-color:#64748b;"
-                    >
-                      Close
-                    </button>
-                  </div>
-                  <div style="font-size:11px;color:#94a3b8;margin-top:4px;">
-                    Enter any YouTube video link (e.g. <code>https://youtube.com/watch?v=...</code>). The video plays right here on this page without opening YouTube.
-                  </div>
-                </div>
-
-                <!-- Embedded Iframe Video Player -->
-                <div class="reading-video-iframe-wrap ${readingBookState.videoCompact ? "compact" : ""}">
-                  <iframe
-                    id="readingPageVideoIframe"
-                    data-video-id="${videoInfo.videoId}"
-                    src="${videoInfo.embedUrl}"
-                    title="${escapeHtml(pageObj.title || currentStory.title)}"
-                    frameborder="0"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-              </div>
-            `;
-          }
-        }
+        // Mount 3D Flipbook engine
+        setTimeout(() => {
+          mountReadingFlipbook(readingBookState.currentPage || 0);
+        }, 30);
       }
 
       function initReadingBook() {
         loadReadingBookState();
         renderReadingBook();
+
+        // Responsive re-layout on resize
+        let resizeTimer = null;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            const container = document.getElementById("tab-reading");
+            if (container && container.classList.contains("active")) {
+              mountReadingFlipbook(readingBookState.currentPage || 0);
+            }
+          }, 250);
+        });
       }
 
-      // Comprehensive Master Application Bootstrapper
       function initAllAppModules() {
         try { loadMedicinesConfig(); } catch (e) { console.error("Error loading medicines config:", e); }
         try { loadPeriodData(); } catch (e) { console.error("Error loading period data:", e); }
