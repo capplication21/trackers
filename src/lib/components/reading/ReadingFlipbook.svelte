@@ -151,7 +151,7 @@
   });
 </script>
 
-<div class="reading-stage-wrapper" id="readingStageWrapper" bind:this={stageWrapper}>
+<div class="reading-stage-wrapper" id="readingFlipbookCard" bind:this={stageWrapper}>
   <!-- Stage Top Toolbar -->
   <div class="reading-stage-top-controls">
     <div class="reading-stage-page-info" id="readingStagePageIndicator">

@@ -30,15 +30,15 @@
 <div class="reading-companion-box" id="readingCompanionMediaBox">
   <div class="reading-companion-topbar">
     <div class="reading-companion-info">
-      <div class="reading-pulse-dot" title="Audio narration synced"></div>
+      <div class="reading-pulse-dot" title="Video narration available"></div>
       <div style="min-width:0;">
         <div class="reading-companion-title">
-          🎧 Narration: {readingState.currentStory.title}
+          ▶️ Story Narration Video • {readingState.currentStory.title}
         </div>
-        <div style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:6px;">
+        <div style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:6px;margin-top:2px;flex-wrap:wrap;">
           <span>{readingState.currentStory.level}</span> •
           <span>{readingState.currentStory.pages.length} Chapters</span> •
-          <span style="color:#22c55e;">Synced Audio Player</span>
+          <span style="color:#22c55e;font-weight:700;">Watch or Read on this page</span>
         </div>
       </div>
     </div>
@@ -46,17 +46,29 @@
     <div class="reading-companion-actions">
       <button
         type="button"
-        class="reading-media-btn"
-        id="readingMediaModeBtn"
-        onclick={() => readingState.toggleMediaMode()}
-        title="Toggle between audio mode and video screen"
+        class="reading-media-btn active"
+        onclick={() => readingState.toggleMediaVisibility()}
+        title="Show or hide story video"
       >
-        {#if readingState.mediaMode === 'compact'}
-          <span>🎬</span> Watch Video
+        {#if readingState.isMediaVisible}
+          <span>🔽</span> Hide Video
         {:else}
-          <span>🎵</span> Audio Bar
+          <span>👁️</span> Watch Video Here
         {/if}
       </button>
+
+      {#if readingState.currentStory.videoUrl}
+        <a
+          href={readingState.currentStory.videoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="reading-media-btn"
+          title="Open in YouTube"
+          style="text-decoration:none;"
+        >
+          <span>↗️</span> YouTube
+        </a>
+      {/if}
 
       <button
         type="button"
@@ -64,34 +76,29 @@
         onclick={openModal}
         title="Put or edit video URL for this story"
       >
-        <span>🔗</span> Video Link
-      </button>
-
-      <button
-        type="button"
-        class="reading-media-btn"
-        onclick={() => readingState.toggleMediaVisibility()}
-        title="Hide or show companion player"
-      >
-        <span>👁️</span> Media
+        <span>✏️</span> Edit Link
       </button>
     </div>
   </div>
 
   <!-- Embedded Video / Audio Player -->
-  <div
-    class="reading-video-stage-container {readingState.mediaMode} {readingState.isMediaVisible ? '' : 'hidden'}"
-    id="readingCompanionMediaStage"
-  >
-    <iframe
-      id="readingCompanionIframe"
-      data-active-video-id={readingState.currentVideoId}
-      src="https://www.youtube.com/embed/{readingState.currentVideoId}?enablejsapi=1&rel=0"
-      title="English2Flow Story Narration"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
-  </div>
+  {#if readingState.isMediaVisible}
+    <div
+      class="reading-video-stage-container expanded"
+      id="readingCompanionMediaStage"
+      style="margin-top:12px;border:2px solid #334155;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.5);aspect-ratio:16/9;height:auto;max-height:480px;"
+    >
+      <iframe
+        id="readingCompanionIframe"
+        data-active-video-id={readingState.currentVideoId}
+        src="https://www.youtube.com/embed/{readingState.currentVideoId}?enablejsapi=1&rel=0"
+        title="English2Flow Story Narration"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        style="width:100%;height:100%;border:0;display:block;"
+      ></iframe>
+    </div>
+  {/if}
 </div>
 
 {#if showModal}

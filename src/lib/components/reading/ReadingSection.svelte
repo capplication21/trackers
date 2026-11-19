@@ -11,14 +11,8 @@
 </script>
 
 <div class="tab-content active" id="tab-reading" style="display: block;">
-  <div class="section-title reading-title" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-    <span><span>📖</span> READING BOOK</span>
-    <div
-      class="reading-badge-indicator"
-      style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1e40af;border:1.5px solid #bfdbfe;font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:999px;"
-    >
-      <span>🎬</span> Story Video (Plays on this Page)
-    </div>
+  <div class="section-title">
+    <span>📖</span> READING BOOK
   </div>
 
   <div id="readingBookContainer">
