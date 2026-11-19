@@ -1,0 +1,968 @@
+{
+  "meta": [
+    {
+      "key": "morning",
+      "icon": "🌅",
+      "title": "Morning Adkar",
+      "arabicTitle": "أَذْكَارُ الصَّبَاحِ",
+      "pdfLabel": "Morning Adkar PDF"
+    },
+    {
+      "key": "evening",
+      "icon": "🌇",
+      "title": "Evening Adkar",
+      "arabicTitle": "أَذْكَارُ الْمَسَاءِ",
+      "pdfLabel": "Evening Adkar PDF"
+    }
+  ],
+  "morning": [
+    {
+      "title": "Sayyidul Istighfar",
+      "banner": "The Morning Adhkar – Ideally recited between Fajr and Sunrise",
+      "arabic": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+      "translit": "Allaahuma anta rabbee laailaaha illa ant, khalaqtanee wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika mastata'tu, a'oodhu bika min sharri maa sana'tu, aboo-u laka bini'matika 'alayya wa aboo-u bidhanbee, faghfir lee fa-innahu laa yaghfirudh-dhunooba illaa ant",
+      "meaning": "Sayyidul Istighfaar: Master Supplication for Forgiveness, acknowledging Allah's blessings, confessing sins, and asking for pardon.",
+      "repeat": "Recited 1 time",
+      "ref": "Sahih al-Bukhari 6306"
+    },
+    {
+      "title": "Tahlil & Sovereignty",
+      "arabic": "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+      "translit": "Laa ilaaha illal-laahu wahdahu laa shareeka lahu, lahul-mulku wa lahul-hamdu wa huwa 'alaa kulli shay'in qadeer",
+      "meaning": "None has the right to be worshipped but Allah alone Who has no partner. Sovereignty and praise belong to Him, and He is Able to do all things.",
+      "repeat": "Recited 10 times in morning / 100 times daily",
+      "ref": "Sahih al-Bukhari 3293 & Sahih Muslim 2691"
+    },
+    {
+      "title": "Tasbeeh & Hamd",
+      "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+      "translit": "Subhaanallaahi wa bi hamdihi",
+      "meaning": "Glory is to Allah and Praise is to Him.",
+      "repeat": "Recited 100 times",
+      "ref": "Sahih al-Bukhari 6405 & Sahih Muslim 2691"
+    },
+    {
+      "title": "Protection from All Harm",
+      "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+      "translit": "Bismillaahil-ladhee laa yadurru ma'as-mihi shay'un fil-ardi wa laa fis-samaa'i wa huwas-samee'ul-'aleem",
+      "meaning": "In the Name of Allah, with Whose Name nothing can cause harm on earth or in heaven, and He is the All-Hearing, All-Knowing.",
+      "repeat": "Recited in morning and evening",
+      "ref": "Musnad Ahmad 446 & Sunan al-Tirmidhi 3388"
+    },
+    {
+      "title": "Supplication for Well-being ('Afiyah)",
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ، وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",
+      "translit": "Allaahumma innee as'alukal-'aafiyata fid-dunyaa wal-aakhirah, Allaahumma innee as'alukal-'afwa wal-'aafiyata fee deenee wa dunyaaya wa ahlee wa maalee, Allaahummas-tur 'awraatee wa aamin raw'aatee, Allaahummah-fadhnee min bayni yadayya wa min khalfee wa 'an yameenee wa 'an shimaalee wa min fawqee, wa a'oodhu bi-'adhamatika an ughtaala min tahtee",
+      "meaning": "O Allah, I seek Your pardon and well-being in my faith, worldly affairs, family, and wealth; conceal my faults, calm my fears, and protect me from all sides.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan Abu Dawud 5074"
+    },
+    {
+      "title": "Surah Al-Ikhlas",
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+      "translit": "Bismillaahir-rahmaanir-raheem. Qul huwal-laahu ahad. Allaahus-samad. Lam yalid wa lam yoolad. Wa lam yakun lahu kufuwan ahad",
+      "meaning": "Surah Al-Ikhlas: Say, He is Allah, [who is] One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent.",
+      "repeat": "Recited 3 times",
+      "ref": "Sunan Abu Dawud & Sunan al-Tirmidhi"
+    },
+    {
+      "title": "Surah Al-Falaq",
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+      "translit": "Bismillaahir-rahmaanir-raheem. Qul a'oodhu birabbil-falaq. Min sharri maa khalaq. Wa min sharri ghaasiqin idhaa waqab. Wa min sharrin-naffaathaati fil-'uqad. Wa min sharri haasidin idhaa hasad",
+      "meaning": "Surah Al-Falaq: Seeking refuge in the Lord of the daybreak from created harm, darkness when it settles, the blowers in knots, and the envier when he envies.",
+      "repeat": "Recited 3 times",
+      "ref": "Sunan Abu Dawud & Sunan al-Tirmidhi"
+    },
+    {
+      "title": "Surah An-Nas",
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",
+      "translit": "Bismillaahir-rahmaanir-raheem. Qul a'oodhu birabbin-naas. Malikin-naas. Ilaahin-naas. Min sharril-waswaasil-khannaas. Alladhee yuwaswisu fee sudoorin-naas. Minal-jinnati wan-naas",
+      "meaning": "Surah An-Nas: Seeking refuge in the Lord, Sovereign, and God of mankind from the retreating whisperer in the hearts of mankind.",
+      "repeat": "Recited 3 times",
+      "ref": "Sunan Abu Dawud & Sunan al-Tirmidhi"
+    },
+    {
+      "title": "Pleasure with Allah & Islam",
+      "arabic": "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",
+      "translit": "Radeetu billaahi rabban, wa bil-islaami deenan, wa bi-muhammadin sallallaahu 'alayhi wa sallama nabiyyaa",
+      "meaning": "I am pleased with Allah as my Lord, Islam as my religion, and Muhammad ﷺ as my Prophet.",
+      "repeat": "Recited 3 times",
+      "ref": "Musnad Imam Ahmad 18968"
+    },
+    {
+      "title": "Refuge from Self & Satan",
+      "arabic": "اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَىٰ نَفْسِي سُوءًا، أَوْ أَجُرَّهُ إِلَىٰ مُسْلِمٍ",
+      "translit": "Allaahumma faatiras-samaawaati wal-ard, 'aalimal-ghaybi wash-shahaadah, rabba kulli shay'in wa maleekah, ash-hadu an laa ilaaha illaa ant, a'oodhu bika min sharri nafsee wa sharri-shaytaani wa shirkih, wa an aqtarifa 'alaa nafsee soo-an aw ajurrahu ilaa muslim",
+      "meaning": "O Allah, Creator of heaven and earth, Knower of unseen and seen, I seek refuge in You from the evil of myself, Satan, his polytheism, and harming any Muslim.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan Abu Dawud 5067 & Sunan at-Tirmidhi 3529"
+    },
+    {
+      "title": "Supplication to the Ever-Living",
+      "arabic": "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ وَلَا تَكِلْنِي إِلَىٰ نَفْسِي طَرْفَةَ عَيْنٍ",
+      "translit": "Yaa hayyu yaa qayyoom, bi-rahmatika astagheeth, aslih lee sha'nee kullahu wa laa takilnee ilaa nafsee tarfata 'ayn",
+      "meaning": "O Ever-Living, O Self-Sustaining, by Your mercy I seek help; rectify all of my affairs and do not leave me to myself even for the blink of an eye.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan an-Nasa'i (al-Kubra) 10405"
+    },
+    {
+      "title": "Entering the Morning",
+      "arabic": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَٰذَا الْيَوْمِ، وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَٰذَا الْيَوْمِ، وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ، وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
+      "translit": "Asbahnaa wa asbahal-mulku lillaah, wal-hamdu lillaah, laa ilaaha illallaahu wahdahu laa shareeka lah, lahul-mulku wa lahul-hamdu wa huwa 'alaa kulli shay'in qadeer, rabbi as-aluka khayra maa fee haadhal-yawmi wa khayra maa ba'dahu, wa a'oodhu bika min sharri maa fee haadhal-yawmi wa sharri maa ba'dahu, rabbi a'oodhu bika minal-kasali wa soo-il-kibar, rabbi a'oodhu bika min 'adhaabin fin-naari wa 'adhaabin fil-qabr",
+      "meaning": "We have reached the morning and the kingdom belongs to Allah. O Lord, I ask You for the good of this day and what follows it, and seek refuge from laziness and torment of Hell or grave.",
+      "repeat": "Recited 1 time",
+      "ref": "Sahih Muslim 2723"
+    },
+    {
+      "title": "Affirming Morning by Allah's Will",
+      "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",
+      "translit": "Allaahumma bika asbahnaa, wa bika amsaynaa, wa bika nahyaa, wa bika namootu wa ilaykan-nushoor",
+      "meaning": "O Allah, by You we enter the morning and by You we enter the evening, by You we live and die, and unto You is our resurrection.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan Abu Dawud 5068"
+    },
+    {
+      "title": "Glorification by Weight of Creation",
+      "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ وَمِدَادَ كَلِمَاتِهِ",
+      "translit": "Subhaanallaahi wa bi-hamdihi, 'adada khalqihi, wa ridaa nafsihi, wa zinata 'arshihi, wa midaada kalimaatih",
+      "meaning": "Glory and praise be to Allah as many times as the count of His creation, according to His good pleasure, by the weight of His Throne, and ink of His words.",
+      "repeat": "Recited 3 times",
+      "ref": "Sahih Muslim 2726"
+    },
+    {
+      "title": "Natural State of Islam",
+      "arabic": "أَصْبَحْنَا عَلَىٰ فِطْرَةِ الْإِسْلَامِ وَعَلَىٰ كَلِمَةِ الْإِخْلَاصِ وَعَلَىٰ دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ وَعَلَىٰ مِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ",
+      "translit": "Asbahnaa 'alaa fitratil-islaami wa 'alaa kalimatil-ikhlaas, wa 'alaa deeni nabiyyinaa Muhammadin ﷺ, wa 'alaa millati abeenaa Ibraaheema haneefan musliman wa maa kaana minal-mushrikeen",
+      "meaning": "We have reached morning upon the pristine religion of Islam, the declaration of sincerity, the faith of Prophet Muhammad ﷺ, and the upright creed of Ibrahim.",
+      "repeat": "Recited 1 time",
+      "ref": "Musnad Imam Ahmad 15360"
+    },
+    {
+      "title": "Sufficiency in Allah",
+      "arabic": "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+      "translit": "Hasbiyallaahu laa ilaaha illaa huwa 'alayhi tawakkaltu wa huwa rabbul-'arshil-'adheem",
+      "meaning": "Allah is sufficient for me; there is no deity worthy of worship except Him. In Him I place my trust, and He is the Lord of the Mighty Throne.",
+      "repeat": "Recited 7 times",
+      "ref": "Sunan Abu Dawud 5081"
+    }
+  ],
+  "evening": [
+    {
+      "title": "Sayyidul Istighfar",
+      "banner": "The Evening Adhkar – To be recited in the Evening, ideally between 'Asr and Maghrib",
+      "arabic": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+      "translit": "Allaahuma anta rabbee laailaaha illa ant, khalaqtanee wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika masta-ta'tu, a'uthubika min sharri ma sana'tu, abu-u laka bi ni'matika 'alayya, wa abu-u bi-dhambi, faghfirlee finnahu laa yaghfiru-dhunooba illa ant",
+      "meaning": "Sayyidul Istighfaar: Master Supplication for Forgiveness. Acknowledging Allah's Lordship and blessings, repenting for sins, and seeking divine forgiveness.",
+      "repeat": "Recited 1 time",
+      "ref": "Sahih al-Bukhari 6306"
+    },
+    {
+      "title": "Tahlil & Sovereignty",
+      "arabic": "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+      "translit": "Laa ilaaha illal-laahu wahdahu laa shareeka lahu, lahul mulku wa-lahul hamdu wa-huwa 'ala kulli shayin qadeer",
+      "meaning": "None has the right to be worshipped but Allah alone Who has no partner. Sovereignty and praise belong to Him, and He has full power over all things.",
+      "repeat": "Recited 10 times and 100 times anytime throughout the day",
+      "ref": "Sahih al-Bukhari 3293 & Sahih al-Muslim 2691"
+    },
+    {
+      "title": "Tasbeeh & Praise",
+      "arabic": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+      "translit": "Subhaanallaahi wa bi hamdihi",
+      "meaning": "Glory is to Allah and Praise is to Him.",
+      "repeat": "Recited 100 times",
+      "ref": "Sahih al-Bukhari 6405 & Sahih al-Muslim 2691"
+    },
+    {
+      "title": "Protection from Harm",
+      "arabic": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+      "translit": "Bismillaahil-ladhi laa yadduru ma'a ismihi shayun fil-ardi walaa fis-samaai wa-huwas samee'ul 'aleem",
+      "meaning": "In the Name of Allah, Who with His Name nothing can cause harm in the Earth nor in the Heavens, and He is the All-Hearing, the All-Knowing.",
+      "repeat": "Recited Once only (or 3 times)",
+      "ref": "Musnad Imam Ahmad 446 and Sunan al-Tirmidhi 3388"
+    },
+    {
+      "title": "Supplication for Well-being ('Afiyah)",
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ، وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَتِي، وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ، وَمِنْ خَلْفِي، وَعَنْ يَمِينِي، وَعَنْ شِمَالِي، وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي",
+      "translit": "Allaahuma inni asalukal aafiyata fid-dunya wal aakhirah, Allaahuma inni asalukal 'afwa wal 'aafiyata fee deenee wa dunyaay, wa ahlee wa maalee, Allahumas tur 'awratee, wa-aamin raw'aatee, Allahumahfathnee min bayni yaday, wa-min khalfee, wa-'an yameenee, wa-'an shimaalee, wa-min fawqee, wa a'udhu bi-'adhamatika an ughtaala min tahtee",
+      "meaning": "O Allah, I seek Your protection and pardon in this world and the next, in my faith, worldly affairs, family, and wealth; conceal my faults, secure my fears, and guard me from every direction.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan Abu Dawud 5074"
+    },
+    {
+      "title": "Surah Al-Ikhlas",
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
+      "translit": "Bismillaah-hirahmaan-nirraheem. Qul huwal-laahu Ahad. Allaahus samad. Lam yalid wa lam yuwlad. Wa lam yakul-lahu kuf-fuw-wan Ahad",
+      "meaning": "Surah Al-Ikhlas: Say, He is Allah, One and Indivisible. Allah, the Sustainer needed by all. He has never had offspring, nor was He born, and none is comparable to Him.",
+      "repeat": "Recited Three times",
+      "ref": "Sunan Abu Dawud & Sunan al-Tirmidhi"
+    },
+    {
+      "title": "Surah Al-Falaq",
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+      "translit": "Bismillaah-hirahmaan-nirraheem. Qul 'audhu birabbil falaq. Min sharri maa khalaq. Wa min sharri ghaasiqin idha waqab. Wa min sharrin naffa-thaati fil 'uqad. Wa min sharri haasidin idha hasad",
+      "meaning": "Surah Al-Falaq: Seeking refuge in the Lord of the daybreak from created harm, dark night, witchcraft, and the envious.",
+      "repeat": "Recited Three times",
+      "ref": "Sunan Abu Dawud & Sunan al-Tirmidhi"
+    },
+    {
+      "title": "Surah An-Nas",
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ",
+      "translit": "Bismillaah-hirahmaan-nirraheem. Qul 'audhu birabbin naas. Malikin-naas. Ilaahin-naas. Min sharril waswaasil khannaas. El-ledhi yuwas-wisu fee sudoorin-naas. Minal jin-nati wan-naas",
+      "meaning": "Surah An-Nas: Seeking refuge in the Lord, Master, and God of humankind from the lurking whisperer among jinn and men.",
+      "repeat": "Recited Three times",
+      "ref": "Sunan Abu Dawud & Sunan al-Tirmidhi"
+    },
+    {
+      "title": "Contentment with Allah & His Messenger",
+      "arabic": "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",
+      "translit": "Radeetu billaahi rabban, wa-bil islaami deenan, wa-bi muhammadin sallal-laahu 'alayhi wa sallama nabeeyyan",
+      "meaning": "I am pleased with Allah as my Lord, with Islam as my Religion, and with Muhammad (peace and blessings be upon him) as my Prophet.",
+      "repeat": "Recited Three times",
+      "ref": "Musnad Imam Ahmad 18968"
+    },
+    {
+      "title": "Seeking Refuge from Evil & Satan",
+      "arabic": "اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لا إِلَهَ إِلا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي وَشَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا، أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ",
+      "translit": "Allaahuma faatiras samaa-waati wal ard, 'aalimal ghaybi washa-haadah, rabba kulli shayin wa maleekah, ash-hadu allaa-ilaaha illa ant, a'udhu bika min sharri nafsee, wa sharrish shaytaani wa shirkih, wa-an aktarifa 'alaa nafsee sooan, aw ajjuruhu ila muslim",
+      "meaning": "O Allah, Creator of the Heavens and Earth, Knower of unseen and evident, Lord and Possessor of all things. I seek refuge from the evil of my soul, Satan, his helpers, and from harming any Muslim.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan Abu Dawud 5067 & Sunan At-Tirmidhi 3529"
+    },
+    {
+      "title": "Supplication to the Ever-Living",
+      "arabic": "يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ وَلا تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ",
+      "translit": "Yaa hayuu yaa qayyoom, bi-rahmatika astagheeth, uslih-lee sha-nee kullahu wa-laa takil-nee ila nafsee tarfata 'ayn",
+      "meaning": "O Ever Living One, O All-Sustaining One, by Your mercy I call on You to set right all of my affairs; do not place me in charge of my soul even for the blinking of an eye.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan An-Nasa'i (Al-Kubra) 10405"
+    },
+    {
+      "title": "Entering the Evening",
+      "arabic": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لا إِلَهَ إِلا اللَّهُ وَحْدَهُ لا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَذِهِ اللَّيْلَةِ، وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَذِهِ اللَّيْلَةِ، وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ، وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ",
+      "translit": "Amsaynaa wa-amsal mulku lillah, wal hamdu lillah, laa ilaaha ilal -laahu wahdahoo laa shareeka lah, lahul mulku, wa-lahul hamdu wa-huwa 'ala kulli shayin qadeer, rabbi as-aluka khayra maa fee hadhi-hil laylah, wa khayra ma b'adahaa, wa 'audhu bika min sharri maa fee hadhi-hil laylah, wa sharri maa b'adahaa, rabbi 'audhu bika minal kasal, wa-sooil kibar, rabbi 'audu bika min 'adhaabin fin-naari wa 'adhaabin fil qabr",
+      "meaning": "We have entered the evening and all sovereignty belongs to Allah. My Lord, I ask You for the goodness of this night and what comes after it, and seek refuge from its evil, laziness, old-age feebleness, and punishment of Hellfire and grave.",
+      "repeat": "Recited 1 time",
+      "ref": "Sahih Muslim 2723"
+    },
+    {
+      "title": "Affirming Evening by Allah's Will",
+      "arabic": "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ",
+      "translit": "Allahumma bika amsaynaa, wa-bika asbahnaa, wa-bika nahyaa, wa-bika namootu, wa-ilaykal maseer",
+      "meaning": "O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and unto You is our final return.",
+      "repeat": "Recited 1 time",
+      "ref": "Sunan Ibn Maajah 3868"
+    },
+    {
+      "title": "Sufficiency in Allah",
+      "arabic": "حَسْبِيَ اللَّهُ لا إِلَهَ إِلا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+      "translit": "Hasbeeyal-laahu laa ilaaha illa huwa 'alayhi tawakaltu wa-huwa rabbul 'arshil 'adheem",
+      "meaning": "Sufficient for me is Allah; there is no deity except Him. Upon Him I have relied, and He is the Lord of the Great Throne.",
+      "repeat": "Recited 7 Times",
+      "ref": "Sunan Abu Dawud 5081"
+    },
+    {
+      "title": "Refuge in Allah's Perfect Words",
+      "banner": "Recited in the evening for protection from harm and poisonous creatures",
+      "arabic": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
+      "translit": "A'udhu bikalimaatil-laahit taam-maati min sharri maa khalaq",
+      "meaning": "I seek refuge in the Perfect Words of Allah from the evil of what He has created.",
+      "repeat": "Recited Once only in the evening",
+      "ref": "Sahih Muslim 2708, 2709"
+    },
+    {
+      "title": "Last Two Verses of Surah Al-Baqarah",
+      "banner": "The last two verses of Surah Al-Baqarah are to be recited after the sun has set and not before",
+      "arabic": "ءَامَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِۦ وَالْمُؤْمِنُونَ ۚ كُلٌّ ءَامَنَ بِاللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِۦ ۚ وَقَالُوا۟ سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ ۝ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَآ إِن نَّسِينَآ أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَآ إِصْرًا كَمَا حَمَلْتَهُۥ عَلَى الَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِۦ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَآ ۚ أَنتَ مَوْلَىٰنَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَٰفِرِينَ",
+      "translit": "285. Aamanar rasoolu bimaa oonzila ilayhi mir-rabbihi wal mu'minoon, kulun aamana billaahi wa malaaikatihi wa kutubihi wa rousulih, laa noufarriqu bayna ahadim mir-rousulih, wa qaalou sami'naa wa-ata'naa ghufraanaka rabbanaa wa ilaykal maser. 286. Laa yukalliful-laahu nafsan illaa wus'aha, lahaa ma kasabat wa'alayhaa mak tasabat, rabbanaa laa tu-aa-khidhnaa inn naseenaa aw akhta'naa, rabbanaa wa-laa tahmil 'alaynaa isran kaa hamaltahu 'alal ladheena min qablinaa, rabbanaa wa-laa tuham-milnaa maa laa taaqata lana bih, wa'fu 'annaa, waghfir lanaa, war-hamnaa, anta mawlaanaa fansurnaa 'alal qawmil kaafireen",
+      "meaning": "Verses 285-286 of Surah Al-Baqarah. The Prophet ﷺ mentioned that whoever recites these two verses at night, they will suffice him (as protection against all harm).",
+      "repeat": "Recited at night after sunset",
+      "ref": "Sahih al-Bukhari 4008 & Sahih al-Muslim 807"
+    }
+  ],
+  "surahs": [
+    {
+      "name": "Al-Faatiha",
+      "num": 1,
+      "count": 7,
+      "ar": "سُورَةُ ٱلْفَاتِحَةِ"
+    },
+    {
+      "name": "Al-Baqara",
+      "num": 2,
+      "count": 286,
+      "ar": "سُورَةُ البَقَرَةِ"
+    },
+    {
+      "name": "Aal-i-Imraan",
+      "num": 3,
+      "count": 200,
+      "ar": "سُورَةُ آلِ عِمۡرَانَ"
+    },
+    {
+      "name": "An-Nisaa",
+      "num": 4,
+      "count": 176,
+      "ar": "سُورَةُ النِّسَاءِ"
+    },
+    {
+      "name": "Al-Maaida",
+      "num": 5,
+      "count": 120,
+      "ar": "سُورَةُ المَائـِدَةِ"
+    },
+    {
+      "name": "Al-An'aam",
+      "num": 6,
+      "count": 165,
+      "ar": "سُورَةُ الأَنۡعَامِ"
+    },
+    {
+      "name": "Al-A'raaf",
+      "num": 7,
+      "count": 206,
+      "ar": "سُورَةُ الأَعۡرَافِ"
+    },
+    {
+      "name": "Al-Anfaal",
+      "num": 8,
+      "count": 75,
+      "ar": "سُورَةُ الأَنفَالِ"
+    },
+    {
+      "name": "At-Tawba",
+      "num": 9,
+      "count": 129,
+      "ar": "سُورَةُ التَّوۡبَةِ"
+    },
+    {
+      "name": "Yunus",
+      "num": 10,
+      "count": 109,
+      "ar": "سُورَةُ يُونُسَ"
+    },
+    {
+      "name": "Hud",
+      "num": 11,
+      "count": 123,
+      "ar": "سُورَةُ هُودٍ"
+    },
+    {
+      "name": "Yusuf",
+      "num": 12,
+      "count": 111,
+      "ar": "سُورَةُ يُوسُفَ"
+    },
+    {
+      "name": "Ar-Ra'd",
+      "num": 13,
+      "count": 43,
+      "ar": "سُورَةُ الرَّعۡدِ"
+    },
+    {
+      "name": "Ibrahim",
+      "num": 14,
+      "count": 52,
+      "ar": "سُورَةُ إِبۡرَاهِيمَ"
+    },
+    {
+      "name": "Al-Hijr",
+      "num": 15,
+      "count": 99,
+      "ar": "سُورَةُ الحِجۡرِ"
+    },
+    {
+      "name": "An-Nahl",
+      "num": 16,
+      "count": 128,
+      "ar": "سُورَةُ النَّحۡلِ"
+    },
+    {
+      "name": "Al-Israa",
+      "num": 17,
+      "count": 111,
+      "ar": "سُورَةُ الإِسۡرَاءِ"
+    },
+    {
+      "name": "Al-Kahf",
+      "num": 18,
+      "count": 110,
+      "ar": "سُورَةُ الكَهۡفِ"
+    },
+    {
+      "name": "Maryam",
+      "num": 19,
+      "count": 98,
+      "ar": "سُورَةُ مَرۡيَمَ"
+    },
+    {
+      "name": "Taa-Haa",
+      "num": 20,
+      "count": 135,
+      "ar": "سُورَةُ طه"
+    },
+    {
+      "name": "Al-Anbiyaa",
+      "num": 21,
+      "count": 112,
+      "ar": "سُورَةُ الأَنبِيَاءِ"
+    },
+    {
+      "name": "Al-Hajj",
+      "num": 22,
+      "count": 78,
+      "ar": "سُورَةُ الحَجِّ"
+    },
+    {
+      "name": "Al-Muminoon",
+      "num": 23,
+      "count": 118,
+      "ar": "سُورَةُ المُؤۡمِنُونَ"
+    },
+    {
+      "name": "An-Noor",
+      "num": 24,
+      "count": 64,
+      "ar": "سُورَةُ النُّورِ"
+    },
+    {
+      "name": "Al-Furqaan",
+      "num": 25,
+      "count": 77,
+      "ar": "سُورَةُ الفُرۡقَانِ"
+    },
+    {
+      "name": "Ash-Shu'araa",
+      "num": 26,
+      "count": 227,
+      "ar": "سُورَةُ الشُّعَرَاءِ"
+    },
+    {
+      "name": "An-Naml",
+      "num": 27,
+      "count": 93,
+      "ar": "سُورَةُ النَّمۡلِ"
+    },
+    {
+      "name": "Al-Qasas",
+      "num": 28,
+      "count": 88,
+      "ar": "سُورَةُ القَصَصِ"
+    },
+    {
+      "name": "Al-Ankaboot",
+      "num": 29,
+      "count": 69,
+      "ar": "سُورَةُ العَنكَبُوتِ"
+    },
+    {
+      "name": "Ar-Room",
+      "num": 30,
+      "count": 60,
+      "ar": "سُورَةُ الرُّومِ"
+    },
+    {
+      "name": "Luqman",
+      "num": 31,
+      "count": 34,
+      "ar": "سُورَةُ لُقۡمَانَ"
+    },
+    {
+      "name": "As-Sajda",
+      "num": 32,
+      "count": 30,
+      "ar": "سُورَةُ السَّجۡدَةِ"
+    },
+    {
+      "name": "Al-Ahzaab",
+      "num": 33,
+      "count": 73,
+      "ar": "سُورَةُ الأَحۡزَابِ"
+    },
+    {
+      "name": "Saba",
+      "num": 34,
+      "count": 54,
+      "ar": "سُورَةُ سَبَإٍ"
+    },
+    {
+      "name": "Faatir",
+      "num": 35,
+      "count": 45,
+      "ar": "سُورَةُ فَاطِرٍ"
+    },
+    {
+      "name": "Yaseen",
+      "num": 36,
+      "count": 83,
+      "ar": "سُورَةُ يسٓ"
+    },
+    {
+      "name": "As-Saaffaat",
+      "num": 37,
+      "count": 182,
+      "ar": "سُورَةُ الصَّافَّاتِ"
+    },
+    {
+      "name": "Saad",
+      "num": 38,
+      "count": 88,
+      "ar": "سُورَةُ صٓ"
+    },
+    {
+      "name": "Az-Zumar",
+      "num": 39,
+      "count": 75,
+      "ar": "سُورَةُ الزُّمَرِ"
+    },
+    {
+      "name": "Ghafir",
+      "num": 40,
+      "count": 85,
+      "ar": "سُورَةُ غَافِرٍ"
+    },
+    {
+      "name": "Fussilat",
+      "num": 41,
+      "count": 54,
+      "ar": "سُورَةُ فُصِّلَتۡ"
+    },
+    {
+      "name": "Ash-Shura",
+      "num": 42,
+      "count": 53,
+      "ar": "سُورَةُ الشُّورَىٰ"
+    },
+    {
+      "name": "Az-Zukhruf",
+      "num": 43,
+      "count": 89,
+      "ar": "سُورَةُ الزُّخۡرُفِ"
+    },
+    {
+      "name": "Ad-Dukhaan",
+      "num": 44,
+      "count": 59,
+      "ar": "سُورَةُ الدُّخَانِ"
+    },
+    {
+      "name": "Al-Jaathiya",
+      "num": 45,
+      "count": 37,
+      "ar": "سُورَةُ الجَاثِيَةِ"
+    },
+    {
+      "name": "Al-Ahqaf",
+      "num": 46,
+      "count": 35,
+      "ar": "سُورَةُ الأَحۡقَافِ"
+    },
+    {
+      "name": "Muhammad",
+      "num": 47,
+      "count": 38,
+      "ar": "سُورَةُ مُحَمَّدٍ"
+    },
+    {
+      "name": "Al-Fath",
+      "num": 48,
+      "count": 29,
+      "ar": "سُورَةُ الفَتۡحِ"
+    },
+    {
+      "name": "Al-Hujuraat",
+      "num": 49,
+      "count": 18,
+      "ar": "سُورَةُ الحُجُرَاتِ"
+    },
+    {
+      "name": "Qaaf",
+      "num": 50,
+      "count": 45,
+      "ar": "سُورَةُ قٓ"
+    },
+    {
+      "name": "Adh-Dhaariyat",
+      "num": 51,
+      "count": 60,
+      "ar": "سُورَةُ الذَّارِيَاتِ"
+    },
+    {
+      "name": "At-Tur",
+      "num": 52,
+      "count": 49,
+      "ar": "سُورَةُ الطُّورِ"
+    },
+    {
+      "name": "An-Najm",
+      "num": 53,
+      "count": 62,
+      "ar": "سُورَةُ النَّجۡمِ"
+    },
+    {
+      "name": "Al-Qamar",
+      "num": 54,
+      "count": 55,
+      "ar": "سُورَةُ القَمَرِ"
+    },
+    {
+      "name": "Ar-Rahmaan",
+      "num": 55,
+      "count": 78,
+      "ar": "سُورَةُ الرَّحۡمَٰن"
+    },
+    {
+      "name": "Al-Waaqia",
+      "num": 56,
+      "count": 96,
+      "ar": "سُورَةُ الوَاقِعَةِ"
+    },
+    {
+      "name": "Al-Hadid",
+      "num": 57,
+      "count": 29,
+      "ar": "سُورَةُ الحَدِيدِ"
+    },
+    {
+      "name": "Al-Mujaadila",
+      "num": 58,
+      "count": 22,
+      "ar": "سُورَةُ المُجَادلَةِ"
+    },
+    {
+      "name": "Al-Hashr",
+      "num": 59,
+      "count": 24,
+      "ar": "سُورَةُ الحَشۡرِ"
+    },
+    {
+      "name": "Al-Mumtahana",
+      "num": 60,
+      "count": 13,
+      "ar": "سُورَةُ المُمۡتَحنَةِ"
+    },
+    {
+      "name": "As-Saff",
+      "num": 61,
+      "count": 14,
+      "ar": "سُورَةُ الصَّفِّ"
+    },
+    {
+      "name": "Al-Jumu'a",
+      "num": 62,
+      "count": 11,
+      "ar": "سُورَةُ الجُمُعَةِ"
+    },
+    {
+      "name": "Al-Munaafiqoon",
+      "num": 63,
+      "count": 11,
+      "ar": "سُورَةُ المُنَافِقُونَ"
+    },
+    {
+      "name": "At-Taghaabun",
+      "num": 64,
+      "count": 18,
+      "ar": "سُورَةُ التَّغَابُنِ"
+    },
+    {
+      "name": "At-Talaaq",
+      "num": 65,
+      "count": 12,
+      "ar": "سُورَةُ الطَّلَاقِ"
+    },
+    {
+      "name": "At-Tahrim",
+      "num": 66,
+      "count": 12,
+      "ar": "سُورَةُ التَّحۡرِيمِ"
+    },
+    {
+      "name": "Al-Mulk",
+      "num": 67,
+      "count": 30,
+      "ar": "سُورَةُ المُلۡكِ"
+    },
+    {
+      "name": "Al-Qalam",
+      "num": 68,
+      "count": 52,
+      "ar": "سُورَةُ القَلَمِ"
+    },
+    {
+      "name": "Al-Haaqqa",
+      "num": 69,
+      "count": 52,
+      "ar": "سُورَةُ الحَاقَّةِ"
+    },
+    {
+      "name": "Al-Ma'aarij",
+      "num": 70,
+      "count": 44,
+      "ar": "سُورَةُ المَعَارِجِ"
+    },
+    {
+      "name": "Nooh",
+      "num": 71,
+      "count": 28,
+      "ar": "سُورَةُ نُوحٍ"
+    },
+    {
+      "name": "Al-Jinn",
+      "num": 72,
+      "count": 28,
+      "ar": "سُورَةُ الجِنِّ"
+    },
+    {
+      "name": "Al-Muzzammil",
+      "num": 73,
+      "count": 20,
+      "ar": "سُورَةُ المُزَّمِّلِ"
+    },
+    {
+      "name": "Al-Muddaththir",
+      "num": 74,
+      "count": 56,
+      "ar": "سُورَةُ المُدَّثِّرِ"
+    },
+    {
+      "name": "Al-Qiyaama",
+      "num": 75,
+      "count": 40,
+      "ar": "سُورَةُ القِيَامَةِ"
+    },
+    {
+      "name": "Al-Insaan",
+      "num": 76,
+      "count": 31,
+      "ar": "سُورَةُ الإِنسَانِ"
+    },
+    {
+      "name": "Al-Mursalaat",
+      "num": 77,
+      "count": 50,
+      "ar": "سُورَةُ المُرۡسَلَاتِ"
+    },
+    {
+      "name": "An-Naba",
+      "num": 78,
+      "count": 40,
+      "ar": "سُورَةُ النَّبَإِ"
+    },
+    {
+      "name": "An-Naazi'aat",
+      "num": 79,
+      "count": 46,
+      "ar": "سُورَةُ النَّازِعَاتِ"
+    },
+    {
+      "name": "Abasa",
+      "num": 80,
+      "count": 42,
+      "ar": "سُورَةُ عَبَسَ"
+    },
+    {
+      "name": "At-Takwir",
+      "num": 81,
+      "count": 29,
+      "ar": "سُورَةُ التَّكۡوِيرِ"
+    },
+    {
+      "name": "Al-Infitaar",
+      "num": 82,
+      "count": 19,
+      "ar": "سُورَةُ الانفِطَارِ"
+    },
+    {
+      "name": "Al-Mutaffifin",
+      "num": 83,
+      "count": 36,
+      "ar": "سُورَةُ المُطَفِّفِينَ"
+    },
+    {
+      "name": "Al-Inshiqaaq",
+      "num": 84,
+      "count": 25,
+      "ar": "سُورَةُ الانشِقَاقِ"
+    },
+    {
+      "name": "Al-Burooj",
+      "num": 85,
+      "count": 22,
+      "ar": "سُورَةُ البُرُوجِ"
+    },
+    {
+      "name": "At-Taariq",
+      "num": 86,
+      "count": 17,
+      "ar": "سُورَةُ الطَّارِقِ"
+    },
+    {
+      "name": "Al-A'laa",
+      "num": 87,
+      "count": 19,
+      "ar": "سُورَةُ الأَعۡلَىٰ"
+    },
+    {
+      "name": "Al-Ghaashiya",
+      "num": 88,
+      "count": 26,
+      "ar": "سُورَةُ الغَاشِيَةِ"
+    },
+    {
+      "name": "Al-Fajr",
+      "num": 89,
+      "count": 30,
+      "ar": "سُورَةُ الفَجۡرِ"
+    },
+    {
+      "name": "Al-Balad",
+      "num": 90,
+      "count": 20,
+      "ar": "سُورَةُ البَلَدِ"
+    },
+    {
+      "name": "Ash-Shams",
+      "num": 91,
+      "count": 15,
+      "ar": "سُورَةُ الشَّمۡسِ"
+    },
+    {
+      "name": "Al-Lail",
+      "num": 92,
+      "count": 21,
+      "ar": "سُورَةُ اللَّيۡلِ"
+    },
+    {
+      "name": "Ad-Dhuhaa",
+      "num": 93,
+      "count": 11,
+      "ar": "سُورَةُ الضُّحَىٰ"
+    },
+    {
+      "name": "Ash-Sharh",
+      "num": 94,
+      "count": 8,
+      "ar": "سُورَةُ الشَّرۡحِ"
+    },
+    {
+      "name": "At-Tin",
+      "num": 95,
+      "count": 8,
+      "ar": "سُورَةُ التِّينِ"
+    },
+    {
+      "name": "Al-Alaq",
+      "num": 96,
+      "count": 19,
+      "ar": "سُورَةُ العَلَقِ"
+    },
+    {
+      "name": "Al-Qadr",
+      "num": 97,
+      "count": 5,
+      "ar": "سُورَةُ القَدۡرِ"
+    },
+    {
+      "name": "Al-Bayyina",
+      "num": 98,
+      "count": 8,
+      "ar": "سُورَةُ البَيِّنَةِ"
+    },
+    {
+      "name": "Az-Zalzala",
+      "num": 99,
+      "count": 8,
+      "ar": "سُورَةُ الزَّلۡزَلَةِ"
+    },
+    {
+      "name": "Al-Aadiyaat",
+      "num": 100,
+      "count": 11,
+      "ar": "سُورَةُ العَادِيَاتِ"
+    },
+    {
+      "name": "Al-Qaari'a",
+      "num": 101,
+      "count": 11,
+      "ar": "سُورَةُ القَارِعَةِ"
+    },
+    {
+      "name": "At-Takaathur",
+      "num": 102,
+      "count": 8,
+      "ar": "سُورَةُ التَّكَاثُرِ"
+    },
+    {
+      "name": "Al-Asr",
+      "num": 103,
+      "count": 3,
+      "ar": "سُورَةُ العَصۡرِ"
+    },
+    {
+      "name": "Al-Humaza",
+      "num": 104,
+      "count": 9,
+      "ar": "سُورَةُ الهُمَزَةِ"
+    },
+    {
+      "name": "Al-Fil",
+      "num": 105,
+      "count": 5,
+      "ar": "سُورَةُ الفِيلِ"
+    },
+    {
+      "name": "Quraish",
+      "num": 106,
+      "count": 4,
+      "ar": "سُورَةُ قُرَيۡشٍ"
+    },
+    {
+      "name": "Al-Maa'un",
+      "num": 107,
+      "count": 7,
+      "ar": "سُورَةُ المَاعُونِ"
+    },
+    {
+      "name": "Al-Kawthar",
+      "num": 108,
+      "count": 3,
+      "ar": "سُورَةُ الكَوۡثَرِ"
+    },
+    {
+      "name": "Al-Kaafiroon",
+      "num": 109,
+      "count": 6,
+      "ar": "سُورَةُ الكَافِرُونَ"
+    },
+    {
+      "name": "An-Nasr",
+      "num": 110,
+      "count": 3,
+      "ar": "سُورَةُ النَّصۡرِ"
+    },
+    {
+      "name": "Al-Masad",
+      "num": 111,
+      "count": 5,
+      "ar": "سُورَةُ المَسَدِ"
+    },
+    {
+      "name": "Al-Ikhlaas",
+      "num": 112,
+      "count": 4,
+      "ar": "سُورَةُ الإِخۡلَاصِ"
+    },
+    {
+      "name": "Al-Falaq",
+      "num": 113,
+      "count": 5,
+      "ar": "سُورَةُ الفَلَقِ"
+    },
+    {
+      "name": "An-Naas",
+      "num": 114,
+      "count": 6,
+      "ar": "سُورَةُ النَّاسِ"
+    }
+  ]
+}

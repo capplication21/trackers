@@ -1,0 +1,298 @@
+{
+  "questions": [
+    {
+      "name": "Apples",
+      "baseKg": 240
+    },
+    {
+      "name": "Bananas",
+      "baseKg": 120
+    },
+    {
+      "name": "Tomatoes",
+      "baseKg": 80
+    },
+    {
+      "name": "Chicken",
+      "baseKg": 640
+    },
+    {
+      "name": "Almonds",
+      "baseKg": 1600
+    },
+    {
+      "name": "Mutton",
+      "baseKg": 1800
+    },
+    {
+      "name": "Rice",
+      "baseKg": 320
+    },
+    {
+      "name": "Flour",
+      "baseKg": 160
+    },
+    {
+      "name": "Sugar",
+      "baseKg": 140
+    },
+    {
+      "name": "Grapes",
+      "baseKg": 400
+    },
+    {
+      "name": "Pistachios",
+      "baseKg": 2800
+    },
+    {
+      "name": "Mangoes",
+      "baseKg": 360
+    }
+  ],
+  "grams": [
+    {
+      "story": "You are at the vegetable vendor. Fresh tomatoes cost Rs. 80 per kg. You ask for 250 grams (1 پاؤ). How much will you pay?",
+      "urdu": "ٹماٹر 80 روپے فی کلو ہیں۔ آپ کو 250 گرام (ایک پاؤ) چاہئیں۔ آپ کتنے پیسے دیں گی؟",
+      "options": [
+        {
+          "text": "Rs. 20",
+          "correct": true
+        },
+        {
+          "text": "Rs. 25",
+          "correct": false
+        },
+        {
+          "text": "Rs. 40",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Mental Shortcut for 250g: Divide the 1 kg rate by 4 (or halve it twice: half of 80 is 40, half of 40 is 20!). 80 ÷ 4 = Rs. 20.",
+      "urduTrick": "اردو شارٹ کٹ: 250 گرام یعنی پاؤ کے لیے کلو کے ریٹ کا آدھے کا آدھا کریں۔ 80 کا آدھا 40، اور 40 کا آدھا 20 روپے!"
+    },
+    {
+      "story": "Fresh chicken costs Rs. 600 per kg at the meat shop. You buy 750 grams (تین پاؤ). How much is the total?",
+      "urdu": "چکن کا ریٹ 600 روپے فی کلو ہے۔ آپ نے 750 گرام (تین پاؤ) خریدا۔ کل قیمت کیا ہوگی؟",
+      "options": [
+        {
+          "text": "Rs. 450",
+          "correct": true
+        },
+        {
+          "text": "Rs. 400",
+          "correct": false
+        },
+        {
+          "text": "Rs. 500",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Mental Shortcut for 750g: 750g is 3 quarters. 1 quarter (250g) of 600 is 150. Now multiply by 3: 150 × 3 = Rs. 450!",
+      "urduTrick": "اردو شارٹ کٹ: پہلے ایک پاؤ کی قیمت نکالیں (600 کا چوتھائی 150 روپے)، پھر 3 سے ضرب دیں: 150 × 3 = 450 روپے!"
+    },
+    {
+      "story": "Red onions are priced at Rs. 90 per kg. You buy 1.5 kg (ڈیڑھ کلو). How much will they cost?",
+      "urdu": "پیاز 90 روپے کلو ہے۔ آپ نے ڈیڑھ کلو (1.5 kg) خریدی۔ کتنے پیسے بنیں گے؟",
+      "options": [
+        {
+          "text": "Rs. 135",
+          "correct": true
+        },
+        {
+          "text": "Rs. 120",
+          "correct": false
+        },
+        {
+          "text": "Rs. 150",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Mental Shortcut: 1 kg is 90. Half a kg (500g) is 45. Add them together: 90 + 45 = Rs. 135!",
+      "urduTrick": "اردو شارٹ کٹ: 1 کلو کے 90 روپے، آدھے کلو کے 45 روپے۔ دونوں کو جمع کریں: 90 + 45 = 135 روپے!"
+    },
+    {
+      "story": "A dozen bananas (12 bananas) cost Rs. 180. You only want to buy 4 bananas for the children. How much do they cost?",
+      "urdu": "ایک درجن کیلے 180 روپے کے ہیں۔ آپ کو صرف 4 کیلے چاہئیں۔ کتنی قیمت بنے گی؟",
+      "options": [
+        {
+          "text": "Rs. 60",
+          "correct": true
+        },
+        {
+          "text": "Rs. 45",
+          "correct": false
+        },
+        {
+          "text": "Rs. 75",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Mental Shortcut: 4 is one-third of 12! So just divide 180 by 3: 180 ÷ 3 = Rs. 60 (or Rs. 15 per banana × 4)!",
+      "urduTrick": "اردو شارٹ کٹ: 4 کیلے درجن کا ایک تہائی (1/3) ہیں۔ 180 کو 3 پر تقسیم کریں: 60 روپے!"
+    }
+  ],
+  "change": [
+    {
+      "story": "Your grocery items total Rs. 340 at the counter. You pay with a 500-rupee note. How much change should the cashier hand you?",
+      "urdu": "گروسری کا کل بل 340 روپے بنا۔ آپ نے 500 کا نوٹ دیا۔ کیشیئر سے کتنے روپے بقایا ملنے چاہئیں؟",
+      "options": [
+        {
+          "text": "Rs. 160",
+          "correct": true
+        },
+        {
+          "text": "Rs. 140",
+          "correct": false
+        },
+        {
+          "text": "Rs. 180",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Counting-Up Trick: Count up from 340 to 500! 340 + 60 = 400, and 400 + 100 = 500. Change = 60 + 100 = Rs. 160!",
+      "urduTrick": "اردو شارٹ کٹ: 340 میں 60 ملائیں تو 400، اور 100 ملائیں تو 500۔ کل بقایا 160 روپے!"
+    },
+    {
+      "story": "At the pharmacy, the medicine bill is Rs. 720. You pay with a 1000-rupee note. What is your exact change?",
+      "urdu": "میڈیکل سٹور پر بل 720 روپے ہے۔ آپ نے 1000 کا نوٹ دیا۔ بقایا رقم کتنی ہونی چاہیے؟",
+      "options": [
+        {
+          "text": "Rs. 280",
+          "correct": true
+        },
+        {
+          "text": "Rs. 260",
+          "correct": false
+        },
+        {
+          "text": "Rs. 320",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Counting-Up Trick: 720 + 80 = 800. And 800 + 200 = 1000. Total change = Rs. 280!",
+      "urduTrick": "اردو شارٹ کٹ: 720 میں 80 ملائے 800، اور مزید 200 ملائے تو 1000۔ بقایا 280 روپے!"
+    },
+    {
+      "story": "At the bakery, bread and biscuits cost Rs. 185. You give a 500-rupee note. How much change should you receive?",
+      "urdu": "بیکری کا بل 185 روپے ہے۔ آپ نے 500 کا نوٹ دیا۔ کتنے روپے واپس ملیں گے؟",
+      "options": [
+        {
+          "text": "Rs. 315",
+          "correct": true
+        },
+        {
+          "text": "Rs. 325",
+          "correct": false
+        },
+        {
+          "text": "Rs. 295",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Counting-Up Trick: 185 + 15 = 200, and 200 + 300 = 500. Total change = Rs. 315!",
+      "urduTrick": "اردو شارٹ کٹ: 185 میں 15 ملائے 200، اور 300 ملائے تو 500۔ بقایا 315 روپے!"
+    },
+    {
+      "story": "Your family mutton purchase totals Rs. 1650. You hand over two 1000-rupee notes (Rs. 2000). What is your change?",
+      "urdu": "گوشت کا بل 1650 روپے بنا۔ آپ نے 1000 کے دو نوٹ (2000 روپے) دیے۔ بقایا کتنے ملیں گے؟",
+      "options": [
+        {
+          "text": "Rs. 350",
+          "correct": true
+        },
+        {
+          "text": "Rs. 450",
+          "correct": false
+        },
+        {
+          "text": "Rs. 250",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Counting-Up Trick: 1650 + 350 = 2000. Your change is Rs. 350!",
+      "urduTrick": "اردو شارٹ کٹ: 1650 میں 350 ملائیں تو پورے 2000 بنتے ہیں۔ بقایا 350 روپے!"
+    }
+  ],
+  "discount": [
+    {
+      "story": "A washing powder pack of Rs. 500 is on a '10% Discount' offer. How much will you actually pay?",
+      "urdu": "500 روپے کے سرف پر 10 فیصد رعایت (ڈسکاؤنٹ) ہے۔ آپ کو کتنے روپے ادا کرنے ہوں گے؟",
+      "options": [
+        {
+          "text": "Rs. 450",
+          "correct": true
+        },
+        {
+          "text": "Rs. 480",
+          "correct": false
+        },
+        {
+          "text": "Rs. 420",
+          "correct": false
+        }
+      ],
+      "trick": "💡 10% Shortcut: Just drop the last zero! 10% of 500 is 50. Price to pay: 500 - 50 = Rs. 450!",
+      "urduTrick": "اردو شارٹ کٹ: 10 فیصد معلوم کرنے کے لئے آخری صفر ہٹا دیں! 500 کا 10 فیصد 50 روپے ہے۔ 500 میں سے 50 نکالیں: 450 روپے!"
+    },
+    {
+      "story": "A 5-liter cooking oil tin priced at Rs. 2000 has a special '20% Off' sale. How much money do you save?",
+      "urdu": "2000 روپے کے آئل ٹن پر 20 فیصد کی رعایت ہے۔ آپ کی کتنے روپے کی بچت ہوگی؟",
+      "options": [
+        {
+          "text": "Rs. 400 saved",
+          "correct": true
+        },
+        {
+          "text": "Rs. 200 saved",
+          "correct": false
+        },
+        {
+          "text": "Rs. 500 saved",
+          "correct": false
+        }
+      ],
+      "trick": "💡 20% Shortcut: Find 10% first (drop a zero = 200), then double it! 200 × 2 = Rs. 400 saved! (You pay Rs. 1600).",
+      "urduTrick": "اردو شارٹ کٹ: پہلے 10 فیصد معلوم کریں (200 روپے)، پھر اسے ڈبل کر دیں: 200 × 2 = 400 روپے بچت!"
+    },
+    {
+      "story": "A non-stick frying pan priced at Rs. 1400 is on 'Flat 50% Off / Half Price' weekend sale. How much does it cost now?",
+      "urdu": "1400 روپے کے فرائنگ پین پر 50 فیصد کی چھوٹ (آدھی قیمت) ہے۔ اب یہ کتنے کا ملے گا؟",
+      "options": [
+        {
+          "text": "Rs. 700",
+          "correct": true
+        },
+        {
+          "text": "Rs. 650",
+          "correct": false
+        },
+        {
+          "text": "Rs. 800",
+          "correct": false
+        }
+      ],
+      "trick": "💡 50% Shortcut: 50% is simply half! Half of 1400 is Rs. 700.",
+      "urduTrick": "اردو شارٹ کٹ: 50 فیصد کا مطلب سیدھا سیدھا آدھا کرنا ہے! 1400 کا آدھا 700 روپے!"
+    },
+    {
+      "story": "A supermarket offers 'Buy 2 Get 1 Free' on premium soap bars priced at Rs. 90 each. What is the total cost for 3 bars?",
+      "urdu": "سوپ پر آفر ہے: 2 خریدیں 1 مفت (Buy 2 Get 1 Free)۔ ایک صابن 90 روپے کا ہے۔ 3 صابن کتنے میں پڑیں گے؟",
+      "options": [
+        {
+          "text": "Rs. 180",
+          "correct": true
+        },
+        {
+          "text": "Rs. 270",
+          "correct": false
+        },
+        {
+          "text": "Rs. 240",
+          "correct": false
+        }
+      ],
+      "trick": "💡 Offer Shortcut: You take 3 bars but pay only for 2! 90 × 2 = Rs. 180 (Effective price is just Rs. 60 per bar!).",
+      "urduTrick": "اردو شارٹ کٹ: 3 صابن ملیں گے لیکن بل صرف 2 کا بنے گا: 90 × 2 = 180 روپے!"
+    }
+  ]
+}

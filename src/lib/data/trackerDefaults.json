@@ -1,0 +1,97 @@
+{
+  "tasks": [
+    {
+      "id": "m3",
+      "label": "Folic Acid medicine",
+      "icon": "💊",
+      "period": "morning",
+      "time": "8:00 AM"
+    },
+    {
+      "id": "m4",
+      "label": "Exercise",
+      "icon": "🏋️",
+      "period": "morning",
+      "time": "8:30 AM"
+    },
+    {
+      "id": "a2",
+      "label": "Vitamin B Complex medicine",
+      "icon": "💊",
+      "period": "afternoon",
+      "time": "1:30 PM"
+    },
+    {
+      "id": "a3",
+      "label": "Activity on Kimi",
+      "icon": "🤖",
+      "period": "afternoon",
+      "time": "2:00 PM"
+    },
+    {
+      "id": "e3",
+      "label": "Read and Listen Quran",
+      "icon": "📖",
+      "period": "evening",
+      "time": "6:00 PM"
+    },
+    {
+      "id": "e4",
+      "label": "Lumosity",
+      "icon": "🧠",
+      "period": "evening",
+      "time": "6:30 PM"
+    },
+    {
+      "id": "n5",
+      "label": "Surah Mulk",
+      "icon": "📖",
+      "period": "night",
+      "time": "9:30 PM"
+    },
+    {
+      "id": "n4",
+      "label": "Freedase 30 medicine",
+      "icon": "💊",
+      "period": "night",
+      "time": "10:00 PM"
+    }
+  ],
+  "medicines": [
+    {
+      "id": "m3",
+      "defaultName": "Folic Acid medicine",
+      "name": "Folic Acid medicine",
+      "period": "morning",
+      "enabled": true,
+      "isDefault": true,
+      "icon": "💊"
+    },
+    {
+      "id": "a2",
+      "defaultName": "Vitamin B Complex medicine",
+      "name": "Vitamin B Complex medicine",
+      "period": "afternoon",
+      "enabled": true,
+      "isDefault": true,
+      "icon": "💊"
+    },
+    {
+      "id": "n4",
+      "defaultName": "Freedase 30 medicine",
+      "name": "Freedase 30 medicine",
+      "period": "night",
+      "enabled": true,
+      "isDefault": true,
+      "icon": "💊"
+    }
+  ],
+  "glassMl": 250,
+  "walkWaterPeriods": [
+    "morning",
+    "afternoon",
+    "evening",
+    "night"
+  ],
+  "hairWashTarget": 2
+}

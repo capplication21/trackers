@@ -1,0 +1,2242 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "grammar",
+      "level": "B1",
+      "question": "Choose the correct sentence in the Present Perfect tense:",
+      "options": [
+        "I have seen that movie yesterday evening.",
+        "I have already finished my assignment.",
+        "She has went to London last week.",
+        "They has lived in this city since ten years."
+      ],
+      "correctIndex": 1,
+      "explanation": "Present Perfect ('have finished') connects past actions to now with 'already'. Specific past time ('yesterday', 'last week') requires Simple Past."
+    },
+    {
+      "id": 2,
+      "category": "grammar",
+      "level": "B1",
+      "question": "If I _______ more free time, I would learn how to code.",
+      "options": [
+        "have",
+        "had",
+        "will have",
+        "would have"
+      ],
+      "correctIndex": 1,
+      "explanation": "Second Conditional for hypothetical/unreal situations: 'If + Simple Past (had) ..., would + base verb (would learn)'."
+    },
+    {
+      "id": 3,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Which word best completes the sentence: 'Smartphones have become _______ in modern society; almost everyone owns one.'",
+      "options": [
+        "ubiquitous",
+        "reluctant",
+        "scarce",
+        "hostile"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Ubiquitous' means present, appearing, or found everywhere."
+    },
+    {
+      "id": 4,
+      "category": "grammar",
+      "level": "B1",
+      "question": "Neither the manager nor the employees _______ satisfied with the new decision.",
+      "options": [
+        "was",
+        "were",
+        "is",
+        "be"
+      ],
+      "correctIndex": 1,
+      "explanation": "With 'neither... nor...', the verb agrees with the closer subject. 'Employees' is plural, so we use 'were'."
+    },
+    {
+      "id": 5,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Choose the correct natural collocation: 'Could you please _______ me a favor and close the door?'",
+      "options": [
+        "make",
+        "do",
+        "give",
+        "take"
+      ],
+      "correctIndex": 1,
+      "explanation": "In English, the standard fixed collocation is always 'do someone a favor', never 'make a favor'."
+    },
+    {
+      "id": 6,
+      "category": "grammar",
+      "level": "B2",
+      "question": "By the time we arrived at the airport, the flight _______ already taken off.",
+      "options": [
+        "has",
+        "had",
+        "was",
+        "would have"
+      ],
+      "correctIndex": 1,
+      "explanation": "Past Perfect ('had taken off') is used for an action completed before another past event ('arrived')."
+    },
+    {
+      "id": 7,
+      "category": "vocab",
+      "level": "B1",
+      "question": "The team demonstrated incredible _______ by recovering quickly after failing their first inspection.",
+      "options": [
+        "resilience",
+        "hesitation",
+        "fragility",
+        "indifference"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Resilience' is the capacity to recover quickly from difficulties or setbacks."
+    },
+    {
+      "id": 8,
+      "category": "grammar",
+      "level": "B1",
+      "question": "She is accustomed to _______ early every morning for her workout.",
+      "options": [
+        "wake up",
+        "waking up",
+        "woke up",
+        "wakes up"
+      ],
+      "correctIndex": 1,
+      "explanation": "The phrase 'be accustomed to' is followed by a gerund (-ing form), so 'waking up' is correct."
+    },
+    {
+      "id": 9,
+      "category": "grammar",
+      "level": "B1",
+      "question": "Spot the error: 'He suggested that she _______ a specialist doctor.'",
+      "options": [
+        "sees",
+        "see",
+        "saw",
+        "will see"
+      ],
+      "correctIndex": 1,
+      "explanation": "The subjunctive mood after verbs like 'suggest that' takes the bare infinitive ('see') for all persons."
+    },
+    {
+      "id": 10,
+      "category": "vocab",
+      "level": "B2",
+      "question": "Choose the correct antonym of 'Diligent':",
+      "options": [
+        "Hardworking",
+        "Careful",
+        "Slothful / Lazy",
+        "Attentive"
+      ],
+      "correctIndex": 2,
+      "explanation": "'Diligent' means showing steady and earnest care/effort. Its opposite is 'lazy' or 'slothful'."
+    },
+    {
+      "id": 11,
+      "category": "grammar",
+      "level": "B1",
+      "question": "I look forward to _______ you at the annual convention next month.",
+      "options": [
+        "see",
+        "seeing",
+        "have seen",
+        "saw"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Look forward to' has 'to' as a preposition, which requires a noun or gerund: 'seeing you'."
+    },
+    {
+      "id": 12,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Finding a 100-dollar bill in an old coat pocket was pure _______.",
+      "options": [
+        "adversity",
+        "serendipity",
+        "catastrophe",
+        "monotony"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Serendipity' is the occurrence of finding valuable or pleasant things by chance."
+    },
+    {
+      "id": 13,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Hardly _______ into the house when the storm began.",
+      "options": [
+        "we had stepped",
+        "had we stepped",
+        "we stepped",
+        "did we stepped"
+      ],
+      "correctIndex": 1,
+      "explanation": "Inversion with negative adverbs: 'Hardly had we stepped...' puts the auxiliary verb before the subject."
+    },
+    {
+      "id": 14,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Choose the best phrasal verb: 'I was exhausted, so I decided to _______ for the night.'",
+      "options": [
+        "turn in",
+        "turn out",
+        "turn over",
+        "turn away"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Turn in' is an idiomatic phrasal verb meaning to go to bed for the night."
+    },
+    {
+      "id": 15,
+      "category": "grammar",
+      "level": "B1",
+      "question": "The project was approved _______ some initial budget constraints.",
+      "options": [
+        "despite of",
+        "despite",
+        "although",
+        "even though"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Despite' is followed directly by a noun phrase without 'of'. ('In spite of' uses 'of', but 'despite' does not)."
+    },
+    {
+      "id": 16,
+      "category": "grammar",
+      "level": "B2",
+      "question": "If she _______ harder, she would have passed the examination.",
+      "options": [
+        "studied",
+        "had studied",
+        "would study",
+        "has studied"
+      ],
+      "correctIndex": 1,
+      "explanation": "Third Conditional for past unreal situations: 'If + Past Perfect (had studied) ..., would have + past participle'."
+    },
+    {
+      "id": 17,
+      "category": "vocab",
+      "level": "B1",
+      "question": "The medical team made a significant _______ in gene therapy research.",
+      "options": [
+        "breakdown",
+        "breakthrough",
+        "breakout",
+        "breakoff"
+      ],
+      "correctIndex": 1,
+      "explanation": "A 'breakthrough' is an important discovery or development that helps solve a major challenge."
+    },
+    {
+      "id": 18,
+      "category": "grammar",
+      "level": "B1",
+      "question": "She distinctly prefers drinking green tea _______ coffee in the mornings.",
+      "options": [
+        "than",
+        "to",
+        "from",
+        "over to"
+      ],
+      "correctIndex": 1,
+      "explanation": "In standard grammar, the verb 'prefer' is followed by the preposition 'to' (prefer X to Y)."
+    },
+    {
+      "id": 19,
+      "category": "vocab",
+      "level": "B2",
+      "question": "Despite the sudden turbulence, the flight attendant remained completely _______.",
+      "options": [
+        "composed",
+        "reckless",
+        "frantic",
+        "turbulent"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Composed' means calm, tranquil, and in full control of one's emotions."
+    },
+    {
+      "id": 20,
+      "category": "grammar",
+      "level": "B2",
+      "question": "By this time next summer, the engineers _______ constructing the new bridge.",
+      "options": [
+        "will finish",
+        "will have finished",
+        "have finished",
+        "are finishing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Future Perfect ('will have finished') describes an action that will be completed prior to a specific future time."
+    },
+    {
+      "id": 21,
+      "category": "grammar",
+      "level": "B1",
+      "question": "Neither of the submitted applications _______ all the minimum eligibility criteria.",
+      "options": [
+        "meet",
+        "meets",
+        "are meeting",
+        "have met"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Neither of + plural noun' takes a singular verb ('meets') in formal standard English."
+    },
+    {
+      "id": 22,
+      "category": "vocab",
+      "level": "B2",
+      "question": "The wording of the legal contract was so _______ that both parties interpreted it differently.",
+      "options": [
+        "lucid",
+        "ambiguous",
+        "transparent",
+        "definitive"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Ambiguous' means open to more than one interpretation; unclear or having a double meaning."
+    },
+    {
+      "id": 23,
+      "category": "grammar",
+      "level": "B1",
+      "question": "The suspect denied _______ any confidential company documents to the competitor.",
+      "options": [
+        "to leak",
+        "leaking",
+        "leaked",
+        "having to leak"
+      ],
+      "correctIndex": 1,
+      "explanation": "The verb 'deny' is followed by a gerund (-ing form), so 'leaking' is correct."
+    },
+    {
+      "id": 24,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Choose the correct idiom: 'Stop talking in circles and stop beating around the _______!'",
+      "options": [
+        "fence",
+        "bush",
+        "tree",
+        "corner"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Beat around the bush' is an English idiom meaning to avoid talking about what is important."
+    },
+    {
+      "id": 25,
+      "category": "grammar",
+      "level": "B2",
+      "question": "No sooner _______ home than the unexpected thunderstorm started.",
+      "options": [
+        "she had arrived",
+        "had she arrived",
+        "did she arrived",
+        "she arrived"
+      ],
+      "correctIndex": 1,
+      "explanation": "'No sooner' at the beginning of a clause triggers subject-auxiliary inversion: 'had she arrived'."
+    },
+    {
+      "id": 26,
+      "category": "vocab",
+      "level": "B2",
+      "question": "The laboratory implements _______ safety measures to prevent contamination.",
+      "options": [
+        "stringent",
+        "negligent",
+        "feeble",
+        "lenient"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Stringent' means strict, precise, and rigorously binding or exacting."
+    },
+    {
+      "id": 27,
+      "category": "grammar",
+      "level": "B2",
+      "question": "I would rather you _______ me the truth during yesterday's meeting.",
+      "options": [
+        "told",
+        "had told",
+        "would tell",
+        "have told"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Would rather + subject + Past Perfect' refers to a past regret or preference about an event that already occurred."
+    },
+    {
+      "id": 28,
+      "category": "vocab",
+      "level": "B1",
+      "question": "An action or decision that cannot be changed or reversed is called _______.",
+      "options": [
+        "temporary",
+        "irreversible",
+        "flexible",
+        "tentative"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Irreversible' means impossible to undo or alter once completed."
+    },
+    {
+      "id": 29,
+      "category": "grammar",
+      "level": "B2",
+      "question": "In the courtroom, the witness was made _______ the timeline of events.",
+      "options": [
+        "repeat",
+        "to repeat",
+        "repeating",
+        "repeated"
+      ],
+      "correctIndex": 1,
+      "explanation": "In passive voice ('was made'), the causative verb make takes a full infinitive with to: 'was made to repeat'."
+    },
+    {
+      "id": 30,
+      "category": "vocab",
+      "level": "B2",
+      "question": "Select the best antonym for the word 'Meticulous':",
+      "options": [
+        "Careful",
+        "Precise",
+        "Careless",
+        "Thorough"
+      ],
+      "correctIndex": 2,
+      "explanation": "'Meticulous' means showing great attention to detail. Its direct antonym is 'careless'."
+    },
+    {
+      "id": 31,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Scarcely _______ the presentation when the fire alarm began ringing.",
+      "options": [
+        "we had started",
+        "had we started",
+        "did we started",
+        "were we started"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Scarcely' at the beginning of a clause requires inversion: 'had we started'."
+    },
+    {
+      "id": 32,
+      "category": "vocab",
+      "level": "B2",
+      "question": "His campaign promises turned out to be empty _______ with no real substance.",
+      "options": [
+        "rhetoric",
+        "authenticity",
+        "accuracy",
+        "modesty"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Rhetoric' often refers to language that sounds impressive but lacks sincerity or meaningful substance."
+    },
+    {
+      "id": 33,
+      "category": "grammar",
+      "level": "B1",
+      "question": "It is high time we _______ concrete steps to improve our sleep schedule.",
+      "options": [
+        "take",
+        "took",
+        "have taken",
+        "will take"
+      ],
+      "correctIndex": 1,
+      "explanation": "The structure 'it is high time + subject' requires the Unreal Simple Past ('took') to express urgency."
+    },
+    {
+      "id": 34,
+      "category": "vocab",
+      "level": "B1",
+      "question": "A scholar who speaks and writes fluently in several languages is known as a _______.",
+      "options": [
+        "biologist",
+        "polyglot",
+        "novelist",
+        "philanthropist"
+      ],
+      "correctIndex": 1,
+      "explanation": "A 'polyglot' is a person who knows and uses several languages fluently."
+    },
+    {
+      "id": 35,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Not only _______ the national tournament, but she also set a new record.",
+      "options": [
+        "she won",
+        "did she win",
+        "she has won",
+        "won she"
+      ],
+      "correctIndex": 1,
+      "explanation": "Inversion follows negative correlative conjunctions: 'Not only did she win...'."
+    },
+    {
+      "id": 36,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Choose the correct phrasal verb: 'We will have to _______ the project launch until next month.'",
+      "options": [
+        "put off",
+        "put on",
+        "put out",
+        "put up"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Put off' is a phrasal verb meaning to postpone or delay an event."
+    },
+    {
+      "id": 37,
+      "category": "grammar",
+      "level": "B1",
+      "question": "The local police _______ currently investigating the source of the cyberattack.",
+      "options": [
+        "is",
+        "are",
+        "was",
+        "has been"
+      ],
+      "correctIndex": 1,
+      "explanation": "In standard English grammar, the collective noun 'police' is plural and takes a plural verb ('are')."
+    },
+    {
+      "id": 38,
+      "category": "vocab",
+      "level": "B1",
+      "question": "The panoramic view of the snow-covered mountains from the peak was _______.",
+      "options": [
+        "monotonous",
+        "breathtaking",
+        "tedious",
+        "dismal"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Breathtaking' describes something astonishing, awe-inspiring, or magnificent in beauty."
+    },
+    {
+      "id": 39,
+      "category": "grammar",
+      "level": "B2",
+      "question": "You _______ have left your keys in the office; the car door was completely unlocked.",
+      "options": [
+        "must",
+        "should",
+        "can",
+        "would"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Must have + past participle' is used for logical deductions of high certainty in the past."
+    },
+    {
+      "id": 40,
+      "category": "vocab",
+      "level": "B2",
+      "question": "Which word is the closest synonym to 'Ephemeral'?",
+      "options": [
+        "Permanent",
+        "Short-lived",
+        "Everlasting",
+        "Constant"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Ephemeral' means lasting for a very short time; transient or short-lived."
+    },
+    {
+      "id": 41,
+      "category": "grammar",
+      "level": "B1",
+      "question": "The jury _______ unable to reach a unanimous verdict after two days of deliberation.",
+      "options": [
+        "was",
+        "were",
+        "are",
+        "have been"
+      ],
+      "correctIndex": 0,
+      "explanation": "When a collective noun acts as a single unified body in formal English, it takes a singular verb ('was')."
+    },
+    {
+      "id": 42,
+      "category": "vocab",
+      "level": "B1",
+      "question": "She gave a very _______ and detailed description of what happened that evening.",
+      "options": [
+        "vivid",
+        "vague",
+        "dim",
+        "hazy"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Vivid' means producing powerful, distinct, and clear feelings or mental images."
+    },
+    {
+      "id": 43,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Were you _______ more time, how would you invest it differently?",
+      "options": [
+        "give",
+        "given",
+        "to give",
+        "giving"
+      ],
+      "correctIndex": 1,
+      "explanation": "Inverted conditional with 'were + subject + past participle (passive)': 'Were you given' = 'If you were given'."
+    },
+    {
+      "id": 44,
+      "category": "vocab",
+      "level": "B1",
+      "question": "To make a long story _______, we resolved the issue before the deadline arrived.",
+      "options": [
+        "brief",
+        "short",
+        "little",
+        "fast"
+      ],
+      "correctIndex": 1,
+      "explanation": "The standard fixed English idiom is 'to make a long story short'."
+    },
+    {
+      "id": 45,
+      "category": "grammar",
+      "level": "B1",
+      "question": "Sarah has been working _______ a certified financial planner for over six years.",
+      "options": [
+        "like",
+        "as",
+        "same",
+        "such"
+      ],
+      "correctIndex": 1,
+      "explanation": "We use 'as' (not 'like') when stating someone's actual job, role, or profession."
+    },
+    {
+      "id": 46,
+      "category": "vocab",
+      "level": "B2",
+      "question": "Her quiet and gentle demeanor belied her _______ determination to succeed.",
+      "options": [
+        "feeble",
+        "fierce",
+        "hesitant",
+        "passive"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Fierce determination' is a strong collocation meaning intense, passionate, and powerful commitment."
+    },
+    {
+      "id": 47,
+      "category": "grammar",
+      "level": "B2",
+      "question": "I really wish I _______ more attentive during the chemistry lecture yesterday.",
+      "options": [
+        "am",
+        "was",
+        "had been",
+        "would be"
+      ],
+      "correctIndex": 2,
+      "explanation": "'Wish + Past Perfect' expresses a regret about a past situation ('had been')."
+    },
+    {
+      "id": 48,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Choose the correct collocation: 'The guest speaker made a profound _______ on the students.'",
+      "options": [
+        "impression",
+        "result",
+        "doing",
+        "consequence"
+      ],
+      "correctIndex": 0,
+      "explanation": "The natural verb-noun collocation in English is 'to make an impression on someone'."
+    },
+    {
+      "id": 49,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Seldom _______ such remarkable discipline in so young an athlete.",
+      "options": [
+        "we have seen",
+        "have we seen",
+        "we saw",
+        "did we saw"
+      ],
+      "correctIndex": 1,
+      "explanation": "Negative adverb 'seldom' at the beginning of a sentence requires inversion: 'have we seen'."
+    },
+    {
+      "id": 50,
+      "category": "vocab",
+      "level": "B2",
+      "question": "The sudden proposal faced _______ resistance from community representatives.",
+      "options": [
+        "docile",
+        "stiff",
+        "mild",
+        "gentle"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Stiff resistance' is a natural collocation meaning tough, stubborn, or severe opposition."
+    },
+    {
+      "id": 51,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Had they warned us about the blizzard, we _______ our travel plans immediately.",
+      "options": [
+        "will change",
+        "would have changed",
+        "have changed",
+        "changed"
+      ],
+      "correctIndex": 1,
+      "explanation": "Inverted third conditional: 'Had they warned us' = 'If they had warned us ..., would have changed'."
+    },
+    {
+      "id": 52,
+      "category": "vocab",
+      "level": "B1",
+      "question": "The word 'Candid' most nearly means:",
+      "options": [
+        "Secretive",
+        "Frank and honest",
+        "Arrogant",
+        "Polite but false"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Candid' means truthful, straightforward, and sincere in speech or expression."
+    },
+    {
+      "id": 53,
+      "category": "grammar",
+      "level": "B1",
+      "question": "He is senior _______ me by two years in the marketing division.",
+      "options": [
+        "than",
+        "to",
+        "from",
+        "over"
+      ],
+      "correctIndex": 1,
+      "explanation": "Adjectives of Latin origin ending in -ior (senior, junior, superior, inferior) take 'to', not 'than'."
+    },
+    {
+      "id": 54,
+      "category": "vocab",
+      "level": "B2",
+      "question": "A deadlock in negotiations where neither side can make progress is called a _______.",
+      "options": [
+        "stalemate",
+        "triumph",
+        "compromise",
+        "concord"
+      ],
+      "correctIndex": 0,
+      "explanation": "A 'stalemate' is a situation in which no progress can be made or no advancement is possible."
+    },
+    {
+      "id": 55,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Little _______ that this modest experiment would revolutionize clean energy.",
+      "options": [
+        "did they know",
+        "they knew",
+        "they had known",
+        "do they knew"
+      ],
+      "correctIndex": 0,
+      "explanation": "Negative adverb 'little' at the beginning requires subject-verb inversion: 'Little did they know'."
+    },
+    {
+      "id": 56,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Complete the idiom: 'Take rumors on social media with a grain of _______.'",
+      "options": [
+        "pepper",
+        "sugar",
+        "salt",
+        "wheat"
+      ],
+      "correctIndex": 2,
+      "explanation": "The idiom 'take with a grain of salt' means to view something with skepticism."
+    },
+    {
+      "id": 57,
+      "category": "grammar",
+      "level": "B2",
+      "question": "We would have reached the summit before noon if the weather _______ so harsh.",
+      "options": [
+        "was not",
+        "had not been",
+        "is not",
+        "would not be"
+      ],
+      "correctIndex": 1,
+      "explanation": "Third conditional requires Past Perfect in the if-clause: 'if the weather had not been'."
+    },
+    {
+      "id": 58,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Select the direct antonym for the adjective 'Vague':",
+      "options": [
+        "Unclear",
+        "Precise",
+        "Hazy",
+        "Ambiguous"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Vague' means indefinite or indistinct. Its direct opposite is 'precise' or 'specific'."
+    },
+    {
+      "id": 59,
+      "category": "grammar",
+      "level": "B2",
+      "question": "The chairperson insisted that the financial audit _______ conducted impartially.",
+      "options": [
+        "is",
+        "be",
+        "was",
+        "being"
+      ],
+      "correctIndex": 1,
+      "explanation": "The present subjunctive mood (base form 'be') is used after verbs of demanding or insisting."
+    },
+    {
+      "id": 60,
+      "category": "vocab",
+      "level": "B1",
+      "question": "The sudden flash flood caused _______ damage to road infrastructure.",
+      "options": [
+        "trivial",
+        "extensive",
+        "negligible",
+        "scanty"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Extensive' means large in amount, wide-ranging, or comprehensive."
+    },
+    {
+      "id": 61,
+      "category": "grammar",
+      "level": "B1",
+      "question": "I haven't seen Sarah _______ we graduated from college four years ago.",
+      "options": [
+        "for",
+        "since",
+        "from",
+        "during"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Since' refers to a specific starting point in time in the past ('we graduated'), whereas 'for' is used for a duration."
+    },
+    {
+      "id": 62,
+      "category": "vocab",
+      "level": "B2",
+      "question": "The CEO's transparent announcement brought great _______ to the anxious employees.",
+      "options": [
+        "reassurance",
+        "trepidation",
+        "dismay",
+        "skepticism"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Reassurance' means restoring confidence and removing doubts or anxiety."
+    },
+    {
+      "id": 63,
+      "category": "grammar",
+      "level": "B2",
+      "question": "She speaks with so much confidence, as though she _______ every secret about the project.",
+      "options": [
+        "knows",
+        "knew",
+        "has known",
+        "will know"
+      ],
+      "correctIndex": 1,
+      "explanation": "'As though / as if' with unreal or hypothetical situations takes the subjunctive past ('knew')."
+    },
+    {
+      "id": 64,
+      "category": "vocab",
+      "level": "B1",
+      "question": "It is essential to continually _______ your communication skills in the modern workplace.",
+      "options": [
+        "hone",
+        "stifle",
+        "hamper",
+        "dilute"
+      ],
+      "correctIndex": 0,
+      "explanation": "'To hone' means to refine, sharpen, or perfect a skill over time."
+    },
+    {
+      "id": 65,
+      "category": "grammar",
+      "level": "B1",
+      "question": "All the heavy luggage _______ loaded into the cargo compartment.",
+      "options": [
+        "were",
+        "was",
+        "are",
+        "have been"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Luggage' is an uncountable noun in English and always takes a singular verb ('was')."
+    },
+    {
+      "id": 66,
+      "category": "vocab",
+      "level": "B2",
+      "question": "The company enforces _______ compliance guidelines to protect customer data.",
+      "options": [
+        "stringent",
+        "negligent",
+        "fragile",
+        "pliable"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Stringent' means strictly controlled, rigorous, and binding."
+    },
+    {
+      "id": 67,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Had they known about the train cancellation, they _______ by commuter bus instead.",
+      "options": [
+        "would travel",
+        "would have traveled",
+        "will travel",
+        "had traveled"
+      ],
+      "correctIndex": 1,
+      "explanation": "Inverted 3rd Conditional: 'Had they known' = 'If they had known ..., would have traveled'."
+    },
+    {
+      "id": 68,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Choose the correct idiom: 'After making that careless mistake, he had to face the _______.'",
+      "options": [
+        "curtain",
+        "music",
+        "mirror",
+        "storm"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Face the music' is an idiom meaning to accept the unpleasant consequences of one's actions."
+    },
+    {
+      "id": 69,
+      "category": "grammar",
+      "level": "B1",
+      "question": "You _______ better lock the doors before leaving the office for the weekend.",
+      "options": [
+        "would",
+        "had",
+        "should",
+        "must"
+      ],
+      "correctIndex": 1,
+      "explanation": "The fixed English modal phrase for urgent advice is 'had better' (+ base verb), never 'would better'."
+    },
+    {
+      "id": 70,
+      "category": "vocab",
+      "level": "B2",
+      "question": "The professor delivered a remarkably _______ and well-structured lecture on quantum physics.",
+      "options": [
+        "lucid",
+        "opaque",
+        "hazy",
+        "convoluted"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Lucid' means expressed clearly and easy to comprehend."
+    },
+    {
+      "id": 71,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Only after reading the confidential report _______ the full scale of the crisis.",
+      "options": [
+        "we understood",
+        "did we understand",
+        "we have understood",
+        "we had understood"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Only after' at the start of a sentence triggers subject-auxiliary inversion: 'did we understand'."
+    },
+    {
+      "id": 72,
+      "category": "vocab",
+      "level": "B1",
+      "question": "She demonstrated a natural _______ for analyzing complex mathematical puzzles.",
+      "options": [
+        "reluctance",
+        "aptitude",
+        "aversion",
+        "indifference"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Aptitude' is a natural ability, talent, or capacity to learn and perform well."
+    },
+    {
+      "id": 73,
+      "category": "grammar",
+      "level": "B1",
+      "question": "Despite our polite objections, he insisted on _______ for everyone's lunch.",
+      "options": [
+        "pay",
+        "paying",
+        "to pay",
+        "paid"
+      ],
+      "correctIndex": 1,
+      "explanation": "Preposition 'on' after 'insist' must be followed by a gerund (-ing form): 'paying'."
+    },
+    {
+      "id": 74,
+      "category": "vocab",
+      "level": "B2",
+      "question": "The committee rejected the claims because they were based on _______ evidence.",
+      "options": [
+        "spurious",
+        "authentic",
+        "irrefutable",
+        "valid"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Spurious' means false, bogus, or not genuine."
+    },
+    {
+      "id": 75,
+      "category": "grammar",
+      "level": "B2",
+      "question": "Were you _______ an opportunity to lead the international team, would you accept it?",
+      "options": [
+        "offer",
+        "offered",
+        "to offering",
+        "be offer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Passive inverted conditional: 'Were you offered' = 'If you were offered'."
+    },
+    {
+      "id": 76,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Select the best phrasal verb: 'Please remember to _______ the lights when you exit the room.'",
+      "options": [
+        "turn down",
+        "turn off",
+        "turn into",
+        "turn over"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Turn off' means to switch off the power or operation of a device."
+    },
+    {
+      "id": 77,
+      "category": "grammar",
+      "level": "B1",
+      "question": "Neither the supervisor nor the newly hired assistant _______ able to solve the glitch.",
+      "options": [
+        "were",
+        "was",
+        "are",
+        "have been"
+      ],
+      "correctIndex": 1,
+      "explanation": "With 'Neither... nor...', the verb agrees with the closer subject ('assistant' is singular, so use 'was')."
+    },
+    {
+      "id": 78,
+      "category": "vocab",
+      "level": "B2",
+      "question": "Over the last five years, the small startup underwent a remarkable _______ into a global enterprise.",
+      "options": [
+        "metamorphosis",
+        "deterioration",
+        "stagnation",
+        "recession"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Metamorphosis' refers to a complete transformation or profound change in form/character."
+    },
+    {
+      "id": 79,
+      "category": "grammar",
+      "level": "B2",
+      "question": "It is mandatory that each attendee _______ their official badge at the entrance.",
+      "options": [
+        "shows",
+        "show",
+        "showed",
+        "will show"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mandative subjunctive mood takes the bare infinitive ('show') regardless of the subject."
+    },
+    {
+      "id": 80,
+      "category": "vocab",
+      "level": "B1",
+      "question": "Mountain weather is notoriously _______, often shifting from sunshine to hail unexpectedly.",
+      "options": [
+        "predictable",
+        "unpredictable",
+        "constant",
+        "static"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Unpredictable' describes something that cannot be anticipated or predicted with certainty."
+    }
+  ],
+  "vocab": [
+    {
+      "id": "vocab_1",
+      "word": "Resilient",
+      "urdu": "مضبوط / حالات کا مقابلہ کرنے والا / لچکدار",
+      "meaning": "Able to withstand or recover quickly from difficult conditions",
+      "example": "She remained resilient and stayed positive during challenging times.",
+      "pos": "adjective",
+      "phonetic": "/rɪˈzɪl.jənt/",
+      "status": "learning",
+      "createdAt": 1794735716349
+    },
+    {
+      "id": "vocab_2",
+      "word": "Diligent",
+      "urdu": "محنتی / انتھک / جفاکش",
+      "meaning": "Having or showing care and conscientiousness in one's work or duties",
+      "example": "He is a diligent student who practices English every single day.",
+      "pos": "adjective",
+      "phonetic": "/ˈdɪl.ɪ.dʒənt/",
+      "status": "learning",
+      "createdAt": 1794822116349
+    },
+    {
+      "id": "vocab_3",
+      "word": "Accomplish",
+      "urdu": "حاصل کرنا / مکمل کرنا / پایہ تکمیل تک پہنچانا",
+      "meaning": "To achieve or complete successfully",
+      "example": "With proper planning, you can accomplish all your daily goals.",
+      "pos": "verb",
+      "phonetic": "/əˈkʌm.plɪʃ/",
+      "status": "learned",
+      "createdAt": 1794908516349
+    },
+    {
+      "id": "vocab_4",
+      "word": "Fascinating",
+      "urdu": "دلچسپ / مسحور کن / پرکشش",
+      "meaning": "Extremely interesting and attractive",
+      "example": "The new English grammar book has fascinating real-life examples.",
+      "pos": "adjective",
+      "phonetic": "/ˈfæs.ɪ.neɪ.tɪŋ/",
+      "status": "learning",
+      "createdAt": 1794994916349
+    },
+    {
+      "id": "vocab_5",
+      "word": "Essential",
+      "urdu": "لازمی / بنیادی / انتہائی ضروری",
+      "meaning": "Absolutely necessary; extremely important",
+      "example": "Daily practice is essential for mastering any new language.",
+      "pos": "adjective",
+      "phonetic": "/ɪˈsɛn.ʃəl/",
+      "status": "learned",
+      "createdAt": 1794649316349
+    },
+    {
+      "id": "vocab_6",
+      "word": "Punctual",
+      "urdu": "وقت کا پابند",
+      "meaning": "Doing something at the agreed or proper time; on time",
+      "example": "Being punctual shows professionalism and respect for others' time.",
+      "pos": "adjective",
+      "phonetic": "/ˈpʌŋk.tʃu.əl/",
+      "status": "learning",
+      "createdAt": 1794908516349
+    },
+    {
+      "id": "vocab_7",
+      "word": "Perseverance",
+      "urdu": "ثابت قدمی / مستقل مزاجی / ہمت",
+      "meaning": "Persistence in doing something despite difficulty or delay in achieving success",
+      "example": "Through hard work and perseverance, she cleared the English test with top marks.",
+      "pos": "noun",
+      "phonetic": "/ˌpɜː.sɪˈvɪə.rəns/",
+      "status": "learning",
+      "createdAt": 1794822116349
+    },
+    {
+      "id": "vocab_8",
+      "word": "Comprehend",
+      "urdu": "سمجھنا / ادراک کرنا / ذہن نشین کرنا",
+      "meaning": "To grasp mentally; understand fully",
+      "example": "Reading slowly helps you comprehend complex sentences much better.",
+      "pos": "verb",
+      "phonetic": "/ˌkɒm.prɪˈhɛnd/",
+      "status": "learning",
+      "createdAt": 1794994916349
+    },
+    {
+      "id": "vocab_9",
+      "word": "Meticulous",
+      "urdu": "انتہائی باریک بین / احتیاط پسند",
+      "meaning": "Showing great attention to detail; very careful and precise",
+      "example": "He keeps meticulous notes of every new English vocabulary word.",
+      "pos": "adjective",
+      "phonetic": "/məˈtɪk.jə.ləs/",
+      "status": "learning",
+      "createdAt": 1794735716349
+    },
+    {
+      "id": "vocab_10",
+      "word": "Versatile",
+      "urdu": "ہر فن مولا / کثیر المقاصد / ہمہ جہت",
+      "meaning": "Able to adapt or be adapted to many different functions or activities",
+      "example": "She is a versatile writer who writes both technical and creative articles.",
+      "pos": "adjective",
+      "phonetic": "/ˈvɜː.sə.taɪl/",
+      "status": "learned",
+      "createdAt": 1794562916349
+    },
+    {
+      "id": "vocab_11",
+      "word": "Empathy",
+      "urdu": "ہمدردی / دوسرے کا درد و احساس محسوس کرنا",
+      "meaning": "The ability to understand and share the feelings of another person",
+      "example": "Showing empathy helps build strong relationships and trust.",
+      "pos": "noun",
+      "phonetic": "/ˈɛm.pə.θi/",
+      "status": "learning",
+      "createdAt": 1794908516349
+    },
+    {
+      "id": "vocab_12",
+      "word": "Gratitude",
+      "urdu": "شکر گزاری / احسان مندی",
+      "meaning": "The quality of being thankful; readiness to show appreciation",
+      "example": "Starting the day with gratitude brings peace and motivation.",
+      "pos": "noun",
+      "phonetic": "/ˈɡræt.ɪ.tjuːd/",
+      "status": "learned",
+      "createdAt": 1794476516349
+    }
+  ],
+  "b1Themes": {
+    "0": {
+      "dayName": "Sunday",
+      "themeTitle": "Self-Care, Peaceful Mornings & Personal Reflection",
+      "icon": "🌸",
+      "scenarios": {
+        "sun_calm": {
+          "name": "1. Quiet Morning Routine & Self-Care (2nd Conditional - Imagination)",
+          "badge": "Self-Care & Dreams (Past ➔ Would + Verb)",
+          "context": "Imagine having a peaceful, uninterrupted hour for yourself every morning before the family wakes up and the daily rush begins.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had an uninterrupted hour ..., would enjoy</code>",
+          "hint": "Starter: <em>'If I had an uninterrupted quiet hour every morning, I would...'</em>",
+          "answer": "If I had an uninterrupted quiet hour every morning, I would enjoy my tea peacefully and go for a morning walk.",
+          "explanation": "2nd conditional for personal dreams and self-care."
+        },
+        "sun_chores": {
+          "name": "2. Finishing Chores Early for Personal Time (1st Conditional)",
+          "badge": "Daily Productivity & Peace",
+          "context": "You have laundry and organizing to finish, but you want protected quiet time for yourself in the afternoon.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + finish by noon ..., will have peaceful time</code>",
+          "hint": "Starter: <em>'If I finish the household chores by noon, I will...'</em>",
+          "answer": "If I finish the household chores by noon, I will have peaceful time to relax and practice English.",
+          "explanation": "Connects morning efficiency with afternoon self-development."
+        },
+        "sun_reflection": {
+          "name": "3. Weekly Routine Reflection (3rd Conditional)",
+          "badge": "Weekly Reflection (Past ➔ Past)",
+          "context": "Reflecting on the past week: some days felt rushed because tasks weren't organized in a written planner.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had planned out ..., wouldn't have felt overwhelmed</code>",
+          "hint": "Starter: <em>'If I had planned out my priorities earlier in the week, I wouldn't have...'</em>",
+          "answer": "If I had planned out my priorities earlier in the week, I wouldn't have felt so overwhelmed by Sunday.",
+          "explanation": "'Felt so overwhelmed' is authentic emotional expression at B1 level."
+        }
+      },
+      "politePhrases": [
+        {
+          "casual": "I cannot do your work today.",
+          "targetWord": "I would love to help, but I need to dedicate this evening to...",
+          "answer": "I would love to help, but I need to dedicate this evening to some rest and family time.",
+          "explanation": "A graceful, firm way to set personal boundaries politely."
+        },
+        {
+          "casual": "Help me wash the dishes.",
+          "targetWord": "Could you please give me a hand with the dishes so...",
+          "answer": "Could you please give me a hand with the dishes so we can both relax earlier tonight?",
+          "explanation": "'Give me a hand' is a warm, collaborative way to invite family help."
+        },
+        {
+          "casual": "Thanks for the help today.",
+          "targetWord": "I genuinely appreciate your support today; it made a...",
+          "answer": "I genuinely appreciate your support today; it made a huge difference to my day.",
+          "explanation": "'I genuinely appreciate your support' expresses deep, heartfelt gratitude."
+        }
+      ],
+      "vocabQuestions": [
+        {
+          "prompt": "Instead of saying: 'I am very busy today with household work.'",
+          "options": [
+            {
+              "text": "I have a rather hectic schedule today with errands and cooking. (اردو: بہت مصروف / بھاگ دوڑ والا دن)",
+              "correct": true
+            },
+            {
+              "text": "I am trapped in giant work today.",
+              "correct": false
+            },
+            {
+              "text": "My hours are totally running fast.",
+              "correct": false
+            }
+          ],
+          "explanation": "'A rather hectic schedule' (بہت مصروف / بھاگ دوڑ والا دن) is natural and mature."
+        },
+        {
+          "prompt": "Instead of saying: 'After deep cleaning, I was very tired and sleepy.'",
+          "options": [
+            {
+              "text": "After deep cleaning the house, I felt completely exhausted (drained). (اردو: تھکا ہوا / نڈھال)",
+              "correct": true
+            },
+            {
+              "text": "I was having dead batteries inside.",
+              "correct": false
+            },
+            {
+              "text": "My eyes were shutting like stone.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Completely exhausted / drained' (تھکا ہوا / نڈھال) captures honest fatigue."
+        },
+        {
+          "prompt": "Instead of saying: 'Sitting with my tea felt very calm.'",
+          "options": [
+            {
+              "text": "Sipping my morning tea brought a serene and tranquil feeling. (اردو: پرسکون اور اطمینان بخش)",
+              "correct": true
+            },
+            {
+              "text": "The tea made my heart silent.",
+              "correct": false
+            },
+            {
+              "text": "It gave easy calm sitting.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Serene and tranquil' (پرسکون اور اطمینان بخش) is evocative and soothing."
+        }
+      ],
+      "spokenPrompts": {
+        "p1": "What was one small moment that brought you genuine peace or joy this past week?",
+        "p2": "Mention one personal goal or positive habit you want to practice in the coming week.",
+        "p3": "Speak about your English learning journey: how do you feel speaking English aloud today compared to before?"
+      }
+    },
+    "1": {
+      "dayName": "Monday",
+      "themeTitle": "Kitchen, Cooking & Recipe Delights",
+      "icon": "🍳",
+      "scenarios": {
+        "mon_prep": {
+          "name": "1. Evening Dinner Prep (1st Conditional)",
+          "badge": "Kitchen Planning (Present ➔ Future)",
+          "context": "You want dinner preparation to be relaxed and stress-free this evening instead of rushing at the last minute.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + present simple ..., will + [base verb]</code>",
+          "hint": "Think: What happens if you chop vegetables and marinate meat earlier in the afternoon?<br>Starter: <em>'If I prep the vegetables this afternoon, cooking dinner will...'</em>",
+          "answer": "If I prep the vegetables this afternoon, cooking dinner will take only twenty minutes.",
+          "explanation": "The 1st conditional connects a real present action ('prep the vegetables') with a practical future benefit ('cooking dinner will take...')."
+        },
+        "mon_recipe": {
+          "name": "2. Trying a Royal Biryani Recipe (2nd Conditional - Imagination)",
+          "badge": "Culinary Creativity (Past ➔ Would + Verb)",
+          "context": "You saw a delicious royal saffron biryani recipe online, but you don't have saffron and heavy cream in the pantry today.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had ..., would try / make + [verb]</code>",
+          "hint": "Starter: <em>'If I had saffron and fresh cream at home, I would...'</em>",
+          "answer": "If I had saffron and fresh cream at home, I would try making that royal biryani recipe tonight.",
+          "explanation": "The 2nd conditional ('If I had... I would try...') is ideal for talking about fun recipe ideas and imaginary meals."
+        },
+        "mon_milk": {
+          "name": "3. Boiling Milk on the Stove (3rd Conditional - Past Reflection)",
+          "badge": "Kitchen Reflection (Past ➔ Past)",
+          "context": "Earlier today, while attending a phone call, the boiling milk spilled over the stovetop because the flame was too high.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had kept ..., wouldn't have spilled</code>",
+          "hint": "Starter: <em>'If I had kept the milk on low flame, it wouldn't have...'</em>",
+          "answer": "If I had kept the milk on low flame, it wouldn't have spilled over the stove.",
+          "explanation": "The 3rd conditional reflects on everyday household slips calmly without self-blame."
+        }
+      },
+      "politePhrases": [
+        {
+          "casual": "How did you make this curry? Tell me.",
+          "targetWord": "This curry is delightful! Could you please share...",
+          "answer": "This curry is delightful! Could you please share which spices you used in the gravy?",
+          "explanation": "Complimenting the host before asking for the recipe sounds graceful and flattering."
+        },
+        {
+          "casual": "The chicken is cooked nicely.",
+          "targetWord": "Everything is cooked to perfection, especially...",
+          "answer": "Everything is cooked to perfection, especially the tender chicken roast!",
+          "explanation": "'Cooked to perfection' and 'tender' are elegant B1 food compliments."
+        },
+        {
+          "casual": "Do you want more rice?",
+          "targetWord": "Would you care for another...",
+          "answer": "Would you care for another serving of warm pulao?",
+          "explanation": "'Would you care for another serving' is classic, polite English hospitality."
+        }
+      ],
+      "vocabQuestions": [
+        {
+          "prompt": "Instead of saying: 'The food I cooked was very tasty.'",
+          "options": [
+            {
+              "text": "The food had lots of sweet taste in the mouth.",
+              "correct": false
+            },
+            {
+              "text": "The dinner turned out wonderfully flavorful and aromatic. (اردو: نہایت ذائقہ دار اور خوشبودار)",
+              "correct": true
+            },
+            {
+              "text": "The curry was super good to eat.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Flavorful and aromatic' (نہایت ذائقہ دار اور خوشبودار) vividly describes rich homemade cuisine."
+        },
+        {
+          "prompt": "Instead of saying: 'The curry is very spicy and burning.'",
+          "options": [
+            {
+              "text": "The gravy is quite pungent and zesty with chillies. (اردو: کافی تیز اور چٹپٹا)",
+              "correct": true
+            },
+            {
+              "text": "It has too much fire on my tongue.",
+              "correct": false
+            },
+            {
+              "text": "The dish is spicy very much badly.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Pungent and zesty' (کافی تیز اور چٹپٹا) precisely explains high-spice flavor."
+        },
+        {
+          "prompt": "Instead of saying: 'The roti is totally burnt and bad.'",
+          "options": [
+            {
+              "text": "The flatbread is black-feeling all over.",
+              "correct": false
+            },
+            {
+              "text": "The flatbread got slightly charred on the edges. (اردو: کناروں سے ذرا سا جھلس گیا)",
+              "correct": true
+            },
+            {
+              "text": "It was finished by fire completely.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Slightly charred on the edges' (کناروں سے ذرا سا جھلس گیا) is refined and gentle."
+        }
+      ],
+      "spokenPrompts": {
+        "p1": "What meals or dishes did you prepare in the kitchen today?",
+        "p2": "What is your favorite comfort dish to make when you want something quick and delicious?",
+        "p3": "If you were hosting a family dinner tomorrow, what special 3-course menu would you cook?"
+      }
+    },
+    "2": {
+      "dayName": "Tuesday",
+      "themeTitle": "Health, Clinic & Doctor Visits",
+      "icon": "🏥",
+      "scenarios": {
+        "tue_clinic": {
+          "name": "1. Doctor Appointment & Waiting Room (3rd Conditional)",
+          "badge": "Clinic Reflection (Past ➔ Past)",
+          "context": "You visited the family clinic today without a prior appointment, and had to wait for over an hour in a crowded waiting room.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had booked ..., wouldn't have waited</code>",
+          "hint": "Starter: <em>'If I had booked the appointment yesterday, we wouldn't have...'</em>",
+          "answer": "If I had booked the appointment yesterday, we wouldn't have waited so long in the clinic today.",
+          "explanation": "Using 3rd conditional ('If I had booked... wouldn't have waited...') is a standard way to reflect on time management."
+        },
+        "tue_water": {
+          "name": "2. Staying Hydrated (1st Conditional)",
+          "badge": "Daily Wellness (Present ➔ Future)",
+          "context": "You often forget to drink sufficient water during busy household mornings and end up with mild headaches by evening.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + drink ..., will feel</code>",
+          "hint": "Starter: <em>'If I drink at least eight glasses of water every day, I will...'</em>",
+          "answer": "If I drink at least eight glasses of water every day, I will feel more energized and active.",
+          "explanation": "1st conditional links positive daily health habits with clear future well-being."
+        },
+        "tue_rest": {
+          "name": "3. Recovering from Seasonal Flu (1st Conditional)",
+          "badge": "Family Care & Recovery",
+          "context": "Your family member has caught a seasonal fever and needs rest and timely prescribed medicines to recover quickly.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + takes medicines ..., will recover</code>",
+          "hint": "Starter: <em>'If she takes her prescribed medicines on time, she will...'</em>",
+          "answer": "If she takes her prescribed medicines on time, she will recover from the cold within two days.",
+          "explanation": "Expresses confident, supportive care in family healthcare situations."
+        }
+      },
+      "politePhrases": [
+        {
+          "casual": "I have pain in my stomach since yesterday.",
+          "targetWord": "Doctor, I've been experiencing...",
+          "answer": "Doctor, I've been experiencing a persistent dull ache in my stomach since yesterday evening.",
+          "explanation": "'A persistent dull ache' gives the doctor clear, professional medical information."
+        },
+        {
+          "casual": "When should I take this syrup?",
+          "targetWord": "Could you please clarify whether this syrup...",
+          "answer": "Could you please clarify whether this syrup should be taken before or after meals?",
+          "explanation": "'Could you please clarify whether...' is polite and ensures patient safety."
+        },
+        {
+          "casual": "Change my doctor appointment to Thursday.",
+          "targetWord": "I apologize, but could we please reschedule...",
+          "answer": "I apologize, but could we please reschedule my appointment to Thursday afternoon?",
+          "explanation": "'Reschedule my appointment' is the standard polite phrase used by clinic receptionists."
+        }
+      ],
+      "vocabQuestions": [
+        {
+          "prompt": "Instead of saying: 'I am very worried about my child's recurring fever.'",
+          "options": [
+            {
+              "text": "I'm genuinely concerned (anxious) about my child's recurring fever. (اردو: فکر مند / متفکر)",
+              "correct": true
+            },
+            {
+              "text": "My heart is beating in deep tension.",
+              "correct": false
+            },
+            {
+              "text": "I am feeling too much scared.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Genuinely concerned' (فکر مند / متفکر) expresses responsible maternal attention."
+        },
+        {
+          "prompt": "Instead of saying: 'After sickness, I am very weak and falling.'",
+          "options": [
+            {
+              "text": "I was feeling frail and slightly lightheaded today. (اردو: کمزور اور چکر آنا)",
+              "correct": true
+            },
+            {
+              "text": "My energy was gone to zero level.",
+              "correct": false
+            },
+            {
+              "text": "I was very much falling down.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Frail and lightheaded' (کمزور اور چکر آنا) is accurate medical vocabulary."
+        },
+        {
+          "prompt": "Instead of saying: 'This cough is not stopping at all.'",
+          "options": [
+            {
+              "text": "This is a persistent, stubborn cough that lingers at night. (اردو: مسلسل رہنے والی کھانسی)",
+              "correct": true
+            },
+            {
+              "text": "The throat is shouting cough again.",
+              "correct": false
+            },
+            {
+              "text": "Cough is repeating non-stop.",
+              "correct": false
+            }
+          ],
+          "explanation": "'A persistent cough' (مسلسل رہنے والی کھانسی) is what physicians look for."
+        }
+      ],
+      "spokenPrompts": {
+        "p1": "How is your energy and health feeling today?",
+        "p2": "What healthy habit (such as warm water, herbal tea, or a walk) did you practice today?",
+        "p3": "What is one self-care routine you want to stick to for the rest of the week?"
+      }
+    },
+    "3": {
+      "dayName": "Wednesday",
+      "themeTitle": "Shopping, Grocery Market & Fresh Produce",
+      "icon": "🛒",
+      "scenarios": {
+        "wed_list": {
+          "name": "1. Making a Shopping List (1st Conditional)",
+          "badge": "Smart Budgeting (Present ➔ Future)",
+          "context": "You are heading to the grocery supermarket and want to avoid impulse purchases and stay within your budget.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + make a clear list ..., won't buy</code>",
+          "hint": "Starter: <em>'If I make a clear grocery list beforehand, I won't...'</em>",
+          "answer": "If I make a clear grocery list beforehand, I won't buy unnecessary items.",
+          "explanation": "A practical conditional sentence every smart homemaker uses for budgeting."
+        },
+        "wed_sale": {
+          "name": "2. Supermarket Discount Sale (3rd Conditional)",
+          "badge": "Saving & Offers (Past ➔ Past)",
+          "context": "The departmental store had a 40% discount on laundry detergent and pantry staples, but you only heard about it after the sale ended.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had checked ..., would have saved</code>",
+          "hint": "Starter: <em>'If I had checked the store flyer on Monday, I would have...'</em>",
+          "answer": "If I had checked the supermarket flyer on Monday, I would have saved money on household supplies.",
+          "explanation": "Reflects on missed deals and planning future shopping."
+        },
+        "wed_morning": {
+          "name": "3. Fresh Vegetable Market (1st Conditional)",
+          "badge": "Fresh Produce & Quality",
+          "context": "You want fresh coriander, mint, and crisp spinach for this week's meals.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + visit early ..., will find</code>",
+          "hint": "Starter: <em>'If we visit the vegetable market early in the morning, we will...'</em>",
+          "answer": "If we visit the vegetable market early in the morning, we will find the freshest produce.",
+          "explanation": "'Freshest produce' refers to fresh greens, fruits, and vegetables."
+        }
+      },
+      "politePhrases": [
+        {
+          "casual": "Give me fresh vegetables, not old ones.",
+          "targetWord": "Could you please help me pick...",
+          "answer": "Could you please help me pick a fresh bunch of coriander and check if these tomatoes are firm?",
+          "explanation": "Gentle and specific requests at the market guarantee the best produce."
+        },
+        {
+          "casual": "How much for one kilo of apples?",
+          "targetWord": "Excuse me, could you please tell me the price per...",
+          "answer": "Excuse me, could you please tell me the price per kilogram for these apples?",
+          "explanation": "'Price per kilogram' is standard polite shopping terminology."
+        },
+        {
+          "casual": "You charged me twice for this oil.",
+          "targetWord": "Could you please check my receipt? I believe...",
+          "answer": "Could you please check my receipt? I believe this item was scanned twice.",
+          "explanation": "'I believe this item was scanned twice' resolves billing mistakes politely."
+        }
+      ],
+      "vocabQuestions": [
+        {
+          "prompt": "Instead of saying: 'The vegetables were very cheap.'",
+          "options": [
+            {
+              "text": "The groceries were low class price.",
+              "correct": false
+            },
+            {
+              "text": "The fresh vegetables were quite economical and affordable. (اردو: سستا اور مناسب قیمت)",
+              "correct": true
+            },
+            {
+              "text": "The rate was down greatly.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Economical and affordable' (سستا اور مناسب قیمت) is positive and respectful."
+        },
+        {
+          "prompt": "Instead of saying: 'The imported olive oil is very expensive.'",
+          "options": [
+            {
+              "text": "The imported olive oil is rather exorbitant and overpriced. (اردو: بے جا مہنگا)",
+              "correct": true
+            },
+            {
+              "text": "The money asked was too giant.",
+              "correct": false
+            },
+            {
+              "text": "It is taking huge cash from pockets.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Rather exorbitant' (بے جا مہنگا) is an advanced adjective for overpriced items."
+        },
+        {
+          "prompt": "Instead of saying: 'The spinach was very fresh and green.'",
+          "options": [
+            {
+              "text": "The spinach was crisp, farm-fresh, and vibrant. (اردو: تازہ اور خستہ ترکاریاں)",
+              "correct": true
+            },
+            {
+              "text": "Spinach had high greenness.",
+              "correct": false
+            },
+            {
+              "text": "It was newly born from trees.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Crisp and farm-fresh' (تازہ اور خستہ ترکاریاں) paints a mouth-watering picture."
+        }
+      ],
+      "spokenPrompts": {
+        "p1": "What items do you need to restock in your kitchen or pantry this week?",
+        "p2": "Do you prefer shopping at a local neighborhood bazaar or a modern supermarket, and why?",
+        "p3": "If you had an extra budget to spend on your home, what would you purchase?"
+      }
+    },
+    "4": {
+      "dayName": "Thursday",
+      "themeTitle": "Children, School Routine & Parenting",
+      "icon": "🎒",
+      "scenarios": {
+        "thu_study": {
+          "name": "1. Children's Evening Study Routine (1st Conditional)",
+          "badge": "Family Support & Routine",
+          "context": "Your children have school term exams next month, and you want them to study calmly every evening.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + revise consistently ..., will feel</code>",
+          "hint": "Starter: <em>'If my children revise their lessons consistently every evening, they will...'</em>",
+          "answer": "If my children revise their lessons consistently every evening, they will feel much more confident during exams.",
+          "explanation": "1st conditional builds structured encouragement into parenting conversations."
+        },
+        "thu_bags": {
+          "name": "2. Packing School Bags at Night (1st Conditional)",
+          "badge": "Peaceful Mornings",
+          "context": "Morning rush is stressful when school bags, uniforms, and shoes aren't prepared the night before.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + pack bags before bedtime ..., will be</code>",
+          "hint": "Starter: <em>'If the children pack their school bags before bedtime, our mornings will...'</em>",
+          "answer": "If the children pack their school bags before bedtime, our mornings will be completely peaceful.",
+          "explanation": "Practical, real-world conditional for household peace."
+        },
+        "thu_sports": {
+          "name": "3. School Sports Competition (3rd Conditional)",
+          "badge": "Encouraging Effort (Past ➔ Past)",
+          "context": "Your son ran in the school sports day race today. He practiced hard, but a small slip cost him first place.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + hadn't slipped ..., would have won</code>",
+          "hint": "Starter: <em>'If he hadn't slipped near the finish line, he would have...'</em>",
+          "answer": "If he hadn't slipped near the finish line, he would have won the gold medal.",
+          "explanation": "Reflecting on sports with empathy and encouragement."
+        }
+      },
+      "politePhrases": [
+        {
+          "casual": "How is my child doing in class?",
+          "targetWord": "Could you please share how my child is progressing in class, and...",
+          "answer": "Could you please share how my child is progressing in class, and where they might need extra support at home?",
+          "explanation": "The perfect opening question for a Parent-Teacher Meeting (PTM)."
+        },
+        {
+          "casual": "Is tomorrow a half-day in school?",
+          "targetWord": "I'm calling to inquire whether tomorrow is a...",
+          "answer": "I'm calling to inquire whether tomorrow is a half-day for the middle school section.",
+          "explanation": "'I am calling to inquire whether...' is formal, polite telephone etiquette."
+        },
+        {
+          "casual": "Good job on your marks.",
+          "targetWord": "You put in sincere effort, and I'm genuinely proud of...",
+          "answer": "You put in sincere effort, and I'm genuinely proud of your hard work!",
+          "explanation": "'Genuinely proud of your hard work' builds children's inner confidence."
+        }
+      ],
+      "vocabQuestions": [
+        {
+          "prompt": "Instead of saying: 'The children are very naughty today.'",
+          "options": [
+            {
+              "text": "The children are exceptionally mischievous and energetic today. (اردو: شرارتی اور زندہ دل)",
+              "correct": true
+            },
+            {
+              "text": "Kids are breaking rules badly.",
+              "correct": false
+            },
+            {
+              "text": "They are too much troublesome.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Mischievous and energetic' (شرارتی اور زندہ دل) is affectionate and descriptive."
+        },
+        {
+          "prompt": "Instead of saying: 'My daughter is very smart in learning.'",
+          "options": [
+            {
+              "text": "She has a remarkably sharp and inquisitive mind. (اردو: تیز فہم اور متجسس ذہن)",
+              "correct": true
+            },
+            {
+              "text": "She has big brain power.",
+              "correct": false
+            },
+            {
+              "text": "She catches books fast.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Inquisitive mind' (متجسس ذہن) means curious and eager to learn."
+        },
+        {
+          "prompt": "Instead of saying: 'The living room is dirty after kids play.'",
+          "options": [
+            {
+              "text": "The room is full of bad trash.",
+              "correct": false
+            },
+            {
+              "text": "The living room is quite cluttered (disorganised) after the children played. (اردو: بکھرا ہوا / بے ترتیب)",
+              "correct": true
+            },
+            {
+              "text": "The children ruined the whole carpet.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Cluttered' (بکھرا ہوا / بے ترتیب) accurately distinguishes toys from actual filth."
+        }
+      ],
+      "spokenPrompts": {
+        "p1": "How did your children's day or school routine go today?",
+        "p2": "What was one sweet, funny, or proud moment you shared with family today?",
+        "p3": "What is one routine you want your household to follow smoothly tomorrow morning?"
+      }
+    },
+    "5": {
+      "dayName": "Friday",
+      "themeTitle": "Welcoming Guests, Relatives & Warm Hospitality",
+      "icon": "☕",
+      "scenarios": {
+        "fri_tea": {
+          "name": "1. Welcoming Friday Guests (1st Conditional)",
+          "badge": "Hospitality Prep (Present ➔ Future)",
+          "context": "Your cousins or relatives are coming over after Friday prayers, and you want to welcome them warmly.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + arrive ..., will have warm chai ready</code>",
+          "hint": "Starter: <em>'If our relatives arrive this afternoon, I will have...'</em>",
+          "answer": "If our relatives arrive this afternoon, I will have warm chai and fresh snacks ready for them.",
+          "explanation": "1st conditional expresses thoughtful host planning."
+        },
+        "fri_unannounced": {
+          "name": "2. Unexpected Visitors (3rd Conditional)",
+          "badge": "Social Reflection (Past ➔ Past)",
+          "context": "Some family friends visited unexpectedly around lunch time when the kitchen was already cleaned up.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had informed us an hour earlier ..., would have prepared</code>",
+          "hint": "Starter: <em>'If they had informed us an hour in advance, we would have...'</em>",
+          "answer": "If they had informed us an hour in advance, we would have prepared a full lunch spread.",
+          "explanation": "'In advance' and 'a full lunch spread' are natural B1 collocations."
+        },
+        "fri_patio": {
+          "name": "3. Garden Tea Gathering (2nd Conditional - Imagination)",
+          "badge": "Social Dreams (Past ➔ Would + Verb)",
+          "context": "Imagine your house had a spacious green garden patio to host pleasant evening tea gatherings.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had a larger garden ..., would host</code>",
+          "hint": "Starter: <em>'If our house had a larger garden patio, we would...'</em>",
+          "answer": "If our house had a larger garden patio, we would host a pleasant tea party for all the cousins.",
+          "explanation": "2nd conditional for imagining lovely social occasions."
+        }
+      },
+      "politePhrases": [
+        {
+          "casual": "Come inside and sit down.",
+          "targetWord": "Please come in and make yourself at home! May I...",
+          "answer": "Please come in and make yourself at home! May I get you a warm cup of tea or some refreshments?",
+          "explanation": "'Make yourself at home' is the hallmark of gracious hospitality."
+        },
+        {
+          "casual": "Eat the snacks, I made them for you.",
+          "targetWord": "Please help yourself to some fresh snacks; they were...",
+          "answer": "Please help yourself to some fresh snacks; they were prepared just for you.",
+          "explanation": "'Please help yourself' invites guests warmly without being pushy."
+        },
+        {
+          "casual": "Bye, visit again.",
+          "targetWord": "It was truly wonderful having you over! Please...",
+          "answer": "It was truly wonderful having you over! Please visit us again very soon.",
+          "explanation": "A heartfelt goodbye leaves a lasting warm impression."
+        }
+      ],
+      "vocabQuestions": [
+        {
+          "prompt": "Instead of saying: 'She is a very good host.'",
+          "options": [
+            {
+              "text": "She is a remarkably gracious and hospitable host. (اردو: مہمان نواز اور پرخلوص)",
+              "correct": true
+            },
+            {
+              "text": "She gives too much food to eat.",
+              "correct": false
+            },
+            {
+              "text": "She is very welcoming for mouth-food.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Gracious and hospitable' (مہمان نواز اور پرخلوص) is the highest compliment for hospitality."
+        },
+        {
+          "prompt": "Instead of saying: 'The living room is very comfortable and nice.'",
+          "options": [
+            {
+              "text": "The room has a cozy, warm, and welcoming atmosphere. (اردو: پرسکون اور آرام دہ ماحول)",
+              "correct": true
+            },
+            {
+              "text": "The sofa gives easy sitting.",
+              "correct": false
+            },
+            {
+              "text": "The room has full luxury feelings.",
+              "correct": false
+            }
+          ],
+          "explanation": "'A cozy and welcoming atmosphere' (پرسکون اور آرام دہ ماحول) describes a comfortable home."
+        },
+        {
+          "prompt": "Instead of saying: 'The house was full of too much loud talking.'",
+          "options": [
+            {
+              "text": "The house was bustling with lively laughter and joyous chatter. (اردو: قہقہوں اور رونق سے بھرا گھر)",
+              "correct": true
+            },
+            {
+              "text": "Every person was shouting words.",
+              "correct": false
+            },
+            {
+              "text": "There was big noise inside the walls.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Joyous chatter' (رونق اور چہچہاہٹ) conveys happy family bonding."
+        }
+      ],
+      "spokenPrompts": {
+        "p1": "Who is your favorite guest or relative to host at home, and why?",
+        "p2": "How do you like to welcome people to make them feel comfortable and appreciated?",
+        "p3": "If you were planning an evening high tea for close friends, what 3 snacks and tea would you serve?"
+      }
+    },
+    "6": {
+      "dayName": "Saturday",
+      "themeTitle": "Weekend Family Outings & Leisure",
+      "icon": "🌳",
+      "scenarios": {
+        "sat_picnic": {
+          "name": "1. Sunny Weather Picnic (1st Conditional)",
+          "badge": "Weekend Plans (Present ➔ Future)",
+          "context": "Your family plans to visit the lake park for an open-air picnic if the weather remains sunny tomorrow morning.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + stays clear and sunny ..., will go for a picnic</code>",
+          "hint": "Starter: <em>'If the weather stays clear and sunny tomorrow, our family will...'</em>",
+          "answer": "If the weather stays clear and sunny tomorrow morning, our family will go for a picnic at the lake park.",
+          "explanation": "1st conditional for planning weekend family outings."
+        },
+        "sat_traffic": {
+          "name": "2. Beating the Weekend City Traffic (1st Conditional)",
+          "badge": "Road Travel & Timing",
+          "context": "You want to visit your grandparents across town without getting stuck in Saturday evening traffic.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + leave before 9 AM ..., will easily beat the traffic</code>",
+          "hint": "Starter: <em>'If we leave the house before 9 AM, we will...'</em>",
+          "answer": "If we leave the house before 9 AM, we will easily beat the weekend city traffic.",
+          "explanation": "'Beat the traffic' is a high-frequency native idiom for arriving before congestion."
+        },
+        "sat_umbrella": {
+          "name": "3. Sudden Downpour (3rd Conditional)",
+          "badge": "Weather Surprise (Past ➔ Past)",
+          "context": "While strolling in the garden this afternoon, an unseasonal rain shower started, and you had left your umbrella in the car.",
+          "formula": "<strong>B1 Rule:</strong> <code>If + had carried ..., wouldn't have been caught</code>",
+          "hint": "Starter: <em>'If we had carried an umbrella in the car, we wouldn't have...'</em>",
+          "answer": "If we had carried an umbrella in the car, we wouldn't have been caught in the sudden downpour.",
+          "explanation": "'Caught in a sudden downpour' is expressive B1 English for unexpected rain."
+        }
+      },
+      "politePhrases": [
+        {
+          "casual": "Give us a quiet table near the window.",
+          "targetWord": "Excuse me, could we please get a quiet table...",
+          "answer": "Excuse me, could we please get a quiet table near the window for four people?",
+          "explanation": "Courteous restaurant requests ensure prompt, warm hospitality."
+        },
+        {
+          "casual": "Where is the parking area?",
+          "targetWord": "Pardon me, could you please point us in the direction of...",
+          "answer": "Pardon me, could you please point us in the direction of the nearest parking area?",
+          "explanation": "'Point us in the direction of...' sounds mature and polished."
+        },
+        {
+          "casual": "I cannot come to your dinner party.",
+          "targetWord": "Thank you so much for the invitation, but unfortunately...",
+          "answer": "Thank you so much for the invitation, but unfortunately I won't be able to attend due to prior family commitments.",
+          "explanation": "'Due to prior family commitments' is the most elegant way to decline an invitation."
+        }
+      ],
+      "vocabQuestions": [
+        {
+          "prompt": "Instead of saying: 'The lake park was very crowded.'",
+          "options": [
+            {
+              "text": "The park was bustling and packed with families enjoying the sun. (اردو: پر رونق اور ہجوم والا)",
+              "correct": true
+            },
+            {
+              "text": "There were too many humans standing.",
+              "correct": false
+            },
+            {
+              "text": "The park had overflowing population.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Bustling and packed' (پر رونق اور ہجوم والا) is vibrant and descriptive."
+        },
+        {
+          "prompt": "Instead of saying: 'The view from the hill was very beautiful.'",
+          "options": [
+            {
+              "text": "The landscape was breathtaking and picturesque. (اردو: دلکش اور خوبصورت منظر)",
+              "correct": true
+            },
+            {
+              "text": "The view was looking excessively fine.",
+              "correct": false
+            },
+            {
+              "text": "It was having super eyesight pleasure.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Breathtaking and picturesque' (دلکش اور خوبصورت منظر) is rich descriptive writing."
+        },
+        {
+          "prompt": "Instead of saying: 'The afternoon sun was very hot and sweating.'",
+          "options": [
+            {
+              "text": "The afternoon was scorching and humid outdoors. (اردو: شدید گرم اور حبس زدہ)",
+              "correct": true
+            },
+            {
+              "text": "The sun was throwing too much burn.",
+              "correct": false
+            },
+            {
+              "text": "I had giant sweat coming out.",
+              "correct": false
+            }
+          ],
+          "explanation": "'Scorching and humid' (شدید گرم اور حبس زدہ) describes summer weather vividly."
+        }
+      ],
+      "spokenPrompts": {
+        "p1": "What was the most enjoyable or relaxing part of your weekend so far?",
+        "p2": "Describe a favorite park, market, or restaurant you love visiting with family.",
+        "p3": "What pleasant activity do you want to enjoy before the new week begins?"
+      }
+    }
+  },
+  "dict": {
+    "resilient": {
+      "urdu": "مضبوط / حالات کا مقابلہ کرنے والا / لچکدار",
+      "meaning": "Able to withstand or recover quickly from difficult conditions",
+      "pos": "adjective",
+      "phonetic": "/rɪˈzɪl.jənt/",
+      "example": "She remained resilient through every hardship."
+    },
+    "diligent": {
+      "urdu": "محنتی / انتھک / ہوشیار",
+      "meaning": "Showing care and conscientiousness in one's work",
+      "pos": "adjective",
+      "phonetic": "/ˈdɪl.ɪ.dʒənt/",
+      "example": "A diligent worker always earns high praise."
+    },
+    "accomplish": {
+      "urdu": "حاصل کرنا / مکمل کرنا / پایہ تکمیل تک پہنچانا",
+      "meaning": "To achieve or complete successfully",
+      "pos": "verb",
+      "phonetic": "/əˈkʌm.plɪʃ/",
+      "example": "We accomplished our main target on schedule."
+    },
+    "fascinating": {
+      "urdu": "دلچسپ / مسحور کن / پرکشش",
+      "meaning": "Extremely interesting and captivating",
+      "pos": "adjective",
+      "phonetic": "/ˈfæs.ɪ.neɪ.tɪŋ/",
+      "example": "The book offers a fascinating look into language history."
+    },
+    "essential": {
+      "urdu": "لازمی / بنیادی / انتہائی ضروری",
+      "meaning": "Absolutely necessary; extremely important",
+      "pos": "adjective",
+      "phonetic": "/ɪˈsɛn.ʃəl/",
+      "example": "Fresh fruits and water are essential for good health."
+    },
+    "punctual": {
+      "urdu": "وقت کا پابند",
+      "meaning": "Doing something at the agreed or proper time",
+      "pos": "adjective",
+      "phonetic": "/ˈpʌŋk.tʃu.əl/",
+      "example": "Always be punctual for your meetings."
+    },
+    "perseverance": {
+      "urdu": "ثابت قدمی / مستقل مزاجی",
+      "meaning": "Persistence in doing something despite difficulty",
+      "pos": "noun",
+      "phonetic": "/ˌpɜː.sɪˈvɪə.rəns/",
+      "example": "Perseverance will eventually turn failure into victory."
+    },
+    "comprehend": {
+      "urdu": "سمجھنا / ادراک کرنا",
+      "meaning": "To grasp mentally; understand fully",
+      "pos": "verb",
+      "phonetic": "/ˌkɒm.prɪˈhɛnd/",
+      "example": "Listen carefully to comprehend the main point."
+    },
+    "meticulous": {
+      "urdu": "انتہائی باریک بین / احتیاط پسند",
+      "meaning": "Showing great attention to detail; very precise",
+      "pos": "adjective",
+      "phonetic": "/məˈtɪk.jə.ləs/",
+      "example": "He gave meticulous attention to spelling accuracy."
+    },
+    "versatile": {
+      "urdu": "ہر فن مولا / کثیر المقاصد",
+      "meaning": "Able to adapt to many different functions",
+      "pos": "adjective",
+      "phonetic": "/ˈvɜː.sə.taɪl/",
+      "example": "She is a versatile professional in multiple fields."
+    },
+    "empathy": {
+      "urdu": "ہمدردی / دوسرے کا درد محسوس کرنا",
+      "meaning": "The ability to understand and share another's feelings",
+      "pos": "noun",
+      "phonetic": "/ˈɛm.pə.θi/",
+      "example": "Treat everyone with empathy and kindness."
+    },
+    "gratitude": {
+      "urdu": "شکر گزاری / احسان مندی",
+      "meaning": "The quality of being thankful and showing appreciation",
+      "pos": "noun",
+      "phonetic": "/ˈɡræt.ɪ.tjuːd/",
+      "example": "He expressed sincere gratitude to his teacher."
+    },
+    "innovative": {
+      "urdu": "جدت پسند / نیا اور تخلیقی",
+      "meaning": "Featuring new methods; advanced and original",
+      "pos": "adjective",
+      "phonetic": "/ˈɪn.ə.veɪ.tɪv/",
+      "example": "They developed an innovative mobile app."
+    },
+    "feasible": {
+      "urdu": "ممکن / قابل عمل",
+      "meaning": "Possible to do easily or conveniently",
+      "pos": "adjective",
+      "phonetic": "/ˈfiː.zə.bəl/",
+      "example": "The proposed timeline is completely feasible."
+    },
+    "reluctant": {
+      "urdu": "ہچکچانے والا / بے دل",
+      "meaning": "Unwilling and hesitant; disinclined",
+      "pos": "adjective",
+      "phonetic": "/rɪˈlʌk.tənt/",
+      "example": "He was reluctant to admit his mistake."
+    },
+    "ambitious": {
+      "urdu": "بڑے ارادے رکھنے والا / بلند حوصلہ",
+      "meaning": "Having or showing a strong desire and determination to succeed",
+      "pos": "adjective",
+      "phonetic": "/æmˈbɪʃ.əs/",
+      "example": "She has ambitious career plans for the future."
+    },
+    "curious": {
+      "urdu": "متجسس / جاننے کا شوقین",
+      "meaning": "Eager to know or learn something",
+      "pos": "adjective",
+      "phonetic": "/ˈkjʊə.ri.əs/",
+      "example": "Children are naturally curious about the world."
+    },
+    "candid": {
+      "urdu": "کھرا / بے باک / صاف گو",
+      "meaning": "Truthful and straightforward; frank",
+      "pos": "adjective",
+      "phonetic": "/ˈkæn.dɪd/",
+      "example": "She gave a candid opinion during the meeting."
+    },
+    "prudent": {
+      "urdu": "دانش مند / دور اندیش / محتاط",
+      "meaning": "Acting with or showing care and thought for the future",
+      "pos": "adjective",
+      "phonetic": "/ˈpruː.dənt/",
+      "example": "It is prudent to save some money for emergencies."
+    },
+    "lucid": {
+      "urdu": "واضح / صاف / آسانی سے سمجھ آنے والا",
+      "meaning": "Expressed clearly; easy to understand",
+      "pos": "adjective",
+      "phonetic": "/ˈluː.sɪd/",
+      "example": "The teacher gave a lucid explanation of the topic."
+    },
+    "eloquent": {
+      "urdu": "خوش بیان / فصیح و بلیغ",
+      "meaning": "Fluent or persuasive in speaking or writing",
+      "pos": "adjective",
+      "phonetic": "/ˈɛl.ə.kwənt/",
+      "example": "His eloquent speech moved the entire audience."
+    },
+    "genuine": {
+      "urdu": "اصلی / مخلص / حقیقی",
+      "meaning": "Truly what something is said to be; authentic and sincere",
+      "pos": "adjective",
+      "phonetic": "/ˈdʒɛn.ju.ɪn/",
+      "example": "She has a genuine passion for teaching."
+    },
+    "generous": {
+      "urdu": "سخی / فیاض / دریا دل",
+      "meaning": "Showing a readiness to give more of something than is strictly necessary",
+      "pos": "adjective",
+      "phonetic": "/ˈdʒɛn.ər.əs/",
+      "example": "He made a generous donation to the local clinic."
+    },
+    "enthusiastic": {
+      "urdu": "پرجوش / پرشوق",
+      "meaning": "Having or showing intense and eager enjoyment or interest",
+      "pos": "adjective",
+      "phonetic": "/ɪnˌθjuː.ziˈæs.tɪk/",
+      "example": "The students were enthusiastic about the science fair."
+    },
+    "optimistic": {
+      "urdu": "پرامید / مثبت سوچ رکھنے والا",
+      "meaning": "Hopeful and confident about the future",
+      "pos": "adjective",
+      "phonetic": "/ˌɒp.tɪˈmɪs.tɪk/",
+      "example": "Always stay optimistic even during tough days."
+    }
+  }
+}

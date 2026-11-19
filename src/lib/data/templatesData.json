@@ -1,0 +1,115 @@
+[
+  {
+    "id": "tmpl_cocoa_puffs",
+    "title": "High Protein Cocoa Puffs",
+    "subtitle": "with chocolate & oats (Air Fryer)",
+    "category": "recipe",
+    "categoryBadge": "BREAKFAST · AIR FRYER",
+    "icon": "🥣",
+    "image": "cocoa_puffs_dish.jpg",
+    "prepTime": "5 minutes",
+    "cookTime": "21 minutes",
+    "totalTime": "26 minutes",
+    "temperature": "170°C",
+    "servings": "2",
+    "difficulty": "easy",
+    "url": "https://youtube.com/shorts/9lQzND2xMHI?si=I4wVNhgw5gq5ng1o",
+    "ingredients": [
+      {
+        "name": "Oat flour",
+        "qty": "45–50 g"
+      },
+      {
+        "name": "Cocoa powder",
+        "qty": "20–25 g"
+      },
+      {
+        "name": "Protein powder",
+        "qty": "35–40 g"
+      },
+      {
+        "name": "Brown sugar",
+        "qty": "20–25 g (2 tbsp)"
+      },
+      {
+        "name": "Baking soda",
+        "qty": "5 g (1 tsp)"
+      },
+      {
+        "name": "Instant coffee powder",
+        "qty": "2–4 g (1 to 2 tsp)"
+      },
+      {
+        "name": "Milk",
+        "qty": "75–90 g (5 to 6 tbsp)"
+      }
+    ],
+    "preparation": [
+      "In a mixing bowl, combine oat flour, cocoa powder, protein powder, brown sugar, baking soda, and instant coffee powder. Whisk thoroughly.",
+      "Gradually add milk (5 to 6 tbsp), stirring until a soft, pliable chocolate dough forms.",
+      "Pinch small pieces of dough and roll them into miniature balls (puffs) with your palms.",
+      "Arrange puffs in the air fryer basket in a single layer. Air fry at 170°C for 21 minutes until crispy and crunchy. Let cool, serve with fresh milk or yogurt!"
+    ],
+    "content": "Oat flour: 45–50 g\nCocoa powder: 20–25 g\nProtein powder: 35–40 g\nBrown sugar: 20–25 g (2 tbsp)\nBaking soda: 5 g (1 tsp)\nInstant coffee powder: 2–4 g (1 to 2 tsp)\nMilk: 75–90 g (5 to 6 tbsp; add gradually)\n\n170 degree 21mint",
+    "createdAt": 1726857600000
+  },
+  {
+    "id": "tmpl_vanilla_egg_cake",
+    "title": "Vanilla Egg Sponge Cake",
+    "subtitle": "Air Fryer & Stovepot Method",
+    "category": "recipe",
+    "categoryBadge": "BAKING · AIR FRYER / STOVE",
+    "icon": "🍰",
+    "image": "vanilla_egg_cake.jpg",
+    "prepTime": "10 minutes",
+    "cookTime": "25–35 min",
+    "totalTime": "35–45 min",
+    "temperature": "150°C–160°C",
+    "servings": "4",
+    "difficulty": "easy",
+    "url": "https://youtu.be/rxc8d4dWics?si=yoFZiTJZJfWTM",
+    "ingredients": [
+      {
+        "name": "All-purpose flour",
+        "qty": "60–65 g"
+      },
+      {
+        "name": "Sugar",
+        "qty": "50 g"
+      },
+      {
+        "name": "Neutral oil or butter",
+        "qty": "40 g"
+      },
+      {
+        "name": "Eggs (2 eggs)",
+        "qty": "100 g (whisked)"
+      },
+      {
+        "name": "Eno (unflavored)",
+        "qty": "2 g (½ tsp)"
+      },
+      {
+        "name": "Salt",
+        "qty": "1 g"
+      },
+      {
+        "name": "Vanilla extract",
+        "qty": "3–5 g"
+      },
+      {
+        "name": "Milk",
+        "qty": "10 ml"
+      }
+    ],
+    "preparation": [
+      "Whisk eggs, sugar, oil/butter & vanilla until light and frothy. Sift in flour, salt, milk & Eno (½ tsp replaces baking powder); fold gently into a smooth batter.",
+      "Air Fryer: Preheat at 160°C (3–5 min). Bake at 150°C–160°C for 20–25 min (up to 30–35 min depending on model).",
+      "Stove Method: Preheat heavy pot on low 10 min. Place batter inside, seal tight with lid so no steam escapes. Bake on lowest flame 35–45 min (keep lid closed first 30 min).",
+      "Toothpick Test: Check cake quickly at 20–25 min. Clean toothpick = done (remove immediately)! Wet batter = add 2–3 min. Check fast so air fryer retains heat.",
+      "Pro-Tip: If top browns too fast before center sets, tent a small sheet of foil over cake to protect top while center finishes baking."
+    ],
+    "content": "All-purpose flour: 60g – 65g\nSugar: 50g\nNeutral oil: 40g (or butter 40g)\nEggs: 100g (2 eggs, whisked)\nEno (unflavored): 2g (1/2 tsp)\nSalt: 1g\nVanilla extract: 3g – 5g\nMilk: 10ml\n\n• Air Fryer: Preheat 160°C (3–5 min). Bake 150°C–160°C for 20–25 min (up to 35 min).\n• Stove: Preheat pot on low 10 min. Seal tight; bake on lowest flame 35–45 min.\n• Toothpick test at 20–25 min. Check quickly to keep heat! Tent foil if top browns early.",
+    "createdAt": 1726857600001
+  }
+]
