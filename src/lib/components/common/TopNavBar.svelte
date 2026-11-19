@@ -1,8 +1,6 @@
 <script>
   import { navigationState } from '$lib/stores/navigationState.svelte.js';
 
-  let isMenuOpen = $state(false);
-
   const navItems = [
     { id: 'schedule', icon: '⏰', badge: 'DAILY', title: 'Schedule' },
     { id: 'water', icon: '✅', badge: 'HABITS', title: 'Habit Tracker' },
@@ -27,7 +25,6 @@
 
   function selectTab(id) {
     navigationState.setTab(id);
-    isMenuOpen = false;
   }
 </script>
 
@@ -46,20 +43,20 @@
     <button
       type="button"
       class="nav-menu-toggle-btn"
-      class:active={isMenuOpen}
-      onclick={() => (isMenuOpen = !isMenuOpen)}
+      class:active={navigationState.isMenuOpen}
+      onclick={() => navigationState.toggleMenu()}
       title="Open All Apps Menu"
     >
-      <span class="menu-icon">{isMenuOpen ? '✕' : '☰'}</span>
+      <span class="menu-icon">{navigationState.isMenuOpen ? '✕' : '☰'}</span>
       <span class="menu-text">Menu</span>
     </button>
   </div>
 
-  {#if isMenuOpen}
+  {#if navigationState.isMenuOpen}
     <div
       class="nav-menu-overlay"
-      onclick={() => (isMenuOpen = false)}
-      onkeydown={(e) => { if (e.key === 'Escape') isMenuOpen = false; }}
+      onclick={() => navigationState.closeMenu()}
+      onkeydown={(e) => { if (e.key === 'Escape') navigationState.closeMenu(); }}
       role="button"
       tabindex="-1"
     >
@@ -79,7 +76,7 @@
           <button
             type="button"
             class="dropdown-close-btn"
-            onclick={() => (isMenuOpen = false)}
+            onclick={() => navigationState.closeMenu()}
             title="Close menu"
           >
             ✕

@@ -58,4 +58,15 @@
       <ScheduleSection />
     {/if}
   </div>
+
+  {#if !navigationState.isMenuOpen}
+    <button
+      type="button"
+      class="floating-nav-pill"
+      onclick={() => navigationState.toggleMenu()}
+      title="Open Navigators"
+    >
+      <span class="floating-icon">🧭</span> Navigators
+    </button>
+  {/if}
 </div>
