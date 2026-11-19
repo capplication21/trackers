@@ -2,278 +2,636 @@
   import { onMount } from 'svelte';
   import { recipeState } from '$lib/stores/recipeState.svelte.js';
 
-  let showAddModal = $state(false);
-  let showMissingModal = $state(false);
+  let isAccordionOpen = $state(true);
+  let expandedRecipeIds = $state({});
 
-  // New recipe form
-  let newTitle = $state('');
-  let newCategory = $state('Dinner');
-  let newPrep = $state('15 mins');
-  let newCook = $state('30 mins');
-  let newServings = $state('4');
-  let newIngredients = $state('');
-  let newInstructions = $state('');
+  // Modals
+  let showEditModal = $state(false);
+  let modalIndex = $state(-1);
+  let modalTitle = $state('');
+  let modalUrl = $state('');
+  let modalIngredients = $state('');
+  let modalAddedItems = $state('');
+  let modalChanges = $state('');
+  let modalVeg = $state(false);
+  let modalFavorite = $state(false);
+  let modalMustTry = $state(false);
+  let modalQuick = $state(false);
+  let modalOkay = $state(false);
 
-  onMount(() => {
-    recipeState.init();
+  // New Shopping Item input
+  let newShoppingItem = $state('');
+
+  const subTabs = [
+    { id: 'all', icon: '📋', label: 'All' },
+    { id: 'veg', icon: '🥗', label: 'Veg' },
+    { id: 'favorites', icon: '⭐', label: 'Favorites' },
+    { id: 'musttry', icon: '🔥', label: 'Must Try' },
+    { id: 'quick', icon: '⚡', label: 'Quick' },
+    { id: 'ingredients', icon: '📜', label: 'Ingredients' }
+  ];
+
+  onMount(async () => {
+    await recipeState.init();
   });
 
-  async function handleCreateRecipe() {
-    if (!newTitle.trim()) return;
-    const recipe = {
-      id: 'custom_' + Date.now(),
-      title: newTitle.trim(),
-      category: newCategory,
-      prepTime: newPrep.trim(),
-      cookTime: newCook.trim(),
-      servings: newServings.trim(),
-      ingredients: newIngredients.split('\n').map(i => i.trim()).filter(Boolean),
-      instructions: newInstructions.split('\n').map(i => i.trim()).filter(Boolean)
-    };
-    await recipeState.addRecipe(recipe);
-    newTitle = '';
-    newIngredients = '';
-    newInstructions = '';
-    showAddModal = false;
+  function toggleAccordion() {
+    isAccordionOpen = !isAccordionOpen;
   }
+
+  function toggleRecipeDetails(id) {
+    expandedRecipeIds[id] = !expandedRecipeIds[id];
+  }
+
+  function openAddModal() {
+    modalIndex = -1;
+    modalTitle = '';
+    modalUrl = '';
+    modalIngredients = '';
+    modalAddedItems = '';
+    modalChanges = '';
+    modalVeg = false;
+    modalFavorite = false;
+    modalMustTry = false;
+    modalQuick = false;
+    modalOkay = false;
+    showEditModal = true;
+  }
+
+  function openEditModal(recipe, index) {
+    modalIndex = index;
+    modalTitle = recipe.title || '';
+    modalUrl = recipe.url || '';
+    modalIngredients = (recipe.ingredients || []).join('\n');
+    modalAddedItems = recipe.addedItems || '';
+    modalChanges = recipe.changes || '';
+    modalVeg = Boolean(recipe.veg);
+    modalFavorite = Boolean(recipe.favorite);
+    modalMustTry = Boolean(recipe.mustTry);
+    modalQuick = Boolean(recipe.quick);
+    modalOkay = Boolean(recipe.okay);
+    showEditModal = true;
+  }
+
+  async function handleSaveRecipeModal() {
+    if (!modalTitle.trim()) return;
+
+    const ingList = modalIngredients
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    const recipeData = {
+      title: modalTitle.trim(),
+      url: modalUrl.trim(),
+      ingredients: ingList,
+      addedItems: modalAddedItems.trim(),
+      changes: modalChanges.trim(),
+      veg: modalVeg,
+      favorite: modalFavorite,
+      mustTry: modalMustTry,
+      quick: modalQuick,
+      okay: modalOkay
+    };
+
+    if (modalIndex >= 0) {
+      await recipeState.updateRecipe(modalIndex, recipeData);
+    } else {
+      await recipeState.addRecipe(recipeData);
+    }
+    showEditModal = false;
+  }
+
+  async function handleDeleteRecipe(index, title) {
+    if (typeof window !== 'undefined' && !window.confirm(`Delete recipe "${title}"?`)) {
+      return;
+    }
+    await recipeState.deleteRecipe(index);
+  }
+
+  async function addCustomShoppingItem() {
+    if (!newShoppingItem.trim()) return;
+    await recipeState.toggleMissingIngredient(newShoppingItem.trim());
+    newShoppingItem = '';
+  }
+
+  function shareWhatsAppShopping() {
+    if (typeof window === 'undefined') return;
+    const text = encodeURIComponent(
+      `🛒 Shopping Checklist:\n` +
+      recipeState.missingIngredients.map((item, i) => `${i + 1}. ${item}`).join('\n')
+    );
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  }
+
+  function copyShoppingList() {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      const text = recipeState.missingIngredients.join('\n');
+      navigator.clipboard.writeText(text);
+      if (typeof window !== 'undefined') window.alert('Copied to clipboard! 📋');
+    }
+  }
+
+  const currentTabLabel = $derived(() => {
+    switch (recipeState.activeTab) {
+      case 'veg':
+        return 'Veg Recipes';
+      case 'favorites':
+        return 'Favorites (Tried Dishes)';
+      case 'musttry':
+        return 'Must Try (Have To Try)';
+      case 'quick':
+        return 'Quick Recipes (Less Time)';
+      case 'ingredients':
+        return 'Ingredients & Shopping';
+      default:
+        return 'All Recipes';
+    }
+  });
+
+  const currentTabIcon = $derived(() => {
+    const found = subTabs.find((t) => t.id === recipeState.activeTab);
+    return found ? found.icon : '📋';
+  });
 </script>
 
 <div class="tab-content active" id="tab-recipe" style="display: block;">
-  <div class="section-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-    <span><span>🍳</span> RECIPE BOOK &amp; KITCHEN</span>
-    <div style="display: flex; gap: 8px;">
-      <button
-        type="button"
-        class="reading-tool-btn"
-        onclick={() => (showMissingModal = true)}
-        style="font-size: 11.5px; padding: 4px 10px;"
-      >
-        🛒 Missing Ingredients ({recipeState.missingIngredients.length})
-      </button>
-      <button
-        type="button"
-        class="reading-tool-btn active"
-        onclick={() => (showAddModal = true)}
-        style="font-size: 11.5px; padding: 4px 10px;"
-      >
-        ➕ Add Recipe
-      </button>
-    </div>
+  <!-- Pill Title Badge -->
+  <div style="display: inline-flex; align-items: center; gap: 6px; background: #ffffff; border: 2.5px solid var(--ink); border-radius: 999px; padding: 6px 16px; font-weight: 800; font-size: 13px; margin-bottom: 14px; box-shadow: 0 2px 0 var(--ink);">
+    <span style="font-size: 15px;">🔍</span> RECIPE BOOK
   </div>
 
-  <!-- Search & Category Filters -->
-  <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+  <!-- Search Input Row -->
+  <div class="recipe-search-row" style="display: flex; gap: 8px; margin-bottom: 12px;">
     <input
       type="text"
-      placeholder="🔍 Search recipes or ingredients..."
+      class="input-field"
+      id="recipeSearchInput"
+      placeholder="Search ingredients, comma separated..."
       bind:value={recipeState.searchQuery}
-      style="width: 100%; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 12px; font-size: 13px; font-weight: 600; box-shadow: 0 2px 0 var(--ink); box-sizing: border-box;"
+      style="flex: 1; padding: 10px 14px; border: 2.5px solid var(--ink); border-radius: 14px; font-size: 13.5px; font-weight: 600; box-shadow: 0 2.5px 0 var(--ink); background: #ffffff; box-sizing: border-box;"
     />
-
-    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-      {#each recipeState.categories as cat}
-        <button
-          type="button"
-          class="reading-filter-pill {recipeState.activeCategory === cat ? 'active' : ''}"
-          onclick={() => (recipeState.activeCategory = cat)}
-          style="text-transform: capitalize;"
-        >
-          {cat}
-        </button>
-      {/each}
-    </div>
+    <button
+      type="button"
+      class="recipe-search-btn"
+      title="Search Recipes"
+      style="width: 46px; height: 46px; background: #eab308; border: 2.5px solid var(--ink); border-radius: 14px; box-shadow: 0 2.5px 0 var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;"
+    >
+      🔍
+    </button>
   </div>
 
-  <!-- Recipe Grid -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: clamp(10px, 1.5vw, 16px);">
-    {#each recipeState.filteredRecipes as recipe (recipe.id || recipe.title)}
-      <div
-        class="recipe-card-item"
-        onclick={() => (recipeState.selectedRecipe = recipe)}
-        onkeydown={(e) => { if (e.key === 'Enter') recipeState.selectedRecipe = recipe; }}
-        tabindex="0"
-        role="button"
-        style="background: #ffffff; border: 2px solid var(--ink); border-radius: 16px; padding: 14px; box-shadow: 0 3px 0 var(--ink); cursor: pointer; transition: transform 0.1s ease; display: flex; flex-direction: column; justify-content: space-between;"
+  <!-- Add New Recipe Button -->
+  <button
+    type="button"
+    class="add-period-btn"
+    onclick={openAddModal}
+    style="width: 100%; margin-bottom: 14px; background: #eab308; color: #141413; border: 2.5px solid var(--ink); border-radius: 14px; padding: 12px; font-size: 14.5px; font-weight: 800; cursor: pointer; box-shadow: 0 3px 0 var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.15s ease;"
+  >
+    <span style="font-size: 16px;">➕</span> Add New Recipe
+  </button>
+
+  <!-- Recipe Sub-Navigation Bar -->
+  <div
+    class="recipe-sub-tabs"
+    style="display: flex; align-items: center; justify-content: space-between; background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; padding: 6px; box-shadow: 0 3.5px 0 var(--ink); margin-bottom: 16px; gap: 4px; overflow-x: auto;"
+  >
+    {#each subTabs as tab (tab.id)}
+      {@const isActive = recipeState.activeTab === tab.id}
+      <button
+        type="button"
+        class="recipe-sub-tab-btn {isActive ? 'active' : ''}"
+        onclick={() => (recipeState.activeTab = tab.id)}
+        style="flex: 1; min-width: 52px; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 8px; border-radius: 10px; border: {isActive ? '2px solid var(--ink)' : '2px solid transparent'}; background: {isActive ? '#0d9488' : 'transparent'}; color: {isActive ? '#ffffff' : '#64748b'}; cursor: pointer; font-family: inherit; font-size: 11px; font-weight: 800; transition: all 0.15s ease; box-shadow: {isActive ? '0 2px 0 var(--ink)' : 'none'};"
       >
-        <div>
-          {#if recipe.image}
-            <div style="width: 100%; height: 140px; border-radius: 10px; overflow: hidden; margin-bottom: 10px; border: 1px solid #cbd5e1;">
-              <img src={recipe.image} alt={recipe.title} style="width: 100%; height: 100%; object-fit: cover;" />
-            </div>
-          {/if}
-
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span style="font-size: 11px; font-weight: 800; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 999px;">
-              {recipe.category || 'Kitchen'}
-            </span>
-            <span style="font-size: 11px; font-weight: 700; color: #64748b;">
-              ⏱ {recipe.cookTime || recipe.prepTime || '30 mins'}
-            </span>
-          </div>
-
-          <div style="font-size: 15px; font-weight: 800; color: var(--ink); line-height: 1.3; margin-bottom: 8px;">
-            {recipe.title}
-          </div>
-
-          <div style="font-size: 12px; color: #64748b; line-height: 1.4;">
-            {(recipe.ingredients || []).length} ingredients • Serves {recipe.servings || '4'}
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
-          <button
-            type="button"
-            class="reading-tool-btn"
-            style="font-size: 11px; padding: 4px 10px; width: 100%;"
-          >
-            View Recipe 📖
-          </button>
-        </div>
-      </div>
+        <span style="font-size: 18px;">{tab.icon}</span>
+        <span style="white-space: nowrap;">{tab.label}</span>
+      </button>
     {/each}
   </div>
-</div>
 
-<!-- Recipe Detail Modal -->
-{#if recipeState.selectedRecipe}
-  {@const r = recipeState.selectedRecipe}
-  <div class="reading-modal-overlay">
-    <div class="reading-modal-card" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <div style="font-size: 17px; font-weight: 800; color: #fef08a;">{r.title}</div>
-        <button type="button" class="reading-tool-btn" onclick={() => (recipeState.selectedRecipe = null)}>✕</button>
+  <!-- SECTION CONTENT -->
+  {#if recipeState.activeTab === 'ingredients'}
+    <!-- Ingredients / Shopping List Mode -->
+    <div
+      class="ingredient-dropdown-card open"
+      style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 4px 0 var(--ink); overflow: hidden; margin-bottom: 16px;"
+    >
+      <div
+        class="ingredient-dropdown-header"
+        style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fefce8; border-bottom: 2.5px solid var(--ink);"
+      >
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 36px; height: 36px; background: #ffffff; border: 2px solid var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 0 var(--ink);">
+            🛒
+          </div>
+          <div>
+            <div style="font-size: 14.5px; font-weight: 800; color: var(--ink);">Have to Buy</div>
+            <div style="font-size: 11px; color: #64748b; font-weight: 600;">Shopping Checklist</div>
+          </div>
+        </div>
+        <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;">
+          {recipeState.missingIngredients.length}
+        </span>
       </div>
 
-      <div style="display: flex; gap: 12px; font-size: 12px; color: #94a3b8; margin-bottom: 14px;">
-        <span>🍽 Servings: <strong>{r.servings || '4'}</strong></span>
-        <span>⏱ Prep: <strong>{r.prepTime || '--'}</strong></span>
-        <span>🔥 Cook: <strong>{r.cookTime || '--'}</strong></span>
-      </div>
+      <div style="padding: 14px 16px;">
+        <!-- Add Item Row -->
+        <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+          <input
+            type="text"
+            placeholder="Add shopping item..."
+            bind:value={newShoppingItem}
+            onkeydown={(e) => { if (e.key === 'Enter') addCustomShoppingItem(); }}
+            style="flex: 1; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 13px; font-weight: 600;"
+          />
+          <button
+            type="button"
+            onclick={addCustomShoppingItem}
+            style="padding: 8px 14px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
+          >
+            ➕ Add
+          </button>
+        </div>
 
-      <!-- Ingredients Checklist -->
-      <div style="margin-bottom: 16px;">
-        <div style="font-size: 13px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
-          🛒 Ingredients (Check if you have or click to add to missing list):
+        <!-- Action bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <span style="font-size: 12px; font-weight: 700; color: #475569;">
+            Checklist ({recipeState.missingIngredients.length} items)
+          </span>
+          <div style="display: flex; gap: 6px;">
+            <button
+              type="button"
+              onclick={shareWhatsAppShopping}
+              title="Share to WhatsApp"
+              style="background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
+            >
+              💬
+            </button>
+            <button
+              type="button"
+              onclick={copyShoppingList}
+              title="Copy checklist"
+              style="background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
+            >
+              📋
+            </button>
+            <button
+              type="button"
+              onclick={() => recipeState.clearMissingIngredients()}
+              title="Clear all"
+              style="background: #fee2e2; color: #dc2626; border: 1.5px solid var(--ink); border-radius: 8px; padding: 0 8px; height: 30px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 1.5px 0 var(--ink);"
+            >
+              🗑️ Clear
+            </button>
+          </div>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 6px;">
-          {#each r.ingredients as ing}
-            {@const ingText = typeof ing === 'string' ? ing : ing.name || JSON.stringify(ing)}
-            {@const isMissing = recipeState.missingIngredients.includes(ingText)}
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 6px 10px; border-radius: 6px; font-size: 12px; color: #e2e8f0;">
-              <span>• {ingText}</span>
-              <button
-                type="button"
-                class="reading-tool-btn {isMissing ? 'active' : ''}"
-                onclick={() => recipeState.toggleMissingIngredient(ingText)}
-                style="font-size: 10.5px; padding: 2px 6px;"
-              >
-                {isMissing ? 'Missing ❌' : 'Got it ✓'}
-              </button>
-            </div>
-          {/each}
-        </div>
-      </div>
 
-      <!-- Instructions -->
-      <div>
-        <div style="font-size: 13px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
-          👨‍🍳 Method &amp; Instructions:
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-          {#each r.instructions as step, sIdx}
-            <div style="font-size: 12px; line-height: 1.5; color: #cbd5e1; background: #0f172a; padding: 8px 10px; border-radius: 6px;">
-              <strong style="color: #fef08a;">Step {sIdx + 1}:</strong> {step}
-            </div>
-          {/each}
-        </div>
+        {#if recipeState.missingIngredients.length === 0}
+          <div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 13px; font-style: italic;">
+            Your shopping checklist is empty! Tap ingredients inside recipes or add above.
+          </div>
+        {:else}
+          <div style="display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow-y: auto;">
+            {#each recipeState.missingIngredients as item, idx}
+              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px;">
+                <span style="font-size: 13px; font-weight: 700; color: var(--ink);">• {item}</span>
+                <button
+                  type="button"
+                  onclick={() => recipeState.removeMissingIngredient(idx)}
+                  style="background: transparent; border: none; cursor: pointer; font-size: 13px;"
+                >
+                  🗑️
+                </button>
+              </div>
+            {/each}
+          </div>
+        {/if}
       </div>
     </div>
-  </div>
-{/if}
+  {:else}
+    <!-- Regular Recipe Accordion Card -->
+    <div
+      class="ingredient-dropdown-card {isAccordionOpen ? 'open' : ''}"
+      style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 4px 0 var(--ink); overflow: hidden; margin-bottom: 16px;"
+    >
+      <!-- Accordion Header -->
+      <div
+        class="ingredient-dropdown-header"
+        onclick={toggleAccordion}
+        onkeydown={(e) => { if (e.key === 'Enter') toggleAccordion(); }}
+        role="button"
+        tabindex="0"
+        style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fefce8; border-bottom: {isAccordionOpen ? '2.5px solid var(--ink)' : 'none'}; cursor: pointer; user-select: none;"
+      >
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 36px; height: 36px; background: #ffffff; border: 2px solid var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 0 var(--ink);">
+            {currentTabIcon()}
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 14.5px; font-weight: 800; color: var(--ink);">
+              {currentTabLabel()}
+            </span>
+            <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800; color: var(--ink);">
+              {recipeState.filteredRecipes.length}
+            </span>
+          </div>
+        </div>
 
-<!-- Missing Ingredients Modal -->
-{#if showMissingModal}
-  <div class="reading-modal-overlay">
-    <div class="reading-modal-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <div style="font-size: 15px; font-weight: 800; color: #fef08a;">🛒 Missing Ingredients / Shopping List</div>
-        <button type="button" class="reading-tool-btn" onclick={() => (showMissingModal = false)}>✕</button>
+        <button
+          type="button"
+          class="ingredient-dropdown-chevron-box"
+          style="width: 28px; height: 28px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink);"
+        >
+          {isAccordionOpen ? '▲' : '▼'}
+        </button>
       </div>
 
-      {#if recipeState.missingIngredients.length === 0}
-        <p style="font-size: 12px; color: #94a3b8; text-align: center; padding: 20px 0;">
-          All set! No missing ingredients marked right now.
-        </p>
-      {:else}
-        <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; max-height: 250px; overflow-y: auto;">
-          {#each recipeState.missingIngredients as item}
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 6px 10px; border-radius: 6px; font-size: 12px; color: #f87171;">
-              <span>❌ {item}</span>
-              <button
-                type="button"
-                class="reading-tool-btn"
-                onclick={() => recipeState.toggleMissingIngredient(item)}
-                style="font-size: 10px; padding: 2px 6px;"
-              >
-                Remove
-              </button>
+      <!-- Accordion Body -->
+      {#if isAccordionOpen}
+        <div style="padding: 12px 14px; max-height: 600px; overflow-y: auto;">
+          {#if recipeState.filteredRecipes.length === 0}
+            <div style="text-align: center; padding: 32px 16px; color: #94a3b8; font-size: 13px; font-style: italic;">
+              No recipes found for this filter.
             </div>
-          {/each}
+          {:else}
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              {#each recipeState.filteredRecipes as { recipe, index } (recipe.id || index)}
+                {@const isExpanded = Boolean(expandedRecipeIds[recipe.id])}
+                <div
+                  class="recipe-index-item {recipe.veg ? 'is-veg' : ''} {recipe.favorite ? 'is-favorite' : ''} {recipe.mustTry ? 'is-must-try' : ''} {recipe.quick ? 'is-quick' : ''} {recipe.okay ? 'is-ok' : ''}"
+                  style="background: #fdfbf7; border: 2px solid var(--ink); border-radius: 14px; padding: 12px; box-shadow: 0 2.5px 0 var(--ink); transition: transform 0.1s ease;"
+                >
+                  <!-- Recipe Title -->
+                  <div
+                    onclick={() => toggleRecipeDetails(recipe.id)}
+                    onkeydown={(e) => { if (e.key === 'Enter') toggleRecipeDetails(recipe.id); }}
+                    role="button"
+                    tabindex="0"
+                    style="font-size: 15px; font-weight: 800; color: var(--ink); cursor: pointer; margin-bottom: 8px; line-height: 1.3;"
+                  >
+                    {recipe.title}
+                  </div>
+
+                  <!-- Action Buttons Row -->
+                  <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <!-- Veg button -->
+                    <button
+                      type="button"
+                      class="recipe-action-btn veg-btn {recipe.veg ? 'active' : ''}"
+                      onclick={() => recipeState.toggleVeg(index)}
+                      title={recipe.veg ? 'Vegetarian (Click to toggle)' : 'Mark as Vegetarian'}
+                      style="width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ink); background: {recipe.veg ? '#bbf7d0' : '#f8fafc'}; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
+                    >
+                      🥗
+                    </button>
+
+                    <!-- Favorite button -->
+                    <button
+                      type="button"
+                      class="recipe-action-btn fav-btn {recipe.favorite ? 'active' : ''}"
+                      onclick={() => recipeState.toggleFavorite(index)}
+                      title={recipe.favorite ? 'Favorited' : 'Add to Favorites'}
+                      style="width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ink); background: {recipe.favorite ? '#fef08a' : '#f8fafc'}; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
+                    >
+                      {recipe.favorite ? '⭐' : '☆'}
+                    </button>
+
+                    <!-- Must Try button -->
+                    <button
+                      type="button"
+                      class="recipe-action-btn must-try-btn {recipe.mustTry ? 'active' : ''}"
+                      onclick={() => recipeState.toggleMustTry(index)}
+                      title={recipe.mustTry ? 'Must Try' : 'Add to Must Try'}
+                      style="width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ink); background: {recipe.mustTry ? '#ffedd5' : '#f8fafc'}; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
+                    >
+                      🔥
+                    </button>
+
+                    <!-- Quick button -->
+                    <button
+                      type="button"
+                      class="recipe-action-btn quick-btn {recipe.quick ? 'active' : ''}"
+                      onclick={() => recipeState.toggleQuick(index)}
+                      title={recipe.quick ? 'Quick Recipe' : 'Mark as Quick Recipe'}
+                      style="width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ink); background: {recipe.quick ? '#e0f2fe' : '#f8fafc'}; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
+                    >
+                      ⚡
+                    </button>
+
+                    <!-- Okay button -->
+                    <button
+                      type="button"
+                      class="recipe-action-btn ok-btn {recipe.okay ? 'active' : ''}"
+                      onclick={() => recipeState.toggleOkay(index)}
+                      title={recipe.okay ? 'Okay / Normal' : 'Mark as Okay'}
+                      style="width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ink); background: {recipe.okay ? '#ede9fe' : '#f8fafc'}; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
+                    >
+                      👌
+                    </button>
+
+                    <!-- Edit button -->
+                    <button
+                      type="button"
+                      class="recipe-action-btn edit-btn"
+                      onclick={() => openEditModal(recipe, index)}
+                      title="Edit Recipe"
+                      style="width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ink); background: #f8fafc; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
+                    >
+                      ✏️
+                    </button>
+
+                    <!-- Delete button -->
+                    <button
+                      type="button"
+                      class="history-delete"
+                      onclick={() => handleDeleteRecipe(index, recipe.title)}
+                      title="Delete Recipe"
+                      style="width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ink); background: #fee2e2; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+
+                  <!-- Expanded Details -->
+                  {#if isExpanded}
+                    <div style="margin-top: 12px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1;">
+                      {#if recipe.url}
+                        <div style="margin-bottom: 10px;">
+                          <a
+                            href={recipe.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="display: inline-flex; align-items: center; gap: 6px; background: #0284c7; color: #ffffff; padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--ink); font-size: 12px; font-weight: 800; text-decoration: none; box-shadow: 0 1.5px 0 var(--ink);"
+                          >
+                            <span>▶ Watch Video</span>
+                            <span>↗</span>
+                          </a>
+                        </div>
+                      {/if}
+
+                      {#if (recipe.ingredients || []).length > 0}
+                        <div style="margin-bottom: 10px;">
+                          <div style="font-size: 12px; font-weight: 800; color: #475569; margin-bottom: 6px;">
+                            Ingredients (tap to add to shopping list):
+                          </div>
+                          <div style="display: flex; flex-direction: column; gap: 4px;">
+                            {#each recipe.ingredients as ing}
+                              {@const isMissing = recipeState.missingIngredients.includes(ing.trim())}
+                              <button
+                                type="button"
+                                onclick={() => recipeState.toggleMissingIngredient(ing)}
+                                style="text-align: left; background: {isMissing ? '#fef3c7' : '#ffffff'}; border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px 8px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; color: var(--ink);"
+                              >
+                                <span>{isMissing ? '🛒' : '▫'}</span>
+                                <span style="font-weight: {isMissing ? '700' : '500'};">{ing}</span>
+                              </button>
+                            {/each}
+                          </div>
+                        </div>
+                      {/if}
+
+                      {#if recipe.addedItems || recipe.changes}
+                        <div style="background: #f1f5f9; border-radius: 8px; padding: 8px 10px; font-size: 11.5px; color: #334155; margin-top: 8px;">
+                          {#if recipe.addedItems}
+                            <div><strong>Added Items:</strong> {recipe.addedItems}</div>
+                          {/if}
+                          {#if recipe.changes}
+                            <div><strong>Notes:</strong> {recipe.changes}</div>
+                          {/if}
+                        </div>
+                      {/if}
+                    </div>
+                  {/if}
+                </div>
+              {/each}
+            </div>
+          {/if}
+        </div>
+      {/if}
+    </div>
+  {/if}
+</div>
+
+<!-- Add / Edit Recipe Modal -->
+{#if showEditModal}
+  <div
+    class="nav-menu-overlay"
+    onclick={() => (showEditModal = false)}
+    onkeydown={(e) => { if (e.key === 'Escape') showEditModal = false; }}
+    role="button"
+    tabindex="-1"
+    style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999999; display: flex; align-items: center; justify-content: center; padding: 16px;"
+  >
+    <div
+      class="nav-menu-dropdown"
+      onclick={(e) => e.stopPropagation()}
+      onkeydown={(e) => e.stopPropagation()}
+      role="dialog"
+      tabindex="0"
+      style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; width: min(100%, 460px); max-height: 90vh; overflow-y: auto; padding: 20px; box-shadow: 0 6px 0 var(--ink);"
+    >
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+        <div style="font-size: 15px; font-weight: 800; color: var(--ink);">
+          {modalIndex >= 0 ? '✏️ Edit Recipe' : '➕ Add New Recipe'}
         </div>
         <button
           type="button"
-          class="reading-tool-btn"
-          onclick={() => recipeState.clearMissingIngredients()}
-          style="width: 100%; color: #f87171;"
+          onclick={() => (showEditModal = false)}
+          style="background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 12px; font-weight: 800;"
         >
-          Clear All Missing Items
+          ✕
         </button>
-      {/if}
-    </div>
-  </div>
-{/if}
+      </div>
 
-<!-- Add Recipe Modal -->
-{#if showAddModal}
-  <div class="reading-modal-overlay">
-    <div class="reading-modal-card" style="max-width: 500px; max-height: 90vh; overflow-y: auto;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <div style="font-size: 15px; font-weight: 800; color: #fef08a;">➕ Add Custom Recipe</div>
-        <button type="button" class="reading-tool-btn" onclick={() => (showAddModal = false)}>✕</button>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div>
+          <label for="recipeTitle" style="font-size: 11.5px; font-weight: 800; color: #475569; display: block; margin-bottom: 4px;">
+            Recipe Title *
+          </label>
+          <input
+            id="recipeTitle"
+            type="text"
+            bind:value={modalTitle}
+            placeholder="e.g. Crispy Honey Chicken"
+            style="width: 100%; padding: 8px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 13px; font-weight: 600; box-sizing: border-box;"
+          />
+        </div>
+
+        <div>
+          <label for="recipeUrl" style="font-size: 11.5px; font-weight: 800; color: #475569; display: block; margin-bottom: 4px;">
+            YouTube / Video Link
+          </label>
+          <input
+            id="recipeUrl"
+            type="text"
+            bind:value={modalUrl}
+            placeholder="https://youtube.com/..."
+            style="width: 100%; padding: 8px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 13px; font-weight: 600; box-sizing: border-box;"
+          />
+        </div>
+
+        <div>
+          <label for="recipeIngredients" style="font-size: 11.5px; font-weight: 800; color: #475569; display: block; margin-bottom: 4px;">
+            Ingredients (1 per line)
+          </label>
+          <textarea
+            id="recipeIngredients"
+            rows="5"
+            bind:value={modalIngredients}
+            placeholder="Chicken&#10;Soy sauce&#10;Honey..."
+            style="width: 100%; padding: 8px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12.5px; font-family: inherit; box-sizing: border-box;"
+          ></textarea>
+        </div>
+
+        <!-- Checkbox Options -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px;">
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" bind:checked={modalVeg} /> 🥗 Veg
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" bind:checked={modalFavorite} /> ⭐ Favorite
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" bind:checked={modalMustTry} /> 🔥 Must Try
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" bind:checked={modalQuick} /> ⚡ Quick
+          </label>
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" bind:checked={modalOkay} /> 👌 Okay
+          </label>
+        </div>
+
+        <div>
+          <label for="recipeChanges" style="font-size: 11.5px; font-weight: 800; color: #475569; display: block; margin-bottom: 4px;">
+            Notes &amp; Custom Changes
+          </label>
+          <textarea
+            id="recipeChanges"
+            rows="2"
+            bind:value={modalChanges}
+            placeholder="My personal tweaks..."
+            style="width: 100%; padding: 8px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12.5px; font-family: inherit; box-sizing: border-box;"
+          ></textarea>
+        </div>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div>
-          <label for="recipeTitleInput" style="font-size: 11px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 4px;">Recipe Title *</label>
-          <input id="recipeTitleInput" type="text" bind:value={newTitle} placeholder="e.g. Grandma's Apple Pie" style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #ffffff; box-sizing: border-box;" />
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <div>
-            <label for="recipeCatInput" style="font-size: 11px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 4px;">Category</label>
-            <select id="recipeCatInput" bind:value={newCategory} style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #ffffff; box-sizing: border-box;">
-              <option value="Dinner">Dinner</option>
-              <option value="Lunch">Lunch</option>
-              <option value="Breakfast">Breakfast</option>
-              <option value="Dessert">Dessert</option>
-              <option value="Snacks">Snacks</option>
-            </select>
-          </div>
-          <div>
-            <label for="recipeServingsInput" style="font-size: 11px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 4px;">Servings</label>
-            <input id="recipeServingsInput" type="text" bind:value={newServings} placeholder="e.g. 4" style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #ffffff; box-sizing: border-box;" />
-          </div>
-        </div>
-        <div>
-          <label for="recipeIngredientsInput" style="font-size: 11px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 4px;">Ingredients (1 per line) *</label>
-          <textarea id="recipeIngredientsInput" bind:value={newIngredients} rows="4" placeholder="2 cups flour&#10;1 cup sugar&#10;3 apples..." style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #ffffff; font-family: inherit; font-size: 12px; box-sizing: border-box;"></textarea>
-        </div>
-        <div>
-          <label for="recipeInstructionsInput" style="font-size: 11px; font-weight: 800; color: #cbd5e1; display: block; margin-bottom: 4px;">Instructions (1 step per line) *</label>
-          <textarea id="recipeInstructionsInput" bind:value={newInstructions} rows="4" placeholder="Preheat oven to 350F&#10;Mix dry ingredients...&#10;Bake for 35 mins" style="width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #475569; background: #0f172a; color: #ffffff; font-family: inherit; font-size: 12px; box-sizing: border-box;"></textarea>
-        </div>
-      </div>
-      <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px;">
-        <button type="button" class="reading-tool-btn" onclick={() => (showAddModal = false)}>Cancel</button>
-        <button type="button" class="reading-tool-btn active" onclick={handleCreateRecipe}>Save Recipe</button>
+
+      <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; border-top: 2px solid #e2e8f0; padding-top: 12px;">
+        <button
+          type="button"
+          onclick={() => (showEditModal = false)}
+          style="padding: 8px 14px; background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer;"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onclick={handleSaveRecipeModal}
+          style="padding: 8px 16px; background: #eab308; color: #141413; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
+        >
+          Save Recipe
+        </button>
       </div>
     </div>
   </div>
