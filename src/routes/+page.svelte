@@ -1,8 +1,6 @@
 <script>
   import { navigationState } from '$lib/stores/navigationState.svelte.js';
   import TopNavBar from '$lib/components/common/TopNavBar.svelte';
-  import NavigatorHub from '$lib/components/common/NavigatorHub.svelte';
-  import FloatingNavButton from '$lib/components/common/FloatingNavButton.svelte';
 
   // Modules
   import ReadingSection from '$lib/components/reading/ReadingSection.svelte';
@@ -26,12 +24,10 @@
   <TopNavBar />
 
   <div id="content-area">
-    {#if navigationState.activeTab === 'navigator'}
-      <NavigatorHub />
+    {#if navigationState.activeTab === 'schedule'}
+      <ScheduleSection />
     {:else if navigationState.activeTab === 'reading'}
       <ReadingSection />
-    {:else if navigationState.activeTab === 'schedule'}
-      <ScheduleSection />
     {:else if navigationState.activeTab === 'water'}
       <WaterWalkModule />
     {:else if navigationState.activeTab === 'week'}
@@ -59,9 +55,7 @@
     {:else if navigationState.activeTab === 'pdf'}
       <PdfFlipbookViewer />
     {:else}
-      <NavigatorHub />
+      <ScheduleSection />
     {/if}
   </div>
-
-  <FloatingNavButton />
 </div>

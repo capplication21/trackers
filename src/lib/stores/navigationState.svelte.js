@@ -1,33 +1,31 @@
 class NavigationStore {
-  activeTab = $state('navigator'); // Default to Navigator Hub (15 Apps menu)
-  previousTab = $state('schedule');
+  activeTab = $state('schedule'); // Default to daily schedule
+  previousTab = $state('water');
 
   constructor() {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash.replace('#', '').trim();
-      if (hash && hash !== '') {
+      if (hash && hash !== '' && hash !== 'navigator') {
         this.activeTab = hash;
       } else {
-        this.activeTab = 'navigator';
+        this.activeTab = 'schedule';
       }
 
       window.addEventListener('hashchange', () => {
         const newHash = window.location.hash.replace('#', '').trim();
-        if (newHash && newHash !== this.activeTab) {
-          if (this.activeTab !== 'navigator') {
-            this.previousTab = this.activeTab;
-          }
+        if (newHash && newHash !== this.activeTab && newHash !== 'navigator') {
+          this.previousTab = this.activeTab;
           this.activeTab = newHash;
-        } else if (!newHash) {
-          this.activeTab = 'navigator';
+        } else if (!newHash || newHash === 'navigator') {
+          this.activeTab = 'schedule';
         }
       });
     }
   }
 
   setTab(tab) {
-    if (!tab) tab = 'navigator';
-    if (this.activeTab !== 'navigator' && this.activeTab !== tab) {
+    if (!tab || tab === 'navigator') tab = 'schedule';
+    if (this.activeTab !== tab) {
       this.previousTab = this.activeTab;
     }
     this.activeTab = tab;

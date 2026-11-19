@@ -4,22 +4,21 @@
   let isMenuOpen = $state(false);
 
   const navItems = [
-    { id: 'navigator', icon: '🧭', badge: 'HUB', title: 'Navigator Hub' },
     { id: 'schedule', icon: '⏰', badge: 'DAILY', title: 'Schedule' },
-    { id: 'water', icon: '✅', badge: 'HABITS', title: 'Tracker' },
-    { id: 'reading', icon: '📚', badge: 'READING', title: 'Reading Book' },
+    { id: 'water', icon: '✅', badge: 'HABITS', title: 'Habit Tracker' },
     { id: 'week', icon: '📅', badge: '3X/WEEK', title: '3x/Week' },
     { id: 'history', icon: '📜', badge: 'ARCHIVE', title: 'History' },
-    { id: 'period', icon: '🩸', badge: 'HEALTH', title: 'Period' },
+    { id: 'period', icon: '🩸', badge: 'HEALTH', title: 'Period Tracker' },
     { id: 'recipe', icon: '🍳', badge: 'KITCHEN', title: 'Recipe Book' },
-    { id: 'english', icon: '🔤', badge: 'TOOLKIT', title: 'Toolkit' },
+    { id: 'english', icon: '🔤', badge: 'TOOLKIT', title: 'English Toolkit' },
     { id: 'englishtest', icon: '📝', badge: 'EXAM', title: 'English Test' },
     { id: 'mathtest', icon: '🧮', badge: 'MATHS', title: 'Math Test' },
     { id: 'notes', icon: '🤲', badge: 'DUAAS', title: 'Duaa Book' },
     { id: 'pdf', icon: '📖', badge: 'BOOKS', title: 'PDF Reader' },
     { id: 'summary', icon: '📊', badge: 'STATS', title: 'Summary' },
     { id: 'templates', icon: '📋', badge: 'TEMPLATES', title: 'Template Book' },
-    { id: 'adkar', icon: '📿', badge: 'ADKAR', title: 'Adkar' }
+    { id: 'adkar', icon: '📿', badge: 'ADKAR', title: 'Adkar' },
+    { id: 'reading', icon: '📚', badge: 'READING', title: 'Reading Book' }
   ];
 
   const currentItem = $derived(
@@ -34,22 +33,10 @@
 
 <header class="app-top-nav-bar">
   <div class="top-nav-inner">
-    {#if navigationState.activeTab !== 'navigator'}
-      <button
-        type="button"
-        class="nav-hub-back-btn"
-        onclick={() => navigationState.setTab('navigator')}
-        title="Back to Navigator Hub"
-      >
-        <span class="back-arrow">🧭</span>
-        <span class="hub-label">Hub</span>
-      </button>
-    {:else}
-      <div class="brand-badge">
-        <span class="brand-icon">🧭</span>
-        <span class="brand-title">NAVIGATOR</span>
-      </div>
-    {/if}
+    <div class="brand-badge">
+      <span class="brand-icon">🌟</span>
+      <span class="brand-title">TRACKER</span>
+    </div>
 
     <div class="current-section-badge">
       <span class="section-icon">{currentItem.icon}</span>
@@ -61,7 +48,7 @@
       class="nav-menu-toggle-btn"
       class:active={isMenuOpen}
       onclick={() => (isMenuOpen = !isMenuOpen)}
-      title="Toggle Navigation Menu"
+      title="Open All Apps Menu"
     >
       <span class="menu-icon">{isMenuOpen ? '✕' : '☰'}</span>
       <span class="menu-text">Menu</span>
@@ -85,13 +72,15 @@
       >
         <div class="dropdown-header">
           <div class="dropdown-title">
-            <span>🧭 Quick Navigation Menu</span>
-            <span class="app-count">{navItems.length} Apps</span>
+            <span class="title-icon">🧭</span>
+            <span>All Apps & Tools</span>
+            <span class="app-count">{navItems.length}</span>
           </div>
           <button
             type="button"
             class="dropdown-close-btn"
             onclick={() => (isMenuOpen = false)}
+            title="Close menu"
           >
             ✕
           </button>
@@ -136,33 +125,8 @@
     background: #ffffff;
     border: 2.5px solid var(--ink, #141413);
     border-radius: 14px;
-    padding: 6px 10px;
+    padding: 8px 12px;
     box-shadow: 0 3px 0 var(--ink, #141413);
-  }
-
-  .nav-hub-back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-    color: #ffffff;
-    border: 2px solid var(--ink, #141413);
-    border-radius: 999px;
-    padding: 5px 12px;
-    font-size: 12.5px;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 2px 0 var(--ink, #141413);
-    transition: transform 0.15s ease;
-  }
-
-  .nav-hub-back-btn:hover {
-    transform: translateY(-1.5px);
-  }
-
-  .nav-hub-back-btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 0 var(--ink, #141413);
   }
 
   .brand-badge {
@@ -173,44 +137,63 @@
     border: 2px solid var(--ink, #141413);
     border-radius: 999px;
     padding: 4px 10px;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 900;
     letter-spacing: 0.5px;
+    color: #141413;
+    flex-shrink: 0;
+  }
+
+  .brand-icon {
+    font-size: 13px;
   }
 
   .current-section-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 800;
     color: #1e1b4b;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 170px;
+    max-width: 200px;
+  }
+
+  .section-icon {
+    font-size: 15px;
   }
 
   .nav-menu-toggle-btn {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #f1f5f9;
-    color: var(--ink, #141413);
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: #ffffff;
     border: 2px solid var(--ink, #141413);
     border-radius: 999px;
-    padding: 5px 12px;
-    font-size: 12.5px;
+    padding: 6px 14px;
+    font-size: 13px;
     font-weight: 800;
     cursor: pointer;
     box-shadow: 0 2px 0 var(--ink, #141413);
     transition: all 0.15s ease;
+    flex-shrink: 0;
   }
 
-  .nav-menu-toggle-btn.active,
   .nav-menu-toggle-btn:hover {
-    background: #e2e8f0;
     transform: translateY(-1.5px);
+    box-shadow: 0 3.5px 0 var(--ink, #141413);
+  }
+
+  .nav-menu-toggle-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 var(--ink, #141413);
+  }
+
+  .nav-menu-toggle-btn.active {
+    background: #dc2626;
   }
 
   .nav-menu-overlay {
@@ -288,6 +271,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+  }
+
+  .dropdown-close-btn:hover {
+    background: #fee2e2;
+    color: #dc2626;
   }
 
   .dropdown-grid {
