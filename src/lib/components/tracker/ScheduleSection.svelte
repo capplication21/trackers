@@ -379,7 +379,17 @@
               </div>
             </div>
           </div>
-          <button type="button" class="page-back-btn" style="padding: 6px 13px; font-size: 11.5px; background: #0d9488; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800; cursor: pointer;">
+          <button
+            type="button"
+            class="page-back-btn"
+            onclick={(e) => {
+              e.stopPropagation();
+              if (typeof window !== 'undefined') {
+                window.open('https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK', '_blank');
+              }
+            }}
+            style="padding: 6px 13px; font-size: 11.5px; background: #0d9488; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800; cursor: pointer;"
+          >
             Course ↗
           </button>
         </div>

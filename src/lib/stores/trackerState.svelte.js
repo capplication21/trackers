@@ -21,15 +21,15 @@ class TrackerStore {
   
   // 3x/Week Zad and Understand Quran state
   zadSubjects = $state([
-    { id: 'aqeedah', name: 'Aqeedah (Islamic Creed)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/@academyzaden' },
+    { id: 'aqeedah', name: 'Aqeedah (Islamic Creed)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/playlist?list=PLDOc9rkFwfwA7LVnGN1E9CWhZZ0DL0VWm&si=1U_LLA39ZaJzn30F' },
     { id: 'fiqh', name: 'Fiqh (Islamic Jurisprudence)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/@academyzaden' },
     { id: 'seerah', name: 'Seerah (Prophetic Biography)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/@academyzaden' },
     { id: 'tarbiyah', name: 'Islamic Education & Tarbiyah', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/@academyzaden' }
   ]);
 
   uqSubjects = $state([
-    { id: 'quran_course_1', name: 'Understand Al-Qur\'an 50% Words', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://youtube.com/@understandquran' },
-    { id: 'quran_course_2', name: 'Grammar Made Easy Level 1', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://youtube.com/@understandquran' }
+    { id: 'quran_course_1', name: 'Understand Al-Qur\'an 50% Words', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK' },
+    { id: 'quran_course_2', name: 'Grammar Made Easy Level 1', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK' }
   ]);
 
   // Period Health
@@ -71,10 +71,24 @@ class TrackerStore {
 
     // Load Zad & UQ courses
     const savedZad = await storageBridge.getItem('zad_subjects_v1');
-    if (Array.isArray(savedZad)) this.zadSubjects = savedZad;
+    if (Array.isArray(savedZad)) {
+      this.zadSubjects = savedZad.map((s) => {
+        if (s.id === 'aqeedah' || (s.name && s.name.toLowerCase().includes('aqeedah'))) {
+          return { ...s, playlistUrl: 'https://youtube.com/playlist?list=PLDOc9rkFwfwA7LVnGN1E9CWhZZ0DL0VWm&si=1U_LLA39ZaJzn30F' };
+        }
+        return s;
+      });
+    }
 
     const savedUq = await storageBridge.getItem('uq_subjects_v1');
-    if (Array.isArray(savedUq)) this.uqSubjects = savedUq;
+    if (Array.isArray(savedUq)) {
+      this.uqSubjects = savedUq.map((s) => {
+        if (!s.playlistUrl || s.playlistUrl.includes('@understandquran')) {
+          return { ...s, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK' };
+        }
+        return s;
+      });
+    }
 
     // Load medicines
     const savedMeds = await storageBridge.getItem('medicines_config');
