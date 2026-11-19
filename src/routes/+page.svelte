@@ -1,5 +1,6 @@
 <script>
   import { navigationState } from '$lib/stores/navigationState.svelte.js';
+  import TopNavBar from '$lib/components/common/TopNavBar.svelte';
   import NavigatorHub from '$lib/components/common/NavigatorHub.svelte';
   import FloatingNavButton from '$lib/components/common/FloatingNavButton.svelte';
 
@@ -22,6 +23,8 @@
 </script>
 
 <div class="app-container">
+  <TopNavBar />
+
   <div id="content-area">
     {#if navigationState.activeTab === 'navigator'}
       <NavigatorHub />

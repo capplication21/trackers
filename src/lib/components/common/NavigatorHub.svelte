@@ -2,7 +2,6 @@
   import { navigationState } from '$lib/stores/navigationState.svelte.js';
 
   const hubCards = [
-    { id: 'reading', icon: '📚', badge: 'READING', title: 'Reading Book' },
     { id: 'schedule', icon: '⏰', badge: 'DAILY', title: 'Schedule' },
     { id: 'water', icon: '✅', badge: 'HABITS', title: 'Tracker' },
     { id: 'week', icon: '📅', badge: '3X/WEEK', title: '3x/Week' },
@@ -16,7 +15,8 @@
     { id: 'pdf', icon: '📖', badge: 'BOOKS', title: 'PDF Reader' },
     { id: 'summary', icon: '📊', badge: 'STATS', title: 'Summary' },
     { id: 'templates', icon: '📋', badge: 'TEMPLATES', title: 'Template Book' },
-    { id: 'adkar', icon: '📿', badge: 'ADKAR', title: 'Adkar' }
+    { id: 'adkar', icon: '📿', badge: 'ADKAR', title: 'Adkar' },
+    { id: 'reading', icon: '📚', badge: 'READING', title: 'Reading Book' }
   ];
 </script>
 

@@ -1545,8 +1545,8 @@
         position: fixed;
         bottom: 18px;
         right: 18px;
-        z-index: 9999;
-        display: none;
+        z-index: 999999;
+        display: inline-flex !important;
         align-items: center;
         gap: 8px;
         background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
