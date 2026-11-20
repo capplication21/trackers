@@ -17,21 +17,10 @@
     1 /* Epilogue */
   );
 
-  const pageInfoText = $derived.by(() => {
-    const page = readingState.currentPage;
-    if (page === 0) return '📖 Cover Page';
-    if (page === 1) return '📜 Dedication & Title';
-    if (page === 2) return '📑 Table of Contents';
-    if (page >= totalPages - 1) return '✨ Epilogue & Reflection';
-    const chNum = page - 2;
-    return `📖 Chapter ${chNum} of ${story.pages.length}`;
-  });
-
   const savedBookmark = $derived(readingState.getStoryBookmark(story.id));
-  const isCurrentPageBookmarked = $derived(readingState.isPageBookmarked(story.id, readingState.currentPage));
 
-  async function handleToggleBookmark() {
-    await readingState.toggleBookmark(story.id, readingState.currentPage);
+  async function handleTogglePageBookmark(pageIdx) {
+    await readingState.toggleBookmark(story.id, pageIdx);
   }
 
   async function mountBook() {
@@ -75,6 +64,7 @@
         mobileScrollSupport: false,
         usePortrait: isMobile,
         flippingTime: 500,
+        useMouseEvents: false,
         startPage: Math.max(0, readingState.currentPage || 0)
       });
 
@@ -118,13 +108,42 @@
     }
   }
 
-  function toggleFullscreen() {
-    if (!stageWrapper) return;
-    if (!document.fullscreenElement) {
-      if (stageWrapper.requestFullscreen) stageWrapper.requestFullscreen();
-    } else {
-      if (document.exitFullscreen) document.exitFullscreen();
+  function handleBookClick(event) {
+    // If the click originated from an interactive element (buttons, links, bookmark triggers), let it do its work
+    if (event.target.closest('button, a, input, select, textarea, .reading-bookmark-ribbon, .reading-page-bm-btn')) {
+      return;
     }
+
+    if (!bookElement) return;
+    const rect = bookElement.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+
+    // Closed cover (Page 0) -> click anywhere flips next to open the book
+    if (readingState.currentPage === 0) {
+      handleFlipNext();
+      return;
+    }
+
+    // Last page / Epilogue -> click flips back
+    if (readingState.currentPage >= totalPages - 1) {
+      handleFlipPrev();
+      return;
+    }
+
+    // Open spread:
+    // Left click on page (left half) flips back to previous page
+    // Right click on page (right half) flips forward to next page
+    if (clickX < rect.width / 2) {
+      handleFlipPrev();
+    } else {
+      handleFlipNext();
+    }
+  }
+
+  function handleContextMenu(event) {
+    // Prevent default context menu on book, and support secondary mouse click to go next
+    event.preventDefault();
+    handleFlipNext();
   }
 
   onMount(() => {
@@ -157,53 +176,16 @@
 </script>
 
 <div class="reading-stage-wrapper" id="readingFlipbookCard" bind:this={stageWrapper}>
-  <!-- Stage Top Toolbar -->
-  <div class="reading-stage-top-controls">
-    <div class="reading-stage-page-info" id="readingStagePageIndicator">
-      {pageInfoText}
-    </div>
-
-    <div class="reading-top-tool-group">
-      <button
-        type="button"
-        class="reading-tool-btn {isCurrentPageBookmarked ? 'active' : ''}"
-        onclick={handleToggleBookmark}
-        title={isCurrentPageBookmarked ? 'Remove bookmark from this page' : 'Bookmark this page'}
-        style="display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 12px; {isCurrentPageBookmarked ? 'background: #f59e0b; color: #141413; border: 1.5px solid #d97706;' : ''}"
-      >
-        <span>{isCurrentPageBookmarked ? '🔖' : '📑'}</span>
-        <span>{isCurrentPageBookmarked ? 'Bookmarked' : 'Bookmark Page'}</span>
-      </button>
-
-      {#if savedBookmark !== null && savedBookmark !== readingState.currentPage}
-        <button
-          type="button"
-          class="reading-tool-btn"
-          onclick={() => flipTo(savedBookmark)}
-          title="Jump to your saved bookmark"
-          style="display: inline-flex; align-items: center; gap: 5px; font-weight: 800; font-size: 11.5px; background: #fef08a; color: #854d0e; border: 1.5px solid #ca8a04;"
-        >
-          <span>📌</span>
-          <span>Go to Bookmark</span>
-        </button>
-      {/if}
-    </div>
-  </div>
-
-  <!-- Flipbook Stage with Floating Arrows -->
-  <div class="reading-flipbook-container">
-    <button
-      type="button"
-      class="reading-flip-arrow-btn reading-flip-arrow-prev"
-      id="readingFlipArrowPrev"
-      disabled={readingState.currentPage <= 0}
-      onclick={handleFlipPrev}
-      title="Flip to Previous Page"
-    >
-      ◀
-    </button>
-
-    <div id="readingStBookElement" bind:this={bookElement}>
+  <!-- Flipbook Stage with Left/Right Click Page Turning -->
+  <div
+    class="reading-flipbook-container"
+    onclick={handleBookClick}
+    oncontextmenu={handleContextMenu}
+    role="region"
+    aria-label="Storybook Reader"
+    style="position: relative; user-select: none;"
+  >
+    <div id="readingStBookElement" bind:this={bookElement} style="cursor: pointer;">
       <!-- Page 0: Front Hardcover -->
       <div
         class="reading-flip-page reading-page-cover-front"
@@ -225,12 +207,29 @@
               ★ {story.level} • {story.pages.length} Chapters ★
             </span>
           </div>
+
+          {#if savedBookmark !== null && savedBookmark > 0}
+            <div style="margin-top:16px;">
+              <button
+                type="button"
+                class="reading-cover-resume-btn"
+                onclick={(e) => {
+                  e.stopPropagation();
+                  flipTo(savedBookmark);
+                }}
+                style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; background: #f59e0b; color: #141413; border: 1.5px solid #d97706; border-radius: 999px; font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"
+                title="Jump directly to your saved bookmark"
+              >
+                <span>🔖 Resume from Bookmark (Page {savedBookmark})</span>
+              </button>
+            </div>
+          {/if}
         </div>
 
         <div
           style="border-top:1px solid rgba(212,175,55,0.3);padding-top:10px;text-align:center;font-size:10.5px;color:#fef3c7;opacity:0.85;"
         >
-          Click right edge or "Next ▶" to flip open • English2Flow
+          Click page to open • English2Flow
         </div>
       </div>
 
@@ -238,13 +237,41 @@
       <div class="reading-flip-page">
         <div class="reading-page-inner">
           {#if savedBookmark === 1}
-            <div class="reading-bookmark-ribbon" title="Your Bookmark">
+            <div
+              class="reading-bookmark-ribbon"
+              role="button"
+              tabindex="0"
+              onclick={(e) => {
+                e.stopPropagation();
+                handleTogglePageBookmark(1);
+              }}
+              onkeydown={(e) => {
+                if (e.key === 'Enter') {
+                  e.stopPropagation();
+                  handleTogglePageBookmark(1);
+                }
+              }}
+              title="Bookmarked! Click to remove bookmark"
+            >
               <span>🔖</span>
             </div>
           {/if}
           <div class="reading-page-header">
             <span>Frontispiece</span>
-            <span>English2Flow</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span>English2Flow</span>
+              <button
+                type="button"
+                class="reading-page-bm-btn"
+                onclick={(e) => {
+                  e.stopPropagation();
+                  handleTogglePageBookmark(1);
+                }}
+                title={savedBookmark === 1 ? 'Remove bookmark' : 'Bookmark this page'}
+              >
+                {savedBookmark === 1 ? '🔖' : '📑'}
+              </button>
+            </div>
           </div>
 
           <div style="text-align:center;margin:auto 0;padding:14px 8px;">
@@ -268,7 +295,7 @@
             <div
               style="font-size:11px;color:#854d0e;background:#fefce8;padding:8px 12px;border-radius:8px;border:1px dashed #ca8a04;margin-top:14px;"
             >
-              🎧 <strong>Reading Tip:</strong> Hit <em>Watch Video</em> or <em>Audio Bar</em> above to listen to native pronunciation while following the words.
+              🎧 <strong>Reading Tip:</strong> Follow the English story line by line. Click the right page to turn forward!
             </div>
           </div>
 
@@ -283,13 +310,41 @@
       <div class="reading-flip-page">
         <div class="reading-page-inner">
           {#if savedBookmark === 2}
-            <div class="reading-bookmark-ribbon" title="Your Bookmark">
+            <div
+              class="reading-bookmark-ribbon"
+              role="button"
+              tabindex="0"
+              onclick={(e) => {
+                e.stopPropagation();
+                handleTogglePageBookmark(2);
+              }}
+              onkeydown={(e) => {
+                if (e.key === 'Enter') {
+                  e.stopPropagation();
+                  handleTogglePageBookmark(2);
+                }
+              }}
+              title="Bookmarked! Click to remove bookmark"
+            >
               <span>🔖</span>
             </div>
           {/if}
           <div class="reading-page-header">
             <span>Contents</span>
-            <span>Table of Chapters</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span>Table of Chapters</span>
+              <button
+                type="button"
+                class="reading-page-bm-btn"
+                onclick={(e) => {
+                  e.stopPropagation();
+                  handleTogglePageBookmark(2);
+                }}
+                title={savedBookmark === 2 ? 'Remove bookmark' : 'Bookmark this page'}
+              >
+                {savedBookmark === 2 ? '🔖' : '📑'}
+              </button>
+            </div>
           </div>
 
           <div style="flex:1;overflow-y:auto;padding-right:4px;">
@@ -303,8 +358,16 @@
               {#each story.pages as p, pIdx}
                 {@const targetFlipIndex = pIdx + 3}
                 <div
-                  onclick={() => flipTo(targetFlipIndex)}
-                  onkeydown={(e) => { if (e.key === 'Enter') flipTo(targetFlipIndex); }}
+                  onclick={(e) => {
+                    e.stopPropagation();
+                    flipTo(targetFlipIndex);
+                  }}
+                  onkeydown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.stopPropagation();
+                      flipTo(targetFlipIndex);
+                    }
+                  }}
                   tabindex="0"
                   role="button"
                   style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;transition:background 0.12s ease;"
@@ -333,13 +396,41 @@
         <div class="reading-flip-page">
           <div class="reading-page-inner">
             {#if savedBookmark === pageFlipIndex}
-              <div class="reading-bookmark-ribbon" title="Your Bookmark">
+              <div
+                class="reading-bookmark-ribbon"
+                role="button"
+                tabindex="0"
+                onclick={(e) => {
+                  e.stopPropagation();
+                  handleTogglePageBookmark(pageFlipIndex);
+                }}
+                onkeydown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.stopPropagation();
+                    handleTogglePageBookmark(pageFlipIndex);
+                  }
+                }}
+                title="Bookmarked! Click to remove bookmark"
+              >
                 <span>🔖</span>
               </div>
             {/if}
             <div class="reading-page-header">
               <span>{story.title.split(':')[0]}</span>
-              <span>Chapter {humanPageNum} of {story.pages.length}</span>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span>Chapter {humanPageNum} of {story.pages.length}</span>
+                <button
+                  type="button"
+                  class="reading-page-bm-btn"
+                  onclick={(e) => {
+                    e.stopPropagation();
+                    handleTogglePageBookmark(pageFlipIndex);
+                  }}
+                  title={savedBookmark === pageFlipIndex ? 'Remove bookmark' : 'Bookmark this page'}
+                >
+                  {savedBookmark === pageFlipIndex ? '🔖' : '📑'}
+                </button>
+              </div>
             </div>
 
             <div class="reading-chapter-title">
@@ -386,13 +477,41 @@
       <div class="reading-flip-page">
         <div class="reading-page-inner">
           {#if savedBookmark === story.pages.length + 3}
-            <div class="reading-bookmark-ribbon" title="Your Bookmark">
+            <div
+              class="reading-bookmark-ribbon"
+              role="button"
+              tabindex="0"
+              onclick={(e) => {
+                e.stopPropagation();
+                handleTogglePageBookmark(story.pages.length + 3);
+              }}
+              onkeydown={(e) => {
+                if (e.key === 'Enter') {
+                  e.stopPropagation();
+                  handleTogglePageBookmark(story.pages.length + 3);
+                }
+              }}
+              title="Bookmarked! Click to remove bookmark"
+            >
               <span>🔖</span>
             </div>
           {/if}
           <div class="reading-page-header">
             <span>Epilogue</span>
-            <span>Reflection &amp; Moral</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span>Reflection &amp; Moral</span>
+              <button
+                type="button"
+                class="reading-page-bm-btn"
+                onclick={(e) => {
+                  e.stopPropagation();
+                  handleTogglePageBookmark(story.pages.length + 3);
+                }}
+                title={savedBookmark === story.pages.length + 3 ? 'Remove bookmark' : 'Bookmark this page'}
+              >
+                {savedBookmark === story.pages.length + 3 ? '🔖' : '📑'}
+              </button>
+            </div>
           </div>
 
           <div style="flex:1;overflow-y:auto;padding-right:4px;">
@@ -423,7 +542,10 @@
               <button
                 type="button"
                 class="reading-tool-btn active"
-                onclick={() => flipTo(0)}
+                onclick={(e) => {
+                  e.stopPropagation();
+                  flipTo(0);
+                }}
                 style="padding:8px 16px;font-size:12px;display:inline-flex;align-items:center;gap:6px;"
               >
                 ↺ Re-read from Cover
@@ -438,16 +560,5 @@
         </div>
       </div>
     </div>
-
-    <button
-      type="button"
-      class="reading-flip-arrow-btn reading-flip-arrow-next"
-      id="readingFlipArrowNext"
-      disabled={readingState.currentPage >= totalPages - 1}
-      onclick={handleFlipNext}
-      title="Flip to Next Page"
-    >
-      ▶
-    </button>
   </div>
 </div>

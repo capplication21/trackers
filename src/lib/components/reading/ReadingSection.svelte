@@ -16,7 +16,9 @@
   </div>
 
   <div id="readingBookContainer">
-    <ReadingBookshelf />
+    {#if readingState.allStories.length > 1}
+      <ReadingBookshelf />
+    {/if}
     <ReadingCompanionPlayer />
     <ReadingFlipbook />
   </div>

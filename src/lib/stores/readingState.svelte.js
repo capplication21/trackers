@@ -26,7 +26,7 @@ class ReadingStore {
     // Load persistent state
     const saved = await storageBridge.getItem('english2flow_reading_state');
     if (saved && typeof saved === 'object') {
-      if (saved.storyId) this.storyId = saved.storyId;
+      this.storyId = 'story_linda'; // Only "A Mother's Secret: Love & Sacrifice" in book form
       if (typeof saved.currentPage === 'number') this.currentPage = saved.currentPage;
       if (typeof saved.fontSize === 'number') this.fontSize = saved.fontSize;
       if (typeof saved.isSoundEnabled === 'boolean') this.isSoundEnabled = saved.isSoundEnabled;
@@ -36,11 +36,6 @@ class ReadingStore {
       if (saved.customVideoUrls) this.customVideoUrls = saved.customVideoUrls;
     }
 
-    const savedUserStories = await storageBridge.getItem('english2flow_user_stories');
-    if (Array.isArray(savedUserStories)) {
-      this.userStories = savedUserStories;
-    }
-
     const savedBookmarks = await storageBridge.getItem('english2flow_bookmarks');
     if (savedBookmarks && typeof savedBookmarks === 'object') {
       this.bookmarks = savedBookmarks;
@@ -48,7 +43,7 @@ class ReadingStore {
   }
 
   get allStories() {
-    return [...builtinStories, ...this.userStories];
+    return builtinStories.filter(s => s.id === 'story_linda');
   }
 
   get currentStory() {
