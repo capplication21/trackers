@@ -27,6 +27,61 @@
   let viewerEmbedUrl = $derived(viewerRecipe?.url ? getYouTubeEmbedUrl(viewerRecipe.url) : '');
   let viewerNewItem = $state('');
 
+  // In-Page YouTube Recipe Player & Note Page (opens on the same page)
+  let activePlayerRecipe = $state(null);
+  let activePlayerIndex = $state(-1);
+  let isVideoMinimized = $state(false);
+  let activeRecipeNotes = $state('');
+  let activeRecipeCustomIng = $state('');
+  let isNotesSaved = $state(false);
+
+  let inPageEmbedUrl = $derived(
+    activePlayerRecipe?.url ? getYouTubeEmbedUrl(activePlayerRecipe.url) : ''
+  );
+
+  function openInPageRecipePlayer(recipe, index) {
+    activePlayerRecipe = recipe;
+    activePlayerIndex = index;
+    isVideoMinimized = false;
+    activeRecipeNotes = recipe.changes || '';
+    activeRecipeCustomIng = '';
+    isNotesSaved = false;
+
+    // Smooth scroll to the in-page player
+    setTimeout(() => {
+      const el = document.getElementById('inpageRecipePlayer');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  }
+
+  function closeInPageRecipePlayer() {
+    activePlayerRecipe = null;
+    activePlayerIndex = -1;
+  }
+
+  function toggleVideoMinimize() {
+    isVideoMinimized = !isVideoMinimized;
+  }
+
+  async function saveActiveRecipeNotes() {
+    if (!activePlayerRecipe || activePlayerIndex < 0) return;
+    await recipeState.updateRecipe(activePlayerIndex, {
+      changes: activeRecipeNotes.trim()
+    });
+    isNotesSaved = true;
+    setTimeout(() => {
+      isNotesSaved = false;
+    }, 2000);
+  }
+
+  async function addCustomIngToBuy() {
+    if (!activeRecipeCustomIng.trim()) return;
+    await recipeState.toggleMissingIngredient(activeRecipeCustomIng.trim());
+    activeRecipeCustomIng = '';
+  }
+
   function openRecipeViewer(recipe, index) {
     viewerRecipe = recipe;
     viewerIndex = index;
@@ -36,6 +91,8 @@
 
   function shareRecipeNotes(recipe) {
     if (!recipe || typeof window === 'undefined') return;
+    const notesText =
+      recipe === activePlayerRecipe ? activeRecipeNotes : recipe.changes || '';
     const missing = (recipe.ingredients || []).filter((ing) =>
       recipeState.missingIngredients.includes(ingredientName(ing).trim())
     );
@@ -46,7 +103,7 @@
       (missing.length > 0
         ? missing.map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')
         : (recipe.ingredients || []).map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')) +
-      (recipe.changes ? `\n\n📝 *Notes:* ${recipe.changes}` : '') +
+      (notesText ? `\n\n📝 *Notes:* ${notesText}` : '') +
       (recipe.addedItems ? `\n🧂 *Added items:* ${recipe.addedItems}` : '')
     );
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
@@ -54,6 +111,8 @@
 
   function copyRecipeNotes(recipe) {
     if (!recipe || typeof navigator === 'undefined' || !navigator.clipboard) return;
+    const notesText =
+      recipe === activePlayerRecipe ? activeRecipeNotes : recipe.changes || '';
     const missing = (recipe.ingredients || []).filter((ing) =>
       recipeState.missingIngredients.includes(ingredientName(ing).trim())
     );
@@ -64,7 +123,7 @@
       (missing.length > 0
         ? missing.map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')
         : (recipe.ingredients || []).map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')) +
-      (recipe.changes ? `\n\n📝 Notes: ${recipe.changes}` : '') +
+      (notesText ? `\n\n📝 Notes: ${notesText}` : '') +
       (recipe.addedItems ? `\n🧂 Added items: ${recipe.addedItems}` : '');
 
     navigator.clipboard.writeText(text);
@@ -537,6 +596,209 @@
 
       {#if isUncommonOpen}
         <div style="padding: 14px 16px;">
+          <!-- In-Page YouTube Video Player & Note Page (opens on the same page!) -->
+          {#if activePlayerRecipe}
+            <div id="inpageRecipePlayer" class="inpage-player-card">
+              <!-- Dark Header Bar like Quran screenshot -->
+              <div class="inpage-yt-header">
+                <div class="inpage-yt-title">
+                  <span class="inpage-yt-play-icon">▶</span>
+                  <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    YouTube: {activePlayerRecipe.title}
+                  </span>
+                </div>
+                <div class="inpage-yt-actions">
+                  {#if activePlayerRecipe.url}
+                    <button
+                      type="button"
+                      class="inpage-ctrl-btn"
+                      onclick={toggleVideoMinimize}
+                    >
+                      {isVideoMinimized ? '▲ Show Video' : '▼ Minimize Video'}
+                    </button>
+                    <a
+                      class="inpage-open-link"
+                      href={activePlayerRecipe.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Open on YouTube in new tab"
+                    >
+                      Open ↗
+                    </a>
+                  {/if}
+                  <button
+                    type="button"
+                    class="inpage-close-btn"
+                    onclick={closeInPageRecipePlayer}
+                    title="Close Video & Notes"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              <!-- Embedded Video (when not minimized) -->
+              {#if !isVideoMinimized}
+                <div class="inpage-video-wrapper">
+                  {#if inPageEmbedUrl}
+                    <iframe
+                      src={inPageEmbedUrl}
+                      title={activePlayerRecipe.title}
+                      class="inpage-yt-iframe"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  {:else}
+                    <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #94a3b8; font-size: 13px; gap: 8px; padding: 20px;">
+                      <span>No YouTube video URL set for this recipe yet.</span>
+                      <button
+                        type="button"
+                        onclick={() => openEditModal(activePlayerRecipe, activePlayerIndex)}
+                        style="padding: 5px 12px; background: #eab308; color: #141413; border: 1.5px solid var(--ink); border-radius: 6px; font-weight: 800; font-size: 11px; cursor: pointer;"
+                      >
+                        ✏️ Add Video URL
+                      </button>
+                    </div>
+                  {/if}
+                </div>
+              {/if}
+
+              <!-- Note Page Down Below Player -->
+              <div class="inpage-note-page">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1.5px dashed #cbd5e1; padding-bottom: 8px;">
+                  <div style="font-size: 14px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 6px;">
+                    <span>📝 Note Page:</span>
+                    <span style="color: #0284c7;">{activePlayerRecipe.title}</span>
+                  </div>
+                  {#if isNotesSaved}
+                    <span style="font-size: 11px; font-weight: 800; color: #16a34a; background: #dcfce7; border: 1px solid #86efac; padding: 2px 8px; border-radius: 999px;">
+                      ✅ Note Saved!
+                    </span>
+                  {/if}
+                </div>
+
+                <!-- 🛒 Ingredients to buy (tap to add to checklist) -->
+                <div style="margin-bottom: 12px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 12px;">
+                  <div style="font-size: 11.5px; font-weight: 800; color: #475569; margin-bottom: 6px;">
+                    🛒 Ingredients (Tap to add/remove from "Have to Buy" shopping list):
+                  </div>
+                  {#if (activePlayerRecipe.ingredients || []).length > 0}
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+                      {#each activePlayerRecipe.ingredients as ing}
+                        {@const cleanName = ingredientName(ing).trim()}
+                        {@const isMarked = recipeState.missingIngredients.includes(cleanName)}
+                        <button
+                          type="button"
+                          onclick={() => recipeState.toggleMissingIngredient(cleanName)}
+                          style="display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 8px; font-size: 11.5px; cursor: pointer; font-family: inherit; font-weight: {isMarked ? '800' : '600'}; border: {isMarked ? '1.5px solid #d97706' : '1.5px solid #cbd5e1'}; background: {isMarked ? '#fef3c7' : '#ffffff'}; color: {isMarked ? '#92400e' : 'var(--ink)'}; box-shadow: {isMarked ? '0 1px 2px rgba(217, 119, 6, 0.2)' : 'none'}; transition: all 0.15s ease;"
+                          title={isMarked ? 'In shopping list (tap to remove)' : 'Tap to add to shopping list'}
+                        >
+                          <span>{isMarked ? '🛒' : '➕'}</span>
+                          <span>{cleanName}</span>
+                          {#if isMarked}
+                            <span style="font-size: 9px; opacity: 0.8;">(buying)</span>
+                          {/if}
+                        </button>
+                      {/each}
+                    </div>
+                  {/if}
+
+                  <!-- Extra item input -->
+                  <div style="display: flex; gap: 6px;">
+                    <input
+                      type="text"
+                      placeholder="Note down an extra ingredient to buy..."
+                      bind:value={activeRecipeCustomIng}
+                      onkeydown={(e) => { if (e.key === 'Enter') addCustomIngToBuy(); }}
+                      style="flex: 1; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12px; font-weight: 600;"
+                    />
+                    <button
+                      type="button"
+                      onclick={addCustomIngToBuy}
+                      style="padding: 6px 12px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 11.5px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); white-space: nowrap;"
+                    >
+                      ➕ Add to Buy
+                    </button>
+                  </div>
+                </div>
+
+                <!-- ✍️ Notes Textarea -->
+                <div style="margin-bottom: 12px;">
+                  <label for="activeRecipeNotesTextarea" style="font-size: 11.5px; font-weight: 800; color: #475569; display: block; margin-bottom: 4px;">
+                    ✍️ Recipe Notes &amp; Cooking Steps:
+                  </label>
+                  <textarea
+                    id="activeRecipeNotesTextarea"
+                    rows="3"
+                    bind:value={activeRecipeNotes}
+                    placeholder="Note down steps or secret tips while watching video..."
+                    style="width: 100%; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 12.5px; font-family: inherit; box-sizing: border-box; background: #ffffff; line-height: 1.4;"
+                  ></textarea>
+                </div>
+
+                <!-- Actions: Save, Share, Copy, Edit, Delete, Close -->
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button
+                      type="button"
+                      onclick={saveActiveRecipeNotes}
+                      style="padding: 6px 14px; background: #eab308; color: #141413; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); display: inline-flex; align-items: center; gap: 5px;"
+                    >
+                      <span>💾</span> Save Note
+                    </button>
+                    <button
+                      type="button"
+                      onclick={() => shareRecipeNotes(activePlayerRecipe)}
+                      style="padding: 6px 12px; background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); display: inline-flex; align-items: center; gap: 5px;"
+                      title="Share recipe notes to WhatsApp"
+                    >
+                      <span>💬</span> Share
+                    </button>
+                    <button
+                      type="button"
+                      onclick={() => copyRecipeNotes(activePlayerRecipe)}
+                      style="padding: 6px 12px; background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); display: inline-flex; align-items: center; gap: 5px;"
+                      title="Copy notes"
+                    >
+                      <span>📋</span> Copy
+                    </button>
+                  </div>
+
+                  <div style="display: flex; gap: 6px; align-items: center;">
+                    <button
+                      type="button"
+                      class="action-icon-btn edit-icon-btn"
+                      onclick={() => openEditModal(activePlayerRecipe, activePlayerIndex)}
+                      title="Edit Recipe Details"
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      type="button"
+                      class="action-icon-btn delete-icon-btn"
+                      onclick={async () => {
+                        const title = activePlayerRecipe.title;
+                        const idx = activePlayerIndex;
+                        closeInPageRecipePlayer();
+                        await handleDeleteRecipe(idx, title);
+                      }}
+                      title="Delete Recipe"
+                    >
+                      🗑️
+                    </button>
+                    <button
+                      type="button"
+                      onclick={closeInPageRecipePlayer}
+                      style="padding: 5px 12px; background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 11.5px; cursor: pointer;"
+                    >
+                      Close ✕
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {/if}
+
           <!-- Search Row -->
           <div style="margin-bottom: 14px;">
             <input
@@ -570,12 +832,12 @@
                   <div class="uncommon-recipe-links" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1;">
                     {#each entry.recipes as r (r.recipeIndex)}
                       <div class="uncommon-recipe-item-pill">
-                        <!-- Recipe Title & Video Trigger -->
+                        <!-- Recipe Title & Video Trigger (Opens on the same page!) -->
                         <button
                           type="button"
                           class="uncommon-recipe-tag-text"
-                          onclick={(e) => { e.preventDefault(); e.stopPropagation(); openRecipeViewer(r.recipe, r.recipeIndex); }}
-                          title="Watch YouTube, Note Ingredients & Share"
+                          onclick={(e) => { e.preventDefault(); e.stopPropagation(); openInPageRecipePlayer(r.recipe, r.recipeIndex); }}
+                          title="Watch YouTube Video & Note Down on Same Page"
                         >
                           <span style="font-size: 13px;">📖</span>
                           <span>{r.title}</span>
@@ -1213,6 +1475,120 @@
 {/if}
 
 <style>
+  /* In-Page YouTube Video & Note Page Player */
+  .inpage-player-card {
+    background: #0f172a;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 2px solid var(--ink, #141413);
+    box-shadow: 0 4px 0 var(--ink, #141413);
+  }
+
+  .inpage-yt-header {
+    background: #0f172a;
+    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .inpage-yt-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    min-width: 0;
+  }
+
+  .inpage-yt-play-icon {
+    background: #2563eb;
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  .inpage-yt-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .inpage-ctrl-btn {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #93c5fd;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .inpage-ctrl-btn:hover {
+    background: #334155;
+    color: #ffffff;
+  }
+
+  .inpage-open-link {
+    color: #cbd5e1;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .inpage-open-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .inpage-close-btn {
+    background: #334155;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inpage-close-btn:hover {
+    background: #ef4444;
+  }
+
+  .inpage-video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000000;
+  }
+
+  .inpage-yt-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .inpage-note-page {
+    background: #fffdf8;
+    padding: 14px 16px;
+    border-top: 2px solid var(--ink, #141413);
+  }
+
   .uncommon-recipe-item-pill {
     background: linear-gradient(135deg, #f5b729 0%, #e8a317 100%);
     color: #1a1a1a;
