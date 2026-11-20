@@ -30,19 +30,24 @@ class RecipeStore {
     // Load full saved recipe book if exists
     const stored = await storageBridge.getItem('recipe_book_data_v1');
     if (stored && Array.isArray(stored.recipes) && stored.recipes.length > 0) {
-      this.recipes = stored.recipes.map((r, i) => ({
-        id: r.id || `r_${i}`,
-        title: r.title || 'Untitled Recipe',
-        url: r.url || '',
-        ingredients: Array.isArray(r.ingredients) ? r.ingredients : [],
-        veg: Boolean(r.veg),
-        favorite: Boolean(r.favorite),
-        mustTry: Boolean(r.mustTry),
-        quick: Boolean(r.quick),
-        okay: Boolean(r.okay),
-        addedItems: r.addedItems || '',
-        changes: r.changes || ''
-      }));
+      this.recipes = stored.recipes.map((r, i) => {
+        let url = r.url || '';
+        if (url.includes('sample-veg-paneer')) url = 'https://www.youtube.com/shorts/Sl310lormQo';
+        if (url.includes('sample-veg-gobi')) url = 'https://www.youtube.com/shorts/MhYtkFhNVgI';
+        return {
+          id: r.id || `r_${i}`,
+          title: r.title || 'Untitled Recipe',
+          url,
+          ingredients: Array.isArray(r.ingredients) ? r.ingredients : [],
+          veg: Boolean(r.veg),
+          favorite: Boolean(r.favorite),
+          mustTry: Boolean(r.mustTry),
+          quick: Boolean(r.quick),
+          okay: Boolean(r.okay),
+          addedItems: r.addedItems || '',
+          changes: r.changes || ''
+        };
+      });
     }
 
     const isGarbage = (text) => {

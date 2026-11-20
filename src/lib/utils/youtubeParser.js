@@ -8,9 +8,19 @@ export function extractYouTubeId(urlOrId) {
   if (!urlOrId) return "";
   const str = String(urlOrId).trim();
   if (/^[a-zA-Z0-9_-]{11}$/.test(str)) return str;
-  const regExp = new RegExp("(?:youtu\\.be/|youtube\\.com/(?:embed/|v/|watch\\?v=|watch\\?.+&v=))([\\w-]{11})");
+  const regExp = /(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/|live\/))([a-zA-Z0-9_-]{11})/;
   const match = str.match(regExp);
-  return match && match[1] ? match[1] : "";
+  if (match && match[1]) return match[1];
+
+  // Also check query parameter v= anywhere in query string
+  const vMatch = str.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+  if (vMatch && vMatch[1]) return vMatch[1];
+
+  // Fallback for /shorts/<id>
+  const shortsMatch = str.match(/\/shorts\/([a-zA-Z0-9_-]{11})/);
+  if (shortsMatch && shortsMatch[1]) return shortsMatch[1];
+
+  return "";
 }
 
 /**

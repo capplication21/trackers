@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { recipeState } from '$lib/stores/recipeState.svelte.js';
   import { getYouTubeEmbedUrl } from '$lib/utils/youtubeParser.js';
 
@@ -39,7 +39,7 @@
     activePlayerRecipe?.url ? getYouTubeEmbedUrl(activePlayerRecipe.url) : ''
   );
 
-  function openInPageRecipePlayer(recipe, index) {
+  async function openInPageRecipePlayer(recipe, index) {
     activePlayerRecipe = recipe;
     activePlayerIndex = index;
     isVideoMinimized = false;
@@ -47,13 +47,12 @@
     activeRecipeCustomIng = '';
     isNotesSaved = false;
 
-    // Smooth scroll to the in-page player
-    setTimeout(() => {
-      const el = document.getElementById('inpageRecipePlayer');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 50);
+    // Wait for DOM to render then smooth scroll to the in-page player
+    await tick();
+    const el = document.getElementById('inpageRecipePlayer');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   function closeInPageRecipePlayer() {
@@ -537,6 +536,18 @@
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowfullscreen
                     ></iframe>
+                  {:else if activePlayerRecipe.url}
+                    <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--ink); font-size: 13px; gap: 10px; padding: 20px; background: #fefce8;">
+                      <span style="font-weight: 700;">Direct Video Link:</span>
+                      <a
+                        href={activePlayerRecipe.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="padding: 8px 16px; background: #ef4444; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 13px; text-decoration: none; box-shadow: 0 2px 0 var(--ink); display: inline-flex; align-items: center; gap: 6px;"
+                      >
+                        ▶ Watch on YouTube ↗
+                      </a>
+                    </div>
                   {:else}
                     <div style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #94a3b8; font-size: 13px; gap: 8px; padding: 20px;">
                       <span>No YouTube video URL set for this recipe yet.</span>
