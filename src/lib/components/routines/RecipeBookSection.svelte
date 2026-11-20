@@ -515,34 +515,31 @@
                     </span>
                   </summary>
 
-                  <div class="uncommon-recipe-links" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1;">
+                  <div class="uncommon-recipe-links" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1;">
                     {#each entry.recipes as r (r.recipeIndex)}
-                      <div
-                        class="uncommon-recipe-row"
-                        style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 8px 12px; box-shadow: 0 1.5px 0 var(--ink);"
-                      >
+                      <div class="uncommon-recipe-item-pill">
                         <!-- Recipe Title & Link -->
-                        <div style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;">
-                          <span style="font-size: 14px; flex-shrink: 0;">📖</span>
-                          {#if r.url}
-                            <a
-                              href={r.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              style="font-size: 13px; font-weight: 700; color: #0284c7; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
-                              title="Watch Video"
-                            >
-                              {r.title} <span style="font-size: 10px; color: #64748b;">↗</span>
-                            </a>
-                          {:else}
-                            <span style="font-size: 13px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                              {r.title}
-                            </span>
-                          {/if}
-                        </div>
+                        {#if r.url}
+                          <a
+                            href={r.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="uncommon-recipe-tag-text"
+                            title="Watch Video"
+                          >
+                            <span style="font-size: 13px;">📖</span>
+                            <span>{r.title}</span>
+                            <span style="font-size: 10px; opacity: 0.8;">↗</span>
+                          </a>
+                        {:else}
+                          <span class="uncommon-recipe-tag-text">
+                            <span style="font-size: 13px;">📖</span>
+                            <span>{r.title}</span>
+                          </span>
+                        {/if}
 
                         <!-- Action Icons (Edit & Delete like Qur'an) -->
-                        <div class="uncommon-recipe-actions" style="display: flex; align-items: center; gap: 5px; flex-shrink: 0;">
+                        <div class="uncommon-recipe-actions">
                           <button
                             type="button"
                             class="action-icon-btn edit-icon-btn"
@@ -951,6 +948,51 @@
 {/if}
 
 <style>
+  .uncommon-recipe-item-pill {
+    background: linear-gradient(135deg, #f5b729 0%, #e8a317 100%);
+    color: #1a1a1a;
+    border: 2px solid var(--ink, #141413);
+    border-radius: 10px;
+    box-shadow: 0 2px 0 var(--ink, #141413);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px 6px 12px;
+    max-width: 100%;
+    box-sizing: border-box;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .uncommon-recipe-item-pill:hover {
+    transform: translateY(-1.5px);
+    box-shadow: 0 3px 0 var(--ink, #141413);
+  }
+
+  .uncommon-recipe-tag-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #1a1a1a;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .uncommon-recipe-tag-text:hover {
+    text-decoration: underline;
+  }
+
+  .uncommon-recipe-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
   .action-icon-btn {
     width: 26px;
     height: 26px;
@@ -962,18 +1004,17 @@
     align-items: center;
     justify-content: center;
     transition: all 0.15s ease;
-    border: 1.5px solid #cbd5e1;
+    border: 1.5px solid var(--ink, #141413);
+    box-shadow: 0 1px 0 var(--ink, #141413);
     padding: 0;
   }
 
   .action-icon-btn:hover {
     background: #f1f5f9;
-    border-color: #94a3b8;
     transform: translateY(-1px);
   }
 
   .delete-icon-btn:hover {
     background: #fee2e2;
-    border-color: #f87171;
   }
 </style>
