@@ -14,9 +14,7 @@
     1 /* Dedication */ +
     1 /* TOC */ +
     story.pages.length +
-    1 /* Epilogue */ +
-    1 /* Back Cover */ +
-    ((1 + 1 + 1 + story.pages.length + 1 + 1) % 2 !== 0 ? 1 : 0) /* Blank parchment */
+    1 /* Epilogue */
   );
 
   const pageInfoText = $derived.by(() => {
@@ -24,7 +22,7 @@
     if (page === 0) return '📖 Cover Page';
     if (page === 1) return '📜 Dedication & Title';
     if (page === 2) return '📑 Table of Contents';
-    if (page >= totalPages - 2) return '✨ Epilogue & Reflection';
+    if (page >= totalPages - 1) return '✨ Epilogue & Reflection';
     const chNum = page - 2;
     return `📖 Chapter ${chNum} of ${story.pages.length}`;
   });
@@ -404,8 +402,19 @@
               <li style="margin-bottom:6px;">Can you summarize what happened in 3 sentences using your own English words?</li>
             </ol>
 
-            <div style="background:#f1f5f9;border-radius:8px;padding:10px;font-size:11px;color:#475569;text-align:center;">
+            <div style="background:#f1f5f9;border-radius:8px;padding:10px;font-size:11px;color:#475569;text-align:center;margin-bottom:12px;">
               🎉 <strong>Congratulations!</strong> You finished reading <em>{story.title}</em>!
+            </div>
+
+            <div style="text-align:center;">
+              <button
+                type="button"
+                class="reading-tool-btn active"
+                onclick={() => flipTo(0)}
+                style="padding:8px 16px;font-size:12px;display:inline-flex;align-items:center;gap:6px;"
+              >
+                ↺ Re-read from Cover
+              </button>
             </div>
           </div>
 
@@ -413,49 +422,6 @@
             <span>Epilogue</span>
             <span>End of Story</span>
           </div>
-        </div>
-      </div>
-
-      {#if (1 + 1 + 1 + story.pages.length + 1 + 1) % 2 !== 0}
-        <!-- Blank Parchment Endpaper to ensure even spreads -->
-        <div class="reading-flip-page">
-          <div class="reading-page-inner" style="justify-content:center;text-align:center;">
-            <div style="font-size:24px;color:#ca8a04;margin-bottom:8px;">❦</div>
-            <div style="font-size:12px;color:#94a3b8;font-style:italic;">Notes &amp; Reflections</div>
-            <div style="font-size:24px;color:#ca8a04;margin-top:8px;">❦</div>
-          </div>
-        </div>
-      {/if}
-
-      <!-- Back Hardcover -->
-      <div
-        class="reading-flip-page reading-page-cover-back"
-        style="--story-theme-color:{story.coverColor || '#2b0a1a'};"
-      >
-        <div style="font-size:18px;">{story.icon || '📖'}</div>
-
-        <div style="padding:14px 10px;">
-          <div style="font-size:15px;font-weight:800;color:#fef08a;margin-bottom:8px;">
-            {story.title}
-          </div>
-          <p style="font-size:11.5px;line-height:1.6;color:#fef3c7;margin-bottom:16px;">
-            {story.description}
-          </p>
-
-          <button
-            type="button"
-            class="reading-tool-btn active"
-            onclick={() => flipTo(0)}
-            style="padding:8px 16px;font-size:12px;"
-          >
-            ↺ Re-read from Cover
-          </button>
-        </div>
-
-        <div
-          style="border-top:1px solid rgba(212,175,55,0.3);padding-top:10px;font-size:10.5px;color:#fef3c7;opacity:0.85;"
-        >
-          English2Flow • YouTube Channel Graded Library
         </div>
       </div>
     </div>
