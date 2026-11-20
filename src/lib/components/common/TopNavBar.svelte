@@ -12,6 +12,7 @@
     { id: 'englishtest', icon: '📝', badge: 'EXAM', title: 'English Test' },
     { id: 'mathtest', icon: '🧮', badge: 'MATHS', title: 'Math Test' },
     { id: 'notes', icon: '🤲', badge: 'DUAAS', title: 'Duaa Book' },
+    { id: 'quran', icon: '📖', badge: "QUR'AN", title: "Qur'an" },
     { id: 'pdf', icon: '📖', badge: 'BOOKS', title: 'PDF Reader' },
     { id: 'templates', icon: '📖', badge: 'STORIES', title: 'English Stories Book' },
     { id: 'adkar', icon: '📿', badge: 'ADKAR', title: 'Adkar' },

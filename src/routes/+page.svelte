@@ -17,6 +17,7 @@
   import DuaaNotesSection from '$lib/components/routines/DuaaNotesSection.svelte';
   import TemplatesSection from '$lib/components/routines/TemplatesSection.svelte';
   import PdfFlipbookViewer from '$lib/components/pdf/PdfFlipbookViewer.svelte';
+  import QuranSection from '$lib/components/quran/QuranSection.svelte';
 </script>
 
 <div class="app-container">
@@ -47,6 +48,8 @@
       <DailyMathsSuite />
     {:else if navigationState.activeTab === 'notes'}
       <DuaaNotesSection />
+    {:else if navigationState.activeTab === 'quran'}
+      <QuranSection />
     {:else if navigationState.activeTab === 'templates'}
       <TemplatesSection />
     {:else if navigationState.activeTab === 'pdf'}

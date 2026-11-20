@@ -2,7 +2,9 @@
   import { onMount } from 'svelte';
   import { trackerState } from '$lib/stores/trackerState.svelte.js';
   import { navigationState } from '$lib/stores/navigationState.svelte.js';
+  import { quranState } from '$lib/stores/quranState.svelte.js';
   import { storageBridge } from '$lib/stores/storageBridge.js';
+  import EveningQuranModal from './EveningQuranModal.svelte';
 
   let activePeriod = $state('activities'); // 'activities' | 'morning' | 'afternoon' | 'evening' | 'night'
 
@@ -53,6 +55,28 @@
   let surahFormEnd = $state(10);
   let surahFormUrl = $state('');
   let editingSurahId = $state(null);
+
+  // Evening Quran Reader & Recitation Modal (Matches Screenshot)
+  let isEveningQuranOpen = $state(false);
+  let eveningQuranSurah = $state(2);
+  let eveningQuranStart = $state(1);
+  let eveningQuranEnd = $state(286);
+  let eveningQuranUrl = $state('');
+
+  function openEveningQuran(surahObj) {
+    if (surahObj) {
+      eveningQuranSurah = surahObj.surahNumber || 2;
+      eveningQuranStart = surahObj.ayahStart || 1;
+      eveningQuranEnd = surahObj.ayahEnd || 286;
+      eveningQuranUrl = surahObj.url || '';
+    } else {
+      eveningQuranSurah = 2;
+      eveningQuranStart = 1;
+      eveningQuranEnd = 286;
+      eveningQuranUrl = '';
+    }
+    isEveningQuranOpen = true;
+  }
 
   onMount(async () => {
     await trackerState.init();
@@ -781,7 +805,31 @@
               <div class="task-text" style="margin-bottom: 0;">
                 Read and Listen Quran <span>📖</span>
               </div>
-              <div style="display: flex; gap: 5px; align-items: center;">
+              <div style="display: flex; gap: 5px; align-items: center; flex-wrap: wrap;">
+                <button
+                  type="button"
+                  class="grammar-add-topic-btn"
+                  onclick={(e) => {
+                    e.stopPropagation();
+                    openEveningQuran(quranSurahs[0] || null);
+                  }}
+                  title="Open Read & Listen Quran Player"
+                  style="font-size: 11px; padding: 3px 8px; background: #047857; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
+                >
+                  <span>📖</span> Open Player ➔
+                </button>
+                <button
+                  type="button"
+                  class="grammar-add-topic-btn"
+                  onclick={(e) => {
+                    e.stopPropagation();
+                    navigationState.setTab('quran');
+                  }}
+                  title="Open Qur'an App"
+                  style="font-size: 11px; padding: 3px 8px; background: #0284c7; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
+                >
+                  <span>📗</span> All 114 Surahs
+                </button>
                 <button
                   type="button"
                   class="grammar-add-topic-btn"
@@ -811,7 +859,7 @@
                       <button
                         type="button"
                         class="grammar-item-action-btn"
-                        onclick={() => navigationState.setTab('pdf')}
+                        onclick={() => openEveningQuran(s)}
                         title="Read &amp; Listen"
                         style="width: 24px; height: 24px; font-size: 11px; background: #ecfdf5; border: 1.5px solid #059669; border-radius: 6px; color: #047857; cursor: pointer;"
                       >
@@ -842,7 +890,7 @@
                     <button
                       type="button"
                       class="quran-read-btn"
-                      onclick={() => navigationState.setTab('pdf')}
+                      onclick={() => openEveningQuran(s)}
                       title="Open Surah with Arabic text, Urdu meaning &amp; recitation"
                     >
                       <span>📖</span> Read &amp; Listen with Urdu Meaning
@@ -916,15 +964,33 @@
           </div>
           <div style="flex: 1; min-width: 0;">
             <div class="task-text">Surah Mulk <span>📖</span></div>
-            <a
-              class="yt-link"
-              href="https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF"
-              target="_blank"
-              rel="noopener noreferrer"
-              onclick={(e) => e.stopPropagation()}
-            >
-              <span>▶️</span> Listen Surah Mulk
-            </a>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
+              <button
+                type="button"
+                class="grammar-add-topic-btn"
+                onclick={(e) => {
+                  e.stopPropagation();
+                  openEveningQuran({
+                    surahNumber: 67,
+                    ayahStart: 1,
+                    ayahEnd: 30,
+                    url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
+                  });
+                }}
+                style="font-size: 11px; padding: 4px 10px; background: #047857; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
+              >
+                <span>📖</span> Read &amp; Listen Surah Mulk ➔
+              </button>
+              <a
+                class="yt-link"
+                href="https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick={(e) => e.stopPropagation()}
+              >
+                <span>▶️</span> Listen Surah Mulk
+              </a>
+            </div>
           </div>
         </div>
 
@@ -1164,3 +1230,13 @@
     </div>
   </div>
 {/if}
+
+<!-- EVENING QURAN READER & RECITATION MODAL (MATCHES SCREENSHOT) -->
+<EveningQuranModal
+  isOpen={isEveningQuranOpen}
+  surahNumber={eveningQuranSurah}
+  initialStart={eveningQuranStart}
+  initialEnd={eveningQuranEnd}
+  initialVideoUrl={eveningQuranUrl}
+  onClose={() => (isEveningQuranOpen = false)}
+/>
