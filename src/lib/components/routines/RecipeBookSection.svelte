@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { recipeState } from '$lib/stores/recipeState.svelte.js';
+  import { getYouTubeEmbedUrl } from '$lib/utils/youtubeParser.js';
 
   let isAccordionOpen = $state(true);
   let expandedRecipeIds = $state({});
@@ -18,6 +19,57 @@
   let modalMustTry = $state(false);
   let modalQuick = $state(false);
   let modalOkay = $state(false);
+
+  // Recipe Viewer Modal (YouTube player, note down ingredients, share notes)
+  let showViewerModal = $state(false);
+  let viewerRecipe = $state(null);
+  let viewerIndex = $state(-1);
+  let viewerEmbedUrl = $derived(viewerRecipe?.url ? getYouTubeEmbedUrl(viewerRecipe.url) : '');
+  let viewerNewItem = $state('');
+
+  function openRecipeViewer(recipe, index) {
+    viewerRecipe = recipe;
+    viewerIndex = index;
+    viewerNewItem = '';
+    showViewerModal = true;
+  }
+
+  function shareRecipeNotes(recipe) {
+    if (!recipe || typeof window === 'undefined') return;
+    const missing = (recipe.ingredients || []).filter((ing) =>
+      recipeState.missingIngredients.includes(ingredientName(ing).trim())
+    );
+    const text = encodeURIComponent(
+      `🍲 *Recipe:* ${recipe.title}\n` +
+      (recipe.url ? `▶ *YouTube Video:* ${recipe.url}\n\n` : '\n') +
+      `🛒 *Ingredients to buy:*\n` +
+      (missing.length > 0
+        ? missing.map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')
+        : (recipe.ingredients || []).map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')) +
+      (recipe.changes ? `\n\n📝 *Notes:* ${recipe.changes}` : '') +
+      (recipe.addedItems ? `\n🧂 *Added items:* ${recipe.addedItems}` : '')
+    );
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  }
+
+  function copyRecipeNotes(recipe) {
+    if (!recipe || typeof navigator === 'undefined' || !navigator.clipboard) return;
+    const missing = (recipe.ingredients || []).filter((ing) =>
+      recipeState.missingIngredients.includes(ingredientName(ing).trim())
+    );
+    const text =
+      `🍲 Recipe: ${recipe.title}\n` +
+      (recipe.url ? `▶ YouTube Video: ${recipe.url}\n\n` : '\n') +
+      `🛒 Ingredients to buy:\n` +
+      (missing.length > 0
+        ? missing.map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')
+        : (recipe.ingredients || []).map((m, i) => `${i + 1}. ${ingredientName(m)}`).join('\n')) +
+      (recipe.changes ? `\n\n📝 Notes: ${recipe.changes}` : '') +
+      (recipe.addedItems ? `\n🧂 Added items: ${recipe.addedItems}` : '');
+
+    navigator.clipboard.writeText(text);
+    if (typeof window !== 'undefined') window.alert('Recipe notes & ingredients copied! 📋');
+  }
 
   // New Shopping Item input
   let newShoppingItem = $state('');
@@ -518,25 +570,19 @@
                   <div class="uncommon-recipe-links" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1;">
                     {#each entry.recipes as r (r.recipeIndex)}
                       <div class="uncommon-recipe-item-pill">
-                        <!-- Recipe Title & Link -->
-                        {#if r.url}
-                          <a
-                            href={r.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="uncommon-recipe-tag-text"
-                            title="Watch Video"
-                          >
-                            <span style="font-size: 13px;">📖</span>
-                            <span>{r.title}</span>
-                            <span style="font-size: 10px; opacity: 0.8;">↗</span>
-                          </a>
-                        {:else}
-                          <span class="uncommon-recipe-tag-text">
-                            <span style="font-size: 13px;">📖</span>
-                            <span>{r.title}</span>
-                          </span>
-                        {/if}
+                        <!-- Recipe Title & Video Trigger -->
+                        <button
+                          type="button"
+                          class="uncommon-recipe-tag-text"
+                          onclick={(e) => { e.preventDefault(); e.stopPropagation(); openRecipeViewer(r.recipe, r.recipeIndex); }}
+                          title="Watch YouTube, Note Ingredients & Share"
+                        >
+                          <span style="font-size: 13px;">📖</span>
+                          <span>{r.title}</span>
+                          {#if r.url}
+                            <span class="yt-badge">▶ Video</span>
+                          {/if}
+                        </button>
 
                         <!-- Action Icons (Edit & Delete like Qur'an) -->
                         <div class="uncommon-recipe-actions">
@@ -823,6 +869,225 @@
   {/if}
 </div>
 
+<!-- Recipe Viewer Modal (Watch YouTube Video, Note Ingredients to Buy, Share Notes) -->
+{#if showViewerModal && viewerRecipe}
+  <div
+    class="nav-menu-overlay"
+    onclick={() => (showViewerModal = false)}
+    onkeydown={(e) => { if (e.key === 'Escape') showViewerModal = false; }}
+    role="button"
+    tabindex="-1"
+    style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 999999; display: flex; align-items: center; justify-content: center; padding: 16px;"
+  >
+    <div
+      class="nav-menu-dropdown"
+      onclick={(e) => e.stopPropagation()}
+      onkeydown={(e) => e.stopPropagation()}
+      role="dialog"
+      tabindex="0"
+      style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 18px; width: min(100%, 540px); max-height: 90vh; overflow-y: auto; padding: 18px 20px; box-shadow: 0 6px 0 var(--ink);"
+    >
+      <!-- Modal Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;">
+          <span style="font-size: 18px;">🍲</span>
+          <div style="font-size: 15.5px; font-weight: 800; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            {viewerRecipe.title}
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 6px; flex-shrink: 0;">
+          <button
+            type="button"
+            class="action-icon-btn edit-icon-btn"
+            onclick={() => {
+              showViewerModal = false;
+              openEditModal(viewerRecipe, viewerIndex);
+            }}
+            title="Edit Recipe"
+          >
+            ✏️
+          </button>
+          <button
+            type="button"
+            class="action-icon-btn delete-icon-btn"
+            onclick={async () => {
+              showViewerModal = false;
+              await handleDeleteRecipe(viewerIndex, viewerRecipe.title);
+            }}
+            title="Delete Recipe"
+          >
+            🗑️
+          </button>
+          <button
+            type="button"
+            onclick={() => (showViewerModal = false)}
+            style="background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center;"
+            title="Close"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Embedded YouTube Video Player -->
+      {#if viewerEmbedUrl}
+        <div style="margin-bottom: 16px;">
+          <div style="width: 100%; aspect-ratio: 16 / 9; background: #000000; border-radius: 12px; border: 2px solid var(--ink); overflow: hidden; box-shadow: 0 3px 0 var(--ink);">
+            <iframe
+              src={viewerEmbedUrl}
+              title={viewerRecipe.title}
+              style="width: 100%; height: 100%; border: none;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          {#if viewerRecipe.url}
+            <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
+              <a
+                href={viewerRecipe.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style="font-size: 11px; font-weight: 700; color: #0284c7; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;"
+              >
+                Open in YouTube ↗
+              </a>
+            </div>
+          {/if}
+        </div>
+      {:else if viewerRecipe.url}
+        <div style="margin-bottom: 16px; padding: 12px; background: #fef08a; border: 1.5px solid var(--ink); border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12.5px; font-weight: 700; color: var(--ink);">Recipe Link</span>
+          <a
+            href={viewerRecipe.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style="background: #0284c7; color: #ffffff; padding: 5px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 800; text-decoration: none;"
+          >
+            Open Link ↗
+          </a>
+        </div>
+      {/if}
+
+      <!-- Quick Shopping Checklist Note Down -->
+      <div style="background: #fdfbf7; border: 2px solid var(--ink); border-radius: 14px; padding: 14px; margin-bottom: 14px; box-shadow: 0 2px 0 var(--ink);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--ink);">
+              🛒 Note Down Ingredients to Buy
+            </div>
+            <div style="font-size: 11px; color: #64748b; font-weight: 600;">
+              Tap ingredient while watching to add to shopping list
+            </div>
+          </div>
+          <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;">
+            {(viewerRecipe.ingredients || []).length} items
+          </span>
+        </div>
+
+        {#if (viewerRecipe.ingredients || []).length === 0}
+          <div style="color: #94a3b8; font-size: 12px; font-style: italic; padding: 8px 0;">
+            No ingredients listed for this recipe yet. Add custom ingredients below!
+          </div>
+        {:else}
+          <div style="display: flex; flex-direction: column; gap: 6px; max-height: 200px; overflow-y: auto; margin-bottom: 10px;">
+            {#each viewerRecipe.ingredients as ing}
+              {@const cleanName = ingredientName(ing).trim()}
+              {@const isMarked = recipeState.missingIngredients.includes(cleanName)}
+              <button
+                type="button"
+                onclick={() => recipeState.toggleMissingIngredient(cleanName)}
+                style="display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; border-radius: 8px; border: {isMarked ? '1.5px solid #d97706' : '1.5px solid #cbd5e1'}; background: {isMarked ? '#fef3c7' : '#ffffff'}; cursor: pointer; text-align: left; font-family: inherit; transition: all 0.15s ease;"
+              >
+                <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                  <span style="font-size: 13px;">{isMarked ? '✅' : '▫'}</span>
+                  <span style="font-size: 12.5px; font-weight: {isMarked ? '800' : '600'}; color: var(--ink);">
+                    {cleanName}
+                  </span>
+                </div>
+                <span style="font-size: 10.5px; font-weight: 800; color: {isMarked ? '#b45309' : '#0284c7'};">
+                  {isMarked ? 'Added to Buy 🛒' : '+ Add to Buy'}
+                </span>
+              </button>
+            {/each}
+          </div>
+        {/if}
+
+        <!-- Add Custom Ingredient to Buy Input -->
+        <div style="display: flex; gap: 6px;">
+          <input
+            type="text"
+            placeholder="Type extra item to buy while watching..."
+            bind:value={viewerNewItem}
+            onkeydown={(e) => {
+              if (e.key === 'Enter' && viewerNewItem.trim()) {
+                recipeState.toggleMissingIngredient(viewerNewItem.trim());
+                viewerNewItem = '';
+              }
+            }}
+            style="flex: 1; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12px; font-weight: 600;"
+          />
+          <button
+            type="button"
+            onclick={() => {
+              if (viewerNewItem.trim()) {
+                recipeState.toggleMissingIngredient(viewerNewItem.trim());
+                viewerNewItem = '';
+              }
+            }}
+            style="padding: 6px 12px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 11px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink);"
+          >
+            ➕ Add
+          </button>
+        </div>
+      </div>
+
+      <!-- Recipe Notes & Custom Tweaks -->
+      {#if viewerRecipe.changes || viewerRecipe.addedItems}
+        <div style="background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 10px 12px; margin-bottom: 14px; font-size: 12px; color: #334155;">
+          <div style="font-weight: 800; color: var(--ink); margin-bottom: 4px;">📝 Notes &amp; Tweaks:</div>
+          {#if viewerRecipe.changes}
+            <div style="margin-bottom: 4px;"><strong>Notes:</strong> {viewerRecipe.changes}</div>
+          {/if}
+          {#if viewerRecipe.addedItems}
+            <div><strong>Added Items:</strong> {viewerRecipe.addedItems}</div>
+          {/if}
+        </div>
+      {/if}
+
+      <!-- Share Notes & Actions Row -->
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 2px solid #e2e8f0; padding-top: 12px;">
+        <div style="display: flex; gap: 8px;">
+          <button
+            type="button"
+            onclick={() => shareRecipeNotes(viewerRecipe)}
+            style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
+            title="Share Recipe & Notes to WhatsApp"
+          >
+            <span>💬</span> Share to WhatsApp
+          </button>
+          <button
+            type="button"
+            onclick={() => copyRecipeNotes(viewerRecipe)}
+            style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
+            title="Copy Notes to Clipboard"
+          >
+            <span>📋</span> Copy Notes
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onclick={() => (showViewerModal = false)}
+          style="padding: 8px 16px; background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer;"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+{/if}
+
 <!-- Add / Edit Recipe Modal -->
 {#if showEditModal}
   <div
@@ -980,10 +1245,26 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-family: inherit;
   }
 
   .uncommon-recipe-tag-text:hover {
     text-decoration: underline;
+  }
+
+  .yt-badge {
+    font-size: 10px;
+    background: #dc2626;
+    color: #ffffff;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: 0.3px;
   }
 
   .uncommon-recipe-actions {
