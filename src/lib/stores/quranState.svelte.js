@@ -50,8 +50,55 @@ class QuranStore {
   // Daily Reflection
   dailyReflection = $state(DAILY_REFLECTIONS[0]);
 
+  // Shared Surah Playlists (Synchronized in real-time between Schedule & Qur'an Tool)
+  surahs = $state([
+    {
+      id: 'surah_2',
+      title: '📖 Surah 2: Al-Baqarah (Ayat 1 – 286)',
+      surahNumber: 2,
+      ayahStart: 1,
+      ayahEnd: 286,
+      url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
+    }
+  ]);
+  surahsLoaded = false;
+
   constructor() {
     this.pickDailyReflection();
+  }
+
+  async initSurahs() {
+    if (this.surahsLoaded) return;
+    try {
+      const saved = await storageBridge.getItem('quran_evening_surahs');
+      if (Array.isArray(saved) && saved.length > 0) {
+        this.surahs = saved;
+      }
+    } catch (e) {
+      console.warn('Failed loading shared Quran surahs:', e);
+    }
+    this.surahsLoaded = true;
+  }
+
+  async addSurah(newSurah) {
+    this.surahs = [...this.surahs, newSurah];
+    try {
+      await storageBridge.setItem('quran_evening_surahs', this.surahs);
+    } catch (e) {}
+  }
+
+  async updateSurah(id, updatedFields) {
+    this.surahs = this.surahs.map((s) => (s.id === id ? { ...s, ...updatedFields } : s));
+    try {
+      await storageBridge.setItem('quran_evening_surahs', this.surahs);
+    } catch (e) {}
+  }
+
+  async deleteSurah(id) {
+    this.surahs = this.surahs.filter((s) => s.id !== id);
+    try {
+      await storageBridge.setItem('quran_evening_surahs', this.surahs);
+    } catch (e) {}
   }
 
   pickDailyReflection() {
@@ -93,6 +140,9 @@ class QuranStore {
         if (typeof savedSettings.showTransliteration === 'boolean') this.showTransliteration = savedSettings.showTransliteration;
         if (typeof savedSettings.readingMode === 'string') this.readingMode = savedSettings.readingMode;
       }
+
+      // 5. Load Shared Surahs Playlist
+      await this.initSurahs();
 
       // Load initial surah if reader is directly accessed
       await this.loadSurah(this.lastRead?.surahNumber || 1, false);

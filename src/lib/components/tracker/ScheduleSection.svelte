@@ -21,22 +21,11 @@
   let medModalPeriod = $state('morning');
   let medModalIsDefault = $state(false);
 
-  // Quran Playlist State (Evening)
-  const defaultEveningSurahs = [
-    {
-      id: 'surah_2',
-      title: '📖 Surah 2: Al-Baqarah (Ayat 1 – 286)',
-      surahNumber: 2,
-      ayahStart: 1,
-      ayahEnd: 286,
-      url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
-    }
-  ];
-  let quranSurahs = $state(defaultEveningSurahs);
+  // Quran Playlist State (Evening - Synchronized via quranState)
   let showSurahModal = $state(false);
   let surahFormTitle = $state('');
   let surahFormStart = $state(1);
-  let surahFormEnd = $state(10);
+  let surahFormEnd = $state(286);
   let surahFormUrl = $state('');
   let editingSurahId = $state(null);
 
@@ -64,12 +53,7 @@
 
   onMount(async () => {
     await trackerState.init();
-
-    // Load saved Quran surahs
-    const savedSurahs = await storageBridge.getItem('quran_evening_surahs');
-    if (Array.isArray(savedSurahs) && savedSurahs.length > 0) {
-      quranSurahs = savedSurahs;
-    }
+    await quranState.initSurahs();
 
     // Load timer minutes preference
     const savedMin = await storageBridge.getItem('tm_exercise_minutes');
@@ -211,7 +195,7 @@
     editingSurahId = null;
     surahFormTitle = '';
     surahFormStart = 1;
-    surahFormEnd = 10;
+    surahFormEnd = 286;
     surahFormUrl = '';
     showSurahModal = true;
   }
@@ -220,7 +204,7 @@
     editingSurahId = s.id;
     surahFormTitle = s.title;
     surahFormStart = s.ayahStart || 1;
-    surahFormEnd = s.ayahEnd || 10;
+    surahFormEnd = s.ayahEnd || 286;
     surahFormUrl = s.url || '';
     showSurahModal = true;
   }
@@ -228,35 +212,28 @@
   async function saveSurah() {
     if (!surahFormTitle.trim()) return;
     if (editingSurahId) {
-      quranSurahs = quranSurahs.map((s) => {
-        if (s.id === editingSurahId) {
-          return {
-            ...s,
-            title: surahFormTitle.trim(),
-            ayahStart: surahFormStart,
-            ayahEnd: surahFormEnd,
-            url: surahFormUrl.trim()
-          };
-        }
-        return s;
+      await quranState.updateSurah(editingSurahId, {
+        title: surahFormTitle.trim(),
+        ayahStart: surahFormStart,
+        ayahEnd: surahFormEnd,
+        url: surahFormUrl.trim()
       });
     } else {
       const newSurah = {
         id: 'surah_' + Date.now(),
         title: surahFormTitle.trim(),
+        surahNumber: parseInt(surahFormTitle.match(/\d+/)?.[0] || '2', 10),
         ayahStart: surahFormStart,
         ayahEnd: surahFormEnd,
         url: surahFormUrl.trim()
       };
-      quranSurahs = [...quranSurahs, newSurah];
+      await quranState.addSurah(newSurah);
     }
-    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
     showSurahModal = false;
   }
 
   async function deleteSurah(id) {
-    quranSurahs = quranSurahs.filter((s) => s.id !== id);
-    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
+    await quranState.deleteSurah(id);
   }
 </script>
 
@@ -802,7 +779,7 @@
 
             <!-- Surah Cards List -->
             <div style="margin-top: 8px;" onclick={(e) => e.stopPropagation()} role="presentation">
-              {#each quranSurahs as s (s.id)}
+              {#each quranState.surahs as s (s.id)}
                 <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 10px 14px; margin-top: 6px;">
                   <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
                     <div style="flex: 1; min-width: 0;">

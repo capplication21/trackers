@@ -1,21 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  import { trackerState } from '$lib/stores/trackerState.svelte.js';
-  import { storageBridge } from '$lib/stores/storageBridge.js';
+  import { quranState } from '$lib/stores/quranState.svelte.js';
   import EveningQuranModal from '$lib/components/tracker/EveningQuranModal.svelte';
-
-  const defaultSurahs = [
-    {
-      id: 'surah_2',
-      title: '📖 Surah 2: Al-Baqarah (Ayat 1 – 286)',
-      surahNumber: 2,
-      ayahStart: 1,
-      ayahEnd: 286,
-      url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
-    }
-  ];
-
-  let quranSurahs = $state(defaultSurahs);
 
   // Set / Edit Surah Modal
   let showSurahModal = $state(false);
@@ -33,11 +19,7 @@
   let activeUrl = $state('');
 
   onMount(async () => {
-    await trackerState.init();
-    const saved = await storageBridge.getItem('quran_evening_surahs');
-    if (Array.isArray(saved) && saved.length > 0) {
-      quranSurahs = saved;
-    }
+    await quranState.initSurahs();
   });
 
   function openPlayer(s) {
@@ -76,17 +58,11 @@
   async function saveSurah() {
     if (!surahFormTitle.trim()) return;
     if (editingSurahId) {
-      quranSurahs = quranSurahs.map((s) => {
-        if (s.id === editingSurahId) {
-          return {
-            ...s,
-            title: surahFormTitle.trim(),
-            ayahStart: surahFormStart,
-            ayahEnd: surahFormEnd,
-            url: surahFormUrl.trim()
-          };
-        }
-        return s;
+      await quranState.updateSurah(editingSurahId, {
+        title: surahFormTitle.trim(),
+        ayahStart: surahFormStart,
+        ayahEnd: surahFormEnd,
+        url: surahFormUrl.trim()
       });
     } else {
       const newSurah = {
@@ -97,15 +73,13 @@
         ayahEnd: surahFormEnd,
         url: surahFormUrl.trim()
       };
-      quranSurahs = [...quranSurahs, newSurah];
+      await quranState.addSurah(newSurah);
     }
-    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
     showSurahModal = false;
   }
 
   async function deleteSurah(id) {
-    quranSurahs = quranSurahs.filter((s) => s.id !== id);
-    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
+    await quranState.deleteSurah(id);
   }
 </script>
 
@@ -135,7 +109,7 @@
 
       <!-- Surah Cards List -->
       <div class="surah-cards-list" onclick={(e) => e.stopPropagation()} role="presentation">
-        {#each quranSurahs as s (s.id)}
+        {#each quranState.surahs as s (s.id)}
           <div class="surah-item-box">
             <div class="surah-item-top">
               <div class="surah-info-side">
