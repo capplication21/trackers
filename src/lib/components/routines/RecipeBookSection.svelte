@@ -351,13 +351,32 @@
     newShoppingItem = '';
   }
 
-  function shareWhatsAppShopping() {
+  async function shareWhatsAppShopping() {
     if (typeof window === 'undefined') return;
-    const text = encodeURIComponent(
+    if (recipeState.missingIngredients.length === 0) {
+      window.alert('No ingredients to buy noted yet! Add ingredients first.');
+      return;
+    }
+    const rawText =
       `🛒 Shopping Checklist:\n` +
+      recipeState.missingIngredients.map((item, i) => `${i + 1}. ${item}`).join('\n');
+    const waText = encodeURIComponent(
+      `🛒 *Shopping Checklist:*\n` +
       recipeState.missingIngredients.map((item, i) => `${i + 1}. ${item}`).join('\n')
     );
-    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Shopping Checklist',
+          text: rawText
+        });
+        return;
+      } catch (e) {
+        // Fallback to WhatsApp if share cancelled or dismissed
+      }
+    }
+    window.open(`https://api.whatsapp.com/send?text=${waText}`, '_blank');
   }
 
   function copyShoppingList() {
@@ -637,10 +656,16 @@
                       <button
                         type="button"
                         onclick={shareWhatsAppShopping}
-                        title="Share to WhatsApp"
-                        style="background: #22c55e; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
+                        title="Share Checklist"
+                        style="background: #22c55e; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
                       >
-                        💬
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                          <circle cx="18" cy="5" r="3"></circle>
+                          <circle cx="6" cy="12" r="3"></circle>
+                          <circle cx="18" cy="19" r="3"></circle>
+                          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
                       </button>
                       <button
                         type="button"
@@ -716,10 +741,17 @@
                     <button
                       type="button"
                       onclick={() => shareRecipeNotes(activePlayerRecipe)}
-                      style="padding: 6px 12px; background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); display: inline-flex; align-items: center; gap: 5px;"
-                      title="Share recipe notes to WhatsApp"
+                      style="padding: 6px 12px; background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); display: inline-flex; align-items: center; gap: 6px;"
+                      title="Share recipe notes"
                     >
-                      <span>💬</span> Share
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                      </svg>
+                      <span>Share</span>
                     </button>
                     <button
                       type="button"
@@ -802,10 +834,16 @@
                   <button
                     type="button"
                     onclick={shareWhatsAppShopping}
-                    title="Share to WhatsApp"
-                    style="background: #22c55e; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
+                    title="Share Checklist"
+                    style="background: #22c55e; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink);"
                   >
-                    💬
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                      <circle cx="18" cy="5" r="3"></circle>
+                      <circle cx="6" cy="12" r="3"></circle>
+                      <circle cx="18" cy="19" r="3"></circle>
+                      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                    </svg>
                   </button>
                   <button
                     type="button"
@@ -1380,9 +1418,16 @@
             type="button"
             onclick={() => shareRecipeNotes(viewerRecipe)}
             style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
-            title="Share Recipe & Notes to WhatsApp"
+            title="Share Recipe & Notes"
           >
-            <span>💬</span> Share to WhatsApp
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>Share Recipe</span>
           </button>
           <button
             type="button"
