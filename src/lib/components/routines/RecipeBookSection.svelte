@@ -665,7 +665,7 @@
 
               <!-- Note Page Down Below Player -->
               <div class="inpage-note-page">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1.5px dashed #cbd5e1; padding-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1.5px dashed #cbd5e1; padding-bottom: 8px;">
                   <div style="font-size: 14px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 6px;">
                     <span>📝 Note Page:</span>
                     <span style="color: #0284c7;">{activePlayerRecipe.title}</span>
@@ -677,13 +677,13 @@
                   {/if}
                 </div>
 
-                <!-- 🛒 Ingredients to buy (tap to add to checklist) -->
-                <div style="margin-bottom: 12px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 12px;">
-                  <div style="font-size: 11.5px; font-weight: 800; color: #475569; margin-bottom: 6px;">
-                    🛒 Ingredients (Tap to add/remove from "Have to Buy" shopping list):
-                  </div>
-                  {#if (activePlayerRecipe.ingredients || []).length > 0}
-                    <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
+                <!-- 🛒 Recipe Ingredients Quick Tap-To-Add -->
+                {#if (activePlayerRecipe.ingredients || []).length > 0}
+                  <div style="margin-bottom: 12px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 10px 12px;">
+                    <div style="font-size: 11.5px; font-weight: 800; color: #475569; margin-bottom: 6px;">
+                      🛒 Tap Recipe Ingredients to Add to Shopping Checklist:
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
                       {#each activePlayerRecipe.ingredients as ing}
                         {@const cleanName = ingredientName(ing).trim()}
                         {@const isMarked = recipeState.missingIngredients.includes(cleanName)}
@@ -696,30 +696,97 @@
                           <span>{isMarked ? '🛒' : '➕'}</span>
                           <span>{cleanName}</span>
                           {#if isMarked}
-                            <span style="font-size: 9px; opacity: 0.8;">(buying)</span>
+                            <span style="font-size: 9px; opacity: 0.8;">(added)</span>
                           {/if}
                         </button>
                       {/each}
                     </div>
-                  {/if}
+                  </div>
+                {/if}
 
-                  <!-- Extra item input -->
-                  <div style="display: flex; gap: 6px;">
+                <!-- 🛒 Shopping Checklist (Exact match to Have to Buy card) -->
+                <div style="background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; box-shadow: 0 2px 0 var(--ink);">
+                  <!-- Add ingredient to buy input row -->
+                  <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                     <input
                       type="text"
-                      placeholder="Note down an extra ingredient to buy..."
+                      placeholder="Add ingredient to buy..."
                       bind:value={activeRecipeCustomIng}
                       onkeydown={(e) => { if (e.key === 'Enter') addCustomIngToBuy(); }}
-                      style="flex: 1; padding: 6px 10px; border: 1.5px solid var(--ink); border-radius: 8px; font-size: 12px; font-weight: 600;"
+                      style="flex: 1; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 13px; font-weight: 600; box-sizing: border-box;"
                     />
                     <button
                       type="button"
                       onclick={addCustomIngToBuy}
-                      style="padding: 6px 12px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; font-size: 11.5px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); white-space: nowrap;"
+                      style="width: 40px; height: 40px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 20px; cursor: pointer; box-shadow: 0 2px 0 var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"
+                      title="Add to shopping list"
                     >
-                      ➕ Add to Buy
+                      +
                     </button>
                   </div>
+
+                  <!-- Shopping Checklist header bar -->
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                      <span style="font-size: 12.5px; font-weight: 700; color: #334155;">Shopping Checklist</span>
+                      <span style="background: #e2e8f0; border: 1px solid var(--ink); padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 800;">
+                        {recipeState.missingIngredients.length}
+                      </span>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                      <button
+                        type="button"
+                        onclick={shareWhatsAppShopping}
+                        title="Share to WhatsApp"
+                        style="background: #22c55e; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
+                      >
+                        💬
+                      </button>
+                      <button
+                        type="button"
+                        onclick={copyShoppingList}
+                        title="Copy Checklist"
+                        style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
+                      >
+                        📋
+                      </button>
+                      <button
+                        type="button"
+                        onclick={() => recipeState.clearMissingIngredients()}
+                        title="Clear all"
+                        style="background: #fee2e2; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- List of items to buy -->
+                  {#if recipeState.missingIngredients.length === 0}
+                    <div style="text-align: center; padding: 14px; color: #94a3b8; font-size: 12px; font-style: italic;">
+                      No ingredients to buy noted yet. Tap recipe ingredients or type above to add!
+                    </div>
+                  {:else}
+                    <div style="display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto;">
+                      {#each recipeState.missingIngredients as item, idx}
+                        <div
+                          style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px;"
+                        >
+                          <span style="font-size: 13px; font-weight: 700; color: var(--ink);">
+                            • {item}
+                          </span>
+                          <button
+                            type="button"
+                            onclick={() => recipeState.removeMissingIngredient(idx)}
+                            style="background: transparent; border: none; cursor: pointer; font-size: 13px; opacity: 0.6; padding: 2px;"
+                            title="Remove item"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      {/each}
+                    </div>
+                  {/if}
                 </div>
 
                 <!-- ✍️ Notes Textarea -->
@@ -796,6 +863,95 @@
                   </div>
                 </div>
               </div>
+            </div>
+          {/if}
+
+          <!-- Shopping Checklist inside Uncommon Ingredients (Matches Have to Buy exact design) -->
+          {#if !activePlayerRecipe}
+            <div
+              style="margin-bottom: 16px; background: #ffffff; border: 2px solid var(--ink); border-radius: 14px; padding: 12px 14px; box-shadow: 0 2.5px 0 var(--ink);"
+            >
+              <!-- Add ingredient to buy input row -->
+              <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                <input
+                  type="text"
+                  placeholder="Add ingredient to buy..."
+                  bind:value={newShoppingItem}
+                  onkeydown={(e) => { if (e.key === 'Enter') addCustomShoppingItem(); }}
+                  style="flex: 1; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 13px; font-weight: 600; box-sizing: border-box;"
+                />
+                <button
+                  type="button"
+                  onclick={addCustomShoppingItem}
+                  style="width: 40px; height: 40px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 20px; cursor: pointer; box-shadow: 0 2px 0 var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0;"
+                  title="Add to shopping list"
+                >
+                  +
+                </button>
+              </div>
+
+              <!-- Header bar with Shopping Checklist, count, and action buttons -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 13px; font-weight: 700; color: #334155;">Shopping Checklist</span>
+                  <span style="background: #e2e8f0; border: 1px solid var(--ink); padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 800;">
+                    {recipeState.missingIngredients.length}
+                  </span>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <button
+                    type="button"
+                    onclick={shareWhatsAppShopping}
+                    title="Share to WhatsApp"
+                    style="background: #22c55e; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
+                  >
+                    💬
+                  </button>
+                  <button
+                    type="button"
+                    onclick={copyShoppingList}
+                    title="Copy Checklist"
+                    style="background: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
+                  >
+                    📋
+                  </button>
+                  <button
+                    type="button"
+                    onclick={() => recipeState.clearMissingIngredients()}
+                    title="Clear all"
+                    style="background: #fee2e2; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </div>
+
+              <!-- Items in shopping checklist -->
+              {#if recipeState.missingIngredients.length === 0}
+                <div style="text-align: center; padding: 12px; color: #94a3b8; font-size: 12px; font-style: italic;">
+                  No ingredients to buy noted yet. Type above or tap recipe ingredients to add!
+                </div>
+              {:else}
+                <div style="display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto;">
+                  {#each recipeState.missingIngredients as item, idx}
+                    <div
+                      style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px;"
+                    >
+                      <span style="font-size: 13px; font-weight: 700; color: var(--ink);">
+                        • {item}
+                      </span>
+                      <button
+                        type="button"
+                        onclick={() => recipeState.removeMissingIngredient(idx)}
+                        style="background: transparent; border: none; cursor: pointer; font-size: 13px; opacity: 0.6; padding: 2px;"
+                        title="Remove item"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                  {/each}
+                </div>
+              {/if}
             </div>
           {/if}
 
