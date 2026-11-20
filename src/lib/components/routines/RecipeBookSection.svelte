@@ -31,6 +31,131 @@
     { id: 'ingredients', icon: '📜', label: 'Ingredients' }
   ];
 
+  const COMMON_INGREDIENT_KEYWORDS = [
+    'salt',
+    'sugar',
+    'brown sugar',
+    'chicken',
+    'oil',
+    'sesame oil',
+    'water',
+    'garlic',
+    'ginger',
+    'onion',
+    'spring onion',
+    'pepper',
+    'black pepper',
+    'soy sauce',
+    'dark soy sauce',
+    'light soy sauce',
+    'vinegar',
+    'rice vinegar',
+    'butter',
+    'flour',
+    'cornstarch',
+    'corn starch',
+    'corn flour',
+    'rice flour',
+    'honey'
+  ];
+
+  function ingredientName(ing) {
+    return typeof ing === 'string' ? ing : ing?.name || '';
+  }
+
+  function isInstructionText(name) {
+    const normalized = name.toLowerCase();
+    return (
+      /degree/.test(normalized) ||
+      /marinate/.test(normalized) ||
+      /\d+\s*mint\b/.test(normalized) ||
+      /^add\b/.test(normalized) ||
+      /^fry\b/.test(normalized) ||
+      /\btill\b/.test(normalized) ||
+      /\buntil\b/.test(normalized) ||
+      /^sauce:?$/.test(normalized.trim())
+    );
+  }
+
+  function isCommonIngredient(name) {
+    const normalized = name.toLowerCase();
+    return COMMON_INGREDIENT_KEYWORDS.some((keyword) => normalized.includes(keyword));
+  }
+
+  const INGREDIENT_ROOT_WORDS = ['beef'];
+
+  function normalizeIngredientKey(name) {
+    const key = name
+      .toLowerCase()
+      .replace(/\([^)]*\)/g, ' ')
+      .replace(/[^a-z\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    const tokens = key.split(' ');
+    const root = INGREDIENT_ROOT_WORDS.find((word) => tokens.includes(word));
+    return root || key;
+  }
+
+  let uncommonSearchQuery = $state('');
+  let isShoppingOpen = $state(true);
+  let isUncommonOpen = $state(true);
+  let isCommonOpen = $state(true);
+
+  let commonNames = $derived.by(() => {
+    const commonMap = new Map();
+    recipeState.recipes.forEach((recipe) => {
+      (recipe.ingredients || []).forEach((ing) => {
+        const name = ingredientName(ing).trim();
+        if (!name || isInstructionText(name)) return;
+        const key = normalizeIngredientKey(name);
+        if (!key) return;
+        if (isCommonIngredient(name)) {
+          const existing = commonMap.get(key);
+          if (!existing || name.length < existing.length) {
+            commonMap.set(key, name);
+          }
+        }
+      });
+    });
+    return [...commonMap.values()].sort((a, b) => a.localeCompare(b));
+  });
+
+  let uncommonIngredientEntries = $derived.by(() => {
+    const uncommonMap = new Map();
+    recipeState.recipes.forEach((recipe, recipeIndex) => {
+      (recipe.ingredients || []).forEach((ing) => {
+        const name = ingredientName(ing).trim();
+        if (!name || isInstructionText(name)) return;
+        const key = normalizeIngredientKey(name);
+        if (!key) return;
+        if (!isCommonIngredient(name)) {
+          if (!uncommonMap.has(key)) {
+            uncommonMap.set(key, { name, recipes: [] });
+          }
+          const entry = uncommonMap.get(key);
+          if (name.length < entry.name.length) {
+            entry.name = name;
+          }
+          if (!entry.recipes.some((r) => r.recipeIndex === recipeIndex)) {
+            entry.recipes.push({
+              recipe,
+              recipeIndex,
+              title: recipe.title || 'Untitled Recipe',
+              url: recipe.url || ''
+            });
+          }
+        }
+      });
+    });
+    return [...uncommonMap.values()].sort((a, b) => a.name.localeCompare(b.name));
+  });
+
+  let filteredUncommonEntries = $derived.by(() => {
+    const q = uncommonSearchQuery.trim().toLowerCase();
+    if (!q) return uncommonIngredientEntries;
+    return uncommonIngredientEntries.filter((e) => e.name.toLowerCase().includes(q));
+  });
+
   onMount(async () => {
     await recipeState.init();
   });
@@ -62,7 +187,9 @@
     modalIndex = index;
     modalTitle = recipe.title || '';
     modalUrl = recipe.url || '';
-    modalIngredients = (recipe.ingredients || []).join('\n');
+    modalIngredients = (recipe.ingredients || [])
+      .map((i) => (typeof i === 'string' ? i : i?.name || ''))
+      .join('\n');
     modalAddedItems = recipe.addedItems || '';
     modalChanges = recipe.changes || '';
     modalVeg = Boolean(recipe.veg);
@@ -212,102 +339,288 @@
 
   <!-- SECTION CONTENT -->
   {#if recipeState.activeTab === 'ingredients'}
-    <!-- Ingredients / Shopping List Mode -->
+    <!-- 1. Have to Buy / Shopping List Card -->
     <div
       class="ingredient-dropdown-card open"
       style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 4px 0 var(--ink); overflow: hidden; margin-bottom: 16px;"
     >
       <div
         class="ingredient-dropdown-header"
-        style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fefce8; border-bottom: 2.5px solid var(--ink);"
+        onclick={() => (isShoppingOpen = !isShoppingOpen)}
+        onkeydown={(e) => { if (e.key === 'Enter') isShoppingOpen = !isShoppingOpen; }}
+        role="button"
+        tabindex="0"
+        style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fefce8; border-bottom: {isShoppingOpen ? '2.5px solid var(--ink)' : 'none'}; cursor: pointer; user-select: none;"
       >
         <div style="display: flex; align-items: center; gap: 10px;">
           <div style="width: 36px; height: 36px; background: #ffffff; border: 2px solid var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 0 var(--ink);">
             🛒
           </div>
-          <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
             <div style="font-size: 14.5px; font-weight: 800; color: var(--ink);">Have to Buy</div>
-            <div style="font-size: 11px; color: #64748b; font-weight: 600;">Shopping Checklist</div>
+            <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;">
+              {recipeState.missingIngredients.length}
+            </span>
           </div>
         </div>
-        <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;">
-          {recipeState.missingIngredients.length}
-        </span>
+        <button
+          type="button"
+          class="ingredient-dropdown-chevron-box"
+          style="width: 28px; height: 28px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink);"
+        >
+          {isShoppingOpen ? '▲' : '▼'}
+        </button>
       </div>
 
-      <div style="padding: 14px 16px;">
-        <!-- Add Item Row -->
-        <div style="display: flex; gap: 8px; margin-bottom: 14px;">
-          <input
-            type="text"
-            placeholder="Add shopping item..."
-            bind:value={newShoppingItem}
-            onkeydown={(e) => { if (e.key === 'Enter') addCustomShoppingItem(); }}
-            style="flex: 1; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 13px; font-weight: 600;"
-          />
-          <button
-            type="button"
-            onclick={addCustomShoppingItem}
-            style="padding: 8px 14px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
-          >
-            ➕ Add
-          </button>
-        </div>
+      {#if isShoppingOpen}
+        <div style="padding: 14px 16px;">
+          <!-- Add Item Row -->
+          <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+            <input
+              type="text"
+              placeholder="Add ingredient to buy..."
+              bind:value={newShoppingItem}
+              onkeydown={(e) => { if (e.key === 'Enter') addCustomShoppingItem(); }}
+              style="flex: 1; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 13px; font-weight: 600;"
+            />
+            <button
+              type="button"
+              onclick={addCustomShoppingItem}
+              style="padding: 8px 14px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
+            >
+              ➕
+            </button>
+          </div>
 
-        <!-- Action bar -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-          <span style="font-size: 12px; font-weight: 700; color: #475569;">
-            Checklist ({recipeState.missingIngredients.length} items)
-          </span>
-          <div style="display: flex; gap: 6px;">
-            <button
-              type="button"
-              onclick={shareWhatsAppShopping}
-              title="Share to WhatsApp"
-              style="background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
-            >
-              💬
-            </button>
-            <button
-              type="button"
-              onclick={copyShoppingList}
-              title="Copy checklist"
-              style="background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
-            >
-              📋
-            </button>
-            <button
-              type="button"
-              onclick={() => recipeState.clearMissingIngredients()}
-              title="Clear all"
-              style="background: #fee2e2; color: #dc2626; border: 1.5px solid var(--ink); border-radius: 8px; padding: 0 8px; height: 30px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 1.5px 0 var(--ink);"
-            >
-              🗑️ Clear
-            </button>
+          <!-- Action bar -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; color: #475569;">
+              Shopping Checklist
+            </span>
+            <div style="display: flex; gap: 6px;">
+              <button
+                type="button"
+                onclick={shareWhatsAppShopping}
+                title="Share to WhatsApp"
+                style="background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
+              >
+                💬
+              </button>
+              <button
+                type="button"
+                onclick={copyShoppingList}
+                title="Copy checklist"
+                style="background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
+              >
+                📋
+              </button>
+              <button
+                type="button"
+                onclick={() => recipeState.clearMissingIngredients()}
+                title="Clear all"
+                style="background: #fee2e2; color: #dc2626; border: 1.5px solid var(--ink); border-radius: 8px; padding: 0 8px; height: 30px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 1.5px 0 var(--ink);"
+              >
+                🗑️
+              </button>
+            </div>
+          </div>
+
+          {#if recipeState.missingIngredients.length === 0}
+            <div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 13px; font-style: italic;">
+              No missing ingredients noted yet. Type above to add!
+            </div>
+          {:else}
+            <div style="display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow-y: auto;">
+              {#each recipeState.missingIngredients as item, idx}
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px;">
+                  <span style="font-size: 13px; font-weight: 700; color: var(--ink);">• {item}</span>
+                  <button
+                    type="button"
+                    onclick={() => recipeState.removeMissingIngredient(idx)}
+                    style="background: transparent; border: none; cursor: pointer; font-size: 13px;"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              {/each}
+            </div>
+          {/if}
+        </div>
+      {/if}
+    </div>
+
+    <!-- 2. Uncommon Ingredients Card -->
+    <div
+      class="ingredient-dropdown-card open"
+      id="uncommonIngredientsCard"
+      style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 4px 0 var(--ink); overflow: hidden; margin-bottom: 16px; padding: 0;"
+    >
+      <div
+        class="ingredient-dropdown-header"
+        onclick={() => (isUncommonOpen = !isUncommonOpen)}
+        onkeydown={(e) => { if (e.key === 'Enter') isUncommonOpen = !isUncommonOpen; }}
+        role="button"
+        tabindex="0"
+        style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fefce8; border-bottom: {isUncommonOpen ? '2.5px solid var(--ink)' : 'none'}; cursor: pointer; user-select: none;"
+      >
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 36px; height: 36px; background: #ffffff; border: 2px solid var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 0 var(--ink);">
+            📋
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="font-size: 14.5px; font-weight: 800; color: var(--ink);">Uncommon Ingredients</div>
+            <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;">
+              {uncommonIngredientEntries.length}
+            </span>
           </div>
         </div>
-
-        {#if recipeState.missingIngredients.length === 0}
-          <div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 13px; font-style: italic;">
-            Your shopping checklist is empty! Tap ingredients inside recipes or add above.
-          </div>
-        {:else}
-          <div style="display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow-y: auto;">
-            {#each recipeState.missingIngredients as item, idx}
-              <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px;">
-                <span style="font-size: 13px; font-weight: 700; color: var(--ink);">• {item}</span>
-                <button
-                  type="button"
-                  onclick={() => recipeState.removeMissingIngredient(idx)}
-                  style="background: transparent; border: none; cursor: pointer; font-size: 13px;"
-                >
-                  🗑️
-                </button>
-              </div>
-            {/each}
-          </div>
-        {/if}
+        <button
+          type="button"
+          class="ingredient-dropdown-chevron-box"
+          style="width: 28px; height: 28px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink);"
+        >
+          {isUncommonOpen ? '▲' : '▼'}
+        </button>
       </div>
+
+      {#if isUncommonOpen}
+        <div style="padding: 14px 16px;">
+          <!-- Search Row -->
+          <div style="margin-bottom: 14px;">
+            <input
+              type="text"
+              placeholder="Search uncommon ingredient..."
+              bind:value={uncommonSearchQuery}
+              style="width: 100%; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 13px; font-weight: 600; box-sizing: border-box;"
+            />
+          </div>
+
+          <!-- Uncommon Ingredients Chips List -->
+          {#if filteredUncommonEntries.length === 0}
+            <div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 13px; font-style: italic;">
+              No uncommon ingredients found.
+            </div>
+          {:else}
+            <div id="uncommonIngredientsList" class="history-list">
+              {#each filteredUncommonEntries as entry (entry.name)}
+                <details class="uncommon-ingredient-item">
+                  <summary class="uncommon-ingredient-name">
+                    <span class="uncommon-ingredient-name-text">
+                      <span>🔘</span>
+                      <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{entry.name}</span>
+                    </span>
+                    <span style="display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;">
+                      <span class="uncommon-recipe-count">{entry.recipes.length}</span>
+                      <span class="uncommon-arrow-icon">▼</span>
+                    </span>
+                  </summary>
+
+                  <div class="uncommon-recipe-links" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1;">
+                    {#each entry.recipes as r (r.recipeIndex)}
+                      <div
+                        class="uncommon-recipe-row"
+                        style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; padding: 8px 12px; box-shadow: 0 1.5px 0 var(--ink);"
+                      >
+                        <!-- Recipe Title & Link -->
+                        <div style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;">
+                          <span style="font-size: 14px; flex-shrink: 0;">📖</span>
+                          {#if r.url}
+                            <a
+                              href={r.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style="font-size: 13px; font-weight: 700; color: #0284c7; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                              title="Watch Video"
+                            >
+                              {r.title} <span style="font-size: 10px; color: #64748b;">↗</span>
+                            </a>
+                          {:else}
+                            <span style="font-size: 13px; font-weight: 700; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                              {r.title}
+                            </span>
+                          {/if}
+                        </div>
+
+                        <!-- Action Icons (Edit & Delete like Qur'an) -->
+                        <div class="uncommon-recipe-actions" style="display: flex; align-items: center; gap: 5px; flex-shrink: 0;">
+                          <button
+                            type="button"
+                            class="action-icon-btn edit-icon-btn"
+                            onclick={(e) => { e.preventDefault(); e.stopPropagation(); openEditModal(r.recipe, r.recipeIndex); }}
+                            title="Edit Recipe"
+                          >
+                            ✏️
+                          </button>
+                          <button
+                            type="button"
+                            class="action-icon-btn delete-icon-btn"
+                            onclick={(e) => { e.preventDefault(); e.stopPropagation(); handleDeleteRecipe(r.recipeIndex, r.title); }}
+                            title="Delete Recipe"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      </div>
+                    {/each}
+                  </div>
+                </details>
+              {/each}
+            </div>
+          {/if}
+        </div>
+      {/if}
+    </div>
+
+    <!-- 3. Common Ingredients Card -->
+    <div
+      class="ingredient-dropdown-card open"
+      style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 4px 0 var(--ink); overflow: hidden; margin-bottom: 16px;"
+    >
+      <div
+        class="ingredient-dropdown-header"
+        onclick={() => (isCommonOpen = !isCommonOpen)}
+        onkeydown={(e) => { if (e.key === 'Enter') isCommonOpen = !isCommonOpen; }}
+        role="button"
+        tabindex="0"
+        style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fefce8; border-bottom: {isCommonOpen ? '2.5px solid var(--ink)' : 'none'}; cursor: pointer; user-select: none;"
+      >
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 36px; height: 36px; background: #ffffff; border: 2px solid var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 0 var(--ink);">
+            🧂
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="font-size: 14.5px; font-weight: 800; color: var(--ink);">Common Ingredients</div>
+            <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;">
+              {commonNames.length}
+            </span>
+          </div>
+        </div>
+        <button
+          type="button"
+          class="ingredient-dropdown-chevron-box"
+          style="width: 28px; height: 28px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink);"
+        >
+          {isCommonOpen ? '▲' : '▼'}
+        </button>
+      </div>
+
+      {#if isCommonOpen}
+        <div style="padding: 14px 16px;">
+          {#if commonNames.length === 0}
+            <div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 13px; font-style: italic;">
+              No common ingredients found.
+            </div>
+          {:else}
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              {#each commonNames as name}
+                <div class="ingredient-chip">
+                  <span>🌿</span> {name}
+                </div>
+              {/each}
+            </div>
+          {/if}
+        </div>
+      {/if}
     </div>
   {:else}
     <!-- Regular Recipe Accordion Card -->
@@ -636,3 +949,31 @@
     </div>
   </div>
 {/if}
+
+<style>
+  .action-icon-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    border: 1.5px solid #cbd5e1;
+    padding: 0;
+  }
+
+  .action-icon-btn:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+    transform: translateY(-1px);
+  }
+
+  .delete-icon-btn:hover {
+    background: #fee2e2;
+    border-color: #f87171;
+  }
+</style>
