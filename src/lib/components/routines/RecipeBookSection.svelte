@@ -208,7 +208,6 @@
   }
 
   let uncommonSearchQuery = $state('');
-  let isShoppingOpen = $state(true);
   let isUncommonOpen = $state(true);
   let isCommonOpen = $state(true);
 
@@ -450,116 +449,6 @@
 
   <!-- SECTION CONTENT -->
   {#if recipeState.activeTab === 'ingredients'}
-    <!-- 1. Have to Buy / Shopping List Card -->
-    <div
-      class="ingredient-dropdown-card open"
-      style="background: #ffffff; border: 2.5px solid var(--ink); border-radius: 16px; box-shadow: 0 4px 0 var(--ink); overflow: hidden; margin-bottom: 16px;"
-    >
-      <div
-        class="ingredient-dropdown-header"
-        onclick={() => (isShoppingOpen = !isShoppingOpen)}
-        onkeydown={(e) => { if (e.key === 'Enter') isShoppingOpen = !isShoppingOpen; }}
-        role="button"
-        tabindex="0"
-        style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #fefce8; border-bottom: {isShoppingOpen ? '2.5px solid var(--ink)' : 'none'}; cursor: pointer; user-select: none;"
-      >
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <div style="width: 36px; height: 36px; background: #ffffff; border: 2px solid var(--ink); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 0 var(--ink);">
-            🛒
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="font-size: 14.5px; font-weight: 800; color: var(--ink);">Have to Buy</div>
-            <span style="background: #ffffff; border: 1.5px solid var(--ink); padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;">
-              {recipeState.missingIngredients.length}
-            </span>
-          </div>
-        </div>
-        <button
-          type="button"
-          class="ingredient-dropdown-chevron-box"
-          style="width: 28px; height: 28px; background: #ffffff; border: 1.5px solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink);"
-        >
-          {isShoppingOpen ? '▲' : '▼'}
-        </button>
-      </div>
-
-      {#if isShoppingOpen}
-        <div style="padding: 14px 16px;">
-          <!-- Add Item Row -->
-          <div style="display: flex; gap: 8px; margin-bottom: 14px;">
-            <input
-              type="text"
-              placeholder="Add ingredient to buy..."
-              bind:value={newShoppingItem}
-              onkeydown={(e) => { if (e.key === 'Enter') addCustomShoppingItem(); }}
-              style="flex: 1; padding: 8px 12px; border: 1.5px solid var(--ink); border-radius: 10px; font-size: 13px; font-weight: 600;"
-            />
-            <button
-              type="button"
-              onclick={addCustomShoppingItem}
-              style="padding: 8px 14px; background: #0284c7; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
-            >
-              ➕
-            </button>
-          </div>
-
-          <!-- Action bar -->
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-            <span style="font-size: 12px; font-weight: 700; color: #475569;">
-              Shopping Checklist
-            </span>
-            <div style="display: flex; gap: 6px;">
-              <button
-                type="button"
-                onclick={shareWhatsAppShopping}
-                title="Share to WhatsApp"
-                style="background: #25d366; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 14px;"
-              >
-                💬
-              </button>
-              <button
-                type="button"
-                onclick={copyShoppingList}
-                title="Copy checklist"
-                style="background: #f8fafc; border: 1.5px solid var(--ink); border-radius: 8px; width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1.5px 0 var(--ink); font-size: 13px;"
-              >
-                📋
-              </button>
-              <button
-                type="button"
-                onclick={() => recipeState.clearMissingIngredients()}
-                title="Clear all"
-                style="background: #fee2e2; color: #dc2626; border: 1.5px solid var(--ink); border-radius: 8px; padding: 0 8px; height: 30px; font-size: 11px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 1.5px 0 var(--ink);"
-              >
-                🗑️
-              </button>
-            </div>
-          </div>
-
-          {#if recipeState.missingIngredients.length === 0}
-            <div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 13px; font-style: italic;">
-              No missing ingredients noted yet. Type above to add!
-            </div>
-          {:else}
-            <div style="display: flex; flex-direction: column; gap: 6px; max-height: 300px; overflow-y: auto;">
-              {#each recipeState.missingIngredients as item, idx}
-                <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 12px;">
-                  <span style="font-size: 13px; font-weight: 700; color: var(--ink);">• {item}</span>
-                  <button
-                    type="button"
-                    onclick={() => recipeState.removeMissingIngredient(idx)}
-                    style="background: transparent; border: none; cursor: pointer; font-size: 13px;"
-                  >
-                    🗑️
-                  </button>
-                </div>
-              {/each}
-            </div>
-          {/if}
-        </div>
-      {/if}
-    </div>
-
     <!-- 2. Uncommon Ingredients Card -->
     <div
       class="ingredient-dropdown-card open"

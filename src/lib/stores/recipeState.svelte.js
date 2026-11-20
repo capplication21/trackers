@@ -45,12 +45,24 @@ class RecipeStore {
       }));
     }
 
+    const isGarbage = (text) => {
+      const lower = (text || '').toLowerCase();
+      return (
+        lower.includes('air fry') ||
+        lower.includes('bake at') ||
+        lower.includes('170°c') ||
+        lower.includes('180°c') ||
+        lower.includes('minutes') ||
+        lower.includes('mins')
+      );
+    };
+
     if (stored && Array.isArray(stored.missingIngredients)) {
-      this.missingIngredients = stored.missingIngredients;
+      this.missingIngredients = stored.missingIngredients.filter((i) => !isGarbage(i));
     } else {
       const savedMissing = await storageBridge.getItem('missing_ingredients_v1');
       if (Array.isArray(savedMissing)) {
-        this.missingIngredients = savedMissing;
+        this.missingIngredients = savedMissing.filter((i) => !isGarbage(i));
       }
     }
   }
