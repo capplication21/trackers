@@ -40,6 +40,17 @@
   );
 
   async function openInPageRecipePlayer(recipe, index) {
+    if (!recipe) return;
+    const title = (recipe.title || '').toLowerCase();
+    if (title.includes('paneer') && (!recipe.url || recipe.url.includes('sample') || recipe.url.includes('Sl310lormQo'))) {
+      recipe.url = 'https://www.youtube.com/watch?v=fMDYYYI85BI';
+      recipeState.updateRecipe(index, { url: recipe.url });
+    }
+    if (title.includes('cauliflower') && (!recipe.url || recipe.url.includes('sample') || recipe.url.includes('MhYtkFhNVgI'))) {
+      recipe.url = 'https://www.youtube.com/watch?v=R9SrZPrt6mM';
+      recipeState.updateRecipe(index, { url: recipe.url });
+    }
+
     activePlayerRecipe = recipe;
     activePlayerIndex = index;
     isVideoMinimized = false;
@@ -246,11 +257,21 @@
             entry.name = name;
           }
           if (!entry.recipes.some((r) => r.recipeIndex === recipeIndex)) {
+            let u = recipe.url || '';
+            const t = (recipe.title || '').toLowerCase();
+            if (t.includes('paneer') && (!u || u.includes('sample') || u.includes('Sl310lormQo'))) {
+              u = 'https://www.youtube.com/watch?v=fMDYYYI85BI';
+              recipe.url = u;
+            }
+            if (t.includes('cauliflower') && (!u || u.includes('sample') || u.includes('MhYtkFhNVgI'))) {
+              u = 'https://www.youtube.com/watch?v=R9SrZPrt6mM';
+              recipe.url = u;
+            }
             entry.recipes.push({
               recipe,
               recipeIndex,
               title: recipe.title || 'Untitled Recipe',
-              url: recipe.url || ''
+              url: u
             });
           }
         }

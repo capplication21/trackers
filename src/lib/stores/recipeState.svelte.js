@@ -30,10 +30,18 @@ class RecipeStore {
     // Load full saved recipe book if exists
     const stored = await storageBridge.getItem('recipe_book_data_v1');
     if (stored && Array.isArray(stored.recipes) && stored.recipes.length > 0) {
+      let updatedAny = false;
       this.recipes = stored.recipes.map((r, i) => {
         let url = r.url || '';
-        if (url.includes('sample-veg-paneer')) url = 'https://www.youtube.com/shorts/Sl310lormQo';
-        if (url.includes('sample-veg-gobi')) url = 'https://www.youtube.com/shorts/MhYtkFhNVgI';
+        const titleLower = (r.title || '').toLowerCase();
+        if (titleLower.includes('paneer') && (!url || url.includes('sample') || url.includes('Sl310lormQo'))) {
+          url = 'https://www.youtube.com/watch?v=fMDYYYI85BI';
+          updatedAny = true;
+        }
+        if (titleLower.includes('cauliflower') && (!url || url.includes('sample') || url.includes('MhYtkFhNVgI'))) {
+          url = 'https://www.youtube.com/watch?v=R9SrZPrt6mM';
+          updatedAny = true;
+        }
         return {
           id: r.id || `r_${i}`,
           title: r.title || 'Untitled Recipe',
@@ -48,6 +56,9 @@ class RecipeStore {
           changes: r.changes || ''
         };
       });
+      if (updatedAny) {
+        await this.save();
+      }
     }
 
     const isGarbage = (text) => {
