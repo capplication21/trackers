@@ -38,15 +38,15 @@
     const availWidth = bookElement.parentElement ? bookElement.parentElement.clientWidth : window.innerWidth - 32;
 
     let pageWidth = 440;
-    let pageHeight = 600;
+    let pageHeight = 580;
 
     if (isMobile) {
-      pageWidth = Math.max(280, Math.min(availWidth - 20, 420));
-      pageHeight = Math.round(pageWidth * 1.38);
+      pageWidth = Math.max(260, Math.min(availWidth - 16, 400));
+      pageHeight = Math.round(pageWidth * 1.34);
     } else {
-      const spreadWidth = Math.min(availWidth - 30, 920);
+      const spreadWidth = Math.min(availWidth - 24, 880);
       pageWidth = Math.round(spreadWidth / 2);
-      pageHeight = Math.min(640, Math.round(pageWidth * 1.36));
+      pageHeight = Math.min(580, Math.round(pageWidth * 1.32));
     }
 
     try {
@@ -54,16 +54,13 @@
       const flip = new PageFlip(bookElement, {
         width: pageWidth,
         height: pageHeight,
-        size: isMobile ? 'fixed' : 'stretch',
-        minWidth: 260,
-        maxWidth: 960,
-        minHeight: 380,
-        maxHeight: 1200,
+        size: 'fixed',
+        autoSize: false,
         maxShadowOpacity: 0.45,
         showCover: true,
         mobileScrollSupport: false,
         usePortrait: isMobile,
-        flippingTime: 500,
+        flippingTime: 450,
         useMouseEvents: false,
         startPage: Math.max(0, readingState.currentPage || 0)
       });

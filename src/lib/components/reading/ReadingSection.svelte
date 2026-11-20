@@ -1,5 +1,4 @@
 <script>
-  import ReadingBookshelf from './ReadingBookshelf.svelte';
   import ReadingCompanionPlayer from './ReadingCompanionPlayer.svelte';
   import ReadingFlipbook from './ReadingFlipbook.svelte';
   import { readingState } from '$lib/stores/readingState.svelte.js';
@@ -16,9 +15,6 @@
   </div>
 
   <div id="readingBookContainer">
-    {#if readingState.allStories.length > 1}
-      <ReadingBookshelf />
-    {/if}
     <ReadingCompanionPlayer />
     <ReadingFlipbook />
   </div>
