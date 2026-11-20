@@ -24,28 +24,12 @@
   // Quran Playlist State (Evening)
   const defaultEveningSurahs = [
     {
-      id: 'surah_5',
-      title: '📖 Surah 5: Al-Maaida (Ayat 82 - 108)',
-      surahNumber: 5,
-      ayahStart: 82,
-      ayahEnd: 108,
-      url: 'https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3'
-    },
-    {
-      id: 'surah_18',
-      title: '📖 Surah 18: Al-Kahf (Ayat 1 - 110)',
-      surahNumber: 18,
+      id: 'surah_2',
+      title: '📖 Surah 2: Al-Baqarah (Ayat 1 – 286)',
+      surahNumber: 2,
       ayahStart: 1,
-      ayahEnd: 110,
-      url: 'https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3'
-    },
-    {
-      id: 'surah_7',
-      title: '📖 Surah 7: Al-A\'raaf (Ayat 1 - 206)',
-      surahNumber: 7,
-      ayahStart: 1,
-      ayahEnd: 206,
-      url: 'https://youtube.com/playlist?list=PLUt_PBIteVByS4E__A_aLw7gspxgNd4b3'
+      ayahEnd: 286,
+      url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
     }
   ];
   let quranSurahs = $state(defaultEveningSurahs);
@@ -805,63 +789,63 @@
               <div class="task-text" style="margin-bottom: 0;">
                 Read and Listen Quran <span>📖</span>
               </div>
-              <div style="display: flex; gap: 5px; align-items: center; flex-wrap: wrap;">
-                <button
-                  type="button"
-                  class="grammar-add-topic-btn"
-                  onclick={(e) => {
-                    e.stopPropagation();
-                    openEveningQuran(quranSurahs[0] || null);
-                  }}
-                  title="Open Read & Listen Quran Player"
-                  style="font-size: 11px; padding: 3px 8px; background: #047857; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
-                >
-                  <span>📖</span> Open Player ➔
-                </button>
-                <button
-                  type="button"
-                  class="grammar-add-topic-btn"
-                  onclick={(e) => {
-                    e.stopPropagation();
-                    navigationState.setTab('quran');
-                  }}
-                  title="Open Qur'an App"
-                  style="font-size: 11px; padding: 3px 8px; background: #0284c7; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
-                >
-                  <span>📗</span> All 114 Surahs
-                </button>
-                <button
-                  type="button"
-                  class="grammar-add-topic-btn"
-                  onclick={(e) => { e.stopPropagation(); openAddSurahModal(); }}
-                  title="Set Surah, Ayat range & YouTube recitation link"
-                  style="font-size: 11px; padding: 3px 8px; background: #f59e0b; color: #000000; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
-                >
-                  <span>➕</span> Set Surah &amp; Ayahs
-                </button>
-              </div>
+              <button
+                type="button"
+                class="grammar-add-topic-btn"
+                onclick={(e) => { e.stopPropagation(); openAddSurahModal(); }}
+                title="Set Surah, Ayat range & YouTube recitation link"
+                style="font-size: 11.5px; padding: 4px 14px; background: #f59e0b; color: #000000; font-weight: 800; border: 2px solid var(--ink); border-radius: 999px; cursor: pointer; box-shadow: 0 2px 0 var(--ink); display: inline-flex; align-items: center; gap: 4px;"
+              >
+                <span style="color: #6366f1; font-weight: 900; font-size: 13px;">+</span> Set Surah &amp; Ayahs
+              </button>
             </div>
 
             <!-- Surah Cards List -->
             <div style="margin-top: 8px;" onclick={(e) => e.stopPropagation()} role="presentation">
               {#each quranSurahs as s (s.id)}
-                <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 10px; margin-top: 6px;">
-                  <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; gap: 6px;">
-                    <div>
-                      <div style="font-size: 12.5px; font-weight: 800; color: #1e293b;">
+                <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 10px 14px; margin-top: 6px;">
+                  <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+                    <div style="flex: 1; min-width: 0;">
+                      <div style="font-size: 13px; font-weight: 800; color: #0f172a; line-height: 1.3;">
                         {s.title}
                       </div>
-                      <div style="font-size: 11px; color: #0284c7; font-weight: 700; margin-top: 1px;">
-                        Ayat {s.ayahStart || 1} - {s.ayahEnd || 10} · Online Arabic &amp; Urdu Meaning
+                      <div style="font-size: 11px; color: #0284c7; font-weight: 700; margin-top: 2px;">
+                        Ayat {s.ayahStart || 1} – {s.ayahEnd || 286} · Online Arabic &amp; Urdu Meaning
+                      </div>
+
+                      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 6px;">
+                        <button
+                          type="button"
+                          class="quran-read-btn"
+                          onclick={() => openEveningQuran(s)}
+                          title="Open Surah with Arabic text, Urdu meaning &amp; recitation"
+                          style="background: #ffffff; border: 1.5px solid #059669; color: #047857; border-radius: 8px; padding: 3px 10px; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; gap: 5px; cursor: pointer;"
+                        >
+                          <span>📖</span> Read &amp; Listen with Urdu Meaning
+                        </button>
+                        {#if s.url}
+                          <a
+                            class="yt-link"
+                            href={s.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onclick={(e) => e.stopPropagation()}
+                            style="background: #eff6ff; border: 1.5px solid #bfdbfe; color: #2563eb; border-radius: 8px; padding: 3px 10px; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; gap: 5px; text-decoration: none; margin-top: 0;"
+                          >
+                            <span style="color: #2563eb; font-size: 10px;">▶</span> External Link
+                          </a>
+                        {/if}
                       </div>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 4px;">
+
+                    <!-- Right action icons -->
+                    <div style="display: flex; align-items: center; gap: 5px; flex-shrink: 0;">
                       <button
                         type="button"
                         class="grammar-item-action-btn"
                         onclick={() => openEveningQuran(s)}
                         title="Read &amp; Listen"
-                        style="width: 24px; height: 24px; font-size: 11px; background: #ecfdf5; border: 1.5px solid #059669; border-radius: 6px; color: #047857; cursor: pointer;"
+                        style="width: 26px; height: 26px; font-size: 11px; background: #ffffff; border: 1.5px solid #10b981; border-radius: 8px; color: #047857; cursor: pointer; display: flex; align-items: center; justify-content: center;"
                       >
                         📖
                       </button>
@@ -870,7 +854,7 @@
                         class="grammar-item-action-btn"
                         onclick={() => editSurah(s)}
                         title="Edit Playlist"
-                        style="width: 22px; height: 22px; font-size: 10px; border: 1.5px solid #cbd5e1; border-radius: 6px; background: white; cursor: pointer;"
+                        style="width: 26px; height: 26px; font-size: 11px; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center;"
                       >
                         ✏️
                       </button>
@@ -879,34 +863,11 @@
                         class="grammar-item-action-btn delete-btn"
                         onclick={() => deleteSurah(s.id)}
                         title="Delete Playlist"
-                        style="width: 22px; height: 22px; font-size: 10px; border: 1.5px solid #f87171; border-radius: 6px; background: white; cursor: pointer;"
+                        style="width: 26px; height: 26px; font-size: 11px; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center;"
                       >
                         🗑️
                       </button>
                     </div>
-                  </div>
-
-                  <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px;">
-                    <button
-                      type="button"
-                      class="quran-read-btn"
-                      onclick={() => openEveningQuran(s)}
-                      title="Open Surah with Arabic text, Urdu meaning &amp; recitation"
-                    >
-                      <span>📖</span> Read &amp; Listen with Urdu Meaning
-                    </button>
-                    {#if s.url}
-                      <a
-                        class="yt-link"
-                        href={s.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onclick={(e) => e.stopPropagation()}
-                        style="font-size: 10.5px; padding: 2px 7px; margin-top: 0;"
-                      >
-                        <span>▶️</span> External Link
-                      </a>
-                    {/if}
                   </div>
                 </div>
               {/each}
