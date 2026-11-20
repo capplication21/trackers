@@ -3222,6 +3222,7 @@
 
       /* Story Inside Chapter Page Layout */
       .reading-page-inner {
+        position: relative;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -3229,6 +3230,21 @@
         padding: 24px 22px 18px 22px;
         box-sizing: border-box;
         overflow-y: auto;
+      }
+
+      .reading-bookmark-ribbon {
+        position: absolute;
+        top: 0;
+        right: 18px;
+        background: #dc2626;
+        color: #ffffff;
+        padding: 3px 6px 5px 6px;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        font-size: 13px;
+        z-index: 20;
+        line-height: 1;
+        pointer-events: none;
       }
 
       .reading-page-header {

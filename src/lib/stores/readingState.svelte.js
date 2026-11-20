@@ -12,6 +12,7 @@ class ReadingStore {
   activeFilter = $state('all'); // 'all' | 'level1' | 'level2'
   customVideoUrls = $state({});
   userStories = $state([]);
+  bookmarks = $state({}); // { [storyId]: pageIndex }
 
   pageFlipInstance = null;
   isInitialized = false;
@@ -38,6 +39,11 @@ class ReadingStore {
     const savedUserStories = await storageBridge.getItem('english2flow_user_stories');
     if (Array.isArray(savedUserStories)) {
       this.userStories = savedUserStories;
+    }
+
+    const savedBookmarks = await storageBridge.getItem('english2flow_bookmarks');
+    if (savedBookmarks && typeof savedBookmarks === 'object') {
+      this.bookmarks = savedBookmarks;
     }
   }
 
@@ -81,8 +87,29 @@ class ReadingStore {
 
   async setStory(id) {
     this.storyId = id;
-    this.currentPage = 0;
+    const bm = this.getStoryBookmark(id);
+    this.currentPage = bm !== null ? bm : 0;
     await this.saveState();
+  }
+
+  getStoryBookmark(storyId) {
+    const val = this.bookmarks[storyId];
+    return typeof val === 'number' ? val : null;
+  }
+
+  isPageBookmarked(storyId, page) {
+    return this.bookmarks[storyId] === page;
+  }
+
+  async toggleBookmark(storyId, page) {
+    if (this.bookmarks[storyId] === page) {
+      const updated = { ...this.bookmarks };
+      delete updated[storyId];
+      this.bookmarks = updated;
+    } else {
+      this.bookmarks = { ...this.bookmarks, [storyId]: page };
+    }
+    await storageBridge.setItem('english2flow_bookmarks', this.bookmarks);
   }
 
   async setFilter(filter) {

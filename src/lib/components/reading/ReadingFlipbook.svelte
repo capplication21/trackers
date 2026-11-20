@@ -27,6 +27,13 @@
     return `📖 Chapter ${chNum} of ${story.pages.length}`;
   });
 
+  const savedBookmark = $derived(readingState.getStoryBookmark(story.id));
+  const isCurrentPageBookmarked = $derived(readingState.isPageBookmarked(story.id, readingState.currentPage));
+
+  async function handleToggleBookmark() {
+    await readingState.toggleBookmark(story.id, readingState.currentPage);
+  }
+
   async function mountBook() {
     await tick();
     if (!bookElement) return;
@@ -159,42 +166,27 @@
     <div class="reading-top-tool-group">
       <button
         type="button"
-        class="reading-tool-btn {readingState.isSoundEnabled ? 'active' : ''}"
-        onclick={() => readingState.toggleSound()}
-        title="Toggle realistic page-flip sound effect"
+        class="reading-tool-btn {isCurrentPageBookmarked ? 'active' : ''}"
+        onclick={handleToggleBookmark}
+        title={isCurrentPageBookmarked ? 'Remove bookmark from this page' : 'Bookmark this page'}
+        style="display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 12px; {isCurrentPageBookmarked ? 'background: #f59e0b; color: #141413; border: 1.5px solid #d97706;' : ''}"
       >
-        {#if readingState.isSoundEnabled}
-          <span>🔊</span> Sound On
-        {:else}
-          <span>🔇</span> Sound Off
-        {/if}
+        <span>{isCurrentPageBookmarked ? '🔖' : '📑'}</span>
+        <span>{isCurrentPageBookmarked ? 'Bookmarked' : 'Bookmark Page'}</span>
       </button>
 
-      <button
-        type="button"
-        class="reading-tool-btn"
-        onclick={() => readingState.adjustFontSize(-1)}
-        title="Decrease font size"
-      >
-        A-
-      </button>
-      <button
-        type="button"
-        class="reading-tool-btn"
-        onclick={() => readingState.adjustFontSize(1)}
-        title="Increase font size"
-      >
-        A+
-      </button>
-
-      <button
-        type="button"
-        class="reading-tool-btn"
-        onclick={toggleFullscreen}
-        title="Fullscreen Reading Mood"
-      >
-        ⛶ Fullscreen
-      </button>
+      {#if savedBookmark !== null && savedBookmark !== readingState.currentPage}
+        <button
+          type="button"
+          class="reading-tool-btn"
+          onclick={() => flipTo(savedBookmark)}
+          title="Jump to your saved bookmark"
+          style="display: inline-flex; align-items: center; gap: 5px; font-weight: 800; font-size: 11.5px; background: #fef08a; color: #854d0e; border: 1.5px solid #ca8a04;"
+        >
+          <span>📌</span>
+          <span>Go to Bookmark</span>
+        </button>
+      {/if}
     </div>
   </div>
 
@@ -245,6 +237,11 @@
       <!-- Page 1: Inside Front & Dedication -->
       <div class="reading-flip-page">
         <div class="reading-page-inner">
+          {#if savedBookmark === 1}
+            <div class="reading-bookmark-ribbon" title="Your Bookmark">
+              <span>🔖</span>
+            </div>
+          {/if}
           <div class="reading-page-header">
             <span>Frontispiece</span>
             <span>English2Flow</span>
@@ -285,6 +282,11 @@
       <!-- Page 2: Table of Contents -->
       <div class="reading-flip-page">
         <div class="reading-page-inner">
+          {#if savedBookmark === 2}
+            <div class="reading-bookmark-ribbon" title="Your Bookmark">
+              <span>🔖</span>
+            </div>
+          {/if}
           <div class="reading-page-header">
             <span>Contents</span>
             <span>Table of Chapters</span>
@@ -327,8 +329,14 @@
       <!-- Pages 3..N+2: Story Chapter Pages -->
       {#each story.pages as p, pIdx}
         {@const humanPageNum = pIdx + 1}
+        {@const pageFlipIndex = pIdx + 3}
         <div class="reading-flip-page">
           <div class="reading-page-inner">
+            {#if savedBookmark === pageFlipIndex}
+              <div class="reading-bookmark-ribbon" title="Your Bookmark">
+                <span>🔖</span>
+              </div>
+            {/if}
             <div class="reading-page-header">
               <span>{story.title.split(':')[0]}</span>
               <span>Chapter {humanPageNum} of {story.pages.length}</span>
@@ -377,6 +385,11 @@
       <!-- Epilogue, Moral & Discussion Page -->
       <div class="reading-flip-page">
         <div class="reading-page-inner">
+          {#if savedBookmark === story.pages.length + 3}
+            <div class="reading-bookmark-ribbon" title="Your Bookmark">
+              <span>🔖</span>
+            </div>
+          {/if}
           <div class="reading-page-header">
             <span>Epilogue</span>
             <span>Reflection &amp; Moral</span>
@@ -435,48 +448,6 @@
       title="Flip to Next Page"
     >
       ▶
-    </button>
-  </div>
-
-  <!-- Bottom Chapter Quick Jump Bar -->
-  <div class="reading-bottom-chapter-bar">
-    <button
-      type="button"
-      class="reading-chapter-jump-pill {readingState.currentPage === 0 ? 'active' : ''}"
-      onclick={() => flipTo(0)}
-    >
-      Cover 📕
-    </button>
-    <button
-      type="button"
-      class="reading-chapter-jump-pill {readingState.currentPage === 1 ? 'active' : ''}"
-      onclick={() => flipTo(1)}
-    >
-      Title 📜
-    </button>
-    <button
-      type="button"
-      class="reading-chapter-jump-pill {readingState.currentPage === 2 ? 'active' : ''}"
-      onclick={() => flipTo(2)}
-    >
-      TOC 📑
-    </button>
-    {#each story.pages as p, idx}
-      {@const targetIdx = idx + 3}
-      <button
-        type="button"
-        class="reading-chapter-jump-pill {readingState.currentPage === targetIdx ? 'active' : ''}"
-        onclick={() => flipTo(targetIdx)}
-      >
-        Ch {idx + 1}
-      </button>
-    {/each}
-    <button
-      type="button"
-      class="reading-chapter-jump-pill {readingState.currentPage >= story.pages.length + 3 ? 'active' : ''}"
-      onclick={() => flipTo(story.pages.length + 3)}
-    >
-      Moral ✨
     </button>
   </div>
 </div>
