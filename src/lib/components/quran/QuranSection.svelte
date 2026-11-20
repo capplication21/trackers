@@ -1,1184 +1,627 @@
 <script>
   import { onMount } from 'svelte';
-  import { SURAH_LIST } from '$lib/data/quranData.js';
+  import { trackerState } from '$lib/stores/trackerState.svelte.js';
   import { storageBridge } from '$lib/stores/storageBridge.js';
-  import { navigationState } from '$lib/stores/navigationState.svelte.js';
-  import { triggerHaptic } from '$lib/utils/haptics.js';
-  import { getYouTubeEmbedUrl } from '$lib/utils/youtubeParser.js';
+  import EveningQuranModal from '$lib/components/tracker/EveningQuranModal.svelte';
 
-  // State
-  let selectedSurahNum = $state(2);
-  let startAyah = $state(1);
-  let endAyah = $state(286);
-  let scriptMode = $state('indopak'); // 'indopak' | 'uthmani'
-  let isFocusMode = $state(false);
-  let isVideoMinimized = $state(false);
-  let videoUrl = $state('https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF');
+  const defaultSurahs = [
+    {
+      id: 'surah_2',
+      title: '📖 Surah 2: Al-Baqarah (Ayat 1 – 286)',
+      surahNumber: 2,
+      ayahStart: 1,
+      ayahEnd: 286,
+      url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
+    }
+  ];
 
-  // Edit Video URL modal
-  let showEditUrlModal = $state(false);
-  let editUrlInput = $state('');
+  let quranSurahs = $state(defaultSurahs);
 
-  // Data & Audio
-  let allLoadedAyahs = $state([]);
-  let isLoading = $state(false);
-  let loadError = $state(null);
-  let playingAyahNum = $state(null);
-  let audioElement = null;
+  // Set / Edit Surah Modal
+  let showSurahModal = $state(false);
+  let surahFormTitle = $state('');
+  let surahFormStart = $state(1);
+  let surahFormEnd = $state(286);
+  let surahFormUrl = $state('');
+  let editingSurahId = $state(null);
 
-  // Selected Surah Meta
-  let currentMeta = $derived.by(() => {
-    return SURAH_LIST.find((s) => s.number === selectedSurahNum) || SURAH_LIST[1];
-  });
+  // Player Modal
+  let isPlayerOpen = $state(false);
+  let activeSurahNum = $state(2);
+  let activeStart = $state(1);
+  let activeEnd = $state(286);
+  let activeUrl = $state('');
 
-  // Embed URL for YouTube
-  let embedUrl = $derived.by(() => {
-    return getYouTubeEmbedUrl(videoUrl);
-  });
-
-  // Slice displayed ayahs
-  let displayedAyahs = $derived.by(() => {
-    if (!allLoadedAyahs || allLoadedAyahs.length === 0) return [];
-    return allLoadedAyahs.filter(
-      (a) => a.numberInSurah >= startAyah && a.numberInSurah <= endAyah
-    );
-  });
+  let isDone = $derived(Boolean(trackerState.completedTasks['e3']));
 
   onMount(async () => {
-    // Load last viewed surah & preferences if saved
-    try {
-      const savedPref = await storageBridge.getItem('quran_tool_preference');
-      if (savedPref && typeof savedPref === 'object') {
-        if (savedPref.surahNumber) selectedSurahNum = savedPref.surahNumber;
-        if (savedPref.startAyah) startAyah = savedPref.startAyah;
-        if (savedPref.endAyah) endAyah = savedPref.endAyah;
-        if (savedPref.scriptMode) scriptMode = savedPref.scriptMode;
-        if (savedPref.videoUrl) videoUrl = savedPref.videoUrl;
-      }
-    } catch (e) {}
-
-    const meta = SURAH_LIST.find((s) => s.number === selectedSurahNum);
-    if (!endAyah || endAyah > (meta?.ayahCount || 286)) {
-      endAyah = meta ? meta.ayahCount : 286;
+    await trackerState.init();
+    const saved = await storageBridge.getItem('quran_evening_surahs');
+    if (Array.isArray(saved) && saved.length > 0) {
+      quranSurahs = saved;
     }
-
-    await loadSurahAyahs(selectedSurahNum);
   });
 
-  async function loadSurahAyahs(surahNum, forceNet = false) {
-    isLoading = true;
-    loadError = null;
-    stopAudio();
-
-    const cacheKey = `quran_evening_surah_${surahNum}_full`;
-
-    // Try reading from cache first unless forceNet is requested
-    if (!forceNet) {
-      try {
-        const cached = await storageBridge.getItem(cacheKey);
-        if (cached && Array.isArray(cached) && cached.length > 0) {
-          allLoadedAyahs = cached;
-          isLoading = false;
-          saveCurrentPreference();
-          return;
-        }
-      } catch (e) {
-        console.warn('Cache lookup failed:', e);
-      }
+  function openPlayer(s) {
+    if (s) {
+      activeSurahNum = s.surahNumber || 2;
+      activeStart = s.ayahStart || 1;
+      activeEnd = s.ayahEnd || 286;
+      activeUrl = s.url || '';
+    } else {
+      activeSurahNum = 2;
+      activeStart = 1;
+      activeEnd = 286;
+      activeUrl = 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF';
     }
+    isPlayerOpen = true;
+  }
 
-    try {
-      // Fetch both Indo-Pak script and Urdu translation (Fateh Muhammad Jalandhry)
-      // and Uthmani script as fallback/toggle
-      const res = await fetch(
-        `https://api.alquran.cloud/v1/surah/${surahNum}/editions/quran-indopak,quran-uthmani,ur.jalandhry`
-      );
+  function openAddSurah() {
+    editingSurahId = null;
+    surahFormTitle = '';
+    surahFormStart = 1;
+    surahFormEnd = 286;
+    surahFormUrl = '';
+    showSurahModal = true;
+  }
 
-      if (!res.ok) {
-        throw new Error(`Server returned HTTP ${res.status}`);
-      }
+  function editSurah(s) {
+    editingSurahId = s.id;
+    surahFormTitle = s.title;
+    surahFormStart = s.ayahStart || 1;
+    surahFormEnd = s.ayahEnd || 286;
+    surahFormUrl = s.url || '';
+    showSurahModal = true;
+  }
 
-      const json = await res.json();
-      if (json && json.data && json.data.length >= 3) {
-        const indopakData = json.data[0];
-        const uthmaniData = json.data[1];
-        const urduData = json.data[2];
-
-        const mapped = indopakData.ayahs.map((ay, idx) => {
-          const uthAy = uthmaniData.ayahs[idx] || {};
-          const urAy = urduData.ayahs[idx] || {};
-
-          let cleanIndopak = ay.text || '';
-          let cleanUthmani = uthAy.text || '';
-
-          // If not Surah 1 and not Surah 9, strip leading Bismillah from verse 1
-          if (surahNum !== 1 && surahNum !== 9 && idx === 0) {
-            cleanIndopak = cleanIndopak.replace(/^بِسۡمِ ٱللَّهِ ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ\s*/, '');
-            cleanUthmani = cleanUthmani.replace(/^بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ\s*/, '');
-          }
-
+  async function saveSurah() {
+    if (!surahFormTitle.trim()) return;
+    if (editingSurahId) {
+      quranSurahs = quranSurahs.map((s) => {
+        if (s.id === editingSurahId) {
           return {
-            numberInSurah: ay.numberInSurah,
-            globalNumber: ay.number,
-            arabicIndopak: cleanIndopak.trim(),
-            arabicUthmani: cleanUthmani.trim(),
-            urduText: (urAy.text || '').trim()
+            ...s,
+            title: surahFormTitle.trim(),
+            ayahStart: surahFormStart,
+            ayahEnd: surahFormEnd,
+            url: surahFormUrl.trim()
           };
-        });
-
-        allLoadedAyahs = mapped;
-        saveCurrentPreference();
-
-        // Cache for instant offline access
-        try {
-          await storageBridge.setItem(cacheKey, mapped);
-        } catch {}
-      } else {
-        throw new Error('Invalid data received from Quran server.');
-      }
-    } catch (err) {
-      console.warn('Failed to load Ayahs from net:', err);
-      loadError = 'Could not load verses from the network. Please check your connection or retry.';
-    } finally {
-      isLoading = false;
-    }
-  }
-
-  function saveCurrentPreference() {
-    try {
-      storageBridge.setItem('quran_tool_preference', {
-        surahNumber: selectedSurahNum,
-        startAyah,
-        endAyah,
-        scriptMode,
-        videoUrl
-      });
-    } catch (e) {}
-  }
-
-  function handleSurahChange(e) {
-    const num = parseInt(e.target.value, 10);
-    if (!num) return;
-    triggerHaptic('light');
-    selectedSurahNum = num;
-    const meta = SURAH_LIST.find((s) => s.number === num);
-    startAyah = 1;
-    endAyah = meta ? meta.ayahCount : 10;
-    loadSurahAyahs(num);
-  }
-
-  function toggleScriptMode() {
-    triggerHaptic('selection');
-    scriptMode = scriptMode === 'indopak' ? 'uthmani' : 'indopak';
-    saveCurrentPreference();
-  }
-
-  function toggleFocusMode() {
-    triggerHaptic('selection');
-    isFocusMode = !isFocusMode;
-  }
-
-  function toggleVideoMinimize() {
-    triggerHaptic('light');
-    isVideoMinimized = !isVideoMinimized;
-  }
-
-  function playAyahAudio(ayah) {
-    if (playingAyahNum === ayah.numberInSurah) {
-      stopAudio();
-      return;
-    }
-
-    stopAudio();
-    playingAyahNum = ayah.numberInSurah;
-    triggerHaptic('light');
-
-    const sStr = String(selectedSurahNum).padStart(3, '0');
-    const aStr = String(ayah.numberInSurah).padStart(3, '0');
-    const audioUrl = `https://everyayah.com/data/Alafasy_128kbps/${sStr}${aStr}.mp3`;
-
-    audioElement = new Audio(audioUrl);
-    audioElement.onended = () => {
-      // Auto play next verse if within range
-      if (ayah.numberInSurah < endAyah) {
-        const nextAyah = allLoadedAyahs.find((a) => a.numberInSurah === ayah.numberInSurah + 1);
-        if (nextAyah) {
-          playAyahAudio(nextAyah);
-          return;
         }
-      }
-      playingAyahNum = null;
-    };
-    audioElement.onerror = () => {
-      playingAyahNum = null;
-    };
-    audioElement.play().catch(() => {
-      playingAyahNum = null;
-    });
-  }
-
-  function stopAudio() {
-    if (audioElement) {
-      try {
-        audioElement.pause();
-        audioElement.currentTime = 0;
-      } catch (e) {}
-      audioElement = null;
+        return s;
+      });
+    } else {
+      const newSurah = {
+        id: 'surah_' + Date.now(),
+        title: surahFormTitle.trim(),
+        surahNumber: parseInt(surahFormTitle.match(/\d+/)?.[0] || '2', 10),
+        ayahStart: surahFormStart,
+        ayahEnd: surahFormEnd,
+        url: surahFormUrl.trim()
+      };
+      quranSurahs = [...quranSurahs, newSurah];
     }
-    playingAyahNum = null;
+    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
+    showSurahModal = false;
   }
 
-  function handlePrevAyahs() {
-    triggerHaptic('light');
-    const range = Math.max(1, endAyah - startAyah + 1);
-    if (startAyah > 1) {
-      const newStart = Math.max(1, startAyah - range);
-      const newEnd = Math.max(newStart, startAyah - 1);
-      startAyah = newStart;
-      endAyah = newEnd;
-      saveCurrentPreference();
-    } else if (selectedSurahNum > 1) {
-      // Go to previous Surah
-      selectedSurahNum -= 1;
-      const meta = SURAH_LIST.find((s) => s.number === selectedSurahNum);
-      startAyah = 1;
-      endAyah = meta ? meta.ayahCount : 10;
-      loadSurahAyahs(selectedSurahNum);
-    }
-  }
-
-  function handleNextAyahs() {
-    triggerHaptic('light');
-    const range = Math.max(1, endAyah - startAyah + 1);
-    const meta = currentMeta;
-    if (endAyah < meta.ayahCount) {
-      const newStart = endAyah + 1;
-      const newEnd = Math.min(meta.ayahCount, endAyah + range);
-      startAyah = newStart;
-      endAyah = newEnd;
-      saveCurrentPreference();
-    } else if (selectedSurahNum < 114) {
-      // Advance to next Surah
-      selectedSurahNum += 1;
-      const nextMeta = SURAH_LIST.find((s) => s.number === selectedSurahNum);
-      startAyah = 1;
-      endAyah = nextMeta ? nextMeta.ayahCount : 10;
-      loadSurahAyahs(selectedSurahNum);
-    }
-  }
-
-  function saveCustomVideoUrl() {
-    if (editUrlInput.trim()) {
-      videoUrl = editUrlInput.trim();
-      saveCurrentPreference();
-    }
-    showEditUrlModal = false;
-  }
-
-  function goBackToSchedule() {
-    stopAudio();
-    navigationState.setTab('schedule');
+  async function deleteSurah(id) {
+    quranSurahs = quranSurahs.filter((s) => s.id !== id);
+    await storageBridge.setItem('quran_evening_surahs', quranSurahs);
   }
 </script>
 
-<div class="quran-tool-container" class:focus-mode={isFocusMode}>
-  <!-- TOP BAR -->
-  <div class="quran-top-bar">
-    <div class="top-title-group">
-      <div class="title-with-icon">
-        <span class="book-icon">📖</span>
-        <span class="title-text">
-          Surah {selectedSurahNum}: {currentMeta.englishName} · {currentMeta.name}
-        </span>
-      </div>
-      <div class="ayat-pill-badge">
-        Ayat {startAyah} – {endAyah} of {currentMeta.ayahCount}
-      </div>
-    </div>
-
-    <div class="top-actions-group">
-      <!-- PK Indo-Pak Button -->
-      <button
-        type="button"
-        class="top-pill-btn pk-btn"
-        class:active={scriptMode === 'indopak'}
-        onclick={toggleScriptMode}
-        title="Toggle between Indo-Pak and Uthmani script"
-      >
-        <span class="pk-flag">PK</span>
-        <span>{scriptMode === 'indopak' ? 'Indo-Pak' : 'Uthmani'}</span>
-      </button>
-
-      <!-- Focus Button -->
-      <button
-        type="button"
-        class="top-pill-btn focus-btn"
-        class:active={isFocusMode}
-        onclick={toggleFocusMode}
-        title="Toggle Focus Reading Mode"
-      >
-        <span>📖</span>
-        <span>Focus</span>
-      </button>
-
-      <!-- Close Button -->
-      <button
-        type="button"
-        class="close-round-btn"
-        onclick={goBackToSchedule}
-        title="Back to Schedule"
-      >
-        ✕
-      </button>
-    </div>
+<div class="quran-page-wrapper">
+  <!-- Pill Header Badge -->
+  <div class="quran-header-pill">
+    <span class="pill-icon">📖</span> QUR'AN
   </div>
 
-  <!-- SURAH & AYAH RANGE SELECTOR CONTROLS -->
-  <div class="selector-controls-row">
-    <select
-      class="surah-dropdown"
-      value={selectedSurahNum}
-      onchange={handleSurahChange}
-    >
-      {#each SURAH_LIST as s (s.number)}
-        <option value={s.number}>
-          {s.number}. {s.englishName} ({s.name})
-        </option>
-      {/each}
-    </select>
-
-    <div class="range-inputs-wrap">
-      <input
-        type="number"
-        class="range-num-input"
-        min="1"
-        max={currentMeta.ayahCount}
-        bind:value={startAyah}
-      />
-      <span class="range-sep">-</span>
-      <input
-        type="number"
-        class="range-num-input"
-        min="1"
-        max={currentMeta.ayahCount}
-        bind:value={endAyah}
-      />
+  <!-- Task Card (Matches Screenshot Exactly) -->
+  <div
+    class="task-card"
+    id="task-e3-quran-page"
+    class:completed={isDone}
+    onclick={() => trackerState.toggleTask('e3')}
+    role="button"
+    tabindex="0"
+    onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('e3'); }}
+  >
+    <div class="checkbox">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
     </div>
 
-    <button
-      type="button"
-      class="load-net-btn"
-      onclick={() => loadSurahAyahs(selectedSurahNum, true)}
-      title="Fetch latest verses from network"
-    >
-      <span class="reload-icon">🔄</span> Load from Net
-    </button>
-  </div>
-
-  <!-- YOUTUBE RECITATION CONTAINER -->
-  {#if !isFocusMode}
-    <div class="youtube-player-card">
-      <div class="yt-header-bar">
-        <div class="yt-title">
-          <span class="yt-play-icon">▶</span>
-          <span>YouTube Recitation</span>
+    <div class="task-content-body">
+      <!-- Title & Set Button Row -->
+      <div class="task-head-row">
+        <div class="task-text" style="margin-bottom: 0;">
+          Read and Listen Quran <span>📖</span>
         </div>
-        <div class="yt-actions">
-          <button
-            type="button"
-            class="yt-ctrl-btn min-btn"
-            onclick={toggleVideoMinimize}
-          >
-            {isVideoMinimized ? '▲ Show Video' : '▼ Minimize Video'}
-          </button>
-          {#if videoUrl}
-            <a
-              class="yt-open-link"
-              href={videoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open ↗
-            </a>
-          {/if}
-          <button
-            type="button"
-            class="yt-edit-btn"
-            onclick={() => {
-              editUrlInput = videoUrl;
-              showEditUrlModal = true;
-            }}
-            title="Edit YouTube URL"
-          >
-            ✏️
-          </button>
-        </div>
-      </div>
-
-      {#if !isVideoMinimized}
-        <div class="yt-video-wrapper">
-          {#if embedUrl}
-            <iframe
-              src={embedUrl}
-              title="YouTube Quran Recitation"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              class="yt-iframe"
-            ></iframe>
-          {:else}
-            <div class="yt-placeholder">
-              <p>No video player configured.</p>
-              <button
-                type="button"
-                class="set-video-btn"
-                onclick={() => {
-                  editUrlInput = videoUrl;
-                  showEditUrlModal = true;
-                }}
-              >
-                Set YouTube Recitation Link
-              </button>
-            </div>
-          {/if}
-        </div>
-      {/if}
-    </div>
-  {/if}
-
-  <!-- BISMILLAH CALLIGRAPHY BANNER -->
-  {#if selectedSurahNum !== 9}
-    <div class="bismillah-banner-box">
-      <div class="bismillah-calligraphy" dir="rtl">
-        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-      </div>
-    </div>
-  {/if}
-
-  <!-- SCROLLABLE AYAH CARDS -->
-  <div class="ayah-cards-scroll-container">
-    {#if isLoading}
-      <div class="loader-state">
-        <div class="spinner"></div>
-        <p>Loading verses &amp; Urdu translation...</p>
-      </div>
-    {:else if loadError}
-      <div class="error-state">
-        <p>⚠️ {loadError}</p>
         <button
           type="button"
-          class="retry-btn"
-          onclick={() => loadSurahAyahs(selectedSurahNum, true)}
+          class="set-surah-btn"
+          onclick={(e) => { e.stopPropagation(); openAddSurah(); }}
+          title="Set Surah, Ayat range & YouTube recitation link"
         >
-          ↺ Retry Loading
+          <span class="plus-sign">+</span> Set Surah &amp; Ayahs
         </button>
       </div>
-    {:else if displayedAyahs.length === 0}
-      <div class="empty-state">
-        <p>No verses to display in range {startAyah} – {endAyah}.</p>
-      </div>
-    {:else}
-      {#each displayedAyahs as ayah (ayah.numberInSurah)}
-        {@const isPlaying = playingAyahNum === ayah.numberInSurah}
-        <div class="single-ayah-card" class:playing={isPlaying}>
-          <div class="ayah-card-head">
-            <span class="ayah-number-badge">
-              Ayah {ayah.numberInSurah}
-            </span>
 
-            <button
-              type="button"
-              class="ayah-play-btn"
-              class:active={isPlaying}
-              onclick={() => playAyahAudio(ayah)}
-              title={isPlaying ? 'Pause recitation' : 'Listen to Ayah'}
-            >
-              {#if isPlaying}
-                <span>⏸</span>
-              {:else}
-                <span class="play-symbol">▶</span>
-              {/if}
-            </button>
-          </div>
+      <!-- Surah Cards List -->
+      <div class="surah-cards-list" onclick={(e) => e.stopPropagation()} role="presentation">
+        {#each quranSurahs as s (s.id)}
+          <div class="surah-item-box">
+            <div class="surah-item-top">
+              <div class="surah-info-side">
+                <div class="surah-title-text">
+                  {s.title}
+                </div>
+                <div class="surah-meta-text">
+                  Ayat {s.ayahStart || 1} – {s.ayahEnd || 286} · Online Arabic &amp; Urdu Meaning
+                </div>
 
-          <!-- Arabic Text -->
-          <div
-            class="arabic-verse-line"
-            class:indopak={scriptMode === 'indopak'}
-            dir="rtl"
-          >
-            {scriptMode === 'indopak' ? ayah.arabicIndopak : ayah.arabicUthmani}
-          </div>
+                <div class="surah-actions-row">
+                  <button
+                    type="button"
+                    class="quran-read-btn"
+                    onclick={() => openPlayer(s)}
+                    title="Open Surah with Arabic text, Urdu meaning &amp; recitation"
+                  >
+                    <span>📖</span> Read &amp; Listen with Urdu Meaning
+                  </button>
+                  {#if s.url}
+                    <a
+                      class="quran-ext-link"
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onclick={(e) => e.stopPropagation()}
+                    >
+                      <span class="play-icon-badge">▶</span> External Link
+                    </a>
+                  {/if}
+                </div>
+              </div>
 
-          <!-- Dashed Divider -->
-          <div class="dashed-divider"></div>
-
-          <!-- Urdu Meaning / Translation -->
-          {#if ayah.urduText}
-            <div class="urdu-meaning-line" dir="rtl">
-              {ayah.urduText}
+              <!-- Right action icons -->
+              <div class="surah-icons-group">
+                <button
+                  type="button"
+                  class="action-icon-btn read-icon-btn"
+                  onclick={() => openPlayer(s)}
+                  title="Read &amp; Listen"
+                >
+                  📖
+                </button>
+                <button
+                  type="button"
+                  class="action-icon-btn edit-icon-btn"
+                  onclick={() => editSurah(s)}
+                  title="Edit Playlist"
+                >
+                  ✏️
+                </button>
+                <button
+                  type="button"
+                  class="action-icon-btn delete-icon-btn"
+                  onclick={() => deleteSurah(s.id)}
+                  title="Delete Playlist"
+                >
+                  🗑️
+                </button>
+              </div>
             </div>
-          {/if}
-        </div>
-      {/each}
-    {/if}
-  </div>
-
-  <!-- FOOTER BUTTONS -->
-  <div class="modal-footer-bar">
-    <button
-      type="button"
-      class="footer-pill-btn prev-btn"
-      onclick={handlePrevAyahs}
-    >
-      ◀ Prev Ayahs
-    </button>
-
-    <button
-      type="button"
-      class="footer-pill-btn next-btn"
-      onclick={handleNextAyahs}
-    >
-      Next Ayahs ▶
-    </button>
-
-    <button
-      type="button"
-      class="footer-pill-btn close-btn"
-      onclick={goBackToSchedule}
-    >
-      ✕ Close
-    </button>
+          </div>
+        {/each}
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- EDIT YOUTUBE URL MODAL -->
-{#if showEditUrlModal}
+<!-- SET SURAH & AYAHS MODAL -->
+{#if showSurahModal}
   <div
-    class="edit-url-overlay"
-    onclick={() => (showEditUrlModal = false)}
-    onkeydown={(e) => { if (e.key === 'Escape') showEditUrlModal = false; }}
+    class="nav-menu-overlay"
+    onclick={() => (showSurahModal = false)}
+    onkeydown={(e) => { if (e.key === 'Escape') showSurahModal = false; }}
     role="button"
     tabindex="-1"
   >
     <div
-      class="edit-url-box"
+      class="nav-menu-dropdown"
+      style="max-width: 440px; padding: 20px;"
       onclick={(e) => e.stopPropagation()}
       onkeydown={(e) => e.stopPropagation()}
       role="dialog"
       tabindex="0"
     >
-      <h3 style="font-size: 15px; font-weight: 800; margin-bottom: 6px; color: #0f172a;">
-        ✏️ Edit YouTube Recitation Link
-      </h3>
-      <p style="font-size: 12px; color: #64748b; margin-bottom: 8px;">
-        Paste a YouTube video URL or playlist URL (e.g. https://youtu.be/... or https://youtube.com/playlist?list=...):
-      </p>
-      <input
-        type="text"
-        class="edit-url-input"
-        bind:value={editUrlInput}
-        placeholder="https://youtu.be/..."
-      />
-      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+        <h3 style="font-size: 16px; font-weight: 800; color: #1e1b4b; margin: 0;">
+          {editingSurahId ? '✏️ Edit Surah' : '➕ Set Surah & Ayahs'}
+        </h3>
         <button
           type="button"
-          class="cancel-btn"
-          onclick={() => (showEditUrlModal = false)}
+          class="dropdown-close-btn"
+          onclick={() => (showSurahModal = false)}
+        >
+          ✕
+        </button>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label for="surahTitleInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+          Title (e.g. 📖 Surah 2: Al-Baqarah (Ayat 1 – 286)):
+        </label>
+        <input
+          id="surahTitleInput"
+          type="text"
+          class="input-field"
+          style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+          placeholder="📖 Surah 2: Al-Baqarah (Ayat 1 – 286)"
+          bind:value={surahFormTitle}
+        />
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+        <div style="flex: 1;">
+          <label for="surahStartInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+            Start Ayah:
+          </label>
+          <input
+            id="surahStartInput"
+            type="number"
+            min="1"
+            class="input-field"
+            style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+            bind:value={surahFormStart}
+          />
+        </div>
+        <div style="flex: 1;">
+          <label for="surahEndInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+            End Ayah:
+          </label>
+          <input
+            id="surahEndInput"
+            type="number"
+            min="1"
+            class="input-field"
+            style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+            bind:value={surahFormEnd}
+          />
+        </div>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label for="surahUrlInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+          Recitation Link (YouTube / Audio URL):
+        </label>
+        <input
+          id="surahUrlInput"
+          type="url"
+          class="input-field"
+          style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
+          placeholder="https://youtu.be/..."
+          bind:value={surahFormUrl}
+        />
+      </div>
+
+      <div style="display: flex; gap: 8px; justify-content: flex-end;">
+        <button
+          type="button"
+          onclick={() => (showSurahModal = false)}
+          style="padding: 7px 12px; font-size: 12px; background: #f1f5f9; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 700; cursor: pointer;"
         >
           Cancel
         </button>
         <button
           type="button"
-          class="save-btn"
-          onclick={saveCustomVideoUrl}
+          onclick={saveSurah}
+          style="padding: 7px 16px; font-size: 12px; background: #f59e0b; color: black; border: 1.5px solid var(--ink); border-radius: 8px; font-weight: 800; cursor: pointer; box-shadow: 0 2px 0 var(--ink);"
         >
-          Save Link
+          Save Surah
         </button>
       </div>
     </div>
   </div>
 {/if}
 
+<!-- FULL QURAN RECITATION PLAYER MODAL -->
+<EveningQuranModal
+  isOpen={isPlayerOpen}
+  surahNumber={activeSurahNum}
+  initialStart={activeStart}
+  initialEnd={activeEnd}
+  initialVideoUrl={activeUrl}
+  onClose={() => (isPlayerOpen = false)}
+/>
+
 <style>
-  .quran-tool-container {
-    background: #ffffff;
-    border: 2.5px solid var(--ink, #141413);
-    border-radius: clamp(16px, 2.5vw, 24px);
+  .quran-page-wrapper {
     max-width: 680px;
     margin: 0 auto;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    padding: clamp(14px, 2vw, 20px);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12), 0 5px 0 var(--ink, #141413);
-    overflow: hidden;
+    padding-bottom: 60px;
+    font-family: inherit;
   }
 
-  .quran-tool-container.focus-mode {
-    max-width: 820px;
-  }
-
-  /* TOP BAR */
-  .quran-top-bar {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 8px;
-    padding-bottom: 12px;
-  }
-
-  .top-title-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-  }
-
-  .title-with-icon {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: clamp(14px, 2.2vw, 17px);
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .book-icon {
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
-  .ayat-pill-badge {
-    background: #ede9fe;
-    color: #6d28d9;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 2px 10px;
-    border-radius: 999px;
-    width: fit-content;
-  }
-
-  .top-actions-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .top-pill-btn {
-    background: #ffffff;
-    border-radius: 999px;
-    padding: 4px 10px;
-    font-size: 11.5px;
-    font-weight: 800;
-    cursor: pointer;
+  .quran-header-pill {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    transition: all 0.15s;
-  }
-
-  .top-pill-btn.pk-btn {
-    border: 1.5px solid #10b981;
-    color: #059669;
-  }
-
-  .top-pill-btn.pk-btn.active {
-    background: #ecfdf5;
-  }
-
-  .pk-flag {
-    font-size: 9.5px;
-    background: #10b981;
-    color: #ffffff;
-    padding: 1px 4px;
-    border-radius: 3px;
-    font-weight: 900;
-  }
-
-  .top-pill-btn.focus-btn {
-    border: 1.5px solid #0d9488;
-    color: #0f766e;
-  }
-
-  .top-pill-btn.focus-btn.active {
-    background: #0d9488;
-    color: #ffffff;
-  }
-
-  .close-round-btn {
+    gap: 6px;
     background: #ffffff;
-    border: 1.5px solid var(--ink, #141413);
-    border-radius: 8px;
-    width: 28px;
-    height: 28px;
+    border: 2.5px solid var(--ink, #141413);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-weight: 800;
+    font-size: 13px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 0 var(--ink, #141413);
+  }
+
+  .pill-icon {
+    font-size: 15px;
+  }
+
+  /* TASK CARD MATCHING SCREENSHOT */
+  .task-card {
+    background: #ffffff;
+    border: 2.5px solid var(--ink, #141413);
+    border-radius: 20px;
+    padding: 18px 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 900;
-    color: #0f172a;
+    align-items: flex-start;
+    gap: 14px;
+    box-shadow: 0 4px 0 var(--ink, #141413);
     cursor: pointer;
     transition: background 0.15s;
   }
 
-  .close-round-btn:hover {
-    background: #fee2e2;
+  .task-card.completed {
+    background: #f8fafc;
   }
 
-  /* SELECTOR CONTROLS ROW */
-  .selector-controls-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-
-  .surah-dropdown {
-    flex: 1;
-    min-width: 170px;
-    background: #ffffff;
-    border: 2px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 6px 10px;
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #0f172a;
-    outline: none;
-  }
-
-  .surah-dropdown:focus {
+  .task-card.completed .checkbox {
+    background: #10b981;
     border-color: #059669;
   }
 
-  .range-inputs-wrap {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  .task-card.completed .checkbox svg {
+    display: block;
   }
 
-  .range-num-input {
-    width: 52px;
-    background: #ffffff;
-    border: 2px solid #cbd5e1;
+  .checkbox {
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--ink, #141413);
     border-radius: 8px;
-    padding: 5px 6px;
-    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .checkbox svg {
+    display: none;
+  }
+
+  .task-content-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .task-head-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .task-text {
+    font-size: 16px;
     font-weight: 800;
-    text-align: center;
-    color: #0f172a;
-    outline: none;
+    color: #1e1b4b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .range-num-input:focus {
-    border-color: #059669;
-  }
-
-  .range-sep {
-    font-weight: 800;
-    color: #64748b;
-  }
-
-  .load-net-btn {
+  .set-surah-btn {
+    font-size: 11.5px;
+    padding: 4px 14px;
     background: #f59e0b;
     color: #000000;
-    border: 2px solid var(--ink, #141413);
-    border-radius: 10px;
-    padding: 6px 12px;
-    font-size: 12px;
     font-weight: 800;
+    border: 2px solid var(--ink, #141413);
+    border-radius: 999px;
     cursor: pointer;
     box-shadow: 0 2px 0 var(--ink, #141413);
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    transition: transform 0.1s;
-    white-space: nowrap;
-  }
-
-  .load-net-btn:active {
-    transform: translateY(2px);
-    box-shadow: none;
-  }
-
-  .reload-icon {
-    font-size: 13px;
-  }
-
-  /* YOUTUBE CARD */
-  .youtube-player-card {
-    background: #0f172a;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .yt-header-bar {
-    background: #0f172a;
-    padding: 7px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-
-  .yt-title {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 800;
-  }
-
-  .yt-play-icon {
-    background: #2563eb;
-    color: #ffffff;
-    width: 17px;
-    height: 17px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-  }
-
-  .yt-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .yt-ctrl-btn {
-    background: #1e293b;
-    border: 1px solid #334155;
-    color: #93c5fd;
-    border-radius: 6px;
-    padding: 3px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-
-  .yt-open-link {
-    color: #cbd5e1;
-    font-size: 11px;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .yt-open-link:hover {
-    color: #ffffff;
-    text-decoration: underline;
-  }
-
-  .yt-edit-btn {
-    background: transparent;
-    border: none;
-    font-size: 12px;
-    cursor: pointer;
-    padding: 2px;
-  }
-
-  .yt-video-wrapper {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    background: #000000;
-  }
-
-  .yt-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  .yt-placeholder {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #94a3b8;
-    font-size: 13px;
-    gap: 8px;
-  }
-
-  .set-video-btn {
-    background: #2563eb;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 800;
-    cursor: pointer;
-  }
-
-  /* BISMILLAH BANNER */
-  .bismillah-banner-box {
-    background: #ecfdf5;
-    border: 1.5px solid #a7f3d0;
-    border-radius: 12px;
-    padding: 10px;
-    margin-bottom: 12px;
-    text-align: center;
-  }
-
-  .bismillah-calligraphy {
-    font-family: 'Scheherazade New', 'Amiri', serif;
-    font-size: clamp(22px, 3.5vw, 28px);
-    font-weight: 700;
-    color: #047857;
-    line-height: 1.4;
-  }
-
-  /* AYAH CARDS SCROLL CONTAINER */
-  .ayah-cards-scroll-container {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 #f8fafc;
-  }
-
-  .ayah-cards-scroll-container::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .ayah-cards-scroll-container::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 999px;
-  }
-
-  .single-ayah-card {
-    background: #ffffff;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 14px 16px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    transition: border-color 0.15s, background 0.15s;
-  }
-
-  .single-ayah-card.playing {
-    border-color: #059669;
-    background: #f0fdf4;
-  }
-
-  .ayah-card-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-
-  .ayah-number-badge {
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #475569;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 6px;
-  }
-
-  .ayah-play-btn {
-    background: #f0fdfa;
-    border: 1.5px solid #0d9488;
-    border-radius: 8px;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    color: #0d9488;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .ayah-play-btn:hover {
-    background: #ccfbf1;
-  }
-
-  .ayah-play-btn.active {
-    background: #0d9488;
-    color: #ffffff;
-  }
-
-  .play-symbol {
-    margin-left: 2px;
-  }
-
-  .arabic-verse-line {
-    font-size: clamp(22px, 3.5vw, 26px);
-    font-weight: 600;
-    color: #0f172a;
-    text-align: right;
-    line-height: 1.9;
-    word-spacing: 3px;
-    font-family: 'Amiri', 'Scheherazade New', serif;
-  }
-
-  .arabic-verse-line.indopak {
-    font-family: 'Scheherazade New', 'Noto Nastaliq Urdu', 'Amiri', serif;
-    line-height: 2.1;
-  }
-
-  .dashed-divider {
-    border-bottom: 1px dashed #cbd5e1;
-    margin: 10px 0;
-  }
-
-  .urdu-meaning-line {
-    font-family: 'Noto Nastaliq Urdu', 'Scheherazade New', serif;
-    font-size: 15.5px;
-    line-height: 2.1;
-    color: #334155;
-    text-align: right;
-  }
-
-  /* LOADER & ERROR */
-  .loader-state,
-  .error-state,
-  .empty-state {
-    padding: 30px 16px;
-    text-align: center;
-    color: #64748b;
-  }
-
-  .spinner {
-    width: 30px;
-    height: 30px;
-    border: 3px solid #e2e8f0;
-    border-top-color: #059669;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 10px;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  .retry-btn {
-    margin-top: 8px;
-    background: #f1f5f9;
-    border: 1.5px solid var(--ink, #141413);
-    border-radius: 6px;
-    padding: 5px 12px;
-    font-size: 12px;
-    font-weight: 800;
-    cursor: pointer;
-  }
-
-  /* FOOTER BAR */
-  .modal-footer-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-top: 10px;
-    margin-top: 10px;
-    border-top: 1px solid #f1f5f9;
-  }
-
-  .footer-pill-btn {
-    border-radius: 999px;
-    padding: 8px 16px;
-    font-size: 12.5px;
-    font-weight: 800;
-    cursor: pointer;
+    gap: 4px;
     transition: transform 0.1s;
     font-family: inherit;
   }
 
-  .footer-pill-btn:active {
+  .set-surah-btn:active {
     transform: translateY(2px);
+    box-shadow: none;
   }
 
-  .footer-pill-btn.prev-btn {
+  .plus-sign {
+    color: #6366f1;
+    font-weight: 900;
+    font-size: 13px;
+  }
+
+  /* INNER SURAH CARD */
+  .surah-cards-list {
+    margin-top: 10px;
+  }
+
+  .surah-item-box {
     background: #ffffff;
-    color: #0284c7;
-    border: 2px solid #0284c7;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top: 6px;
   }
 
-  .footer-pill-btn.next-btn {
-    background: #f59e0b;
-    color: #000000;
-    border: 2px solid var(--ink, #141413);
-    box-shadow: 0 2px 0 var(--ink, #141413);
+  .surah-item-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
   }
 
-  .footer-pill-btn.close-btn {
+  .surah-info-side {
     flex: 1;
-    background: #ffffff;
-    color: #ef4444;
-    border: 2px solid #ef4444;
-    text-align: center;
+    min-width: 0;
   }
 
-  /* EDIT URL MODAL */
-  .edit-url-overlay {
+  .surah-title-text {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.3;
+  }
+
+  .surah-meta-text {
+    font-size: 11px;
+    color: #0284c7;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .surah-actions-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .quran-read-btn {
+    background: #ffffff;
+    border: 1.5px solid #059669;
+    color: #047857;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+
+  .quran-read-btn:hover {
+    background: #f0fdf4;
+  }
+
+  .quran-ext-link {
+    background: #eff6ff;
+    border: 1.5px solid #bfdbfe;
+    color: #2563eb;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+
+  .quran-ext-link:hover {
+    background: #dbeafe;
+  }
+
+  .play-icon-badge {
+    color: #2563eb;
+    font-size: 9px;
+  }
+
+  /* ACTION ICONS GROUP */
+  .surah-icons-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+
+  .action-icon-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .read-icon-btn {
+    border: 1.5px solid #10b981;
+    color: #047857;
+  }
+
+  .read-icon-btn:hover {
+    background: #ecfdf5;
+  }
+
+  .edit-icon-btn,
+  .delete-icon-btn {
+    border: 1.5px solid #cbd5e1;
+  }
+
+  .edit-icon-btn:hover,
+  .delete-icon-btn:hover {
+    background: #f1f5f9;
+  }
+
+  /* MODAL STYLES */
+  .nav-menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 100010;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(3px);
+    z-index: 100000;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 16px;
   }
 
-  .edit-url-box {
+  .nav-menu-dropdown {
     background: #ffffff;
-    border: 2px solid var(--ink, #141413);
-    border-radius: 16px;
-    padding: 18px;
-    width: min(100%, 420px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    border: 2.5px solid var(--ink, #141413);
+    border-radius: 20px;
+    width: min(100%, 440px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25), 0 5px 0 var(--ink, #141413);
   }
 
-  .edit-url-input {
-    width: 100%;
-    border: 2px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 8px 10px;
-    font-size: 13px;
-    font-weight: 600;
-    outline: none;
-  }
-
-  .edit-url-input:focus {
-    border-color: #2563eb;
-  }
-
-  .cancel-btn {
+  .dropdown-close-btn {
     background: #f1f5f9;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 6px 14px;
-    font-weight: 700;
+    border: 2px solid var(--ink, #141413);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
     font-size: 12px;
-    cursor: pointer;
-  }
-
-  .save-btn {
-    background: #059669;
-    color: #ffffff;
-    border: 1.5px solid var(--ink, #141413);
-    border-radius: 8px;
-    padding: 6px 16px;
     font-weight: 800;
-    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
 </style>
