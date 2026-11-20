@@ -32,8 +32,6 @@
   let activeEnd = $state(286);
   let activeUrl = $state('');
 
-  let isDone = $derived(Boolean(trackerState.completedTasks['e3']));
-
   onMount(async () => {
     await trackerState.init();
     const saved = await storageBridge.getItem('quran_evening_surahs');
@@ -117,22 +115,8 @@
     <span class="pill-icon">📖</span> QUR'AN
   </div>
 
-  <!-- Task Card (Matches Screenshot Exactly) -->
-  <div
-    class="task-card"
-    id="task-e3-quran-page"
-    class:completed={isDone}
-    onclick={() => trackerState.toggleTask('e3')}
-    role="button"
-    tabindex="0"
-    onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('e3'); }}
-  >
-    <div class="checkbox">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="20 6 9 17 4 12" />
-      </svg>
-    </div>
-
+  <!-- Quran Card -->
+  <div class="quran-main-card">
     <div class="task-content-body">
       <!-- Title & Set Button Row -->
       <div class="task-head-row">
@@ -363,48 +347,13 @@
     font-size: 15px;
   }
 
-  /* TASK CARD MATCHING SCREENSHOT */
-  .task-card {
+  /* MAIN CARD */
+  .quran-main-card {
     background: #ffffff;
     border: 2.5px solid var(--ink, #141413);
     border-radius: 20px;
     padding: 18px 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
     box-shadow: 0 4px 0 var(--ink, #141413);
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-
-  .task-card.completed {
-    background: #f8fafc;
-  }
-
-  .task-card.completed .checkbox {
-    background: #10b981;
-    border-color: #059669;
-  }
-
-  .task-card.completed .checkbox svg {
-    display: block;
-  }
-
-  .checkbox {
-    width: 26px;
-    height: 26px;
-    border: 2px solid var(--ink, #141413);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .checkbox svg {
-    display: none;
   }
 
   .task-content-body {
