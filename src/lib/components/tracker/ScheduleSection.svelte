@@ -1010,7 +1010,23 @@
               </svg>
             </div>
             <div style="flex: 1; min-width: 0;">
-              <div class="task-text">{nightSurah.title || 'Surah Mulk'} <span>📖</span></div>
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                <div class="task-text" style="margin-bottom: 0;">{nightSurah.title || 'Surah Mulk'} <span>📖</span></div>
+                <button
+                  type="button"
+                  class="grammar-add-topic-btn"
+                  onclick={(e) => { e.stopPropagation(); editNightSurah(); }}
+                  title="Set Surah, Ayat range (Start & End) & YouTube link"
+                  style="font-size: 11px; padding: 3px 10px; background: #f59e0b; color: #000000; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 999px; cursor: pointer; box-shadow: 0 1.5px 0 var(--ink); display: inline-flex; align-items: center; gap: 4px;"
+                >
+                  <span style="color: #6366f1; font-weight: 900; font-size: 12px;">+</span> Set Surah &amp; Ayahs
+                </button>
+              </div>
+
+              <div style="font-size: 11px; color: #0284c7; font-weight: 700; margin-top: 3px;">
+                Ayat {nightSurah.ayahStart || 1} – {nightSurah.ayahEnd || 30} · Online Arabic &amp; Urdu Meaning
+              </div>
+
               <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
                 <button
                   type="button"
@@ -1026,7 +1042,7 @@
                   }}
                   style="font-size: 11px; padding: 4px 10px; background: #047857; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
                 >
-                  <span>📖</span> Read &amp; Listen {nightSurah.title || 'Surah Mulk'} ➔
+                  <span>📖</span> Read &amp; Listen {nightSurah.title || 'Surah Mulk'} (Ayat {nightSurah.ayahStart || 1} – {nightSurah.ayahEnd || 30}) ➔
                 </button>
                 {#if nightSurah.url}
                   <a
@@ -1227,7 +1243,7 @@
     >
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
         <h3 style="margin: 0; font-size: 16px; font-weight: 800; color: var(--ink);">
-          {editingSurahId ? '✏️ Edit Surah' : '➕ Set Surah & Ayahs'}
+          {editingSurahId && editingSurahId !== 'night_mulk' ? '✏️ Edit Surah' : '➕ Set Surah & Ayahs'}
         </h3>
         <button
           type="button"
