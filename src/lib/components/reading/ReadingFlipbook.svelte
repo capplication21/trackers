@@ -29,6 +29,9 @@
   }
 
   function handleTouchStart(e) {
+    if (e.target && e.target.closest && e.target.closest('.reading-page-scrollable, button, a, input, select')) {
+      return;
+    }
     if (e.touches && e.touches[0]) {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
@@ -37,6 +40,9 @@
   }
 
   function handleTouchMove(e) {
+    if (e.target && e.target.closest && e.target.closest('.reading-page-scrollable, button, a, input, select')) {
+      return;
+    }
     if (e.touches && e.touches[0]) {
       const dx = Math.abs(e.touches[0].clientX - touchStartX);
       const dy = Math.abs(e.touches[0].clientY - touchStartY);
@@ -72,8 +78,9 @@
     let pageHeight = 580;
 
     if (isMobile) {
-      pageWidth = Math.max(260, Math.min(availWidth - 16, 400));
-      pageHeight = Math.max(540, Math.min(680, Math.round(pageWidth * 1.55)));
+      pageWidth = Math.max(260, Math.min(availWidth - 12, 420));
+      const targetMobileH = Math.round(window.innerHeight * 0.64);
+      pageHeight = Math.max(540, Math.min(660, Math.max(targetMobileH, Math.round(pageWidth * 1.5))));
     } else {
       const spreadWidth = Math.min(availWidth - 24, 880);
       pageWidth = Math.round(spreadWidth / 2);
@@ -103,6 +110,16 @@
           readingState.currentPage = e.data;
           readingState.saveState();
           playPageFlipSound(readingState.isSoundEnabled);
+
+          // Scroll new page to top when flipped
+          setTimeout(() => {
+            if (bookElement) {
+              const scrollables = bookElement.querySelectorAll('.reading-page-scrollable');
+              scrollables.forEach((el) => {
+                el.scrollTop = 0;
+              });
+            }
+          }, 60);
         });
         pageFlipInstance = flip;
         readingState.pageFlipInstance = flip;
@@ -137,19 +154,19 @@
   }
 
   function handleBookClick(event) {
-    // If user was dragging / scrolling text, do not flip page!
+    // If user was dragging / scrolling text with touch, do not flip page!
     if (isTouchDragging) {
       isTouchDragging = false;
       return;
     }
 
-    // Interactive elements
+    // Interactive elements: buttons, links, inputs, bookmark ribbons
     if (event.target.closest('button, a, input, select, textarea, .reading-bookmark-ribbon, .reading-page-bm-btn')) {
       return;
     }
 
-    // On mobile, if tapped inside scrollable text body, do not flip page (allow scrolling/reading)
-    if (isMobile && event.target.closest('.reading-page-scrollable') && readingState.currentPage > 0 && readingState.currentPage < totalPages - 1) {
+    // If text was selected with mouse, do not flip
+    if (typeof window !== 'undefined' && window.getSelection()?.toString()?.length > 0) {
       return;
     }
 
@@ -169,7 +186,6 @@
       return;
     }
 
-    // Open spread:
     // Left click on page (left half) flips back to previous page
     // Right click on page (right half) flips forward to next page
     if (clickX < rect.width / 2) {
@@ -290,18 +306,6 @@
     aria-label="Storybook Reader"
     style="position: relative; user-select: none;"
   >
-    <!-- Floating Prev Arrow -->
-    {#if readingState.currentPage > 0}
-      <button
-        type="button"
-        class="reading-flip-arrow-btn reading-flip-arrow-prev"
-        onclick={(e) => { e.stopPropagation(); handleFlipPrev(); }}
-        title="Previous Page (‹)"
-      >
-        ‹
-      </button>
-    {/if}
-
     <div id="readingStBookElement" bind:this={bookElement} style="cursor: pointer;">
       <!-- Page 0: Front Hardcover -->
       <div
@@ -464,7 +468,7 @@
             </div>
           </div>
 
-          <div class="reading-page-scrollable" style="flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding-right:4px;padding-bottom:32px;">
+          <div class="reading-page-scrollable" style="flex:1 1 0%;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain;padding-right:6px;padding-bottom:90px;">
             <div
               class="reading-chapter-title"
               style="margin-bottom:14px;border-bottom:2px solid #ca8a04;padding-bottom:4px;"
@@ -551,7 +555,7 @@
             </div>
 
             <!-- Scrollable Page Body (Allows full chapter & vocab to be read comfortably on mobile) -->
-            <div class="reading-page-scrollable" style="flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding-right:4px;padding-bottom:36px;">
+            <div class="reading-page-scrollable" style="flex:1 1 0%;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain;padding-right:6px;padding-bottom:90px;">
               <div class="reading-chapter-title">
                 {p.chapter}: {p.title}
               </div>
@@ -634,7 +638,7 @@
             </div>
           </div>
 
-          <div class="reading-page-scrollable" style="flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding-right:4px;padding-bottom:36px;">
+          <div class="reading-page-scrollable" style="flex:1 1 0%;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain;padding-right:6px;padding-bottom:90px;">
             <div class="reading-chapter-title" style="color:#854d0e;">
               ✨ Moral of the Story
             </div>
@@ -680,18 +684,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Floating Next Arrow -->
-    {#if readingState.currentPage < totalPages - 1}
-      <button
-        type="button"
-        class="reading-flip-arrow-btn reading-flip-arrow-next"
-        onclick={(e) => { e.stopPropagation(); handleFlipNext(); }}
-        title="Next Page (›)"
-      >
-        ›
-      </button>
-    {/if}
   </div>
 
   <!-- Bottom Chapter Stepper Bar -->
@@ -735,25 +727,69 @@
 
 <style>
   :global(.reading-stage-wrapper) {
-    padding-bottom: 60px;
+    padding-bottom: 75px;
   }
   :global(.reading-page-inner) {
     overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+  }
+  :global(.reading-page-header) {
+    flex-shrink: 0 !important;
+  }
+  :global(.reading-page-footer) {
+    flex-shrink: 0 !important;
+    margin-top: 8px !important;
+    padding-top: 6px !important;
+    border-top: 1px solid #e4d7c5 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  :global(.stf__outerShadow),
+  :global(.stf__innerShadow),
+  :global(.stf__hardShadow),
+  :global(.stf__hardInnerShadow),
+  :global(.stf__block canvas),
+  :global(.stf__parent canvas) {
+    pointer-events: none !important;
   }
   :global(.reading-page-scrollable) {
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+    scrollbar-color: #94a3b8 #f1f5f9;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    overscroll-behavior-y: contain;
   }
   :global(.reading-page-scrollable::-webkit-scrollbar) {
-    width: 4px;
+    width: 5px;
+  }
+  :global(.reading-page-scrollable::-webkit-scrollbar-track) {
+    background: #f1f5f9;
+    border-radius: 4px;
   }
   :global(.reading-page-scrollable::-webkit-scrollbar-thumb) {
-    background: #cbd5e1;
+    background: #94a3b8;
     border-radius: 4px;
+  }
+  :global(.reading-page-scrollable::-webkit-scrollbar-thumb:hover) {
+    background: #64748b;
   }
   @media (max-width: 768px) {
     :global(.reading-stage-wrapper) {
-      padding-bottom: 80px !important;
+      padding: 8px 4px 90px 4px !important;
+    }
+    :global(.reading-page-inner) {
+      padding: 14px 12px 10px 12px !important;
+    }
+    :global(.reading-chapter-title) {
+      font-size: 15px !important;
+      margin-bottom: 8px !important;
+    }
+    :global(.reading-prose-container) {
+      line-height: 1.62 !important;
     }
   }
 </style>

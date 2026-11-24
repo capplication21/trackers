@@ -2658,6 +2658,16 @@
         line-height: 1.5;
         margin-bottom: 8px;
       }
+      .adkar-pdf-urdu {
+        font-family: 'Noto Nastaliq Urdu', 'Urdu Typesetting', 'Jameel Noori Nastaleeq', 'Amiri', serif, system-ui;
+        direction: rtl;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: #b48216;
+        line-height: 1.95;
+        margin-bottom: 9px;
+        text-align: center;
+      }
       .adkar-pdf-trans {
         font-size: 12.5px;
         color: #1f2937;
@@ -3231,7 +3241,7 @@
         justify-content: space-between;
         padding: 24px 22px 18px 22px;
         box-sizing: border-box;
-        overflow-y: auto;
+        overflow: hidden;
       }
 
       .reading-bookmark-ribbon {
@@ -3283,6 +3293,7 @@
         letter-spacing: 0.5px;
         color: #78716c;
         text-transform: uppercase;
+        flex-shrink: 0;
       }
 
       .reading-chapter-title {
@@ -3345,6 +3356,7 @@
         font-size: 10px;
         color: #a8a29e;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        flex-shrink: 0;
       }
 
       /* Floating Page Turn Arrows */
@@ -3384,6 +3396,41 @@
       }
       .reading-flip-arrow-next {
         right: -20px;
+      }
+
+      /* Make sure PageFlip shadows never block touch scrolling or clicks */
+      .stf__outerShadow,
+      .stf__innerShadow,
+      .stf__hardShadow,
+      .stf__hardInnerShadow,
+      .stf__block canvas,
+      .stf__parent canvas {
+        pointer-events: none !important;
+      }
+
+      @media (max-width: 768px) {
+        .reading-flip-arrow-prev {
+          left: 4px !important;
+          width: 36px !important;
+          height: 36px !important;
+          font-size: 16px !important;
+        }
+        .reading-flip-arrow-next {
+          right: 4px !important;
+          width: 36px !important;
+          height: 36px !important;
+          font-size: 16px !important;
+        }
+        .reading-page-inner {
+          padding: 14px 12px 10px 12px !important;
+        }
+        .reading-chapter-title {
+          font-size: 15px !important;
+          margin-bottom: 8px !important;
+        }
+        .reading-prose-container {
+          line-height: 1.62 !important;
+        }
       }
 
       /* Bottom Chapter Stepper Bar */

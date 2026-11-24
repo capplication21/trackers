@@ -6,6 +6,8 @@
   import { storageBridge } from '$lib/stores/storageBridge.js';
   import { SURAH_LIST } from '$lib/data/quranData.js';
   import { detectSurahFromText, getSurahMeta } from '$lib/utils/surahMatcher.js';
+  import { openExternalUrl } from '$lib/utils/openLink.js';
+  import defaults from '$lib/data/trackerDefaults.json';
   import EveningQuranModal from './EveningQuranModal.svelte';
 
   let activePeriod = $state('activities'); // 'activities' | 'morning' | 'afternoon' | 'evening' | 'night'
@@ -220,8 +222,8 @@
   }
 
   function missingDefaultMedicines(period) {
-    const periodDefaults = (defaults.medicines || []).filter((m) => m.period === period);
-    return periodDefaults.filter((dm) => !trackerState.medicines.some((m) => m.id === dm.id));
+    const periodDefaults = (defaults?.medicines || []).filter((m) => m.period === period);
+    return periodDefaults.filter((dm) => !(trackerState?.medicines || []).some((m) => m.id === dm.id));
   }
 
   async function restoreDefaultMedicine(defaultMed) {
@@ -494,9 +496,7 @@
             class="page-back-btn"
             onclick={(e) => {
               e.stopPropagation();
-              if (typeof window !== 'undefined') {
-                window.open('https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK', '_blank');
-              }
+              openExternalUrl('https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK');
             }}
             style="padding: 6px 13px; font-size: 11.5px; background: #0d9488; color: #ffffff; border: 1.5px solid var(--ink); border-radius: 9px; box-shadow: 0 2px 0 var(--ink); flex-shrink: 0; font-weight: 800; cursor: pointer;"
           >

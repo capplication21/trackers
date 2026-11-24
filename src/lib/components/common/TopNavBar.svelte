@@ -14,7 +14,7 @@
     { id: 'notes', icon: '🤲', badge: 'DUAAS', title: 'Duaa Book' },
     { id: 'quran', icon: '📖', badge: "QUR'AN", title: "Qur'an" },
     { id: 'pdf', icon: '📖', badge: 'BOOKS', title: 'PDF Reader' },
-    { id: 'templates', icon: '📖', badge: 'STORIES', title: 'English Stories Book' },
+    { id: 'templates', icon: '🍳', badge: 'TRIED', title: 'My Tried Recipe' },
     { id: 'adkar', icon: '📿', badge: 'ADKAR', title: 'Adkar' },
     { id: 'reading', icon: '📚', badge: 'READING', title: 'Reading Book' }
   ];

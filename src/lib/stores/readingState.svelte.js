@@ -4,6 +4,7 @@ import { extractYouTubeId } from '$lib/utils/youtubeParser.js';
 
 class ReadingStore {
   storyId = $state('story_linda');
+  activeView = $state('library'); // 'library' | 'reader'
   currentPage = $state(0);
   fontSize = $state(16);
   isSoundEnabled = $state(true);
@@ -26,7 +27,8 @@ class ReadingStore {
     // Load persistent state
     const saved = await storageBridge.getItem('english2flow_reading_state');
     if (saved && typeof saved === 'object') {
-      this.storyId = 'story_linda'; // Only "A Mother's Secret: Love & Sacrifice" in book form
+      if (saved.storyId) this.storyId = saved.storyId;
+      if (saved.activeView) this.activeView = saved.activeView;
       if (typeof saved.currentPage === 'number') this.currentPage = saved.currentPage;
       if (typeof saved.fontSize === 'number') this.fontSize = saved.fontSize;
       if (typeof saved.isSoundEnabled === 'boolean') this.isSoundEnabled = saved.isSoundEnabled;
@@ -43,7 +45,7 @@ class ReadingStore {
   }
 
   get allStories() {
-    return builtinStories.filter(s => s.id === 'story_linda');
+    return [...builtinStories, ...this.userStories];
   }
 
   get currentStory() {
@@ -70,6 +72,7 @@ class ReadingStore {
   async saveState() {
     await storageBridge.setItem('english2flow_reading_state', {
       storyId: this.storyId,
+      activeView: this.activeView,
       currentPage: this.currentPage,
       fontSize: this.fontSize,
       isSoundEnabled: this.isSoundEnabled,
@@ -82,8 +85,14 @@ class ReadingStore {
 
   async setStory(id) {
     this.storyId = id;
+    this.activeView = 'reader';
     const bm = this.getStoryBookmark(id);
     this.currentPage = bm !== null ? bm : 0;
+    await this.saveState();
+  }
+
+  async setView(view) {
+    this.activeView = view;
     await this.saveState();
   }
 

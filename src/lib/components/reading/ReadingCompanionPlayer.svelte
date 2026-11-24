@@ -1,5 +1,6 @@
 <script>
   import { readingState } from '$lib/stores/readingState.svelte.js';
+  import { openExternalUrl } from '$lib/utils/openLink.js';
 
   let showModal = $state(false);
   let customUrlInput = $state('');
@@ -58,16 +59,14 @@
       </button>
 
       {#if readingState.currentStory.videoUrl}
-        <a
-          href={readingState.currentStory.videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onclick={() => openExternalUrl(readingState.currentStory.videoUrl)}
           class="reading-media-btn"
           title="Open in YouTube"
-          style="text-decoration:none;"
         >
           <span>↗️</span> YouTube
-        </a>
+        </button>
       {/if}
 
       <button

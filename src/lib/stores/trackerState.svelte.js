@@ -21,15 +21,15 @@ class TrackerStore {
   
   // 3x/Week Zad and Understand Quran state
   zadSubjects = $state([
-    { id: 'aqeedah', name: 'Aqeedah (Islamic Creed)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/playlist?list=PLDOc9rkFwfwA7LVnGN1E9CWhZZ0DL0VWm&si=1U_LLA39ZaJzn30F' },
-    { id: 'fiqh', name: 'Fiqh (Islamic Jurisprudence)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/@academyzaden' },
-    { id: 'seerah', name: 'Seerah (Prophetic Biography)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/@academyzaden' },
-    { id: 'tarbiyah', name: 'Islamic Education & Tarbiyah', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://youtube.com/@academyzaden' }
+    { id: 'aqeedah', name: 'Aqeedah (Islamic Creed)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwA7LVnGN1E9CWhZZ0DL0VWm' },
+    { id: 'fiqh', name: 'Fiqh (Islamic Jurisprudence)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwD4Yxk6qCwcfnUIXiA6iIeU' },
+    { id: 'seerah', name: 'Seerah (Prophetic Biography)', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwBA0g3JSYqdoQlqw0tum0Fd' },
+    { id: 'tarbiyah', name: 'Islamic Education & Tarbiyah', currentLecture: 1, totalLectures: 25, playlistUrl: 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwDl5V60aZu-qgSRl99lxubI' }
   ]);
 
   uqSubjects = $state([
-    { id: 'quran_course_1', name: 'Understand Al-Qur\'an 50% Words', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK' },
-    { id: 'quran_course_2', name: 'Grammar Made Easy Level 1', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK' }
+    { id: 'quran_course_1', name: 'Understand Al-Qur\'an 50% Words', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7Uz-AUKjxMqdIKErqpRmESh' },
+    { id: 'quran_course_2', name: 'Grammar Made Easy Level 1', currentLecture: 1, totalLectures: 20, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR' }
   ]);
 
   // Period Health
@@ -72,10 +72,42 @@ class TrackerStore {
     // Load Zad & UQ courses (save whatever the user has — no silent URL overrides,
     // so edited playlist links persist across reloads)
     const savedZad = await storageBridge.getItem('zad_subjects_v1');
-    if (Array.isArray(savedZad)) this.zadSubjects = savedZad;
+    if (Array.isArray(savedZad)) {
+      this.zadSubjects = savedZad.map(s => {
+        const name = (s.name || '').toLowerCase();
+        let url = s.playlistUrl;
+        if (!url || url === 'https://youtube.com/@academyzaden' || url.includes('search_query=')) {
+          if (s.id === 'aqeedah' || name.includes('aqeedah') || name.includes('alqedah')) {
+            url = 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwA7LVnGN1E9CWhZZ0DL0VWm';
+          } else if (s.id === 'fiqh' || name.includes('fiqh')) {
+            url = 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwD4Yxk6qCwcfnUIXiA6iIeU';
+          } else if (s.id === 'seerah' || name.includes('seerah') || name.includes('serah')) {
+            url = 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwBA0g3JSYqdoQlqw0tum0Fd';
+          } else if (s.id === 'tarbiyah' || name.includes('tarbiyah') || name.includes('education')) {
+            url = 'https://www.youtube.com/playlist?list=PLDOc9rkFwfwDl5V60aZu-qgSRl99lxubI';
+          }
+        }
+        return { ...s, playlistUrl: url };
+      });
+      await storageBridge.setItem('zad_subjects_v1', this.zadSubjects);
+    }
 
     const savedUq = await storageBridge.getItem('uq_subjects_v1');
-    if (Array.isArray(savedUq)) this.uqSubjects = savedUq;
+    if (Array.isArray(savedUq)) {
+      this.uqSubjects = savedUq.map(s => {
+        const name = (s.name || '').toLowerCase();
+        let url = s.playlistUrl;
+        if (!url || url === 'https://youtube.com/@understandquran' || url.includes('search_query=')) {
+          if (s.id === 'quran_course_2' || name.includes('grammar')) {
+            url = 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR';
+          } else {
+            url = 'https://www.youtube.com/playlist?list=PL62RQxDpIL7Uz-AUKjxMqdIKErqpRmESh';
+          }
+        }
+        return { ...s, playlistUrl: url };
+      });
+      await storageBridge.setItem('uq_subjects_v1', this.uqSubjects);
+    }
 
     // Load medicines
     const savedMeds = await storageBridge.getItem('medicines_config');
