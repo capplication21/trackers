@@ -24,12 +24,25 @@
   /** @type {HTMLButtonElement | null} */
   let buttonEl = $state(null);
   let pos = $state({ x: /** @type {number | null} */ (null), y: /** @type {number | null} */ (null) });
+  
+  const HOLD_DURATION = 1500; // 1.5s hold required before dragging is enabled
+  /** @type {any} */
+  let holdTimer = null;
+  let isHolding = $state(false);
+  let isDragReady = $state(false);
   let isDragging = $state(false);
   let hasMoved = $state(false);
   let startX = 0;
   let startY = 0;
   let startLeft = 0;
   let startTop = 0;
+
+  function clearHoldTimer() {
+    if (holdTimer) {
+      clearTimeout(holdTimer);
+      holdTimer = null;
+    }
+  }
 
   /**
    * @param {number} x
@@ -70,13 +83,14 @@
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
+      clearHoldTimer();
     };
   });
 
   /** @param {PointerEvent} e */
   function handlePointerDown(e) {
     if (e.button !== 0 && e.pointerType === 'mouse') return;
-    if (!buttonEl) return;
+    if (!buttonEl || isHolding) return;
 
     try {
       buttonEl.setPointerCapture(e.pointerId);
@@ -87,18 +101,34 @@
     startY = e.clientY;
     startLeft = rect.left;
     startTop = rect.top;
+
+    isHolding = true;
+    isDragReady = false;
+    isDragging = false;
     hasMoved = false;
-    isDragging = true;
+
+    clearHoldTimer();
+    holdTimer = setTimeout(() => {
+      // 1.5 seconds hold reached -> unlock dragging!
+      isDragReady = true;
+      isDragging = true;
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try {
+          navigator.vibrate(35);
+        } catch {}
+      }
+    }, HOLD_DURATION);
   }
 
   /** @param {PointerEvent} e */
   function handlePointerMove(e) {
-    if (!isDragging) return;
+    // Do NOT drag unless user held for 1.5 seconds!
+    if (!isDragReady || !isDragging) return;
 
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
 
-    if (!hasMoved && Math.hypot(dx, dy) > 4) {
+    if (!hasMoved && Math.hypot(dx, dy) > 3) {
       hasMoved = true;
     }
 
@@ -109,7 +139,7 @@
 
   /** @param {PointerEvent} e */
   function handlePointerUp(e) {
-    if (!isDragging) return;
+    clearHoldTimer();
 
     try {
       if (buttonEl?.hasPointerCapture(e.pointerId)) {
@@ -117,27 +147,35 @@
       }
     } catch {}
 
+    const wasDragReady = isDragReady;
     const moved = hasMoved;
+
+    isHolding = false;
+    isDragReady = false;
     isDragging = false;
     hasMoved = false;
 
-    if (moved) {
+    if (wasDragReady && moved) {
+      // User held for 1.5s and actually dragged -> save position
       try {
         localStorage.setItem('tracker_nav_pill_pos', JSON.stringify({ x: pos.x, y: pos.y }));
       } catch {}
     } else {
+      // Released before 1.5s (or held without moving) -> behaves as click!
       navigationState.toggleMenu();
     }
   }
 
   /** @param {PointerEvent} e */
   function handlePointerCancel(e) {
-    if (!isDragging) return;
+    clearHoldTimer();
     try {
       if (buttonEl?.hasPointerCapture(e.pointerId)) {
         buttonEl.releasePointerCapture(e.pointerId);
       }
     } catch {}
+    isHolding = false;
+    isDragReady = false;
     isDragging = false;
     hasMoved = false;
   }
@@ -187,15 +225,23 @@
       bind:this={buttonEl}
       type="button"
       class="floating-nav-pill"
+      class:is-holding={isHolding && !isDragReady}
+      class:is-drag-ready={isDragReady}
       class:is-dragging={isDragging && hasMoved}
       style={pos.x !== null && pos.y !== null
-        ? `left: ${pos.x}px; top: ${pos.y}px; right: auto; bottom: auto; cursor: ${isDragging ? 'grabbing' : 'grab'};`
-        : `cursor: ${isDragging ? 'grabbing' : 'grab'};`}
+        ? `left: ${pos.x}px; top: ${pos.y}px; right: auto; bottom: auto; cursor: ${isDragging && hasMoved ? 'grabbing' : isDragReady ? 'grab' : 'pointer'};`
+        : `cursor: ${isDragging && hasMoved ? 'grabbing' : isDragReady ? 'grab' : 'pointer'};`}
       onpointerdown={handlePointerDown}
       onpointermove={handlePointerMove}
       onpointerup={handlePointerUp}
       onpointercancel={handlePointerCancel}
-      title="Drag to reposition or click to open Navigators"
+      onkeydown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          navigationState.toggleMenu();
+        }
+      }}
+      title="Tap to open Navigators (or hold 1.5s to drag)"
     >
       <span class="floating-icon">🧭</span> Navigators
     </button>
@@ -207,12 +253,21 @@
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .floating-nav-pill.is-holding {
+    transform: scale(0.96);
+    filter: brightness(0.96);
+  }
+  .floating-nav-pill.is-drag-ready {
+    transform: scale(1.08) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.65), 0 10px 24px rgba(79, 70, 229, 0.45), 0 4px 0 var(--ink) !important;
   }
   .floating-nav-pill.is-dragging {
     transition: none !important;
     animation: none !important;
-    transform: scale(1.06) !important;
-    box-shadow: 0 12px 28px rgba(79, 70, 229, 0.65), 0 5px 0 var(--ink) !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 14px 28px rgba(79, 70, 229, 0.65), 0 5px 0 var(--ink) !important;
     z-index: 1000000 !important;
   }
 </style>
