@@ -32,6 +32,17 @@
   let surahFormUrl = $state('');
   let editingSurahId = $state(null);
 
+  // Night Surah (Surah Mulk) State
+  let nightSurah = $state({
+    id: 'night_mulk',
+    title: 'Surah Mulk',
+    surahNumber: 67,
+    ayahStart: 1,
+    ayahEnd: 30,
+    url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF',
+    isDeleted: false
+  });
+
   // Evening Quran Reader & Recitation Modal (Matches Screenshot)
   let isEveningQuranOpen = $state(false);
   let eveningQuranSurah = $state(2);
@@ -57,6 +68,14 @@
   onMount(async () => {
     await trackerState.init();
     await quranState.initSurahs();
+
+    // Load Night Surah Mulk preferences
+    try {
+      const savedNightSurah = await storageBridge.getItem('night_surah_config_v1');
+      if (savedNightSurah && typeof savedNightSurah === 'object') {
+        nightSurah = { ...nightSurah, ...savedNightSurah };
+      }
+    } catch (e) {}
 
     // Load timer minutes preference
     const savedMin = await storageBridge.getItem('tm_exercise_minutes');
@@ -243,6 +262,38 @@
     }
   }
 
+  function editNightSurah() {
+    editingSurahId = 'night_mulk';
+    surahFormNumber = nightSurah.surahNumber || 67;
+    surahFormTitle = nightSurah.title || 'Surah Mulk';
+    const meta = getSurahMeta(surahFormNumber);
+    surahFormStart = nightSurah.ayahStart || 1;
+    surahFormEnd = nightSurah.ayahEnd || meta.ayahCount || 30;
+    surahFormUrl = nightSurah.url || 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF';
+    showSurahModal = true;
+  }
+
+  async function deleteNightSurah() {
+    if (!confirm('Are you sure you want to remove Surah Mulk from your Night routine?')) return;
+    nightSurah = {
+      ...nightSurah,
+      isDeleted: true
+    };
+    try {
+      await storageBridge.setItem('night_surah_config_v1', nightSurah);
+    } catch (e) {}
+  }
+
+  async function restoreNightSurah() {
+    nightSurah = {
+      ...nightSurah,
+      isDeleted: false
+    };
+    try {
+      await storageBridge.setItem('night_surah_config_v1', nightSurah);
+    } catch (e) {}
+  }
+
   async function saveSurah() {
     const titleTrimmed = surahFormTitle.trim();
     if (!titleTrimmed && !surahFormNumber) return;
@@ -254,7 +305,20 @@
     const start = Math.max(1, parseInt(surahFormStart, 10) || 1);
     const end = Math.min(meta.ayahCount, Math.max(start, parseInt(surahFormEnd, 10) || meta.ayahCount));
 
-    if (editingSurahId) {
+    if (editingSurahId === 'night_mulk') {
+      nightSurah = {
+        ...nightSurah,
+        title: finalTitle,
+        surahNumber: finalSurahNum,
+        ayahStart: start,
+        ayahEnd: end,
+        url: surahFormUrl.trim(),
+        isDeleted: false
+      };
+      try {
+        await storageBridge.setItem('night_surah_config_v1', nightSurah);
+      } catch (e) {}
+    } else if (editingSurahId) {
       await quranState.updateSurah(editingSurahId, {
         title: finalTitle,
         surahNumber: finalSurahNum,
@@ -929,52 +993,90 @@
       <!-- NIGHT SPECIFIC TASKS -->
       {:else if activePeriod === 'night'}
         <!-- Surah Mulk -->
-        {@const isMulkDone = Boolean(trackerState.completedTasks['n5'])}
-        <div
-          class="task-card"
-          id="task-n5-s"
-          class:completed={isMulkDone}
-          onclick={() => trackerState.toggleTask('n5')}
-          role="button"
-          tabindex="0"
-          onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('n5'); }}
-        >
-          <div class="checkbox">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </div>
-          <div style="flex: 1; min-width: 0;">
-            <div class="task-text">Surah Mulk <span>📖</span></div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
+        {#if !nightSurah.isDeleted}
+          {@const isMulkDone = Boolean(trackerState.completedTasks['n5'])}
+          <div
+            class="task-card"
+            id="task-n5-s"
+            class:completed={isMulkDone}
+            onclick={() => trackerState.toggleTask('n5')}
+            role="button"
+            tabindex="0"
+            onkeydown={(e) => { if (e.key === 'Enter') trackerState.toggleTask('n5'); }}
+          >
+            <div class="checkbox">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div class="task-text">{nightSurah.title || 'Surah Mulk'} <span>📖</span></div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
+                <button
+                  type="button"
+                  class="grammar-add-topic-btn"
+                  onclick={(e) => {
+                    e.stopPropagation();
+                    openEveningQuran({
+                      surahNumber: nightSurah.surahNumber || 67,
+                      ayahStart: nightSurah.ayahStart || 1,
+                      ayahEnd: nightSurah.ayahEnd || 30,
+                      url: nightSurah.url || 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
+                    });
+                  }}
+                  style="font-size: 11px; padding: 4px 10px; background: #047857; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
+                >
+                  <span>📖</span> Read &amp; Listen {nightSurah.title || 'Surah Mulk'} ➔
+                </button>
+                {#if nightSurah.url}
+                  <a
+                    class="yt-link"
+                    href={nightSurah.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onclick={(e) => e.stopPropagation()}
+                  >
+                    <span>▶️</span> Listen {nightSurah.title || 'Surah Mulk'}
+                  </a>
+                {/if}
+              </div>
+            </div>
+
+            <!-- Action icons: Edit and Delete -->
+            <div style="display: flex; align-items: center; gap: 5px; flex-shrink: 0;" onclick={(e) => e.stopPropagation()}>
               <button
                 type="button"
-                class="grammar-add-topic-btn"
-                onclick={(e) => {
-                  e.stopPropagation();
-                  openEveningQuran({
-                    surahNumber: 67,
-                    ayahStart: 1,
-                    ayahEnd: 30,
-                    url: 'https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF'
-                  });
-                }}
-                style="font-size: 11px; padding: 4px 10px; background: #047857; color: #ffffff; font-weight: 800; border: 1.5px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: 0 1px 0 var(--ink);"
+                class="grammar-item-action-btn"
+                onclick={(e) => { e.stopPropagation(); editNightSurah(); }}
+                title="Edit Surah Mulk"
+                style="width: 26px; height: 26px; font-size: 11px; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center;"
               >
-                <span>📖</span> Read &amp; Listen Surah Mulk ➔
+                ✏️
               </button>
-              <a
-                class="yt-link"
-                href="https://youtu.be/JZnXtmZk_3M?si=xXxwcQyjEP_KeoFF"
-                target="_blank"
-                rel="noopener noreferrer"
-                onclick={(e) => e.stopPropagation()}
+              <button
+                type="button"
+                class="grammar-item-action-btn delete-btn"
+                onclick={(e) => { e.stopPropagation(); deleteNightSurah(); }}
+                title="Delete Surah Mulk"
+                style="width: 26px; height: 26px; font-size: 11px; border: 1.5px solid #cbd5e1; border-radius: 8px; background: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center;"
               >
-                <span>▶️</span> Listen Surah Mulk
-              </a>
+                🗑️
+              </button>
             </div>
           </div>
-        </div>
+        {:else}
+          <div style="padding: 8px 12px; margin-bottom: 8px; border: 1.5px dashed #cbd5e1; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); background: #f8fafc;">
+            <span>Surah Mulk removed from Night routine</span>
+            <button
+              type="button"
+              class="grammar-add-topic-btn"
+              onclick={restoreNightSurah}
+              style="font-size: 11px; padding: 3px 10px;"
+            >
+              + Restore Surah Mulk
+            </button>
+          </div>
+        {/if}
 
         <!-- Freedase 30 & Night Medicines -->
         {#each periodMedicines('night') as med (med.id)}
