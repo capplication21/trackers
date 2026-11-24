@@ -8,6 +8,11 @@
   let pageFlipInstance = null;
   let isMobile = $state(false);
 
+  // Touch gesture tracking to prevent accidental page-turns while scrolling
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isTouchDragging = false;
+
   const story = $derived(readingState.currentStory);
   const totalPages = $derived(
     1 /* Front Cover */ +
@@ -21,6 +26,32 @@
 
   async function handleTogglePageBookmark(pageIdx) {
     await readingState.toggleBookmark(story.id, pageIdx);
+  }
+
+  function handleTouchStart(e) {
+    if (e.touches && e.touches[0]) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      isTouchDragging = false;
+    }
+  }
+
+  function handleTouchMove(e) {
+    if (e.touches && e.touches[0]) {
+      const dx = Math.abs(e.touches[0].clientX - touchStartX);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY);
+      if (dx > 7 || dy > 7) {
+        isTouchDragging = true;
+      }
+    }
+  }
+
+  function handleTouchEnd() {
+    if (isTouchDragging) {
+      setTimeout(() => {
+        isTouchDragging = false;
+      }, 180);
+    }
   }
 
   async function mountBook() {
@@ -42,11 +73,11 @@
 
     if (isMobile) {
       pageWidth = Math.max(260, Math.min(availWidth - 16, 400));
-      pageHeight = Math.round(pageWidth * 1.34);
+      pageHeight = Math.max(540, Math.min(680, Math.round(pageWidth * 1.55)));
     } else {
       const spreadWidth = Math.min(availWidth - 24, 880);
       pageWidth = Math.round(spreadWidth / 2);
-      pageHeight = Math.min(580, Math.round(pageWidth * 1.32));
+      pageHeight = Math.min(600, Math.round(pageWidth * 1.34));
     }
 
     try {
@@ -58,7 +89,7 @@
         autoSize: false,
         maxShadowOpacity: 0.45,
         showCover: true,
-        mobileScrollSupport: false,
+        mobileScrollSupport: true,
         usePortrait: isMobile,
         flippingTime: 450,
         useMouseEvents: false,
@@ -106,8 +137,19 @@
   }
 
   function handleBookClick(event) {
-    // If the click originated from an interactive element (buttons, links, bookmark triggers), let it do its work
+    // If user was dragging / scrolling text, do not flip page!
+    if (isTouchDragging) {
+      isTouchDragging = false;
+      return;
+    }
+
+    // Interactive elements
     if (event.target.closest('button, a, input, select, textarea, .reading-bookmark-ribbon, .reading-page-bm-btn')) {
+      return;
+    }
+
+    // On mobile, if tapped inside scrollable text body, do not flip page (allow scrolling/reading)
+    if (isMobile && event.target.closest('.reading-page-scrollable') && readingState.currentPage > 0 && readingState.currentPage < totalPages - 1) {
       return;
     }
 
@@ -173,15 +215,93 @@
 </script>
 
 <div class="reading-stage-wrapper" id="readingFlipbookCard" bind:this={stageWrapper}>
+  <!-- Stage Top Control Toolbar -->
+  <div class="reading-stage-top-controls">
+    <div class="reading-stage-page-info">
+      {#if readingState.currentPage === 0}
+        <span>📖 Cover Page</span>
+      {:else if readingState.currentPage === 1}
+        <span>📖 Frontispiece</span>
+      {:else if readingState.currentPage === 2}
+        <span>📑 Table of Contents</span>
+      {:else if readingState.currentPage >= totalPages - 1}
+        <span>✨ Epilogue &amp; Moral</span>
+      {:else}
+        <span>📖 Chapter {readingState.currentPage - 2} of {story.pages.length}</span>
+      {/if}
+    </div>
+
+    <div class="reading-top-tool-group">
+      <!-- Font Size Controls (Helpful on mobile to make text fit perfectly) -->
+      <button
+        type="button"
+        class="reading-tool-btn"
+        onclick={() => readingState.adjustFontSize(-1)}
+        title="Decrease font size"
+        style="font-size: 11px; padding: 3px 8px;"
+      >
+        A-
+      </button>
+      <span style="font-size: 11px; font-weight: 700; color: #94a3b8; min-width: 26px; text-align: center;">
+        {readingState.fontSize}px
+      </span>
+      <button
+        type="button"
+        class="reading-tool-btn"
+        onclick={() => readingState.adjustFontSize(1)}
+        title="Increase font size"
+        style="font-size: 11px; padding: 3px 8px;"
+      >
+        A+
+      </button>
+
+      <!-- Jump to TOC -->
+      <button
+        type="button"
+        class="reading-tool-btn"
+        onclick={() => flipTo(2)}
+        title="Table of Contents"
+      >
+        📑 TOC
+      </button>
+
+      <!-- Bookmark button -->
+      <button
+        type="button"
+        class="reading-tool-btn"
+        class:active={savedBookmark === readingState.currentPage}
+        onclick={() => handleTogglePageBookmark(readingState.currentPage)}
+        title="Bookmark current page"
+      >
+        {savedBookmark === readingState.currentPage ? '🔖 Saved' : '🔖 Bookmark'}
+      </button>
+    </div>
+  </div>
+
   <!-- Flipbook Stage with Left/Right Click Page Turning -->
   <div
     class="reading-flipbook-container"
     onclick={handleBookClick}
     oncontextmenu={handleContextMenu}
+    ontouchstart={handleTouchStart}
+    ontouchmove={handleTouchMove}
+    ontouchend={handleTouchEnd}
     role="region"
     aria-label="Storybook Reader"
     style="position: relative; user-select: none;"
   >
+    <!-- Floating Prev Arrow -->
+    {#if readingState.currentPage > 0}
+      <button
+        type="button"
+        class="reading-flip-arrow-btn reading-flip-arrow-prev"
+        onclick={(e) => { e.stopPropagation(); handleFlipPrev(); }}
+        title="Previous Page (‹)"
+      >
+        ‹
+      </button>
+    {/if}
+
     <div id="readingStBookElement" bind:this={bookElement} style="cursor: pointer;">
       <!-- Page 0: Front Hardcover -->
       <div
@@ -344,7 +464,7 @@
             </div>
           </div>
 
-          <div style="flex:1;overflow-y:auto;padding-right:4px;">
+          <div class="reading-page-scrollable" style="flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding-right:4px;padding-bottom:32px;">
             <div
               class="reading-chapter-title"
               style="margin-bottom:14px;border-bottom:2px solid #ca8a04;padding-bottom:4px;"
@@ -430,37 +550,40 @@
               </div>
             </div>
 
-            <div class="reading-chapter-title">
-              {p.chapter}: {p.title}
-            </div>
+            <!-- Scrollable Page Body (Allows full chapter & vocab to be read comfortably on mobile) -->
+            <div class="reading-page-scrollable" style="flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding-right:4px;padding-bottom:36px;">
+              <div class="reading-chapter-title">
+                {p.chapter}: {p.title}
+              </div>
 
-            <div class="reading-prose-container" style="font-size:{readingState.fontSize}px;">
-              {#each p.prose as paragraph, paraIdx}
-                {#if paraIdx === 0 && paragraph.length > 0}
-                  <p style="margin-bottom:12px;">
-                    <span class="reading-drop-cap">{paragraph.charAt(0)}</span>{paragraph.slice(1)}
-                  </p>
-                {:else}
-                  <p style="margin-bottom:12px;">{paragraph}</p>
-                {/if}
-              {/each}
-            </div>
-
-            {#if p.vocab && p.vocab.length}
-              <div class="reading-vocab-box">
-                <div
-                  style="font-weight:800;color:#854d0e;margin-bottom:4px;display:flex;align-items:center;gap:4px;"
-                >
-                  <span>💡</span> Key Vocabulary &amp; Expressions:
-                </div>
-                {#each p.vocab as v}
-                  <div class="reading-vocab-item">
-                    <span class="reading-vocab-word">• {v.word}</span>:
-                    <span class="reading-vocab-def">{v.meaning}</span>
-                  </div>
+              <div class="reading-prose-container" style="font-size:{readingState.fontSize}px;">
+                {#each p.prose as paragraph, paraIdx}
+                  {#if paraIdx === 0 && paragraph.length > 0}
+                    <p style="margin-bottom:12px;">
+                      <span class="reading-drop-cap">{paragraph.charAt(0)}</span>{paragraph.slice(1)}
+                    </p>
+                  {:else}
+                    <p style="margin-bottom:12px;">{paragraph}</p>
+                  {/if}
                 {/each}
               </div>
-            {/if}
+
+              {#if p.vocab && p.vocab.length}
+                <div class="reading-vocab-box">
+                  <div
+                    style="font-weight:800;color:#854d0e;margin-bottom:4px;display:flex;align-items:center;gap:4px;"
+                  >
+                    <span>💡</span> Key Vocabulary &amp; Expressions:
+                  </div>
+                  {#each p.vocab as v}
+                    <div class="reading-vocab-item">
+                      <span class="reading-vocab-word">• {v.word}</span>:
+                      <span class="reading-vocab-def">{v.meaning}</span>
+                    </div>
+                  {/each}
+                </div>
+              {/if}
+            </div>
 
             <div class="reading-page-footer">
               <span>English2Flow</span>
@@ -511,7 +634,7 @@
             </div>
           </div>
 
-          <div style="flex:1;overflow-y:auto;padding-right:4px;">
+          <div class="reading-page-scrollable" style="flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding-right:4px;padding-bottom:36px;">
             <div class="reading-chapter-title" style="color:#854d0e;">
               ✨ Moral of the Story
             </div>
@@ -557,5 +680,80 @@
         </div>
       </div>
     </div>
+
+    <!-- Floating Next Arrow -->
+    {#if readingState.currentPage < totalPages - 1}
+      <button
+        type="button"
+        class="reading-flip-arrow-btn reading-flip-arrow-next"
+        onclick={(e) => { e.stopPropagation(); handleFlipNext(); }}
+        title="Next Page (›)"
+      >
+        ›
+      </button>
+    {/if}
+  </div>
+
+  <!-- Bottom Chapter Stepper Bar -->
+  <div class="reading-bottom-chapter-bar">
+    <button
+      type="button"
+      class="reading-chapter-jump-pill"
+      class:active={readingState.currentPage === 0}
+      onclick={() => flipTo(0)}
+    >
+      Cover
+    </button>
+    <button
+      type="button"
+      class="reading-chapter-jump-pill"
+      class:active={readingState.currentPage === 2}
+      onclick={() => flipTo(2)}
+    >
+      TOC
+    </button>
+    {#each story.pages as p, idx}
+      <button
+        type="button"
+        class="reading-chapter-jump-pill"
+        class:active={readingState.currentPage === idx + 3}
+        onclick={() => flipTo(idx + 3)}
+      >
+        Ch. {idx + 1}
+      </button>
+    {/each}
+    <button
+      type="button"
+      class="reading-chapter-jump-pill"
+      class:active={readingState.currentPage === totalPages - 1}
+      onclick={() => flipTo(totalPages - 1)}
+    >
+      Epilogue
+    </button>
   </div>
 </div>
+
+<style>
+  :global(.reading-stage-wrapper) {
+    padding-bottom: 60px;
+  }
+  :global(.reading-page-inner) {
+    overflow: hidden !important;
+  }
+  :global(.reading-page-scrollable) {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+  :global(.reading-page-scrollable::-webkit-scrollbar) {
+    width: 4px;
+  }
+  :global(.reading-page-scrollable::-webkit-scrollbar-thumb) {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  @media (max-width: 768px) {
+    :global(.reading-stage-wrapper) {
+      padding-bottom: 80px !important;
+    }
+  }
+</style>
