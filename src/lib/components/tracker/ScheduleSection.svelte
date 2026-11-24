@@ -4,6 +4,8 @@
   import { navigationState } from '$lib/stores/navigationState.svelte.js';
   import { quranState } from '$lib/stores/quranState.svelte.js';
   import { storageBridge } from '$lib/stores/storageBridge.js';
+  import { SURAH_LIST } from '$lib/data/quranData.js';
+  import { detectSurahFromText, getSurahMeta } from '$lib/utils/surahMatcher.js';
   import EveningQuranModal from './EveningQuranModal.svelte';
 
   let activePeriod = $state('activities'); // 'activities' | 'morning' | 'afternoon' | 'evening' | 'night'
@@ -23,6 +25,7 @@
 
   // Quran Playlist State (Evening - Synchronized via quranState)
   let showSurahModal = $state(false);
+  let surahFormNumber = $state(2);
   let surahFormTitle = $state('');
   let surahFormStart = $state(1);
   let surahFormEnd = $state(286);
@@ -193,38 +196,79 @@
   // Surah helpers
   function openAddSurahModal() {
     editingSurahId = null;
-    surahFormTitle = '';
+    surahFormNumber = 2;
+    const meta = getSurahMeta(2);
+    surahFormTitle = `📖 Surah 2: Al-Baqarah (Ayat 1 – 286)`;
     surahFormStart = 1;
-    surahFormEnd = 286;
+    surahFormEnd = meta.ayahCount || 286;
     surahFormUrl = '';
     showSurahModal = true;
   }
 
   function editSurah(s) {
     editingSurahId = s.id;
-    surahFormTitle = s.title;
+    const detected = detectSurahFromText(s.title);
+    surahFormNumber = s.surahNumber || detected || 2;
+    surahFormTitle = s.title || '';
+    const meta = getSurahMeta(surahFormNumber);
     surahFormStart = s.ayahStart || 1;
-    surahFormEnd = s.ayahEnd || 286;
+    surahFormEnd = s.ayahEnd || meta.ayahCount || 286;
     surahFormUrl = s.url || '';
     showSurahModal = true;
   }
 
+  function handleSurahDropdownChange(e) {
+    const num = parseInt(e.target.value, 10);
+    if (!num) return;
+    surahFormNumber = num;
+    const meta = getSurahMeta(num);
+    // If title was blank or had standard surah title format, update title to match
+    if (!surahFormTitle || /^📖\s*Surah\s*\d+/i.test(surahFormTitle) || /^surah\s+[a-z]+/i.test(surahFormTitle.trim())) {
+      surahFormTitle = `📖 Surah ${meta.number}: ${meta.englishName} (${meta.name})`;
+    }
+    surahFormStart = 1;
+    surahFormEnd = meta.ayahCount;
+  }
+
+  function handleTitleInput(e) {
+    const val = e.target.value;
+    surahFormTitle = val;
+    const detected = detectSurahFromText(val);
+    if (detected && detected !== surahFormNumber) {
+      surahFormNumber = detected;
+      const meta = getSurahMeta(detected);
+      if (surahFormEnd > meta.ayahCount) {
+        surahFormEnd = meta.ayahCount;
+      }
+    }
+  }
+
   async function saveSurah() {
-    if (!surahFormTitle.trim()) return;
+    const titleTrimmed = surahFormTitle.trim();
+    if (!titleTrimmed && !surahFormNumber) return;
+
+    const detected = detectSurahFromText(titleTrimmed);
+    const finalSurahNum = surahFormNumber || detected || 2;
+    const meta = getSurahMeta(finalSurahNum);
+    const finalTitle = titleTrimmed || `📖 Surah ${meta.number}: ${meta.englishName} (${meta.name})`;
+    const start = Math.max(1, parseInt(surahFormStart, 10) || 1);
+    const end = Math.min(meta.ayahCount, Math.max(start, parseInt(surahFormEnd, 10) || meta.ayahCount));
+
     if (editingSurahId) {
       await quranState.updateSurah(editingSurahId, {
-        title: surahFormTitle.trim(),
-        ayahStart: surahFormStart,
-        ayahEnd: surahFormEnd,
+        title: finalTitle,
+        surahNumber: finalSurahNum,
+        ayahStart: start,
+        ayahEnd: end,
         url: surahFormUrl.trim()
       });
     } else {
       const newSurah = {
         id: 'surah_' + Date.now(),
-        title: surahFormTitle.trim(),
-        surahNumber: parseInt(surahFormTitle.match(/\d+/)?.[0] || '2', 10),
-        ayahStart: surahFormStart,
-        ayahEnd: surahFormEnd,
+        title: finalTitle,
+        surahNumber: finalSurahNum,
+        ayahStart: start,
+        ayahEnd: end,
         url: surahFormUrl.trim()
       };
       await quranState.addSurah(newSurah);
@@ -1092,6 +1136,26 @@
         </button>
       </div>
 
+      <!-- Surah Selector Dropdown -->
+      <div style="margin-bottom: 10px;">
+        <label for="surahSelectDropdown" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
+          Surah Name &amp; Number:
+        </label>
+        <select
+          id="surahSelectDropdown"
+          class="input-field"
+          style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px; background: #ffffff;"
+          value={surahFormNumber}
+          onchange={handleSurahDropdownChange}
+        >
+          {#each SURAH_LIST as s (s.number)}
+            <option value={s.number}>
+              {s.number}. {s.englishName} ({s.name}) — {s.ayahCount} Ayahs
+            </option>
+          {/each}
+        </select>
+      </div>
+
       <div style="margin-bottom: 10px;">
         <label for="surahTitleInput" style="display: block; font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px;">
           Title (e.g. 📖 Surah 18: Al-Kahf):
@@ -1102,7 +1166,8 @@
           class="input-field"
           style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 2px solid var(--ink); border-radius: 8px; font-size: 13.5px;"
           placeholder="📖 Surah 18: Al-Kahf (Ayat 1 - 110)"
-          bind:value={surahFormTitle}
+          value={surahFormTitle}
+          oninput={handleTitleInput}
         />
       </div>
 

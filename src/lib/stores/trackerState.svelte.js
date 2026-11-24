@@ -69,26 +69,13 @@ class TrackerStore {
     const savedHistory = await storageBridge.getItem('tracker_history_archive');
     if (Array.isArray(savedHistory)) this.history = savedHistory;
 
-    // Load Zad & UQ courses
+    // Load Zad & UQ courses (save whatever the user has — no silent URL overrides,
+    // so edited playlist links persist across reloads)
     const savedZad = await storageBridge.getItem('zad_subjects_v1');
-    if (Array.isArray(savedZad)) {
-      this.zadSubjects = savedZad.map((s) => {
-        if (s.id === 'aqeedah' || (s.name && s.name.toLowerCase().includes('aqeedah'))) {
-          return { ...s, playlistUrl: 'https://youtube.com/playlist?list=PLDOc9rkFwfwA7LVnGN1E9CWhZZ0DL0VWm&si=1U_LLA39ZaJzn30F' };
-        }
-        return s;
-      });
-    }
+    if (Array.isArray(savedZad)) this.zadSubjects = savedZad;
 
     const savedUq = await storageBridge.getItem('uq_subjects_v1');
-    if (Array.isArray(savedUq)) {
-      this.uqSubjects = savedUq.map((s) => {
-        if (!s.playlistUrl || s.playlistUrl.includes('@understandquran')) {
-          return { ...s, playlistUrl: 'https://www.youtube.com/playlist?list=PL62RQxDpIL7VhZuvQkggarKVAe9YvaePR&si=qcgHjtXVrXq_QCxK' };
-        }
-        return s;
-      });
-    }
+    if (Array.isArray(savedUq)) this.uqSubjects = savedUq;
 
     // Load medicines
     const savedMeds = await storageBridge.getItem('medicines_config');
@@ -210,6 +197,16 @@ class TrackerStore {
     await storageBridge.setItem('zad_subjects_v1', this.zadSubjects);
   }
 
+  async updateZadSubject(subjectId, name, totalLectures, playlistUrl) {
+    this.zadSubjects = this.zadSubjects.map(s => {
+      if (s.id === subjectId) {
+        return { ...s, name, totalLectures, playlistUrl };
+      }
+      return s;
+    });
+    await storageBridge.setItem('zad_subjects_v1', this.zadSubjects);
+  }
+
   async updateUqLecture(subjectId, delta) {
     this.uqSubjects = this.uqSubjects.map(s => {
       if (s.id === subjectId) {
@@ -224,6 +221,16 @@ class TrackerStore {
   async addUqSubject(name, totalLectures = 20, playlistUrl = '') {
     const id = 'uq_' + Date.now();
     this.uqSubjects = [...this.uqSubjects, { id, name, currentLecture: 1, totalLectures, playlistUrl }];
+    await storageBridge.setItem('uq_subjects_v1', this.uqSubjects);
+  }
+
+  async updateUqSubject(subjectId, name, totalLectures, playlistUrl) {
+    this.uqSubjects = this.uqSubjects.map(s => {
+      if (s.id === subjectId) {
+        return { ...s, name, totalLectures, playlistUrl };
+      }
+      return s;
+    });
     await storageBridge.setItem('uq_subjects_v1', this.uqSubjects);
   }
 

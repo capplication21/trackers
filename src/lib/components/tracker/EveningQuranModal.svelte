@@ -53,15 +53,21 @@
     );
   });
 
+  let lastOpenedKey = '';
   $effect(() => {
     if (isOpen) {
-      selectedSurahNum = surahNumber || 2;
-      startAyah = initialStart || 1;
-      const meta = SURAH_LIST.find((s) => s.number === selectedSurahNum);
-      endAyah = initialEnd || meta?.ayahCount || 286;
-      if (initialVideoUrl) videoUrl = initialVideoUrl;
-      loadSurahAyahs(selectedSurahNum);
+      const currentKey = `${surahNumber}_${initialStart}_${initialEnd}_${initialVideoUrl}`;
+      if (lastOpenedKey !== currentKey) {
+        lastOpenedKey = currentKey;
+        selectedSurahNum = surahNumber || 2;
+        startAyah = initialStart || 1;
+        const meta = SURAH_LIST.find((s) => s.number === selectedSurahNum);
+        endAyah = initialEnd || meta?.ayahCount || 286;
+        if (initialVideoUrl) videoUrl = initialVideoUrl;
+        loadSurahAyahs(selectedSurahNum);
+      }
     } else {
+      lastOpenedKey = '';
       stopAudio();
     }
   });

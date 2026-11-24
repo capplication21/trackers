@@ -1,6 +1,7 @@
 import { storageBridge } from './storageBridge.js';
 import { SURAH_LIST, JUZ_LIST, BUNDLED_SURAHS, DAILY_REFLECTIONS } from '$lib/data/quranData.js';
 import { triggerHaptic } from '$lib/utils/haptics.js';
+import { detectSurahFromText } from '$lib/utils/surahMatcher.js';
 
 class QuranStore {
   // Navigation & View
@@ -72,7 +73,21 @@ class QuranStore {
     try {
       const saved = await storageBridge.getItem('quran_evening_surahs');
       if (Array.isArray(saved) && saved.length > 0) {
-        this.surahs = saved;
+        let changed = false;
+        this.surahs = saved.map((s) => {
+          const detected = detectSurahFromText(s.title);
+          // If title clearly matches a specific Surah and surahNumber is different (or missing)
+          if (detected && detected !== s.surahNumber) {
+            changed = true;
+            return { ...s, surahNumber: detected };
+          }
+          return s;
+        });
+        if (changed) {
+          try {
+            await storageBridge.setItem('quran_evening_surahs', this.surahs);
+          } catch (e) {}
+        }
       }
     } catch (e) {
       console.warn('Failed loading shared Quran surahs:', e);
