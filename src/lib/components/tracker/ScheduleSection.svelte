@@ -212,6 +212,23 @@
     showMedModal = false;
   }
 
+  async function deleteMedicineDirect(med) {
+    const medName = med.name || med.defaultName || 'this medicine';
+    if (!confirm(`Are you sure you want to delete ${medName}?`)) return;
+    trackerState.medicines = trackerState.medicines.filter((m) => m.id !== med.id);
+    await storageBridge.setItem('medicines_config', trackerState.medicines);
+  }
+
+  function missingDefaultMedicines(period) {
+    const periodDefaults = (defaults.medicines || []).filter((m) => m.period === period);
+    return periodDefaults.filter((dm) => !trackerState.medicines.some((m) => m.id === dm.id));
+  }
+
+  async function restoreDefaultMedicine(defaultMed) {
+    trackerState.medicines = [...trackerState.medicines, { ...defaultMed }];
+    await storageBridge.setItem('medicines_config', trackerState.medicines);
+  }
+
   // Surah helpers
   function openAddSurahModal() {
     editingSurahId = null;
@@ -674,14 +691,39 @@
                 {isDone ? '✓ Taken' : '❓ Not taken'}
               </div>
             </div>
+            <div style="display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;" onclick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                class="task-med-edit-btn"
+                onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'morning'); }}
+                title="Change name, keep default, or edit medicine"
+                style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;"
+              >
+                <span>✏️</span> <span>Edit</span>
+              </button>
+              <button
+                type="button"
+                class="task-med-delete-btn"
+                onclick={(e) => { e.stopPropagation(); deleteMedicineDirect(med); }}
+                title="Delete medicine"
+                style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; width: 26px; height: 26px; font-size: 11px; cursor: pointer; color: #ef4444; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;"
+              >
+                🗑️
+              </button>
+            </div>
+          </div>
+        {/each}
+
+        {#each missingDefaultMedicines('morning') as defMed (defMed.id)}
+          <div style="padding: 6px 10px; margin-bottom: 8px; border: 1.5px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--muted); background: #f8fafc;">
+            <span>{defMed.defaultName || defMed.name} removed</span>
             <button
               type="button"
-              class="task-med-edit-btn"
-              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'morning'); }}
-              title="Change name, keep default, or remove medicine"
-              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+              class="grammar-add-topic-btn"
+              onclick={() => restoreDefaultMedicine(defMed)}
+              style="font-size: 10.5px; padding: 2px 8px;"
             >
-              <span>✏️</span> <span>Edit</span>
+              + Restore
             </button>
           </div>
         {/each}
@@ -784,14 +826,39 @@
                 {isDone ? '✓ Taken' : '❓ Not taken'}
               </div>
             </div>
+            <div style="display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;" onclick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                class="task-med-edit-btn"
+                onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'afternoon'); }}
+                title="Change name, keep default, or edit medicine"
+                style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;"
+              >
+                <span>✏️</span> <span>Edit</span>
+              </button>
+              <button
+                type="button"
+                class="task-med-delete-btn"
+                onclick={(e) => { e.stopPropagation(); deleteMedicineDirect(med); }}
+                title="Delete medicine"
+                style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; width: 26px; height: 26px; font-size: 11px; cursor: pointer; color: #ef4444; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;"
+              >
+                🗑️
+              </button>
+            </div>
+          </div>
+        {/each}
+
+        {#each missingDefaultMedicines('afternoon') as defMed (defMed.id)}
+          <div style="padding: 6px 10px; margin-bottom: 8px; border: 1.5px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--muted); background: #f8fafc;">
+            <span>{defMed.defaultName || defMed.name} removed</span>
             <button
               type="button"
-              class="task-med-edit-btn"
-              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'afternoon'); }}
-              title="Change name, keep default, or remove medicine"
-              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+              class="grammar-add-topic-btn"
+              onclick={() => restoreDefaultMedicine(defMed)}
+              style="font-size: 10.5px; padding: 2px 8px;"
             >
-              <span>✏️</span> <span>Edit</span>
+              + Restore
             </button>
           </div>
         {/each}
@@ -841,15 +908,26 @@
                 {isDone ? '✓ Taken' : '❓ Not taken'}
               </div>
             </div>
-            <button
-              type="button"
-              class="task-med-edit-btn"
-              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'evening'); }}
-              title="Change name, keep default, or remove medicine"
-              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
-            >
-              <span>✏️</span> <span>Edit</span>
-            </button>
+            <div style="display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;" onclick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                class="task-med-edit-btn"
+                onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'evening'); }}
+                title="Change name, keep default, or edit medicine"
+                style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;"
+              >
+                <span>✏️</span> <span>Edit</span>
+              </button>
+              <button
+                type="button"
+                class="task-med-delete-btn"
+                onclick={(e) => { e.stopPropagation(); deleteMedicineDirect(med); }}
+                title="Delete medicine"
+                style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; width: 26px; height: 26px; font-size: 11px; cursor: pointer; color: #ef4444; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;"
+              >
+                🗑️
+              </button>
+            </div>
           </div>
         {/each}
 
@@ -1118,14 +1196,39 @@
                 {isDone ? '✓ Taken' : '❓ Not taken'}
               </div>
             </div>
+            <div style="display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;" onclick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                class="task-med-edit-btn"
+                onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'night'); }}
+                title="Change name, keep default, or edit medicine"
+                style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;"
+              >
+                <span>✏️</span> <span>Edit</span>
+              </button>
+              <button
+                type="button"
+                class="task-med-delete-btn"
+                onclick={(e) => { e.stopPropagation(); deleteMedicineDirect(med); }}
+                title="Delete medicine"
+                style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; width: 26px; height: 26px; font-size: 11px; cursor: pointer; color: #ef4444; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;"
+              >
+                🗑️
+              </button>
+            </div>
+          </div>
+        {/each}
+
+        {#each missingDefaultMedicines('night') as defMed (defMed.id)}
+          <div style="padding: 6px 10px; margin-bottom: 8px; border: 1.5px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--muted); background: #f8fafc;">
+            <span>{defMed.defaultName || defMed.name} removed</span>
             <button
               type="button"
-              class="task-med-edit-btn"
-              onclick={(e) => { e.stopPropagation(); openMedModal(med.id, 'night'); }}
-              title="Change name, keep default, or remove medicine"
-              style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 3px 8px; font-size: 11px; cursor: pointer; color: #475569; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;"
+              class="grammar-add-topic-btn"
+              onclick={() => restoreDefaultMedicine(defMed)}
+              style="font-size: 10.5px; padding: 2px 8px;"
             >
-              <span>✏️</span> <span>Edit</span>
+              + Restore
             </button>
           </div>
         {/each}
@@ -1203,15 +1306,14 @@
             >
               Reset to Default
             </button>
-          {:else}
-            <button
-              type="button"
-              onclick={removeMedicine}
-              style="padding: 7px 12px; font-size: 12px; background: #fee2e2; color: #b91c1c; border: 1.5px solid #ef4444; border-radius: 8px; font-weight: 700; cursor: pointer;"
-            >
-              Delete
-            </button>
           {/if}
+          <button
+            type="button"
+            onclick={removeMedicine}
+            style="padding: 7px 12px; font-size: 12px; background: #fee2e2; color: #b91c1c; border: 1.5px solid #ef4444; border-radius: 8px; font-weight: 700; cursor: pointer;"
+          >
+            Delete
+          </button>
         {/if}
         <button
           type="button"
@@ -1361,3 +1463,15 @@
   initialVideoUrl={eveningQuranUrl}
   onClose={() => (isEveningQuranOpen = false)}
 />
+
+<style>
+  :global(.task-med-edit-btn:hover) {
+    background: #e2e8f0 !important;
+    border-color: #94a3b8 !important;
+  }
+  :global(.task-med-delete-btn:hover) {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+  }
+</style>
