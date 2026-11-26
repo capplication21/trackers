@@ -19,4 +19,5 @@ src-tauri/gen/android/buildSrc/build/
 src-tauri/gen/android/.tauri/
 *.exe
 *.apk
+.claude/
 

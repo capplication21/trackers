@@ -104,7 +104,9 @@
       </div>
 
       <ReadingCompanionPlayer />
-      <ReadingFlipbook />
+      {#key readingState.storyId}
+        <ReadingFlipbook />
+      {/key}
     {/if}
   </div>
 </div>

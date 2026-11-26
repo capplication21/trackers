@@ -6,7 +6,7 @@
   let bookElement = $state(null);
   let stageWrapper = $state(null);
   let pageFlipInstance = null;
-  let isMobile = $state(false);
+  let isMobile = false;
 
   // Touch gesture tracking to prevent accidental page-turns while scrolling
   let touchStartX = 0;
@@ -66,13 +66,24 @@
 
     if (pageFlipInstance) {
       try {
+        pageFlipInstance.clear();
+        const origRemove = bookElement.remove;
+        bookElement.remove = () => {};
         pageFlipInstance.destroy();
-      } catch (e) {}
+        bookElement.remove = origRemove;
+        const wrappers = bookElement.querySelectorAll('.stf__parent, .sft__wrapper, .stf__block');
+        wrappers.forEach((w) => w.remove());
+      } catch (e) {
+        console.warn('Error clearing previous pageFlip instance:', e);
+      }
       pageFlipInstance = null;
+      readingState.pageFlipInstance = null;
     }
 
     isMobile = window.innerWidth <= 768;
-    const availWidth = bookElement.parentElement ? bookElement.parentElement.clientWidth : window.innerWidth - 32;
+    const availWidth = (bookElement.parentElement && bookElement.parentElement.clientWidth > 0)
+      ? bookElement.parentElement.clientWidth
+      : (window.innerWidth - 32);
 
     let pageWidth = 440;
     let pageHeight = 580;
@@ -126,6 +137,13 @@
       }
     } catch (err) {
       console.warn('PageFlip initialization error, running in fallback mode:', err);
+      const pages = bookElement.querySelectorAll('.reading-flip-page');
+      pages.forEach((p, idx) => {
+        p.style.display = idx === (readingState.currentPage || 0) ? 'block' : 'none';
+        p.style.width = '100%';
+        p.style.maxWidth = '520px';
+        p.style.margin = '0 auto';
+      });
     }
   }
 
@@ -205,11 +223,18 @@
     mountBook();
 
     let resizeTimer;
+    let lastWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        mountBook();
-      }, 250);
+        // Only re-mount if window width changed significantly (e.g. orientation change).
+        // Vertical scroll on mobile changes innerHeight (URL bar collapse), which must NOT destroy the book!
+        const currentWidth = window.innerWidth;
+        if (Math.abs(currentWidth - lastWidth) > 50) {
+          lastWidth = currentWidth;
+          mountBook();
+        }
+      }, 300);
     };
 
     window.addEventListener('resize', handleResize);
@@ -219,14 +244,10 @@
         try {
           pageFlipInstance.destroy();
         } catch (e) {}
+        pageFlipInstance = null;
+        readingState.pageFlipInstance = null;
       }
     };
-  });
-
-  // Re-mount when the selected story changes
-  $effect(() => {
-    const _id = readingState.storyId;
-    mountBook();
   });
 </script>
 
@@ -728,6 +749,9 @@
 <style>
   :global(.reading-stage-wrapper) {
     padding-bottom: 75px;
+  }
+  :global(.reading-flipbook-container) {
+    min-height: 520px;
   }
   :global(.reading-page-inner) {
     overflow: hidden !important;
